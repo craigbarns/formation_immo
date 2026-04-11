@@ -36,6 +36,7 @@ import { PrintableRecap } from "@/components/interactive/PrintableRecap";
 import { BookmarkButton } from "@/components/user-content/BookmarkButton";
 import { NotesPanelButton } from "./NotesPanelButton";
 import { LessonJourneyBadge } from "@/components/LessonJourneyBadge";
+import { AICoachButton } from "@/components/ai-coach";
 
 type Props = { params: Promise<{ moduleSlug: string; lessonSlug: string }> };
 
@@ -105,7 +106,7 @@ export default async function LessonPage({ params }: Props) {
           </p>
           <LessonJourneyBadge moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
 
-          {/* Actions: Bookmark + Notes + Recap */}
+          {/* Actions: Bookmark + Notes + Recap + AI Coach */}
           <div className="flex flex-wrap items-center gap-3 mt-5">
             <BookmarkButton
               moduleSlug={moduleSlug}
@@ -119,6 +120,12 @@ export default async function LessonPage({ params }: Props) {
               moduleTitle={mod.title}
               lessonTitle={lesson.title}
               avatarName={avatar?.name}
+            />
+            <AICoachButton 
+              moduleSlug={moduleSlug}
+              lessonSlug={lessonSlug}
+              lessonTitle={lesson.title}
+              variant="inline"
             />
           </div>
         </header>

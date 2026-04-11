@@ -4,6 +4,7 @@ import { COURSE } from "@/data/course";
 import { getFlashcardsForModule } from "@/data/flashcards";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { FlashcardDeck } from "@/components/flashcards/FlashcardDeck";
+import { FlashcardSM2 } from "@/components/flashcards/FlashcardSM2";
 
 type Props = { params: Promise<{ moduleSlug: string }> };
 
@@ -52,7 +53,36 @@ export default async function FlashcardsPage({ params }: Props) {
       </div>
 
       {cards.length > 0 ? (
-        <FlashcardDeck cards={cards} moduleSlug={moduleSlug} />
+        <div className="space-y-6">
+          {/* Mode selector */}
+          <div className="flex items-center gap-4 rounded-xl border border-zinc-200 bg-white p-4">
+            <span className="text-sm font-medium text-zinc-600">Mode d&apos;apprentissage :</span>
+            <div className="flex gap-2">
+              <Link
+                href={`?mode=classic`}
+                className="rounded-lg bg-[#1a3a5c] px-4 py-2 text-sm font-medium text-white"
+              >
+                Classique
+              </Link>
+              <Link
+                href={`?mode=sm2`}
+                className="rounded-lg border border-[#d4af37] px-4 py-2 text-sm font-medium text-[#d4af37] hover:bg-[#d4af37]/10"
+              >
+                Répétition espacée (SM-2)
+              </Link>
+            </div>
+          </div>
+          
+          <FlashcardSM2 
+            flashcards={cards.map((c, i) => ({
+              id: `${moduleSlug}-${i}`,
+              front: c.front,
+              back: c.back,
+              moduleSlug,
+            }))} 
+            moduleSlug={moduleSlug} 
+          />
+        </div>
       ) : (
         <div className="rounded-xl border border-zinc-200 bg-white p-8 text-center">
           <p className="text-zinc-500">Aucune flashcard disponible pour ce module.</p>

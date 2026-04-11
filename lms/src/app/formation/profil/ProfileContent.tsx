@@ -5,6 +5,7 @@ import { getGamificationState, getLevelForXP, LEVELS, type GamificationState } f
 import { BadgesGrid } from "@/components/gamification/BadgesGrid";
 import { GlobalTimeTracker } from "@/components/gamification/ModuleTimeTracker";
 import { CertificateGenerator } from "@/components/certificate/CertificateGenerator";
+import { CertificatePreview } from "@/components/certificate";
 
 export function ProfileContent() {
   const [state, setState] = useState<GamificationState | null>(null);
@@ -144,6 +145,11 @@ export function ProfileContent() {
 
       {/* Certificate */}
       <CertificateGenerator />
+      
+      {/* LinkedIn Certificate */}
+      <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+        <CertificatePreview />
+      </div>
     </div>
   );
 }

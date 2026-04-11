@@ -5,6 +5,7 @@ import type { ModuleAvatar } from "@/data/module-avatars";
 import type { LessonVisuals, KeyConcept, StatCard, ComparisonRow } from "@/data/lesson-keyconcepts";
 import type { QuizCheckpoint } from "@/data/quiz-checkpoints";
 import type { ResolvedAudioQuizItem } from "@/data/audio-quiz-schedule";
+import confetti from "canvas-confetti";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                               */
@@ -269,7 +270,13 @@ export function CinematicPlayer({
   const [playing, setPlaying] = useState(false);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [speed, setSpeed] = useState(1);
+  const [speed, setSpeed] = useState(() => {
+    if (typeof window === "undefined") return 1;
+    const saved = localStorage.getItem("cinematic-player-speed");
+    return saved ? parseFloat(saved) : 1;
+  });
+  const [showShortcuts, setShowShortcuts] = useState(false);
+  const wasPlayingBeforeBlur = useRef(false);
   const [loaded, setLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [clearedQuizCount, setClearedQuizCount] = useState(0);
@@ -406,19 +413,100 @@ export function CinematicPlayer({
     setSpeed(next);
   }, [speed]);
 
+  /* ---------- Confetti on lesson end ---------- */
+  const hasTriggeredConfetti = useRef(false);
+  useEffect(() => {
+    if (slide.kind === "end" && !hasTriggeredConfetti.current) {
+      hasTriggeredConfetti.current = true;
+      const end = Date.now() + 1000;
+      const colors = ["#d4af37", "#1a3a5c", "#10b981"];
+      
+      (function frame() {
+        confetti({
+          particleCount: 3,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: colors,
+        });
+        confetti({
+          particleCount: 3,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: colors,
+        });
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+    }
+  }, [slide.kind]);
+
   /* ---------- Keyboard ---------- */
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement).tagName;
-      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "BUTTON") return;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      
+      // Show shortcuts help
+      if (e.key === "?" && !e.metaKey && !e.ctrlKey) {
+        e.preventDefault();
+        setShowShortcuts(true);
+        return;
+      }
+      
+      if (tag === "BUTTON") return;
+      
       if (e.code === "Space") { e.preventDefault(); toggle(); }
       if (e.code === "ArrowRight") { e.preventDefault(); navigateSlide(1); }
       if (e.code === "ArrowLeft") { e.preventDefault(); navigateSlide(-1); }
+      if (e.code === "ArrowUp") { e.preventDefault(); cycleSpeed(); }
+      if (e.code === "ArrowDown") { e.preventDefault(); toggleFullscreen(); }
+      if (e.key === "f" || e.key === "F") { e.preventDefault(); toggleFullscreen(); }
+      if (e.key === "m" || e.key === "M") { 
+        e.preventDefault(); 
+        const el = audioRef.current;
+        if (el) el.muted = !el.muted;
+      }
+      if (e.key === "j" || e.key === "J") { e.preventDefault(); skip(-10); }
+      if (e.key === "l" || e.key === "L") { e.preventDefault(); skip(10); }
+      if (e.key === "0" || e.key === "Home") { 
+        e.preventDefault(); 
+        const el = audioRef.current;
+        if (el) el.currentTime = 0;
+      }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [toggle, navigateSlide]);
+  }, [toggle, navigateSlide, cycleSpeed, toggleFullscreen, skip]);
+
+  /* ---------- Pause on blur (auto-pause when switching tabs) ---------- */
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      const el = audioRef.current;
+      if (!el) return;
+      
+      if (document.hidden && playing) {
+        wasPlayingBeforeBlur.current = true;
+        el.pause();
+        setPlaying(false);
+      } else if (!document.hidden && wasPlayingBeforeBlur.current) {
+        wasPlayingBeforeBlur.current = false;
+        // Optional: auto-resume when coming back
+        // el.play(); setPlaying(true);
+      }
+    };
+    
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [playing]);
+
+  /* ---------- Save playback speed ---------- */
+  useEffect(() => {
+    localStorage.setItem("cinematic-player-speed", String(speed));
+  }, [speed]);
 
   /* ---------- Fullscreen ---------- */
 
@@ -441,6 +529,63 @@ export function CinematicPlayer({
   /* ------------------------------------------------------------------ */
 
   const playerContent = (
+    <>
+    {/* Keyboard Shortcuts Modal */}
+    {showShortcuts && (
+      <div 
+        className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm"
+        onClick={() => setShowShortcuts(false)}
+      >
+        <div 
+          className="w-full max-w-md rounded-2xl border border-[#d4af37]/30 bg-[#0f1f33] p-6 shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-lg font-bold text-white">Raccourcis clavier</h3>
+            <button 
+              onClick={() => setShowShortcuts(false)}
+              className="rounded-full p-1 text-white/50 hover:bg-white/10 hover:text-white"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between py-2 border-b border-white/10">
+              <span className="text-white/70">Lecture / Pause</span>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">Espace</kbd>
+            </div>
+            <div className="flex justify-between py-2 border-b border-white/10">
+              <span className="text-white/70">Slide suivant / précédent</span>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">→ ←</kbd>
+            </div>
+            <div className="flex justify-between py-2 border-b border-white/10">
+              <span className="text-white/70">Vitesse de lecture</span>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">↑</kbd>
+            </div>
+            <div className="flex justify-between py-2 border-b border-white/10">
+              <span className="text-white/70">Plein écran</span>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">↓ ou F</kbd>
+            </div>
+            <div className="flex justify-between py-2 border-b border-white/10">
+              <span className="text-white/70">-10 sec / +10 sec</span>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">J L</kbd>
+            </div>
+            <div className="flex justify-between py-2 border-b border-white/10">
+              <span className="text-white/70">Mute / Unmute</span>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">M</kbd>
+            </div>
+            <div className="flex justify-between py-2">
+              <span className="text-white/70">Revenir au début</span>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">0 ou Home</kbd>
+            </div>
+          </div>
+          <p className="mt-4 text-xs text-center text-white/40">Appuyez sur ? pour afficher cette aide</p>
+        </div>
+      </div>
+    )}
+    
     <div
       ref={containerRef}
       className={`overflow-hidden rounded-2xl border-2 border-[#1a3a5c]/20 shadow-2xl ${
@@ -705,6 +850,19 @@ export function CinematicPlayer({
         />
       </div>
     </div>
+    
+    {/* Keyboard shortcut hint */}
+    <button
+      onClick={() => setShowShortcuts(true)}
+      className="mt-2 flex items-center justify-center gap-1 text-[10px] text-white/30 hover:text-white/50 transition"
+      title="Voir les raccourcis clavier"
+    >
+      <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      Appuyez sur ? pour les raccourcis
+    </button>
+    </>
   );
 
   return playerContent;

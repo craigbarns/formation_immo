@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/toast";
 import { ThemeProvider } from "@/lib/theme";
+import { FocusModeProvider } from "@/components/focus-mode";
+import { AICoachButton } from "@/components/ai-coach";
+import { StreakReminder } from "@/components/retention";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,9 +51,13 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
-          <ToastProvider>
-            {children}
-          </ToastProvider>
+          <FocusModeProvider>
+            <ToastProvider>
+              {children}
+              <StreakReminder />
+              <AICoachButton />
+            </ToastProvider>
+          </FocusModeProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, Clock, Layers, Sparkles } from "lucide-react";
+import { BookOpen, Clock, Layers, Sparkles, Target, Brain } from "lucide-react";
 import { COURSE, lessonId } from "@/data/course";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getModuleShowcase } from "@/data/module-showcase";
@@ -9,6 +9,9 @@ import { ModuleRowProgress } from "@/components/ModuleRowProgress";
 import { DashboardGamification } from "./DashboardGamification";
 import { DashboardAnalytics } from "./DashboardAnalytics";
 import { StaggerContainer, StaggerItem } from "@/components/animations";
+import { DailyGoalTracker } from "@/components/retention";
+import { AdaptiveLearningPath } from "@/components/learning-path";
+import { AICoachButton } from "@/components/ai-coach";
 
 export default function FormationHomePage() {
   const totalLessons = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
@@ -94,6 +97,24 @@ export default function FormationHomePage() {
 
           <ProgressOverview />
           <ContinueFormationCta />
+        </div>
+      </section>
+
+      {/* Daily Goal & Learning Path */}
+      <section className="grid gap-6 md:grid-cols-2">
+        <div className="space-y-4">
+          <h2 className="flex items-center gap-2 text-lg font-bold text-brand-navy">
+            <Target className="h-5 w-5 text-brand-gold" />
+            Objectif quotidien
+          </h2>
+          <DailyGoalTracker />
+        </div>
+        <div className="space-y-4">
+          <h2 className="flex items-center gap-2 text-lg font-bold text-brand-navy">
+            <Brain className="h-5 w-5 text-brand-gold" />
+            Parcours recommandé
+          </h2>
+          <AdaptiveLearningPath />
         </div>
       </section>
 

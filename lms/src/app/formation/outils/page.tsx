@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { CreditSimulator } from "@/components/simulators/CreditSimulator";
-import { RentabiliteSimulator } from "@/components/simulators/RentabiliteSimulator";
+import { AdvancedCreditSimulator, RentabilitySimulator } from "@/components/simulators";
 import { NegotiationSimulator } from "@/components/simulators/NegotiationSimulator";
 
 export default function OutilsPage() {
@@ -62,20 +61,20 @@ export default function OutilsPage() {
       <section id="credit" className="scroll-mt-6">
         <ToolHeader icon="🏦" tag="Financement" tagColor="blue" title="Simulateur de crédit immobilier" />
         <p className="mb-5 max-w-2xl text-sm leading-relaxed text-zinc-600">
-          Calculez instantanément les mensualités, le coût total et le taux d&apos;endettement pour tout
-          projet d&apos;acquisition. Idéal pour conseiller vos clients sur leur capacité d&apos;emprunt.
+          Calculez instantanément les mensualités, le coût total, le taux d&apos;endettement et le TAEG 
+          pour tout projet d&apos;acquisition. Simulez différents scénarios et vérifiez l'éligibilité.
         </p>
-        <CreditSimulator />
+        <AdvancedCreditSimulator />
       </section>
 
       {/* Simulateur rentabilité */}
       <section id="rentabilite" className="scroll-mt-6">
-        <ToolHeader icon="📈" tag="Investissement" tagColor="green" title="Rentabilité locative" />
+        <ToolHeader icon="📈" tag="Investissement" tagColor="green" title="Rentabilité locative avancée" />
         <p className="mb-5 max-w-2xl text-sm leading-relaxed text-zinc-600">
-          Calculez le rendement brut, net et le cashflow mensuel. Présentez des analyses chiffrées
-          convaincantes à vos clients investisseurs.
+          Calculez le rendement brut, net-net, le cashflow mensuel et le délai de retour sur investissement. 
+          Analyse complète avec toutes les charges pour des simulations réalistes.
         </p>
-        <RentabiliteSimulator />
+        <RentabilitySimulator />
       </section>
 
       {/* Jeu de rôle */}
