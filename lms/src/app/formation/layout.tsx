@@ -1,10 +1,14 @@
 import { FormationShell } from "@/components/FormationShell";
+import { AuthCheck } from "@/components/auth/AuthCheck";
 
 export default async function FormationLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Session check disabled for demo - using client-side auth
-  return <FormationShell>{children}</FormationShell>;
+  return (
+    <AuthCheck>
+      <FormationShell>{children}</FormationShell>
+    </AuthCheck>
+  );
 }
