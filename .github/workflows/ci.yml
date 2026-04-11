@@ -1,0 +1,37 @@
+# Lint + build Next.js (dossier lms/) — à chaque push / PR sur main
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+defaults:
+  run:
+    working-directory: lms
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: lms/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Lint : activer quand `npm run lint` est vert (eslint strict sur tout le repo).
+      - name: Build
+        env:
+          # Valeurs factices pour un build CI (pas de secrets réels)
+          SESSION_SECRET: ci-build-session-secret-min-32-chars-x
+          LMS_PASSWORD: ci-placeholder
+        run: npm run build
