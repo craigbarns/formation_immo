@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { toPng } from "html-to-image";
-import { Download, Linkedin, Share2, Award } from "lucide-react";
+import { Download, Share2, Award, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 import { getGamificationState, getLevelForXP, LEVELS } from "@/lib/gamification";
 
@@ -30,6 +29,8 @@ export function LinkedInCertificate({ userName = "Apprenant", completionDate }: 
     setIsGenerating(true);
     
     try {
+      // Dynamic import to avoid SSR issues
+      const { toPng } = await import("html-to-image");
       const dataUrl = await toPng(certificateRef.current, {
         quality: 1,
         pixelRatio: 2,
@@ -158,7 +159,7 @@ export function LinkedInCertificate({ userName = "Apprenant", completionDate }: 
           onClick={handleLinkedInShare}
           className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#0077b5] px-6 py-3 font-semibold text-white transition hover:bg-[#006396]"
         >
-          <Linkedin className="h-4 w-4" />
+          <ExternalLink className="h-4 w-4" />
           Partager
         </motion.button>
       </div>

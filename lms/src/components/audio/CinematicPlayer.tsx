@@ -443,6 +443,12 @@ export function CinematicPlayer({
     }
   }, [slide.kind]);
 
+  /* ---------- Fullscreen ---------- */
+
+  const toggleFullscreen = useCallback(() => {
+    setIsFullscreen((v) => !v);
+  }, []);
+
   /* ---------- Keyboard ---------- */
 
   useEffect(() => {
@@ -508,12 +514,7 @@ export function CinematicPlayer({
     localStorage.setItem("cinematic-player-speed", String(speed));
   }, [speed]);
 
-  /* ---------- Fullscreen ---------- */
-
-  const toggleFullscreen = useCallback(() => {
-    setIsFullscreen((v) => !v);
-  }, []);
-
+  /* ---------- Fullscreen Escape Handler ---------- */
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.code === "Escape" && isFullscreen) setIsFullscreen(false);

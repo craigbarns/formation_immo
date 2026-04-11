@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Brain, ArrowRight, TrendingUp, AlertCircle, Sparkles } from "lucide-react";
 import { getGamificationState } from "@/lib/gamification";
 import { getStoredProgress } from "@/components/LessonProgress";
-import { getCourseModules } from "@/data/course";
+import { COURSE } from "@/data/course";
 
 interface Recommendation {
   type: "continue" | "review" | "explore" | "practice";
@@ -21,7 +21,7 @@ function generateRecommendations(): Recommendation[] {
   const recommendations: Recommendation[] = [];
   const gamification = getGamificationState();
   const progress = getStoredProgress();
-  const modules = getCourseModules();
+  const modules = COURSE;
   
   // Find weak areas from exam scores
   const weakModules: string[] = [];

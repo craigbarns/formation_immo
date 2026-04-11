@@ -3,8 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Send, Bot, User, Sparkles, X, RotateCcw } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { sendMessageToCoach, getConversationHistory, getPersonalizedRecommendation, clearCoachMemory } from "./ai-coach-service";
-import type { ChatMessage } from "./ai-coach-storage";
+import { sendMessageToCoach, getConversationHistory, getPersonalizedRecommendation } from "./ai-coach-service";
+import { clearCoachMemory, type ChatMessage } from "./ai-coach-storage";
 
 interface AICoachChatProps {
   moduleSlug?: string;

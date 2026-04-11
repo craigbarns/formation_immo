@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Brain, RotateCw, CheckCircle2, XCircle2, MoreHorizontal } from "lucide-react";
+import { Brain, RotateCw, CheckCircle2, XCircle, MoreHorizontal } from "lucide-react";
 
 // SM-2 Algorithm implementation
 interface FlashcardData {
@@ -278,7 +278,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
             onClick={() => handleResponse(0)}
             className="flex flex-col items-center gap-1 rounded-xl bg-red-500/20 p-3 text-red-400 transition hover:bg-red-500/30"
           >
-            <XCircle2 className="h-5 w-5" />
+            <XCircle className="h-5 w-5" />
             <span className="text-xs font-semibold">Encore</span>
             <span className="text-[10px] text-white/50">&lt; 1min</span>
           </button>

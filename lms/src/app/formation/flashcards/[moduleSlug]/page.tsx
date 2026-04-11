@@ -76,8 +76,8 @@ export default async function FlashcardsPage({ params }: Props) {
           <FlashcardSM2 
             flashcards={cards.map((c, i) => ({
               id: `${moduleSlug}-${i}`,
-              front: c.front,
-              back: c.back,
+              front: c.question,
+              back: c.answer,
               moduleSlug,
             }))} 
             moduleSlug={moduleSlug} 
