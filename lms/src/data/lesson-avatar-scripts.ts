@@ -1,32 +1,29 @@
 /**
- * Contenu interactif HeyGen / LiveAvatar par leçon (embed conversationnel uniquement).
- * - suggestedQuestions : idées à copier-coller dans le chat de l’iframe.
- * - scriptBeats : optionnel, réservé pour une éventuelle réutilisation (non affiché dans l’UI).
+ * Textes pédagogiques pour la chaîne de production : scripts vocaux → TTS → D-ID.
+ * - scriptBeats : phrases / prompts à enregistrer ou à coller dans l’outil TTS puis D-ID.
+ * - suggestedQuestions : idées de reformulation ou de Q/R pour le coach texte (FrenchCoach).
  *
- * Contextes par leçon (optionnel) : `LIVEAVATAR_LESSON_CONTEXTS` dans `.env.local`.
+ * @see docs/D-ID-INTEGRATION.md
  */
 
-export type HeyGenScriptBeat = {
+export type LessonScriptBeat = {
   id: string;
-  /** Libellé court du bouton */
+  /** Libellé court (bouton / repère en studio) */
   label: string;
-  /** Texte prononcé par l’avatar (mode repeat) */
+  /** Texte lu par la voix sur la vidéo avatar */
   text: string;
 };
 
-export type HeyGenLessonInteractive = {
-  /** Résumé pédagogique affiché au-dessus du bloc */
+export type LessonAvatarInteractive = {
   tagline: string;
-  /** Questions types pour le chat vocal / texte (iframe) */
   suggestedQuestions: string[];
-  /** Non utilisé par l’interface actuelle */
-  scriptBeats?: HeyGenScriptBeat[];
+  scriptBeats?: LessonScriptBeat[];
 };
 
-const BY_KEY: Record<string, HeyGenLessonInteractive> = {
+const BY_KEY: Record<string, LessonAvatarInteractive> = {
   "juridique/loi-alur": {
     tagline:
-      "Renforcez la leçon : faites résumer les points clés par l’avatar, puis dialoguez sur vos cas réels.",
+      "Renforcez la leçon : enregistrez des beats courts avec la même voix que vos vidéos D-ID, ou utilisez le coach texte pour approfondir.",
     scriptBeats: [
       {
         id: "alur-1",
@@ -53,7 +50,7 @@ const BY_KEY: Record<string, HeyGenLessonInteractive> = {
 
   "juridique/compromis": {
     tagline:
-      "Entraînez-vous sur le compromis : récap express puis questions sur délais et conditions suspensives.",
+      "Entraînez-vous sur le compromis : enchaînez des segments courts pour D-ID, ou posez vos questions au coach.",
     scriptBeats: [
       {
         id: "comp-1",
@@ -74,7 +71,7 @@ const BY_KEY: Record<string, HeyGenLessonInteractive> = {
 
   "transaction/negociation-mandat": {
     tagline:
-      "Simulez un pitch mandat exclusif : l’avatar reformule les arguments, vous affinez en conversation.",
+      "Simulez un pitch mandat exclusif : chaque beat peut devenir un plan D-ID, puis enchaînez dans votre monteur.",
     scriptBeats: [
       {
         id: "nm-1",
@@ -95,7 +92,7 @@ const BY_KEY: Record<string, HeyGenLessonInteractive> = {
 
   "financement/rentabilite": {
     tagline:
-      "Calculs et vocabulaire rentabilité : l’avatar vous pose le cadre avant vos questions chiffrées.",
+      "Calculs et vocabulaire rentabilité : segments courts pour vidéos, ou questions au coach pour les cas limites.",
     scriptBeats: [
       {
         id: "rent-1",
@@ -115,9 +112,9 @@ const BY_KEY: Record<string, HeyGenLessonInteractive> = {
   },
 };
 
-export function getHeyGenInteractive(
+export function getLessonAvatarInteractive(
   moduleSlug: string,
   lessonSlug: string,
-): HeyGenLessonInteractive | null {
+): LessonAvatarInteractive | null {
   return BY_KEY[`${moduleSlug}/${lessonSlug}`] ?? null;
 }

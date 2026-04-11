@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Lock, Sparkles } from "lucide-react";
+import { Loader2, Lock, Sparkles } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -55,7 +55,7 @@ export default function LoginPage() {
         <div className="card-elevated overflow-hidden rounded-3xl border-brand-navy/10">
           <div className="h-1.5 bg-gradient-to-r from-brand-navy via-brand-navy-soft to-brand-gold" aria-hidden />
           <div className="p-8">
-            <form onSubmit={onSubmit} className="space-y-5">
+            <form onSubmit={onSubmit} className="space-y-5" aria-busy={loading}>
               <div>
                 <label
                   htmlFor="password"
@@ -84,9 +84,16 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="btn-primary-solid w-full py-3.5 text-base disabled:opacity-60"
+                className="btn-primary-solid inline-flex w-full items-center justify-center gap-2 py-3.5 text-base disabled:opacity-60"
               >
-                {loading ? "Connexion…" : "Entrer dans l’espace formation"}
+                {loading ? (
+                  <>
+                    <Loader2 className="h-5 w-5 shrink-0 animate-spin" aria-hidden />
+                    Connexion…
+                  </>
+                ) : (
+                  "Entrer dans l’espace formation"
+                )}
               </button>
             </form>
             <p className="mt-6 text-center text-sm text-zinc-500">

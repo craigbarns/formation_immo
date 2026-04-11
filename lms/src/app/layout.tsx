@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/toast";
@@ -21,6 +21,19 @@ export const metadata: Metadata = {
   },
   description:
     "Parcours professionnel : juridique, transaction, financement, marketing et terrain. Leçons, QCM, fiches et simulateurs.",
+  openGraph: {
+    title: "Formation agent immobilier — 42 h",
+    description:
+      "5 modules, leçons audio, QCM, simulateurs et fiches — aligné sur la pratique terrain.",
+    locale: "fr_FR",
+    type: "website",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#1a3a5c",
 };
 
 export default function RootLayout({

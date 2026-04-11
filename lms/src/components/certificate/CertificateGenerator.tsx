@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { getGamificationState, getLevelForXP, BADGES } from "@/lib/gamification";
 import { COURSE } from "@/data/course";
+import { FORMATION_PROGRESS_STORAGE_KEY } from "@/constants/formation-storage";
 
 export function CertificateGenerator() {
   const [name, setName] = useState("");
@@ -19,9 +20,9 @@ export function CertificateGenerator() {
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem("formation-immobilier-progress");
-      const progress = raw ? JSON.parse(raw) : {};
-      setCompletedLessons(Object.keys(progress).length);
+      const raw = localStorage.getItem(FORMATION_PROGRESS_STORAGE_KEY);
+      const progress = raw ? (JSON.parse(raw) as Record<string, boolean>) : {};
+      setCompletedLessons(Object.values(progress).filter(Boolean).length);
     } catch { /* empty */ }
 
     if (state) {

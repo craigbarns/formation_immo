@@ -89,7 +89,25 @@ body {
   }
 
   .btn-primary-solid {
-    @apply rounded-xl bg-brand-navy px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-navy/20 transition hover:bg-brand-navy-deep hover:shadow-lg;
+    @apply rounded-xl bg-brand-navy px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-navy/20 outline-none transition hover:bg-brand-navy-deep hover:shadow-lg focus-visible:ring-2 focus-visible:ring-brand-gold/70 focus-visible:ring-offset-2 active:scale-[0.98];
+  }
+
+  .btn-secondary-outline {
+    @apply rounded-xl border-2 border-white/35 bg-white/5 px-5 py-3 text-sm font-semibold text-white outline-none backdrop-blur-sm transition hover:border-white/50 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-brand-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy active:scale-[0.98];
+  }
+
+  .animate-enter {
+    animation: fadeIn 0.55s ease-out forwards;
+  }
+
+  .animate-enter-delay-1 {
+    animation: fadeIn 0.55s ease-out 0.08s forwards;
+    opacity: 0;
+  }
+
+  .animate-enter-delay-2 {
+    animation: fadeIn 0.55s ease-out 0.16s forwards;
+    opacity: 0;
   }
 
   .trust-badge {

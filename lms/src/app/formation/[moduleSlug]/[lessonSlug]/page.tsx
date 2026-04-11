@@ -35,6 +35,7 @@ import { LessonMap } from "@/components/interactive/LessonMap";
 import { PrintableRecap } from "@/components/interactive/PrintableRecap";
 import { BookmarkButton } from "@/components/user-content/BookmarkButton";
 import { NotesPanelButton } from "./NotesPanelButton";
+import { LessonJourneyBadge } from "@/components/LessonJourneyBadge";
 
 type Props = { params: Promise<{ moduleSlug: string; lessonSlug: string }> };
 
@@ -102,6 +103,7 @@ export default async function LessonPage({ params }: Props) {
             Écoutez la narration, parcourez la fiche, puis cochez la leçon lorsque le contenu est
             assimilé — vous gardez le contrôle sur votre rythme.
           </p>
+          <LessonJourneyBadge moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
 
           {/* Actions: Bookmark + Notes + Recap */}
           <div className="flex flex-wrap items-center gap-3 mt-5">
@@ -248,7 +250,7 @@ export default async function LessonPage({ params }: Props) {
 
       {/* Navigation */}
       <nav
-        className="mt-12 flex flex-wrap justify-between gap-4 border-t border-zinc-200/90 bg-gradient-to-b from-transparent to-brand-gold-soft/20 pt-10"
+        className="mt-12 flex flex-wrap justify-between gap-4 border-t border-zinc-200/90 bg-gradient-to-b from-transparent to-brand-gold-soft/30 pt-10"
         aria-label="Leçon précédente ou suivante"
       >
         {nav?.prev ? (

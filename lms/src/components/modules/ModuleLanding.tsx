@@ -6,6 +6,8 @@ import { lessonId } from "@/data/course";
 import type { ModuleShowcase } from "@/data/module-showcase";
 import { getStoredProgress } from "@/components/LessonProgress";
 import { ModuleLessonAudioControls } from "@/components/ModuleLessonAudioControls";
+import { ModuleHeroResumeCta } from "@/components/modules/ModuleHeroResumeCta";
+import { ModuleLessonStatusBadge } from "@/components/modules/ModuleLessonStatusBadge";
 
 export type ModuleLandingProps = {
   moduleSlug: string;
@@ -95,19 +97,12 @@ export function ModuleLanding({
               {showcase.subhead}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href={firstLessonHref}
-                className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-[#0f172a] shadow-lg transition hover:bg-white/95 hover:shadow-xl"
-              >
-                Commencer ce module
-              </Link>
-              <Link
-                href="/formation/supports-visuels"
-                className="inline-flex items-center justify-center rounded-xl border border-white/35 bg-white/10 px-5 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20"
-              >
-                Fiches & infographies
-              </Link>
+            <div className="mt-8">
+              <ModuleHeroResumeCta
+                moduleSlug={moduleSlug}
+                firstLessonHref={firstLessonHref}
+                examenHref={examenHref}
+              />
             </div>
 
             <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-white/20 pt-8 text-center sm:max-w-lg sm:text-left">
@@ -245,12 +240,12 @@ export function ModuleLanding({
                     href={`/formation/${moduleSlug}/${lesson.slug}`}
                     className="flex min-w-0 flex-1 gap-4"
                   >
-                    <span
-                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-base font-bold text-white shadow-md transition group-hover:scale-105"
-                      style={{ backgroundColor: accent }}
-                    >
-                      {i + 1}
-                    </span>
+                    <ModuleLessonStatusBadge
+                      moduleSlug={moduleSlug}
+                      lessonSlug={lesson.slug}
+                      index={i + 1}
+                      accentColor={accent}
+                    />
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="font-bold text-zinc-900 group-hover:text-[#1a3a5c]">

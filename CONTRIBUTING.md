@@ -6,7 +6,7 @@ La **référence du projet est le dépôt GitHub** : les changements importants 
 
 ## À ne pas commiter
 
-- `lms/.env.local` (mots de passe, clés API Mistral, Fal, HeyGen, etc.)
+- `lms/.env.local` (mots de passe, clés API Mistral, Fal, D-ID, etc.)
 - `lms/node_modules/`, `lms/.next/`
 - fichiers personnels ou brouillons hors arborescence du cours
 

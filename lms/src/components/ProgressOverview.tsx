@@ -1,23 +1,45 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { COURSE, lessonId } from "@/data/course";
 import { getStoredProgress } from "./LessonProgress";
+import {
+  FORMATION_PROGRESS_CHANGED_EVENT,
+  FORMATION_PROGRESS_STORAGE_KEY,
+} from "@/constants/formation-storage";
+
+function computeStats() {
+  const total = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
+  const p = getStoredProgress();
+  let done = 0;
+  for (const mod of COURSE) {
+    for (const l of mod.lessons) {
+      if (p[lessonId(mod.slug, l.slug)]) done++;
+    }
+  }
+  return { done, total };
+}
 
 export function ProgressOverview() {
   const [stats, setStats] = useState<{ done: number; total: number } | null>(null);
 
-  useEffect(() => {
-    const total = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
-    const p = getStoredProgress();
-    let done = 0;
-    for (const mod of COURSE) {
-      for (const l of mod.lessons) {
-        if (p[lessonId(mod.slug, l.slug)]) done++;
-      }
-    }
-    setStats({ done, total });
+  const refresh = useCallback(() => {
+    setStats(computeStats());
   }, []);
+
+  useEffect(() => {
+    refresh();
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === null || e.key === FORMATION_PROGRESS_STORAGE_KEY) refresh();
+    };
+    const onCustom = () => refresh();
+    window.addEventListener("storage", onStorage);
+    window.addEventListener(FORMATION_PROGRESS_CHANGED_EVENT, onCustom);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener(FORMATION_PROGRESS_CHANGED_EVENT, onCustom);
+    };
+  }, [refresh]);
 
   if (!stats) {
     return (
@@ -46,11 +68,11 @@ export function ProgressOverview() {
           <p className="text-xs text-zinc-600">
             {remaining > 0 ? (
               <>
-                Plus que {remaining} leçon{remaining > 1 ? "s" : ""} pour le tour complet — vous y
-                êtes presque.
+                Encore {remaining} leçon{remaining > 1 ? "s" : ""} pour boucler les {stats.total}{" "}
+                étapes — chaque clic sur « J’ai terminé » met à jour ce compteur.
               </>
             ) : (
-              <>Parcours terminé — félicitations.</>
+              <>Parcours complet — temps de consolider avec les QCM et le profil.</>
             )}
           </p>
         </div>
@@ -62,8 +84,8 @@ export function ProgressOverview() {
         />
       </div>
       <p className="mt-3 text-xs leading-relaxed text-zinc-500">
-        Utilisez « J&apos;ai terminé » en bas de chaque leçon pour mettre à jour cette progression
-        (enregistré dans votre navigateur).
+        La progression est enregistrée dans votre navigateur (bouton « J&apos;ai terminé cette leçon »
+        en bas de page). Changez d’ordinateur ? Reprenez manuellement là où vous étiez.
       </p>
     </div>
   );

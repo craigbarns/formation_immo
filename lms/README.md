@@ -71,7 +71,7 @@ Ne commitez **jamais** la clé API.
 
 ### Voix ElevenLabs (français — avatar / échantillons)
 
-Utilisé pour les **IDs de voix** dans `src/data/formateur-voices.json` (colonnes ElevenLabs des formateurs) et pour générer des **MP3 de test** avant production D-ID / HeyGen.
+Utilisé pour les **IDs de voix** dans `src/data/formateur-voices.json` (colonnes ElevenLabs des formateurs) et pour générer des **MP3 de test** avant production D-ID.
 
 1. Créez une clé API sur [elevenlabs.io](https://elevenlabs.io) (Developer → API keys).
 2. Dans `lms/.env.local` : `ELEVENLABS_API_KEY=…` — **ne jamais commiter** ; en cas de fuite, **révoquez la clé** sur le dashboard.
@@ -115,25 +115,14 @@ node scripts/did-generate-lesson-01.mjs           # narration complète (~9 min,
 - **402** : ajouter des crédits sur [studio.d-id.com](https://studio.d-id.com/).  
 - L’URL MP4 renvoyée est **temporaire** : téléchargez le fichier ou uploadez sur YouTube (non listé), puis mettez l’URL stable dans `course.ts`.
 
-### LiveAvatar (HeyGen)
+### Avatars D-ID (remplace HeyGen / LiveAvatar)
 
-La clé **LiveAvatar** (`LIVEAVATAR_API_KEY` dans `.env.local`) s’utilise sur **`api.liveavatar.com`**, pas sur l’ancienne API `api.heygen.com/v1/streaming.*` (sunset mars 2026).
+Le dépôt **n’intègre plus** HeyGen ni LiveAvatar. La chaîne de production est : **scripts Markdown** → **TTS** (Mistral Voxtral ou ElevenLabs) → **D-ID** (Talking Photo / API) → **MP4** → URL stable dans `src/data/course.ts` (`videoUrl`).
 
-Pour **`POST /v1/sessions/token` en mode `FULL`**, le corps doit inclure **`avatar_persona`** (avec `context_id`), pas seulement `context_id` à la racine — voir la [doc Create Session Token](https://docs.liveavatar.com/api-reference/sessions/create-session-token). La réponse fournit **`data.session_token`** (plus un champ `token` à la racine).
-
-Pour **discuter avec l’avatar sur la loi ALUR** (mandats, diagnostics, annonces, etc.), il faut un **Context** LiveAvatar dédié (prompt + message d’accueil) :
-
-1. `cd lms && LIVEAVATAR_API_KEY=… node scripts/liveavatar-create-alur-context.mjs`
-2. Copier l’`id` renvoyé dans `.env.local` : `LIVEAVATAR_ALUR_CONTEXT_ID=…`
-
-En **sandbox**, l’API n’expose qu’un avatar (Wayne) : le code utilise cet ID par défaut ; un autre avatar peut empêcher la conversation vocale. Si le micro ne donne aucune réponse, ouvrez l’URL d’embed dans un **nouvel onglet** ou définissez `LIVEAVATAR_EMBED_SANDBOX=false` (session facturée en crédits).
-
-- **Page isolée (optionnelle)** : `/demo-liveavatar` — test d’embed hors parcours.
-- **Coach HeyGen sur les leçons** : le bloc « HeyGen — Coach interactif » (embed conversation LiveAvatar) s’affiche sur les leçons définies dans `src/data/heygen-interactive.ts`. Pour un **contexte différent par leçon** (prompt HeyGen dédié), renseignez `LIVEAVATAR_LESSON_CONTEXTS` (JSON `moduleSlug/leçon` → `context_id`) dans `.env.local`.
-- **Page démo** : `/formation/interactive-avatar` — même bloc que la leçon ALUR.
-- **CLI** : `LIVEAVATAR_API_KEY=… node scripts/liveavatar-embed-test.mjs`
-
-Documentation : [docs.liveavatar.com](https://docs.liveavatar.com/).
+- **Guide détaillé** : `lms/docs/D-ID-INTEGRATION.md`
+- **Page exemple (beats + prompts)** : `/formation/interactive-avatar` — données dans `src/data/lesson-avatar-scripts.ts`
+- **Démo hors formation** : `/demo-did` (l’ancienne `/demo-liveavatar` redirige ici)
+- **Marie (présentation pédagogique)** : `/formation/marie-did` (l’ancienne `/formation/marie-heygen` redirige ici)
 
 ## Progression élève
 

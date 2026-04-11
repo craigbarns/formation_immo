@@ -19,7 +19,11 @@ import {
   getLevelForXP,
   LEVELS,
 } from "@/lib/gamification";
-import { COURSE } from "@/data/course";
+import { COURSE, lessonId } from "@/data/course";
+import {
+  FORMATION_PROGRESS_CHANGED_EVENT,
+  FORMATION_PROGRESS_STORAGE_KEY,
+} from "@/constants/formation-storage";
 import { AnimatedCounter } from "@/components/animations";
 import { formatDuration } from "@/lib/utils/date";
 import { getAllBookmarks, getAllNotes } from "@/lib/user-content";
@@ -55,48 +59,63 @@ export function DashboardAnalytics() {
 
   useEffect(() => {
     setMounted(true);
-    const gameState = getGamificationState();
-    const levelInfo = getLevelForXP(gameState.xp);
 
-    // Calculate module progress
-    const progressKey = "formation-immobilier-progress";
-    const progress = JSON.parse(localStorage.getItem(progressKey) || "[]");
-    
-    const moduleProgress = COURSE.map((module) => ({
-      slug: module.slug,
-      completed: progress.filter((p: string) => p.startsWith(module.slug)).length,
-      total: module.lessons.length,
-    }));
+    function loadStats() {
+      const gameState = getGamificationState();
+      const levelInfo = getLevelForXP(gameState.xp);
 
-    const totalTime = Object.values(gameState.lessonTimes).reduce(
-      (acc, time) => acc + time,
-      0
-    );
+      let progressObj: Record<string, boolean> = {};
+      try {
+        const raw = localStorage.getItem(FORMATION_PROGRESS_STORAGE_KEY);
+        progressObj = raw ? (JSON.parse(raw) as Record<string, boolean>) : {};
+      } catch {
+        progressObj = {};
+      }
 
-    // Get exam scores
-    const examScores = Object.entries(gameState.examScores).map(([module, data]) => ({
-      module: COURSE.find((m) => m.slug === module)?.title || module,
-      score: data.score,
-      total: data.total,
-      date: data.date,
-    }));
+      const moduleProgress = COURSE.map((module) => ({
+        slug: module.slug,
+        completed: module.lessons.filter(
+          (l) => progressObj[lessonId(module.slug, l.slug)],
+        ).length,
+        total: module.lessons.length,
+      }));
 
-    setStats({
-      xp: gameState.xp,
-      level: levelInfo.current.level,
-      streak: gameState.streak,
-      lessonsCompleted: progress.length,
-      totalLessons: COURSE.reduce((acc, m) => acc + m.lessons.length, 0),
-      timeSpent: totalTime,
-      badgesEarned: gameState.earnedBadges.length,
-      totalBadges: 16,
-      examsTaken: gameState.totalExamsTaken,
-      bookmarksCount: getAllBookmarks().length,
-      notesCount: getAllNotes().length,
-      quizCorrect: gameState.totalQuizCorrect,
-      moduleProgress,
-      examScores,
-    });
+      const lessonsCompleted = Object.entries(progressObj).filter(([, v]) => v).length;
+
+      const totalTime = Object.values(gameState.lessonTimes).reduce(
+        (acc, time) => acc + time,
+        0,
+      );
+
+      const examScores = Object.entries(gameState.examScores).map(([module, data]) => ({
+        module: COURSE.find((m) => m.slug === module)?.title || module,
+        score: data.score,
+        total: data.total,
+        date: data.date,
+      }));
+
+      setStats({
+        xp: gameState.xp,
+        level: levelInfo.current.level,
+        streak: gameState.streak,
+        lessonsCompleted,
+        totalLessons: COURSE.reduce((acc, m) => acc + m.lessons.length, 0),
+        timeSpent: totalTime,
+        badgesEarned: gameState.earnedBadges.length,
+        totalBadges: 16,
+        examsTaken: gameState.totalExamsTaken,
+        bookmarksCount: getAllBookmarks().length,
+        notesCount: getAllNotes().length,
+        quizCorrect: gameState.totalQuizCorrect,
+        moduleProgress,
+        examScores,
+      });
+    }
+
+    loadStats();
+    const onProgress = () => loadStats();
+    window.addEventListener(FORMATION_PROGRESS_CHANGED_EVENT, onProgress);
+    return () => window.removeEventListener(FORMATION_PROGRESS_CHANGED_EVENT, onProgress);
   }, []);
 
   if (!mounted || !stats) {

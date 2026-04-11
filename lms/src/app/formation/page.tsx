@@ -4,6 +4,8 @@ import { COURSE, lessonId } from "@/data/course";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getModuleShowcase } from "@/data/module-showcase";
 import { ProgressOverview } from "@/components/ProgressOverview";
+import { ContinueFormationCta } from "@/components/ContinueFormationCta";
+import { ModuleRowProgress } from "@/components/ModuleRowProgress";
 import { DashboardGamification } from "./DashboardGamification";
 import { DashboardAnalytics } from "./DashboardAnalytics";
 import { StaggerContainer, StaggerItem } from "@/components/animations";
@@ -91,6 +93,7 @@ export default function FormationHomePage() {
           </dl>
 
           <ProgressOverview />
+          <ContinueFormationCta />
         </div>
       </section>
 
@@ -134,7 +137,7 @@ export default function FormationHomePage() {
       </section>
 
       {/* Modules */}
-      <section>
+      <section id="parcours" className="scroll-mt-24">
         <h2 className="section-heading">
           <span className="shrink-0">Votre parcours</span>
         </h2>
@@ -179,18 +182,19 @@ export default function FormationHomePage() {
                             {showcase.headline}
                           </p>
                         )}
+                        <ModuleRowProgress moduleSlug={mod.slug} />
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       <Link
                         href={`/formation/flashcards/${mod.slug}`}
-                        className="rounded-xl border border-[#1a3a5c]/20 bg-[#1a3a5c]/5 px-3 py-2 text-xs font-bold text-[#1a3a5c] transition hover:bg-[#1a3a5c]/10"
+                        className="rounded-xl border border-brand-navy/20 bg-brand-navy/5 px-3 py-2 text-xs font-bold text-brand-navy transition hover:bg-brand-navy/10"
                       >
                         Flashcards
                       </Link>
                       <Link
                         href={`/formation/examen/${mod.slug}`}
-                        className="rounded-xl border border-[#d4af37]/35 bg-amber-50 px-3 py-2 text-xs font-bold text-[#8a7318] transition hover:bg-amber-100"
+                        className="rounded-xl border border-brand-gold/35 bg-amber-50 px-3 py-2 text-xs font-bold text-amber-900 transition hover:bg-amber-100"
                       >
                         Examen
                       </Link>
@@ -209,7 +213,7 @@ export default function FormationHomePage() {
                         >
                           <span className="flex items-center gap-2 text-[15px] text-zinc-800">
                             {lesson.interactiveScenarioId && (
-                              <span className="rounded-md bg-[#1a3a5c]/10 px-2 py-0.5 text-[10px] font-bold uppercase text-[#1a3a5c]">
+                              <span className="rounded-md bg-brand-navy/10 px-2 py-0.5 text-[10px] font-bold uppercase text-brand-navy">
                                 Interactif
                               </span>
                             )}
@@ -248,7 +252,7 @@ function QuickLink({
   return (
     <Link
       href={href}
-      className={`group rounded-2xl border p-4 text-center shadow-sm transition ${
+      className={`link-focus group rounded-2xl border p-4 text-center shadow-sm transition ${
         highlight
           ? "border-brand-navy/20 bg-gradient-to-b from-white to-brand-gold-soft/50 hover:border-brand-gold/45 hover:shadow-lg"
           : "border-zinc-200/90 bg-white hover:border-brand-navy/20 hover:shadow-md"

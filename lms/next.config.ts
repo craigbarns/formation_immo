@@ -6,10 +6,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.join(__dirname),
   },
-  /**
-   * Autoriser le micro / la caméra pour l’iframe cross-origin embed.liveavatar.com
-   * (sinon certains navigateurs bloquent la conversation vocale dans l’embed).
-   */
+  /** Micro / caméra réservés à l’origine de l’app (widgets ou futurs iframes D-ID sur votre domaine). */
   async headers() {
     return [
       {
@@ -17,8 +14,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Permissions-Policy",
-            value:
-              'microphone=(self "https://embed.liveavatar.com"), camera=(self "https://embed.liveavatar.com")',
+            value: "microphone=(self), camera=(self)",
           },
         ],
       },

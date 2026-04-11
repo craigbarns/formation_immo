@@ -73,10 +73,11 @@ function ThemeToggleSimpleInner() {
 
   return (
     <motion.button
+      type="button"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={toggleTheme}
-      className="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors"
+      className="rounded-xl bg-white/10 p-2.5 text-white outline-none transition-colors hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-amber-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a3a5c]"
       aria-label={resolvedTheme === "dark" ? "Passer en mode clair" : "Passer en mode sombre"}
     >
       <motion.div

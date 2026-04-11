@@ -2,14 +2,14 @@
 
 ## ✅ Composants Implémentés
 
-### 1. HeyGen LiveAvatar - Coach Marie (Chat)
-**Statut:** ✅ Intégré et fonctionnel
+### 1. Avatars vidéo D-ID + coach texte (FrenchCoach)
+**Statut:** HeyGen / LiveAvatar **retirés** du code (2026). Remplacés par D-ID + TTS.
 
-- `src/lib/liveavatar.ts` - Client API HeyGen avec forcing FR
-- `src/components/LiveAvatarModal.tsx` - Modal conversationnel
-- `src/components/coach/FrenchCoach.tsx` - Détection anglicismes
-- Force la langue: `default_language: "fr"`
-- Routes: `/formation/coach-marie`, `/formation/marie-heygen`
+- `src/components/coach/FrenchCoach.tsx` — chat pédagogique (widget shell)
+- `src/data/lesson-avatar-scripts.ts` — beats / questions pour prod vidéo & coach
+- `src/components/did/LessonDidCoachSection.tsx` — bloc UI (ex. `/formation/interactive-avatar`)
+- `docs/D-ID-INTEGRATION.md` — chaîne script → TTS → D-ID → `videoUrl`
+- Routes : `/formation/marie-did` (ex-`/formation/marie-heygen`), `/demo-did` (ex-`/demo-liveavatar`)
 
 ### 2. Coqui XTTS - Génération Voix
 **Statut:** ✅ Scripts CLI prêts

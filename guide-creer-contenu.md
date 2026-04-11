@@ -17,7 +17,7 @@ Ce dépôt est déjà structuré (5 modules × 5 leçons, QCM, cas pratiques, te
 | **Évaluation**                 | QCM + cas                       | `module*/qcm/*.md`, `evaluation/cas-pratique-module-*.md`                                     |
 | **Outils terrain**             | Fiches, grilles                 | `module*/templates/*.md` (+ Excel générés, voir ci-dessous)                                   |
 | **Vidéo**                      | MP4 / YouTube                   | `lms/public/videos/` ou URL dans `course.ts` → `videoUrl`                                     |
-| **Avatar conversationnel**     | Contexte + embed                | `lms/scripts/liveavatar-create-alur-context.mjs`, variable `LIVEAVATAR_ALUR_CONTEXT_ID`       |
+| **Vidéo avatar (D-ID)**        | Script → TTS → D-ID → MP4       | `lms/docs/D-ID-INTEGRATION.md`, `lesson-avatar-scripts.ts`, `videoUrl` dans `course.ts`        |
 
 
 Toute nouvelle leçon doit toucher au minimum : **un fichier dans `module*/scripts/`** + **une entrée dans `lms/src/data/course.ts`**.
@@ -30,7 +30,7 @@ Toute nouvelle leçon doit toucher au minimum : **un fichier dans `module*/scrip
 | Besoin                             | Outil                                                   | Comment l’utiliser ici                                                               |
 | ---------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | Rédaction structurée               | **Markdown** (Cursor, VS Code, Obsidian)                | Éditer les `scripts/*.md` ; prévisualiser via le LMS (`npm run dev` dans `lms/`)     |
-| Cohérence du parcours              | `**course.ts`**                                         | Titres, slugs URL, chemins `scriptFile`, `videoUrl`, `liveAvatarSandbox`             |
+| Cohérence du parcours              | `**course.ts`**                                         | Titres, slugs URL, chemins `scriptFile`, `videoUrl`, `audioUrl`                      |
 | Vérifier que rien ne manque        | `**node scripts/validate-course-content.mjs`**          | Depuis la racine du dépôt (voir `scripts/README.md`)                                 |
 | Tableurs pédagogiques              | **Python**                                              | `pip install -r requirements.txt` puis `python3 scripts/generate_excel_templates.py` |
 | Vidéo avatar / voix                | **D-ID**, **Synthesia**, **ElevenLabs** (selon scripts) | Scripts prêts dans `module*/scripts/` (sections narration + repères B-roll)          |

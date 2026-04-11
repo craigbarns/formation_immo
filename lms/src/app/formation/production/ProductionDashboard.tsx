@@ -13,14 +13,6 @@ type Props = {
   visuals: ModuleVisuals[];
 };
 
-const LIVEAVATAR_STATUS: Record<string, { ready: boolean; contextName: string }> = {
-  juridique: { ready: true, contextName: "ALUR (Loi ALUR & conformite)" },
-  transaction: { ready: false, contextName: "Transaction & negociation" },
-  financement: { ready: false, contextName: "Financement & fiscalite" },
-  marketing: { ready: false, contextName: "Marketing digital immobilier" },
-  terrain: { ready: false, contextName: "Visite, closing & fidelisation" },
-};
-
 export function ProductionDashboard({ modules, avatars, visuals }: Props) {
   const [expandedModule, setExpandedModule] = useState<string | null>(null);
 
@@ -31,8 +23,8 @@ export function ProductionDashboard({ modules, avatars, visuals }: Props) {
         const moduleVisuals = visuals.find((v) => v.moduleSlug === mod.slug);
         const visPending = moduleVisuals?.prompts.filter((p) => !p.imageUrl).length ?? 0;
         const visReady = (moduleVisuals?.prompts.length ?? 0) - visPending;
-        const liveAvatar = LIVEAVATAR_STATUS[mod.slug];
         const videosReady = mod.lessons.filter((l) => l.videoUrl).length;
+        const videosComplete = videosReady === mod.lessons.length;
         const scenariosReady = mod.lessons.filter((l) => l.interactiveScenarioId).length;
         const isExpanded = expandedModule === mod.slug;
 
@@ -70,8 +62,8 @@ export function ProductionDashboard({ modules, avatars, visuals }: Props) {
                   done={videosReady === mod.lessons.length}
                 />
                 <StatusChip
-                  label={`Avatar ${liveAvatar?.ready ? "OK" : "A faire"}`}
-                  done={!!liveAvatar?.ready}
+                  label={`D-ID ${videosComplete ? "OK" : "A faire"}`}
+                  done={videosComplete}
                 />
                 <StatusChip
                   label={`Scenarios ${scenariosReady}`}
@@ -102,37 +94,34 @@ export function ProductionDashboard({ modules, avatars, visuals }: Props) {
                   </section>
                 )}
 
-                {/* LiveAvatar status */}
-                {liveAvatar && (
-                  <section>
-                    <h4 className="text-xs font-bold uppercase tracking-wide text-zinc-400 mb-3">
-                      LiveAvatar conversationnel
-                    </h4>
-                    <div
-                      className={`rounded-lg p-4 ${
-                        liveAvatar.ready
-                          ? "bg-green-50 border border-green-200"
-                          : "bg-amber-50 border border-amber-200"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <span
-                          className={`h-2.5 w-2.5 rounded-full ${
-                            liveAvatar.ready ? "bg-green-500" : "bg-amber-500"
-                          }`}
-                        />
-                        <span className="text-sm font-medium">
-                          {liveAvatar.contextName}
-                        </span>
-                      </div>
-                      <p className="mt-1 text-xs text-zinc-600">
-                        {liveAvatar.ready
-                          ? "Contexte cree et configure. L'avatar peut repondre aux questions de ce module."
-                          : `Script pret. Executez : node scripts/liveavatar-create-${mod.slug}-context.mjs`}
-                      </p>
+                <section>
+                  <h4 className="mb-3 text-xs font-bold uppercase tracking-wide text-zinc-400">
+                    Vidéos présentateur (D-ID)
+                  </h4>
+                  <div
+                    className={`rounded-lg border p-4 ${
+                      videosComplete
+                        ? "border-green-200 bg-green-50"
+                        : "border-amber-200 bg-amber-50"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`h-2.5 w-2.5 rounded-full ${
+                          videosComplete ? "bg-green-500" : "bg-amber-500"
+                        }`}
+                      />
+                      <span className="text-sm font-medium">
+                        MP4 hébergés — {videosReady}/{mod.lessons.length} leçons
+                      </span>
                     </div>
-                  </section>
-                )}
+                    <p className="mt-1 text-xs text-zinc-600">
+                      {videosComplete
+                        ? "Les videoUrl pointent vers vos exports D-ID (ou autre hébergeur stable)."
+                        : "Chaîne : script Markdown → TTS → D-ID → URL dans course.ts. Guide : lms/docs/D-ID-INTEGRATION.md."}
+                    </p>
+                  </div>
+                </section>
 
                 {/* Videos status */}
                 <section>
