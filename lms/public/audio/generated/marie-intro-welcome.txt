@@ -1,0 +1,11 @@
+# Audio placeholder: marie-intro-welcome
+# Texte (60 mots, ~27s):
+Bonjour et bienvenue dans votre formation immobilière de 42 heures. Je suis Marie, votre coach pédagogique. Ensemble, nous allons explorer tous les aspects essentiels du métier d'agent immobilier, du juridique à la transaction, en passant par le financement et le marketing. Cette formation est conforme à la réglementation ALUR et vous préparera efficacement à votre examen. Commençons dès maintenant !
+
+# Pour générer le vrai audio:
+# 1. Assurez-vous que XTTS est lancé: python -m TTS.server.server --port 5000
+# 2. Exécutez:
+node scripts/voice/xtts-generate.mjs   --text="Bonjour et bienvenue dans votre formation immobilière de 42 heures. Je suis Marie, votre coach pédagogique. Ensemble, nous allons explorer tous les aspects essentiels du métier d'agent immobilier, du juridique à la transaction, en passant par le financement et le marketing. Cette formation est conforme à la réglementation ALUR et vous préparera efficacement à votre examen. Commençons dès maintenant !"   --speaker=marie   --output=marie-intro-welcome.mp3
+
+# 3. Générez les sous-titres:
+node scripts/subtitles/whisperx-generate.mjs   --video=public/audio/generated/marie-intro-welcome.mp3   --lang=fr

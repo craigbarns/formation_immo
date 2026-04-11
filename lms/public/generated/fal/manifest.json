@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-04-08T12:37:28.779Z",
+  "models": {
+    "image": "fal-ai/flux/schnell",
+    "video": null
+  },
+  "modules": [
+    {
+      "slug": "juridique",
+      "cover": "/generated/fal/juridique/cover.jpg",
+      "bumper": null
+    },
+    {
+      "slug": "transaction",
+      "cover": "/generated/fal/transaction/cover.jpg",
+      "bumper": null
+    },
+    {
+      "slug": "financement",
+      "cover": "/generated/fal/financement/cover.jpg",
+      "bumper": null
+    },
+    {
+      "slug": "marketing",
+      "cover": "/generated/fal/marketing/cover.jpg",
+      "bumper": null
+    },
+    {
+      "slug": "terrain",
+      "cover": "/generated/fal/terrain/cover.jpg",
+      "bumper": null
+    }
+  ]
+}

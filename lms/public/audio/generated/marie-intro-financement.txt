@@ -1,0 +1,11 @@
+# Audio placeholder: marie-intro-financement
+# Texte (47 mots, ~21s):
+Le financement immobilier est souvent le point de blocage des transactions. Pas d'inquiétude ! Dans ce module, nous allons maîtriser les concepts de taux d'endettement, les différents types de prêts, les dispositifs fiscaux comme le Pinel ou le PTZ. Vous pourrez ainsi conseiller vos clients avec expertise.
+
+# Pour générer le vrai audio:
+# 1. Assurez-vous que XTTS est lancé: python -m TTS.server.server --port 5000
+# 2. Exécutez:
+node scripts/voice/xtts-generate.mjs   --text="Le financement immobilier est souvent le point de blocage des transactions. Pas d'inquiétude ! Dans ce module, nous allons maîtriser les concepts de taux d'endettement, les différents types de prêts, les dispositifs fiscaux comme le Pinel ou le PTZ. Vous pourrez ainsi conseiller vos clients avec expertise."   --speaker=marie   --output=marie-intro-financement.mp3
+
+# 3. Générez les sous-titres:
+node scripts/subtitles/whisperx-generate.mjs   --video=public/audio/generated/marie-intro-financement.mp3   --lang=fr

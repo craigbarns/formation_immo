@@ -1,0 +1,272 @@
+# SCRIPT VIDÉO 5 - MODULE 2 : TRANSACTION
+
+> **Narration audio (TTS)** : texte nettoyé dans `*.narration.txt` (même nom que ce fichier). Régénérer avec `node lms/scripts/extract-narration-for-audio.mjs`, puis MP3 via `node lms/scripts/mistral-voxtral-tts.mjs`.
+## "CRM et fidélisation client"
+
+**Durée** : 9 minutes (environ 1500 mots)
+**Voix ElevenLabs recommandée** : Liam (voix chaleureuse, moderne, pédagogue)
+**Avatar** : Homme 30-40 ans, look tech-friendly, pull col roulé, open-space startup
+
+---
+
+### 🎬 PROMPT MIDJOURNEY POUR VISUEL D'ACCOMPAGNEMENT
+
+```
+Modern real estate professional using CRM software on multiple screens, customer data visualization, contact management interface, warm friendly atmosphere, tech-savvy environment, blue and green color scheme, photorealistic, 4K --ar 16:9 --v 6
+```
+
+---
+
+### 📜 SCRIPT COMPLET
+
+#### [SEGMENT 1 - ACCROCHE] (0:00 - 0:50)
+
+[B-ROLL : Montage rapide d'un agent qui oublie un rendez-vous, qui cherche un numéro, qui ne se souvient pas du nom d'un client]
+
+"Vous avez vendu un appartement à Monsieur Martin il y a six mois. Aujourd'hui, il vous appelle. Vous décrochez : 'Allô, oui, euh... c'est bien Monsieur... euh... ?' [PAUSE 2s] Il raccroche. Vous venez de perdre un client à vie."
+
+[B-ROLL : Agent dépité qui regarde son téléphone]
+
+"Ou pire. Vous avez un acheteur qualifié. Parfait pour ce nouveau mandat. Mais vous ne vous souvenez plus de ses critères. Vous perdez une vente. Et un vendeur mécontent."
+
+[B-ROLL : Transition vers un agent organisé, CRM ouvert, tout sous contrôle]
+
+"Le problème, ce n'est pas votre mémoire. C'est votre système. Aujourd'hui, je vous montre comment un CRM bien utilisé transforme votre relation client. Comment il génère des recommandations. Comment il fait de vous un agent... incontournable."
+
+---
+
+#### [SEGMENT 2 - PROBLÉMATIQUE] (0:50 - 1:50)
+
+[B-ROLL : Statistiques : 80% des agents n'utilisent pas leur CRM efficacement]
+
+"Quatre-vingts pour cent des agents immobiliers ont un CRM. Quatre-vingts pour cent ne l'utilisent pas efficacement. Ils y stockent des noms. Des numéros. Et c'est tout."
+
+[B-ROLL : CRM mal utilisé, champs vides, données incomplètes]
+
+"Résultat ? Ils oublient leurs clients. Ils ratent des opportunités. Ils passent à côté de ventes faciles. Et surtout... ils ne génèrent pas de recommandations."
+
+[B-ROLL : Graphique montrant la valeur d'un client sur la durée]
+
+"Pourtant, un client satisfait génère en moyenne trois recommandations dans les cinq années suivant la transaction. Trois recommandations. Imaginez si vous aviez cent clients satisfaits dans votre CRM. Ce serait trois cents opportunités."
+
+[B-ROLL : Agent qui calcule, qui réalise le potentiel]
+
+"Le CRM, ce n'est pas une corvée. C'est votre banque de données. Votre mémoire. Votre assistant personnel. Celui qui ne dort jamais. Celui qui ne vous fait jamais passer pour un idiot au téléphone."
+
+---
+
+#### [SEGMENT 3 - CONTENU STRUCTURÉ] (1:50 - 6:30)
+
+[B-ROLL : Titre "LES 5 PILIERS DU CRM QUI GÉNÈRE DES RECOMMANDATIONS"]
+
+"Voici les cinq piliers d'un CRM qui génère des recommandations. Ignorez-en un, et vous laissez de l'argent sur la table."
+
+---
+
+**PILIER 1 : LA RICHESSE DES DONNÉES** (1:50 - 2:55)
+
+[B-ROLL : Interface CRM qui se remplit de données riches et détaillées]
+
+"Premier pilier : la richesse des données. Votre CRM doit contenir BEAUCOUP plus qu'un nom et un numéro."
+
+[B-ROLL : Les champs essentiels qui apparaissent un par un]
+
+"Coordonnées complètes : adresse, téléphone, email, réseaux sociaux. Situation familiale : marié, enfants, âges. Situation professionnelle : métier, revenus, stabilité. Projet immobilier : achat, vente, investissement, délai. Critères de recherche : budget, surface, secteurs, impératifs."
+
+[B-ROLL : Suite des champs]
+
+"Historique des contacts : dates, sujets, conclusions. Préférences : communication, horaires, style. Notes personnelles : anniversaire, passions, détails marquants."
+
+[B-ROLL : Agent qui saisit des informations détaillées]
+
+"Quand vous appelez Monsieur Martin, vous savez qu'il a deux enfants de 8 et 10 ans. Que son anniversaire est le 15 mars. Qu'il adore le golf. Que son projet est de vendre dans deux ans pour agrandir."
+
+[B-ROLL : Appel personnalisé, client impressionné]
+
+"Vous dites : 'Bonjour Monsieur Martin, c'est Julie de l'agence. J'espère que les enfants vont bien, la rentrée s'est bien passée ? Et votre partie de golf de dimanche ?' Monsieur Martin est bluffé. Vous vous souvenez de lui. Vous vous intéressez à lui."
+
+---
+
+**PILIER 2 : LA SEGMENTATION** (2:55 - 4:00)
+
+[B-ROLL : Segments de clients qui se créent automatiquement dans le CRM]
+
+"Deuxième pilier : la segmentation. Tous vos contacts ne sont pas égaux. Vous devez les segmenter pour les traiter différemment."
+
+[B-ROLL : Les segments qui apparaissent avec des couleurs différentes]
+
+"Segment A : acheteurs actifs. Ils cherchent maintenant. Ils sont prêts à visiter. Ils ont le financement. Segment B : vendeurs potentiels. Ils vont vendre dans les six mois. Ils préparent leur projet. Segment C : anciens clients. Ils ont déjà transacté avec vous. Ils peuvent recommander. Segment D : prospects froids. Intérêt vague. Pas de délai défini."
+
+[B-ROLL : Agent qui applique des actions différentes à chaque segment]
+
+"Chaque segment mérite une stratégie différente. Les acheteurs actifs : contact hebdomadaire. Nouveautés immédiates. Les vendeurs potentiels : suivi mensuel. Information marché. Les anciens clients : contact trimestriel. Demande de recommandation. Les prospects froids : newsletter mensuelle. Réchauffement progressif."
+
+---
+
+**PILIER 3 : L'AUTOMATISATION** (4:00 - 5:15)
+
+[B-ROLL : Automatisations qui se déclenchent dans le CRM]
+
+"Troisième pilier : l'automatisation. Vous n'avez pas le temps de tout faire manuellement. Heureusement, le CRM peut automatiser une grande partie du travail."
+
+[B-ROLL : Exemples d'automatisations qui apparaissent]
+
+"Anniversaire client : email automatique avec une petite attention. Nouveau bien correspondant aux critères : alerte automatique par SMS. Trois mois après la vente : email de satisfaction automatique. Un an après la vente : email avec estimation de valeur actualisée."
+
+[B-ROLL : Agent qui configure ses automatisations]
+
+"Configurez ces automatismes une fois. Ils travaillent pour vous 24 heures sur 24. Vos clients reçoivent des messages personnalisés sans que vous ayez à lever le petit doigt."
+
+[B-ROLL : Exemple d'email automatique qui s'envoie]
+
+"Exemple : 'Bonjour Monsieur Martin, Joyeux anniversaire ! Pour vous remercier de votre confiance, je vous offre une bouteille de champagne à récupérer à l'agence. À bientôt, Julie.'"
+
+[B-ROLL : Client qui reçoit l'email, qui sourit]
+
+"Simple. Efficace. Gratuit en termes de temps. Et ça crée du lien."
+
+---
+
+**PILIER 4 : LE SUIVI SYSTEMATIQUE** (5:15 - 6:00)
+
+[B-ROLL : Calendrier de suivi qui se remplit de tâches récurrentes]
+
+"Quatrième pilier : le suivi systématique. Un contact sans suivi est un contact mort. Vous devez avoir un rythme. Une discipline."
+
+[B-ROLL : Les rythmes de suivi qui apparaissent]
+
+"Acheteurs actifs : contact tous les 7 jours. Vendeurs en mandat : point toutes les semaines. Anciens clients : contact tous les 90 jours. Prospects chauds : contact tous les 14 jours. Prospects froids : contact tous les 30 jours."
+
+[B-ROLL : Agent qui programme ses rappels dans le CRM]
+
+"Programmez ces rappels dans votre CRM. Quand la date arrive, vous recevez une notification. Vous n'oubliez personne. Vous ne laissez aucun contact s'endormir."
+
+[B-ROLL : Notification de rappel qui apparaît sur l'écran]
+
+"Exemple : 'Rappel : Contacter Monsieur Martin - Dernier contact il y a 90 jours.' Vous appelez. Vous discutez. Vous demandez s'il connaît quelqu'un qui cherche à acheter ou vendre."
+
+---
+
+**PILIER 5 : LA DEMANDE DE RECOMMANDATION** (6:00 - 6:30)
+
+[B-ROLL : Agent qui demande une recommandation avec aisance]
+
+"Cinquième pilier : la demande de recommandation. Vos clients satisfaits veulent vous aider. Ils ne savent pas comment. Vous devez leur demander."
+
+[B-ROLL : Les moments idéaux pour demander]
+
+"Moment un : juste après la signature. 'Monsieur Martin, je suis ravi qu'on ait trouvé votre appartement. Si vous connaissez quelqu'un qui cherche à acheter ou vendre, je serais ravi de l'aider aussi.' Moment deux : à l'acte authentique. 'Merci pour votre confiance. N'oubliez pas, si vous avez des amis qui se lancent dans un projet immobilier, pensez à moi.'"
+
+[B-ROLL : Suite des moments]
+
+"Moment trois : lors des suivis réguliers. 'Tout va bien avec l'appartement ? Au fait, vous ne connaissez pas quelqu'un qui chercherait à acheter dans le quartier ?' Moment quatre : après un service particulier. 'Je suis content d'avoir pu vous aider pour ce problème de copropriété. Si vous connaissez quelqu'un dans la même situation...'"
+
+[B-ROLL : Client qui réfléchit, qui donne un nom]
+
+"Demandez systématiquement. Demandez différemment. Demandez régulièrement. Les recommandations sont le carburant de votre croissance."
+
+---
+
+#### [SEGMENT 4 - CAS PRATIQUE] (6:30 - 8:00)
+
+[B-ROLL : Titre "CAS PRATIQUE - CRM EN ACTION"]
+
+"Passons au cas pratique. Comment j'ai transformé un simple CRM en machine à recommandations."
+
+[B-ROLL : Interface CRM qui s'affiche, fiche client qui s'ouvre]
+
+"Monsieur et Madame Bernard. Acheté un appartement chez moi il y a deux ans. 45 rue de Sèze, Lyon 6ème. 65m². 380 000 euros."
+
+[B-ROLL : La fiche client riche de détails]
+
+"Dans mon CRM, j'ai tout noté. Leurs enfants : Lucie 12 ans, Thomas 9 ans. Leur chien : Max, un labrador. Leur projet futur : agrandir dans 3-4 ans. Leurs passions : vélo, cuisine. Leur anniversaire de mariage : 14 juin."
+
+[B-ROLL : Automatisations qui se déclenchent]
+
+"Automatisation numéro un : email d'anniversaire de mariage. 'Bonjour Monsieur et Madame Bernard, Joyeux anniversaire de mariage ! 14 ans déjà. Pour fêter ça, je vous offre un dîner au restaurant Le Gourmet à Lyon. Réservation faite au nom de Bernard pour ce soir. Profitez-bien ! Julie.'"
+
+[B-ROLL : Les Bernard qui reçoivent l'email, qui sont touchés]
+
+"Résultat ? Un email de remerciement. 'Vous êtes incroyable, Julie. Personne ne s'est jamais souvenu de notre anniversaire de mariage. Merci !'"
+
+[B-ROLL : Suivi programmé qui arrive]
+
+"Trois mois plus tard, rappel automatique. 'Contacter les Bernard - Dernier contact il y a 90 jours.' J'appelle."
+
+[B-ROLL : Appel en cours]
+
+"Moi : 'Bonjour Madame Bernard, c'est Julie. Comment allez-vous ? Et les enfants ? Lucie a dû rentrer au collège, non ? Et Max, il a toujours autant d'énergie ?' Madame Bernard : 'Julie ! Quelle surprise ! Oui, tout va bien. Lucie adore le collège. Max va bien, merci. Et vous ?'"
+
+[B-ROLL : Agent qui discute, qui demande la recommandation]
+
+"Moi : 'Je voulais juste prendre de vos nouvelles. Au fait, vous ne connaissez pas quelqu'un qui chercherait à acheter ou vendre dans le quartier ? On a quelques biens sympas en ce moment.' Madame Bernard : 'Justement ! Ma sœur cherche un appartement pour sa fille qui rentre à la fac à Lyon. Je lui donne votre numéro ?'"
+
+[B-ROLL : Agent qui note, qui remercie]
+
+"Moi : 'Avec plaisir ! Passez-lui mon numéro, ou je peux l'appeler directement si vous voulez.' Madame Bernard : 'Je lui dis de vous appeler. Merci Julie, vous êtes au top !'"
+
+[B-ROLL : Nouvelle fiche qui se crée dans le CRM]
+
+"J'ai créé une nouvelle fiche : 'Mademoiselle Durand, sœur de Madame Bernard, cherche studio Lyon 3ème ou 6ème, budget 150 000 euros, rentrée universitaire.'"
+
+[B-ROLL : Suite de l'histoire]
+
+"J'ai appelé Mademoiselle Durand le lendemain. Visite de trois studios. Offre sur le deuxième. Compromis signé trois semaines plus tard. 145 000 euros. Honoraires : 7 250 euros."
+
+[B-ROLL : Récapitulatif]
+
+"Coût de l'opération ? Un email automatique. Un appel de dix minutes. Résultat ? 7 250 euros d'honoraires. Et une nouvelle cliente satisfaite qui recommandera à son tour."
+
+---
+
+#### [SEGMENT 5 - CONCLUSION] (8:00 - 9:00)
+
+[B-ROLL : Retour sur l'agent formateur, ton chaleureux et encourageant]
+
+"Le CRM, ce n'est pas une contrainte. C'est un super-pouvoir. Celui de ne jamais oublier. Celui de toujours être pertinent. Celui de générer des opportunités en dormant."
+
+[B-ROLL : Les 5 piliers qui réapparaissent]
+
+"Les cinq piliers : enrichissez vos données. Segmentez vos contacts. Automatisez vos suivis. Soyez systématique. Demandez des recommandations."
+
+[B-ROLL : Agent qui configure son CRM avec détermination]
+
+"Votre mission cette semaine : prenez une heure. Une heure seulement. Passez en revue vos contacts les plus importants. Complétez leurs fiches. Programmez vos rappels. Configurez trois automatismes."
+
+[B-ROLL : Graphique de croissance exponentielle]
+
+"Dans six mois, vous ne reconnaîtrez plus votre activité. Les recommandations vont affluer. Vos clients vont vous adorer. Vous allez passer moins de temps à chercher des clients... et plus de temps à les servir."
+
+[B-ROLL : Agent qui reçoit un appel de recommandation, qui sourit]
+
+"Parce qu'à la fin, ce ne sont pas les annonces qui font les meilleurs agents. Ce sont les relations. Les liens. La confiance. Et ça, ça ne se construit pas en un jour. Ça se construit jour après jour. Contact après contact."
+
+[B-ROLL : Logo formation, écran de fin]
+
+"Merci d'avoir suivi ce module sur la transaction. Vous avez maintenant toutes les clés pour estimer comme un pro, prospecter comme une machine, négocier comme un expert, et fidéliser comme un champion. À vous de jouer. On se retrouve dans le prochain module."
+
+---
+
+### 📋 FICHE TECHNIQUE RÉCAPITULATIVE
+
+| Élément | Détail |
+|---------|--------|
+| **Durée** | 9 minutes |
+| **Mots** | ~1500 |
+| **Voix** | Liam (ElevenLabs) |
+| **Ton** | Chaleureux, moderne, pédagogue |
+| **Cible** | Agents immobiliers voulant améliorer leur fidélisation |
+| **Objectif** | Maîtriser le CRM pour générer des recommandations |
+| **Call-to-action** : Passer 1h cette semaine à optimiser son CRM |
+
+### 🎯 POINTS CLÉS À RETENIR
+
+1. **80% des agents** n'utilisent pas leur CRM efficacement
+2. **1 client satisfait** = 3 recommandations en 5 ans
+3. **5 piliers** : Données → Segmentation → Automatisation → Suivi → Recommandations
+4. **Rythmes de suivi** : 7j (acheteurs) / 14j (prospects chauds) / 30j (froids) / 90j (anciens clients)
+5. **Demander systématiquement** des recommandations à chaque contact
+
+---
+
+*Script prêt pour enregistrement HeyGen/Synthesia*

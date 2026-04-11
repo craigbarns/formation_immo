@@ -1,0 +1,183 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+:root {
+  --background: #fafafa;
+  --foreground: #18181b;
+  --brand-navy: #1a3a5c;
+  --brand-navy-deep: #142d45;
+  --brand-navy-soft: #2d5a87;
+  --brand-gold: #d4af37;
+  --brand-gold-dim: rgba(212, 175, 55, 0.35);
+  --brand-gold-soft: #f7f3e8;
+  --surface-elevated: #ffffff;
+  --surface-warm: #f6f4ef;
+  --muted-foreground: #71717a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-deep: var(--brand-navy-deep);
+  --color-brand-navy-soft: var(--brand-navy-soft);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-gold-soft: var(--brand-gold-soft);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--brand-gold) 35%, transparent);
+  color: var(--brand-navy);
+}
+
+/* Zone formation : fond chaud, profondeur douce, lisibilité maximale */
+.formation-canvas {
+  background-color: var(--surface-warm);
+  background-image:
+    radial-gradient(ellipse 100% 60% at 50% -15%, rgba(26, 58, 92, 0.09), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 100% 0%, rgba(212, 175, 55, 0.06), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(26, 58, 92, 0.04), transparent 45%);
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .card-elevated {
+    @apply rounded-2xl border border-zinc-200/90 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04),0_16px_40px_rgba(26,58,92,0.07)];
+  }
+
+  .card-elevated-hover {
+    @apply transition duration-300 hover:border-brand-navy/15 hover:shadow-[0_8px_32px_rgba(26,58,92,0.12)];
+  }
+
+  .link-focus {
+    @apply outline-none ring-2 ring-brand-navy/20 ring-offset-2 transition focus-visible:ring-brand-gold/50;
+  }
+
+  .text-gradient-brand {
+    @apply bg-gradient-to-r from-brand-navy to-brand-navy-soft bg-clip-text text-transparent;
+  }
+
+  /* Titres de section — repères visuels clairs pour l’apprenant */
+  .section-heading {
+    @apply flex items-center gap-3 text-xs font-bold uppercase tracking-[0.12em] text-zinc-500;
+  }
+
+  .section-heading::after {
+    content: "";
+    @apply h-px flex-1 bg-gradient-to-r from-zinc-300/80 to-transparent;
+  }
+
+  .btn-primary-solid {
+    @apply rounded-xl bg-brand-navy px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-navy/20 transition hover:bg-brand-navy-deep hover:shadow-lg;
+  }
+
+  .trust-badge {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-brand-gold/25 bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-brand-navy/90 shadow-sm;
+  }
+
+  /* Leçon : fil d’Ariane lisible sur fond clair */
+  .breadcrumb-pill {
+    @apply inline-flex items-center rounded-full bg-white px-3 py-1.5 text-[13px] font-semibold text-brand-navy shadow-sm ring-1 ring-zinc-200/90 transition hover:bg-brand-gold-soft hover:ring-brand-navy/15;
+  }
+
+  .breadcrumb-sep {
+    @apply text-zinc-300;
+  }
+
+  /* Titres de bloc dans une leçon (cohérence) */
+  .lesson-block-title {
+    @apply mb-3 flex items-center gap-2 text-sm font-bold uppercase tracking-[0.06em];
+  }
+
+  .lesson-block-title--gold {
+    @apply text-brand-gold;
+  }
+
+  .lesson-block-title--navy {
+    @apply text-brand-navy;
+  }
+
+  .lesson-block-title--muted {
+    @apply text-zinc-500;
+  }
+
+  .lesson-block-title-line {
+    @apply h-px w-6 shrink-0;
+  }
+
+  /* Navigation leçon préc./suiv. */
+  .lesson-nav-prev {
+    @apply flex items-center gap-2 rounded-2xl border border-zinc-200/90 bg-white px-5 py-3.5 text-sm font-semibold text-zinc-700 shadow-sm transition hover:border-brand-navy/20 hover:bg-brand-gold-soft/40 hover:shadow-md;
+  }
+
+  .lesson-nav-next {
+    @apply flex items-center gap-2 rounded-2xl bg-brand-navy px-5 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand-navy/25 transition hover:bg-brand-navy-deep hover:shadow-lg;
+  }
+
+  .lesson-nav-finish {
+    @apply rounded-2xl bg-gradient-to-r from-brand-gold to-amber-500 px-6 py-3.5 text-sm font-bold text-brand-navy shadow-md transition hover:brightness-[1.03];
+  }
+
+  /* Bloc interactif — hover lift */
+  .interactive-block {
+    @apply overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04),0_16px_40px_rgba(26,58,92,0.07)] transition-shadow duration-300 hover:shadow-[0_8px_32px_rgba(26,58,92,0.12)];
+  }
+
+  /* Badge de type d'exercice */
+  .activity-badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold;
+  }
+}
+
+/* Animations globales */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; max-height: 0; }
+  to   { opacity: 1; max-height: 2000px; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(212,175,55,0); }
+}
+
+/* Inputs & focus ring cohérent */
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="range"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--brand-gold);
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
+}
+
+/* Scrollbar discrète */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(26,58,92,0.2); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(26,58,92,0.35); }

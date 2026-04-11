@@ -1,0 +1,11 @@
+# Audio placeholder: marie-intro-terrain
+# Texte (35 mots, ~17s):
+Dernière ligne droite avec le module terrain ! Ici, nous mettons en pratique tout ce que vous avez appris. Visites, négociations, signatures, fidélisation... Vous êtes maintenant prêt à exercer avec professionnalisme et confiance. Allons-y !
+
+# Pour générer le vrai audio:
+# 1. Assurez-vous que XTTS est lancé: python -m TTS.server.server --port 5000
+# 2. Exécutez:
+node scripts/voice/xtts-generate.mjs   --text="Dernière ligne droite avec le module terrain ! Ici, nous mettons en pratique tout ce que vous avez appris. Visites, négociations, signatures, fidélisation... Vous êtes maintenant prêt à exercer avec professionnalisme et confiance. Allons-y !"   --speaker=marie   --output=marie-intro-terrain.mp3
+
+# 3. Générez les sous-titres:
+node scripts/subtitles/whisperx-generate.mjs   --video=public/audio/generated/marie-intro-terrain.mp3   --lang=fr

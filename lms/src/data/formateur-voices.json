@@ -1,0 +1,37 @@
+{
+  "juridique": {
+    "name": "Maître Alexandre Vidal",
+    "mistralVoiceId": "5a271406-039d-46fe-835b-fbbb00eaf08d",
+    "mistralVoiceLabel": "Marie — Neutral (fr_fr, voix française native — cadre légal, gravité)",
+    "elevenLabsVoiceId": "jUHQdLfy668sllNiNTSW",
+    "elevenLabsVoiceLabel": "Clément — français parisien, ton informatif posé (conformité, mandats, diagnostics)"
+  },
+  "transaction": {
+    "name": "Sarah Benali",
+    "mistralVoiceId": "2f62b1af-aea3-4079-9d10-7ca665ee7243",
+    "mistralVoiceLabel": "Marie — Excited (fr_fr — dynamisme prospection, négociation)",
+    "elevenLabsVoiceId": "txtf1EDouKke753vN8SL",
+    "elevenLabsVoiceLabel": "Jeanne — française parisienne, claire et captivante (prospection, négociation, CRM)"
+  },
+  "financement": {
+    "name": "Thomas Mercier",
+    "mistralVoiceId": "e0580ce5-e63c-4cbe-88c8-a983b80c5f1f",
+    "mistralVoiceLabel": "Marie — Curious (fr_fr — pédagogie, intérêt pour les mécanismes chiffres/fiscalité)",
+    "elevenLabsVoiceId": "ojsdYNTmnPdf7yAl8rI5",
+    "elevenLabsVoiceLabel": "Loïc — français calme et rassurant (crédit, fiscalité, rentabilité)"
+  },
+  "marketing": {
+    "name": "Léa Fontaine",
+    "mistralVoiceId": "49d024dd-981b-4462-bb17-74d381eb8fd7",
+    "mistralVoiceLabel": "Marie — Happy (fr_fr — chaleur, communication, annonces et réseaux)",
+    "elevenLabsVoiceId": "DguSKGFJeOJdyMI6NrYY",
+    "elevenLabsVoiceLabel": "Koraly — narration expressive et immersive (annonces, SEO, réseaux, storytelling)"
+  },
+  "terrain": {
+    "name": "Nicolas Arnaud",
+    "mistralVoiceId": "2f62b1af-aea3-4079-9d10-7ca665ee7243",
+    "mistralVoiceLabel": "Marie — Excited (fr_fr — énergie visite et closing ; même timbre que transaction)",
+    "elevenLabsVoiceId": "SomyDQQmnE7TsltdiDgp",
+    "elevenLabsVoiceLabel": "Isac — français posé, autorité et sérénité (visites, closing, fidélisation)"
+  }
+}

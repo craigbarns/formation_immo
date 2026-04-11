@@ -1,0 +1,4 @@
+# Narration audio (extrait automatiquement)
+# Source: demo-sadtalker.md
+# Ne pas éditer la structure des scripts vidéo : régénérer avec node lms/scripts/extract-narration-for-audio.mjs
+Bienvenue dans cette démonstration. SadTalker transforme une photo fixe et un fichier audio en une courte vidéo où le visage suit la parole. C’est idéal pour illustrer vos scripts de formation sans tourner une vraie vidéo en studio. Suivez les étapes sur la page dédiée : vous y trouverez le cadre Hugging Face, les prérequis et le script de génération optionnel. Une fois le fichier MP4 en place dans le dossier public du LMS, vous pourrez l’associer à cette leçon via le champ vidéo du cours.

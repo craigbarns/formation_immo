@@ -1,0 +1,58 @@
+================================================================================
+MODULE 4 : MARKETING DIGITAL - PROMPTS MIDJOURNEY V6
+Format: 16:9 | Style: Corporate Immobilier Professionnel
+================================================================================
+
+---
+[1] PHOTOS PROFESSIONNELLES
+================================================================================
+Professional real estate photography studio setup for digital marketing training. 
+Modern DSLR camera on tripod, laptop displaying property photos, ring light, 
+softbox lighting equipment, clean white desk. Corporate training environment, 
+neutral gray background, professional equipment arranged neatly, warm ambient 
+lighting, high-end corporate photography style, 8K quality, photorealistic 
+--ar 16:9 --v 6.0 --style raw --s 250
+
+---
+[2] ANNONCES IMMOBILIÈRES  
+================================================================================
+Modern real estate property listing interface on computer screen, professional 
+property advertisement design, elegant apartment photos, price tags, property 
+details, clean UI design, blue and white color scheme, corporate real estate 
+portal aesthetic, professional marketing materials, high-end digital presentation, 
+photorealistic, 8K quality --ar 16:9 --v 6.0 --s 250
+
+---
+[3] PORTAILS IMMOBILIERS
+================================================================================
+Real estate portal website interface displayed on large monitor, multiple 
+property listings grid, search filters, map integration, professional real 
+estate platform design, modern web UI, blue accent colors, clean typography, 
+corporate digital platform aesthetic, professional marketing dashboard, 
+photorealistic, 8K quality --ar 16:9 --v 6.0 --s 250
+
+---
+[4] RÉSEAUX SOCIAUX
+================================================================================
+Social media marketing for real estate, smartphone displaying Instagram feed 
+with property posts, laptop showing Facebook real estate page, social media 
+icons floating, engagement metrics, modern digital marketing concept, professional 
+content creation, blue and orange gradient background, corporate social media 
+strategy, photorealistic, 8K quality --ar 16:9 --v 6.0 --s 250
+
+---
+[5] SEO IMMOBILIER
+================================================================================
+SEO optimization concept for real estate business, laptop displaying Google 
+search results with real estate keywords, analytics dashboard, ranking charts, 
+keyword cloud, search engine optimization visualization, modern digital marketing 
+workspace, professional corporate environment, blue and green color scheme, 
+data visualization, photorealistic, 8K quality --ar 16:9 --v 6.0 --s 250
+
+================================================================================
+PARAMÈTRES CONSEILLÉS:
+--ar 16:9      (Format vidéo/formation)
+--v 6.0        (Version Midjourney)
+--s 250        (Stylisation moyenne)
+--style raw    (Pour les images techniques)
+================================================================================

@@ -1,0 +1,21 @@
+{
+  "speaker": "marie",
+  "voice_name": "Marie",
+  "module": "juridique",
+  "text": "Bienvenue dans le module juridique. Ici, nous allons découvrir les fondamentaux légaux qui encadrent notre profession. Le mandat de vente, le compromis, les diagnostics obligatoires, la copropriété... Tous ces concepts seront désormais clairs pour vous. Je vous accompagne pas à pas.",
+  "language": "fr",
+  "estimated_duration": 19,
+  "word_count": 41,
+  "character_count": 283,
+  "generated_at": "2026-04-09T18:04:49.984Z",
+  "audio_path": "/audio/generated/marie-intro-juridique.mp3",
+  "subtitle_path": "/subtitles/marie-intro-juridique.srt",
+  "usage": {
+    "component": "SadTalkerAvatar",
+    "props": {
+      "imageUrl": "/avatars/marie.jpg",
+      "audioUrl": "/audio/generated/marie-intro-juridique.mp3",
+      "transcript": "Bienvenue dans le module juridique. Ici, nous allons découvrir les fondamentaux légaux qui encadrent notre profession. Le mandat de vente, le compromis, les diagnostics obligatoires, la copropriété... Tous ces concepts seront désormais clairs pour vous. Je vous accompagne pas à pas."
+    }
+  }
+}

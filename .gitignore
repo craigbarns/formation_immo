@@ -1,0 +1,9 @@
+# Racine du dépôt — formation immobilière
+.DS_Store
+Thumbs.db
+*.log
+
+# Éditeurs / outils
+.idea/
+.vscode/
+*.swp

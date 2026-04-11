@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1f3c"/>
+      <stop offset="100%" style="stop-color:#2d3561"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5d5c5"/>
+      <stop offset="100%" style="stop-color:#e8c4b8"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a3728"/>
+      <stop offset="100%" style="stop-color:#3d2e1f"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a227"/>
+      <stop offset="100%" style="stop-color:#b8941f"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="200" cy="200" r="190" fill="url(#bg)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="200" cy="200" r="180" fill="none" stroke="#c9a227" stroke-width="2" opacity="0.3"/>
+  <circle cx="200" cy="200" r="160" fill="none" stroke="#c9a227" stroke-width="1" opacity="0.2"/>
+  
+  <!-- Shoulders/Suit -->
+  <path d="M80 380 Q80 280 140 260 L260 260 Q320 280 320 380 Z" fill="#2c3e50"/>
+  <path d="M140 260 L200 380 L260 260" fill="#34495e"/>
+  
+  <!-- Shirt collar -->
+  <path d="M170 260 L200 320 L230 260" fill="#fff"/>
+  
+  <!-- Gold accent -->
+  <path d="M200 320 L200 380" stroke="url(#gold)" stroke-width="3"/>
+  <circle cx="200" cy="330" r="4" fill="url(#gold)"/>
+  
+  <!-- Neck -->
+  <rect x="175" y="200" width="50" height="70" fill="url(#skin)"/>
+  <ellipse cx="200" cy="240" rx="25" ry="8" fill="#e0b8a8" opacity="0.5"/>
+  
+  <!-- Head/Face -->
+  <ellipse cx="200" cy="160" rx="70" ry="85" fill="url(#skin)"/>
+  
+  <!-- Ears -->
+  <ellipse cx="132" cy="165" rx="10" ry="18" fill="url(#skin)"/>
+  <ellipse cx="268" cy="165" rx="10" ry="18" fill="url(#skin)"/>
+  
+  <!-- Hair - Back -->
+  <path d="M120 120 Q100 180 110 220 Q130 200 140 180" fill="url(#hair)"/>
+  <path d="M280 120 Q300 180 290 220 Q270 200 260 180" fill="url(#hair)"/>
+  
+  <!-- Hair - Main -->
+  <path d="M130 140 Q130 60 200 50 Q270 60 270 140 Q270 180 250 200 Q250 120 200 110 Q150 120 150 200 Q130 180 130 140" fill="url(#hair)"/>
+  
+  <!-- Hair - Bun -->
+  <ellipse cx="200" cy="55" rx="35" ry="25" fill="url(#hair)"/>
+  
+  <!-- Eyebrows -->
+  <path d="M155 135 Q170 128 185 135" stroke="#4a3728" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M215 135 Q230 128 245 135" stroke="#4a3728" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="170" cy="155" rx="12" ry="8" fill="#fff"/>
+  <ellipse cx="230" cy="155" rx="12" ry="8" fill="#fff"/>
+  <ellipse cx="170" cy="155" rx="7" ry="5" fill="#4a3728"/>
+  <ellipse cx="230" cy="155" rx="7" ry="5" fill="#4a3728"/>
+  <circle cx="172" cy="153" r="2.5" fill="#fff"/>
+  <circle cx="232" cy="153" r="2.5" fill="#fff"/>
+  
+  <!-- Eyelashes -->
+  <path d="M158 150 Q155 145 152 148" stroke="#4a3728" stroke-width="1.5" fill="none"/>
+  <path d="M242 150 Q245 145 248 148" stroke="#4a3728" stroke-width="1.5" fill="none"/>
+  
+  <!-- Nose -->
+  <path d="M200 155 Q195 185 200 195 Q205 185 200 155" fill="#e0b8a8"/>
+  <ellipse cx="200" cy="195" rx="8" ry="4" fill="#e0b8a8"/>
+  
+  <!-- Mouth (smile) -->
+  <path d="M175 215 Q200 235 225 215" stroke="#c97b7b" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M180 218 Q200 225 220 218" fill="#d98989" opacity="0.6"/>
+  
+  <!-- Cheeks -->
+  <ellipse cx="155" cy="185" rx="12" ry="8" fill="#e8a090" opacity="0.4"/>
+  <ellipse cx="245" cy="185" rx="12" ry="8" fill="#e8a090" opacity="0.4"/>
+  
+  <!-- Blazer lapels -->
+  <path d="M140 260 L170 380 L130 380 Z" fill="#34495e"/>
+  <path d="M260 260 L230 380 L270 380 Z" fill="#34495e"/>
+  
+  <!-- Gold pin/badge -->
+  <circle cx="245" cy="300" r="12" fill="url(#gold)" stroke="#b8941f" stroke-width="2"/>
+  <text x="245" y="305" text-anchor="middle" fill="#1a1f3c" font-size="10" font-weight="bold">IF</text>
+  
+  <!-- Sparkle decoration -->
+  <g opacity="0.8">
+    <path d="M320 80 L325 95 L340 100 L325 105 L320 120 L315 105 L300 100 L315 95 Z" fill="url(#gold)"/>
+    <circle cx="340" cy="70" r="3" fill="url(#gold)"/>
+    <circle cx="350" cy="90" r="2" fill="#fff" opacity="0.6"/>
+  </g>
+</svg>

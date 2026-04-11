@@ -1,0 +1,21 @@
+{
+  "speaker": "marie",
+  "voice_name": "Marie",
+  "module": "terrain",
+  "text": "Dernière ligne droite avec le module terrain ! Ici, nous mettons en pratique tout ce que vous avez appris. Visites, négociations, signatures, fidélisation... Vous êtes maintenant prêt à exercer avec professionnalisme et confiance. Allons-y !",
+  "language": "fr",
+  "estimated_duration": 17,
+  "word_count": 35,
+  "character_count": 241,
+  "generated_at": "2026-04-09T18:04:49.985Z",
+  "audio_path": "/audio/generated/marie-intro-terrain.mp3",
+  "subtitle_path": "/subtitles/marie-intro-terrain.srt",
+  "usage": {
+    "component": "SadTalkerAvatar",
+    "props": {
+      "imageUrl": "/avatars/marie.jpg",
+      "audioUrl": "/audio/generated/marie-intro-terrain.mp3",
+      "transcript": "Dernière ligne droite avec le module terrain ! Ici, nous mettons en pratique tout ce que vous avez appris. Visites, négociations, signatures, fidélisation... Vous êtes maintenant prêt à exercer avec professionnalisme et confiance. Allons-y !"
+    }
+  }
+}
