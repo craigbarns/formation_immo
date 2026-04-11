@@ -21,11 +21,13 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password }),
       });
-      const data = (await res.json()) as { error?: string };
+      const data = (await res.json()) as { error?: string; token?: string };
       if (!res.ok) {
         setError(data.error ?? "Erreur de connexion");
         return;
       }
+      // Store auth in localStorage
+      localStorage.setItem("formation_auth", data.token || "logged-in");
       router.push("/formation");
       router.refresh();
     } catch {

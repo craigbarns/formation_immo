@@ -1,5 +1,3 @@
-import { redirect } from "next/navigation";
-import { getSession } from "@/lib/auth";
 import { FormationShell } from "@/components/FormationShell";
 
 export default async function FormationLayout({
@@ -7,10 +5,6 @@ export default async function FormationLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getSession();
-  if (!session.isLoggedIn) {
-    redirect("/login");
-  }
-
+  // Session check disabled for demo - using client-side auth
   return <FormationShell>{children}</FormationShell>;
 }

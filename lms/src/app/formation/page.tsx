@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { BookOpen, Clock, Layers, Sparkles, Target, Brain } from "lucide-react";
 import { COURSE, lessonId } from "@/data/course";
 import { getAvatarForModule } from "@/data/module-avatars";
@@ -14,8 +18,17 @@ import { AdaptiveLearningPath } from "@/components/learning-path";
 import { AICoachButton } from "@/components/ai-coach";
 
 export default function FormationHomePage() {
+  const router = useRouter();
   const totalLessons = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
   const totalModules = COURSE.length;
+  
+  useEffect(() => {
+    // Check auth on client side
+    const auth = localStorage.getItem("formation_auth");
+    if (!auth) {
+      router.push("/login");
+    }
+  }, [router]);
 
   return (
     <div className="space-y-12">
