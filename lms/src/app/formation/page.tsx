@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, Clock, Layers, Sparkles, Target, Brain } from "lucide-react";
+import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award } from "lucide-react";
 import { COURSE, lessonId } from "@/data/course";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getModuleShowcase } from "@/data/module-showcase";
@@ -12,6 +12,7 @@ import { StaggerContainer, StaggerItem } from "@/components/animations";
 import { DailyGoalTracker } from "@/components/retention";
 import { AdaptiveLearningPath } from "@/components/learning-path";
 import { AICoachButton } from "@/components/ai-coach";
+import { Greeting } from "@/components/Greeting";
 
 export default function FormationHomePage() {
   const totalLessons = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
@@ -39,7 +40,7 @@ export default function FormationHomePage() {
         <div className="relative px-6 py-9 md:px-10 md:py-11">
           <p className="flex items-center gap-2 text-sm font-medium text-brand-navy/80">
             <Sparkles className="h-4 w-4 text-brand-gold" aria-hidden />
-            Bienvenue dans votre espace — tout est inclus, avancez leçon par leçon.
+            <Greeting /> — tout est inclus, avancez leçon par leçon.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <span className="trust-badge border-brand-navy/10 bg-brand-navy text-white">
@@ -47,6 +48,12 @@ export default function FormationHomePage() {
             </span>
             <span className="trust-badge text-[#7a6410]">
               Contenu pro · 42 h
+            </span>
+            <span className="trust-badge border-emerald-300/50 bg-emerald-50 text-emerald-800">
+              Loi ALUR 2026
+            </span>
+            <span className="trust-badge border-blue-300/50 bg-blue-50 text-blue-800">
+              RGPD conforme
             </span>
           </div>
           <h1 className="mt-5 max-w-3xl text-3xl font-bold leading-[1.15] tracking-tight text-brand-navy md:text-[2.35rem]">
@@ -59,7 +66,7 @@ export default function FormationHomePage() {
             quotidien avec vos clients.
           </p>
 
-          <dl className="mt-9 grid gap-3 sm:grid-cols-3">
+          <dl className="mt-9 grid gap-3 sm:grid-cols-4">
             <div className="flex items-center gap-3 rounded-2xl border border-zinc-200/80 bg-white/90 px-4 py-3 shadow-sm">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-navy/[0.08] text-brand-navy">
                 <Layers className="h-5 w-5" aria-hidden />
@@ -91,6 +98,17 @@ export default function FormationHomePage() {
                   Volume
                 </dt>
                 <dd className="text-xl font-bold tabular-nums text-brand-navy">42 h</dd>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 rounded-2xl border border-emerald-200/80 bg-emerald-50/80 px-4 py-3 shadow-sm">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
+                <Award className="h-5 w-5" aria-hidden />
+              </span>
+              <div>
+                <dt className="text-[10px] font-bold uppercase tracking-wide text-emerald-600">
+                  Certifié
+                </dt>
+                <dd className="text-xs font-bold text-emerald-800">ALUR conforme</dd>
               </div>
             </div>
           </dl>

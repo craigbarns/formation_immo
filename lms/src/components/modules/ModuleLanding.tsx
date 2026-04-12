@@ -228,11 +228,20 @@ export function ModuleLanding({
               Cliquez pour ouvrir la leçon — audio disponible sur chaque fiche.
             </p>
           </div>
+          {modulePct !== null && (
+            <div className="flex items-center gap-2 rounded-full border border-brand-navy/15 bg-brand-navy/5 px-4 py-1.5 text-sm">
+              <span className="h-2 w-2 rounded-full bg-brand-gold" />
+              <span className="font-bold text-brand-navy tabular-nums">{modulePct}%</span>
+              <span className="text-zinc-500">complété</span>
+            </div>
+          )}
         </div>
 
         <ol className="space-y-4">
           {lessons.map((lesson, i) => {
             const teaser = showcase.lessonTeaser[lesson.slug] ?? "";
+            // Estimated reading time: ~20min per lesson on average
+            const estMin = lesson.audioSrc ? 25 : 15;
             return (
               <li key={lesson.slug}>
                 <div className="group card-elevated flex flex-col gap-4 rounded-2xl border border-zinc-200/90 p-5 transition hover:border-zinc-300 md:flex-row md:items-stretch md:justify-between">
@@ -256,6 +265,9 @@ export function ModuleLanding({
                             Interactif
                           </span>
                         )}
+                        <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-500">
+                          ~{estMin} min
+                        </span>
                       </div>
                       {teaser && (
                         <p className="mt-2 text-sm leading-relaxed text-zinc-600">{teaser}</p>

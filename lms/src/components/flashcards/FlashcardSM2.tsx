@@ -177,42 +177,72 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
   if (sessionComplete) {
     const total = sessionStats.again + sessionStats.good + sessionStats.easy;
     const accuracy = total > 0 ? ((sessionStats.good + sessionStats.easy) / total) * 100 : 0;
-    
+    const isPerfect = sessionStats.again === 0 && total > 0;
+
     return (
-      <div className="rounded-2xl border border-[#d4af37]/20 bg-gradient-to-br from-[#1a3a5c]/50 to-[#0f1f33]/50 p-8">
-        <h3 className="text-center text-xl font-bold text-white">Session terminée !</h3>
-        
-        <div className="mt-6 grid grid-cols-3 gap-4">
-          <div className="rounded-xl bg-red-500/10 p-4 text-center">
-            <p className="text-2xl font-bold text-red-400">{sessionStats.again}</p>
-            <p className="text-xs text-white/50">À revoir</p>
-          </div>
-          <div className="rounded-xl bg-blue-500/10 p-4 text-center">
-            <p className="text-2xl font-bold text-blue-400">{sessionStats.good}</p>
-            <p className="text-xs text-white/50">Bien</p>
-          </div>
-          <div className="rounded-xl bg-emerald-500/10 p-4 text-center">
-            <p className="text-2xl font-bold text-emerald-400">{sessionStats.easy}</p>
-            <p className="text-xs text-white/50">Facile</p>
-          </div>
-        </div>
-        
-        <div className="mt-6 text-center">
-          <p className="text-sm text-white/70">
-            Précision : <span className="font-bold text-[#d4af37]">{accuracy.toFixed(0)}%</span>
-          </p>
-          <p className="mt-1 text-xs text-white/40">
-            Prochaine révision dans 24h pour les cartes "Bien" et "Facile"
+      <div className="rounded-2xl overflow-hidden border border-[#d4af37]/20 bg-gradient-to-br from-[#1a3a5c]/60 to-[#0f1f33]/70 shadow-xl">
+        {/* Header */}
+        <div className="border-b border-white/10 px-6 py-6 text-center">
+          <div className="text-4xl mb-2">{isPerfect ? "🏆" : accuracy >= 70 ? "🎉" : "📚"}</div>
+          <h3 className="text-xl font-bold text-white">
+            {isPerfect ? "Session parfaite !" : "Session terminée !"}
+          </h3>
+          <p className="mt-1 text-sm text-white/60">
+            {isPerfect
+              ? "Toutes les cartes maîtrisées !"
+              : accuracy >= 70
+                ? "Bonne progression — continuez !"
+                : "Révisez les cartes difficiles demain."}
           </p>
         </div>
-        
-        <button
-          onClick={restartSession}
-          className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#d4af37] py-3 font-semibold text-[#1a3a5c] transition hover:bg-[#e0bf4d]"
-        >
-          <RotateCw className="h-4 w-4" />
-          Nouvelle session
-        </button>
+
+        <div className="p-6">
+          {/* Score ring */}
+          <div className="relative mx-auto flex h-28 w-28 items-center justify-center mb-6">
+            <svg className="-rotate-90 absolute inset-0" viewBox="0 0 112 112">
+              <circle cx="56" cy="56" r="48" strokeWidth="8" fill="none" className="stroke-white/10" />
+              <circle
+                cx="56" cy="56" r="48" strokeWidth="8" fill="none"
+                stroke={accuracy >= 80 ? "#10b981" : accuracy >= 50 ? "#d4af37" : "#ef4444"}
+                strokeDasharray={`${2 * Math.PI * 48}`}
+                strokeDashoffset={`${2 * Math.PI * 48 * (1 - accuracy / 100)}`}
+                strokeLinecap="round"
+              />
+            </svg>
+            <div className="text-center">
+              <p className="text-2xl font-black text-white">{accuracy.toFixed(0)}%</p>
+              <p className="text-[10px] text-white/50">précision</p>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="rounded-xl bg-red-500/10 border border-red-500/20 p-4 text-center">
+              <p className="text-2xl font-bold text-red-400">{sessionStats.again}</p>
+              <p className="text-xs text-white/50 mt-1">À revoir</p>
+            </div>
+            <div className="rounded-xl bg-blue-500/10 border border-blue-500/20 p-4 text-center">
+              <p className="text-2xl font-bold text-blue-400">{sessionStats.good}</p>
+              <p className="text-xs text-white/50 mt-1">Bien</p>
+            </div>
+            <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-4 text-center">
+              <p className="text-2xl font-bold text-emerald-400">{sessionStats.easy}</p>
+              <p className="text-xs text-white/50 mt-1">Facile</p>
+            </div>
+          </div>
+
+          <p className="mt-4 text-center text-xs text-white/40">
+            Prochaine révision dans 24 h pour les cartes &ldquo;Bien&rdquo; et &ldquo;Facile&rdquo;
+          </p>
+
+          <button
+            onClick={restartSession}
+            className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-[#d4af37] py-3.5 font-bold text-[#1a3a5c] shadow-lg transition hover:bg-[#e0bf4d] hover:shadow-xl active:scale-[0.98]"
+          >
+            <RotateCw className="h-4 w-4" />
+            Nouvelle session
+          </button>
+        </div>
       </div>
     );
   }
@@ -220,47 +250,74 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
   const currentCard = dueCards[currentIndex];
   const progress = ((currentIndex) / dueCards.length) * 100;
 
+  // Feedback color after answering
+  const feedbackColor = !showBack
+    ? null
+    : null; // will be set after response
+
   return (
     <div className="space-y-4">
-      {/* Progress */}
+      {/* Progress header */}
       <div className="flex items-center justify-between text-sm">
-        <span className="text-white/50">Carte {currentIndex + 1} sur {dueCards.length}</span>
-        <span className="text-[#d4af37]">{Math.round(progress)}%</span>
+        <div className="flex items-center gap-2">
+          <span className="text-white/70 font-medium">Carte</span>
+          <span className="rounded-lg bg-white/15 px-2 py-0.5 text-sm font-bold text-white tabular-nums">
+            {currentIndex + 1}/{dueCards.length}
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-white/50">{Math.round(progress)}%</span>
+          <span className="text-[#d4af37] font-bold">
+            {sessionStats.easy + sessionStats.good} ✓
+          </span>
+        </div>
       </div>
-      <div className="h-2 rounded-full bg-white/10">
+
+      {/* Progress bar */}
+      <div className="h-2 overflow-hidden rounded-full bg-white/10">
         <motion.div
-          className="h-full rounded-full bg-[#d4af37]"
+          className="h-full rounded-full bg-gradient-to-r from-[#d4af37] to-amber-400"
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
+          transition={{ duration: 0.4 }}
         />
       </div>
 
-      {/* Card */}
-      <div 
-        className="relative min-h-[240px] cursor-pointer perspective-1000"
+      {/* Card with flip animation */}
+      <div
+        className="relative min-h-[240px] cursor-pointer"
         onClick={() => setShowBack(!showBack)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === "Enter" && setShowBack(!showBack)}
+        aria-label={showBack ? "Masquer la réponse" : "Révéler la réponse"}
       >
         <AnimatePresence mode="wait">
           <motion.div
             key={showBack ? "back" : "front"}
-            initial={{ rotateY: showBack ? -90 : 90, opacity: 0 }}
-            animate={{ rotateY: 0, opacity: 1 }}
-            exit={{ rotateY: showBack ? 90 : -90, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="rounded-2xl border border-[#d4af37]/30 bg-gradient-to-br from-[#1a3a5c] to-[#0f1f33] p-8 text-center"
+            initial={{ rotateY: showBack ? -90 : 90, opacity: 0, scale: 0.96 }}
+            animate={{ rotateY: 0, opacity: 1, scale: 1 }}
+            exit={{ rotateY: showBack ? 90 : -90, opacity: 0, scale: 0.96 }}
+            transition={{ duration: 0.28, ease: "easeOut" }}
+            className={`rounded-2xl border p-8 text-center shadow-lg ${
+              showBack
+                ? "border-[#d4af37]/40 bg-gradient-to-br from-[#1a3a5c] via-[#1e4a73] to-[#0f1f33]"
+                : "border-[#d4af37]/20 bg-gradient-to-br from-[#1a3a5c] to-[#0f1f33]"
+            }`}
           >
             <div className="mb-4 flex justify-center">
-              <Brain className="h-8 w-8 text-[#d4af37]" />
+              <Brain className={`h-8 w-8 ${showBack ? "text-[#d4af37]" : "text-white/40"}`} />
             </div>
-            <p className="text-sm text-white/50">
+            <p className={`text-xs font-bold uppercase tracking-widest ${showBack ? "text-[#d4af37]" : "text-white/40"}`}>
               {showBack ? "Réponse" : "Question"}
             </p>
-            <p className="mt-4 text-lg font-medium text-white">
+            <p className="mt-4 text-lg font-medium leading-relaxed text-white">
               {showBack ? currentCard.back : currentCard.front}
             </p>
             {!showBack && (
-              <p className="mt-6 text-xs text-white/30">
-                Cliquez pour révéler la réponse
+              <p className="mt-6 text-xs text-white/30 flex items-center justify-center gap-1">
+                <span>Cliquez pour révéler</span>
+                <span aria-hidden>↩</span>
               </p>
             )}
           </motion.div>
@@ -270,33 +327,34 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
       {/* Response buttons */}
       {showBack && (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.22 }}
           className="grid grid-cols-3 gap-3"
         >
           <button
             onClick={() => handleResponse(0)}
-            className="flex flex-col items-center gap-1 rounded-xl bg-red-500/20 p-3 text-red-400 transition hover:bg-red-500/30"
+            className="flex flex-col items-center gap-1.5 rounded-xl border border-red-500/30 bg-red-500/15 p-3.5 text-red-400 transition hover:bg-red-500/25 hover:scale-[1.03] active:scale-[0.97]"
           >
-            <XCircle className="h-5 w-5" />
-            <span className="text-xs font-semibold">Encore</span>
-            <span className="text-[10px] text-white/50">&lt; 1min</span>
+            <XCircle className="h-6 w-6" />
+            <span className="text-sm font-bold">Encore</span>
+            <span className="text-[10px] text-white/40">&lt; 1 min</span>
           </button>
           <button
             onClick={() => handleResponse(3)}
-            className="flex flex-col items-center gap-1 rounded-xl bg-blue-500/20 p-3 text-blue-400 transition hover:bg-blue-500/30"
+            className="flex flex-col items-center gap-1.5 rounded-xl border border-blue-500/30 bg-blue-500/15 p-3.5 text-blue-300 transition hover:bg-blue-500/25 hover:scale-[1.03] active:scale-[0.97]"
           >
-            <MoreHorizontal className="h-5 w-5" />
-            <span className="text-xs font-semibold">Bien</span>
-            <span className="text-[10px] text-white/50">1 jour</span>
+            <MoreHorizontal className="h-6 w-6" />
+            <span className="text-sm font-bold">Bien</span>
+            <span className="text-[10px] text-white/40">1 jour</span>
           </button>
           <button
             onClick={() => handleResponse(5)}
-            className="flex flex-col items-center gap-1 rounded-xl bg-emerald-500/20 p-3 text-emerald-400 transition hover:bg-emerald-500/30"
+            className="flex flex-col items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/15 p-3.5 text-emerald-400 transition hover:bg-emerald-500/25 hover:scale-[1.03] active:scale-[0.97]"
           >
-            <CheckCircle2 className="h-5 w-5" />
-            <span className="text-xs font-semibold">Facile</span>
-            <span className="text-[10px] text-white/50">4 jours</span>
+            <CheckCircle2 className="h-6 w-6" />
+            <span className="text-sm font-bold">Facile</span>
+            <span className="text-[10px] text-white/40">4 jours</span>
           </button>
         </motion.div>
       )}

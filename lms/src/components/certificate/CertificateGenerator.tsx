@@ -45,129 +45,172 @@ export function CertificateGenerator() {
     canvas.width = w;
     canvas.height = h;
 
-    // Background
-    ctx.fillStyle = "#ffffff";
+    // Background gradient
+    const bgGrad = ctx.createLinearGradient(0, 0, w, h);
+    bgGrad.addColorStop(0, "#fffef9");
+    bgGrad.addColorStop(1, "#f9f7f0");
+    ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, w, h);
 
-    // Border
+    // Outer border — navy
     ctx.strokeStyle = "#1a3a5c";
-    ctx.lineWidth = 3;
-    ctx.strokeRect(30, 30, w - 60, h - 60);
+    ctx.lineWidth = 5;
+    ctx.strokeRect(20, 20, w - 40, h - 40);
 
-    // Inner border
+    // Inner border — gold
     ctx.strokeStyle = "#d4af37";
-    ctx.lineWidth = 1.5;
-    ctx.strokeRect(40, 40, w - 80, h - 80);
+    ctx.lineWidth = 2;
+    ctx.strokeRect(32, 32, w - 64, h - 64);
 
-    // Gold corner accents
-    const cornerSize = 30;
+    // Thin gold line inside
+    ctx.strokeStyle = "rgba(212,175,55,0.4)";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(42, 42, w - 84, h - 84);
+
+    // Gold corner ornaments
+    const cs = 40;
     ctx.fillStyle = "#d4af37";
-    [[50, 50], [w - 50 - cornerSize, 50], [50, h - 50 - cornerSize], [w - 50 - cornerSize, h - 50 - cornerSize]].forEach(([x, y]) => {
-      ctx.fillRect(x, y, cornerSize, 2);
-      ctx.fillRect(x, y, 2, cornerSize);
+    const corners = [[42, 42], [w - 42 - cs, 42], [42, h - 42 - cs], [w - 42 - cs, h - 42 - cs]] as [number,number][];
+    corners.forEach(([x, y]) => {
+      ctx.fillRect(x, y, cs, 3);
+      ctx.fillRect(x, y, 3, cs);
     });
 
-    // Header
-    ctx.fillStyle = "#d4af37";
-    ctx.font = "bold 14px Arial";
+    // Logo / icon placeholder (text-based)
+    ctx.font = "42px serif";
     ctx.textAlign = "center";
-    ctx.fillText("FORMATION PROFESSIONNELLE IMMOBILIERE", w / 2, 100);
+    ctx.fillText("🏛", w / 2, 115);
+
+    // Institution line
+    ctx.fillStyle = "#d4af37";
+    ctx.font = "bold 13px Arial";
+    ctx.letterSpacing = "3px";
+    ctx.fillText("FORMATION PROFESSIONNELLE IMMOBILIÈRE", w / 2, 155);
+    ctx.letterSpacing = "0px";
+
+    // Separator line
+    ctx.strokeStyle = "#d4af37";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(w / 2 - 260, 168);
+    ctx.lineTo(w / 2 + 260, 168);
+    ctx.stroke();
 
     // Title
     ctx.fillStyle = "#1a3a5c";
-    ctx.font = "bold 42px Georgia";
-    ctx.fillText("CERTIFICAT DE FORMATION", w / 2, 170);
+    ctx.font = "bold 46px Georgia";
+    ctx.fillText("CERTIFICAT DE RÉUSSITE", w / 2, 230);
 
-    // Line
+    // Subtitle separator
     ctx.strokeStyle = "#d4af37";
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(w / 2 - 200, 195);
-    ctx.lineTo(w / 2 + 200, 195);
+    ctx.moveTo(w / 2 - 220, 252);
+    ctx.lineTo(w / 2 + 220, 252);
     ctx.stroke();
 
-    // Body
-    ctx.fillStyle = "#333333";
-    ctx.font = "18px Arial";
-    ctx.fillText("Ce certificat atteste que", w / 2, 260);
+    // Body text
+    ctx.fillStyle = "#555555";
+    ctx.font = "italic 18px Georgia";
+    ctx.fillText("Ce certificat atteste que", w / 2, 300);
 
     // Name
     ctx.fillStyle = "#1a3a5c";
-    ctx.font = "bold 36px Georgia";
-    ctx.fillText(name.trim(), w / 2, 320);
+    ctx.font = "bold 40px Georgia";
+    ctx.fillText(name.trim(), w / 2, 360);
 
     // Underline name
     ctx.strokeStyle = "#d4af37";
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.moveTo(w / 2 - 250, 335);
-    ctx.lineTo(w / 2 + 250, 335);
+    ctx.moveTo(w / 2 - 280, 378);
+    ctx.lineTo(w / 2 + 280, 378);
     ctx.stroke();
 
     // Description
     ctx.fillStyle = "#555555";
-    ctx.font = "16px Arial";
-    ctx.fillText("a suivi avec succes la formation", w / 2, 380);
+    ctx.font = "italic 17px Georgia";
+    ctx.fillText("a suivi et validé avec succès la formation complète", w / 2, 420);
 
     ctx.fillStyle = "#1a3a5c";
-    ctx.font = "bold 24px Georgia";
-    ctx.fillText("Agent Immobilier — Formation Complete 42 Heures", w / 2, 420);
+    ctx.font = "bold 26px Georgia";
+    ctx.fillText("Agent Immobilier — Formation Complète 42 Heures", w / 2, 462);
 
-    // Modules
-    ctx.font = "14px Arial";
+    // Modules list
+    ctx.font = "13px Arial";
     ctx.fillStyle = "#666666";
     const modules = [
-      "Module 1 : Juridique & conformite",
-      "Module 2 : Transaction & negociation",
-      "Module 3 : Financement & fiscalite",
-      "Module 4 : Marketing digital",
-      "Module 5 : Visite, closing & fidelisation",
+      "Module 1 : Juridique & conformité  ·  Module 2 : Transaction & négociation",
+      "Module 3 : Financement & fiscalité  ·  Module 4 : Marketing digital",
+      "Module 5 : Visite, closing & fidélisation",
     ];
     modules.forEach((mod, i) => {
-      ctx.fillText(mod, w / 2, 470 + i * 24);
+      ctx.fillText(mod, w / 2, 505 + i * 22);
     });
+
+    // Gold separator
+    ctx.strokeStyle = "rgba(212,175,55,0.35)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(w / 2 - 350, 570);
+    ctx.lineTo(w / 2 + 350, 570);
+    ctx.stroke();
 
     // Stats
     const level = state ? getLevelForXP(state.xp) : null;
-    ctx.font = "bold 14px Arial";
+    ctx.font = "bold 13px Arial";
     ctx.fillStyle = "#1a3a5c";
     ctx.fillText(
-      `Niveau atteint : ${level?.current.title || "N/A"} | XP : ${state?.xp || 0} | Examens reussis : ${examsPassed}/5`,
+      `Niveau : ${level?.current.title || "N/A"}  ·  XP : ${state?.xp || 0}  ·  Examens réussis : ${examsPassed}/5`,
       w / 2,
-      620,
+      600,
     );
 
     // Badges earned
     if (state && state.earnedBadges.length > 0) {
-      ctx.font = "12px Arial";
-      ctx.fillStyle = "#888888";
+      ctx.font = "11px Arial";
+      ctx.fillStyle = "#999999";
       const badgeNames = state.earnedBadges
         .map((id) => BADGES.find((b) => b.id === id)?.name)
         .filter(Boolean)
         .slice(0, 8)
-        .join(" • ");
-      ctx.fillText(`Badges : ${badgeNames}`, w / 2, 650);
+        .join("  ·  ");
+      ctx.fillText(`Badges obtenus : ${badgeNames}`, w / 2, 628);
     }
 
     // Date
-    ctx.font = "14px Arial";
+    ctx.font = "13px Arial";
     ctx.fillStyle = "#888888";
     const dateStr = new Date().toLocaleDateString("fr-FR", {
       day: "numeric",
       month: "long",
       year: "numeric",
     });
-    ctx.fillText(`Delivre le ${dateStr}`, w / 2, 700);
+    ctx.fillText(`Délivré le ${dateStr}`, w / 2, 670);
 
-    // Signature line
+    // Signature lines
+    const sigY = 750;
+    // Left
     ctx.strokeStyle = "#cccccc";
+    ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(w / 2 - 120, 760);
-    ctx.lineTo(w / 2 + 120, 760);
+    ctx.moveTo(200, sigY);
+    ctx.lineTo(480, sigY);
     ctx.stroke();
     ctx.fillStyle = "#999999";
-    ctx.font = "12px Arial";
-    ctx.fillText("Signature du formateur", w / 2, 780);
+    ctx.font = "11px Arial";
+    ctx.fillText("Organisme de formation", 340, sigY + 18);
+    // Right
+    ctx.beginPath();
+    ctx.moveTo(w - 480, sigY);
+    ctx.lineTo(w - 200, sigY);
+    ctx.stroke();
+    ctx.fillText("Le/La stagiaire", w - 340, sigY + 18);
+
+    // ALUR compliance badge at bottom
+    ctx.font = "bold 10px Arial";
+    ctx.fillStyle = "#d4af37";
+    ctx.fillText("CONFORME LOI ALUR — RGPD", w / 2, h - 50);
 
     setGenerated(true);
   }
@@ -182,31 +225,36 @@ export function CertificateGenerator() {
 
   return (
     <div className="rounded-2xl border-2 border-[#1a3a5c]/15 bg-white shadow-lg">
-      <div className="border-b border-zinc-100 bg-gradient-to-r from-[#1a3a5c] to-[#2d5a7c] px-6 py-4 text-white rounded-t-2xl">
-        <h3 className="text-lg font-bold">Certificat de formation</h3>
-        <p className="mt-1 text-xs text-white/70">Generez votre attestation de reussite</p>
+      <div className="border-b border-zinc-100 bg-gradient-to-br from-[#1a3a5c] via-[#1e4a73] to-[#2d5a87] px-6 py-5 text-white rounded-t-2xl">
+        <div className="flex items-center gap-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-xl">🏛️</span>
+          <div>
+            <h3 className="text-lg font-bold">Certificat de formation</h3>
+            <p className="text-xs text-white/70">Générez votre attestation de réussite</p>
+          </div>
+        </div>
       </div>
 
       <div className="p-6">
         {!canGenerate ? (
           <div className="rounded-xl border border-amber-200 bg-amber-50 p-6 text-center">
             <div className="text-3xl">🔒</div>
-            <h4 className="mt-2 text-lg font-bold text-amber-800">Certificat verrouille</h4>
+            <h4 className="mt-2 text-lg font-bold text-amber-800">Certificat verrouillé</h4>
             <p className="mt-2 text-sm text-amber-700">
-              Pour generer votre certificat, vous devez :
+              Pour générer votre certificat, vous devez :
             </p>
             <ul className="mt-3 space-y-2 text-sm text-amber-700">
               <li className="flex items-center justify-center gap-2">
                 <span className={completionPct >= 80 ? "text-emerald-600" : "text-amber-600"}>
                   {completionPct >= 80 ? "✓" : "○"}
                 </span>
-                Completer au moins 80% des lecons ({completionPct}%/80%)
+                Compléter au moins 80% des leçons ({completionPct}%/80%)
               </li>
               <li className="flex items-center justify-center gap-2">
                 <span className={examsPassed >= 3 ? "text-emerald-600" : "text-amber-600"}>
                   {examsPassed >= 3 ? "✓" : "○"}
                 </span>
-                Reussir au moins 3 examens ({examsPassed}/3)
+                Réussir au moins 3 examens ({examsPassed}/3)
               </li>
             </ul>
           </div>
@@ -228,7 +276,7 @@ export function CertificateGenerator() {
                 disabled={!name.trim()}
                 className="rounded-xl bg-[#d4af37] px-6 py-3 text-sm font-bold text-[#1a3a5c] shadow transition hover:bg-[#c4a030] disabled:opacity-50"
               >
-                Generer le certificat
+                Générer le certificat
               </button>
             </div>
 
@@ -243,7 +291,7 @@ export function CertificateGenerator() {
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
-                  Telecharger le certificat
+                  Télécharger le certificat (PNG)
                 </button>
               </div>
             )}

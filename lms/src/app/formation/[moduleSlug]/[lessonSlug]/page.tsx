@@ -37,6 +37,7 @@ import { BookmarkButton } from "@/components/user-content/BookmarkButton";
 import { NotesPanelButton } from "./NotesPanelButton";
 import { LessonJourneyBadge } from "@/components/LessonJourneyBadge";
 import { AICoachButton } from "@/components/ai-coach";
+import { ReadingProgressBar } from "@/components/ReadingProgressBar";
 
 type Props = { params: Promise<{ moduleSlug: string; lessonSlug: string }> };
 
@@ -75,6 +76,7 @@ export default async function LessonPage({ params }: Props) {
 
   return (
     <div>
+      <ReadingProgressBar />
       {/* Avatar banner */}
       {avatar && <LessonAvatarBanner avatar={avatar} />}
 

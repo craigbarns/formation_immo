@@ -87,7 +87,7 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 py-10 pb-20 sm:px-6">{children}</main>
+      <main className="mx-auto max-w-6xl px-4 py-10 pb-20 sm:px-6 md:pb-10">{children}</main>
 
       <footer className="border-t border-zinc-200/90 bg-white/85 py-10 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 sm:flex-row sm:items-start sm:justify-between">
@@ -129,9 +129,17 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
 
       {/* Global Search */}
       <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-      
+
       {/* French Coach */}
       <FrenchCoach />
+
+      {/* Mobile bottom nav */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t border-zinc-200/90 bg-white/95 px-2 py-2 backdrop-blur-md md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+        <MobileNavItem href="/formation" icon="🏠" label="Parcours" />
+        <MobileNavItem href="/formation/outils" icon="🧮" label="Outils" />
+        <MobileNavItem href="/formation/supports-visuels" icon="📋" label="Fiches" />
+        <MobileNavItem href="/formation/profil" icon="🏅" label="Profil" />
+      </nav>
     </div>
   );
 }
@@ -143,6 +151,18 @@ function NavItem({ href, children }: { href: string; children: React.ReactNode }
       className="rounded-full px-3 py-2 text-[13px] font-semibold text-white drop-shadow-sm outline-none transition hover:bg-white/15 hover:text-amber-50 focus-visible:ring-2 focus-visible:ring-amber-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a3a5c]"
     >
       {children}
+    </Link>
+  );
+}
+
+function MobileNavItem({ href, icon, label }: { href: string; icon: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="flex flex-col items-center gap-0.5 px-3 py-1.5 text-zinc-600 hover:text-brand-navy transition-colors"
+    >
+      <span className="text-xl">{icon}</span>
+      <span className="text-[10px] font-semibold">{label}</span>
     </Link>
   );
 }

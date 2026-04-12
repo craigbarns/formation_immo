@@ -26,7 +26,6 @@ export default function LoginPage() {
         setError(data.error ?? "Erreur de connexion");
         return;
       }
-      // Store auth in localStorage
       localStorage.setItem("formation_auth", data.token || "logged-in");
       router.push("/formation");
       router.refresh();
@@ -38,14 +37,61 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="formation-canvas flex min-h-screen flex-col items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md">
+    <div className="formation-canvas relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-12">
+      {/* Floating decorative icons */}
+      <style>{`
+        @keyframes floatIcon {
+          0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.18; }
+          50% { transform: translateY(-14px) rotate(6deg); opacity: 0.28; }
+        }
+        @keyframes floatIcon2 {
+          0%, 100% { transform: translateY(0px) rotate(-4deg); opacity: 0.14; }
+          50% { transform: translateY(-10px) rotate(4deg); opacity: 0.22; }
+        }
+        @keyframes fadeInCard {
+          from { opacity: 0; transform: translateY(16px) scale(0.97); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .float-icon-1 { animation: floatIcon 5s ease-in-out infinite; }
+        .float-icon-2 { animation: floatIcon2 6.5s ease-in-out 1s infinite; }
+        .float-icon-3 { animation: floatIcon 7s ease-in-out 2.5s infinite; }
+        .float-icon-4 { animation: floatIcon2 5.5s ease-in-out 0.5s infinite; }
+        .login-card { animation: fadeInCard 0.6s ease-out forwards; }
+      `}</style>
+
+      <span
+        className="pointer-events-none float-icon-1 fixed left-[6%] top-[12%] select-none text-5xl"
+        aria-hidden
+      >🏠</span>
+      <span
+        className="pointer-events-none float-icon-2 fixed left-[12%] bottom-[18%] select-none text-4xl"
+        aria-hidden
+      >📋</span>
+      <span
+        className="pointer-events-none float-icon-3 fixed right-[8%] top-[20%] select-none text-5xl"
+        aria-hidden
+      >⚖️</span>
+      <span
+        className="pointer-events-none float-icon-4 fixed right-[14%] bottom-[14%] select-none text-4xl"
+        aria-hidden
+      >💼</span>
+
+      <div className="login-card w-full max-w-md">
+        {/* Top badge */}
         <div className="mb-8 text-center">
           <p className="inline-flex items-center gap-2 rounded-full border border-brand-navy/10 bg-white/80 px-4 py-1.5 text-xs font-semibold text-brand-navy shadow-sm">
             <Sparkles className="h-3.5 w-3.5 text-brand-gold" aria-hidden />
             Espace réservé aux inscrits
           </p>
-          <h1 className="mt-5 text-2xl font-bold tracking-tight text-brand-navy md:text-3xl">
+
+          {/* Logo */}
+          <div className="mt-5 flex justify-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-navy text-3xl shadow-lg ring-1 ring-brand-navy/20">
+              🏛️
+            </div>
+          </div>
+
+          <h1 className="mt-4 text-2xl font-bold tracking-tight text-brand-navy md:text-3xl">
             Accédez à votre formation
           </h1>
           <p className="mt-2 text-sm leading-relaxed text-zinc-600">
@@ -54,6 +100,7 @@ export default function LoginPage() {
           </p>
         </div>
 
+        {/* Card */}
         <div className="card-elevated overflow-hidden rounded-3xl border-brand-navy/10">
           <div className="h-1.5 bg-gradient-to-r from-brand-navy via-brand-navy-soft to-brand-gold" aria-hidden />
           <div className="p-8">
@@ -94,20 +141,45 @@ export default function LoginPage() {
                     Connexion…
                   </>
                 ) : (
-                  "Entrer dans l’espace formation"
+                  "Entrer dans l'espace formation"
                 )}
               </button>
             </form>
+
+            {/* What you'll learn */}
+            <div className="mt-7 rounded-2xl border border-brand-gold/25 bg-brand-gold-soft/60 px-5 py-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-brand-navy/70 mb-3">
+                Ce que vous allez apprendre
+              </p>
+              <ul className="space-y-2">
+                {[
+                  { icon: "⚖️", text: "Juridique & ALUR" },
+                  { icon: "💶", text: "Financement & fiscalité" },
+                  { icon: "🤝", text: "Techniques de vente" },
+                ].map(({ icon, text }) => (
+                  <li key={text} className="flex items-center gap-2.5 text-sm font-medium text-brand-navy">
+                    <span className="text-base" aria-hidden>{icon}</span>
+                    {text}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             <p className="mt-6 text-center text-sm text-zinc-500">
               <Link href="/" className="font-semibold text-brand-navy underline-offset-4 hover:underline">
-                ← Retour à l’accueil
+                ← Retour à l&apos;accueil
               </Link>
             </p>
           </div>
         </div>
 
-        <p className="mt-6 text-center text-xs leading-relaxed text-zinc-500">
-          Problème de connexion ? Vérifiez votre saisie ou contactez l’organisme qui vous a remis les
+        {/* Inspirational quote */}
+        <p className="mt-6 text-center text-sm font-medium italic text-brand-navy/60">
+          &ldquo;Votre réussite dans l&apos;immobilier commence ici.&rdquo;
+        </p>
+
+        <p className="mt-3 text-center text-xs leading-relaxed text-zinc-500">
+          Problème de connexion ? Vérifiez votre saisie ou contactez l&apos;organisme qui vous a remis les
           accès.
         </p>
       </div>
