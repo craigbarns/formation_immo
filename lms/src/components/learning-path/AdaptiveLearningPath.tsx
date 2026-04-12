@@ -120,9 +120,9 @@ export function AdaptiveLearningPath() {
   if (recommendations.length === 0) {
     return (
       <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-6 text-center">
-        <Sparkles className="mx-auto h-8 w-8 text-emerald-400" />
-        <h3 className="mt-3 font-bold text-white">Félicitations !</h3>
-        <p className="mt-1 text-sm text-white/70">
+        <Sparkles className="mx-auto h-8 w-8 text-emerald-600" />
+        <h3 className="mt-3 font-bold text-zinc-900">Félicitations !</h3>
+        <p className="mt-1 text-sm text-zinc-600">
           Vous avez terminé tous les modules. Passez aux examens pour valider vos compétences !
         </p>
       </div>
@@ -131,7 +131,7 @@ export function AdaptiveLearningPath() {
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center gap-2 text-sm text-white/50">
+      <div className="flex items-center gap-2 text-sm text-zinc-500">
         <Brain className="h-4 w-4" />
         <span>Parcours personnalisé selon votre progression</span>
       </div>
@@ -148,13 +148,13 @@ export function AdaptiveLearningPath() {
               ? `/formation/${rec.moduleSlug}/${rec.lessonSlug}` 
               : `/formation/${rec.moduleSlug}`
             }
-            className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-[#d4af37]/30 hover:bg-white/10"
+            className="group flex items-center gap-4 rounded-xl border border-zinc-200 bg-white p-4 transition hover:border-[#d4af37]/50 hover:bg-zinc-50"
           >
             <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${
-              rec.type === "continue" ? "bg-blue-500/20 text-blue-400" :
-              rec.type === "review" ? "bg-amber-500/20 text-amber-400" :
-              rec.type === "practice" ? "bg-purple-500/20 text-purple-400" :
-              "bg-emerald-500/20 text-emerald-400"
+              rec.type === "continue" ? "bg-blue-100 text-blue-600" :
+              rec.type === "review" ? "bg-amber-100 text-amber-600" :
+              rec.type === "practice" ? "bg-purple-100 text-purple-600" :
+              "bg-emerald-100 text-emerald-600"
             }`}>
               {rec.type === "continue" ? <TrendingUp className="h-6 w-6" /> :
                rec.type === "review" ? <AlertCircle className="h-6 w-6" /> :
@@ -165,10 +165,10 @@ export function AdaptiveLearningPath() {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <span className={`text-xs font-bold uppercase tracking-wider ${
-                  rec.type === "continue" ? "text-blue-400" :
-                  rec.type === "review" ? "text-amber-400" :
-                  rec.type === "practice" ? "text-purple-400" :
-                  "text-emerald-400"
+                  rec.type === "continue" ? "text-blue-600" :
+                  rec.type === "review" ? "text-amber-600" :
+                  rec.type === "practice" ? "text-purple-600" :
+                  "text-emerald-600"
                 }`}>
                   {rec.type === "continue" ? "Continuer" :
                    rec.type === "review" ? "Réviser" :
@@ -176,13 +176,13 @@ export function AdaptiveLearningPath() {
                    "Explorer"}
                 </span>
               </div>
-              <h4 className="truncate font-semibold text-white group-hover:text-[#d4af37] transition">
+              <h4 className="truncate font-semibold text-zinc-900 group-hover:text-[#1a3a5c] transition">
                 {rec.title}
               </h4>
-              <p className="text-xs text-white/50">{rec.reason}</p>
+              <p className="text-xs text-zinc-500">{rec.reason}</p>
             </div>
             
-            <ArrowRight className="h-5 w-5 text-white/30 transition group-hover:text-[#d4af37] group-hover:translate-x-1" />
+            <ArrowRight className="h-5 w-5 text-zinc-400 transition group-hover:text-[#d4af37] group-hover:translate-x-1" />
           </Link>
         </motion.div>
       ))}
