@@ -20,7 +20,7 @@ import { InteractiveScenario } from "@/components/interactive/InteractiveScenari
 import { LessonTimer } from "@/components/gamification/LessonTimer";
 import { ModuleTimeTracker } from "@/components/gamification/ModuleTimeTracker";
 import { CinematicPlayer } from "@/components/audio/CinematicPlayer";
-import { LessonAvatarBanner } from "@/components/avatars/LessonAvatarBanner";
+import { LessonPresenterPanel } from "@/components/avatars/LessonPresenterPanel";
 import { CaseStudyBlock } from "@/components/interactive/CaseStudyBlock";
 import { ChatRoleplay } from "@/components/interactive/ChatRoleplay";
 import { DragDropExerciseBlock } from "@/components/interactive/DragDropExercise";
@@ -78,7 +78,13 @@ export default async function LessonPage({ params }: Props) {
     <div>
       <ReadingProgressBar />
       {/* Avatar banner */}
-      {avatar && <LessonAvatarBanner avatar={avatar} />}
+      {avatar && (
+        <LessonPresenterPanel
+          moduleSlug={moduleSlug}
+          lessonTitle={lesson.title}
+          isAudioPlaying={false}
+        />
+      )}
 
       <div className="card-elevated mb-8 overflow-hidden">
         {/* Breadcrumb + Timer */}

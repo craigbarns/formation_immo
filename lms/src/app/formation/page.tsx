@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award } from "lucide-react";
 import { COURSE, lessonId } from "@/data/course";
+import { AvatarIllustration } from "@/components/avatars/AvatarIllustration";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getModuleShowcase } from "@/data/module-showcase";
 import { ProgressOverview } from "@/components/ProgressOverview";
@@ -172,6 +173,20 @@ export default function FormationHomePage() {
             label="Examens QCM"
             desc="Par module"
           />
+        </div>
+      </section>
+
+      {/* Formateurs preview */}
+      <section className="scroll-mt-8">
+        <h2 className="section-heading"><span className="shrink-0">Vos formateurs</span></h2>
+        <p className="mt-2 text-sm text-zinc-600">5 experts pour 5 modules — chacun avec son style pédagogique.</p>
+        <div className="mt-4 flex flex-wrap gap-4 justify-center sm:justify-start">
+          {COURSE.map((mod) => (
+            <Link key={mod.slug} href={`/formation/formateurs`} className="flex flex-col items-center gap-1 group">
+              <AvatarIllustration moduleSlug={mod.slug as any} size="sm" animated expression="neutral" />
+              <span className="text-[10px] font-semibold text-zinc-500 group-hover:text-brand-navy transition">{mod.slug}</span>
+            </Link>
+          ))}
         </div>
       </section>
 
