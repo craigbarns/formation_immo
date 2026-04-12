@@ -3,6 +3,8 @@
  * Supprime B-roll, pauses, blocs techniques, tableaux, directions de plateau, etc.
  */
 
+import { cleanMarkdownForTTS } from "./clean-markdown-tts.mjs";
+
 const STOP_HEADINGS = [
   "📚",
   "RÉFÉRENCES",
@@ -109,7 +111,9 @@ export function extractNarrationAudio(markdown) {
     out.push(t);
   }
 
-  return stripTtsInlineArtifacts(out.join("\n\n"));
+  const rawText = out.join("\n\n");
+  const cleanedText = cleanMarkdownForTTS(stripTtsInlineArtifacts(rawText));
+  return cleanedText;
 }
 
 function shouldStopSection(trimmed) {
