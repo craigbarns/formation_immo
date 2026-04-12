@@ -19,12 +19,14 @@ const ROOT = join(__dirname, "..");
 const API_KEY = process.env.HEYGEN_API_KEY || "sk_V2_hgu_kUsxd24XGEM_Y8yRwWCKno6FWSNkQ9LCwNCtSAsk90ea";
 
 // ─── Avatar assigné par module ───────────────────────────────────────────────
+// Tous les MP3 sont générés avec la voix "Marie" (féminin, Mistral Voxtral)
+// → tous les avatars HeyGen sont féminins pour cohérence voix/visage
 const MODULE_AVATARS = {
-  juridique:   { avatarId: "Bastien_public_1",              name: "Bastien — Blazer bleu (Juriste)" },
-  transaction: { avatarId: "Abigail_standing_office_front", name: "Abigail — Bureau (Négociatrice)" },
-  financement: { avatarId: "Florin_Suit_Front_public",      name: "Florin — Costume (Analyste)" },
-  marketing:   { avatarId: "Anja_standing_office_front",    name: "Anja — Bureau (Marketing)" },
-  terrain:     { avatarId: "Brandon_Office_Standing_Front_public", name: "Brandon — Bureau (Directeur)" },
+  juridique:   { avatarId: "Annie_Office_Standing_Front_public", name: "Annie — Bureau debout (Juriste)" },
+  transaction: { avatarId: "Abigail_standing_office_front",      name: "Abigail — Bureau (Négociatrice)" },
+  financement: { avatarId: "Bahar_Suit_Front_public",            name: "Bahar — Costume (Analyste)" },
+  marketing:   { avatarId: "Anja_standing_office_front",         name: "Anja — Bureau (Marketing)" },
+  terrain:     { avatarId: "Adriana_SuitSofa_Front_public",      name: "Adriana — Costume Sofa (Terrain)" },
 };
 
 // ─── Mapping audio → module/leçon ────────────────────────────────────────────
