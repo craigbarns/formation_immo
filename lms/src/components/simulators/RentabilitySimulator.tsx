@@ -65,10 +65,10 @@ export function RentabilitySimulator() {
     new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(amount);
 
   const recommendationConfig = {
-    excellent: { color: "text-emerald-400", bg: "bg-emerald-500/20", label: "Excellent investissement" },
-    good: { color: "text-blue-400", bg: "bg-blue-500/20", label: "Bon investissement" },
-    average: { color: "text-amber-400", bg: "bg-amber-500/20", label: "Rentabilité moyenne" },
-    poor: { color: "text-red-400", bg: "bg-red-500/20", label: "Rentabilité faible" },
+    excellent: { color: "text-emerald-700", bg: "bg-emerald-100", label: "Excellent investissement" },
+    good: { color: "text-blue-700", bg: "bg-blue-100", label: "Bon investissement" },
+    average: { color: "text-amber-700", bg: "bg-amber-100", label: "Rentabilité moyenne" },
+    poor: { color: "text-red-700", bg: "bg-red-100", label: "Rentabilité faible" },
   };
 
   const rec = recommendationConfig[result.recommendation];
@@ -77,7 +77,7 @@ export function RentabilitySimulator() {
     <div className="space-y-6">
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-4">
-          <h4 className="font-semibold text-white flex items-center gap-2">
+          <h4 className="font-semibold text-zinc-800 flex items-center gap-2">
             <Home className="h-4 w-4 text-[#d4af37]" />
             Acquisition
           </h4>
@@ -90,7 +90,7 @@ export function RentabilitySimulator() {
         </div>
 
         <div className="space-y-4">
-          <h4 className="font-semibold text-white flex items-center gap-2">
+          <h4 className="font-semibold text-zinc-800 flex items-center gap-2">
             <DollarSign className="h-4 w-4 text-[#d4af37]" />
             Charges annuelles
           </h4>
@@ -107,7 +107,7 @@ export function RentabilitySimulator() {
         key={result.netYield}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="rounded-2xl border border-[#d4af37]/20 bg-gradient-to-br from-[#1a3a5c]/50 to-[#0f1f33]/50 p-6"
+        className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
       >
         {/* Recommendation */}
         <div className={`mb-6 rounded-xl ${rec.bg} p-4 text-center`}>
@@ -116,52 +116,52 @@ export function RentabilitySimulator() {
 
         {/* Main metrics */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="text-center p-3 rounded-xl bg-white/5">
-            <p className="text-2xl font-bold text-white">{result.grossYield.toFixed(2)}%</p>
-            <p className="text-xs text-white/50">Rendement brut</p>
+          <div className="text-center p-3 rounded-xl bg-zinc-50 border border-zinc-100">
+            <p className="text-2xl font-bold text-zinc-900">{result.grossYield.toFixed(2)}%</p>
+            <p className="text-xs text-zinc-500">Rendement brut</p>
           </div>
-          <div className="text-center p-3 rounded-xl bg-white/5">
+          <div className="text-center p-3 rounded-xl bg-zinc-50 border border-zinc-100">
             <p className={`text-2xl font-bold ${result.netYield >= 0 ? "text-emerald-400" : "text-red-400"}`}>
               {result.netYield.toFixed(2)}%
             </p>
-            <p className="text-xs text-white/50">Rendement net</p>
+            <p className="text-xs text-zinc-500">Rendement net</p>
           </div>
-          <div className="text-center p-3 rounded-xl bg-white/5">
+          <div className="text-center p-3 rounded-xl bg-zinc-50 border border-zinc-100">
             <p className={`text-2xl font-bold ${result.cashflow >= 0 ? "text-emerald-400" : "text-red-400"}`}>
               {formatCurrency(result.cashflow)}
             </p>
-            <p className="text-xs text-white/50">Cashflow mensuel</p>
+            <p className="text-xs text-zinc-500">Cashflow mensuel</p>
           </div>
-          <div className="text-center p-3 rounded-xl bg-white/5">
+          <div className="text-center p-3 rounded-xl bg-zinc-50 border border-zinc-100">
             <p className="text-2xl font-bold text-[#d4af37]">
               {result.yearsToReturn > 0 && result.yearsToReturn < 100 ? result.yearsToReturn.toFixed(1) : "∞"}
             </p>
-            <p className="text-xs text-white/50">Années de retour</p>
+            <p className="text-xs text-zinc-500">Années de retour</p>
           </div>
         </div>
 
         {/* Investment breakdown */}
         <div className="grid md:grid-cols-2 gap-4">
-          <div className="rounded-xl bg-white/5 p-4">
-            <h5 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+          <div className="rounded-xl bg-zinc-50 border border-zinc-100 p-4">
+            <h5 className="text-sm font-semibold text-zinc-800 mb-3 flex items-center gap-2">
               <PieChart className="h-4 w-4 text-[#d4af37]" />
               Investissement total
             </h5>
-            <p className="text-2xl font-bold text-white">{formatCurrency(result.totalInvestment)}</p>
-            <div className="mt-2 text-xs text-white/50 space-y-1">
+            <p className="text-2xl font-bold text-zinc-900">{formatCurrency(result.totalInvestment)}</p>
+            <div className="mt-2 text-xs text-zinc-500 space-y-1">
               <p>Prix: {formatCurrency(purchasePrice)}</p>
               <p>Notaire: {formatCurrency(purchasePrice * notaryFees / 100)}</p>
               <p>Travaux: {formatCurrency(renovation)}</p>
             </div>
           </div>
 
-          <div className="rounded-xl bg-white/5 p-4">
-            <h5 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+          <div className="rounded-xl bg-zinc-50 border border-zinc-100 p-4">
+            <h5 className="text-sm font-semibold text-zinc-800 mb-3 flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-[#d4af37]" />
               Charges annuelles
             </h5>
-            <p className="text-2xl font-bold text-white">{formatCurrency(result.annualCharges)}</p>
-            <div className="mt-2 text-xs text-white/50 space-y-1">
+            <p className="text-2xl font-bold text-zinc-900">{formatCurrency(result.annualCharges)}</p>
+            <div className="mt-2 text-xs text-zinc-500 space-y-1">
               <p>Taxe foncière: {formatCurrency(propertyTax)}</p>
               <p>Copropriété: {formatCurrency(condoFees * 12)}</p>
               <p>Entretien: {formatCurrency((purchasePrice * maintenance) / 100)}</p>

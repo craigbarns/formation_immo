@@ -71,7 +71,7 @@ export function AdvancedCreditSimulator() {
       {/* Input Section */}
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-4">
-          <h4 className="font-semibold text-white flex items-center gap-2">
+          <h4 className="font-semibold text-zinc-800 flex items-center gap-2">
             <Calculator className="h-4 w-4 text-[#d4af37]" />
             Projet immobilier
           </h4>
@@ -118,7 +118,7 @@ export function AdvancedCreditSimulator() {
         </div>
         
         <div className="space-y-4">
-          <h4 className="font-semibold text-white flex items-center gap-2">
+          <h4 className="font-semibold text-zinc-800 flex items-center gap-2">
             <TrendingUp className="h-4 w-4 text-[#d4af37]" />
             Situation financière
           </h4>
@@ -160,7 +160,7 @@ export function AdvancedCreditSimulator() {
         key={result.monthlyPayment}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="rounded-2xl border border-[#d4af37]/20 bg-gradient-to-br from-[#1a3a5c]/50 to-[#0f1f33]/50 p-6"
+        className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
       >
         {/* Eligibility Badge */}
         <div className="mb-4 flex justify-center">
@@ -185,23 +185,23 @@ export function AdvancedCreditSimulator() {
 
         {/* Key Metrics */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="text-center p-3 rounded-xl bg-white/5">
+          <div className="text-center p-3 rounded-xl bg-zinc-50 border border-zinc-100">
             <p className="text-2xl font-bold text-[#d4af37]">{formatCurrency(result.monthlyPayment)}</p>
-            <p className="text-xs text-white/50">Mensualité totale</p>
+            <p className="text-xs text-zinc-500">Mensualité totale</p>
           </div>
-          <div className="text-center p-3 rounded-xl bg-white/5">
+          <div className="text-center p-3 rounded-xl bg-zinc-50 border border-zinc-100">
             <p className={`text-2xl font-bold ${result.debtRatio > 35 ? "text-red-400" : "text-emerald-400"}`}>
               {result.debtRatio.toFixed(1)}%
             </p>
-            <p className="text-xs text-white/50">Taux d'endettement</p>
+            <p className="text-xs text-zinc-500">Taux d'endettement</p>
           </div>
-          <div className="text-center p-3 rounded-xl bg-white/5">
-            <p className="text-2xl font-bold text-white">{formatCurrency(result.totalInterest)}</p>
-            <p className="text-xs text-white/50">Coût du crédit</p>
+          <div className="text-center p-3 rounded-xl bg-zinc-50 border border-zinc-100">
+            <p className="text-2xl font-bold text-zinc-900">{formatCurrency(result.totalInterest)}</p>
+            <p className="text-xs text-zinc-500">Coût du crédit</p>
           </div>
-          <div className="text-center p-3 rounded-xl bg-white/5">
-            <p className="text-2xl font-bold text-white">{result.taeg.toFixed(2)}%</p>
-            <p className="text-xs text-white/50">TAEG</p>
+          <div className="text-center p-3 rounded-xl bg-zinc-50 border border-zinc-100">
+            <p className="text-2xl font-bold text-zinc-900">{result.taeg.toFixed(2)}%</p>
+            <p className="text-xs text-zinc-500">TAEG</p>
           </div>
         </div>
 
@@ -218,7 +218,7 @@ export function AdvancedCreditSimulator() {
         )}
 
         {/* Explanation */}
-        <div className="mt-4 pt-4 border-t border-white/10 text-xs text-white/40">
+        <div className="mt-4 pt-4 border-t border-zinc-200 text-xs text-zinc-400">
           <p>Simulation indicative. Les taux réels peuvent varier selon votre profil et la banque.</p>
         </div>
       </motion.div>
