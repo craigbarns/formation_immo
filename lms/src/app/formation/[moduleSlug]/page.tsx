@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ModuleLanding } from "@/components/modules/ModuleLanding";
-import { COURSE } from "@/data/course";
+import { COURSE, getModuleDurationMin } from "@/data/course";
 import { getModuleShowcase } from "@/data/module-showcase";
 import { getAvatarForModule } from "@/data/module-avatars";
 import {
@@ -46,6 +46,9 @@ export default async function ModulePage({ params }: Props) {
       interactive: Boolean(lesson.interactiveScenarioId),
       audioSrc,
       audioFileOk: audioSrc ? isLessonAudioFilePresent(audioSrc) : false,
+      duration: lesson.duration,
+      difficulty: lesson.difficulty,
+      objectives: lesson.objectives,
     };
   });
 
@@ -53,6 +56,8 @@ export default async function ModulePage({ params }: Props) {
     <ModuleLanding
       moduleSlug={mod.slug}
       moduleTitle={mod.title}
+      moduleDescription={mod.description}
+      moduleDurationMin={getModuleDurationMin(mod.slug)}
       lessons={lessons}
       showcase={showcase}
       avatar={

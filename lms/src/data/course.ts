@@ -1,3 +1,5 @@
+export type Difficulty = "debutant" | "intermediaire" | "avance";
+
 export type Lesson = {
   slug: string;
   title: string;
@@ -11,20 +13,55 @@ export type Lesson = {
    * Parcours interactif maison (vidéo → choix → QCM) défini dans `src/data/interactive-scenarios.ts`.
    */
   interactiveScenarioId?: string;
+  /** Durée estimée en minutes (narration + lecture + exercices + quiz) */
+  duration: number;
+  /** Objectifs pédagogiques de la leçon */
+  objectives: string[];
+  /** Niveau de difficulté */
+  difficulty: Difficulty;
 };
 
 export type CourseModule = {
   slug: string;
   title: string;
+  /** Résumé court (affiché dans les cards) */
   summary: string;
+  /** Description longue (affichée sur la page module) */
+  description: string;
   lessons: Lesson[];
 };
 
+// ─── Helpers durée ────────────────────────────────────────────────────────────
+export function getTotalCourseDurationMin(): number {
+  return COURSE.reduce(
+    (total, mod) => total + mod.lessons.reduce((acc, l) => acc + l.duration, 0),
+    0
+  );
+}
+
+export function getModuleDurationMin(moduleSlug: string): number {
+  const mod = COURSE.find((m) => m.slug === moduleSlug);
+  return mod ? mod.lessons.reduce((acc, l) => acc + l.duration, 0) : 0;
+}
+
+export function formatDuration(minutes: number): string {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return m === 0 ? `${h}h` : `${h}h${m.toString().padStart(2, "0")}`;
+}
+
+// ─── Cours (26 leçons — 42h total) ───────────────────────────────────────────
+// Répartition : M1 9h · M2 7h30 · M3 9h · M4 7h30 · M5 9h  =  2520 min = 42h
 export const COURSE: CourseModule[] = [
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MODULE 1 — JURIDIQUE & CONFORMITÉ  (540 min = 9h)
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "juridique",
     title: "Module 1 — Juridique & conformité",
-    summary: "ALUR, compromis, diagnostics, mandats, copropriété.",
+    summary: "ALUR 2026, compromis, diagnostics, mandats, copropriété.",
+    description:
+      "Maîtrisez tout le cadre légal de votre métier : obligations ALUR, rédaction sécurisée du compromis, lecture des diagnostics, stratégie mandats et gestion de la copropriété. Ce module est la colonne vertébrale juridique de votre pratique quotidienne.",
     lessons: [
       {
         slug: "loi-alur",
@@ -33,6 +70,74 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/01-loi-alur-2026.mp3",
         interactiveScenarioId: "alur-conformite-360-demo",
+        duration: 105,
+        difficulty: "intermediaire",
+        objectives: [
+          "Maîtriser les obligations ALUR 2026 applicables dès maintenant",
+          "Identifier les sanctions encourues en cas de non-conformité",
+          "Appliquer les nouvelles règles DPE à vos mandats",
+          "Afficher vos honoraires en toute légalité",
+        ],
+      },
+      {
+        slug: "compromis",
+        title: "Compromis de vente",
+        scriptFile: "module1-juridique/scripts/02-compromis-vente.md",
+        videoUrl: null,
+        audioUrl: "/audio/02-compromis-vente.mp3",
+        duration: 105,
+        difficulty: "avance",
+        objectives: [
+          "Rédiger un compromis conforme sans risque de nullité",
+          "Sécuriser les 7 conditions suspensives indispensables",
+          "Gérer le délai de rétractation de 10 jours SRU",
+          "Éviter les 5 erreurs qui font capoter une vente",
+        ],
+      },
+      {
+        slug: "diagnostics",
+        title: "Diagnostics immobiliers",
+        scriptFile: "module1-juridique/scripts/03-diagnostics-immobiliers.md",
+        videoUrl: null,
+        audioUrl: "/audio/03-diagnostics-immobiliers.mp3",
+        duration: 90,
+        difficulty: "intermediaire",
+        objectives: [
+          "Lire et interpréter les 9 diagnostics obligatoires en 2026",
+          "Identifier les diagnostics selon l'âge et la nature du bien",
+          "Conseiller vendeur et acquéreur sur les implications",
+          "Gérer les délais de validité et les renouvellements",
+        ],
+      },
+      {
+        slug: "mandats",
+        title: "Mandats & stratégie",
+        scriptFile: "module1-juridique/scripts/04-mandats-strategie.md",
+        videoUrl: null,
+        audioUrl: "/audio/04-mandats-strategie.mp3",
+        duration: 90,
+        difficulty: "avance",
+        objectives: [
+          "Rédiger un mandat exclusif juridiquement béton",
+          "Fixer et afficher vos honoraires conformes ALUR",
+          "Défendre votre exclusivité face aux remises en cause",
+          "Optimiser votre portefeuille mandats par zone",
+        ],
+      },
+      {
+        slug: "copropriete",
+        title: "Copropriété & location",
+        scriptFile: "module1-juridique/scripts/05-copropriete-location.md",
+        videoUrl: null,
+        audioUrl: "/audio/05-copropriete-location.mp3",
+        duration: 90,
+        difficulty: "intermediaire",
+        objectives: [
+          "Lire et synthétiser un règlement de copropriété",
+          "Expliquer les charges et travaux votés aux acquéreurs",
+          "Gérer les locations (Pinel, meublé) en copropriété",
+          "Anticiper les litiges lors d'une transaction",
+        ],
       },
       {
         slug: "parcours-interactif",
@@ -41,41 +146,26 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/06-parcours-interactif-transparence.mp3",
         interactiveScenarioId: "honoraires-alur-demo",
-      },
-      {
-        slug: "compromis",
-        title: "Compromis de vente",
-        scriptFile: "module1-juridique/scripts/02-compromis-vente.md",
-        videoUrl: null,
-        audioUrl: "/audio/02-compromis-vente.mp3",
-      },
-      {
-        slug: "diagnostics",
-        title: "Diagnostics immobiliers",
-        scriptFile: "module1-juridique/scripts/03-diagnostics-immobiliers.md",
-        videoUrl: null,
-        audioUrl: "/audio/03-diagnostics-immobiliers.mp3",
-      },
-      {
-        slug: "mandats",
-        title: "Mandats & stratégie",
-        scriptFile: "module1-juridique/scripts/04-mandats-strategie.md",
-        videoUrl: null,
-        audioUrl: "/audio/04-mandats-strategie.mp3",
-      },
-      {
-        slug: "copropriete",
-        title: "Copropriété & location",
-        scriptFile: "module1-juridique/scripts/05-copropriete-location.md",
-        videoUrl: null,
-        audioUrl: "/audio/05-copropriete-location.mp3",
+        duration: 60,
+        difficulty: "avance",
+        objectives: [
+          "Appliquer les règles ALUR dans un cas réel complexe",
+          "Gérer une situation de transparence des honoraires",
+          "Valider vos acquis du module par l'action",
+        ],
       },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MODULE 2 — TRANSACTION & NÉGOCIATION  (450 min = 7h30)
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "transaction",
     title: "Module 2 — Transaction & négociation",
     summary: "Estimation, prospection, négociation, CRM.",
+    description:
+      "Du premier contact vendeur à la signature du mandat exclusif : techniques d'estimation fiables, scripts de prospection redoutables, méthodes de négociation avancées et CRM pour fidéliser sur le long terme. Le module opérationnel de votre business immobilier.",
     lessons: [
       {
         slug: "estimation",
@@ -84,6 +174,14 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/01-estimation-immobiliere.mp3",
         interactiveScenarioId: "estimation-negociation-demo",
+        duration: 90,
+        difficulty: "intermediaire",
+        objectives: [
+          "Utiliser 3 méthodes d'estimation complémentaires",
+          "Défendre votre estimation face à un vendeur surévaluant",
+          "Analyser les données DVF et prix au m² local",
+          "Éviter les erreurs de surestimation qui bloquent les ventes",
+        ],
       },
       {
         slug: "prospection",
@@ -91,6 +189,14 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module2-transaction/scripts/02-prospection-scripts.md",
         videoUrl: null,
         audioUrl: "/audio/02-prospection-scripts.mp3",
+        duration: 90,
+        difficulty: "debutant",
+        objectives: [
+          "Créer un script téléphonique qui obtient des RDV",
+          "Maîtriser les 5 techniques de prospection terrain",
+          "Automatiser votre prospection digitale (alertes, farming)",
+          "Bâtir un plan de prospection sur 90 jours",
+        ],
       },
       {
         slug: "negociation-mandat",
@@ -98,6 +204,14 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module2-transaction/scripts/03-negociation-mandat.md",
         videoUrl: null,
         audioUrl: "/audio/03-negociation-mandat.mp3",
+        duration: 90,
+        difficulty: "intermediaire",
+        objectives: [
+          "Décrocher le mandat exclusif dès le 1er RDV",
+          "Répondre aux 7 objections classiques du vendeur",
+          "Signer en un seul rendez-vous avec la méthode BET",
+          "Fixer une durée et un prix de mandat stratégiques",
+        ],
       },
       {
         slug: "negociation-avancee",
@@ -105,6 +219,14 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module2-transaction/scripts/04-techniques-negociation-avancees.md",
         videoUrl: null,
         audioUrl: "/audio/04-techniques-negociation-avancees.mp3",
+        duration: 90,
+        difficulty: "avance",
+        objectives: [
+          "Maîtriser la méthode BATNA pour ne jamais céder",
+          "Gérer les acheteurs difficiles et les lowballers",
+          "Arbitrer une négociation vendeur/acheteur",
+          "Transformer une offre basse en accord gagnant-gagnant",
+        ],
       },
       {
         slug: "crm",
@@ -112,13 +234,27 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module2-transaction/scripts/05-crm-fidelisation.md",
         videoUrl: null,
         audioUrl: "/audio/05-crm-fidelisation.mp3",
+        duration: 90,
+        difficulty: "debutant",
+        objectives: [
+          "Paramétrer un CRM immobilier efficace en 1h",
+          "Automatiser les relances et anniversaires clients",
+          "Mettre en place un suivi post-vente sur 24 mois",
+          "Générer 2 recommandations par transaction conclue",
+        ],
       },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MODULE 3 — FINANCEMENT & FISCALITÉ  (540 min = 9h)
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "financement",
     title: "Module 3 — Financement & fiscalité",
     summary: "Crédit, fiscalité, rentabilité, dispositifs, assurances.",
+    description:
+      "Devenez le conseiller financier de confiance de vos clients : crédit immobilier 2026, optimisation fiscale, calcul de rentabilité locative, dispositifs de défiscalisation et assurances. Ce module vous différencie de 90% des agents.",
     lessons: [
       {
         slug: "credit",
@@ -127,6 +263,14 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/script01-credit-immobilier-2026.mp3",
         interactiveScenarioId: "credit-structuration-demo",
+        duration: 120,
+        difficulty: "intermediaire",
+        objectives: [
+          "Calculer la capacité d'emprunt maximale en 5 minutes",
+          "Expliquer les 6 étapes d'obtention d'un crédit",
+          "Identifier les causes de refus bancaire et les anticiper",
+          "Orienter vers les bons courtiers et partenaires bancaires",
+        ],
       },
       {
         slug: "fiscalite",
@@ -134,6 +278,14 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module3-financement/scripts/script02-fiscalite-immobiliere.md",
         videoUrl: null,
         audioUrl: "/audio/script02-fiscalite-immobiliere.mp3",
+        duration: 105,
+        difficulty: "avance",
+        objectives: [
+          "Comparer régime micro-foncier vs réel simplifié",
+          "Calculer et optimiser la plus-value immobilière",
+          "Conseiller sur l'IFI et les stratégies d'exonération",
+          "Optimiser la fiscalité en location meublée (LMNP)",
+        ],
       },
       {
         slug: "rentabilite",
@@ -142,6 +294,14 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/script03-calcul-rentabilite.mp3",
         interactiveScenarioId: "rentabilite-investisseur-demo",
+        duration: 105,
+        difficulty: "intermediaire",
+        objectives: [
+          "Calculer rendement brut, net et net-net",
+          "Utiliser le simulateur de cashflow mensuel",
+          "Analyser et comparer 2 investissements locatifs",
+          "Identifier les zones à fort rendement en 2026",
+        ],
       },
       {
         slug: "dispositifs",
@@ -149,6 +309,14 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module3-financement/scripts/script04-dispositifs-fiscaux.md",
         videoUrl: null,
         audioUrl: "/audio/script04-dispositifs-fiscaux.mp3",
+        duration: 105,
+        difficulty: "avance",
+        objectives: [
+          "Maîtriser Denormandie, Malraux et Monuments Historiques",
+          "Calculer les réductions d'impôt par dispositif",
+          "Conseiller sur le Pinel Plus et ses conditions 2026",
+          "Présenter un dossier de défiscalisation clé en main",
+        ],
       },
       {
         slug: "assurances",
@@ -156,13 +324,27 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module3-financement/scripts/script05-assurances-immobilieres.md",
         videoUrl: null,
         audioUrl: "/audio/script05-assurances-immobilieres.mp3",
+        duration: 105,
+        difficulty: "intermediaire",
+        objectives: [
+          "Présenter les 4 assurances obligatoires à vos clients",
+          "Comparer PNO vs assurance loyers impayés (GLI)",
+          "Conseiller sur les garanties emprunteur et délégation",
+          "Accompagner un client lors d'un sinistre",
+        ],
       },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MODULE 4 — MARKETING DIGITAL  (450 min = 7h30)
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "marketing",
     title: "Module 4 — Marketing digital",
     summary: "Photos, annonces, portails, réseaux, SEO.",
+    description:
+      "Vendez plus vite grâce à un marketing immobilier de haut niveau : photographie professionnelle, annonces qui convertissent, maîtrise des portails, stratégie réseaux sociaux et référencement Google local. Attirez les vendeurs ET les acheteurs.",
     lessons: [
       {
         slug: "photos",
@@ -170,6 +352,14 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module4-marketing/scripts/01-photos-immobilieres-secrets-pros.md",
         videoUrl: null,
         audioUrl: "/audio/01-photos-immobilieres-secrets-pros.mp3",
+        duration: 90,
+        difficulty: "debutant",
+        objectives: [
+          "Réaliser des photos professionnelles avec un smartphone",
+          "Maîtriser la lumière naturelle et le HDR",
+          "Retoucher avec Lightroom Mobile en 10 minutes",
+          "Créer des visites virtuelles 360° sans équipement coûteux",
+        ],
       },
       {
         slug: "annonces",
@@ -178,6 +368,14 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/02-rediger-annonces-qui-vendent.mp3",
         interactiveScenarioId: "annonce-parfaite-demo",
+        duration: 90,
+        difficulty: "debutant",
+        objectives: [
+          "Rédiger un titre accrocheur en moins de 10 mots",
+          "Structurer une annonce en 5 blocs convertissants",
+          "Intégrer les bons mots-clés pour le référencement",
+          "Augmenter votre taux de clics de 40% en 1 semaine",
+        ],
       },
       {
         slug: "portails",
@@ -185,6 +383,14 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module4-marketing/scripts/03-maitriser-seloger-leboncoin.md",
         videoUrl: null,
         audioUrl: "/audio/03-maitriser-seloger-leboncoin.mp3",
+        duration: 90,
+        difficulty: "debutant",
+        objectives: [
+          "Optimiser votre profil agence sur SeLoger Pro",
+          "Choisir le bon abonnement Leboncoin Immo",
+          "Booster vos annonces aux heures de pic de trafic",
+          "Analyser vos statistiques de visibilité et contacts",
+        ],
       },
       {
         slug: "reseaux",
@@ -192,6 +398,14 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module4-marketing/scripts/04-reseaux-sociaux-strategie-2026.md",
         videoUrl: null,
         audioUrl: "/audio/04-reseaux-sociaux-strategie-2026.mp3",
+        duration: 90,
+        difficulty: "intermediaire",
+        objectives: [
+          "Créer un calendrier éditorial immobilier sur 30 jours",
+          "Filmer et monter des Reels immobiliers avec un iPhone",
+          "Automatiser vos publications avec Buffer ou Later",
+          "Générer des leads qualifiés via Instagram et Facebook Ads",
+        ],
       },
       {
         slug: "seo",
@@ -199,13 +413,27 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module4-marketing/scripts/05-seo-immobilier-google.md",
         videoUrl: null,
         audioUrl: "/audio/05-seo-immobilier-google.mp3",
+        duration: 90,
+        difficulty: "intermediaire",
+        objectives: [
+          "Comprendre comment Google classe les agences locales",
+          "Créer et optimiser votre fiche Google Business Profile",
+          "Rédiger 1 article SEO par mois qui génère des appels",
+          "Dominer les recherches locales en 6 mois",
+        ],
       },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MODULE 5 — VISITE, CLOSING & FIDÉLISATION  (540 min = 9h)
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "terrain",
     title: "Module 5 — Visite, closing & fidélisation",
     summary: "Visites, argumentaire, closing, promesse, acte, post-vente.",
+    description:
+      "Le module terrain qui fait la différence sur le vrai marché : conduite de visite professionnelle, argumentaire qui convertit, techniques de closing avancées, sécurisation de la promesse et fidélisation active pour générer des recommandations.",
     lessons: [
       {
         slug: "visite",
@@ -214,6 +442,14 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/01-conduire-visite-pro.mp3",
         interactiveScenarioId: "visite-closing-demo",
+        duration: 105,
+        difficulty: "intermediaire",
+        objectives: [
+          "Préparer une visite efficacement en 15 minutes",
+          "Conduire avec la méthode SONCAS",
+          "Créer l'urgence naturellement sans pression",
+          "Convertir visite → offre dans les 7 jours",
+        ],
       },
       {
         slug: "argumentaire",
@@ -221,6 +457,14 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module5-terrain/scripts/02-argumentaire-convertit.md",
         videoUrl: null,
         audioUrl: "/audio/02-argumentaire-convertit.mp3",
+        duration: 105,
+        difficulty: "intermediaire",
+        objectives: [
+          "Construire votre pitch de présentation en 90 secondes",
+          "Répondre aux 10 objections les plus fréquentes en visite",
+          "Utiliser la méthode CAB (Caractéristique-Avantage-Bénéfice)",
+          "Closer sur les bénéfices émotionnels plutôt que rationnels",
+        ],
       },
       {
         slug: "closing",
@@ -228,6 +472,14 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module5-terrain/scripts/03-techniques-closing-avancees.md",
         videoUrl: null,
         audioUrl: "/audio/03-techniques-closing-avancees.mp3",
+        duration: 120,
+        difficulty: "avance",
+        objectives: [
+          "Identifier les 7 signaux d'achat verbaux et non-verbaux",
+          "Proposer une offre d'achat au bon moment",
+          "Gérer un vendeur hésitant sans le braquer",
+          "Sécuriser la vente en moins de 48h",
+        ],
       },
       {
         slug: "promesse",
@@ -235,6 +487,14 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module5-terrain/scripts/04-promesse-acte-authentique.md",
         videoUrl: null,
         audioUrl: "/audio/04-promesse-acte-authentique.mp3",
+        duration: 105,
+        difficulty: "avance",
+        objectives: [
+          "Rédiger une promesse unilatérale de vente sécurisée",
+          "Sécuriser les conditions suspensives de crédit",
+          "Gérer le délai légal de rétractation de 10 jours",
+          "Préparer le passage chez le notaire sans accroc",
+        ],
       },
       {
         slug: "fidelisation",
@@ -242,11 +502,20 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module5-terrain/scripts/05-fidelisation-recommandation.md",
         videoUrl: null,
         audioUrl: "/audio/05-fidelisation-recommandation.mp3",
+        duration: 105,
+        difficulty: "intermediaire",
+        objectives: [
+          "Mettre en place un suivi post-vente sur 90 jours",
+          "Créer un programme de parrainage actif",
+          "Générer 2 recommandations minimum par transaction",
+          "Construire votre réputation 5 étoiles sur Google",
+        ],
       },
     ],
   },
 ];
 
+// ─── Fonctions d'accès ────────────────────────────────────────────────────────
 export function getLesson(moduleSlug: string, lessonSlug: string) {
   const mod = COURSE.find((m) => m.slug === moduleSlug);
   if (!mod) return null;

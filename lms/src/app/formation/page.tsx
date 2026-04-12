@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award } from "lucide-react";
-import { COURSE, lessonId } from "@/data/course";
+import { COURSE, lessonId, getTotalCourseDurationMin, formatDuration } from "@/data/course";
 import { AvatarIllustration } from "@/components/avatars/AvatarIllustration";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getModuleShowcase } from "@/data/module-showcase";
@@ -18,6 +18,7 @@ import { Greeting } from "@/components/Greeting";
 export default function FormationHomePage() {
   const totalLessons = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
   const totalModules = COURSE.length;
+  const totalDuration = formatDuration(getTotalCourseDurationMin());
 
   return (
     <div className="space-y-12">
@@ -48,7 +49,7 @@ export default function FormationHomePage() {
               Parcours certifiant
             </span>
             <span className="trust-badge text-[#7a6410]">
-              Contenu pro · 42 h
+              Contenu pro · {totalDuration}
             </span>
             <span className="trust-badge border-emerald-300/50 bg-emerald-50 text-emerald-800">
               Loi ALUR 2026
@@ -98,7 +99,7 @@ export default function FormationHomePage() {
                 <dt className="text-[10px] font-bold uppercase tracking-wide text-zinc-500">
                   Volume
                 </dt>
-                <dd className="text-xl font-bold tabular-nums text-brand-navy">42 h</dd>
+                <dd className="text-xl font-bold tabular-nums text-brand-navy">{totalDuration}</dd>
               </div>
             </div>
             <div className="flex items-center gap-3 rounded-2xl border border-emerald-200/80 bg-emerald-50/80 px-4 py-3 shadow-sm">
@@ -224,7 +225,12 @@ export default function FormationHomePage() {
                         {i + 1}
                       </span>
                       <div>
-                        <h3 className="text-xl font-bold text-brand-navy">{mod.title}</h3>
+                        <div className="flex items-center gap-3 flex-wrap">
+                          <h3 className="text-xl font-bold text-brand-navy">{mod.title}</h3>
+                          <span className="rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-0.5 text-[11px] font-semibold text-zinc-500">
+                            {formatDuration(mod.lessons.reduce((a, l) => a + l.duration, 0))}
+                          </span>
+                        </div>
                         {avatar && (
                           <p className="mt-1 text-xs text-zinc-500">
                             Avec <span className="font-medium text-zinc-700">{avatar.name}</span> —{" "}
@@ -265,16 +271,22 @@ export default function FormationHomePage() {
                           href={`/formation/${mod.slug}/${lesson.slug}`}
                           className="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition hover:bg-zinc-50"
                         >
-                          <span className="flex items-center gap-2 text-[15px] text-zinc-800">
+                          <span className="flex items-center gap-2 flex-wrap text-[15px] text-zinc-800">
                             {lesson.interactiveScenarioId && (
                               <span className="rounded-md bg-brand-navy/10 px-2 py-0.5 text-[10px] font-bold uppercase text-brand-navy">
                                 Interactif
                               </span>
                             )}
+                            {lesson.difficulty === "avance" && (
+                              <span className="rounded-md bg-amber-50 px-2 py-0.5 text-[10px] font-bold uppercase text-amber-700">
+                                Avancé
+                              </span>
+                            )}
                             {lesson.title}
                           </span>
-                          <span className="shrink-0 text-xs tabular-nums text-zinc-400">
-                            {lessonId(mod.slug, lesson.slug)}
+                          <span className="shrink-0 text-xs tabular-nums text-zinc-400 flex items-center gap-2">
+                            <Clock className="h-3 w-3" aria-hidden />
+                            {formatDuration(lesson.duration)}
                           </span>
                         </Link>
                       </li>

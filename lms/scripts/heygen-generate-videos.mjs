@@ -98,7 +98,7 @@ async function uploadAudio(filePath) {
 }
 
 // Poll video status until done
-async function waitForVideo(videoId, maxWait = 300000) {
+async function waitForVideo(videoId, maxWait = 1800000) { // 30 min max (vidéos ~8 min)
   const start = Date.now();
   while (Date.now() - start < maxWait) {
     await new Promise(r => setTimeout(r, 5000));

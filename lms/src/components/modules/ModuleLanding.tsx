@@ -12,12 +12,17 @@ import { ModuleLessonStatusBadge } from "@/components/modules/ModuleLessonStatus
 export type ModuleLandingProps = {
   moduleSlug: string;
   moduleTitle: string;
+  moduleDescription?: string;
+  moduleDurationMin?: number;
   lessons: Array<{
     slug: string;
     title: string;
     interactive: boolean;
     audioSrc: string | null;
     audioFileOk: boolean;
+    duration?: number;
+    difficulty?: "debutant" | "intermediaire" | "avance";
+    objectives?: string[];
   }>;
   showcase: ModuleShowcase;
   avatar: {
@@ -34,9 +39,17 @@ export type ModuleLandingProps = {
   nextModule: { href: string; title: string } | null;
 };
 
+function formatDur(minutes: number): string {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return m === 0 ? `${h}h` : `${h}h${m.toString().padStart(2, "0")}`;
+}
+
 export function ModuleLanding({
   moduleSlug,
   moduleTitle,
+  moduleDescription,
+  moduleDurationMin,
   lessons,
   showcase,
   avatar,
@@ -48,6 +61,7 @@ export function ModuleLanding({
 }: ModuleLandingProps) {
   const accent = avatar?.accentColor ?? "#1a3a5c";
   const interactiveCount = lessons.filter((l) => l.interactive).length;
+  const totalMin = moduleDurationMin ?? lessons.reduce((a, l) => a + (l.duration ?? 0), 0);
 
   const [modulePct, setModulePct] = useState<number | null>(null);
 
@@ -94,7 +108,7 @@ export function ModuleLanding({
               {showcase.headline}
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/85 md:text-lg">
-              {showcase.subhead}
+              {moduleDescription ?? showcase.subhead}
             </p>
 
             <div className="mt-8">
@@ -110,7 +124,9 @@ export function ModuleLanding({
                 <dt className="text-[10px] font-bold uppercase tracking-wider text-white/55">
                   Durée
                 </dt>
-                <dd className="mt-1 text-lg font-bold tabular-nums">{showcase.durationLabel}</dd>
+                <dd className="mt-1 text-lg font-bold tabular-nums">
+                  {totalMin > 0 ? formatDur(totalMin) : showcase.durationLabel}
+                </dd>
               </div>
               <div>
                 <dt className="text-[10px] font-bold uppercase tracking-wider text-white/55">
@@ -240,8 +256,7 @@ export function ModuleLanding({
         <ol className="space-y-4">
           {lessons.map((lesson, i) => {
             const teaser = showcase.lessonTeaser[lesson.slug] ?? "";
-            // Estimated reading time: ~20min per lesson on average
-            const estMin = lesson.audioSrc ? 25 : 15;
+            const durLabel = lesson.duration ? formatDur(lesson.duration) : null;
             return (
               <li key={lesson.slug}>
                 <div className="group card-elevated flex flex-col gap-4 rounded-2xl border border-zinc-200/90 p-5 transition hover:border-zinc-300 md:flex-row md:items-stretch md:justify-between">
@@ -265,16 +280,30 @@ export function ModuleLanding({
                             Interactif
                           </span>
                         )}
-                        <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-500">
-                          ~{estMin} min
-                        </span>
+                        {lesson.difficulty === "avance" && (
+                          <span className="rounded-md bg-amber-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-700">
+                            Avancé
+                          </span>
+                        )}
+                        {durLabel && (
+                          <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-500">
+                            ⏱ {durLabel}
+                          </span>
+                        )}
                       </div>
                       {teaser && (
                         <p className="mt-2 text-sm leading-relaxed text-zinc-600">{teaser}</p>
                       )}
-                      <p className="mt-2 text-[11px] tabular-nums text-zinc-400">
-                        {lessonId(moduleSlug, lesson.slug)}
-                      </p>
+                      {lesson.objectives && lesson.objectives.length > 0 && (
+                        <ul className="mt-2 space-y-0.5">
+                          {lesson.objectives.slice(0, 2).map((obj, j) => (
+                            <li key={j} className="flex items-start gap-1.5 text-xs text-zinc-500">
+                              <span className="text-brand-gold mt-0.5" aria-hidden>✓</span>
+                              {obj}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   </Link>
 
