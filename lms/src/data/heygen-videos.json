@@ -1,0 +1,10 @@
+{
+  "_comment": "Généré par: npm run heygen:generate. Ne pas éditer manuellement.",
+  "_avatar_map": {
+    "juridique": "Bastien_public_1",
+    "transaction": "Abigail_standing_office_front",
+    "financement": "Florin_Suit_Front_public",
+    "marketing": "Anja_standing_office_front",
+    "terrain": "Brandon_Office_Standing_Front_public"
+  }
+}

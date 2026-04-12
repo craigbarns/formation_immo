@@ -14,9 +14,16 @@
     "fal:assets:videos": "node scripts/fal-generate-course-assets.mjs --with-videos",
     "elevenlabs:voices": "node scripts/elevenlabs-french-voices.mjs",
     "elevenlabs:samples": "node scripts/elevenlabs-french-voices.mjs --samples-top 8",
-    "elevenlabs:samples:formateurs": "node scripts/elevenlabs-french-voices.mjs --formateur"
+    "elevenlabs:samples:formateurs": "node scripts/elevenlabs-french-voices.mjs --formateur",
+    "heygen:generate": "node scripts/heygen-generate-videos.mjs",
+    "heygen:generate:juridique": "node scripts/heygen-generate-videos.mjs juridique",
+    "heygen:generate:transaction": "node scripts/heygen-generate-videos.mjs transaction",
+    "heygen:generate:financement": "node scripts/heygen-generate-videos.mjs financement",
+    "heygen:generate:marketing": "node scripts/heygen-generate-videos.mjs marketing",
+    "heygen:generate:terrain": "node scripts/heygen-generate-videos.mjs terrain"
   },
   "dependencies": {
+    "@heygen/streaming-avatar": "^2.1.0",
     "@tailwindcss/typography": "^0.5.19",
     "canvas-confetti": "^1.9.3",
     "clsx": "^2.1.1",
