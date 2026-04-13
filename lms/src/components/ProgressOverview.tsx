@@ -1,8 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { COURSE, lessonId } from "@/data/course";
 import { getStoredProgress } from "./LessonProgress";
+import { AnimatedCounter } from "@/components/animations";
 import {
   FORMATION_PROGRESS_CHANGED_EVENT,
   FORMATION_PROGRESS_STORAGE_KEY,
@@ -58,13 +60,13 @@ export function ProgressOverview() {
             Où vous en êtes
           </p>
           <p className="mt-1 text-2xl font-bold tabular-nums text-brand-navy">
-            {stats.done}{" "}
+            <AnimatedCounter value={stats.done} duration={1} />{" "}
             <span className="text-lg font-semibold text-zinc-400">/ {stats.total}</span>
             <span className="ml-2 text-base font-medium text-zinc-600">leçons vues</span>
           </p>
         </div>
         <div className="text-right">
-          <span className="text-3xl font-black tabular-nums text-brand-gold">{pct}%</span>
+          <AnimatedCounter value={pct} suffix="%" duration={1.2} className="text-3xl font-black tabular-nums text-brand-gold" />
           <p className="text-xs text-zinc-600">
             {remaining > 0 ? (
               <>
@@ -78,9 +80,11 @@ export function ProgressOverview() {
         </div>
       </div>
       <div className="mt-4 h-3 overflow-hidden rounded-full bg-zinc-200/90 shadow-inner ring-1 ring-white/60">
-        <div
-          className="h-full rounded-full bg-gradient-to-r from-brand-navy via-brand-navy-soft to-brand-gold transition-all duration-700 ease-out"
-          style={{ width: `${pct}%` }}
+        <motion.div
+          className="h-full rounded-full bg-gradient-to-r from-brand-navy via-brand-navy-soft to-brand-gold"
+          initial={{ width: 0 }}
+          animate={{ width: `${pct}%` }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
         />
       </div>
       <p className="mt-3 text-xs leading-relaxed text-zinc-500">

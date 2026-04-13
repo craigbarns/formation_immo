@@ -9,7 +9,7 @@ import { ContinueFormationCta } from "@/components/ContinueFormationCta";
 import { ModuleRowProgress } from "@/components/ModuleRowProgress";
 import { DashboardGamification } from "./DashboardGamification";
 import { DashboardAnalytics } from "./DashboardAnalytics";
-import { StaggerContainer, StaggerItem } from "@/components/animations";
+import { StaggerContainer, StaggerItem, ScrollReveal } from "@/components/animations";
 import { DailyGoalTracker } from "@/components/retention";
 import { AdaptiveLearningPath } from "@/components/learning-path";
 import { AICoachButton } from "@/components/ai-coach";
@@ -121,6 +121,7 @@ export default function FormationHomePage() {
       </section>
 
       {/* Daily Goal & Learning Path */}
+      <ScrollReveal>
       <section className="grid gap-6 md:grid-cols-2">
         <div className="space-y-4">
           <h2 className="flex items-center gap-2 text-lg font-bold text-brand-navy">
@@ -137,12 +138,16 @@ export default function FormationHomePage() {
           <AdaptiveLearningPath />
         </div>
       </section>
+      </ScrollReveal>
 
+      <ScrollReveal delay={0.1}>
       <DashboardAnalytics />
 
       <DashboardGamification />
+      </ScrollReveal>
 
       {/* Raccourcis */}
+      <ScrollReveal>
       <section className="scroll-mt-8">
         <h2 className="section-heading">
           <span className="shrink-0">Accès rapide</span>
@@ -176,8 +181,10 @@ export default function FormationHomePage() {
           />
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Formateurs preview */}
+      <ScrollReveal delay={0.05}>
       <section className="scroll-mt-8">
         <h2 className="section-heading"><span className="shrink-0">Vos formateurs</span></h2>
         <p className="mt-2 text-sm text-zinc-600">5 experts pour 5 modules — chacun avec son style pédagogique.</p>
@@ -191,6 +198,8 @@ export default function FormationHomePage() {
         </div>
       </section>
 
+      </ScrollReveal>
+
       {/* Modules */}
       <section id="parcours" className="scroll-mt-24">
         <h2 className="section-heading">
@@ -200,13 +209,13 @@ export default function FormationHomePage() {
           Ouvrez un module pour voir les leçons dans l&apos;ordre — idéal pour progresser sans vous
           perdre.
         </p>
-        <ol className="mt-6 space-y-5">
+        <StaggerContainer className="mt-6 space-y-5">
           {COURSE.map((mod, i) => {
             const avatar = getAvatarForModule(mod.slug);
             const showcase = getModuleShowcase(mod.slug);
             const accent = avatar?.accentColor ?? "#1a3a5c";
             return (
-              <li
+              <StaggerItem
                 key={mod.slug}
                 className="group card-elevated card-elevated-hover overflow-hidden"
               >
@@ -264,12 +273,12 @@ export default function FormationHomePage() {
                     </div>
                   </div>
                   <p className="mt-4 text-sm leading-relaxed text-zinc-600">{mod.summary}</p>
-                  <ul className="mt-5 space-y-1 border-t border-zinc-100 pt-5">
+                  <StaggerContainer className="mt-5 space-y-1 border-t border-zinc-100 pt-5" staggerDelay={0.04}>
                     {mod.lessons.map((lesson) => (
-                      <li key={lesson.slug}>
+                      <StaggerItem key={lesson.slug}>
                         <Link
                           href={`/formation/${mod.slug}/${lesson.slug}`}
-                          className="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition hover:bg-zinc-50"
+                          className="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition hover:bg-zinc-50 hover:translate-x-1"
                         >
                           <span className="flex items-center gap-2 flex-wrap text-[15px] text-zinc-800">
                             {lesson.interactiveScenarioId && (
@@ -289,14 +298,14 @@ export default function FormationHomePage() {
                             {formatDuration(lesson.duration)}
                           </span>
                         </Link>
-                      </li>
+                      </StaggerItem>
                     ))}
-                  </ul>
+                  </StaggerContainer>
                 </div>
-              </li>
+              </StaggerItem>
             );
           })}
-        </ol>
+        </StaggerContainer>
       </section>
     </div>
   );

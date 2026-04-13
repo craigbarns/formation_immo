@@ -5,6 +5,7 @@ import { getGamificationState, getLevelForXP } from "@/lib/gamification";
 import { GlobalTimeTracker } from "@/components/gamification/ModuleTimeTracker";
 import { motion } from "framer-motion";
 import { Medal, CheckCircle2, Flame } from "lucide-react";
+import { AnimatedCounter } from "@/components/animations";
 
 export function DashboardGamification() {
   const [mounted, setMounted] = useState(false);
@@ -22,7 +23,12 @@ export function DashboardGamification() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted) return (
+    <div className="mb-6 space-y-4">
+      <div className="h-[188px] animate-pulse rounded-2xl bg-gradient-to-br from-zinc-200 to-zinc-100" />
+      <div className="h-16 animate-pulse rounded-2xl bg-zinc-100" />
+    </div>
+  );
 
   const { current, next, progressToNext } = getLevelForXP(xp);
 
@@ -67,7 +73,7 @@ export function DashboardGamification() {
                   className="h-full rounded-full bg-gradient-to-r from-[#d4af37] via-[#f9e596] to-[#d4af37] shadow-[0_0_10px_rgba(212,175,55,0.4)]"
                 />
               </div>
-              <span className="text-sm font-bold tabular-nums tracking-wide text-amber-100">{xp} XP</span>
+              <AnimatedCounter value={xp} suffix=" XP" duration={1.5} className="text-sm font-bold tabular-nums tracking-wide text-amber-100" />
             </div>
             {next && (
               <p className="mt-1.5 text-xs font-medium text-white/50 tracking-wide">
@@ -78,9 +84,9 @@ export function DashboardGamification() {
         </div>
 
         <div className="mt-6 grid grid-cols-3 gap-3 relative z-10">
-          <MiniStat icon={<Medal size={20} className="text-amber-300" />} value={`${badges}`} label="Badges débloqués" />
-          <MiniStat icon={<CheckCircle2 size={20} className="text-emerald-400" />} value={`${quizCorrect}`} label="QCM réussis" />
-          <MiniStat icon={<Flame size={20} className="text-orange-400" />} value={`${streak}j`} label="Série en cours" />
+          <MiniStat icon={<Medal size={20} className="text-amber-300" />} value={badges} suffix="" label="Badges débloqués" />
+          <MiniStat icon={<CheckCircle2 size={20} className="text-emerald-400" />} value={quizCorrect} suffix="" label="QCM réussis" />
+          <MiniStat icon={<Flame size={20} className="text-orange-400" />} value={streak} suffix="j" label="Série en cours" />
         </div>
       </div>
 
@@ -90,14 +96,14 @@ export function DashboardGamification() {
   );
 }
 
-function MiniStat({ icon, value, label }: { icon: React.ReactNode; value: string; label: string }) {
+function MiniStat({ icon, value, suffix, label }: { icon: React.ReactNode; value: number; suffix: string; label: string }) {
   return (
-    <motion.div 
+    <motion.div
       whileHover={{ y: -2, backgroundColor: "rgba(255,255,255,0.15)" }}
       className="flex flex-col items-center justify-center rounded-xl bg-white/10 px-3 py-3 text-center border border-white/10 backdrop-blur-md transition-colors"
     >
       <div className="mb-1.5 drop-shadow-md">{icon}</div>
-      <div className="text-lg font-bold tracking-tight">{value}</div>
+      <AnimatedCounter value={value} suffix={suffix} duration={1.2} className="text-lg font-bold tracking-tight" />
       <div className="text-[10px] font-medium uppercase tracking-wider text-white/70 mt-0.5">{label}</div>
     </motion.div>
   );

@@ -7,3 +7,4 @@ export { MagneticButton } from "./MagneticButton";
 export { Confetti } from "./Confetti";
 export { FloatingElement } from "./FloatingElement";
 export { PulseRing } from "./PulseRing";
+export { ScrollReveal } from "./ScrollReveal";

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { getStoredProgress } from "@/components/LessonProgress";
 import { countModuleProgress } from "@/lib/formation-journey";
 import {
@@ -42,9 +43,11 @@ export function ModuleRowProgress({ moduleSlug }: { moduleSlug: string }) {
         <span className="tabular-nums text-brand-navy">{label}</span>
       </div>
       <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-zinc-100 ring-1 ring-zinc-200/80">
-        <div
-          className="h-full rounded-full bg-gradient-to-r from-brand-navy to-brand-gold transition-all duration-500 ease-out"
-          style={{ width: `${pct}%` }}
+        <motion.div
+          className="h-full rounded-full bg-gradient-to-r from-brand-navy to-brand-gold"
+          initial={{ width: 0 }}
+          animate={{ width: `${pct}%` }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
         />
       </div>
     </div>

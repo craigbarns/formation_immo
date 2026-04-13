@@ -34,6 +34,7 @@ import { GuidedCalculationBlock } from "@/components/interactive/GuidedCalculati
 import { LessonMap } from "@/components/interactive/LessonMap";
 import { PrintableRecap } from "@/components/interactive/PrintableRecap";
 import { LessonSpecialContent } from "@/components/interactive/LessonSpecialContent";
+import { ScrollReveal } from "@/components/animations";
 import { BookmarkButton } from "@/components/user-content/BookmarkButton";
 import { NotesPanelButton } from "./NotesPanelButton";
 import { LessonJourneyBadge } from "@/components/LessonJourneyBadge";
@@ -197,6 +198,7 @@ export default async function LessonPage({ params }: Props) {
 
       <div className="mt-10 space-y-10">
         {interactive ? (
+          <ScrollReveal>
           <section id="section-scenario">
             <h2 className="lesson-block-title lesson-block-title--navy">
               <span className="lesson-block-title-line bg-brand-navy/25" aria-hidden />
@@ -207,9 +209,11 @@ export default async function LessonPage({ params }: Props) {
             </p>
             <InteractiveScenario scenario={interactive} />
           </section>
+          </ScrollReveal>
         ) : null}
 
         {lesson.videoUrl ? (
+          <ScrollReveal>
           <section id="section-video">
             <h2 className="lesson-block-title lesson-block-title--muted">
               <span className="lesson-block-title-line bg-zinc-300" aria-hidden />
@@ -217,9 +221,11 @@ export default async function LessonPage({ params }: Props) {
             </h2>
             <VideoEmbed url={lesson.videoUrl} title={lesson.title} />
           </section>
+          </ScrollReveal>
         ) : null}
 
         {heygenVideoUrl && avatar ? (
+          <ScrollReveal>
           <section id="section-presenter">
             <h2 className="lesson-block-title lesson-block-title--gold">
               <span className="lesson-block-title-line bg-brand-gold/70" aria-hidden />
@@ -234,9 +240,11 @@ export default async function LessonPage({ params }: Props) {
               accentColor={avatar.accentColor}
             />
           </section>
+          </ScrollReveal>
         ) : null}
 
         {audioSrc ? (
+          <ScrollReveal>
           <section id="section-video">
             <h2 className="lesson-block-title lesson-block-title--gold">
               <span className="lesson-block-title-line bg-brand-gold/70" aria-hidden />
@@ -249,9 +257,11 @@ export default async function LessonPage({ params }: Props) {
               visuals={lessonVisuals}
             />
           </section>
+          </ScrollReveal>
         ) : null}
 
         {trainerCallouts.length > 0 && (
+          <ScrollReveal>
           <section id="section-callouts">
             <h2 className="lesson-block-title lesson-block-title--gold">
               <span className="lesson-block-title-line bg-brand-gold/70" aria-hidden />
@@ -259,9 +269,11 @@ export default async function LessonPage({ params }: Props) {
             </h2>
             <TrainerCalloutBlock callouts={trainerCallouts} />
           </section>
+          </ScrollReveal>
         )}
 
         {dataTables.length > 0 && (
+          <ScrollReveal>
           <section id="section-table">
             <h2 className="lesson-block-title lesson-block-title--navy">
               <span className="lesson-block-title-line bg-brand-navy/25" aria-hidden />
@@ -269,9 +281,11 @@ export default async function LessonPage({ params }: Props) {
             </h2>
             <DataTableBlock tables={dataTables} />
           </section>
+          </ScrollReveal>
         )}
 
         {guidedCalculations.length > 0 && (
+          <ScrollReveal>
           <section id="section-calc">
             <h2 className="lesson-block-title lesson-block-title--navy">
               <span className="lesson-block-title-line bg-brand-navy/25" aria-hidden />
@@ -279,9 +293,11 @@ export default async function LessonPage({ params }: Props) {
             </h2>
             <GuidedCalculationBlock calculations={guidedCalculations} />
           </section>
+          </ScrollReveal>
         )}
 
         {hasInteractiveWorkshop ? (
+          <ScrollReveal>
           <section id="section-exercises" className="space-y-10">
             <h2 className="lesson-block-title lesson-block-title--navy mb-2">
               <span className="lesson-block-title-line bg-brand-navy/30" aria-hidden />
@@ -299,15 +315,20 @@ export default async function LessonPage({ params }: Props) {
             {proChecklists.length > 0 && <ProChecklistBlock checklists={proChecklists} />}
             {chatRoleplay && <ChatRoleplay scenario={chatRoleplay} />}
           </section>
+          </ScrollReveal>
         ) : null}
 
         {quizCheckpoints.length > 0 && (
+          <ScrollReveal>
           <section id="section-quiz" className="card-elevated rounded-2xl border-brand-navy/8 bg-gradient-to-br from-white to-zinc-50/80 p-6 md:p-8">
             <QuizCheckpointsSection checkpoints={quizCheckpoints} />
           </section>
+          </ScrollReveal>
         )}
 
-        <LessonSpecialContent moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
+        <ScrollReveal>
+          <LessonSpecialContent moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
+        </ScrollReveal>
 
         <section id="section-notes">
           <LessonNotes lessonKey={key} />
