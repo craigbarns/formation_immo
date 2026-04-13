@@ -33,6 +33,7 @@ import { DataTableBlock } from "@/components/interactive/DataTableBlock";
 import { GuidedCalculationBlock } from "@/components/interactive/GuidedCalculationBlock";
 import { LessonMap } from "@/components/interactive/LessonMap";
 import { PrintableRecap } from "@/components/interactive/PrintableRecap";
+import { LessonSpecialContent } from "@/components/interactive/LessonSpecialContent";
 import { BookmarkButton } from "@/components/user-content/BookmarkButton";
 import { NotesPanelButton } from "./NotesPanelButton";
 import { LessonJourneyBadge } from "@/components/LessonJourneyBadge";
@@ -305,6 +306,8 @@ export default async function LessonPage({ params }: Props) {
             <QuizCheckpointsSection checkpoints={quizCheckpoints} />
           </section>
         )}
+
+        <LessonSpecialContent moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
 
         <section id="section-notes">
           <LessonNotes lessonKey={key} />

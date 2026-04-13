@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import type { QuizCheckpoint } from "@/data/quiz-checkpoints";
+import { sounds } from "@/lib/sounds";
+import { addXP, XP_REWARDS } from "@/lib/gamification";
 
 function QuizCard({ q }: { q: QuizCheckpoint }) {
   const [picked, setPicked] = useState<number | null>(null);
@@ -23,6 +25,12 @@ function QuizCard({ q }: { q: QuizCheckpoint }) {
                 onClick={() => {
                   setPicked(i);
                   setShowExplain(true);
+                  if (opt.isCorrect) {
+                    sounds.quizCorrect();
+                    addXP(XP_REWARDS.QUIZ_CORRECT, "Bonne réponse QCM");
+                  } else {
+                    sounds.quizWrong();
+                  }
                 }}
                 className={`w-full rounded-lg border px-4 py-2.5 text-left text-sm transition ${
                   !reveal

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "leaflet/dist/leaflet.css";
 import { ToastProvider } from "@/components/toast";
 import { ThemeProvider } from "@/lib/theme";
 import { FocusModeProvider } from "@/components/focus-mode";

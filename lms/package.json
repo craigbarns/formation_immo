@@ -30,13 +30,18 @@
     "heygen:generate:terrain": "node scripts/heygen-generate-videos.mjs terrain"
   },
   "dependencies": {
+    "@ai-sdk/mistral": "^3.0.30",
     "@heygen/streaming-avatar": "^2.1.0",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/leaflet": "^1.9.21",
+    "ai": "^6.0.158",
     "canvas-confetti": "^1.9.3",
     "clsx": "^2.1.1",
+    "echarts": "^6.0.0",
     "framer-motion": "^12.38.0",
     "html-to-image": "^1.11.11",
     "iron-session": "^8.0.4",
+    "leaflet": "^1.9.4",
     "lucide-react": "^1.7.0",
     "next": "16.2.2",
     "react": "19.2.4",

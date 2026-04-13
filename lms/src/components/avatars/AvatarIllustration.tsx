@@ -211,7 +211,7 @@ export function AvatarIllustration({
     : "M67 108 Q80 115 93 108";                     // gentle smile / neutral
 
   const idleAnimation = animated
-    ? { y: [0, -4, 0], transition: { duration: 3.5, repeat: Infinity, ease: "easeInOut" } }
+    ? { y: [0, -4, 0], transition: { duration: 3.5, repeat: Infinity, ease: "easeInOut" as const } }
     : {};
 
   return (

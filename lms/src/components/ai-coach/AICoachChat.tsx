@@ -3,8 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Send, Bot, User, Sparkles, X, RotateCcw } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { sendMessageToCoach, getConversationHistory, getPersonalizedRecommendation } from "./ai-coach-service";
-import { clearCoachMemory, type ChatMessage } from "./ai-coach-storage";
+import { getConversationHistory, getPersonalizedRecommendation } from "./ai-coach-service";
+import { addMessageToMemory, clearCoachMemory, type ChatMessage } from "./ai-coach-storage";
 
 interface AICoachChatProps {
   moduleSlug?: string;
@@ -55,34 +55,62 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     setIsLoading(true);
     setShowRecommendation(false);
 
-    // Optimistically add user message
-    const tempUserMessage: ChatMessage = {
-      id: `temp-${Date.now()}`,
+    const userMsg: ChatMessage = {
+      id: `user-${Date.now()}`,
       role: "user",
       content: userMessage,
       timestamp: new Date().toISOString(),
       context: { moduleSlug, lessonSlug, lessonTitle },
     };
-    setMessages(prev => [...prev, tempUserMessage]);
+    const assistantId = `assistant-${Date.now()}`;
+    const assistantMsg: ChatMessage = {
+      id: assistantId,
+      role: "assistant",
+      content: "",
+      timestamp: new Date().toISOString(),
+    };
+
+    setMessages(prev => [...prev, userMsg, assistantMsg]);
 
     try {
-      const { response, message } = await sendMessageToCoach(userMessage, {
-        moduleSlug,
-        lessonSlug,
-        lessonTitle,
+      // Build API messages from current conversation (exclude synthetic greeting)
+      const apiMessages = [...messages, userMsg]
+        .filter(m => m.id !== "greeting")
+        .map(m => ({ role: m.role as "user" | "assistant", content: m.content }));
+
+      const response = await fetch("/api/coach", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: apiMessages, moduleSlug, lessonSlug, lessonTitle }),
       });
-      setMessages(prev => [...prev.filter(m => m.id !== tempUserMessage.id), message]);
-    } catch (error) {
-      console.error("Error sending message:", error);
-      setMessages(prev => [
-        ...prev.filter(m => m.id !== tempUserMessage.id),
-        {
-          id: `error-${Date.now()}`,
-          role: "assistant",
-          content: "Désolée, j'ai rencontré un problème. Pouvez-vous réessayer ?",
-          timestamp: new Date().toISOString(),
-        },
-      ]);
+
+      if (!response.ok || !response.body) throw new Error("Network error");
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let accText = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        accText += chunk;
+        setMessages(prev =>
+          prev.map(m => m.id === assistantId ? { ...m, content: accText } : m)
+        );
+      }
+
+      // Persist to local memory
+      addMessageToMemory({ role: "user", content: userMessage, context: { moduleSlug, lessonSlug, lessonTitle } });
+      addMessageToMemory({ role: "assistant", content: accText });
+
+    } catch {
+      setMessages(prev =>
+        prev.map(m => m.id === assistantId
+          ? { ...m, content: "Désolée, j'ai rencontré un problème technique. Réessayez dans un instant !" }
+          : m
+        )
+      );
     } finally {
       setIsLoading(false);
     }

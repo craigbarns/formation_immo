@@ -6,6 +6,8 @@ import {
   FORMATION_PROGRESS_CHANGED_EVENT,
   FORMATION_PROGRESS_STORAGE_KEY,
 } from "@/constants/formation-storage";
+import { addXP, XP_REWARDS } from "@/lib/gamification";
+import { sounds } from "@/lib/sounds";
 
 export function getStoredProgress(): Record<string, boolean> {
   if (typeof window === "undefined") return {};
@@ -36,6 +38,13 @@ export function LessonProgress({ lessonKey }: { lessonKey: string }) {
       delete p[lessonKey];
     } else {
       p[lessonKey] = true;
+      // Award XP and play completion sound on first completion
+      addXP(XP_REWARDS.LESSON_COMPLETE, `Leçon terminée: ${lessonKey}`);
+      sounds.lessonComplete();
+      // Confetti burst
+      import("canvas-confetti").then((mod) => {
+        mod.default({ particleCount: 100, spread: 60, origin: { y: 0.7 }, colors: ["#d4af37", "#1a3a5c", "#22c55e"] });
+      });
     }
     localStorage.setItem(FORMATION_PROGRESS_STORAGE_KEY, JSON.stringify(p));
     setDone(!done);

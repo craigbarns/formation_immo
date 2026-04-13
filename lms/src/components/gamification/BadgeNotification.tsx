@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { BadgeId } from "@/lib/gamification";
 import { getBadge } from "@/lib/gamification";
+import { sounds } from "@/lib/sounds";
 
 type Notification = { badgeId: BadgeId; show: boolean };
 
@@ -24,6 +25,20 @@ export function useBadgeNotification() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
   function notify(badgeId: BadgeId) {
+    const badge = getBadge(badgeId);
+    if (badge) {
+      sounds.badgeUnlock(badge.rarity);
+      // Confetti burst
+      import("canvas-confetti").then((mod) => {
+        const confetti = mod.default;
+        const colors =
+          badge.rarity === "legendary" ? ["#d4af37", "#f0c040", "#fff8dc"] :
+          badge.rarity === "epic"      ? ["#a855f7", "#c084fc", "#f0abfc"] :
+          badge.rarity === "rare"      ? ["#3b82f6", "#60a5fa", "#bfdbfe"] :
+                                         ["#22c55e", "#86efac", "#dcfce7"];
+        confetti({ particleCount: badge.rarity === "legendary" ? 180 : badge.rarity === "epic" ? 120 : 80, spread: 70, origin: { y: 0.3 }, colors });
+      });
+    }
     setNotifications((prev) => [...prev, { badgeId, show: true }]);
     setTimeout(() => {
       setNotifications((prev) =>
