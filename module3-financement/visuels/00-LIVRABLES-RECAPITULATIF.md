@@ -6,7 +6,9 @@
 ## 📁 STRUCTURE DES LIVRABLES
 
 ```
-/mnt/okcomputer/output/formation-immobiliere/module3-financement/visuels/
+formation-immobiliere/
+└── module3-financement/
+    └── visuels/
 │
 ├── 00-LIVRABLES-RECAPITULATIF.md    ← Vous êtes ici
 ├── 01-prompts-midjourney.md         ← 15 prompts Midjourney 16:9

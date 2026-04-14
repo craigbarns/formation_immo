@@ -45,7 +45,9 @@
 ## 📁 Structure du Dossier
 
 ```
-/mnt/okcomputer/output/formation-immobiliere/module4-marketing/visuels/
+formation-immobiliere/
+└── module4-marketing/
+    └── visuels/
 ├── 01-photos-professionnelles.jpg
 ├── 02-annonces-immobilieres.jpg
 ├── 03-portails-immobiliers.jpg

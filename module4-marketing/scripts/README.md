@@ -156,7 +156,9 @@ Google search results page mockup showing real estate agency ranking first, "AGE
 ## 📁 FICHIERS GÉNÉRÉS
 
 ```
-/mnt/okcomputer/output/formation-immobiliere/module4-marketing/scripts/
+formation-immobiliere/
+└── module4-marketing/
+    └── scripts/
 ├── README.md (ce fichier)
 ├── 01-photos-immobilieres-secrets-pros.md
 ├── 02-rediger-annonces-qui-vendent.md

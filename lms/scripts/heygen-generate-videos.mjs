@@ -16,7 +16,11 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
-const API_KEY = process.env.HEYGEN_API_KEY || "sk_V2_hgu_kUsxd24XGEM_Y8yRwWCKno6FWSNkQ9LCwNCtSAsk90ea";
+const API_KEY = process.env.HEYGEN_API_KEY;
+if (!API_KEY) {
+  console.error("❌ HEYGEN_API_KEY non définie. Ajoutez-la dans lms/.env.local");
+  process.exit(1);
+}
 
 // ─── Avatar assigné par module ───────────────────────────────────────────────
 // Tous les MP3 sont générés avec la voix "Marie" (féminin, Mistral Voxtral)

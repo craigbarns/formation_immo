@@ -149,7 +149,7 @@ Chaque script suit la structure pédagogique suivante :
 ## 📁 Chemin des Fichiers
 
 ```
-/mnt/okcomputer/output/formation-immobiliere/
+formation-immobiliere/
 └── module3-financement/
     └── scripts/
         ├── README.md

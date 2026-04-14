@@ -268,7 +268,7 @@ D. Étage/Ascenseur → Surface → Orientation → Ancienneté de la vente
 **Un compromis de vente est signé le 15 mars. L'acquéreur, primo-accédant, souhaite exercer son droit de rétractation. Quelle est la date limite pour envoyer la lettre recommandée avec accusé de réception ?**
 
 A. Le 22 mars minuit (7 jours calendaires)  
-B. Le 29 mars minuit (10 jours francs)  
+B. Le 25 mars minuit (10 jours francs après signature)  
 C. Le 5 avril minuit (10 jours calendaires + délai de réflexion)  
 D. Le 15 avril minuit (30 jours pour les primo-accédants)  
 
@@ -276,15 +276,13 @@ D. Le 15 avril minuit (30 jours pour les primo-accédants)
 
 **EXPLICATION DÉTAILLÉE :**
 
-✅ **B est correct** : Le délai de rétractation est de **10 jours francs** à compter du lendemain de la signature (article L. 271-1 du Code de la Construction et de l'Habitation). 
+✅ **B est correct** : Le délai de rétractation est de **10 jours francs** à compter du lendemain de la signature (article L. 271-1 du Code de la Construction et de l'Habitation).
 
 - Signature le 15 mars
 - 1er jour : 16 mars
-- 10ème jour : 25 mars
-- Comme le délai expire un samedi (25 mars), il est prolongé jusqu'au 1er jour ouvrable suivant : **lundi 27 mars**
-- La lettre doit être **envoyée** avant minuit le 27 mars (cachet de la Poste faisant foi)
-
-**ATTENTION** : La question demande la date limite d'envoi. Si on compte strictement 10 jours francs du 16 au 25 mars, avec prolongation au 27, la réponse B (29 mars) semble inclure une marge. En pratique professionnelle, on considère souvent les 10 jours + marge de sécurité.
+- 10ème jour : **25 mars**
+- Si le 25 mars tombe un week-end ou un jour férié, le délai est prolongé jusqu'au premier jour ouvrable suivant (par exemple le **lundi 27 mars** si le 25 est un samedi).
+- La lettre doit être **envoyée** avant minuit ce jour-là (cachet de la Poste faisant foi).
 
 ❌ **A est incorrect** : 7 jours est l'ancien délai (avant la loi ALUR de 2014) ou le délai pour certains contrats de démarchage, pas pour le compromis de vente immobilière.
 

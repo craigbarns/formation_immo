@@ -16,6 +16,13 @@
     "elevenlabs:samples": "node scripts/elevenlabs-french-voices.mjs --samples-top 8",
     "elevenlabs:samples:formateurs": "node scripts/elevenlabs-french-voices.mjs --formateur",
     "audio:clean": "node scripts/clean-and-regen-audio.mjs",
+    "heygen:lesson": "node scripts/heygen-cli.mjs lesson",
+    "heygen:lesson:dry": "node scripts/heygen-cli.mjs lesson --dry-run",
+    "heygen:lesson:test": "node scripts/heygen-cli.mjs lesson --test",
+    "heygen:intro": "node scripts/heygen-cli.mjs intro",
+    "heygen:intro:dry": "node scripts/heygen-cli.mjs intro --dry-run",
+    "heygen:list": "node scripts/heygen-cli.mjs list",
+    "heygen:clean": "node scripts/heygen-cli.mjs clean",
     "heygen:intros": "node scripts/heygen-generate-intros.mjs",
     "heygen:intros:juridique": "node scripts/heygen-generate-intros.mjs juridique",
     "heygen:intros:transaction": "node scripts/heygen-generate-intros.mjs transaction",
@@ -27,7 +34,9 @@
     "heygen:generate:transaction": "node scripts/heygen-generate-videos.mjs transaction",
     "heygen:generate:financement": "node scripts/heygen-generate-videos.mjs financement",
     "heygen:generate:marketing": "node scripts/heygen-generate-videos.mjs marketing",
-    "heygen:generate:terrain": "node scripts/heygen-generate-videos.mjs terrain"
+    "heygen:generate:terrain": "node scripts/heygen-generate-videos.mjs terrain",
+    "audio:elevenlabs": "node scripts/elevenlabs-generate-audio.mjs",
+    "audio:elevenlabs:dry": "node scripts/elevenlabs-generate-audio.mjs --dry-run"
   },
   "dependencies": {
     "@ai-sdk/mistral": "^3.0.30",
@@ -37,6 +46,7 @@
     "ai": "^6.0.158",
     "canvas-confetti": "^1.9.3",
     "clsx": "^2.1.1",
+    "commander": "^14.0.3",
     "echarts": "^6.0.0",
     "framer-motion": "^12.38.0",
     "html-to-image": "^1.11.11",

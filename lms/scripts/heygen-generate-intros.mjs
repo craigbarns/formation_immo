@@ -18,9 +18,19 @@ import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const REPO_ROOT = join(ROOT, "..");
-const API_KEY = process.env.HEYGEN_API_KEY || "sk_V2_hgu_kUsxd24XGEM_Y8yRwWCKno6FWSNkQ9LCwNCtSAsk90ea";
-const MISTRAL_KEY = process.env.MISTRAL_API_KEY || "yFg7Zt2i3fMRCT4xmFcoTfa7JsANLLWK";
 const INTROS_DIR = join(ROOT, "public/audio/intros");
+
+const API_KEY = process.env.HEYGEN_API_KEY;
+if (!API_KEY) {
+  console.error("❌ HEYGEN_API_KEY non définie. Ajoutez-la dans lms/.env.local");
+  process.exit(1);
+}
+
+const MISTRAL_KEY = process.env.MISTRAL_API_KEY;
+if (!MISTRAL_KEY) {
+  console.error("❌ MISTRAL_API_KEY non définie. Ajoutez-la dans lms/.env.local");
+  process.exit(1);
+}
 
 // ─── 4 voix françaises Mistral Voxtral ───────────────────────────────────────
 const VOICES = {

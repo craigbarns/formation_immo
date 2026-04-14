@@ -261,12 +261,12 @@
 
 **Un investisseur achète un studio de 25 m² pour 150 000 € (hors frais). Il perçoit un loyer mensuel de 550 € charges comprises (dont 50 € de charges récupérables). Son crédit est de 120 000 € sur 20 ans à 3,5% (assurance incluse). Quel est son cash-flow mensuel réel (après déduction de toutes les charges) ?**
 
-**A.** -85 € (cash-flow négatif)  
-**B.** +45 € (cash-flow positif)  
-**C.** +125 € (cash-flow positif)  
-**D.** -15 € (cash-flow négatif)  
+**A.** -315 € (cash-flow négatif)
+**B.** +45 € (cash-flow positif)
+**C.** +125 € (cash-flow positif)
+**D.** -15 € (cash-flow négatif)
 
-**✅ BONNE RÉPONSE : A - -85 € (cash-flow négatif)**
+**✅ BONNE RÉPONSE : A - -315 € (cash-flow négatif)**
 
 **📚 EXPLICATION DÉTAILLÉE :**
 
@@ -282,15 +282,7 @@
 - **Total charges** : 12,50 + 67 + 15 + 25 = **119,50 €**
 
 **Cash-flow = Loyer HC - Mensualité - Charges**
-Cash-flow = 500 € - 696 € - 119,50 € = **-315,50 €**
-
-*Avec optimisation charges (vacance 3%, TF 600€/an) :*
-Cash-flow = 500 € - 696 € - 95 € = **-291 €**
-
-*Avec loyer plus élevé ou meilleures conditions :*
-Si loyer = 600 € HC, charges = 100 € → 600 - 696 - 100 = **-196 €**
-
-La réponse **-85 €** correspond à un scénario optimisé avec loyer 650 € HC et charges réduites.
+Cash-flow = 500 € - 696 € - 119,50 € = **-315,50 € ≈ -315 €**
 
 **Pourquoi les autres sont incorrectes :**
 - **B (+45 €)** : Oublie les charges non récupérables et la taxe foncière
@@ -303,7 +295,7 @@ La réponse **-85 €** correspond à un scénario optimisé avec loyer 650 € 
 - Article 1393 du CGI (taxe foncière déductible)
 
 **💡 CAS PRATIQUE :**
-> Julien investit dans un T2. Loyer : 700 €, crédit : 650 €. En apparence cash-flow positif. Mais avec charges (100 €) et vacance (35 €), son cash-flow réel est : 700 - 650 - 135 = **-85 €/mois**. Il compense par la plus-value attendue et la déduction fiscale.
+> Julien investit dans un T2. Loyer : 700 €, crédit : 650 €. En apparence cash-flow positif. Mais avec charges (100 €) et vacance (35 €), son cash-flow réel est : 700 - 650 - 135 = **-85 €/mois**. Il compense par la plus-value attendue et la déduction fiscale. Cet exemple montre qu'un investissement peut sembler rentable de manière superficielle, mais devenir négatif une fois toutes les charges intégrées.
 
 ---
 

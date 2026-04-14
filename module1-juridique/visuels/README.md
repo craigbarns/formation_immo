@@ -146,6 +146,6 @@ Speaker Boost: true
 
 ---
 
-**Projet** : Formation Immobilière - Module 1 Juridique  
-**Livrable** : Visuels IA (Prompts + Storyboards + Voix)  
-**Dossier** : `/mnt/okcomputer/output/formation-immobiliere/module1-juridique/visuels/`
+**Projet** : Formation Immobilière - Module 1 Juridique
+**Livrable** : Visuels IA (Prompts + Storyboards + Voix)
+**Dossier** : `module1-juridique/visuels/`

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Search } from "lucide-react";
+import { Search, Home, Users, FileText, Award } from "lucide-react";
 import { XPBar } from "@/components/gamification/XPBar";
 import { GlobalSearch } from "@/components/search";
 import { MagneticButton } from "@/components/animations";
@@ -136,10 +136,10 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
 
       {/* Mobile bottom nav */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t border-zinc-200/90 bg-white/95 px-2 py-2 backdrop-blur-md md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
-        <MobileNavItem href="/formation" icon="🏠" label="Parcours" />
-        <MobileNavItem href="/formation/formateurs" icon="👥" label="Formateurs" />
-        <MobileNavItem href="/formation/supports-visuels" icon="📋" label="Fiches" />
-        <MobileNavItem href="/formation/profil" icon="🏅" label="Profil" />
+        <MobileNavItem href="/formation" icon={<Home className="h-5 w-5" />} label="Parcours" />
+        <MobileNavItem href="/formation/formateurs" icon={<Users className="h-5 w-5" />} label="Formateurs" />
+        <MobileNavItem href="/formation/supports-visuels" icon={<FileText className="h-5 w-5" />} label="Fiches" />
+        <MobileNavItem href="/formation/profil" icon={<Award className="h-5 w-5" />} label="Profil" />
       </nav>
     </div>
   );
@@ -156,13 +156,13 @@ function NavItem({ href, children }: { href: string; children: React.ReactNode }
   );
 }
 
-function MobileNavItem({ href, icon, label }: { href: string; icon: string; label: string }) {
+function MobileNavItem({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) {
   return (
     <Link
       href={href}
       className="flex flex-col items-center gap-0.5 px-3 py-1.5 text-zinc-600 hover:text-brand-navy transition-colors"
     >
-      <span className="text-xl">{icon}</span>
+      <span className="text-brand-navy/70">{icon}</span>
       <span className="text-[10px] font-semibold">{label}</span>
     </Link>
   );

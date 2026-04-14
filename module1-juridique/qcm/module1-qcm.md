@@ -82,14 +82,14 @@ D) 1 an
 
 **Monsieur Durand signe un compromis de vente pour l'achat d'un appartement le 15 mars. Quelle est la date limite pour qu'il puisse se rétracter ?**
 
-A) Le 22 mars (7 jours après)  
-B) Le 29 mars (14 jours après)  
-C) Le 5 avril (21 jours après)  
+A) Le 22 mars (7 jours après)
+B) Le 25 mars (10 jours francs après signature)
+C) Le 5 avril (21 jours après)
 D) Le 15 avril (1 mois après)
 
 **Bonne réponse : B**
 
-**Explication :** Le délai de rétractation pour un acheteur dans le cadre d'un compromis de vente d'un bien immobilier est de 10 jours calendaires (et non ouvrés). Ce délai court à compter du lendemain de la première présentation de la lettre recommandée notifiant l'acte, ou de la remise en main propre contre récépissé. Si Monsieur Durand signe le 15 mars, le délai court à partir du 16 mars et expire le 25 mars. Cependant, si la notification est faite par lettre recommandée, on compte généralement 10 jours + 2 jours pour la poste = environ 12 jours. Dans la pratique, on considère souvent un délai de 10 à 14 jours selon le mode de notification. La réponse B (29 mars, soit 14 jours) est la plus sécurisante en pratique.
+**Explication :** Le délai de rétractation pour un acheteur dans le cadre d'un compromis de vente d'un bien immobilier est de **10 jours francs** (et non ouvrés). Ce délai court à compter du lendemain de la première présentation de la lettre recommandée notifiant l'acte, ou de la remise en main propre contre récépissé. Si Monsieur Durand signe le 15 mars, le délai court à partir du 16 mars et expire le **25 mars**. Si le 25 mars tombe un week-end ou un jour férié, le délai est prolongé jusqu'au premier jour ouvrable suivant (par exemple le lundi 27 mars si le 25 est un samedi).
 
 **Pourquoi les autres sont fausses :**
 - **A)** Faux : 7 jours est insuffisant. Ce n'est pas le délai légal de rétractation.
