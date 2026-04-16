@@ -1,15 +1,1 @@
-{
-  "_comment": "Généré par: npm run heygen:intros. Ne pas éditer manuellement.",
-  "juridique/loi-alur": {
-    "videoUrl": "https://files2.heygen.ai/aws_pacific/avatar_tmp/ec027bb58dfe40edad9bd66cc343b15b/cfeb30ee3562450a91df61584cc0027b.mp4?Expires=1776614731&Signature=euFX69HpsjSkcsxOieoD8rOK0vHpL8K82-9wloXr5F3IGsbnqkXZ8YcvuXd8IcJbq1m9P08ALzl2jdmguS2cV8XkSeZaDlM6Qm2UOKpU6neP2pZk2kt-QTuKwS3TVUCNgzCEFNtsLwtV2nIAG4IpZoiAiEsyEZwetXQwmytG8RvM-cb1owle-8zxSKDAljMCuKGBspLSGsK--HNpo6~pzC-yVYbz~G-3fihm67AP9L12nmBAFLwROxINsHHkNveQTrT-knQIWlVerlQ6f9BxAe8iRNmyE1lC2zJuN19zMAWHSYt54LcWEGDIqjuQNRqOIY7kY4tY0xEHoh3SHCpcoQ__&Key-Pair-Id=K38HBHX5LX3X2H",
-    "avatarId": "Annie_Office_Standing_Front_public",
-    "introText": "Vous avez déjà eu cette sensation d'être submergé par les changements législatifs ? Cette impression que chaque nouvelle loi complique un peu plus votre métier d'agent immobilier ? En 2026, la Loi ALUR évolue encore.",
-    "generatedAt": "2026-04-12T16:05:31.322Z"
-  },
-  "juridique/compromis": {
-    "videoUrl": "https://files2.heygen.ai/aws_pacific/avatar_tmp/ec027bb58dfe40edad9bd66cc343b15b/5ccbfa572fc64bc7aaad8645d883b0b8.mp4?Expires=1776614804&Signature=IB1EdV4K1dwttQWyZIm6CjNo~YthkHQfxCys-mpI-LBWkFkc6kDvvu7JBZ5pbTwp3gqy37VSALrIzv~sicmIvLl809ryh3f7OYtP0YUy27AQstin6apBQyzzX582F-jwfCTuiKQTQ0JcZRNUGmqJ6lMeDVze42qlIgtHz~xX1hcyq2qF7zoenWQrDeewgP76CLD0VlglVZ9UKX3Vuh1~7iOPx0qk97XMPq67wAuSypL6ze8gRT4C40ReokcVy1HmbqiLvQKJDsfKOCZQinerE15CuhQ8ynIqBb8kHoX~10zKtfuiat3Vp~CGPvgFtVVS8fkTqItaBZeTz6LOI0VhLA__&Key-Pair-Id=K38HBHX5LX3X2H",
-    "avatarId": "Annie_Desk_Sitting_Front_public",
-    "introText": "Le compromis de vente. Pour beaucoup d'agents, ces trois mots provoquent une montée d'adrénaline. Pas l'excitation positive, non. Cette angoisse de l'erreur qui pourrait tout faire capoter. Et si j'ai oublié une clause ?",
-    "generatedAt": "2026-04-12T16:06:44.453Z"
-  }
-}
+{}

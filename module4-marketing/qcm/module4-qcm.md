@@ -294,7 +294,86 @@ Les avis clients sont encouragés et légaux, à condition de respecter quelques
 
 ---
 
-## RÉCAPITULATIF DES RÉPONSES
+## PARTIE 2 — VIDÉO IMMOBILIÈRE, VISITE VIRTUELLE ET PERSONAL BRANDING
+
+---
+
+### QUESTION 11 — Vidéo immobilière : Impact
+
+**D'après les études sur les portails immobiliers, quelle est l'augmentation des demandes de visite générée par les annonces avec une vidéo de présentation par rapport aux annonces uniquement avec des photos ?**
+
+A) +25%
+B) +100%
+C) +403%
+D) +50%
+
+**BONNE RÉPONSE : C**
+
+**EXPLICATION :** Les annonces avec une vidéo de présentation génèrent en moyenne 403% plus de demandes de visite que les annonces avec photos seules. Malgré cet impact, moins de 15% des agents utilisent la vidéo systématiquement. La vidéo répond à l'évolution du comportement des acheteurs qui recherchent les biens depuis leur mobile.
+
+---
+
+### QUESTION 12 — Visite virtuelle : Outil référence
+
+**Quel outil est le standard professionnel pour créer des visites virtuelles 360° dans l'immobilier ?**
+
+A) Google Street View
+B) Matterport
+C) WhatsApp
+D) Canva
+
+**BONNE RÉPONSE : B**
+
+**EXPLICATION :** Matterport est la référence mondiale de la visite virtuelle pour l'immobilier. L'application Matterport Capture est disponible sur iPhone Pro (LiDAR) et crée des visites navigables avec plan 3D, Mattertags (infobulles cliquables) et mode Poupée (vue 3D aérienne). Les biens avec visite virtuelle 360° se vendent en moyenne 2 semaines plus vite.
+
+---
+
+### QUESTION 13 — Google Business : Avis négatif
+
+**Un client publie un avis 1 étoile la veille d'une journée portes ouvertes. Quelle est la meilleure réponse ?**
+
+A) Supprimer la fiche Google Business pour en créer une vierge
+B) Contacter Google pour supprimer l'avis immédiatement
+C) Attendre 24-48h puis répondre publiquement avec empathie en invitant à résoudre en privé
+D) Répondre immédiatement en détaillant pourquoi le client a tort
+
+**BONNE RÉPONSE : C**
+
+**EXPLICATION :** Répondre à chaud risque de créer une dispute publique nuisible. La bonne pratique : attendre 24-48h, puis répondre avec empathie — "Nous sommes désolés d'apprendre votre insatisfaction. Contactez-nous directement pour trouver une solution." Les futurs prospects lisent les réponses autant que les avis eux-mêmes.
+
+---
+
+### QUESTION 14 — Personal branding : Positionnement
+
+**Quelle approche de positionnement est la plus efficace pour développer la notoriété d'un agent ?**
+
+A) Se présenter comme généraliste pour toucher un maximum de clients
+B) Se spécialiser sur un type de bien, un quartier ou un profil de client précis
+C) Travailler uniquement sur les portails immobiliers
+D) Changer régulièrement de spécialité pour s'adapter aux tendances
+
+**BONNE RÉPONSE : B**
+
+**EXPLICATION :** Un agent spécialisé est perçu comme 3 fois plus crédible qu'un généraliste. La spécialisation permet de concentrer sa communication, de construire une expertise reconnue et de justifier des honoraires premium. Exemple : "Spécialiste des appartements familiaux Lyon 6ème depuis 12 ans." Ce positionnement doit être visible sur LinkedIn, Instagram, Google Business et le site web.
+
+---
+
+### QUESTION 15 — Conformité ALUR : Mentions obligatoires annonces
+
+**Quelles mentions sont obligatoires sur toute annonce immobilière publiée par un agent selon la loi ALUR ?**
+
+A) Uniquement le prix de vente et la surface
+B) Le prix TTC, le montant des honoraires TTC, la répartition des honoraires, le numéro de carte professionnelle
+C) Uniquement le numéro de carte professionnelle et le nom de l'agence
+D) Le prix et le DPE — les autres mentions sont facultatives
+
+**BONNE RÉPONSE : B**
+
+**EXPLICATION :** La loi ALUR impose que toute annonce mentionne obligatoirement : le prix TTC, le montant des honoraires TTC en euros, la répartition des honoraires (vendeur ou acquéreur), et le numéro de carte professionnelle. L'affichage doit être visible et non ambigu. Le non-respect expose à une amende administrative et à la responsabilité civile professionnelle.
+
+---
+
+## RÉCAPITULATIF DES RÉPONSES COMPLET
 
 | Question | Niveau | Thème | Bonne Réponse |
 |----------|--------|-------|---------------|
@@ -308,6 +387,11 @@ Les avis clients sont encouragés et légaux, à condition de respecter quelques
 | 8 | Difficile | KPIs | B |
 | 9 | Difficile | Stratégie multi-canal | A |
 | 10 | Difficile | Réglementation | B |
+| 11 | Moyen | Vidéo immobilière | C |
+| 12 | Facile | Visite virtuelle | B |
+| 13 | Moyen | Avis Google | C |
+| 14 | Moyen | Personal branding | B |
+| 15 | Difficile | Conformité ALUR annonces | B |
 
 ---
 

@@ -395,7 +395,86 @@ Ce module évalue vos compétences sur :
 
 ---
 
-## 📊 BAREME DE NOTATION
+## PARTIE 2 — R0/R1/R2 ET DÉCOUVERTE CLIENT
+
+---
+
+### QUESTION 11 — La méthode R0 : Objectif
+
+**Quel est l'objectif principal du R0 dans la méthode de prise de mandat en 3 rendez-vous ?**
+
+A) Estimer le prix du bien et obtenir immédiatement le mandat
+B) Visiter le bien et prendre les mesures
+C) Qualifier le prospect par téléphone — motivation, délai, prix attendu, concurrence
+D) Présenter les comparables de vente et signer le mandat
+
+**BONNE RÉPONSE : C**
+
+**EXPLICATION :** Le R0 est l'appel téléphonique de qualification préalable à toute visite. Il permet de recueillir 5 informations clés : la motivation de vente, le délai souhaité, la présence d'autres agences, l'idée de prix du vendeur, et le projet derrière la vente. Le R0 détermine si le prospect vaut le temps d'une visite — un vendeur non motivé avec un prix déconnecté peut justifier de ne pas donner suite.
+
+---
+
+### QUESTION 12 — La méthode R1 : Le prix
+
+**Lors du R1 (visite physique du bien), quand l'agent doit-il donner son estimation de prix au propriétaire ?**
+
+A) Dès le début de la visite pour cadrer les attentes
+B) Pendant la visite, au moment d'inspecter la pièce principale
+C) À la fin de la visite, avant de partir
+D) Jamais lors du R1 — l'estimation se donne uniquement au R2
+
+**BONNE RÉPONSE : D**
+
+**EXPLICATION :** Le R1 est dédié à la visite du bien et à la découverte client — pas à l'estimation. Donner un prix lors du R1 sans données marché formalisées fragilise votre crédibilité et vous prive de l'effet "expert rigoureux" du R2. Si le propriétaire insiste, la réponse type est : "Je préfère vous donner une estimation précise et argumentée. J'ai besoin d'analyser les comparables — puis-je revenir vendredi avec une présentation complète ?" Cette posture renforce la confiance.
+
+---
+
+### QUESTION 13 — Découverte client : Iceberg
+
+**Un couple cherche "un 3 pièces de 70m² à moins de 380 000€". Après découverte client approfondie, vous apprenez que Madame veut une cuisine ouverte et Monsieur une proximité métro. Ces besoins correspondent à :**
+
+A) Des critères techniques supplémentaires à ajouter à la liste
+B) Des besoins profonds — la partie immergée de l'iceberg décisionnel
+C) Des exigences secondaires moins importantes que le prix et la surface
+D) Des informations inutiles pour la sélection des biens à proposer
+
+**BONNE RÉPONSE : B**
+
+**EXPLICATION :** La méthode de l'iceberg distingue les critères exprimés (partie visible : taille, prix, quartier) des besoins profonds (partie immergée : sécurité pour les enfants, projet de vie, contraintes quotidiennes). 73% des acheteurs signent pour un bien différent de leur demande initiale. En comprenant les besoins profonds, l'agent peut proposer des biens hors critères apparents qui déclenchent l'achat — comme un 65m² avec cuisine ouverte et métro proche qui bat le 70m² demandé.
+
+---
+
+### QUESTION 14 — Suivi acquéreur : Fréquence
+
+**Un acquéreur n'a pas trouvé de bien après 6 mois de recherche active. Quelle est la meilleure action à prendre ?**
+
+A) Cesser le suivi — s'il n'a pas trouvé c'est qu'il n'est pas vraiment acheteur
+B) Lui envoyer tous les nouveaux biens disponibles pour maximiser les chances
+C) Replanifier une découverte client complète — ses critères ont probablement évolué
+D) Lui proposer d'augmenter son budget pour accéder à plus de biens
+
+**BONNE RÉPONSE : C**
+
+**EXPLICATION :** Après 6 mois sans achat, la situation du client a très probablement évolué — naissance, changement professionnel, révision du budget, évolution des critères. Replanifier une découverte client complète permet de repartir sur des bases actualisées et de renouveler la relation de confiance. Continuer à envoyer des biens sans remettre à jour la fiche acquéreur génère de la lassitude et des propositions non pertinentes.
+
+---
+
+### QUESTION 15 — R2 : Contenu du dossier
+
+**Lors du R2 (présentation de l'estimation), quel élément est le plus important pour convaincre un propriétaire dont le prix attendu est supérieur à l'estimation du marché ?**
+
+A) Insister sur votre expérience personnelle et votre réseau d'acheteurs
+B) Présenter des comparables de ventes réelles récentes qui objectivent l'écart de prix
+C) Proposer un prix intermédiaire entre votre estimation et le prix du vendeur
+D) Expliquer que le marché est difficile et qu'il faut être réaliste
+
+**BONNE RÉPONSE : B**
+
+**EXPLICATION :** L'estimation argumentée par des comparables de ventes réelles (DVF, notaires) est l'outil le plus puissant pour recadrer les attentes d'un vendeur surévaluant son bien. Présenter des données factuelles ("voici 6 biens similaires vendus dans votre rue ces 6 derniers mois") est objectif et impersonnel — c'est le marché qui parle, pas l'agent. Cette approche préserve la relation de confiance tout en ancrant l'estimation dans la réalité.
+
+---
+
+## 📊 BAREME DE NOTATION COMPLET
 
 | Niveau | Questions | Points |
 |--------|-----------|--------|
