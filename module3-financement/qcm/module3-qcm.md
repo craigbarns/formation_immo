@@ -407,20 +407,119 @@ La réponse **2 050 €** inclut une marge pour les variations de taux et l'assu
 
 ---
 
-## 📊 TABLEAU RÉCAPITULATIF
+## PARTIE 2 — DÉFISCALISATION IMMOBILIÈRE
+
+---
+
+### QUESTION 11 — Pinel : Statut 2025
+
+**Un client souhaite investir dans un appartement neuf en janvier 2025 pour bénéficier du dispositif Pinel. Est-ce possible ?**
+
+A. Oui — le Pinel est toujours en vigueur en 2025  
+B. Non — le dispositif Pinel a pris fin au 31 décembre 2024  
+C. Oui — mais uniquement en zone A bis  
+D. Oui — avec le nouveau Pinel+ à taux renforcé
+
+**BONNE RÉPONSE : B**
+
+**EXPLICATION :**
+Le dispositif Pinel a pris fin au 31 décembre 2024. Les opérations engagées avant cette date et répondant aux conditions continuent de bénéficier de la réduction d'impôt jusqu'à leur terme. Pour les nouvelles acquisitions depuis le 1er janvier 2025, le Pinel n'est plus disponible. Le Pinel+ (Super Pinel avec critères de qualité renforcés) a également expiré à la même date.
+
+**RÉFÉRENCE** : Loi de finances 2022, article 168 — PLF 2024
+
+---
+
+### QUESTION 12 — Denormandie : Condition travaux
+
+**Pour bénéficier du dispositif Denormandie, quelle est la condition minimale concernant les travaux de rénovation ?**
+
+A. Les travaux doivent représenter au moins 10% du coût total de l'opération  
+B. Les travaux doivent représenter au moins 25% du coût total de l'opération  
+C. Seule la rénovation énergétique est prise en compte  
+D. Aucune condition de montant de travaux n'est requise
+
+**BONNE RÉPONSE : B**
+
+**EXPLICATION :**
+Le dispositif Denormandie, créé en 2019 pour revitaliser les centres-villes dégradés, exige que le montant des travaux représente au moins 25% du coût total de l'opération (prix d'achat + travaux). Ces travaux doivent améliorer la performance énergétique du logement (réduction des consommations d'au moins 30%) ou porter sur au moins 2 des 5 catégories de travaux définies par décret. La réduction d'impôt est de 12%, 18% ou 21% selon la durée de location (6, 9 ou 12 ans).
+
+**RÉFÉRENCE** : Article 199 novovicies du Code Général des Impôts, décret n°2019-232 du 26 mars 2019
+
+---
+
+### QUESTION 13 — Loi Malraux : Taux de réduction
+
+**Un investisseur acquiert un immeuble dans un secteur sauvegardé et engage 150 000 € de travaux de restauration supervisés par un Architecte des Bâtiments de France. Quelle réduction d'impôt peut-il obtenir ?**
+
+A. 22 500 € (15% des travaux)  
+B. 30 000 € (20% des travaux)  
+C. 45 000 € (30% des travaux)  
+D. 16 500 € (11% des travaux)
+
+**BONNE RÉPONSE : C**
+
+**EXPLICATION :**
+La loi Malraux prévoit une réduction d'impôt de 30% des dépenses de travaux pour les immeubles situés en secteur sauvegardé (Site Patrimonial Remarquable avec PSMV approuvé). Le taux est de 22% pour les autres zones Malraux (AVAP, ZPPAUP). Pour 150 000 € de travaux en secteur sauvegardé : 150 000 × 30% = 45 000 € de réduction d'impôt. Le plafond des dépenses est de 400 000 € sur 4 ans. Ce dispositif est permanent (sans date d'expiration contrairement au Pinel).
+
+**RÉFÉRENCE** : Article 199 tervicies du Code Général des Impôts
+
+---
+
+### QUESTION 14 — Défiscalisation : Conseil professionnel
+
+**Un agent immobilier peut-il conseiller un client sur le dispositif fiscal le plus adapté à sa situation et rédiger un plan d'optimisation fiscale personnalisé ?**
+
+A. Oui — c'est une compétence attendue de tout agent immobilier  
+B. Non — le conseil fiscal personnalisé relève exclusivement des conseillers en gestion de patrimoine et experts-comptables  
+C. Oui — uniquement pour les dispositifs Pinel et Denormandie  
+D. Oui — s'il a suivi une formation fiscale
+
+**BONNE RÉPONSE : B**
+
+**EXPLICATION :**
+Le conseil fiscal personnalisé est réglementé. En France, seuls les professionnels habilités (conseillers en gestion de patrimoine - CGP, experts-comptables, avocats fiscalistes) peuvent fournir des conseils en optimisation fiscale personnalisée à titre habituel. L'agent immobilier peut présenter les caractéristiques générales d'un dispositif (durées, taux de réduction) mais ne doit pas établir de plan fiscal personnalisé pour son client. Il doit systématiquement orienter vers un CGP ou expert-comptable pour la dimension fiscale.
+
+**RÉFÉRENCE** : Loi n°2007-1598 du 13 novembre 2007 relative à la lutte contre la corruption (CIF) — Règlement général AMF
+
+---
+
+### QUESTION 15 — Censi-Bouvard : Statut actuel
+
+**Un client a investi dans une résidence étudiante via le dispositif Censi-Bouvard en 2020 pour une durée de 9 ans. En 2025, peut-il encore bénéficier de la réduction d'impôt annuelle prévue au départ ?**
+
+A. Non — Censi-Bouvard a expiré en 2022, toutes les réductions cessent  
+B. Oui — les investissements engagés avant la fin du dispositif continuent de bénéficier de la réduction jusqu'à leur terme  
+C. Oui — mais le taux est réduit de moitié depuis 2023  
+D. Non — il faut revendre le bien pour ne pas perdre l'avantage fiscal
+
+**BONNE RÉPONSE : B**
+
+**EXPLICATION :**
+Le dispositif Censi-Bouvard a expiré au 31 décembre 2022 pour les nouvelles acquisitions. Cependant, les investisseurs qui ont acquis des biens sous ce dispositif avant cette date continuent de bénéficier de la réduction d'impôt annuelle jusqu'au terme de leur engagement (9 ans minimum). Un investisseur ayant signé en 2020 bénéficie donc de la réduction jusqu'en 2029. La fin du dispositif ne remet pas en cause les droits acquis.
+
+**RÉFÉRENCE** : Article 199 sexvicies du Code Général des Impôts (abrogé pour les nouvelles acquisitions depuis le 1er janvier 2023)
+
+---
+
+## TABLEAU RÉCAPITULATIF COMPLET
 
 | N° | Niveau | Thème | Bonne réponse | Points clés |
 |----|--------|-------|---------------|-------------|
-| 1 | 🟢 Facile | Capacité d'emprunt | B | Taux d'endettement 35% HCSF |
-| 2 | 🟢 Facile | PTZ | C | Durée max 25 ans |
-| 3 | 🟢 Facile | Assurance | D | Chômage = optionnel |
-| 4 | 🟡 Moyen | Pinel | C | Plafond zone B1 : 10,93 €/m² |
-| 5 | 🟡 Moyen | Capacité + apport | B | Prix + frais - apport |
-| 6 | 🟡 Moyen | LMNP | B | Déficit cantonné foncier |
-| 7 | 🟡 Moyen | Denormandie | D | 12 ans = 18% max |
-| 8 | 🔴 Difficile | Cash-flow | A | Charges non récupérables incluses |
-| 9 | 🔴 Difficile | Optimisation fiscale | C | Pinel + charges déductibles |
-| 10 | 🔴 Difficile | Montage complexe | C | PTZ + crédit principal |
+| 1 | Facile | Capacité d'emprunt | B | Taux d'endettement 35% HCSF |
+| 2 | Facile | PTZ | C | Durée max 25 ans |
+| 3 | Facile | Assurance | D | Chômage = optionnel |
+| 4 | Moyen | Pinel (historique) | C | Plafond zone B1 : 10,93 €/m² |
+| 5 | Moyen | Capacité + apport | B | Prix + frais - apport |
+| 6 | Moyen | LMNP | B | Déficit cantonné foncier |
+| 7 | Moyen | Denormandie | D | 12 ans = 18% max |
+| 8 | Difficile | Cash-flow | A | Charges non récupérables incluses |
+| 9 | Difficile | Optimisation fiscale | C | Pinel + charges déductibles |
+| 10 | Difficile | Montage complexe | C | PTZ + crédit principal |
+| 11 | Moyen | Pinel 2025 | B | Expiré au 31/12/2024 |
+| 12 | Moyen | Denormandie travaux | B | 25% du coût total |
+| 13 | Difficile | Malraux calcul | C | 30% secteur sauvegardé |
+| 14 | Moyen | Conseil fiscal | B | Hors périmètre agent immo |
+| 15 | Moyen | Censi-Bouvard | B | Droits acquis conservés |
 
 ---
 

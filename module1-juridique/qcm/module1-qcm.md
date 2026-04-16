@@ -236,7 +236,7 @@ D) Les comptes annuels des 20 dernières années
 
 ---
 
-## RÉCAPITULATIF DES RÉPONSES
+## RÉCAPITULATIF DES RÉPONSES — PARTIE 1
 
 | Question | Thématique | Niveau | Réponse |
 |----------|-----------|--------|---------|
@@ -253,14 +253,164 @@ D) Les comptes annuels des 20 dernières années
 
 ---
 
-## SCORE PAR NIVEAU
-
-- **Facile (3 questions)** : ___/3
-- **Moyen (4 questions)** : ___/4
-- **Difficile (3 questions)** : ___/3
-- **TOTAL** : ___/10
+## PARTIE 2 — TRACFIN, NON-DISCRIMINATION ET BAUX
 
 ---
 
-*Document créé pour la formation Agent Immobilier - Module 1 : Juridique*
-*Date de création : 2024*
+### QUESTION 11 — TRACFIN : La déclaration de soupçon
+
+**Un agent immobilier soupçonne qu'un client cherche à blanchir des capitaux. Il effectue une déclaration de soupçon auprès de TRACFIN. Doit-il informer son client de cette démarche ?**
+
+A) Oui, par transparence et devoir d'information  
+B) Non, c'est le délit de "tipping off" passible d'un an d'emprisonnement  
+C) Oui, mais uniquement après la clôture de l'enquête TRACFIN  
+D) Oui, si le client le demande explicitement
+
+**Bonne réponse : B**
+
+**Explication :** L'article L.561-19 du Code monétaire et financier interdit aux professionnels assujettis d'informer leur client ou un tiers qu'une déclaration de soupçon a été effectuée. Cette interdiction, appelée "tipping off", vise à protéger l'enquête et à éviter que le suspect prenne la fuite ou fasse disparaître des preuves. La violation de cette règle est sanctionnée d'1 an d'emprisonnement et 15 000 euros d'amende.
+
+**Référence juridique :** Article L.561-19 du Code monétaire et financier
+
+---
+
+### QUESTION 12 — TRACFIN : Les professionnels assujettis
+
+**Parmi les professionnels suivants, lesquels sont soumis aux obligations TRACFIN dans le secteur immobilier ?**
+
+A) Uniquement les agents immobiliers titulaires de la carte T  
+B) Les agents immobiliers (carte T), les administrateurs de biens et les syndics  
+C) Uniquement les notaires  
+D) Tous les professionnels en contact avec des clients
+
+**Bonne réponse : B**
+
+**Explication :** La loi du 12 juillet 1990, modifiée par les ordonnances de 2016 et 2020, soumet aux obligations de vigilance et de déclaration de soupçon les agents immobiliers titulaires de la carte T, les administrateurs de biens, les syndics de copropriété et les marchands de biens. Les notaires ont également leurs propres obligations distinctes. Un simple négociateur salarié n'est pas personnellement assujetti — c'est son employeur titulaire de la carte qui l'est.
+
+**Référence juridique :** Ordonnance n°2016-1635 du 1er décembre 2016
+
+---
+
+### QUESTION 13 — Non-discrimination : L'inversion de la charge de la preuve
+
+**Dans un litige pour discrimination lors d'une location immobilière, qui doit apporter la preuve que la discrimination n'a pas eu lieu ?**
+
+A) La victime doit prouver la discrimination par tous moyens  
+B) L'agence immobilière doit prouver que la différence de traitement est justifiée par des éléments objectifs  
+C) Ni l'un ni l'autre — c'est le juge qui tranche sans preuve  
+D) La preuve incombe à l'État via le Défenseur des droits
+
+**Bonne réponse : B**
+
+**Explication :** En droit anti-discrimination, la charge de la preuve est aménagée. La victime doit d'abord établir des faits permettant de présumer une discrimination (par exemple, deux dossiers similaires traités différemment). La partie mise en cause — ici l'agence — doit ensuite prouver que la différence de traitement repose sur des éléments objectifs étrangers à tout critère prohibé. C'est ce mécanisme d'inversion de la preuve qui rend les "testings" si efficaces juridiquement.
+
+**Référence juridique :** Article 4 de la loi n°2008-496 du 27 mai 2008
+
+---
+
+### QUESTION 14 — Non-discrimination : Les instructions du propriétaire
+
+**Un propriétaire bailleur demande à son agence de ne pas louer son appartement à des personnes d'une certaine origine. L'agent qui applique cette instruction est-il pénalement responsable ?**
+
+A) Non, il n'est que mandataire et exécute les ordres de son mandant  
+B) Oui, appliquer une instruction discriminatoire constitue un délit pénal  
+C) Non, uniquement si l'instruction est donnée par écrit  
+D) Oui, mais avec des peines réduites par rapport au propriétaire
+
+**Bonne réponse : B**
+
+**Explication :** L'article 225-2 du Code pénal sanctionne toute personne qui pratique une discrimination dans la fourniture d'un service ou d'un logement. Le fait d'exécuter l'instruction d'un tiers n'est pas une cause d'exonération — l'agent qui applique la consigne discriminatoire du propriétaire est pénalement responsable au même titre que lui. La solution professionnelle est soit de refuser le mandat, soit d'informer le propriétaire que ces critères ne seront pas appliqués.
+
+**Référence juridique :** Articles 225-1 et 225-2 du Code pénal
+
+---
+
+### QUESTION 15 — Baux d'habitation : Durée de préavis (zone tendue)
+
+**Un locataire en bail vide résidant dans une ville classée en zone tendue souhaite quitter son logement. Quel est son délai de préavis légal ?**
+
+A) 3 mois incompressibles  
+B) 1 mois  
+C) 6 mois  
+D) 2 mois
+
+**Bonne réponse : B**
+
+**Explication :** Dans les zones tendues (définies par décret), le délai de préavis pour un locataire qui donne congé dans le cadre d'un bail vide est réduit à 1 mois. En dehors des zones tendues, le délai est de 3 mois. La liste des communes classées en zone tendue est fixée par le décret n°2013-392 du 10 mai 2013. Ce délai réduit s'applique également dans d'autres cas : mutation professionnelle, perte d'emploi, état de santé justifiant un changement de domicile.
+
+**Référence juridique :** Article 15 de la loi n°89-462 du 6 juillet 1989 modifiée par la loi ALUR
+
+---
+
+### QUESTION 16 — Baux d'habitation : Encadrement des loyers
+
+**Dans une commune où l'encadrement des loyers est en vigueur, quel est le plafond maximum qu'un propriétaire peut appliquer lors d'une nouvelle mise en location ?**
+
+A) Le loyer de référence sans plafond  
+B) Le loyer de référence majoré de 20%  
+C) Le loyer de référence minoré de 20%  
+D) Le loyer moyen du quartier multiplié par 1,5
+
+**Bonne réponse : B**
+
+**Explication :** Dans les communes ayant mis en place l'encadrement des loyers (Paris, Lille, Bordeaux, Lyon etc.), le loyer ne peut pas dépasser le loyer de référence majoré de 20%. Ce loyer de référence est fixé par arrêté préfectoral et varie selon la localisation, le type de bien et l'époque de construction. Un propriétaire peut pratiquer un loyer inférieur au plafond. Le non-respect expose à une amende administrative de 5 000 € pour une personne physique et 15 000 € pour une personne morale.
+
+**Référence juridique :** Article 140 de la loi n°2018-1021 ELAN du 23 novembre 2018
+
+---
+
+### QUESTION 17 — Baux d'habitation : Logements classés F et G
+
+**Depuis août 2022, quelle est la règle concernant les loyers des logements classés F ou G au DPE ?**
+
+A) Ils peuvent être augmentés de 5% maximum par an  
+B) Ils sont gelés — aucune révision à la hausse n'est possible  
+C) Ils doivent être réduits de 10% par rapport au marché  
+D) Il n'y a aucune règle spécifique pour ces logements
+
+**Bonne réponse : B**
+
+**Explication :** Depuis le 24 août 2022, la loi Climat et Résilience impose que les logements classés F ou G au DPE ne peuvent plus faire l'objet d'une augmentation de loyer. Le loyer reste figé tant que des travaux de rénovation énergétique n'améliorent pas le classement du logement. De plus, selon le calendrier de la loi Climat : les logements G+ (plus de 450 kWh/m²/an) ne peuvent plus être mis en location depuis le 1er janvier 2023, les G dès 2025, les F dès 2028, les E dès 2034.
+
+**Référence juridique :** Loi n°2021-1104 du 22 août 2021 (loi Climat et Résilience), article 160
+
+---
+
+## RÉCAPITULATIF COMPLET DES RÉPONSES
+
+| Question | Thématique | Niveau | Réponse |
+|----------|-----------|--------|---------|
+| 1 | Loi ALUR - honoraires | Facile | C |
+| 2 | Diagnostic amiante | Facile | C |
+| 3 | DPE - validité | Facile | B |
+| 4 | Rétractation compromis | Moyen | B |
+| 5 | Mandat exclusif | Moyen | C |
+| 6 | Charges copropriété | Moyen | B |
+| 7 | Bail location - durée meublé | Moyen | B |
+| 8 | Diagnostic plomb | Difficile | C |
+| 9 | Clause suspensive | Difficile | A |
+| 10 | DIC copropriété | Difficile | C |
+| 11 | TRACFIN - tipping off | Moyen | B |
+| 12 | TRACFIN - professionnels assujettis | Facile | B |
+| 13 | Non-discrimination - charge preuve | Difficile | B |
+| 14 | Non-discrimination - instructions | Moyen | B |
+| 15 | Bail - préavis zone tendue | Moyen | B |
+| 16 | Bail - encadrement loyers | Moyen | B |
+| 17 | Bail - logements F et G | Moyen | B |
+
+---
+
+## SCORE PAR THÉMATIQUE
+
+- **Loi ALUR & Diagnostics (Q1-3, Q8)** : ___/4
+- **Mandats & Contrats (Q4-5, Q9)** : ___/3
+- **Copropriété (Q6, Q10)** : ___/2
+- **Baux d'habitation (Q7, Q15-17)** : ___/4
+- **TRACFIN (Q11-12)** : ___/2
+- **Non-discrimination (Q13-14)** : ___/2
+- **TOTAL** : ___/17
+
+---
+
+*Document mis à jour pour la formation Agent Immobilier - Module 1 : Juridique*
+*Mise à jour : 2025 — Ajout TRACFIN, Non-discrimination, Baux loi Climat*

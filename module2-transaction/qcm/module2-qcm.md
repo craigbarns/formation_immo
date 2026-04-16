@@ -294,7 +294,101 @@ D. Le 15 avril minuit (30 jours pour les primo-accédants)
 
 ---
 
-## TABLEAU RÉCAPITULATIF
+## PARTIE 2 — OFFRE D'ACHAT, AVANTS-CONTRATS ET ACTE AUTHENTIQUE
+
+---
+
+### QUESTION 11 — Offre d'achat : Durée de validité
+
+**Un acquéreur fait une offre d'achat par écrit sans préciser de délai de validité. Le vendeur accepte 15 jours plus tard. L'acquéreur peut-il refuser cette acceptation tardive ?**
+
+A. Non — une offre sans délai est valable indéfiniment  
+B. Oui — sans délai explicite, l'offre peut être rétractée à tout moment avant acceptation  
+C. Non — le vendeur dispose toujours de 30 jours pour accepter  
+D. Oui — mais uniquement si l'acquéreur n'a pas changé de situation financière
+
+**BONNE RÉPONSE : B**
+
+**EXPLICATION :**
+Une offre d'achat sans délai fixé est en principe révocable à tout moment avant son acceptation. Si l'acquéreur a rétracté son offre avant que le vendeur ne l'accepte, il n'y a pas de contrat formé. C'est pourquoi il est impératif de toujours fixer une durée de validité précise (5 à 10 jours en pratique). Si l'offre comporte un délai, elle est irrévocable pendant ce délai selon l'article 1116 du Code civil.
+
+**RÉFÉRENCE** : Articles 1113, 1116 et 1117 du Code civil (réforme 2016)
+
+---
+
+### QUESTION 12 — Compromis de vente : Condition suspensive refusée
+
+**Un compromis de vente prévoit une condition suspensive d'obtention d'un prêt de 200 000 € dans un délai de 45 jours. La banque refuse le financement au 40ème jour. Que récupère l'acquéreur ?**
+
+A. Rien — il est responsable de l'échec du financement  
+B. 50% du dépôt de garantie  
+C. La totalité du dépôt de garantie  
+D. Le dépôt de garantie moins les frais d'agence
+
+**BONNE RÉPONSE : C**
+
+**EXPLICATION :**
+Lorsqu'une condition suspensive n'est pas réalisée dans le délai convenu (ici, le prêt n'est pas obtenu dans les 45 jours), le compromis est automatiquement caduc et l'acquéreur récupère l'intégralité de son dépôt de garantie. Cette protection est d'ordre public — aucune clause contractuelle ne peut y déroger. Le vendeur ne peut réclamer aucune indemnité. L'agent immobilier ne peut pas non plus retenir sa commission.
+
+**RÉFÉRENCE** : Articles 1304 et suivants du Code civil, article L.312-16 du Code de la consommation
+
+---
+
+### QUESTION 13 — Promesse unilatérale de vente : Enregistrement
+
+**Un vendeur signe une promesse unilatérale de vente avec un acquéreur. Dans quel délai doit-elle être enregistrée auprès des services fiscaux ?**
+
+A. 30 jours  
+B. 3 mois  
+C. 10 jours  
+D. Aucun enregistrement n'est obligatoire
+
+**BONNE RÉPONSE : C**
+
+**EXPLICATION :**
+La promesse unilatérale de vente (PUV) doit être enregistrée auprès du service des impôts (SIE) dans un délai de 10 jours à compter de sa date d'acceptation ou de sa signature. Cette formalité est imposée par l'article 1589-2 du Code civil. À défaut, la promesse est nulle et de nul effet. Les frais d'enregistrement sont à la charge de l'acquéreur (environ 125 €).
+
+**RÉFÉRENCE** : Article 1589-2 du Code civil
+
+---
+
+### QUESTION 14 — Acte authentique : Frais de notaire (bien ancien)
+
+**Un appartement ancien est vendu 300 000 €. Quelle est l'estimation réaliste des frais de notaire totaux à prévoir pour l'acquéreur ?**
+
+A. Environ 3 000 € (1% du prix)  
+B. Environ 7 500 € (2,5% du prix)  
+C. Environ 21 000 € (7% du prix)  
+D. Environ 45 000 € (15% du prix)
+
+**BONNE RÉPONSE : C**
+
+**EXPLICATION :**
+Pour un bien immobilier ancien, les frais de notaire représentent environ 7 à 8% du prix de vente. Pour 300 000 €, cela représente environ 21 000 €. Ces frais comprennent : les droits de mutation (environ 5,80% → ~17 400 €), les émoluments du notaire (environ 1 600 €) et les débours (~1 000 €). Pour un bien neuf, les frais sont réduits à 2-3% du prix.
+
+**RÉFÉRENCE** : Décret n°2020-179 du 28 février 2020 (barème des émoluments notariaux)
+
+---
+
+### QUESTION 15 — Acte authentique : Délai de rétractation du vendeur
+
+**Après la signature d'un compromis de vente, le vendeur peut-il se rétracter dans un délai de 10 jours ?**
+
+A. Oui — les deux parties bénéficient d'un délai de 10 jours  
+B. Oui — mais uniquement si une clause le prévoit  
+C. Non — le délai de rétractation de 10 jours ne bénéficie qu'à l'acquéreur non professionnel  
+D. Oui — 3 jours pour le vendeur, 10 jours pour l'acquéreur
+
+**BONNE RÉPONSE : C**
+
+**EXPLICATION :**
+Selon l'article L.271-1 du Code de la construction et de l'habitation, le délai de rétractation de 10 jours francs ne bénéficie qu'à l'acquéreur non professionnel. Le vendeur est engagé dès la signature du compromis et ne dispose d'aucun droit de rétractation légal. S'il souhaite se désengager, il doit soit obtenir l'accord amiable de l'acquéreur, soit s'exposer à des dommages et intérêts ou à l'exécution forcée de la vente.
+
+**RÉFÉRENCE** : Article L.271-1 du Code de la construction et de l'habitation
+
+---
+
+## TABLEAU RÉCAPITULATIF COMPLET
 
 | N° | Thème | Difficulté | Bonne Réponse |
 |----|-------|------------|---------------|
@@ -308,6 +402,11 @@ D. Le 15 avril minuit (30 jours pour les primo-accédants)
 | 8 | Closing | Difficile | B |
 | 9 | Méthode Comparative Avancée | Difficile | A |
 | 10 | Droit de Rétractation | Difficile | B |
+| 11 | Offre d'achat - validité | Moyen | B |
+| 12 | Compromis - condition suspensive | Moyen | C |
+| 13 | Promesse unilatérale - enregistrement | Difficile | C |
+| 14 | Acte authentique - frais notaire | Facile | C |
+| 15 | Rétractation - vendeur | Moyen | C |
 
 ---
 
