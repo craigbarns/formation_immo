@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Search, Home, Users, FileText, Award } from "lucide-react";
+import { Search, Home, FileText, Award, BarChart2 } from "lucide-react";
 import { XPBar } from "@/components/gamification/XPBar";
 import { GlobalSearch } from "@/components/search";
 import { MagneticButton } from "@/components/animations";
@@ -71,11 +71,9 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
             </MagneticButton>
 
             <NavItem href="/formation">Parcours</NavItem>
-            <NavItem href="/formation/formateurs">Formateurs</NavItem>
             <NavItem href="/formation/supports-visuels">Fiches</NavItem>
-            <NavItem href="/formation/outils">Outils</NavItem>
-            <NavItem href="/formation/production">Production</NavItem>
-            <NavItem href="/formation/interactive-avatar">D-ID</NavItem>
+            <NavItem href="/formation/outils">Simulateurs</NavItem>
+            <NavItem href="/formation/examen/juridique">Examens</NavItem>
             <NavItem href="/formation/profil">Profil</NavItem>
             <ThemeToggleSimple />
             <a
@@ -137,7 +135,7 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
       {/* Mobile bottom nav */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t border-zinc-200/90 bg-white/95 px-2 py-2 backdrop-blur-md md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
         <MobileNavItem href="/formation" icon={<Home className="h-5 w-5" />} label="Parcours" />
-        <MobileNavItem href="/formation/formateurs" icon={<Users className="h-5 w-5" />} label="Formateurs" />
+        <MobileNavItem href="/formation/outils" icon={<BarChart2 className="h-5 w-5" />} label="Simulateurs" />
         <MobileNavItem href="/formation/supports-visuels" icon={<FileText className="h-5 w-5" />} label="Fiches" />
         <MobileNavItem href="/formation/profil" icon={<Award className="h-5 w-5" />} label="Profil" />
       </nav>

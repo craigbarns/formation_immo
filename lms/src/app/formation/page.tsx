@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award } from "lucide-react";
-import { COURSE, lessonId, getTotalCourseDurationMin, formatDuration } from "@/data/course";
-import { AvatarIllustration } from "@/components/avatars/AvatarIllustration";
+import { COURSE, getTotalCourseDurationMin, formatDuration } from "@/data/course";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getModuleShowcase } from "@/data/module-showcase";
 import { ProgressOverview } from "@/components/ProgressOverview";
@@ -170,34 +169,42 @@ export default function FormationHomePage() {
             desc="Infographies HD"
             highlight
           />
+          <QuickLink href="/formation/examen/juridique" icon="✅" label="Examens QCM" desc="Par module" />
+          <QuickLink href="/formation/flashcards/juridique" icon="🃏" label="Flashcards" desc="Révision rapide" />
           <QuickLink href="/formation/profil" icon="🏅" label="Badges" desc="Progression" />
           <QuickLink href="/formation/profil" icon="🎓" label="Certificat" desc="Attestation" />
-          <QuickLink href="/formation/production" icon="🎬" label="Production" desc="Avatars" />
-          <QuickLink
-            href="/formation/examen/juridique"
-            icon="✅"
-            label="Examens QCM"
-            desc="Par module"
-          />
         </div>
       </section>
       </ScrollReveal>
 
-      {/* Formateurs preview */}
+      {/* Examens rapides par module */}
       <ScrollReveal delay={0.05}>
       <section className="scroll-mt-8">
-        <h2 className="section-heading"><span className="shrink-0">Vos formateurs</span></h2>
-        <p className="mt-2 text-sm text-zinc-600">5 experts pour 5 modules — chacun avec son style pédagogique.</p>
-        <div className="mt-4 flex flex-wrap gap-4 justify-center sm:justify-start">
-          {COURSE.map((mod) => (
-            <Link key={mod.slug} href={`/formation/formateurs`} className="flex flex-col items-center gap-1 group">
-              <AvatarIllustration moduleSlug={mod.slug as any} size="sm" animated expression="neutral" />
-              <span className="text-[10px] font-semibold text-zinc-500 group-hover:text-brand-navy transition">{mod.slug}</span>
-            </Link>
-          ))}
+        <h2 className="section-heading"><span className="shrink-0">Accès aux examens</span></h2>
+        <p className="mt-2 text-sm text-zinc-600">Testez vos connaissances module par module avec les QCM d&apos;évaluation.</p>
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {COURSE.map((mod, i) => {
+            const avatar = getAvatarForModule(mod.slug);
+            const accent = avatar?.accentColor ?? "#1a3a5c";
+            return (
+              <Link
+                key={mod.slug}
+                href={`/formation/examen/${mod.slug}`}
+                className="group flex flex-col gap-2 rounded-2xl border border-zinc-200/80 bg-white p-4 shadow-sm transition hover:border-brand-navy/20 hover:shadow-md"
+              >
+                <span
+                  className="flex h-9 w-9 items-center justify-center rounded-xl text-sm font-black text-white shadow"
+                  style={{ backgroundColor: accent }}
+                >
+                  {i + 1}
+                </span>
+                <span className="text-xs font-bold leading-snug text-brand-navy line-clamp-2">{mod.title.replace("Module 1 — ", "").replace("Module 2 — ", "").replace("Module 3 — ", "").replace("Module 4 — ", "").replace("Module 5 — ", "")}</span>
+                <span className="text-[10px] text-zinc-500 font-medium">{mod.lessons.length} leçons</span>
+              </Link>
+            );
+          })}
         </div>
       </section>
-
       </ScrollReveal>
 
       {/* Modules */}
