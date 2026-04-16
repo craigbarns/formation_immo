@@ -50,8 +50,8 @@ export function formatDuration(minutes: number): string {
   return m === 0 ? `${h}h` : `${h}h${m.toString().padStart(2, "0")}`;
 }
 
-// ─── Cours (26 leçons — 42h total) ───────────────────────────────────────────
-// Répartition : M1 9h · M2 7h30 · M3 9h · M4 7h30 · M5 9h  =  2520 min = 42h
+// ─── Cours (36 leçons — 42h total) ───────────────────────────────────────────
+// Répartition : M1 9h (540) · M2 7h (420) · M3 9h (540) · M4 7h (420) · M5 10h (600)  =  2520 min = 42h
 export const COURSE: CourseModule[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   // MODULE 1 — JURIDIQUE & CONFORMITÉ  (540 min = 9h)
@@ -70,7 +70,7 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/01-loi-alur-2026.mp3",
         interactiveScenarioId: "alur-conformite-360-demo",
-        duration: 105,
+        duration: 75,
         difficulty: "intermediaire",
         objectives: [
           "Maîtriser les obligations ALUR 2026 applicables dès maintenant",
@@ -85,7 +85,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module1-juridique/scripts/02-compromis-vente.md",
         videoUrl: null,
         audioUrl: "/audio/02-compromis-vente.mp3",
-        duration: 105,
+        duration: 75,
         difficulty: "avance",
         objectives: [
           "Rédiger un compromis conforme sans risque de nullité",
@@ -100,7 +100,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module1-juridique/scripts/03-diagnostics-immobiliers.md",
         videoUrl: null,
         audioUrl: "/audio/03-diagnostics-immobiliers.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "intermediaire",
         objectives: [
           "Lire et interpréter les 9 diagnostics obligatoires en 2026",
@@ -115,7 +115,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module1-juridique/scripts/04-mandats-strategie.md",
         videoUrl: null,
         audioUrl: "/audio/04-mandats-strategie.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "avance",
         objectives: [
           "Rédiger un mandat exclusif juridiquement béton",
@@ -130,7 +130,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module1-juridique/scripts/05-copropriete-location.md",
         videoUrl: null,
         audioUrl: "/audio/05-copropriete-location.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "intermediaire",
         objectives: [
           "Lire et synthétiser un règlement de copropriété",
@@ -146,7 +146,7 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/06-parcours-interactif-transparence.mp3",
         interactiveScenarioId: "honoraires-alur-demo",
-        duration: 60,
+        duration: 45,
         difficulty: "avance",
         objectives: [
           "Appliquer les règles ALUR dans un cas réel complexe",
@@ -160,7 +160,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module1-juridique/scripts/07-tracfin-blanchiment.md",
         videoUrl: null,
         audioUrl: null,
-        duration: 90,
+        duration: 60,
         difficulty: "avance",
         objectives: [
           "Identifier les obligations TRACFIN des agents immobiliers",
@@ -175,7 +175,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module1-juridique/scripts/08-non-discrimination.md",
         videoUrl: null,
         audioUrl: null,
-        duration: 90,
+        duration: 60,
         difficulty: "intermediaire",
         objectives: [
           "Connaître les 25 critères de discrimination prohibés",
@@ -190,7 +190,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module1-juridique/scripts/09-baux-habitation.md",
         videoUrl: null,
         audioUrl: null,
-        duration: 90,
+        duration: 45,
         difficulty: "intermediaire",
         objectives: [
           "Maîtriser la loi du 6 juillet 1989 et ses évolutions récentes",
@@ -219,7 +219,7 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/01-estimation-immobiliere.mp3",
         interactiveScenarioId: "estimation-negociation-demo",
-        duration: 90,
+        duration: 60,
         difficulty: "intermediaire",
         objectives: [
           "Utiliser 3 méthodes d'estimation complémentaires",
@@ -234,7 +234,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module2-transaction/scripts/02-prospection-scripts.md",
         videoUrl: null,
         audioUrl: "/audio/02-prospection-scripts.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "debutant",
         objectives: [
           "Créer un script téléphonique qui obtient des RDV",
@@ -249,7 +249,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module2-transaction/scripts/03-negociation-mandat.md",
         videoUrl: null,
         audioUrl: "/audio/03-negociation-mandat.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "intermediaire",
         objectives: [
           "Décrocher le mandat exclusif dès le 1er RDV",
@@ -264,7 +264,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module2-transaction/scripts/04-techniques-negociation-avancees.md",
         videoUrl: null,
         audioUrl: "/audio/04-techniques-negociation-avancees.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "avance",
         objectives: [
           "Maîtriser la méthode BATNA pour ne jamais céder",
@@ -279,7 +279,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module2-transaction/scripts/05-crm-fidelisation.md",
         videoUrl: null,
         audioUrl: "/audio/05-crm-fidelisation.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "debutant",
         objectives: [
           "Paramétrer un CRM immobilier efficace en 1h",
@@ -294,7 +294,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module2-transaction/scripts/06-offre-achat-avants-contrats.md",
         videoUrl: null,
         audioUrl: null,
-        duration: 90,
+        duration: 60,
         difficulty: "avance",
         objectives: [
           "Rédiger une offre d'achat juridiquement sécurisée",
@@ -338,7 +338,7 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/script01-credit-immobilier-2026.mp3",
         interactiveScenarioId: "credit-structuration-demo",
-        duration: 120,
+        duration: 90,
         difficulty: "intermediaire",
         objectives: [
           "Calculer la capacité d'emprunt maximale en 5 minutes",
@@ -353,7 +353,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module3-financement/scripts/script02-fiscalite-immobiliere.md",
         videoUrl: null,
         audioUrl: "/audio/script02-fiscalite-immobiliere.mp3",
-        duration: 105,
+        duration: 90,
         difficulty: "avance",
         objectives: [
           "Comparer régime micro-foncier vs réel simplifié",
@@ -369,7 +369,7 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/script03-calcul-rentabilite.mp3",
         interactiveScenarioId: "rentabilite-investisseur-demo",
-        duration: 105,
+        duration: 90,
         difficulty: "intermediaire",
         objectives: [
           "Calculer rendement brut, net et net-net",
@@ -384,7 +384,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module3-financement/scripts/script04-dispositifs-fiscaux.md",
         videoUrl: null,
         audioUrl: "/audio/script04-dispositifs-fiscaux.mp3",
-        duration: 105,
+        duration: 90,
         difficulty: "avance",
         objectives: [
           "Maîtriser Denormandie, Malraux et Monuments Historiques",
@@ -399,7 +399,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module3-financement/scripts/script05-assurances-immobilieres.md",
         videoUrl: null,
         audioUrl: "/audio/script05-assurances-immobilieres.mp3",
-        duration: 105,
+        duration: 90,
         difficulty: "intermediaire",
         objectives: [
           "Présenter les 4 assurances obligatoires à vos clients",
@@ -442,7 +442,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module4-marketing/scripts/01-photos-immobilieres-secrets-pros.md",
         videoUrl: null,
         audioUrl: "/audio/01-photos-immobilieres-secrets-pros.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "debutant",
         objectives: [
           "Réaliser des photos professionnelles avec un smartphone",
@@ -458,7 +458,7 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/02-rediger-annonces-qui-vendent.mp3",
         interactiveScenarioId: "annonce-parfaite-demo",
-        duration: 90,
+        duration: 60,
         difficulty: "debutant",
         objectives: [
           "Rédiger un titre accrocheur en moins de 10 mots",
@@ -473,7 +473,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module4-marketing/scripts/03-maitriser-seloger-leboncoin.md",
         videoUrl: null,
         audioUrl: "/audio/03-maitriser-seloger-leboncoin.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "debutant",
         objectives: [
           "Optimiser votre profil agence sur SeLoger Pro",
@@ -488,7 +488,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module4-marketing/scripts/04-reseaux-sociaux-strategie-2026.md",
         videoUrl: null,
         audioUrl: "/audio/04-reseaux-sociaux-strategie-2026.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "intermediaire",
         objectives: [
           "Créer un calendrier éditorial immobilier sur 30 jours",
@@ -503,7 +503,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module4-marketing/scripts/05-seo-immobilier-google.md",
         videoUrl: null,
         audioUrl: "/audio/05-seo-immobilier-google.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "intermediaire",
         objectives: [
           "Comprendre comment Google classe les agences locales",
@@ -518,7 +518,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module4-marketing/scripts/06-video-visite-virtuelle.md",
         videoUrl: null,
         audioUrl: null,
-        duration: 90,
+        duration: 60,
         difficulty: "debutant",
         objectives: [
           "Filmer une visite professionnelle avec un smartphone et un gimbal",
@@ -533,7 +533,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module4-marketing/scripts/07-personal-branding-ereputation.md",
         videoUrl: null,
         audioUrl: null,
-        duration: 90,
+        duration: 60,
         difficulty: "intermediaire",
         objectives: [
           "Construire une identité visuelle cohérente sur tous les canaux",
@@ -562,7 +562,7 @@ export const COURSE: CourseModule[] = [
         videoUrl: null,
         audioUrl: "/audio/01-conduire-visite-pro.mp3",
         interactiveScenarioId: "visite-closing-demo",
-        duration: 105,
+        duration: 90,
         difficulty: "intermediaire",
         objectives: [
           "Préparer une visite efficacement en 15 minutes",
@@ -577,7 +577,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module5-terrain/scripts/02-argumentaire-convertit.md",
         videoUrl: null,
         audioUrl: "/audio/02-argumentaire-convertit.mp3",
-        duration: 105,
+        duration: 90,
         difficulty: "intermediaire",
         objectives: [
           "Construire votre pitch de présentation en 90 secondes",
@@ -592,7 +592,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module5-terrain/scripts/03-techniques-closing-avancees.md",
         videoUrl: null,
         audioUrl: "/audio/03-techniques-closing-avancees.mp3",
-        duration: 120,
+        duration: 90,
         difficulty: "avance",
         objectives: [
           "Identifier les 7 signaux d'achat verbaux et non-verbaux",
@@ -607,7 +607,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module5-terrain/scripts/04-promesse-acte-authentique.md",
         videoUrl: null,
         audioUrl: "/audio/04-promesse-acte-authentique.mp3",
-        duration: 105,
+        duration: 90,
         difficulty: "avance",
         objectives: [
           "Rédiger une promesse unilatérale de vente sécurisée",
@@ -622,7 +622,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module5-terrain/scripts/05-fidelisation-recommandation.md",
         videoUrl: null,
         audioUrl: "/audio/05-fidelisation-recommandation.mp3",
-        duration: 105,
+        duration: 90,
         difficulty: "intermediaire",
         objectives: [
           "Mettre en place un suivi post-vente sur 90 jours",
@@ -637,7 +637,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module5-terrain/scripts/06-r0-r1-r2-prise-mandat.md",
         videoUrl: null,
         audioUrl: null,
-        duration: 90,
+        duration: 75,
         difficulty: "intermediaire",
         objectives: [
           "Qualifier efficacement un prospect par téléphone (R0)",
@@ -652,7 +652,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module5-terrain/scripts/07-decouverte-client-suivi.md",
         videoUrl: null,
         audioUrl: null,
-        duration: 90,
+        duration: 75,
         difficulty: "intermediaire",
         objectives: [
           "Identifier les besoins profonds d'un acquéreur avec la méthode iceberg",
