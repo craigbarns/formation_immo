@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import path from "node:path";
 
 const nextConfig: NextConfig = {
-  /** Force la racine Turbopack au dossier de l'app pour éviter la détection d'un lockfile parent. */
+  outputFileTracingRoot: path.join(__dirname),
   turbopack: {
     root: path.join(__dirname),
   },
