@@ -41,7 +41,7 @@ Charismatic real estate negotiator in modern meeting room, intense discussion wi
 
 "Trente pour cent des compromis ne se transforment pas en vente définitive. Trente pour cent. Vous faites dix compromis, trois tombent à l'eau. Pourquoi ?"
 
-[B-ROLL : Scènes de négociations ratées, tensions, incomprehensions]
+[B-ROLL : Scènes de négociations ratées, tensions, incompréhensions]
 
 "Parce que la négociation a été mal menée. Parce que les attentes n'étaient pas alignées. Parce que les parties n'ont pas été préparées. Parce que l'agent a laissé faire... au lieu de faire faire."
 
@@ -171,71 +171,71 @@ Charismatic real estate negotiator in modern meeting room, intense discussion wi
 
 [B-ROLL : Titre "CAS PRATIQUE - NÉGOCIATION COMPLEXE"]
 
-"Passons au cas pratique. Une négociation complexe sur un bien situé 28 rue de la République, Lyon 2ème."
+"Passons au cas pratique. [PAUSE 1s] Une négociation complexe sur un bien situé 28 rue de la République, Lyon 2ème. [PAUSE 2s]"
 
 [B-ROLL : Photos du bien, immeuble haussmannien, belles prestations]
 
-"Appartement de 75m², deux chambres, rénové, deuxième étage avec ascenseur. Mandat à 420 000 euros."
+"Appartement de 75m², deux chambres, rénové, deuxième étage avec ascenseur. [PAUSE 1s] Mandat à 420 000 euros. [PAUSE 1s]"
 
 [B-ROLL : Les protagonistes qui se présentent]
 
-"Vendeur : Madame Petit, 55 ans, divorcée, veut vendre pour acheter plus petit. Acheteur : Monsieur et Madame Leroy, jeune couple, premier achat."
+"Vendeur : Madame Petit, 55 ans, divorcée, veut vendre pour acheter plus petit. [PAUSE 2s] Acheteur : Monsieur et Madame Leroy, jeune couple, premier achat. [PAUSE 1s]"
 
 [B-ROLL : Première offre, tension]
 
-"Première offre des Leroy : 380 000 euros. Madame Petit refuse catégoriquement. 'C'est ridicule, mon bien vaut 420 000, pas un euro de moins.'"
+"Première offre des Leroy : 380 000 euros. [PAUSE 1s] Madame Petit refuse catégoriquement. [PAUSE 1s] 'C'est ridicule, mon bien vaut 420 000, pas un euro de moins.' [PAUSE 1s]"
 
 [B-ROLL : Agent qui analyse la situation]
 
-"J'applique mes techniques. Première étape : alignement des intérêts. Je parle séparément aux deux parties."
+"J'applique mes techniques. [PAUSE 1s] Première étape : alignement des intérêts. [PAUSE 1s] Je parle séparément aux deux parties. [PAUSE 2s]"
 
 [B-ROLL : Agent avec Madame Petit]
 
-"À Madame Petit : 'Au-delà du prix, qu'est-ce qui compte le plus pour vous ?' Réponse : 'Partir avant l'hiver. Je ne veux pas passer Noël ici, trop de souvenirs.'"
+"À Madame Petit : 'Au-delà du prix, qu'est-ce qui compte le plus pour vous ?' [PAUSE 1s] Réponse : 'Partir avant l'hiver. [PAUSE 1s] Je ne veux pas passer Noël ici, trop de souvenirs.' [PAUSE 2s]"
 
 [B-ROLL : Agent avec les Leroy]
 
-"Aux Leroy : 'Qu'est-ce qui est le plus important dans ce projet ?' Réponse : 'Emménager avant la naissance de notre bébé. Dans quatre mois.'"
+"Aux Leroy : 'Qu'est-ce qui est le plus important dans ce projet ?' [PAUSE 1s] Réponse : 'Emménager avant la naissance de notre bébé. [PAUSE 1s] Dans quatre mois.' [PAUSE 1s]"
 
 [B-ROLL : Les intérêts qui convergent]
 
-"Les deux veulent partir vite. Le timing est plus important que le prix."
+"Les deux veulent partir vite. [PAUSE 1s] Le timing est plus important que le prix. [PAUSE 2s]"
 
 [B-ROLL : Agent qui négocie]
 
-"Je reviens aux Leroy : 'Madame Petit est prête à descendre à 405 000 si vous pouvez signer dans les trois semaines et renoncer à la clause suspensive de prêt. Vous êtes sûrs de votre financement ?'"
+"Je reviens aux Leroy : [PAUSE 1s] 'Madame Petit est prête à descendre à 405 000 si vous pouvez signer dans les trois semaines et renoncer à la clause suspensive de prêt. [PAUSE 1s] Vous êtes sûrs de votre financement ?' [PAUSE 1s]"
 
 [B-ROLL : Les Leroy qui réfléchissent]
 
-"Les Leroy : 'On a l'accord de principe de la banque. On peut tenter sans clause suspensive. Mais 405 000, c'est encore cher.'"
+"Les Leroy : 'On a l'accord de principe de la banque. [PAUSE 1s] On peut tenter sans clause suspensive. [PAUSE 1s] Mais 405 000, c'est encore cher.' [PAUSE 1s]"
 
 [B-ROLL : Agent qui crée un package]
 
-"Moi : 'Écoutez, je vais vous proposer un package. 405 000 euros. Signature dans trois semaines. Sans clause suspensive. En échange, Madame Petit vous laisse les meubles de cuisine, valeur 8 000 euros. Et elle paie les honoraires d'agence. Vous économisez 20 000 euros sur le prix, 8 000 sur la cuisine, 12 000 sur les honoraires. Ça fait 40 000 euros d'économie réelle.'"
+"Moi : 'Écoutez, je vais vous proposer un package. [PAUSE 1s] 405 000 euros. Signature dans trois semaines. Sans clause suspensive. [PAUSE 1s] En échange, Madame Petit vous laisse les meubles de cuisine, valeur 8 000 euros. Et elle paie les honoraires d'agence. [PAUSE 1s] Vous économisez 20 000 euros sur le prix, 8 000 sur la cuisine, 12 000 sur les honoraires. [PAUSE 1s] Ça fait 40 000 euros d'économie réelle.' [PAUSE 2s]"
 
 [B-ROLL : Les Leroy qui calculent]
 
-"Les Leroy : 'C'est intéressant. On réfléchit et on vous rappelle demain.'"
+"Les Leroy : 'C'est intéressant. [PAUSE 1s] On réfléchit et on vous rappelle demain.' [PAUSE 1s]"
 
 [B-ROLL : Agent qui attend, silence]
 
-"Je les laisse réfléchir. Silence. Ils se regardent. Ils chuchotent. Puis : 'On accepte. Mais on veut voir le compromis demain.'"
+"Je les laisse réfléchir. [PAUSE 1s] Silence. Ils se regardent. Ils chuchotent. [PAUSE 1s] Puis : 'On accepte. [PAUSE 1s] Mais on veut voir le compromis demain.' [PAUSE 2s]"
 
 [B-ROLL : Agent qui appelle Madame Petit]
 
-"J'appelle Madame Petit : 'J'ai une bonne nouvelle. Les Leroy acceptent 405 000. Signature dans trois semaines. Sans clause suspensive. Vous partez avant Noël.'"
+"J'appelle Madame Petit : [PAUSE 1s] 'J'ai une bonne nouvelle. [PAUSE 1s] Les Leroy acceptent 405 000. Signature dans trois semaines. Sans clause suspensive. [PAUSE 1s] Vous partez avant Noël.' [PAUSE 1s]"
 
 [B-ROLL : Madame Petit qui est soulagée]
 
-"Madame Petit : 'C'est parfait. J'accepte.'"
+"Madame Petit : 'C'est parfait. [PAUSE 1s] J'accepte.' [PAUSE 2s]"
 
 [B-ROLL : Signature du compromis, poignées de main]
 
-"Compromis signé le lendemain. 405 000 euros. Les Leroy ont économisé 40 000 euros en valeur réelle. Madame Petit part avant Noël. Tout le monde est satisfait."
+"Compromis signé le lendemain. [PAUSE 1s] 405 000 euros. [PAUSE 1s] Les Leroy ont économisé 40 000 euros en valeur réelle. [PAUSE 1s] Madame Petit part avant Noël. [PAUSE 1s] Tout le monde est satisfait. [PAUSE 2s]"
 
 [B-ROLL : Récapitulatif des techniques utilisées]
 
-"Quelles techniques ai-je utilisées ? Alignement des intérêts : le timing commun. Négociation séparée : j'ai parlé à chacun individuellement. Concessionnement réciproque : package prix/date/meubles/honoraires. Négociation en principes : valeur réelle vs prix affiché."
+"Quelles techniques ai-je utilisées ? [PAUSE 1s] Alignement des intérêts : le timing commun. [PAUSE 1s] Négociation séparée : j'ai parlé à chacun individuellement. [PAUSE 1s] Concessionnement réciproque : package prix/date/meubles/honoraires. [PAUSE 1s] Négociation en principes : valeur réelle vs prix affiché."
 
 ---
 

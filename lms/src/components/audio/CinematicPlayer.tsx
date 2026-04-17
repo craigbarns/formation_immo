@@ -621,7 +621,7 @@ export function CinematicPlayer({
               <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">0 ou Home</kbd>
             </div>
           </div>
-          <p className="mt-4 text-xs text-center text-white/60">Appuyez sur ? pour afficher cette aide</p>
+          <p className="mt-4 text-xs text-center text-on-dark-muted">Appuyez sur ? pour afficher cette aide</p>
         </div>
       </div>
     )}
@@ -786,7 +786,7 @@ export function CinematicPlayer({
                 </div>
               )}
               {audioQuizSchedule.length > 0 && (
-                <p className="mt-4 text-[11px] text-white/60">
+                <p className="mt-4 text-[11px] text-on-dark-muted">
                   La reprise de l&apos;audio se fait automatiquement apres la bonne reponse.
                 </p>
               )}
@@ -1358,7 +1358,7 @@ function StatsSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
               {counters[i]}
             </p>
             {s.unit && <p className="text-xs text-white/70 font-medium mt-1">{s.unit}</p>}
-            <p className="mt-2 text-[11px] text-white/60 font-medium leading-tight">{s.label}</p>
+            <p className="mt-2 text-[11px] text-on-dark-muted font-medium leading-tight">{s.label}</p>
           </div>
         ))}
       </div>
@@ -1403,7 +1403,7 @@ function ChartSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
           <div key={i} className="flex flex-col items-center gap-2 flex-1">
             <span className={`text-xs font-black tabular-nums ${STAT_COLORS[s.color] ?? "text-white"}`}>
               {s.value}
-              {s.unit ? <span className="text-[9px] font-normal text-white/60 ml-0.5">{s.unit}</span> : null}
+              {s.unit ? <span className="text-[9px] font-normal text-on-dark-muted ml-0.5">{s.unit}</span> : null}
             </span>
             <div className="relative w-full flex-1 flex items-end">
               <div
@@ -1416,7 +1416,7 @@ function ChartSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
                 }}
               />
             </div>
-            <p className="text-[9px] text-white/60 font-medium text-center leading-tight max-w-[60px]">
+            <p className="text-[9px] text-on-dark-muted font-medium text-center leading-tight max-w-[60px]">
               {s.label}
             </p>
           </div>

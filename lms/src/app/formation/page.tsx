@@ -46,7 +46,7 @@ export default function FormationHomePage() {
             <span className="trust-badge border-brand-navy/10 bg-brand-navy text-white">
               Parcours certifiant
             </span>
-            <span className="trust-badge text-[#7a6410]">
+            <span className="trust-badge border-brand-gold/40 bg-brand-gold-soft text-brand-navy">
               Contenu pro · {totalDuration}
             </span>
             <span className="trust-badge border-emerald-300/50 bg-emerald-50 text-emerald-800">

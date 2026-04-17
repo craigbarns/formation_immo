@@ -166,14 +166,14 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
           <div className="flex items-center gap-1">
             <button
               onClick={handleClearChat}
-              className="rounded-full p-2 text-white/60 hover:bg-white/10 hover:text-white"
+              className="rounded-full p-2 text-on-dark-muted hover:bg-white/10 hover:text-white"
               title="Effacer la conversation"
             >
               <RotateCcw className="h-4 w-4" />
             </button>
             <button
               onClick={onClose}
-              className="rounded-full p-2 text-white/60 hover:bg-white/10 hover:text-white"
+              className="rounded-full p-2 text-on-dark-muted hover:bg-white/10 hover:text-white"
             >
               <X className="h-5 w-5" />
             </button>
@@ -231,7 +231,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex items-center gap-2 text-white/60"
+              className="flex items-center gap-2 text-on-dark-muted"
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-[#f0c040]">
                 <Bot className="h-4 w-4 text-brand-navy" />

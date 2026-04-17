@@ -178,7 +178,7 @@ export function LinkedInCertificate({ userName = "Apprenant", completionDate }: 
               </div>
             </div>
 
-            <p className="mt-6 text-xs text-white/60">
+            <p className="mt-6 text-xs text-on-dark-muted">
               Formation Agent Immobilier — 42h certifiantes
             </p>
             <p className="text-xs text-white/50">
@@ -221,7 +221,7 @@ export function LinkedInCertificate({ userName = "Apprenant", completionDate }: 
         </motion.button>
       </div>
 
-      <p className="text-center text-xs text-white/60">
+      <p className="text-center text-xs text-on-dark-muted">
         Téléchargez votre certificat et partagez-le sur LinkedIn pour valoriser vos compétences
       </p>
     </div>

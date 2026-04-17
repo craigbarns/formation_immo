@@ -289,7 +289,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
             </div>
           </div>
 
-          <p className="mt-4 text-center text-xs text-white/60">
+          <p className="mt-4 text-center text-xs text-on-dark-muted">
             Prochaine révision dans 24 h pour les cartes &ldquo;Bien&rdquo; et &ldquo;Facile&rdquo;
           </p>
 
@@ -364,16 +364,16 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
             }`}
           >
             <div className="mb-4 flex justify-center">
-              <Brain className={`h-8 w-8 ${showBack ? "text-brand-gold" : "text-white/60"}`} />
+              <Brain className={`h-8 w-8 ${showBack ? "text-brand-gold" : "text-on-dark-muted"}`} />
             </div>
-            <p className={`text-xs font-bold uppercase tracking-widest ${showBack ? "text-brand-gold" : "text-white/60"}`}>
+            <p className={`text-xs font-bold uppercase tracking-widest ${showBack ? "text-brand-gold" : "text-on-dark-muted"}`}>
               {showBack ? "Réponse" : "Question"}
             </p>
             <p className="mt-4 text-lg font-medium leading-relaxed text-white">
               {showBack ? currentCard.back : currentCard.front}
             </p>
             {!showBack && (
-              <p className="mt-6 text-xs text-white/60 flex items-center justify-center gap-1">
+              <p className="mt-6 text-xs text-on-dark-muted flex items-center justify-center gap-1">
                 <span>Cliquez pour révéler</span>
                 <span aria-hidden>↩</span>
               </p>
@@ -396,7 +396,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
           >
             <XCircle className="h-6 w-6" />
             <span className="text-sm font-bold">Encore</span>
-            <span className="text-[10px] text-white/60">&lt; 1 min</span>
+            <span className="text-[10px] text-on-dark-muted">&lt; 1 min</span>
           </button>
           <button
             onClick={() => handleResponse(3)}
@@ -404,7 +404,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
           >
             <MoreHorizontal className="h-6 w-6" />
             <span className="text-sm font-bold">Bien</span>
-            <span className="text-[10px] text-white/60">1 jour</span>
+            <span className="text-[10px] text-on-dark-muted">1 jour</span>
           </button>
           <button
             onClick={() => handleResponse(5)}
@@ -412,7 +412,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
           >
             <CheckCircle2 className="h-6 w-6" />
             <span className="text-sm font-bold">Facile</span>
-            <span className="text-[10px] text-white/60">4 jours</span>
+            <span className="text-[10px] text-on-dark-muted">4 jours</span>
           </button>
         </motion.div>
       )}

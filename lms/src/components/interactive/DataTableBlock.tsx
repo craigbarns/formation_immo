@@ -118,7 +118,7 @@ function TableView({ table }: { table: DataTable }) {
                   <div className="flex items-center gap-1.5">
                     {h}
                     {table.sortable && (
-                      <span className="text-white/60">
+                      <span className="text-on-dark-muted">
                         {sortCol === i ? (sortAsc ? "↑" : "↓") : "↕"}
                       </span>
                     )}
