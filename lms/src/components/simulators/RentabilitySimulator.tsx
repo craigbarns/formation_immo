@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
-import { TrendingUp, Home, DollarSign, PieChart, AlertTriangle } from "lucide-react";
+import { TrendingUp, Home, DollarSign, PieChart, AlertTriangle, Briefcase } from "lucide-react";
 import { Slider } from "@/components/ui/Slider";
+import { recordSimulatorUsed } from "@/lib/gamification";
 
 interface RentabilityResult {
   grossYield: number;
@@ -15,6 +16,8 @@ interface RentabilityResult {
   totalInvestment: number;
   yearsToReturn: number;
   recommendation: "excellent" | "good" | "average" | "poor";
+  lmnpAbattement: number;
+  taxableBase: number;
 }
 
 export function RentabilitySimulator() {
@@ -28,6 +31,15 @@ export function RentabilitySimulator() {
   const [insurance, setInsurance] = useState(300);
   const [maintenance, setMaintenance] = useState(5);
   const [management, setManagement] = useState(8);
+  const [isLMNP, setIsLMNP] = useState(false);
+  const [tracked, setTracked] = useState(false);
+
+  useEffect(() => {
+    if (!tracked) {
+      recordSimulatorUsed("rentabilite");
+      setTracked(true);
+    }
+  }, [tracked]);
 
   const result = useMemo<RentabilityResult>(() => {
     const totalInvestment = purchasePrice * (1 + notaryFees / 100) + renovation;
@@ -41,6 +53,10 @@ export function RentabilitySimulator() {
     const netYield = ((annualRent - annualCharges) / totalInvestment) * 100;
     const cashflow = (annualRent - annualCharges) / 12;
     const yearsToReturn = totalInvestment / (annualRent - annualCharges);
+
+    // LMNP: abattement 50% sur revenus locatifs (Micro-BIC)
+    const lmnpAbattement = isLMNP ? annualRent * 0.5 : 0;
+    const taxableBase = isLMNP ? annualRent * 0.5 : annualRent - annualCharges;
 
     let recommendation: RentabilityResult["recommendation"];
     if (netYield >= 8) recommendation = "excellent";
@@ -58,8 +74,10 @@ export function RentabilitySimulator() {
       totalInvestment,
       yearsToReturn,
       recommendation,
+      lmnpAbattement,
+      taxableBase,
     };
-  }, [purchasePrice, notaryFees, renovation, monthlyRent, vacancyRate, propertyTax, condoFees, insurance, maintenance, management]);
+  }, [purchasePrice, notaryFees, renovation, monthlyRent, vacancyRate, propertyTax, condoFees, insurance, maintenance, management, isLMNP]);
 
   const formatCurrency = (amount: number) => 
     new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(amount);
@@ -75,6 +93,28 @@ export function RentabilitySimulator() {
 
   return (
     <div className="space-y-6">
+      {/* LMNP Toggle */}
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-zinc-200 bg-zinc-50 p-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1a3a5c]/10 text-[#1a3a5c]">
+            <Briefcase size={20} />
+          </div>
+          <div>
+            <p className="text-sm font-bold text-zinc-800">Régime LMNP (Micro-BIC)</p>
+            <p className="text-xs text-zinc-500">Abattement de 50 % sur les revenus locatifs</p>
+          </div>
+        </div>
+        <button
+          onClick={() => setIsLMNP((v) => !v)}
+          className={`relative inline-flex h-7 w-12 items-center rounded-full transition ${isLMNP ? "bg-[#1a3a5c]" : "bg-zinc-300"}`}
+          aria-pressed={isLMNP}
+        >
+          <span
+            className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${isLMNP ? "translate-x-6" : "translate-x-1"}`}
+          />
+        </button>
+      </div>
+
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-4">
           <h4 className="font-semibold text-zinc-800 flex items-center gap-2">
@@ -104,7 +144,7 @@ export function RentabilitySimulator() {
       </div>
 
       <motion.div
-        key={result.netYield}
+        key={result.netYield + (isLMNP ? "lmnp" : "")}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
@@ -139,6 +179,26 @@ export function RentabilitySimulator() {
             <p className="text-xs text-zinc-500">Années de retour</p>
           </div>
         </div>
+
+        {/* LMNP fiscal panel */}
+        {isLMNP && (
+          <div className="mb-6 rounded-xl border border-sky-200 bg-sky-50 p-4">
+            <h5 className="text-sm font-bold text-sky-900 mb-2">Impact fiscal LMNP (Micro-BIC)</h5>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <p className="text-xs text-sky-700">Abattement forfaitaire (50 %)</p>
+                <p className="text-lg font-bold text-sky-900">{formatCurrency(result.lmnpAbattement)}</p>
+              </div>
+              <div>
+                <p className="text-xs text-sky-700">Base imposable estimée</p>
+                <p className="text-lg font-bold text-sky-900">{formatCurrency(result.taxableBase)}</p>
+              </div>
+            </div>
+            <p className="mt-2 text-xs text-sky-800">
+              Les charges réelles ne sont pas déduites en micro-BIC. Au-delà de 77 700 € de recettes, passage obligatoire au réel.
+            </p>
+          </div>
+        )}
 
         {/* Investment breakdown */}
         <div className="grid md:grid-cols-2 gap-4">

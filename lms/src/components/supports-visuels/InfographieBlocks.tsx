@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ExternalLink, CheckCircle2, AlertTriangle, Scale, Target, TrendingUp, ShieldCheck, HelpCircle } from "lucide-react";
@@ -63,6 +64,14 @@ function renderInteractive(id: string) {
       return <BlockFinancement />;
     case "regimes-fiscaux":
       return <BlockFiscal />;
+    case "tableau-diagnostics":
+      return <BlockDiagnostics />;
+    case "comparatif-mandats":
+      return <BlockMandats />;
+    case "checklist-reseaux":
+      return <BlockReseaux />;
+    case "calculateur-net-vendeur":
+      return <BlockNetVendeur />;
     default:
       return null;
   }
@@ -640,6 +649,281 @@ function BlockFiscal() {
         Le choix de régime peut être engagé sur plusieurs années — validez avec un expert-comptable
         avant toute option définitive.
       </p>
+    </div>
+  );
+}
+
+function BlockDiagnostics() {
+  const rows = [
+    { name: "DPE", valid: "10 ans", condition: "Toute mise en vente/location", alert: false },
+    { name: "Amiante", valid: "Illimité si négatif", condition: "Permis de construire avant 01/07/1997", alert: false },
+    { name: "Plomb / CREP", valid: "1 an si positif", condition: "Construction avant 01/01/1949", alert: true },
+    { name: "Termites", valid: "6 mois", condition: "Zones classées par arrêté", alert: true },
+    { name: "Électricité", valid: "3 ans", condition: "Installation > 15 ans", alert: false },
+    { name: "Gaz", valid: "3 ans", condition: "Installation > 15 ans", alert: false },
+    { name: "ERP", valid: "6 mois", condition: "Toute vente/location", alert: true },
+    { name: "Mesurage Loi Carrez", valid: "Sans limite", condition: "Lots de copropriété", alert: false },
+    { name: "Assainissement", valid: "3 ans", condition: "Non raccordé au tout-à-l'égout", alert: false },
+    { name: "Bruit (PEB)", valid: "6 mois", condition: "Zones d'exposition aux aérodromes", alert: true },
+  ];
+  return (
+    <div className="space-y-6">
+      <div className="overflow-x-auto rounded-2xl border border-zinc-200 shadow-sm">
+        <table className="w-full min-w-[520px] border-collapse text-sm">
+          <thead className="bg-zinc-100">
+            <tr>
+              <th className="border border-zinc-200 p-3 text-left font-semibold text-[#1a3a5c]">Diagnostic</th>
+              <th className="border border-zinc-200 p-3 text-left font-semibold text-[#1a3a5c]">Validité</th>
+              <th className="border border-zinc-200 p-3 text-left font-semibold text-[#1a3a5c]">Condition</th>
+              <th className="border border-zinc-200 p-3 text-center font-semibold text-[#1a3a5c]">⚠️</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.name} className="hover:bg-zinc-50/60">
+                <td className="border border-zinc-200 p-3 font-medium text-zinc-800">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" className="h-4 w-4 rounded border-zinc-300 text-[#1a3a5c] focus:ring-[#1a3a5c]" />
+                    {r.name}
+                  </label>
+                </td>
+                <td className="border border-zinc-200 p-3 text-zinc-700">{r.valid}</td>
+                <td className="border border-zinc-200 p-3 text-zinc-600">{r.condition}</td>
+                <td className="border border-zinc-200 p-3 text-center">
+                  {r.alert ? <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-red-100 text-red-600 text-xs font-bold">!</span> : <span className="text-zinc-300">—</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm text-amber-950">
+        <strong>Alerte rouge</strong> = validité courte (&lt; 12 mois) à surveiller en amont de chaque compromis.
+      </div>
+    </div>
+  );
+}
+
+function BlockMandats() {
+  const cards = [
+    {
+      title: "Simple",
+      color: "border-zinc-300 bg-zinc-50",
+      badge: "bg-zinc-200 text-zinc-800",
+      delay: "6 à 12 mois",
+      success: "45 %",
+      points: ["Vendeur libre de plusieurs agences", "Pas d'exclusivité", "Commission à l'agent vendeur", "Moins d'engagement marketing"],
+    },
+    {
+      title: "Semi-exclusif",
+      color: "border-sky-300 bg-sky-50",
+      badge: "bg-sky-200 text-sky-900",
+      delay: "3 à 6 mois",
+      success: "68 %",
+      points: ["Exclusivité auprès des pros", "Le vendeur peut vendre seul", "Commission réduite si vente en direct", "Bon compromis confiance/sécurité"],
+    },
+    {
+      title: "Exclusif",
+      color: "border-emerald-300 bg-emerald-50",
+      badge: "bg-emerald-200 text-emerald-900",
+      delay: "2 à 4 mois",
+      success: "82 %",
+      points: ["Une seule agence mandatée", "Stratégie marketing complète", "Commission assurée", "Meilleur taux de conversion"],
+    },
+  ];
+  return (
+    <div className="space-y-8">
+      <div className="grid gap-5 md:grid-cols-3">
+        {cards.map((c, i) => (
+          <motion.div
+            key={c.title}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1 }}
+            viewport={{ once: true }}
+            className={`rounded-2xl border-2 ${c.color} p-5 shadow-sm hover:shadow-md transition-shadow`}
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-bold text-[#1a3a5c]">{c.title}</h3>
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase ${c.badge}`}>{c.success}</span>
+            </div>
+            <p className="mt-1 text-xs text-zinc-500">Délai moyen : {c.delay}</p>
+            <ul className="mt-4 space-y-2 text-sm text-zinc-700">
+              {c.points.map((p) => (
+                <li key={p} className="flex gap-2">
+                  <span className="text-[#c9a227]">★</span> {p}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        ))}
+      </div>
+      <div>
+        <h3 className="text-sm font-bold uppercase text-[#1a3a5c]">Clauses obligatoires dans tout mandat</h3>
+        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+          {[
+            "Honoraires TTC et en euros (< 600 k€)",
+            "Numéro de carte professionnelle (Carte T)",
+            "Durée du mandat et modalités de renouvellement",
+            "Description précise du bien et des lots",
+            "Mentions sur le fonds de garantie",
+          ].map((t) => (
+            <li key={t} className="flex items-start gap-2 text-sm text-zinc-700">
+              <input type="checkbox" className="mt-0.5 h-4 w-4 rounded border-zinc-300 text-[#1a3a5c] focus:ring-[#1a3a5c]" />
+              {t}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function BlockReseaux() {
+  const week = [
+    { day: "Lundi", type: "Post éducatif", hook: "3 erreurs qui tuent votre visibilité en 2026" },
+    { day: "Mardi", type: "Story / Coulisses", hook: "Derrière les coulisses d'une estimation" },
+    { day: "Mercredi", type: "Reel", hook: "Le quartier X en 30 secondes" },
+    { day: "Jeudi", type: "Post témoignage", hook: "Comment M. et Mme Y ont vendu en 21 jours" },
+    { day: "Vendredi", type: "Story sondage", hook: "Vous préférez balcon ou terrasse ?" },
+    { day: "Samedi", type: "Reel bien", hook: "Visite express : 3 pièces, 1 coup de cœur" },
+  ];
+  const checks = [
+    "Bio à jour avec localisation",
+    "Lien vers site ou réservation",
+    "Réponse aux DMs &lt; 2h en journée",
+    "3 hashtags de niche par publication",
+    "1 collaboration locale par mois",
+    "5 avis Google récoltés ce mois-ci",
+  ];
+  return (
+    <div className="space-y-8">
+      <div className="overflow-x-auto rounded-2xl border border-zinc-200 shadow-sm">
+        <table className="w-full min-w-[480px] border-collapse text-sm">
+          <thead className="bg-zinc-100">
+            <tr>
+              <th className="border border-zinc-200 p-3 text-left font-semibold text-[#1a3a5c]">Jour</th>
+              <th className="border border-zinc-200 p-3 text-left font-semibold text-[#1a3a5c]">Format</th>
+              <th className="border border-zinc-200 p-3 text-left font-semibold text-[#1a3a5c]">Exemple de hook</th>
+            </tr>
+          </thead>
+          <tbody>
+            {week.map((w) => (
+              <tr key={w.day} className="hover:bg-zinc-50/60">
+                <td className="border border-zinc-200 p-3 font-medium text-zinc-800">{w.day}</td>
+                <td className="border border-zinc-200 p-3">
+                  <span className="rounded-full bg-[#1a3a5c]/10 px-2 py-0.5 text-xs font-semibold text-[#1a3a5c]">{w.type}</span>
+                </td>
+                <td className="border border-zinc-200 p-3 italic text-zinc-600">« {w.hook} »</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-5">
+        <h3 className="text-sm font-bold uppercase text-[#1a3a5c]">Checklist engagement</h3>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+          {checks.map((c) => (
+            <label key={c} className="flex items-start gap-2 text-sm text-zinc-700 cursor-pointer">
+              <input type="checkbox" className="mt-0.5 h-4 w-4 rounded border-zinc-300 text-[#1a3a5c] focus:ring-[#1a3a5c]" />
+              <span dangerouslySetInnerHTML={{ __html: c }} />
+            </label>
+          ))}
+        </div>
+      </div>
+      <div className="rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm text-amber-950">
+        <strong>Règle 80/20 :</strong> 80 % de contenu utile / informatif, 20 % de promotion directe. Un compte trop promotionnel perd jusqu'à 40 % d'engagement.
+      </div>
+    </div>
+  );
+}
+
+function BlockNetVendeur() {
+  const [prixFai, setPrixFai] = useState(300000);
+  const [honoraires, setHonoraires] = useState(5);
+  const [fraisAcquereur, setFraisAcquereur] = useState(true);
+
+  const montantHonoraires = (prixFai * honoraires) / 100;
+  const netVendeur = fraisAcquereur ? prixFai : prixFai - montantHonoraires;
+
+  const phrases = [
+    `Avec un prix affiché de ${prixFai.toLocaleString("fr-FR")} € FAI, vous empocherez ${Math.round(netVendeur).toLocaleString("fr-FR")} € net.`,
+    `Mes honoraires de ${honoraires} % sont investis dans une stratégie marketing complète pour vendre au meilleur prix.`,
+    `En comparant avec une vente entre particuliers, mon accompagnement vous permet souvent de gagner 10 à 15 % sur le prix de vente final.`,
+  ];
+
+  return (
+    <div className="space-y-6">
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="space-y-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+          <h3 className="text-sm font-bold uppercase text-[#1a3a5c]">Paramètres</h3>
+          <div className="space-y-3">
+            <div>
+              <label className="flex justify-between text-sm text-zinc-600">
+                <span>Prix FAI</span>
+                <span className="font-semibold text-[#d4af37]">{prixFai.toLocaleString("fr-FR")} €</span>
+              </label>
+              <input
+                type="range"
+                min={100000}
+                max={1000000}
+                step={5000}
+                value={prixFai}
+                onChange={(e) => setPrixFai(Number(e.target.value))}
+                className="mt-2 w-full accent-[#1a3a5c]"
+              />
+            </div>
+            <div>
+              <label className="flex justify-between text-sm text-zinc-600">
+                <span>Honoraires (%)</span>
+                <span className="font-semibold text-[#d4af37]">{honoraires} %</span>
+              </label>
+              <input
+                type="range"
+                min={1}
+                max={10}
+                step={0.5}
+                value={honoraires}
+                onChange={(e) => setHonoraires(Number(e.target.value))}
+                className="mt-2 w-full accent-[#1a3a5c]"
+              />
+            </div>
+            <label className="flex items-center gap-2 text-sm text-zinc-700">
+              <input
+                type="checkbox"
+                checked={fraisAcquereur}
+                onChange={(e) => setFraisAcquereur(e.target.checked)}
+                className="h-4 w-4 rounded border-zinc-300 text-[#1a3a5c] focus:ring-[#1a3a5c]"
+              />
+              Honoraires à la charge de l'acquéreur
+            </label>
+          </div>
+        </div>
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
+          <h3 className="text-sm font-bold uppercase text-emerald-900">Résultat</h3>
+          <div className="mt-4 space-y-3">
+            <div className="flex justify-between">
+              <span className="text-sm text-zinc-700">Montant honoraires</span>
+              <span className="font-bold text-zinc-900">{montantHonoraires.toLocaleString("fr-FR", { maximumFractionDigits: 0 })} €</span>
+            </div>
+            <div className="flex justify-between border-t border-emerald-200 pt-3">
+              <span className="text-sm font-bold text-emerald-900">Net vendeur</span>
+              <span className="text-xl font-black text-emerald-800">{Math.round(netVendeur).toLocaleString("fr-FR")} €</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-5">
+        <h3 className="text-sm font-bold uppercase text-[#1a3a5c]">Phrases d'argumentaire prêtes à l'emploi</h3>
+        <ul className="mt-4 space-y-3">
+          {phrases.map((p, i) => (
+            <li key={i} className="flex gap-3 text-sm text-zinc-700">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1a3a5c] text-xs font-bold text-white">{i + 1}</span>
+              <span className="leading-relaxed">{p}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

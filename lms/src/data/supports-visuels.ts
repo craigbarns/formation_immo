@@ -84,6 +84,46 @@ export const SUPPORTS_VISUELS: SupportVisuelMeta[] = [
     hrefLesson: "/formation/financement/fiscalite",
     imageFile: "regimes-fiscaux.png",
   },
+  {
+    id: "tableau-diagnostics",
+    title: "Tableau des diagnostics obligatoires",
+    summary:
+      "Durées de validité, conditions d'obligation et alertes pour chaque diagnostic immobilier.",
+    theme: "juridique",
+    moduleLabel: "Juridique",
+    hrefLesson: "/formation/juridique/diagnostics",
+    imageFile: "tableau-diagnostics.png",
+  },
+  {
+    id: "comparatif-mandats",
+    title: "Comparatif des types de mandats",
+    summary:
+      "Simple, semi-exclusif ou exclusif : délais, taux de réussite et clauses obligatoires.",
+    theme: "juridique",
+    moduleLabel: "Juridique",
+    hrefLesson: "/formation/juridique/mandats",
+    imageFile: "comparatif-mandats.png",
+  },
+  {
+    id: "checklist-reseaux",
+    title: "Checklist réseaux sociaux 2026",
+    summary:
+      "Grille hebdomadaire de publication, hooks performants et checklist engagement.",
+    theme: "negociation",
+    moduleLabel: "Marketing",
+    hrefLesson: "/formation/marketing/reseaux",
+    imageFile: "checklist-reseaux.png",
+  },
+  {
+    id: "calculateur-net-vendeur",
+    title: "Calculateur net vendeur",
+    summary:
+      "Calculez instantanément le net vendeur à partir du prix FAI et générez des phrases d'argumentaire.",
+    theme: "negociation",
+    moduleLabel: "Terrain",
+    hrefLesson: "/formation/terrain/argumentaire",
+    imageFile: "calculateur-net-vendeur.png",
+  },
 ];
 
 export function supportImageUrl(file: string) {

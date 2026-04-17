@@ -1,8 +1,16 @@
 import Link from "next/link";
-import { AdvancedCreditSimulator, RentabilitySimulator } from "@/components/simulators";
+import { AdvancedCreditSimulator, RentabilitySimulator, NetVendeurSimulator, CapaciteEmpruntSimulator } from "@/components/simulators";
 import { NegotiationSimulator } from "@/components/simulators/NegotiationSimulator";
 
 export default function OutilsPage() {
+  const tools = [
+    { id: "credit", icon: "🏦", label: "Simulateur crédit", tag: "Financement", color: "blue" },
+    { id: "rentabilite", icon: "📈", label: "Rentabilité locative", tag: "Investissement", color: "green" },
+    { id: "capacite", icon: "💳", label: "Capacité d'emprunt", tag: "Financement", color: "blue" },
+    { id: "net-vendeur", icon: "🏷️", label: "Net vendeur", tag: "Terrain", color: "amber" },
+    { id: "negociation", icon: "🎭", label: "Jeu de rôle négociation", tag: "Terrain", color: "purple" },
+  ] as const;
+
   return (
     <div className="space-y-12">
       {/* Header */}
@@ -30,18 +38,14 @@ export default function OutilsPage() {
             </h1>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/75">
               Simulateurs professionnels et entraînements pratiques — conçus pour maîtriser le
-              financement, la rentabilité et la négociation comme un expert.
+              financement, la rentabilité, la négociation et l'argumentaire vendeur comme un expert.
             </p>
           </div>
         </div>
 
         {/* Quick links */}
-        <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          {[
-            { id: "credit", icon: "🏦", label: "Simulateur crédit", tag: "Financement" },
-            { id: "rentabilite", icon: "📈", label: "Rentabilité locative", tag: "Investissement" },
-            { id: "negociation", icon: "🎭", label: "Jeu de rôle", tag: "Négociation" },
-          ].map((t) => (
+        <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {tools.map((t) => (
             <a
               key={t.id}
               href={`#${t.id}`}
@@ -61,8 +65,8 @@ export default function OutilsPage() {
       <section id="credit" className="scroll-mt-6">
         <ToolHeader icon="🏦" tag="Financement" tagColor="blue" title="Simulateur de crédit immobilier" />
         <p className="mb-5 max-w-2xl text-sm leading-relaxed text-zinc-600">
-          Calculez instantanément les mensualités, le coût total, le taux d&apos;endettement et le TAEG 
-          pour tout projet d&apos;acquisition. Simulez différents scénarios et vérifiez l'éligibilité.
+          Calculez instantanément les mensualités, le coût total, le taux d&apos;endettement, le TAEG
+          et visualisez un tableau d&apos;amortissement simplifié. Choisissez un scénario prédéfini ou personnalisez chaque paramètre.
         </p>
         <AdvancedCreditSimulator />
       </section>
@@ -71,18 +75,38 @@ export default function OutilsPage() {
       <section id="rentabilite" className="scroll-mt-6">
         <ToolHeader icon="📈" tag="Investissement" tagColor="green" title="Rentabilité locative avancée" />
         <p className="mb-5 max-w-2xl text-sm leading-relaxed text-zinc-600">
-          Calculez le rendement brut, net-net, le cashflow mensuel et le délai de retour sur investissement. 
-          Analyse complète avec toutes les charges pour des simulations réalistes.
+          Calculez le rendement brut, net-net, le cashflow mensuel et le délai de retour sur investissement.
+          Activez le mode LMNP pour estimer l&apos;impact fiscal Micro-BIC.
         </p>
         <RentabilitySimulator />
+      </section>
+
+      {/* Capacité d'emprunt */}
+      <section id="capacite" className="scroll-mt-6">
+        <ToolHeader icon="💳" tag="Financement" tagColor="blue" title="Capacité d&apos;emprunt (reverse)" />
+        <p className="mb-5 max-w-2xl text-sm leading-relaxed text-zinc-600">
+          À partir de vos revenus et de votre taux d&apos;endettement cible, calculez votre mensualité maximale,
+          votre capacité d&apos;emprunt totale et le prix maximum du bien que vous pouvez viser.
+        </p>
+        <CapaciteEmpruntSimulator />
+      </section>
+
+      {/* Net vendeur */}
+      <section id="net-vendeur" className="scroll-mt-6">
+        <ToolHeader icon="🏷️" tag="Terrain" tagColor="amber" title="Calculateur net vendeur" />
+        <p className="mb-5 max-w-2xl text-sm leading-relaxed text-zinc-600">
+          Calculez le prix net vendeur à partir du prix FAI et du taux d&apos;honaires.
+          Générez des phrases d&apos;argumentaire prêtes à l&apos;emploi pour vos rendez-vous vendeur.
+        </p>
+        <NetVendeurSimulator />
       </section>
 
       {/* Jeu de rôle */}
       <section id="negociation" className="scroll-mt-6">
         <ToolHeader icon="🎭" tag="Terrain" tagColor="purple" title="Jeu de rôle : Négociation" />
         <p className="mb-5 max-w-2xl text-sm leading-relaxed text-zinc-600">
-          Entraînez-vous en situation réelle. Choisissez vos réponses face à un client simulé et
-          obtenez un feedback immédiat sur votre approche.
+          Entraînez-vous en situation réelle avec 2 scénarios complets (4 tours chacun).
+          Choisissez vos réponses face à un client simulé et obtenez un feedback immédiat sur votre approche.
         </p>
         <NegotiationSimulator />
       </section>
