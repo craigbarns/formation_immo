@@ -1165,6 +1165,497 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
     explanation: "En moyenne, un particulier réalise 3 à 5 transactions immobilières sur sa vie (résidence principale + évolutions familiales + investissement). La 'valeur à vie' d'un client fidélisé est donc considérable — chaque acheteur satisfait représente potentiellement plusieurs dizaines de milliers d'euros d'honoraires.",
     difficulty: "medium",
   },
+
+  // ═════════════════════════════════════════════════════════════════
+  // LECONS PRECEDEMMENT VIDES / FAIBLES — RENDUES INCROYABLES
+  // ═════════════════════════════════════════════════════════════════
+
+  // ── juridique / tracfin ────────────────────────────────
+  {
+    id: "qc-jur-trac-01",
+    moduleSlug: "juridique",
+    lessonSlug: "tracfin",
+    question: "Quelle est la sanction maximale encourue en cas de non-respect des obligations anti-blanchiment ?",
+    options: [
+      { label: "1 an d'emprisonnement et 15 000 € d'amende", isCorrect: false },
+      { label: "3 ans d'emprisonnement et 75 000 € d'amende", isCorrect: false },
+      { label: "5 ans d'emprisonnement et 375 000 € d'amende", isCorrect: true },
+      { label: "10 ans d'emprisonnement et 1 000 000 € d'amende", isCorrect: false },
+    ],
+    explanation: "La loi du 12 juillet 1990 modifiée prévoit une peine maximale de 5 ans d'emprisonnement et 375 000 € d'amende pour les agents immobiliers qui ne respectent pas leurs obligations de vigilance anti-blanchiment.",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-jur-trac-02",
+    moduleSlug: "juridique",
+    lessonSlug: "tracfin",
+    question: "Quelle est la troisième obligation majeure des agents immobiliers en matière de lutte anti-blanchiment ?",
+    options: [
+      { label: "Vérifier le carnet d'entretien du bien", isCorrect: false },
+      { label: "Déclarer tout soupçon à TRACFIN via la plateforme ERMES", isCorrect: true },
+      { label: "Publier les honoraires sur les réseaux sociaux", isCorrect: false },
+      { label: "Obtenir un accord de principe bancaire", isCorrect: false },
+    ],
+    explanation: "Les trois obligations sont : 1) Vigilance (identification du client), 2) Examen renforcé (situations à risque), 3) Déclaration de soupçon à TRACFIN sans délai via la plateforme ERMES.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-jur-trac-03",
+    moduleSlug: "juridique",
+    lessonSlug: "tracfin",
+    question: "Le financement du terrorisme se distingue du blanchiment car :",
+    options: [
+      { label: "Les fonds sont toujours d'origine illégale", isCorrect: false },
+      { label: "Les fonds peuvent être d'origine légale mais destinés à une activité illégale", isCorrect: true },
+      { label: "Il n'est pas sanctionné pénalement", isCorrect: false },
+      { label: "Il ne concerne pas les agents immobiliers", isCorrect: false },
+    ],
+    explanation: "Contrairement au blanchiment qui dissimule l'origine illicite de fonds, le financement du terrorisme peut utiliser des fonds parfaitement légaux pour financer des activités illégales.",
+    difficulty: "hard",
+  },
+
+  // ── juridique / non-discrimination ─────────────────────
+  {
+    id: "qc-jur-disc-01",
+    moduleSlug: "juridique",
+    lessonSlug: "non-discrimination",
+    question: "Quel article du Code pénal définit la discrimination et ses 25 critères interdits ?",
+    options: [
+      { label: "Article 324-1", isCorrect: false },
+      { label: "Article 225-1", isCorrect: true },
+      { label: "Article 1589", isCorrect: false },
+      { label: "Article 1113", isCorrect: false },
+    ],
+    explanation: "L'article 225-1 du Code pénal énumère les 25 critères de discrimination prohibés, incluant l'origine, le sexe, la situation de famille, l'apparence physique, le lieu de résidence, etc.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-jur-disc-02",
+    moduleSlug: "juridique",
+    lessonSlug: "non-discrimination",
+    question: "Une agence refuse systématiquement les dossiers de candidats dont le revenu dépasse 3 fois le loyer. Quel type de discrimination est-ce ?",
+    options: [
+      { label: "Discrimination directe", isCorrect: false },
+      { label: "Discrimination indirecte", isCorrect: true },
+      { label: "Discrimination par association", isCorrect: false },
+      { label: "Ce n'est pas une discrimination", isCorrect: false },
+    ],
+    explanation: "Une règle apparemment neutre (revenu > 3 fois le loyer) qui désavantage disproportionnellement certaines catégories constitue une discrimination indirecte, sanctionnée par l'article 225-2 du Code pénal.",
+    difficulty: "hard",
+  },
+  {
+    id: "qc-jur-disc-03",
+    moduleSlug: "juridique",
+    lessonSlug: "non-discrimination",
+    question: "Face à un propriétaire qui demande explicitement 'pas de familles nombreuses', comment réagir professionnellement ?",
+    options: [
+      { label: "Exécuter la demande en sélectionnant discrètement", isCorrect: false },
+      { label: "Refuser poliment le mandat ou éduquer sur l'interdiction légale", isCorrect: true },
+      { label: "Demander un supplément de caution pour les familles", isCorrect: false },
+      { label: "Transmettre la demande au Défenseur des droits uniquement", isCorrect: false },
+    ],
+    explanation: "L'agent doit refuser poliment mais fermement une instruction discriminatoire et, si possible, conserver une trace écrite. Exécuter une telle demande expose personnellement l'agent à des sanctions pénales.",
+    difficulty: "medium",
+  },
+
+  // ── juridique / baux-habitation ────────────────────────
+  {
+    id: "qc-jur-baux-01",
+    moduleSlug: "juridique",
+    lessonSlug: "baux-habitation",
+    question: "Quelle est la durée minimale d'un bail vide lorsque le bailleur est une personne physique ?",
+    options: [
+      { label: "1 an", isCorrect: false },
+      { label: "3 ans", isCorrect: true },
+      { label: "6 ans", isCorrect: false },
+      { label: "9 ans", isCorrect: false },
+    ],
+    explanation: "La loi du 6 juillet 1989 prévoit une durée de 3 ans pour un bail vide avec un bailleur personne physique, et 6 ans pour une personne morale.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-jur-baux-02",
+    moduleSlug: "juridique",
+    lessonSlug: "baux-habitation",
+    question: "Depuis la loi Climat, les logements classés F ou G en zone tendue :",
+    options: [
+      { label: "Peuvent être loués sans restriction", isCorrect: false },
+      { label: "Ne peuvent plus être loués", isCorrect: true },
+      { label: "Peuvent être loués avec une majoration de 10 % du loyer", isCorrect: false },
+      { label: "Sont soumis à un préavis de 6 mois uniquement", isCorrect: false },
+    ],
+    explanation: "Les logements classés F ou G (passoires énergétiques) ne peuvent plus être mis en location dans les zones tendues, conformément à la loi Climat et Resilience.",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-jur-baux-03",
+    moduleSlug: "juridique",
+    lessonSlug: "baux-habitation",
+    question: "Quel délai de préavis doit respecter un locataire en bail meublé ?",
+    options: [
+      { label: "1 mois", isCorrect: true },
+      { label: "3 mois", isCorrect: false },
+      { label: "6 mois", isCorrect: false },
+      { label: "Aucun préavis en bail meublé", isCorrect: false },
+    ],
+    explanation: "Dans un bail meublé, le locataire doit respecter un préavis d'1 mois. Dans un bail vide, ce préavis est généralement de 3 mois (sauf zones tendues où il peut être réduit).",
+    difficulty: "easy",
+  },
+
+  // ── transaction / offre-achat-avants-contrats ──────────
+  {
+    id: "qc-tra-offr-01",
+    moduleSlug: "transaction",
+    lessonSlug: "offre-achat-avants-contrats",
+    question: "Quelle est la durée de validité usuelle d'une offre d'achat ?",
+    options: [
+      { label: "24 heures", isCorrect: false },
+      { label: "5 à 10 jours", isCorrect: true },
+      { label: "30 jours", isCorrect: false },
+      { label: "Elle est illimitée", isCorrect: false },
+    ],
+    explanation: "Une offre d'achat doit fixer une durée de validité précise, généralement entre 5 et 10 jours. Sans délai, elle peut théoriquement être rétractée à tout moment avant acceptation.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-tra-offr-02",
+    moduleSlug: "transaction",
+    lessonSlug: "offre-achat-avants-contrats",
+    question: "Dans une promesse unilatérale de vente, qui est engagé contractuellement ?",
+    options: [
+      { label: "Les deux parties", isCorrect: false },
+      { label: "Seul l'acquéreur", isCorrect: false },
+      { label: "Seul le vendeur", isCorrect: true },
+      { label: "Aucune des parties", isCorrect: false },
+    ],
+    explanation: "Dans la promesse unilatérale, seul le vendeur (promettant) s'engage à vendre. L'acquéreur dispose d'une option qu'il peut lever ou non. C'est l'opposé du compromis synallagmatique.",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-tra-offr-03",
+    moduleSlug: "transaction",
+    lessonSlug: "offre-achat-avants-contrats",
+    question: "Quel délai a le notaire pour enregistrer une promesse unilatérale de vente ?",
+    options: [
+      { label: "24 heures", isCorrect: false },
+      { label: "5 jours", isCorrect: false },
+      { label: "10 jours", isCorrect: true },
+      { label: "1 mois", isCorrect: false },
+    ],
+    explanation: "La promesse unilatérale de vente doit être enregistrée auprès du service des impôts dans un délai de 10 jours à compter de sa signature. À défaut, elle peut être nulle.",
+    difficulty: "medium",
+  },
+
+  // ── transaction / acte-authentique ─────────────────────
+  {
+    id: "qc-tra-acte-01",
+    moduleSlug: "transaction",
+    lessonSlug: "acte-authentique",
+    question: "Quelle est la durée de validité du diagnostic électricité et gaz ?",
+    options: [
+      { label: "1 an", isCorrect: false },
+      { label: "3 ans", isCorrect: true },
+      { label: "6 ans", isCorrect: false },
+      { label: "10 ans", isCorrect: false },
+    ],
+    explanation: "Les diagnostics électricité et gaz (pour installations de plus de 15 ans) sont valables 3 ans. Le DPE est valable 10 ans et l'état des risques 6 mois.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-tra-acte-02",
+    moduleSlug: "transaction",
+    lessonSlug: "acte-authentique",
+    question: "L'état daté est un document obligatoire fourni par :",
+    options: [
+      { label: "Le notaire", isCorrect: false },
+      { label: "Le syndic de copropriété", isCorrect: true },
+      { label: "L'agent immobilier", isCorrect: false },
+      { label: "Le vendeur", isCorrect: false },
+    ],
+    explanation: "L'état daté est fourni par le syndic de copropriété. Il récapitule la situation financière du lot (charges dues, travaux votés, contentieux) et doit être remis au notaire avant l'acte authentique.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-tra-acte-03",
+    moduleSlug: "transaction",
+    lessonSlug: "acte-authentique",
+    question: "Si le vendeur ne peut pas libérer le bien le jour de la signature, quelle solution préconisez-vous ?",
+    options: [
+      { label: "Annuler la vente", isCorrect: false },
+      { label: "Signer une convention d'occupation temporaire", isCorrect: true },
+      { label: "Prolonger le compromis indéfiniment", isCorrect: false },
+      { label: "Réduire le prix de vente", isCorrect: false },
+    ],
+    explanation: "Une convention d'occupation temporaire encadre le départ tardif du vendeur après l'acte authentique. Elle précise la durée, l'indemnité journalière et la date limite de libération.",
+    difficulty: "medium",
+  },
+
+  // ── financement / defiscalisation ──────────────────────
+  {
+    id: "qc-fin-defis-01",
+    moduleSlug: "financement",
+    lessonSlug: "defiscalisation",
+    question: "Quel dispositif de défiscalisation a pris fin le 31 décembre 2024 ?",
+    options: [
+      { label: "Denormandie", isCorrect: false },
+      { label: "Malraux", isCorrect: false },
+      { label: "Pinel", isCorrect: true },
+      { label: "Cosse", isCorrect: false },
+    ],
+    explanation: "Le dispositif Pinel, qui a connu plusieurs prolongations, a définitivement pris fin le 31 décembre 2024. Les investisseurs doivent désormais se tourner vers Denormandie, Cosse ou Malraux.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-fin-defis-02",
+    moduleSlug: "financement",
+    lessonSlug: "defiscalisation",
+    question: "Le dispositif Denormandie vise principalement :",
+    options: [
+      { label: "La construction de logements neufs", isCorrect: false },
+      { label: "La rénovation de logements anciens en centre-ville", isCorrect: true },
+      { label: "L'achat de résidences de services", isCorrect: false },
+      { label: "L'acquisition de terrains à bâtir", isCorrect: false },
+    ],
+    explanation: "Denormandie offre une réduction d'impôt pour l'achat et la rénovation de logements anciens dans des communes éligibles. Les travaux doivent représenter au moins 25 % du coût total.",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-fin-defis-03",
+    moduleSlug: "financement",
+    lessonSlug: "defiscalisation",
+    question: "Face à un client souhaitant optimiser massivement sa fiscalité immobilière, vers qui l'orienter ?",
+    options: [
+      { label: "Un notaire", isCorrect: false },
+      { label: "Un conseiller en gestion de patrimoine (CGP)", isCorrect: true },
+      { label: "Un agent immobilier généraliste", isCorrect: false },
+      { label: "Un comptable", isCorrect: false },
+    ],
+    explanation: "L'agent immobilier peut présenter les grands dispositifs, mais l'optimisation fiscale personnalisée relève du conseiller en gestion de patrimoine (CGP). L'agent gagne en crédibilité en sachant orienter vers le bon expert.",
+    difficulty: "easy",
+  },
+
+  // ── marketing / video-visite-virtuelle ────────────────
+  {
+    id: "qc-mkt-vid-01",
+    moduleSlug: "marketing",
+    lessonSlug: "video-visite-virtuelle",
+    question: "Les annonces avec vidéo génèrent en moyenne combien de demandes de visite en plus ?",
+    options: [
+      { label: "+50 %", isCorrect: false },
+      { label: "+150 %", isCorrect: false },
+      { label: "+403 %", isCorrect: true },
+      { label: "+1 000 %", isCorrect: false },
+    ],
+    explanation: "Les études montrent que les annonces avec une vidéo de présentation génèrent 403 % de demandes de visite supplémentaires comparées aux annonces photo uniquement.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-mkt-vid-02",
+    moduleSlug: "marketing",
+    lessonSlug: "video-visite-virtuelle",
+    question: "Quel est l'équipement minimum recommandé pour filmer une visite professionnelle avec un smartphone ?",
+    options: [
+      { label: "Un drone et un projecteur", isCorrect: false },
+      { label: "Un gimbal stabilisateur et un micro cravate", isCorrect: true },
+      { label: "Une caméra 360° professionnelle", isCorrect: false },
+      { label: "Un trépied et une télécommande", isCorrect: false },
+    ],
+    explanation: "Le gimbal stabilisateur (80-150 €) élimine les vibrations et le micro cravate (60-120 €) améliore considérablement la qualité sonore. C'est l'équipement minimum pour un rendu professionnel.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-mkt-vid-03",
+    moduleSlug: "marketing",
+    lessonSlug: "video-visite-virtuelle",
+    question: "Quel format vidéo est spécifiquement conçu pour les réseaux sociaux (Reels, TikTok, Shorts) ?",
+    options: [
+      { label: "La visite guidée de 2-4 minutes", isCorrect: false },
+      { label: "La vidéo courte de 30 à 60 secondes", isCorrect: true },
+      { label: "La visite virtuelle 360°", isCorrect: false },
+      { label: "Le documentaire de 10 minutes", isCorrect: false },
+    ],
+    explanation: "La vidéo courte (30-60s) est le format roi des réseaux sociaux. Elle met en avant les 3 atouts majeurs du bien avec une musique tendance et des sous-titres pour capter l'attention en scrollant.",
+    difficulty: "easy",
+  },
+
+  // ── marketing / personal-branding ──────────────────────
+  {
+    id: "qc-mkt-brand-01",
+    moduleSlug: "marketing",
+    lessonSlug: "personal-branding",
+    question: "Combien de temps un prospect met-il en moyenne à se faire une opinion en ligne sur un agent ?",
+    options: [
+      { label: "5 secondes", isCorrect: false },
+      { label: "30 secondes", isCorrect: true },
+      { label: "3 minutes", isCorrect: false },
+      { label: "10 minutes", isCorrect: false },
+    ],
+    explanation: "Un prospect forme une opinion sur un agent en seulement 30 secondes de consultation en ligne (avis Google, site, réseaux sociaux). La première impression est donc critique et irréversible.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-mkt-brand-02",
+    moduleSlug: "marketing",
+    lessonSlug: "personal-branding",
+    question: "Quel outil gratuit est la vitrine la plus importante pour le personal branding local ?",
+    options: [
+      { label: "Instagram", isCorrect: false },
+      { label: "LinkedIn", isCorrect: false },
+      { label: "Google Business Profile", isCorrect: true },
+      { label: "TikTok", isCorrect: false },
+    ],
+    explanation: "Google Business Profile est l'outil gratuit le plus puissant pour le référencement local. C'est la première chose que voient les prospects lorsqu'ils recherchent un agent ou une agence dans leur quartier.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-mkt-brand-03",
+    moduleSlug: "marketing",
+    lessonSlug: "personal-branding",
+    question: "Face à un avis Google négatif, quelle est la bonne pratique ?",
+    options: [
+      { label: "L'ignorer pour ne pas donner de visibilité", isCorrect: false },
+      { label: "Répondre calmement et proposer de résoudre en privé", isCorrect: true },
+      { label: "Se défendre vigoureusement en public", isCorrect: false },
+      { label: "Demander à Google de le supprimer", isCorrect: false },
+    ],
+    explanation: "La réponse professionnelle à un avis négatif montre aux futurs clients votre capacité à gérer les conflits. Répondez calmement, remerciez pour le retour et proposez une discussion en privé pour résoudre le problème.",
+    difficulty: "easy",
+  },
+
+  // ── terrain / r0-r1-r2 ─────────────────────────────────
+  {
+    id: "qc-ter-r0r1r2-01",
+    moduleSlug: "terrain",
+    lessonSlug: "r0-r1-r2",
+    question: "Quel est le principal objectif du R0 (appel téléphonique) ?",
+    options: [
+      { label: "Vendre le bien au téléphone", isCorrect: false },
+      { label: "Qualifier le prospect et créer un lien de confiance", isCorrect: true },
+      { label: "Donner un prix d'estimation", isCorrect: false },
+      { label: "Prendre rendez-vous à tout prix", isCorrect: false },
+    ],
+    explanation: "Le R0 n'est pas un appel de vente. C'est un appel de qualification pour recueillir 5 informations clés (motivation, délai, agences concurrentes, idée du prix, projet futur) et décider si le prospect vaut un RDV.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-ter-r0r1r2-02",
+    moduleSlug: "terrain",
+    lessonSlug: "r0-r1-r2",
+    question: "Pendant le R1 (visite du bien), quand faut-il annoncer le prix d'estimation ?",
+    options: [
+      { label: "Dès l'arrivée pour cadrer le vendeur", isCorrect: false },
+      { label: "Jamais — on renvoie au R2", isCorrect: false },
+      { label: "On ne l'annonce pas au R1, même si le vendeur insiste", isCorrect: true },
+      { label: "À la fin de la visite si on se sent confiant", isCorrect: false },
+    ],
+    explanation: "Le R1 sert à comprendre le bien et le propriétaire. On ne donne jamais de prix lors de cette visite. La formule type : 'Je préfère vous donner une estimation précise et argumentée après analyse des données marché.'",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-ter-r0r1r2-03",
+    moduleSlug: "terrain",
+    lessonSlug: "r0-r1-r2",
+    question: "La méthode SONCAS sert à :",
+    options: [
+      { label: "Calculer le rendement locatif d'un bien", isCorrect: false },
+      { label: "Profiler le vendeur et adapter son argumentaire", isCorrect: true },
+      { label: "Évaluer la surface habitable", isCorrect: false },
+      { label: "Rédiger une annonce optimisée", isCorrect: false },
+    ],
+    explanation: "SONCAS (Sécurité, Orgueil, Nouveauté, Confort, Argent, Sympathie) est une méthode de profilage comportemental. Elle permet d'identifier le profil dominant du vendeur et d'adapter son argumentaire de prise de mandat.",
+    difficulty: "medium",
+  },
+
+  // ── terrain / decouverte-client ────────────────────────
+  {
+    id: "qc-ter-deco-01",
+    moduleSlug: "terrain",
+    lessonSlug: "decouverte-client",
+    question: "Quel pourcentage d'acheteurs signe finalement pour un bien différent de leur demande initiale ?",
+    options: [
+      { label: "25 %", isCorrect: false },
+      { label: "50 %", isCorrect: false },
+      { label: "73 %", isCorrect: true },
+      { label: "90 %", isCorrect: false },
+    ],
+    explanation: "73 % des acheteurs finissent par acquérir un bien qui ne correspondait pas à leur demande initiale. Cela montre l'importance de remonter aux besoins cachés (partie immergée de l'iceberg) plutôt que de se fier uniquement aux critères techniques.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-ter-deco-02",
+    moduleSlug: "terrain",
+    lessonSlug: "decouverte-client",
+    question: "Quelle question permet d'identifier les 'critères absolus' (deal-breakers) d'un acquéreur ?",
+    options: [
+      { label: "Quelle est votre couleur préférée ?", isCorrect: false },
+      { label: "Si vous deviez garder un seul critère, ce serait lequel ?", isCorrect: true },
+      { label: "Aimez-vous les animaux ?", isCorrect: false },
+      { label: "Quel est votre plat préféré ?", isCorrect: false },
+    ],
+    explanation: "La question 'un seul critère' révèle le deal-breaker ultime du client. C'est l'information la plus précieuse pour cibler les biens pertinents et éviter de faire visiter des biens inadaptés.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-ter-deco-03",
+    moduleSlug: "terrain",
+    lessonSlug: "decouverte-client",
+    question: "Quelle est la durée optimale d'un suivi structuré d'un acquéreur ?",
+    options: [
+      { label: "7 jours", isCorrect: false },
+      { label: "14 jours", isCorrect: false },
+      { label: "30 jours", isCorrect: true },
+      { label: "6 mois", isCorrect: false },
+    ],
+    explanation: "Un suivi structuré sur 30 jours avec des touches régulières (J+1, J+7, J+14, J+30) permet de maintenir la relation sans être intrusif, et de convertir l'acquéreur sans forcer la décision.",
+    difficulty: "easy",
+  },
+
+  // ── Renforcement leçons faibles ───────────────────────
+  // juridique / parcours-interactif
+  {
+    id: "qc-jur-parc-01",
+    moduleSlug: "juridique",
+    lessonSlug: "parcours-interactif",
+    question: "Dans un parcours interactif ALUR, quelle est la priorité absolue avant publication d'une annonce ?",
+    options: [
+      { label: "Prendre les plus belles photos", isCorrect: false },
+      { label: "Vérifier la conformité des honoraires et la transparence du prix", isCorrect: true },
+      { label: "Négocier le plus grand budget publicitaire", isCorrect: false },
+      { label: "Contacter le maximum de portails immobiliers", isCorrect: false },
+    ],
+    explanation: "Le parcours interactif ALUR met en avant la transparence des honoraires et la conformité des mentions obligatoires. C'est la base légale sur laquelle repose toute la suite de la transaction.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-jur-parc-02",
+    moduleSlug: "juridique",
+    lessonSlug: "parcours-interactif",
+    question: "Un vendeur refuse d'afficher les honoraires sur son annonce. Que fait l'agent conforme ?",
+    options: [
+      { label: "Il accepte pour ne pas perdre le mandat", isCorrect: false },
+      { label: "Il refuse la diffusion et fait modifier le mandat et l'annonce", isCorrect: true },
+      { label: "Il les affiche seulement sur son site web", isCorrect: false },
+      { label: "Il les mentionne uniquement lors des visites", isCorrect: false },
+    ],
+    explanation: "L'affichage des honoraires est obligatoire sur chaque annonce depuis la loi ALUR. Un agent professionnel refuse poliment mais fermement de diffuser une annonce non conforme.",
+    difficulty: "easy",
+  },
+
+  // financement / assurances
+  {
+    id: "qc-fin-ass-03",
+    moduleSlug: "financement",
+    lessonSlug: "assurances",
+    question: "Quelle garantie d'assurance emprunteur couvre l'incapacité temporaire de travail ?",
+    options: [
+      { label: "La garantie décès", isCorrect: false },
+      { label: "La garantie PTIA (Perte Totale et Irréversible d'Autonomie)", isCorrect: false },
+      { label: "La garantie ITT (Incapacité Temporaire de Travail)", isCorrect: true },
+      { label: "La garantie chômage uniquement", isCorrect: false },
+    ],
+    explanation: "L'ITT (Incapacité Temporaire de Travail) est la garantie qui prend le relais sur les remboursements de prêt lorsque l'emprunteur est temporairement incapable de travailler à la suite d'un accident ou d'une maladie.",
+    difficulty: "medium",
+  },
 ];
 
 export function getQuizCheckpoints(

@@ -251,6 +251,240 @@ export const LESSON_VISUALS: Record<string, LessonVisuals> = {
       { label: "Valeur client vie", value: "3-5x", unit: "1ere vente", color: "navy" },
     ],
   },
+
+  // ═══ LECONS PRECEDEMMENT VIDES — RENDUES INCROYABLES ═══
+
+  // ─── M1 : leçons manquantes ───────────────────────
+  "juridique/tracfin": {
+    keyConcepts: [
+      { icon: "shield", title: "TRACFIN", description: "Service de renseignement financier placé sous le Ministère de l'Économie depuis 1990", type: "definition" },
+      { icon: "eye", title: "3 obligations", description: "Vigilance — Examen renforcé — Déclaration de soupçon", type: "rule" },
+      { icon: "alert-triangle", title: "Signaux d'alerte", description: "Paiement en cash, société écran, bénéficiaire effectif masqué, urgence inhabituelle", type: "warning" },
+    ],
+    stats: [
+      { label: "Sanctions max", value: "5", unit: "ans", color: "red" },
+      { label: "Amende max", value: "375 000", unit: "EUR", color: "red" },
+      { label: "Délai déclaration", value: "Sans", unit: "délai", color: "gold" },
+    ],
+    comparison: {
+      title: "Blanchiment vs Financement du terrorisme",
+      colAHeader: "Blanchiment",
+      colBHeader: "Financement terrorisme",
+      rows: [
+        { label: "Origine des fonds", colA: "Illégale", colB: "Peut être légale", highlight: "a" },
+        { label: "Objectif", colA: "Dissimuler l'origine", colB: "Financer activité illégale", highlight: "b" },
+        { label: "Article Code pénal", colA: "324-1", colB: "421-2-1", highlight: "a" },
+      ],
+    },
+    takeaways: [
+      "Identifier et vérifier l'identité de chaque client avant toute relation d'affaires",
+      "Repérer les signaux d'alerte et les situations atypiques",
+      "Déclarer tout soupçon sans délai sur la plateforme ERMES",
+      "Conserver une trace écrite de la vigilance appliquée",
+    ],
+  },
+  "juridique/non-discrimination": {
+    keyConcepts: [
+      { icon: "balance-scale", title: "Article 225-1", description: "25 critères de discrimination prohibés dans l'accès au logement", type: "rule" },
+      { icon: "users", title: "Discrimination indirecte", description: "Règle apparemment neutre qui désavantage un groupe protégé", type: "definition" },
+      { icon: "check-circle", title: "Grille conforme", description: "Sélection basée sur les ressources, la situation professionnelle et les garanties", type: "tip" },
+    ],
+    stats: [
+      { label: "Sanctions", value: "3", unit: "ans", color: "red" },
+      { label: "Amende", value: "45 000", unit: "EUR", color: "red" },
+      { label: "Critères interdits", value: "25", unit: "", color: "navy" },
+    ],
+    takeaways: [
+      "Connaître les 25 critères de discrimination prohibés par l'article 225-1",
+      "Différencier discrimination directe, indirecte et par association",
+      "Utiliser une grille de sélection locataire objective et justifiable",
+      "Savoir répondre professionnellement à une demande discriminatoire",
+    ],
+  },
+  "juridique/baux-habitation": {
+    keyConcepts: [
+      { icon: "file-text", title: "Loi du 6 juillet 1989", description: "Texte fondateur des baux d'habitation, modifié par ALUR et ELAN", type: "rule" },
+      { icon: "calendar", title: "Durées", description: "Vide : 3 ans (PP) / 6 ans (PM) — Meublé : 1 an (9 mois étudiant)", type: "definition" },
+      { icon: "thermometer", title: "Passoires énergétiques", description: "Logements classés F ou G ne peuvent plus être loués dans les zones tendues", type: "warning" },
+    ],
+    stats: [
+      { label: "Bail vide PP", value: "3", unit: "ans", color: "navy" },
+      { label: "Bail meublé", value: "1", unit: "an", color: "blue" },
+      { label: "Dépôt garantie", value: "1", unit: "mois", color: "gold" },
+    ],
+    comparison: {
+      title: "Bail vide vs Bail meublé",
+      colAHeader: "Bail vide",
+      colBHeader: "Bail meublé",
+      rows: [
+        { label: "Durée (PP)", colA: "3 ans", colB: "1 an", highlight: "a" },
+        { label: "Durée (étudiant)", colA: "3 ans", colB: "9 mois", highlight: "b" },
+        { label: "Abattement fiscal", colA: "30 %", colB: "50 %", highlight: "b" },
+        { label: "Mobilier", colA: "Non fourni", colB: "Obligatoire", highlight: "b" },
+      ],
+    },
+    takeaways: [
+      "Maîtriser la loi du 6 juillet 1989 et ses évolutions récentes",
+      "Rédiger un bail avec toutes les mentions et annexes obligatoires",
+      "Appliquer l'encadrement des loyers dans les zones tendues",
+      "Gérer les logements classés F et G selon la loi Climat",
+    ],
+  },
+
+  // ─── M2 : leçons manquantes ───────────────────────
+  "transaction/offre-achat-avants-contrats": {
+    keyConcepts: [
+      { icon: "file-signature", title: "Offre d'achat", description: "Manifestation d'intention régie par les articles 1113 et suivants du Code civil", type: "definition" },
+      { icon: "shield", title: "Promesse unilatérale", description: "Le vendeur s'engage seul ; l'acquéreur a une option", type: "tip" },
+      { icon: "check-square", title: "Promesse synallagmatique", description: "Compromis : les deux parties s'engagent mutuellement", type: "rule" },
+    ],
+    stats: [
+      { label: "Validité offre", value: "5-10", unit: "jours", color: "navy" },
+      { label: "Indemnité d'immobilisation", value: "5-10", unit: "%", color: "gold" },
+      { label: "Enregistrement PUV", value: "10", unit: "jours", color: "red" },
+    ],
+    comparison: {
+      title: "Promesse unilatérale vs Synallagmatique",
+      colAHeader: "Promesse unilatérale",
+      colBHeader: "Synallagmatique (compromis)",
+      rows: [
+        { label: "Engagement", colA: "Vendeur seul", colB: "Bilateral", highlight: "b" },
+        { label: "Acquéreur", colA: "Option d'achat", colB: "Lié dès signature", highlight: "a" },
+        { label: "Indemnité", colA: "Immobilisation", colB: "Dépôt de garantie", highlight: "a" },
+        { label: "Enregistrement", colA: "Obligatoire 10j", colB: "Pas obligatoire", highlight: "a" },
+      ],
+    },
+    takeaways: [
+      "Rédiger une offre d'achat sécurisée avec délai de validité précis",
+      "Distinguer promesse unilatérale et promesse synallagmatique",
+      "Maîtriser les conditions suspensives et leurs conséquences",
+      "Gérer le délai de rétractation de 10 jours francs",
+    ],
+  },
+  "transaction/acte-authentique": {
+    keyConcepts: [
+      { icon: "file-text", title: "Acte authentique", description: "Rédigé par le notaire, il rend la vente opposable aux tiers après publication", type: "definition" },
+      { icon: "clock", title: "Diagnostics", description: "Vérifier les durées de validité avant signature notariale", type: "warning" },
+      { icon: "users", title: "État daté", description: "Document obligatoire du syndic récapitulant la situation financière du lot", type: "rule" },
+    ],
+    stats: [
+      { label: "DPE", value: "10", unit: "ans", color: "green" },
+      { label: "Élec / Gaz", value: "3", unit: "ans", color: "gold" },
+      { label: "État des risques", value: "6", unit: "mois", color: "red" },
+    ],
+    takeaways: [
+      "Coordonner les vérifications avant la signature notariale",
+      "Expliquer la composition des frais de notaire",
+      "Anticiper les situations complexes : procuration, état daté, diagnostics périmés",
+      "Accompagner ses clients de la promesse à la remise des clés",
+    ],
+  },
+
+  // ─── M3 : leçons manquantes ───────────────────────
+  "financement/defiscalisation": {
+    keyConcepts: [
+      { icon: "calendar", title: "Dispositifs historiques", description: "Besson, Robien, Borloo, Scellier, Duflot, Pinel — chacun avec ses propres règles", type: "definition" },
+      { icon: "target", title: "Dispositifs actifs 2026", description: "Denormandie, Cosse, Malraux, Monuments Historiques", type: "tip" },
+      { icon: "alert-triangle", title: "Fin du Pinel", description: "Le Pinel a pris fin le 31 décembre 2024 — orienter vers les dispositifs remplaçants", type: "warning" },
+    ],
+    stats: [
+      { label: "Robien", value: "65", unit: "% amort.", color: "navy" },
+      { label: "Scellier", value: "25", unit: "% réduc.", color: "blue" },
+      { label: "Duflot", value: "18", unit: "% réduc.", color: "gold" },
+    ],
+    comparison: {
+      title: "Anciens vs Actifs en 2026",
+      colAHeader: "Anciens (obsolètes)",
+      colBHeader: "Actifs",
+      rows: [
+        { label: "Exemples", colA: "Besson, Robien, Scellier, Pinel", colB: "Denormandie, Cosse, Malraux", highlight: "b" },
+        { label: "Logement visé", colA: "Neuf / ancien selon époque", colB: "Rénovation ancien / social / patrimoine", highlight: "b" },
+        { label: "Conseil", colA: "Connaître pour répondre aux clients", colB: "Orienter les nouveaux investisseurs", highlight: "b" },
+      ],
+    },
+    takeaways: [
+      "Connaître l'histoire des dispositifs Besson, Robien, Scellier, Pinel",
+      "Maîtriser les dispositifs actifs en 2025-2026 : Denormandie, Cosse, Malraux",
+      "Expliquer la fin du Pinel (31/12/2024) aux clients investisseurs",
+      "Orienter vers un conseiller en gestion de patrimoine pour l'optimisation fiscale",
+    ],
+  },
+
+  // ─── M4 : leçons manquantes ───────────────────────
+  "marketing/video-visite-virtuelle": {
+    keyConcepts: [
+      { icon: "camera", title: "3 formats", description: "Vidéo courte (30-60s), Visite guidée (2-4min), Visite virtuelle 360°", type: "definition" },
+      { icon: "zap", title: "Impact vidéo", description: "Les annonces avec vidéo génèrent 403% plus de demandes de visite", type: "stat" },
+      { icon: "target", title: "Équipement minimum", description: "Smartphone + gimbal (80-150€) + micro cravate (60-120€)", type: "tip" },
+    ],
+    stats: [
+      { label: "Impact vidéo", value: "+403", unit: "% demandes", color: "green" },
+      { label: "Gimbal", value: "80-150", unit: "EUR", color: "navy" },
+      { label: "Micro", value: "60-120", unit: "EUR", color: "gold" },
+    ],
+    takeaways: [
+      "Filmer une visite professionnelle avec un smartphone et un gimbal",
+      "Créer une visite virtuelle 360° avec Matterport ou iStaging",
+      "Distribuer les vidéos sur SeLoger, YouTube et Instagram Reels",
+      "Analyser les performances vidéo pour optimiser les annonces",
+    ],
+  },
+  "marketing/personal-branding": {
+    keyConcepts: [
+      { icon: "star", title: "3 piliers", description: "Cohérence visuelle — Positionnement — Crédibilité (preuves sociales)", type: "definition" },
+      { icon: "search", title: "Google Business Profile", description: "Vitrine gratuite et outil de référencement local incontournable", type: "tip" },
+      { icon: "shield", title: "Gestion des avis", description: "Répondre à tous les avis, positifs comme négatifs, de manière professionnelle", type: "rule" },
+    ],
+    stats: [
+      { label: "Photos GBP min", value: "15", unit: "", color: "navy" },
+      { label: "Crédibilité spécialisé", value: "3x", unit: "plus", color: "green" },
+      { label: "Temps 1ère opinion", value: "30", unit: "sec", color: "gold" },
+    ],
+    takeaways: [
+      "Construire une identité visuelle cohérente sur tous les canaux",
+      "Optimiser sa fiche Google Business Profile pour dominer localement",
+      "Gérer les avis clients et les crises d'e-réputation",
+      "Se positionner comme expert sur LinkedIn pour attirer les mandants",
+    ],
+  },
+
+  // ─── M5 : leçons manquantes ───────────────────────
+  "terrain/r0-r1-r2": {
+    keyConcepts: [
+      { icon: "target", title: "R0 — Qualification", description: "Appel téléphonique pour recueillir 5 infos clés et qualifier le prospect", type: "definition" },
+      { icon: "compass", title: "R1 — Visite", description: "Comprendre le bien ET le propriétaire (SONCAS) — sans annoncer le prix", type: "tip" },
+      { icon: "check-circle", title: "R2 — Présentation", description: "Dossier d'estimation argumenté et signature du mandat", type: "rule" },
+    ],
+    stats: [
+      { label: "Mandats perdus", value: "60", unit: "%", color: "red" },
+      { label: "Infos R0", value: "5", unit: "clés", color: "navy" },
+      { label: "Profils SONCAS", value: "6", unit: "types", color: "gold" },
+    ],
+    takeaways: [
+      "Qualifier efficacement un prospect par téléphone (R0)",
+      "Conduire la visite du bien et la découverte vendeur (R1)",
+      "Présenter une estimation argumentée et signer le mandat (R2)",
+      "Ne jamais annoncer un prix avant d'avoir des données marché formalisées",
+    ],
+  },
+  "terrain/decouverte-client": {
+    keyConcepts: [
+      { icon: "search", title: "Iceberg client", description: "73% des acheteurs signent pour un bien différent de leur demande initiale", type: "stat" },
+      { icon: "users", title: "4 catégories", description: "Contexte de vie — Critères absolus — Dimension financière — Projet futur", type: "definition" },
+      { icon: "target", title: "Suivi 30 jours", description: "Structurer un suivi acquéreur sur 30 jours pour convertir sans forcer", type: "tip" },
+    ],
+    stats: [
+      { label: "Acheteurs pivot", value: "73", unit: "%", color: "green" },
+      { label: "Catégories questions", value: "4", unit: "", color: "navy" },
+      { label: "Suivi optimal", value: "30", unit: "jours", color: "gold" },
+    ],
+    takeaways: [
+      "Identifier les besoins profonds d'un acquéreur avec la méthode iceberg",
+      "Poser les 4 catégories de questions de découverte client",
+      "Mettre à jour la fiche acquéreur après chaque contact",
+      "Structurer un suivi acquéreur sur 30 jours pour convertir sans forcer",
+    ],
+  },
 };
 
 export function getVisuals(moduleSlug: string, lessonSlug: string): LessonVisuals | null {
