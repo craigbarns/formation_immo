@@ -314,11 +314,10 @@ export function CinematicPlayer({
   }, [audioQuizSchedule, duration, clearedQuizCount]);
 
   const activeSlide = useMemo(() => {
-    if (manualSlide !== null) return manualSlide;
-    if (!loaded || duration === 0) return 0;
-    const perSlide = duration / slides.length;
-    return Math.min(slides.length - 1, Math.floor(current / perSlide));
-  }, [current, duration, slides.length, loaded, manualSlide]);
+    // Pas d'auto-advance temporelle mécanique — l'utilisateur navigue manuellement
+    // ou via les checkpoints quiz. Cela évite la désynchronisation voix/slides.
+    return manualSlide ?? 0;
+  }, [manualSlide]);
 
   const slide = slides[activeSlide];
   const currentChapter = getChapterForSlide(chapters, activeSlide);
@@ -343,8 +342,7 @@ export function CinematicPlayer({
     const onTime = () => {
       const t = el.currentTime;
       setCurrent(t);
-      // Clear manual slide once audio advances past the slide boundary
-      setManualSlide(null);
+      // On ne réinitialise plus manualSlide ici : le clic utilisateur est respecté
       if (!audioQuizSchedule.length || !el.duration) return;
       const idx = clearedQuizRef.current;
       if (idx >= audioQuizSchedule.length) return;
@@ -415,18 +413,24 @@ export function CinematicPlayer({
   }, [loaded, duration, slides.length, maxSeekTime]);
 
   const navigateSlide = useCallback((dir: -1 | 1) => {
-    const next = Math.max(0, Math.min(slides.length - 1, activeSlide + dir));
+    const current = manualSlide ?? 0;
+    const next = Math.max(0, Math.min(slides.length - 1, current + dir));
     goToSlide(next);
-  }, [activeSlide, slides.length, goToSlide]);
+  }, [manualSlide, slides.length, goToSlide]);
 
   const handleQuizAnswer = useCallback((isCorrect: boolean) => {
     if (!isCorrect) { setQuizFeedback("wrong"); return; }
     setQuizOverlay(null);
     setQuizFeedback("idle");
     setClearedQuizCount((c) => c + 1);
+    // Avance visuellement d'une slide après un bon quiz pour récompenser
+    setManualSlide((prev) => {
+      const current = prev ?? 0;
+      return Math.min(slides.length - 1, current + 1);
+    });
     const el = audioRef.current;
     if (el) { el.play(); setPlaying(true); }
-  }, []);
+  }, [slides.length]);
 
   const dismissQuizWrong = useCallback(() => setQuizFeedback("idle"), []);
 

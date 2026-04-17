@@ -81,6 +81,9 @@ export function extractNarrationAudio(markdown) {
 
     if (/^\[SEGMENT\s+\d+/i.test(bare)) continue;
 
+    // Supprime les lignes entièrement entre crochets résiduelles (ex: [SOUS-PARTIE A : ...])
+    if (/^\[[^\]]+\]\s*$/.test(bare)) continue;
+
     if (trimmed === "---" || trimmed === "***") continue;
 
     if (trimmed.startsWith("|") && trimmed.includes("|")) continue;
@@ -102,7 +105,11 @@ export function extractNarrationAudio(markdown) {
     t = t.replace(/\[PAUSE[^\]]*\]/gi, " ");
     t = t.replace(/\[[Bb]-\s*[Rr][Oo][Ll]{2}[^\]]*\]/gi, " ");
     t = t.replace(/\b(AVATAR|VOIX|NARRATEUR)\s*(\([^)]*\))?\s*:\s*/gi, " ");
+    // Supprime aussi les astérisques Markdown résiduels et les underscores
     t = t.replace(/\*\*([^*]+)\*\*/g, "$1");
+    t = t.replace(/\*([^*]+)\*/g, "$1");
+    t = t.replace(/__([^_]+)__/g, "$1");
+    t = t.replace(/_([^_]+)_/g, "$1");
     t = t.replace(/^\s*[-*]\s+/, "");
     t = t.replace(/\s+/g, " ").trim();
 
