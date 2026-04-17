@@ -1,10 +1,13 @@
 import path from "path";
 import type { NextConfig } from "next";
 
+const root = path.join(__dirname);
+
 const nextConfig: NextConfig = {
-  /** Évite que Turbopack remonte au mauvais workspace (plusieurs lockfiles). */
+  /** Aligne outputFileTracingRoot et turbopack.root sur le même dossier. */
+  outputFileTracingRoot: root,
   turbopack: {
-    root: path.join(__dirname),
+    root,
   },
   /** Micro / caméra réservés à l’origine de l’app (widgets ou futurs iframes D-ID sur votre domaine). */
   async headers() {

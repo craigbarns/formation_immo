@@ -2,26 +2,36 @@
   "juridique": {
     "name": "Maître Alexandre Vidal",
     "mistralVoiceId": "5a271406-039d-46fe-835b-fbbb00eaf08d",
-    "mistralVoiceLabel": "Marie — Neutral (fr_fr) — voix française native, ton posé et autoritaire"
+    "mistralVoiceLabel": "Marie — Neutral (fr_fr) — voix française native, ton posé et autoritaire",
+    "elevenLabsVoiceId": "pNInz6obpgDQGcFmaJgB",
+    "elevenLabsVoiceLabel": "Antoine — voix masculine française (backup ElevenLabs)"
   },
   "transaction": {
     "name": "Sarah Benali",
     "mistralVoiceId": "2f62b1af-aea3-4079-9d10-7ca665ee7243",
-    "mistralVoiceLabel": "Marie — Excited (fr_fr) — voix française native, dynamique et captivante"
+    "mistralVoiceLabel": "Marie — Excited (fr_fr) — voix française native, dynamique et captivante",
+    "elevenLabsVoiceId": "Xb7hH8MSUJpSbSDYk0k2",
+    "elevenLabsVoiceLabel": "Alice — voix féminine française (backup ElevenLabs)"
   },
   "financement": {
     "name": "Thomas Mercier",
     "mistralVoiceId": "e0580ce5-e63c-4cbe-88c8-a983b80c5f1f",
-    "mistralVoiceLabel": "Marie — Curious (fr_fr) — voix française native, pédagogue et analytique"
+    "mistralVoiceLabel": "Marie — Curious (fr_fr) — voix française native, pédagogue et analytique",
+    "elevenLabsVoiceId": "pNInz6obpgDQGcFmaJgB",
+    "elevenLabsVoiceLabel": "Antoine — voix masculine française (backup ElevenLabs)"
   },
   "marketing": {
     "name": "Léa Fontaine",
     "mistralVoiceId": "49d024dd-981b-4462-bb17-74d381eb8fd7",
-    "mistralVoiceLabel": "Marie — Happy (fr_fr) — voix française native, chaleureuse et enthousiaste"
+    "mistralVoiceLabel": "Marie — Happy (fr_fr) — voix française native, chaleureuse et enthousiaste",
+    "elevenLabsVoiceId": "Xb7hH8MSUJpSbSDYk0k2",
+    "elevenLabsVoiceLabel": "Alice — voix féminine française (backup ElevenLabs)"
   },
   "terrain": {
     "name": "Nicolas Arnaud",
     "mistralVoiceId": "2f62b1af-aea3-4079-9d10-7ca665ee7243",
-    "mistralVoiceLabel": "Marie — Excited (fr_fr) — voix française native, confiante et énergique"
+    "mistralVoiceLabel": "Marie — Excited (fr_fr) — voix française native, confiante et énergique",
+    "elevenLabsVoiceId": "pNInz6obpgDQGcFmaJgB",
+    "elevenLabsVoiceLabel": "Antoine — voix masculine française (backup ElevenLabs)"
   }
 }

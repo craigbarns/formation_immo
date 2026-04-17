@@ -304,19 +304,6 @@ export function CinematicPlayer({
   clearedQuizRef.current = clearedQuizCount;
   playingRef.current = playing;
 
-  /* ---------- Chapter transition flash ---------- */
-  useEffect(() => {
-    if (!currentChapter) return;
-    const name = currentChapter.name;
-    if (name === lastChapterRef.current) return;
-    lastChapterRef.current = name;
-    const info = CHAPTER_INFO[name];
-    if (!info) return;
-    setChapterFlash({ name, icon: info.icon, color: info.color, gradient: info.gradient });
-    const timer = setTimeout(() => setChapterFlash(null), 1800);
-    return () => clearTimeout(timer);
-  }, [currentChapter?.name]);
-
   /* ---------- Audio logic ---------- */
 
   const maxSeekTime = useCallback(() => {
@@ -335,6 +322,19 @@ export function CinematicPlayer({
 
   const slide = slides[activeSlide];
   const currentChapter = getChapterForSlide(chapters, activeSlide);
+
+  /* ---------- Chapter transition flash ---------- */
+  useEffect(() => {
+    if (!currentChapter) return;
+    const name = currentChapter.name;
+    if (name === lastChapterRef.current) return;
+    lastChapterRef.current = name;
+    const info = CHAPTER_INFO[name];
+    if (!info) return;
+    setChapterFlash({ name, icon: info.icon, color: info.color, gradient: info.gradient });
+    const timer = setTimeout(() => setChapterFlash(null), 1800);
+    return () => clearTimeout(timer);
+  }, [currentChapter?.name]);
 
   useEffect(() => {
     const el = audioRef.current;
