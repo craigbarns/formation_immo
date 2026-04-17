@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
 import type { Flashcard } from "@/data/flashcards";
 
 const DIFFICULTY_LABELS = { 1: "Facile", 2: "Moyen", 3: "Difficile" } as const;
@@ -10,30 +11,90 @@ const DIFFICULTY_COLORS = {
   3: "bg-red-100 text-red-700",
 } as const;
 
+function loadLocalKnown(moduleSlug: string): Set<string> {
+  if (typeof window === "undefined") return new Set();
+  const stored = localStorage.getItem(`flashcards-known-${moduleSlug}`);
+  return stored ? new Set(JSON.parse(stored)) : new Set();
+}
+
+function saveLocalKnown(moduleSlug: string, known: Set<string>) {
+  if (typeof window !== "undefined") {
+    localStorage.setItem(
+      `flashcards-known-${moduleSlug}`,
+      JSON.stringify([...known])
+    );
+  }
+}
+
 export function FlashcardDeck({ cards, moduleSlug }: { cards: Flashcard[]; moduleSlug: string }) {
   const [current, setCurrent] = useState(0);
   const [flipped, setFlipped] = useState(false);
-  const [known, setKnown] = useState<Set<string>>(() => {
-    if (typeof window === "undefined") return new Set();
-    const stored = localStorage.getItem(`flashcards-known-${moduleSlug}`);
-    return stored ? new Set(JSON.parse(stored)) : new Set();
-  });
+  const [known, setKnown] = useState<Set<string>>(() => loadLocalKnown(moduleSlug));
   const [showAll, setShowAll] = useState(true);
+
+  // Load from Supabase on mount (and keep localStorage as fallback)
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadFromSupabase() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user || cancelled) return;
+
+      const { data } = await supabase
+        .from("user_settings")
+        .select("flashcards_known")
+        .eq("user_id", user.id)
+        .single();
+
+      if (cancelled) return;
+
+      const flashcardsKnown = data?.flashcards_known as Record<string, string[]> | undefined;
+      const moduleKnown = flashcardsKnown?.[moduleSlug];
+      if (moduleKnown && Array.isArray(moduleKnown)) {
+        setKnown(new Set(moduleKnown));
+      }
+    }
+
+    loadFromSupabase();
+    return () => { cancelled = true; };
+  }, [moduleSlug]);
+
+  // Save to Supabase + localStorage whenever known changes
+  useEffect(() => {
+    saveLocalKnown(moduleSlug, known);
+
+    async function saveToSupabase() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data } = await supabase
+        .from("user_settings")
+        .select("flashcards_known")
+        .eq("user_id", user.id)
+        .single();
+
+      const existing = (data?.flashcards_known as Record<string, string[]> | undefined) || {};
+      const next = { ...existing, [moduleSlug]: [...known] };
+
+      await supabase
+        .from("user_settings")
+        .upsert({
+          user_id: user.id,
+          flashcards_known: next,
+          updated_at: new Date().toISOString(),
+        }, { onConflict: "user_id" });
+    }
+
+    saveToSupabase();
+  }, [known, moduleSlug]);
 
   const filteredCards = showAll
     ? cards
     : cards.filter((c) => !known.has(c.id));
 
   const card = filteredCards[current];
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem(
-        `flashcards-known-${moduleSlug}`,
-        JSON.stringify([...known])
-      );
-    }
-  }, [known, moduleSlug]);
 
   const nextCard = useCallback(() => {
     setFlipped(false);
@@ -93,7 +154,7 @@ export function FlashcardDeck({ cards, moduleSlug }: { cards: Flashcard[]; modul
         <p className="mt-1 text-sm text-green-600">{known.size}/{cards.length} cartes validees</p>
         <button
           onClick={resetAll}
-          className="mt-4 rounded-lg bg-[#1a3a5c] px-4 py-2 text-sm font-medium text-white hover:bg-[#142d45]"
+          className="mt-4 rounded-lg bg-brand-navy px-4 py-2 text-sm font-medium text-white hover:bg-brand-navy-deep"
         >
           Recommencer
         </button>
@@ -144,8 +205,8 @@ export function FlashcardDeck({ cards, moduleSlug }: { cards: Flashcard[]; modul
         <div
           className={`min-h-[220px] rounded-xl border-2 p-6 shadow-lg transition-all duration-300 ${
             flipped
-              ? "border-[#d4af37] bg-gradient-to-br from-[#1a3a5c] to-[#142d45]"
-              : "border-[#1a3a5c]/20 bg-white"
+              ? "border-brand-gold bg-gradient-to-br from-brand-navy to-brand-navy-deep"
+              : "border-brand-navy/20 bg-white"
           }`}
         >
           {/* Category & difficulty */}
@@ -165,7 +226,7 @@ export function FlashcardDeck({ cards, moduleSlug }: { cards: Flashcard[]; modul
           {/* Content */}
           {!flipped ? (
             <div className="flex flex-col items-center justify-center min-h-[120px]">
-              <p className="text-center text-lg font-bold text-[#1a3a5c]">
+              <p className="text-center text-lg font-bold text-brand-navy">
                 {card.question}
               </p>
               <p className="mt-4 text-xs text-zinc-400">
@@ -213,7 +274,7 @@ export function FlashcardDeck({ cards, moduleSlug }: { cards: Flashcard[]; modul
         </div>
         <button
           onClick={nextCard}
-          className="rounded-lg bg-[#1a3a5c] px-4 py-2 text-sm font-medium text-white hover:bg-[#142d45]"
+          className="rounded-lg bg-brand-navy px-4 py-2 text-sm font-medium text-white hover:bg-brand-navy-deep"
         >
           Suivante
         </button>
@@ -230,7 +291,7 @@ export function FlashcardDeck({ cards, moduleSlug }: { cards: Flashcard[]; modul
             }}
             className={`h-2 w-2 rounded-full transition ${
               i === current
-                ? "bg-[#d4af37] scale-125"
+                ? "bg-brand-gold scale-125"
                 : known.has(c.id)
                 ? "bg-green-400"
                 : "bg-zinc-300"

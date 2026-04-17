@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 type Props = {
   lessonKey: string;
@@ -10,7 +11,12 @@ function getStorageKey(lessonKey: string) {
   return `notes-${lessonKey}`;
 }
 
-function loadNotes(lessonKey: string): string {
+function parseLessonKey(lessonKey: string) {
+  const [moduleSlug, lessonSlug] = lessonKey.split("/");
+  return { moduleSlug, lessonSlug };
+}
+
+function loadLocalNotes(lessonKey: string): string {
   if (typeof window === "undefined") return "";
   try {
     return localStorage.getItem(getStorageKey(lessonKey)) ?? "";
@@ -19,7 +25,7 @@ function loadNotes(lessonKey: string): string {
   }
 }
 
-function saveNotes(lessonKey: string, value: string) {
+function saveLocalNotes(lessonKey: string, value: string) {
   try {
     if (value) {
       localStorage.setItem(getStorageKey(lessonKey), value);
@@ -40,11 +46,52 @@ export function LessonNotes({ lessonKey }: Props) {
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const savedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const noteIdRef = useRef<string | null>(null);
+  const supabaseRef = useRef(createClient());
 
   useEffect(() => {
-    const stored = loadNotes(lessonKey);
-    setNotes(stored);
-    setHasNotes(stored.length > 0);
+    let cancelled = false;
+
+    async function load() {
+      const { moduleSlug, lessonSlug } = parseLessonKey(lessonKey);
+      const supabase = supabaseRef.current;
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        const { data } = await supabase
+          .from("notes")
+          .select("id, content")
+          .eq("module_slug", moduleSlug)
+          .eq("lesson_slug", lessonSlug)
+          .order("created_at", { ascending: true })
+          .limit(1);
+
+        const row = data?.[0];
+        const content = row?.content ?? "";
+        noteIdRef.current = row?.id ?? null;
+
+        if (!cancelled) {
+          requestAnimationFrame(() => {
+            setNotes(content);
+            setHasNotes(content.length > 0);
+          });
+          saveLocalNotes(lessonKey, content);
+        }
+      } else {
+        const stored = loadLocalNotes(lessonKey);
+        if (!cancelled) {
+          requestAnimationFrame(() => {
+            setNotes(stored);
+            setHasNotes(stored.length > 0);
+          });
+        }
+      }
+    }
+
+    load();
+    return () => {
+      cancelled = true;
+    };
   }, [lessonKey]);
 
   useEffect(() => {
@@ -60,6 +107,47 @@ export function LessonNotes({ lessonKey }: Props) {
     savedTimerRef.current = setTimeout(() => setShowSaved(false), 1500);
   }, []);
 
+  const saveToSupabase = useCallback(async (value: string) => {
+    const { moduleSlug, lessonSlug } = parseLessonKey(lessonKey);
+    const supabase = supabaseRef.current;
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    if (value) {
+      if (noteIdRef.current) {
+        await supabase
+          .from("notes")
+          .update({ content: value, updated_at: new Date().toISOString() })
+          .eq("id", noteIdRef.current)
+          .eq("user_id", user.id);
+      } else {
+        const { data } = await supabase
+          .from("notes")
+          .insert({
+            user_id: user.id,
+            module_slug: moduleSlug,
+            lesson_slug: lessonSlug,
+            content: value,
+            color: "yellow",
+          })
+          .select("id")
+          .single();
+        if (data) {
+          noteIdRef.current = data.id;
+        }
+      }
+    } else {
+      if (noteIdRef.current) {
+        await supabase
+          .from("notes")
+          .delete()
+          .eq("id", noteIdRef.current)
+          .eq("user_id", user.id);
+        noteIdRef.current = null;
+      }
+    }
+  }, [lessonKey]);
+
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       const value = e.target.value;
@@ -69,11 +157,12 @@ export function LessonNotes({ lessonKey }: Props) {
 
       if (debounceRef.current) clearTimeout(debounceRef.current);
       debounceRef.current = setTimeout(() => {
-        saveNotes(lessonKey, value);
+        saveLocalNotes(lessonKey, value);
+        saveToSupabase(value).catch(() => {});
         flashSaved();
       }, 500);
     },
-    [lessonKey, flashSaved],
+    [lessonKey, flashSaved, saveToSupabase],
   );
 
   const handleClear = useCallback(() => {
@@ -84,12 +173,13 @@ export function LessonNotes({ lessonKey }: Props) {
     setNotes("");
     setHasNotes(false);
     setConfirmClear(false);
-    saveNotes(lessonKey, "");
+    saveLocalNotes(lessonKey, "");
+    saveToSupabase("").catch(() => {});
     flashSaved();
-  }, [confirmClear, lessonKey, flashSaved]);
+  }, [confirmClear, lessonKey, flashSaved, saveToSupabase]);
 
   return (
-    <div className="mt-8 overflow-hidden rounded-xl border border-[#1a3a5c]/15 shadow-sm">
+    <div className="mt-8 overflow-hidden rounded-xl border border-brand-navy/15 shadow-sm">
       {/* Header bar */}
       <button
         type="button"
@@ -97,14 +187,14 @@ export function LessonNotes({ lessonKey }: Props) {
           setOpen((prev) => !prev);
           setConfirmClear(false);
         }}
-        className="flex w-full items-center gap-3 bg-[#1a3a5c] px-4 py-3 text-left text-sm font-semibold text-white transition hover:bg-[#142d45]"
+        className="flex w-full items-center gap-3 bg-brand-navy px-4 py-3 text-left text-sm font-semibold text-white transition hover:bg-brand-navy-deep"
       >
         <span className="text-base" aria-hidden>
           📝
         </span>
         <span className="flex-1">Mes notes personnelles</span>
         {!open && hasNotes && (
-          <span className="h-2.5 w-2.5 rounded-full bg-[#d4af37] shadow-sm" />
+          <span className="h-2.5 w-2.5 rounded-full bg-brand-gold shadow-sm" />
         )}
         <svg
           className={`h-4 w-4 shrink-0 text-white/70 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
@@ -131,7 +221,7 @@ export function LessonNotes({ lessonKey }: Props) {
             value={notes}
             onChange={handleChange}
             placeholder="Prenez vos notes ici... Elles sont sauvegardees automatiquement."
-            className="w-full resize-y rounded-xl border border-zinc-200 bg-zinc-50/50 px-4 py-3 text-sm leading-relaxed text-zinc-800 placeholder:text-zinc-400 focus:border-[#d4af37] focus:outline-none focus:ring-2 focus:ring-[#d4af37]/40"
+            className="w-full resize-y rounded-xl border border-zinc-200 bg-zinc-50/50 px-4 py-3 text-sm leading-relaxed text-zinc-800 placeholder:text-zinc-400 focus:border-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/40"
             style={{ minHeight: "150px" }}
           />
 

@@ -29,7 +29,7 @@ Happy clients giving keys to real estate agent in front of their new home, champ
 
 [B-roll: Réseau de connexions qui s'étendent, des clients qui recommandent à d'autres clients]
 
-Le 23 juin 2024. [PAUSE 1s] Vous recevez un appel. [PAUSE 1s] "Bonjour, c'est Sophie. Vous nous avez vendu notre appartement rue de Rivoli l'année dernière. [PAUSE 1s] Nous avons un ami qui cherche exactement ce que vous nous aviez trouvé. [PAUSE 1s] Il veut vous rencontrer. Cette semaine si possible." [PAUSE 2s]
+Le 23 juin 2026. [PAUSE 1s] Vous recevez un appel. [PAUSE 1s] "Bonjour, c'est Sophie. Vous nous avez vendu notre appartement rue de Rivoli l'année dernière. [PAUSE 1s] Nous avons un ami qui cherche exactement ce que vous nous aviez trouvé. [PAUSE 1s] Il veut vous rencontrer. Cette semaine si possible." [PAUSE 2s]
 
 [B-roll: Agent souriant au téléphone, prenant rendez-vous]
 
@@ -151,7 +151,7 @@ Demander une recommandation, c'est un art. [PAUSE 1s] Trop tôt, et le client n'
 
 [B-roll: Chaque erreur qui apparaît avec une croix rouge]
 
-"Vous ne connaissez pas quelqu'un qui veut acheter ?" [PAUSE 1s] Trop vague. Tôt pression. [PAUSE 1s]
+"Vous ne connaissez pas quelqu'un qui veut acheter ?" [PAUSE 1s] Trop vague. Trop de pression. [PAUSE 1s]
 
 "Si vous avez des amis intéressés, je suis là." [PAUSE 1s] Trop passif. Pas d'engagement. [PAUSE 1s]
 

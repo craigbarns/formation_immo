@@ -322,8 +322,7 @@ Commencez dès maintenant en cliquant sur le premier scénario interactif.`;
   console.log(`✅ Terminé: ${cleaned} narration.txt nettoyés, ${regenerated} MP3 régénérés, ${skipped} fichiers propres ignorés`);
 
   if (regenerated > 0) {
-    console.log(`\n🎬 Prochaine étape: npm run heygen:generate`);
-    console.log("   Les MP3 propres sont prêts. HeyGen va générer les vidéos.");
+    console.log(`\n🎬 Les MP3 propres sont prêts dans public/audio/`);
   }
 }
 

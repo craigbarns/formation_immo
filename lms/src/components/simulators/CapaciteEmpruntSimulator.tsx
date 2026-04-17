@@ -12,14 +12,11 @@ export function CapaciteEmpruntSimulator() {
   const [duree, setDuree] = useState(20);
   const [taux, setTaux] = useState(3.5);
   const [apport, setApport] = useState(30000);
-  const [tracked, setTracked] = useState(false);
+  const [tracked] = useState(() => {
+    if (typeof window !== 'undefined') recordSimulatorUsed("capacite-emprunt");
+    return true;
+  });
 
-  useEffect(() => {
-    if (!tracked) {
-      recordSimulatorUsed("capacite-emprunt");
-      setTracked(true);
-    }
-  }, [tracked]);
 
   const result = useMemo(() => {
     const mensualiteMax = (revenus * endettementCible) / 100;
@@ -42,8 +39,8 @@ export function CapaciteEmpruntSimulator() {
       <div className="grid gap-6 md:grid-cols-2">
         {/* Inputs */}
         <div className="space-y-5 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-          <h4 className="flex items-center gap-2 text-sm font-bold text-[#1a3a5c]">
-            <Wallet size={16} className="text-[#d4af37]" /> Situation financière
+          <h4 className="flex items-center gap-2 text-sm font-bold text-brand-navy">
+            <Wallet size={16} className="text-brand-gold" /> Situation financière
           </h4>
 
           <div className="space-y-4">
@@ -112,7 +109,7 @@ function InputRow({
     <div>
       <div className="flex justify-between text-sm font-medium text-zinc-700">
         <label>{label}</label>
-        <span className="font-bold text-[#d4af37]">{format(value)}</span>
+        <span className="font-bold text-brand-gold">{format(value)}</span>
       </div>
       <input
         type="range"
@@ -121,7 +118,7 @@ function InputRow({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="mt-2 h-2 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 accent-[#1a3a5c]"
+        className="mt-2 h-2 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 accent-brand-navy"
       />
     </div>
   );
@@ -139,8 +136,8 @@ function ResultBox({
   tone: "gold" | "navy" | "emerald" | "amber";
 }) {
   const toneClasses = {
-    gold: "text-[#d4af37]",
-    navy: "text-[#1a3a5c]",
+    gold: "text-brand-gold",
+    navy: "text-brand-navy",
     emerald: "text-emerald-600",
     amber: "text-amber-600",
   };

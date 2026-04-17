@@ -67,7 +67,7 @@ Aujourd'hui, je vous dévoile l'art de la rédaction immobilière. [PAUSE 2s] Co
 
 **AVATAR (ton sérieux mais bienveillant) :**
 
-Pourquoi tant d'agents rédigent-ils encore des annonces qui s'endormir ? [PAUSE 2s] Analysons ensemble les trois erreurs les plus fréquentes.
+Pourquoi tant d'agents rédigent-ils encore des annonces qui s'endorment ? [PAUSE 2s] Analysons ensemble les trois erreurs les plus fréquentes.
 
 [B-ROLL : Écran avec texte d'annonce ennuyeuse, curseur qui souligne les problèmes]
 

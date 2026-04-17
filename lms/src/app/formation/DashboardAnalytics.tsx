@@ -18,6 +18,7 @@ import {
   getGamificationState,
   getLevelForXP,
   LEVELS,
+  BADGES,
 } from "@/lib/gamification";
 import { COURSE, lessonId } from "@/data/course";
 import {
@@ -27,6 +28,7 @@ import {
 import { AnimatedCounter } from "@/components/animations";
 import { formatDuration } from "@/lib/utils/date";
 import { getAllBookmarks, getAllNotes } from "@/lib/user-content";
+import { createClient } from "@/lib/supabase/client";
 import {
   CircularProgress,
   HeatmapCalendar,
@@ -51,26 +53,88 @@ interface Stats {
   quizCorrect: number;
   moduleProgress: { slug: string; completed: number; total: number }[];
   examScores: { module: string; score: number; total: number; date: string }[];
+  dailyActivity: Record<string, number>;
 }
 
 export function DashboardAnalytics() {
   const [stats, setStats] = useState<Stats | null>(null);
-  const [mounted, setMounted] = useState(false);
+  const mounted = stats !== null;
 
   useEffect(() => {
-    setMounted(true);
+    const supabase = createClient();
 
-    function loadStats() {
-      const gameState = getGamificationState();
-      const levelInfo = getLevelForXP(gameState.xp);
+    async function loadStats() {
+      const { data: { user } } = await supabase.auth.getUser();
 
+      let gameState: ReturnType<typeof getGamificationState>;
       let progressObj: Record<string, boolean> = {};
-      try {
-        const raw = localStorage.getItem(FORMATION_PROGRESS_STORAGE_KEY);
-        progressObj = raw ? (JSON.parse(raw) as Record<string, boolean>) : {};
-      } catch {
-        progressObj = {};
+      let bookmarksCount: number;
+      let notesCount: number;
+
+      if (user) {
+        // Fetch from Supabase
+        const { data: gamificationData } = await supabase
+          .from("gamification_state")
+          .select("*")
+          .eq("user_id", user.id)
+          .single();
+
+        gameState = {
+          xp: gamificationData?.xp ?? 0,
+          earnedBadges: gamificationData?.earned_badges || [],
+          streak: gamificationData?.streak ?? 0,
+          lastLoginDate: gamificationData?.last_login_date ?? "",
+          totalQuizCorrect: gamificationData?.total_quiz_correct ?? 0,
+          totalExamsTaken: gamificationData?.total_exams_taken ?? 0,
+          totalExamsPerfect: gamificationData?.total_exams_perfect ?? 0,
+          simulatorsUsed: gamificationData?.simulators_used || [],
+          lessonTimes: gamificationData?.lesson_times || {},
+          examScores: gamificationData?.exam_scores || {},
+          xpHistory: gamificationData?.xp_history || [],
+          moduleTimers: gamificationData?.module_timers || {},
+          dailyActivity: gamificationData?.daily_activity || {},
+          completedChecklists: gamificationData?.completed_checklists || [],
+          flashcardsReviewed: gamificationData?.flashcards_reviewed ?? 0,
+        };
+
+        const { data: progressData } = await supabase
+          .from("lesson_progress")
+          .select("lesson_key, completed")
+          .eq("user_id", user.id);
+
+        progressData?.forEach((row) => {
+          progressObj[row.lesson_key] = row.completed;
+        });
+
+        const { data: bookmarksData } = await supabase
+          .from("bookmarks")
+          .select("id", { count: "exact", head: true })
+          .eq("user_id", user.id);
+
+        bookmarksCount = bookmarksData?.length ?? 0;
+
+        const { data: notesData } = await supabase
+          .from("notes")
+          .select("id", { count: "exact", head: true })
+          .eq("user_id", user.id);
+
+        notesCount = notesData?.length ?? 0;
+      } else {
+        // Fallback to localStorage
+        gameState = getGamificationState();
+
+        try {
+          const raw = localStorage.getItem(FORMATION_PROGRESS_STORAGE_KEY);
+          progressObj = raw ? (JSON.parse(raw) as Record<string, boolean>) : {};
+        } catch {
+          progressObj = {};
+        }
+
+        bookmarksCount = getAllBookmarks().length;
+        notesCount = getAllNotes().length;
       }
+
+      const levelInfo = getLevelForXP(gameState.xp);
 
       const moduleProgress = COURSE.map((module) => ({
         slug: module.slug,
@@ -102,18 +166,19 @@ export function DashboardAnalytics() {
         totalLessons: COURSE.reduce((acc, m) => acc + m.lessons.length, 0),
         timeSpent: totalTime,
         badgesEarned: gameState.earnedBadges.length,
-        totalBadges: 16,
+        totalBadges: BADGES.length,
         examsTaken: gameState.totalExamsTaken,
-        bookmarksCount: getAllBookmarks().length,
-        notesCount: getAllNotes().length,
+        bookmarksCount,
+        notesCount,
         quizCorrect: gameState.totalQuizCorrect,
         moduleProgress,
         examScores,
+        dailyActivity: gameState.dailyActivity,
       });
     }
 
     loadStats();
-    const onProgress = () => loadStats();
+    const onProgress = () => { loadStats(); };
     window.addEventListener(FORMATION_PROGRESS_CHANGED_EVENT, onProgress);
     return () => window.removeEventListener(FORMATION_PROGRESS_CHANGED_EVENT, onProgress);
   }, []);
@@ -134,18 +199,19 @@ export function DashboardAnalytics() {
     );
   }
 
-  const progressPercent = Math.round((stats.lessonsCompleted / stats.totalLessons) * 100);
   const nextLevel = LEVELS.find((l) => l.level === stats.level + 1);
   const xpToNextLevel = nextLevel ? nextLevel.xpRequired - stats.xp : 0;
 
-  // Skills radar data
-  const skillsData = [
-    { name: "Juridique", value: (stats.moduleProgress[0]?.completed || 0) * 20, max: 100 },
-    { name: "Transaction", value: (stats.moduleProgress[1]?.completed || 0) * 20, max: 100 },
-    { name: "Finance", value: (stats.moduleProgress[2]?.completed || 0) * 20, max: 100 },
-    { name: "Marketing", value: (stats.moduleProgress[3]?.completed || 0) * 20, max: 100 },
-    { name: "Closing", value: (stats.moduleProgress[4]?.completed || 0) * 20, max: 100 },
-  ];
+  // Skills radar data — dynamically derived from COURSE modules
+  const skillsData = COURSE.map((mod, i) => {
+    const prog = stats.moduleProgress[i];
+    const pct = prog && prog.total > 0 ? Math.round((prog.completed / prog.total) * 100) : 0;
+    return {
+      name: mod.title.replace(/^Module \d+ — /, ""),
+      value: pct,
+      max: 100,
+    };
+  });
 
   const statCards = [
     { icon: Trophy, label: "Niveau", value: stats.level, color: "bg-amber-100 text-amber-700", suffix: `/${LEVELS.length}` },
@@ -252,7 +318,7 @@ export function DashboardAnalytics() {
           animate={{ opacity: 1, x: 0 }}
           className="card-elevated p-6 rounded-2xl"
         >
-          <HeatmapCalendar />
+          <HeatmapCalendar data={stats.dailyActivity} />
         </motion.div>
 
         <motion.div

@@ -9,14 +9,11 @@ export function CreditSimulator() {
   const [rate, setRate] = useState(3.5);
   const [duration, setDuration] = useState(20);
   const [insurance, setInsurance] = useState(0.34);
-  const [tracked, setTracked] = useState(false);
+  const [tracked] = useState(() => {
+    if (typeof window !== 'undefined') recordSimulatorUsed("credit");
+    return true;
+  });
 
-  useEffect(() => {
-    if (!tracked) {
-      recordSimulatorUsed("credit");
-      setTracked(true);
-    }
-  }, [tracked]);
 
   const loanAmount = price - apport;
   const monthlyRate = rate / 100 / 12;
@@ -36,8 +33,8 @@ export function CreditSimulator() {
   const tauxEndettement = totalMonthly > 0 ? (totalMonthly / 4000) * 100 : 0; // salaire fictif 4000
 
   return (
-    <div className="rounded-2xl border-2 border-[#1a3a5c]/15 bg-white shadow-lg">
-      <div className="border-b border-zinc-100 bg-gradient-to-r from-[#1a3a5c] to-[#2d5a7c] px-6 py-4 text-white rounded-t-2xl">
+    <div className="rounded-2xl border-2 border-brand-navy/15 bg-white shadow-lg">
+      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[#2d5a7c] px-6 py-4 text-white rounded-t-2xl">
         <h3 className="text-lg font-bold">Simulateur de Credit Immobilier</h3>
         <p className="mt-1 text-xs text-white/70">Ajustez les parametres pour calculer vos mensualites</p>
       </div>
@@ -157,7 +154,7 @@ function SliderInput({
     <div>
       <div className="flex items-baseline justify-between">
         <label className="text-sm font-medium text-zinc-700">{label}</label>
-        <span className="text-sm font-bold text-[#1a3a5c]">{format(value)}</span>
+        <span className="text-sm font-bold text-brand-navy">{format(value)}</span>
       </div>
       <input
         type="range"
@@ -166,7 +163,7 @@ function SliderInput({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="mt-1.5 w-full accent-[#1a3a5c]"
+        className="mt-1.5 w-full accent-brand-navy"
       />
     </div>
   );
@@ -184,8 +181,8 @@ function ResultCard({
   large?: boolean;
 }) {
   const bg = {
-    blue: "bg-[#1a3a5c]/5 border-[#1a3a5c]/15",
-    gold: "bg-[#d4af37]/10 border-[#d4af37]/30",
+    blue: "bg-brand-navy/5 border-brand-navy/15",
+    gold: "bg-brand-gold/10 border-brand-gold/30",
     gray: "bg-zinc-50 border-zinc-200",
     red: "bg-red-50 border-red-200",
   }[color];
@@ -193,7 +190,7 @@ function ResultCard({
   return (
     <div className={`rounded-xl border p-3 ${bg}`}>
       <p className="text-xs text-zinc-500">{label}</p>
-      <p className={`font-bold text-[#1a3a5c] ${large ? "text-2xl" : "text-lg"}`}>{value}</p>
+      <p className={`font-bold text-brand-navy ${large ? "text-2xl" : "text-lg"}`}>{value}</p>
     </div>
   );
 }

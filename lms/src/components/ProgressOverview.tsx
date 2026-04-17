@@ -9,14 +9,14 @@ import {
   FORMATION_PROGRESS_CHANGED_EVENT,
   FORMATION_PROGRESS_STORAGE_KEY,
 } from "@/constants/formation-storage";
+import { createClient } from "@/lib/supabase/client";
 
-function computeStats() {
+function computeStatsFromProgress(progress: Record<string, boolean>) {
   const total = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
-  const p = getStoredProgress();
   let done = 0;
   for (const mod of COURSE) {
     for (const l of mod.lessons) {
-      if (p[lessonId(mod.slug, l.slug)]) done++;
+      if (progress[lessonId(mod.slug, l.slug)]) done++;
     }
   }
   return { done, total };
@@ -26,11 +26,31 @@ export function ProgressOverview() {
   const [stats, setStats] = useState<{ done: number; total: number } | null>(null);
 
   const refresh = useCallback(() => {
-    setStats(computeStats());
+    async function load() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        const { data } = await supabase
+          .from("lesson_progress")
+          .select("lesson_key, completed")
+          .eq("user_id", user.id);
+
+        const progress: Record<string, boolean> = {};
+        data?.forEach((row) => { progress[row.lesson_key] = row.completed; });
+        setStats(computeStatsFromProgress(progress));
+      } else {
+        setStats(computeStatsFromProgress(getStoredProgress()));
+      }
+    }
+    load();
   }, []);
 
   useEffect(() => {
     refresh();
+  }, [refresh]);
+
+  useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key === null || e.key === FORMATION_PROGRESS_STORAGE_KEY) refresh();
     };
@@ -71,7 +91,7 @@ export function ProgressOverview() {
             {remaining > 0 ? (
               <>
                 Encore {remaining} leçon{remaining > 1 ? "s" : ""} pour boucler les {stats.total}{" "}
-                étapes — chaque clic sur « J’ai terminé » met à jour ce compteur.
+                étapes — chaque clic sur « J&apos;ai terminé » met à jour ce compteur.
               </>
             ) : (
               <>Parcours complet — temps de consolider avec les QCM et le profil.</>
@@ -89,7 +109,7 @@ export function ProgressOverview() {
       </div>
       <p className="mt-3 text-xs leading-relaxed text-zinc-500">
         La progression est enregistrée dans votre navigateur (bouton « J&apos;ai terminé cette leçon »
-        en bas de page). Changez d’ordinateur ? Reprenez manuellement là où vous étiez.
+        en bas de page). Changez d&apos;ordinateur ? Reprenez manuellement là où vous étiez.
       </p>
     </div>
   );

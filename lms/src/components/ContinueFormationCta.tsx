@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, PartyPopper, Sparkles } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 import { getStoredProgress } from "@/components/LessonProgress";
 import { findNextLesson, type NextLessonInfo } from "@/lib/formation-journey";
 import {
@@ -11,6 +12,7 @@ import {
 } from "@/constants/formation-storage";
 
 export function ContinueFormationCta() {
+  const supabase = createClient();
   /** undefined = chargement, null = tout vu, sinon prochaine leçon */
   const [next, setNext] = useState<NextLessonInfo | null | undefined>(undefined);
 
@@ -19,7 +21,27 @@ export function ContinueFormationCta() {
   }, []);
 
   useEffect(() => {
-    refresh();
+    async function load() {
+      const { data: { user } } = await supabase.auth.getUser();
+      let progress: Record<string, boolean>;
+      if (!user) {
+        progress = getStoredProgress();
+      } else {
+        const { data } = await supabase
+          .from("lesson_progress")
+          .select("lesson_key, completed")
+          .eq("user_id", user.id);
+        progress = {};
+        data?.forEach((row) => {
+          if (row.completed) progress[row.lesson_key] = true;
+        });
+      }
+      setNext(findNextLesson(progress));
+    }
+    load();
+  }, [supabase]);
+
+  useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key === null || e.key === FORMATION_PROGRESS_STORAGE_KEY) refresh();
     };
@@ -82,7 +104,7 @@ export function ContinueFormationCta() {
           </p>
           <p className="mt-1 font-semibold text-brand-navy">{next.lessonTitle}</p>
           <p className="mt-1 text-sm text-zinc-600">
-            Étape {next.stepNumber} sur {next.totalSteps} · {next.moduleTitle.replace(/^Module \d+ — /, "M")}
+            Étape {next.stepNumber} sur {next.totalSteps} · {next.moduleTitle.replace(/^Module (\d+) — /, "M$1 · ")}
           </p>
         </div>
       </div>

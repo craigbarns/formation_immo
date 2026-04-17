@@ -70,7 +70,7 @@ Votre positionnement doit être visible dans votre bio Instagram, votre titre Li
 
 **Crédibilité.** [PAUSE 1s]
 
-Les preuves sociales sont votre argument le plus puissant. [PAUSE 1s] Les avis Google, les témoignages clients sur LinkedIn, les statistiques de vente. [PAUSE 1s] "47 biens vendus en 2024 — délai moyen 23 jours." [PAUSE 1s] Ces chiffres transforment votre profil en référence. [PAUSE 2s]
+Les preuves sociales sont votre argument le plus puissant. [PAUSE 1s] Les avis Google, les témoignages clients sur LinkedIn, les statistiques de vente. [PAUSE 1s] "47 biens vendus en 2025 — délai moyen 23 jours." [PAUSE 1s] Ces chiffres transforment votre profil en référence. [PAUSE 2s]
 
 ---
 
@@ -122,7 +122,7 @@ Vos transactions récentes en format "success story" — avec accord du client b
 
 **La stratégie de contenu LinkedIn :** [PAUSE 1s]
 Une publication par semaine sur le marché local. [PAUSE 1s]
-Exemple : "Le prix au m² dans le 6ème Lyon en mars 2025 — ce que j'observe sur le terrain". [PAUSE 1s]
+Exemple : "Le prix au m² dans le 6ème Lyon en mars 2026 — ce que j'observe sur le terrain". [PAUSE 1s]
 Ce type de contenu positionne comme expert et génère des prises de contact directes. [PAUSE 2s]
 
 ---

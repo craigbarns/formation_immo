@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Target, CheckCircle2 } from "lucide-react";
-import { getStoredProgress } from "@/components/LessonProgress";
+import { createClient } from "@/lib/supabase/client";
 
 const DAILY_GOAL_KEY = "formation-daily-goal";
 const DAILY_PROGRESS_KEY = "formation-daily-progress";
@@ -19,55 +19,120 @@ interface DailyProgress {
   minutesSpent: number;
 }
 
+function getLocalDailyGoal(): DailyGoal {
+  if (typeof window === "undefined") return { lessonsPerDay: 2, minutesPerDay: 30 };
+  const saved = localStorage.getItem(DAILY_GOAL_KEY);
+  return saved ? JSON.parse(saved) : { lessonsPerDay: 2, minutesPerDay: 30 };
+}
+
+function getLocalDailyProgress(): DailyProgress {
+  const today = new Date().toISOString().slice(0, 10);
+  if (typeof window === "undefined") return { date: today, lessonsCompleted: 0, minutesSpent: 0 };
+  const savedProgress = localStorage.getItem(DAILY_PROGRESS_KEY);
+  if (savedProgress) {
+    const parsed = JSON.parse(savedProgress);
+    if (parsed.date === today) {
+      return parsed;
+    }
+  }
+  return { date: today, lessonsCompleted: 0, minutesSpent: 0 };
+}
+
 export function useDailyGoal() {
   const [goal, setGoal] = useState<DailyGoal>({ lessonsPerDay: 2, minutesPerDay: 30 });
-  const [progress, setProgress] = useState<DailyProgress>({ date: "", lessonsCompleted: 0, minutesSpent: 0 });
+  const [progress, setProgress] = useState<DailyProgress>(() => {
+    const today = new Date().toISOString().slice(0, 10);
+    return { date: today, lessonsCompleted: 0, minutesSpent: 0 };
+  });
+
+  const goalRef = useRef(goal);
+  const progressRef = useRef(progress);
+  goalRef.current = goal;
+  progressRef.current = progress;
 
   useEffect(() => {
-    const savedGoal = localStorage.getItem(DAILY_GOAL_KEY);
-    if (savedGoal) {
-      setGoal(JSON.parse(savedGoal));
-    }
-    
-    const today = new Date().toISOString().slice(0, 10);
-    const savedProgress = localStorage.getItem(DAILY_PROGRESS_KEY);
-    
-    if (savedProgress) {
-      const parsed = JSON.parse(savedProgress);
-      if (parsed.date === today) {
-        setProgress(parsed);
-      } else {
-        setProgress({ date: today, lessonsCompleted: 0, minutesSpent: 0 });
+    const localGoal = getLocalDailyGoal();
+    const localProgress = getLocalDailyProgress();
+    setGoal(localGoal);
+    setProgress(localProgress);
+    goalRef.current = localGoal;
+    progressRef.current = localProgress;
+
+    async function loadFromSupabase() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data } = await supabase
+        .from("user_settings")
+        .select("daily_goal, daily_progress")
+        .eq("user_id", user.id)
+        .single();
+
+      if (data?.daily_goal) {
+        const g = data.daily_goal as DailyGoal;
+        setGoal(g);
+        goalRef.current = g;
+      }
+      if (data?.daily_progress) {
+        const parsed = data.daily_progress as DailyProgress;
+        const today = new Date().toISOString().slice(0, 10);
+        const p = parsed.date === today
+          ? parsed
+          : { date: today, lessonsCompleted: 0, minutesSpent: 0 };
+        setProgress(p);
+        progressRef.current = p;
       }
     }
+
+    loadFromSupabase();
   }, []);
 
+  const saveToSupabase = async (goalData: DailyGoal, progressData: DailyProgress) => {
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    await supabase
+      .from("user_settings")
+      .upsert({
+        user_id: user.id,
+        daily_goal: goalData,
+        daily_progress: progressData,
+        updated_at: new Date().toISOString(),
+      }, { onConflict: "user_id" });
+  };
+
   const updateGoal = (newGoal: Partial<DailyGoal>) => {
-    const updated = { ...goal, ...newGoal };
+    const updated = { ...goalRef.current, ...newGoal };
+    goalRef.current = updated;
     setGoal(updated);
     localStorage.setItem(DAILY_GOAL_KEY, JSON.stringify(updated));
+    saveToSupabase(updated, progressRef.current);
   };
 
   const recordLessonCompletion = () => {
     const today = new Date().toISOString().slice(0, 10);
-    setProgress(prev => {
-      const updated = prev.date === today 
-        ? { ...prev, lessonsCompleted: prev.lessonsCompleted + 1 }
-        : { date: today, lessonsCompleted: 1, minutesSpent: 0 };
-      localStorage.setItem(DAILY_PROGRESS_KEY, JSON.stringify(updated));
-      return updated;
-    });
+    const prev = progressRef.current;
+    const updated = prev.date === today
+      ? { ...prev, lessonsCompleted: prev.lessonsCompleted + 1 }
+      : { date: today, lessonsCompleted: 1, minutesSpent: 0 };
+    progressRef.current = updated;
+    setProgress(updated);
+    localStorage.setItem(DAILY_PROGRESS_KEY, JSON.stringify(updated));
+    saveToSupabase(goalRef.current, updated);
   };
 
   const recordMinutes = (minutes: number) => {
     const today = new Date().toISOString().slice(0, 10);
-    setProgress(prev => {
-      const updated = prev.date === today 
-        ? { ...prev, minutesSpent: prev.minutesSpent + minutes }
-        : { date: today, lessonsCompleted: 0, minutesSpent: minutes };
-      localStorage.setItem(DAILY_PROGRESS_KEY, JSON.stringify(updated));
-      return updated;
-    });
+    const prev = progressRef.current;
+    const updated = prev.date === today
+      ? { ...prev, minutesSpent: prev.minutesSpent + minutes }
+      : { date: today, lessonsCompleted: 0, minutesSpent: minutes };
+    progressRef.current = updated;
+    setProgress(updated);
+    localStorage.setItem(DAILY_PROGRESS_KEY, JSON.stringify(updated));
+    saveToSupabase(goalRef.current, updated);
   };
 
   const isGoalReached = progress.lessonsCompleted >= goal.lessonsPerDay || progress.minutesSpent >= goal.minutesPerDay;
@@ -83,26 +148,26 @@ export function DailyGoalTracker() {
   const { goal, progress, progressPercent, isGoalReached } = useDailyGoal();
 
   return (
-    <div className="rounded-2xl border border-[#d4af37]/20 bg-gradient-to-br from-[#1a3a5c]/50 to-[#0f1f33]/50 p-4">
+    <div className="rounded-2xl border border-brand-gold/20 bg-gradient-to-br from-brand-navy/50 to-[#0f1f33]/50 p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className={`flex h-10 w-10 items-center justify-center rounded-full ${
             isGoalReached 
               ? "bg-emerald-500/20 text-emerald-400" 
-              : "bg-[#d4af37]/20 text-[#d4af37]"
+              : "bg-brand-gold/20 text-brand-gold"
           }`}>
             {isGoalReached ? <CheckCircle2 className="h-5 w-5" /> : <Target className="h-5 w-5" />}
           </div>
           <div>
             <h4 className="font-semibold text-white">Objectif du jour</h4>
-            <p className="text-xs text-white/50">
+            <p className="text-xs text-white/70">
               {progress.lessonsCompleted}/{goal.lessonsPerDay} leçons • {progress.minutesSpent}/{goal.minutesPerDay} min
             </p>
           </div>
         </div>
         
         <div className="text-right">
-          <span className={`text-2xl font-bold ${isGoalReached ? "text-emerald-400" : "text-[#d4af37]"}`}>
+          <span className={`text-2xl font-bold ${isGoalReached ? "text-emerald-400" : "text-brand-gold"}`}>
             {Math.round(progressPercent)}%
           </span>
         </div>
@@ -117,7 +182,7 @@ export function DailyGoalTracker() {
           className={`h-full rounded-full ${
             isGoalReached 
               ? "bg-gradient-to-r from-emerald-500 to-teal-500" 
-              : "bg-gradient-to-r from-[#d4af37] to-[#f0c040]"
+              : "bg-gradient-to-r from-brand-gold to-[#f0c040]"
           }`}
         />
       </div>

@@ -12,7 +12,7 @@ export default async function ExamPage({ params }: Props) {
 
   return (
     <div>
-      <Link href="/formation" className="text-sm text-zinc-500 hover:text-[#1a3a5c]">
+      <Link href="/formation" className="text-sm text-zinc-500 hover:text-brand-navy">
         ← Retour au parcours
       </Link>
 

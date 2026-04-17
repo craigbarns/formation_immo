@@ -127,7 +127,7 @@ Modern real estate professional using CRM software on multiple screens, customer
 
 ---
 
-**PILIER 4 : LE SUIVI SYSTEMATIQUE** (5:15 - 6:00)
+**PILIER 4 : LE SUIVI SYSTÉMATIQUE** (5:15 - 6:00)
 
 [B-ROLL : Calendrier de suivi qui se remplit de tâches récurrentes]
 

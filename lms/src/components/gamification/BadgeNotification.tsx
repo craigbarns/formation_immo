@@ -81,10 +81,10 @@ function BadgeToast({ badgeId, show }: { badgeId: BadgeId; show: boolean }) {
           {badge.icon}
         </div>
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-wider text-[#d4af37]">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-brand-gold">
             Nouveau badge {RARITY_LABELS[badge.rarity]}
           </p>
-          <p className="text-sm font-bold text-[#1a3a5c]">{badge.name}</p>
+          <p className="text-sm font-bold text-brand-navy">{badge.name}</p>
           <p className="text-xs text-zinc-600">{badge.description}</p>
         </div>
       </div>

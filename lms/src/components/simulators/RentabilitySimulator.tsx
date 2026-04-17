@@ -32,14 +32,11 @@ export function RentabilitySimulator() {
   const [maintenance, setMaintenance] = useState(5);
   const [management, setManagement] = useState(8);
   const [isLMNP, setIsLMNP] = useState(false);
-  const [tracked, setTracked] = useState(false);
+  const [tracked] = useState(() => {
+    if (typeof window !== 'undefined') recordSimulatorUsed("rentabilite");
+    return true;
+  });
 
-  useEffect(() => {
-    if (!tracked) {
-      recordSimulatorUsed("rentabilite");
-      setTracked(true);
-    }
-  }, [tracked]);
 
   const result = useMemo<RentabilityResult>(() => {
     const totalInvestment = purchasePrice * (1 + notaryFees / 100) + renovation;
@@ -96,7 +93,7 @@ export function RentabilitySimulator() {
       {/* LMNP Toggle */}
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-zinc-200 bg-zinc-50 p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1a3a5c]/10 text-[#1a3a5c]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy/10 text-brand-navy">
             <Briefcase size={20} />
           </div>
           <div>
@@ -106,7 +103,7 @@ export function RentabilitySimulator() {
         </div>
         <button
           onClick={() => setIsLMNP((v) => !v)}
-          className={`relative inline-flex h-7 w-12 items-center rounded-full transition ${isLMNP ? "bg-[#1a3a5c]" : "bg-zinc-300"}`}
+          className={`relative inline-flex h-7 w-12 items-center rounded-full transition ${isLMNP ? "bg-brand-navy" : "bg-zinc-300"}`}
           aria-pressed={isLMNP}
         >
           <span
@@ -118,7 +115,7 @@ export function RentabilitySimulator() {
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-4">
           <h4 className="font-semibold text-zinc-800 flex items-center gap-2">
-            <Home className="h-4 w-4 text-[#d4af37]" />
+            <Home className="h-4 w-4 text-brand-gold" />
             Acquisition
           </h4>
           
@@ -131,7 +128,7 @@ export function RentabilitySimulator() {
 
         <div className="space-y-4">
           <h4 className="font-semibold text-zinc-800 flex items-center gap-2">
-            <DollarSign className="h-4 w-4 text-[#d4af37]" />
+            <DollarSign className="h-4 w-4 text-brand-gold" />
             Charges annuelles
           </h4>
           
@@ -173,7 +170,7 @@ export function RentabilitySimulator() {
             <p className="text-xs text-zinc-500">Cashflow mensuel</p>
           </div>
           <div className="text-center p-3 rounded-xl bg-zinc-50 border border-zinc-100">
-            <p className="text-2xl font-bold text-[#d4af37]">
+            <p className="text-2xl font-bold text-brand-gold">
               {result.yearsToReturn > 0 && result.yearsToReturn < 100 ? result.yearsToReturn.toFixed(1) : "∞"}
             </p>
             <p className="text-xs text-zinc-500">Années de retour</p>
@@ -204,7 +201,7 @@ export function RentabilitySimulator() {
         <div className="grid md:grid-cols-2 gap-4">
           <div className="rounded-xl bg-zinc-50 border border-zinc-100 p-4">
             <h5 className="text-sm font-semibold text-zinc-800 mb-3 flex items-center gap-2">
-              <PieChart className="h-4 w-4 text-[#d4af37]" />
+              <PieChart className="h-4 w-4 text-brand-gold" />
               Investissement total
             </h5>
             <p className="text-2xl font-bold text-zinc-900">{formatCurrency(result.totalInvestment)}</p>
@@ -217,7 +214,7 @@ export function RentabilitySimulator() {
 
           <div className="rounded-xl bg-zinc-50 border border-zinc-100 p-4">
             <h5 className="text-sm font-semibold text-zinc-800 mb-3 flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-[#d4af37]" />
+              <TrendingUp className="h-4 w-4 text-brand-gold" />
               Charges annuelles
             </h5>
             <p className="text-2xl font-bold text-zinc-900">{formatCurrency(result.annualCharges)}</p>

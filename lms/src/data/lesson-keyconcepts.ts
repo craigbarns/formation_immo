@@ -332,7 +332,7 @@ export const LESSON_VISUALS: Record<string, LessonVisuals> = {
   },
 
   // ─── M2 : leçons manquantes ───────────────────────
-  "transaction/offre-achat-avants-contrats": {
+  "transaction/offre-achat-avant-contrats": {
     keyConcepts: [
       { icon: "file-signature", title: "Offre d'achat", description: "Manifestation d'intention régie par les articles 1113 et suivants du Code civil", type: "definition" },
       { icon: "shield", title: "Promesse unilatérale", description: "Le vendeur s'engage seul ; l'acquéreur a une option", type: "tip" },

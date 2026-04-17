@@ -40,8 +40,6 @@ import { NotesPanelButton } from "./NotesPanelButton";
 import { LessonJourneyBadge } from "@/components/LessonJourneyBadge";
 import { AICoachButton } from "@/components/ai-coach";
 import { ReadingProgressBar } from "@/components/ReadingProgressBar";
-import { HeyGenVideoPlayer } from "@/components/avatars/HeyGenVideoPlayer";
-import { getHeyGenVideoUrl } from "@/lib/heygen-videos";
 import { getResolvedAudioQuizSchedule, type ResolvedAudioQuizItem } from "@/data/audio-quiz-schedule";
 
 /* ------------------------------------------------------------------ */
@@ -103,7 +101,6 @@ export default async function LessonPage({ params }: Props) {
       : null;
   const audioSrc = getLessonAudioPlaybackSrc(lesson);
   const avatar = getAvatarForModule(moduleSlug);
-  const heygenVideoUrl = getHeyGenVideoUrl(moduleSlug, lessonSlug);
   const lessonVisuals = getVisuals(moduleSlug, lessonSlug);
   const visualsForPlayer = lessonVisuals ?? buildFallbackVisuals(lesson);
   const caseStudies = getCaseStudies(moduleSlug, lessonSlug);
@@ -146,7 +143,7 @@ export default async function LessonPage({ params }: Props) {
               /
             </span>
             <Link href={`/formation/${mod.slug}`} className="breadcrumb-pill link-focus">
-              {mod.title.replace(/^Module \d+ — /, "M")}
+              {mod.title.replace(/^Module (\d+) — /, "M$1 · ")}
             </Link>
           </nav>
           <LessonTimer lessonKey={key} moduleSlug={moduleSlug} />
@@ -268,28 +265,9 @@ export default async function LessonPage({ params }: Props) {
           </ScrollReveal>
         ) : null}
 
-        {heygenVideoUrl && avatar ? (
-          <ScrollReveal>
-          <section id="section-presenter">
-            <h2 className="lesson-block-title lesson-block-title--gold">
-              <span className="lesson-block-title-line bg-brand-gold/70" aria-hidden />
-              Présentation
-            </h2>
-            <HeyGenVideoPlayer
-              videoUrl={heygenVideoUrl}
-              moduleSlug={moduleSlug}
-              lessonTitle={lesson.title}
-              presenterName={avatar.name}
-              presenterRole={avatar.role}
-              accentColor={avatar.accentColor}
-            />
-          </section>
-          </ScrollReveal>
-        ) : null}
-
         {audioSrc ? (
           <ScrollReveal>
-          <section id="section-video">
+          <section id="section-audio">
             <h2 className="lesson-block-title lesson-block-title--gold">
               <span className="lesson-block-title-line bg-brand-gold/70" aria-hidden />
               Vidéo de formation

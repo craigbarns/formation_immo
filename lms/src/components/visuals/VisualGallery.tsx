@@ -81,7 +81,7 @@ export function VisualGallery({ prompts }: { prompts: VisualPrompt[] }) {
 
           {/* Info */}
           <div className="p-4">
-            <h4 className="font-bold text-[#1a3a5c] text-sm">{p.title}</h4>
+            <h4 className="font-bold text-brand-navy text-sm">{p.title}</h4>
             <p className="mt-1 text-xs text-zinc-600">{p.description}</p>
 
             {/* Expand prompt */}
@@ -89,7 +89,7 @@ export function VisualGallery({ prompts }: { prompts: VisualPrompt[] }) {
               onClick={() =>
                 setExpandedId(expandedId === p.id ? null : p.id)
               }
-              className="mt-2 text-[11px] font-medium text-[#d4af37] hover:underline"
+              className="mt-2 text-[11px] font-medium text-brand-gold hover:underline"
             >
               {expandedId === p.id ? "Masquer le prompt" : "Prompt Midjourney"}
             </button>
@@ -101,7 +101,7 @@ export function VisualGallery({ prompts }: { prompts: VisualPrompt[] }) {
                 </p>
                 <button
                   onClick={() => copy(p.id, p.prompt)}
-                  className="mt-2 rounded bg-[#1a3a5c] px-3 py-1 text-[10px] font-bold text-white hover:bg-[#142d45]"
+                  className="mt-2 rounded bg-brand-navy px-3 py-1 text-[10px] font-bold text-white hover:bg-brand-navy-deep"
                 >
                   {copiedId === p.id ? "Copie !" : "Copier"}
                 </button>

@@ -32,11 +32,11 @@ const CONFIG: Record<CalloutType, {
   terrain: {
     icon: "🏠",
     label: "Sur le terrain",
-    bg: "bg-[#1a3a5c]/[0.04]",
-    border: "border-l-[#1a3a5c]",
-    titleColor: "text-[#1a3a5c]",
-    bodyColor: "text-[#1a3a5c]/80",
-    badgeBg: "bg-[#1a3a5c]/10 text-[#1a3a5c]",
+    bg: "bg-brand-navy/[0.04]",
+    border: "border-l-brand-navy",
+    titleColor: "text-brand-navy",
+    bodyColor: "text-brand-navy/80",
+    badgeBg: "bg-brand-navy/10 text-brand-navy",
   },
   fact: {
     icon: "📊",

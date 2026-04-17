@@ -9,7 +9,7 @@ interface ActivityData {
 }
 
 interface HeatmapCalendarProps {
-  data?: ActivityData[];
+  data?: ActivityData[] | Record<string, number>;
 }
 
 const DAYS = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
@@ -19,31 +19,32 @@ export function HeatmapCalendar({ data }: HeatmapCalendarProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    requestAnimationFrame(() => setMounted(true));
   }, []);
 
-  // Generate last 16 weeks of data
-  const generateData = (): ActivityData[] => {
+  // Generate last 16 weeks of empty data when no real data is provided
+  const generateEmptyData = (): ActivityData[] => {
     const result: ActivityData[] = [];
     const today = new Date();
-    
     for (let i = 112; i >= 0; i--) {
       const date = new Date(today);
       date.setDate(date.getDate() - i);
-      
-      // Simulate activity based on localStorage if available
-      const dateStr = date.toISOString().split("T")[0];
-      const hasActivity = Math.random() > 0.6;
-      
       result.push({
-        date: dateStr,
-        count: hasActivity ? Math.floor(Math.random() * 4) + 1 : 0,
+        date: date.toISOString().split("T")[0],
+        count: 0,
       });
     }
     return result;
   };
 
-  const activityData = data || generateData();
+  const normalizeData = (input: HeatmapCalendarProps["data"]): ActivityData[] => {
+    if (!input) return generateEmptyData();
+    if (Array.isArray(input)) return input;
+    // Record<string, number>
+    return Object.entries(input).map(([date, count]) => ({ date, count }));
+  };
+
+  const activityData = normalizeData(data);
 
   const getColor = (count: number) => {
     if (count === 0) return "bg-gray-100";

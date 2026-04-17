@@ -26,7 +26,6 @@ interface GlobalSearchProps {
 export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [results, setResults] = useState<SearchResult[]>([]);
   const router = useRouter();
 
   // Build search index
@@ -65,12 +64,11 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
     return index;
   }, []);
 
-  // Perform search
-  useEffect(() => {
+  // Compute results
+  const results = useMemo<SearchResult[]>(() => {
     if (!query.trim()) {
-      // Show recent items when no query
       const bookmarks = getAllBookmarks().slice(0, 3);
-      const recent: SearchResult[] = bookmarks.map((b) => ({
+      return bookmarks.map((b) => ({
         id: `recent-${b.id}`,
         type: "bookmark",
         title: b.lessonTitle,
@@ -78,8 +76,6 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
         href: `/formation/${b.moduleSlug}/${b.lessonSlug}`,
         icon: <Bookmark className="w-4 h-4 text-brand-gold" />,
       }));
-      setResults(recent);
-      return;
     }
 
     const lowerQuery = query.toLowerCase();
@@ -89,7 +85,6 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
         item.subtitle.toLowerCase().includes(lowerQuery)
     );
 
-    // Also search in notes
     const notes = searchNotes(query);
     const noteResults: SearchResult[] = notes.slice(0, 3).map((note) => ({
       id: `note-${note.id}`,
@@ -101,9 +96,10 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
       moduleSlug: note.moduleSlug,
     }));
 
-    setResults([...filtered.slice(0, 6), ...noteResults]);
-    setSelectedIndex(0);
+    return [...filtered.slice(0, 6), ...noteResults];
   }, [query, searchIndex]);
+
+  const clampedSelectedIndex = results.length > 0 ? Math.max(0, Math.min(selectedIndex, results.length - 1)) : 0;
 
   // Keyboard navigation
   const handleKeyDown = useCallback(
@@ -121,8 +117,8 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
           break;
         case "Enter":
           e.preventDefault();
-          if (results[selectedIndex]) {
-            router.push(results[selectedIndex].href);
+          if (results[clampedSelectedIndex]) {
+            router.push(results[clampedSelectedIndex].href);
             onClose();
           }
           break;
@@ -131,7 +127,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
           break;
       }
     },
-    [isOpen, results, selectedIndex, router, onClose]
+    [isOpen, results, clampedSelectedIndex, router, onClose]
   );
 
   useEffect(() => {
@@ -142,8 +138,10 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
   // Reset on open
   useEffect(() => {
     if (isOpen) {
-      setQuery("");
-      setSelectedIndex(0);
+      requestAnimationFrame(() => {
+        setQuery("");
+        setSelectedIndex(0);
+      });
     }
   }, [isOpen]);
 
@@ -185,7 +183,10 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
             <input
               type="text"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setSelectedIndex(0);
+              }}
               placeholder="Rechercher une leçon, un favori, une note..."
               className="flex-1 text-lg outline-none placeholder:text-gray-400"
               autoFocus
@@ -222,7 +223,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                       onClose();
                     }}
                     className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl text-left transition-colors ${
-                      index === selectedIndex
+                      index === clampedSelectedIndex
                         ? "bg-brand-navy text-white"
                         : "hover:bg-gray-50 text-gray-700"
                     }`}
@@ -232,7 +233,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                   >
                     <div
                       className={`p-2 rounded-lg ${
-                        index === selectedIndex ? "bg-white/20" : "bg-gray-100"
+                        index === clampedSelectedIndex ? "bg-white/20" : "bg-gray-100"
                       }`}
                     >
                       {result.icon}
@@ -241,7 +242,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                       <p className="font-medium truncate">{result.title}</p>
                       <p
                         className={`text-sm truncate ${
-                          index === selectedIndex ? "text-white/70" : "text-gray-500"
+                          index === clampedSelectedIndex ? "text-white/70" : "text-gray-500"
                         }`}
                       >
                         {result.subtitle}
@@ -249,7 +250,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                     </div>
                     <ArrowRight
                       className={`w-4 h-4 ${
-                        index === selectedIndex ? "opacity-100" : "opacity-0"
+                        index === clampedSelectedIndex ? "opacity-100" : "opacity-0"
                       }`}
                     />
                   </motion.button>

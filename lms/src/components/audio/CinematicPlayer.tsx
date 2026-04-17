@@ -152,7 +152,7 @@ const TYPE_COLORS: Record<string, { bg: string; border: string; text: string }> 
   rule: { bg: "bg-white/10", border: "border-white/20", text: "text-white/90" },
   tip: { bg: "bg-emerald-500/20", border: "border-emerald-400/50", text: "text-emerald-200" },
   warning: { bg: "bg-amber-500/20", border: "border-amber-400/50", text: "text-amber-200" },
-  stat: { bg: "bg-[#d4af37]/20", border: "border-[#d4af37]/40", text: "text-[#d4af37]" },
+  stat: { bg: "bg-brand-gold/20", border: "border-brand-gold/40", text: "text-brand-gold" },
 };
 
 const TYPE_LABELS: Record<string, string> = {
@@ -165,7 +165,7 @@ const TYPE_LABELS: Record<string, string> = {
 
 const STAT_COLORS: Record<string, string> = {
   navy: "text-white",
-  gold: "text-[#d4af37]",
+  gold: "text-brand-gold",
   green: "text-emerald-400",
   red: "text-red-400",
   blue: "text-blue-400",
@@ -173,7 +173,7 @@ const STAT_COLORS: Record<string, string> = {
 
 const STAT_BAR_COLORS: Record<string, string> = {
   navy: "bg-white",
-  gold: "bg-[#d4af37]",
+  gold: "bg-brand-gold",
   green: "bg-emerald-400",
   red: "bg-red-400",
   blue: "bg-blue-400",
@@ -283,6 +283,7 @@ export function CinematicPlayer({
   const [duration, setDuration] = useState(0);
   const [speed, setSpeed] = useState(() => {
     if (typeof window === "undefined") return 1;
+    if (typeof window === 'undefined') return 1;
     const saved = localStorage.getItem("cinematic-player-speed");
     return saved ? parseFloat(saved) : 1;
   });
@@ -576,14 +577,14 @@ export function CinematicPlayer({
         onClick={() => setShowShortcuts(false)}
       >
         <div 
-          className="w-full max-w-md rounded-2xl border border-[#d4af37]/30 bg-[#0f1f33] p-6 shadow-2xl"
+          className="w-full max-w-md rounded-2xl border border-brand-gold/30 bg-[#0f1f33] p-6 shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-lg font-bold text-white">Raccourcis clavier</h3>
             <button 
               onClick={() => setShowShortcuts(false)}
-              className="rounded-full p-1 text-white/50 hover:bg-white/10 hover:text-white"
+              className="rounded-full p-1 text-white/70 hover:bg-white/10 hover:text-white"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -593,41 +594,41 @@ export function CinematicPlayer({
           <div className="space-y-2 text-sm">
             <div className="flex justify-between py-2 border-b border-white/10">
               <span className="text-white/70">Lecture / Pause</span>
-              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">Espace</kbd>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">Espace</kbd>
             </div>
             <div className="flex justify-between py-2 border-b border-white/10">
               <span className="text-white/70">Slide suivant / précédent</span>
-              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">→ ←</kbd>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">→ ←</kbd>
             </div>
             <div className="flex justify-between py-2 border-b border-white/10">
               <span className="text-white/70">Vitesse de lecture</span>
-              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">↑</kbd>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">↑</kbd>
             </div>
             <div className="flex justify-between py-2 border-b border-white/10">
               <span className="text-white/70">Plein écran</span>
-              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">↓ ou F</kbd>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">↓ ou F</kbd>
             </div>
             <div className="flex justify-between py-2 border-b border-white/10">
               <span className="text-white/70">-10 sec / +10 sec</span>
-              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">J L</kbd>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">J L</kbd>
             </div>
             <div className="flex justify-between py-2 border-b border-white/10">
               <span className="text-white/70">Mute / Unmute</span>
-              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">M</kbd>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">M</kbd>
             </div>
             <div className="flex justify-between py-2">
               <span className="text-white/70">Revenir au début</span>
-              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[#d4af37]">0 ou Home</kbd>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">0 ou Home</kbd>
             </div>
           </div>
-          <p className="mt-4 text-xs text-center text-white/40">Appuyez sur ? pour afficher cette aide</p>
+          <p className="mt-4 text-xs text-center text-white/60">Appuyez sur ? pour afficher cette aide</p>
         </div>
       </div>
     )}
     
     <div
       ref={containerRef}
-      className={`overflow-hidden rounded-2xl border-2 border-[#1a3a5c]/20 shadow-2xl ${
+      className={`overflow-hidden rounded-2xl border-2 border-brand-navy/20 shadow-2xl ${
         isFullscreen ? "fixed inset-0 z-50 rounded-none border-0 flex flex-col" : ""
       }`}
     >
@@ -669,7 +670,7 @@ export function CinematicPlayer({
 
       {/* ── VIDEO AREA ─────────────────────────────────── */}
       <div
-        className={`relative bg-gradient-to-br from-[#0f1f33] via-[#1a3a5c] to-[#0a1929] overflow-hidden ${
+        className={`relative bg-gradient-to-br from-[#0f1f33] via-brand-navy to-[#0a1929] overflow-hidden ${
           isFullscreen ? "flex-1" : "aspect-video"
         }`}
       >
@@ -746,10 +747,10 @@ export function CinematicPlayer({
         {/* Quiz overlay */}
         {quizOverlay && (
           <div className="absolute inset-0 z-20 flex items-center justify-center bg-[#0a1929]/92 p-4 backdrop-blur-sm">
-            <div className="max-h-[min(480px,85vh)] w-full max-w-lg overflow-y-auto rounded-2xl border border-[#d4af37]/40 bg-[#0f1f33] p-5 shadow-2xl sm:p-7">
+            <div className="max-h-[min(480px,85vh)] w-full max-w-lg overflow-y-auto rounded-2xl border border-brand-gold/40 bg-[#0f1f33] p-5 shadow-2xl sm:p-7">
               {/* Gold bar at top */}
-              <div className="mb-4 h-1 w-16 rounded-full bg-gradient-to-r from-[#d4af37] to-[#f0c040]" />
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#d4af37]">
+              <div className="mb-4 h-1 w-16 rounded-full bg-gradient-to-r from-brand-gold to-[#f0c040]" />
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gold">
                 Question de verification
               </p>
               <p className="mt-3 text-base font-semibold leading-snug text-white sm:text-lg">
@@ -761,9 +762,9 @@ export function CinematicPlayer({
                     <button
                       type="button"
                       onClick={() => handleQuizAnswer(opt.isCorrect)}
-                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-left text-sm text-white/90 transition hover:border-[#d4af37]/50 hover:bg-white/10 active:scale-[0.99]"
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-left text-sm text-white/90 transition hover:border-brand-gold/50 hover:bg-white/10 active:scale-[0.99]"
                     >
-                      <span className="mr-3 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-white/25 text-[10px] font-bold text-white/50">
+                      <span className="mr-3 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-white/25 text-[10px] font-bold text-white/70">
                         {String.fromCharCode(65 + i)}
                       </span>
                       {opt.label}
@@ -778,14 +779,14 @@ export function CinematicPlayer({
                   <button
                     type="button"
                     onClick={dismissQuizWrong}
-                    className="mt-3 text-xs font-semibold text-[#d4af37] underline-offset-2 hover:underline"
+                    className="mt-3 text-xs font-semibold text-brand-gold underline-offset-2 hover:underline"
                   >
                     Reessayer
                   </button>
                 </div>
               )}
               {audioQuizSchedule.length > 0 && (
-                <p className="mt-4 text-[11px] text-white/40">
+                <p className="mt-4 text-[11px] text-white/60">
                   La reprise de l&apos;audio se fait automatiquement apres la bonne reponse.
                 </p>
               )}
@@ -796,7 +797,7 @@ export function CinematicPlayer({
         {/* Chapter label + slide counter */}
         <div className="absolute top-3 right-3 flex items-center gap-2">
           {currentChapter && (
-            <span className="rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#d4af37]/80 backdrop-blur-sm">
+            <span className="rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-gold/80 backdrop-blur-sm">
               {currentChapter.name}
             </span>
           )}
@@ -822,7 +823,7 @@ export function CinematicPlayer({
         <button
           type="button"
           onClick={toggleFullscreen}
-          className="absolute bottom-3 right-3 flex h-7 w-7 items-center justify-center rounded-full bg-black/40 text-white/60 backdrop-blur-sm transition hover:bg-black/60 hover:text-white"
+          className="absolute bottom-3 right-3 flex h-7 w-7 items-center justify-center rounded-full bg-black/40 text-white/80 backdrop-blur-sm transition hover:bg-black/60 hover:text-white"
           title={isFullscreen ? "Quitter plein ecran (Esc)" : "Plein ecran"}
         >
           {isFullscreen ? (
@@ -843,7 +844,7 @@ export function CinematicPlayer({
               type="button"
               onClick={() => navigateSlide(-1)}
               disabled={activeSlide === 0}
-              className="absolute left-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-black/30 text-white/60 backdrop-blur-sm transition hover:bg-black/50 hover:text-white disabled:opacity-0"
+              className="absolute left-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-black/30 text-white/80 backdrop-blur-sm transition hover:bg-black/50 hover:text-white disabled:opacity-0"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -853,7 +854,7 @@ export function CinematicPlayer({
               type="button"
               onClick={() => navigateSlide(1)}
               disabled={activeSlide === slides.length - 1}
-              className="absolute right-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-black/30 text-white/60 backdrop-blur-sm transition hover:bg-black/50 hover:text-white disabled:opacity-0"
+              className="absolute right-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-black/30 text-white/80 backdrop-blur-sm transition hover:bg-black/50 hover:text-white disabled:opacity-0"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -869,7 +870,7 @@ export function CinematicPlayer({
             className="absolute inset-0 flex items-center justify-center bg-black/20 transition hover:bg-black/30"
             aria-label="Lancer la lecture"
           >
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#d4af37] text-[#1a3a5c] shadow-xl shadow-[#d4af37]/30 transition hover:scale-110 active:scale-100">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-gold text-brand-navy shadow-xl shadow-brand-gold/30 transition hover:scale-110 active:scale-100">
               <svg className="h-7 w-7 ml-1" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
@@ -897,17 +898,17 @@ export function CinematicPlayer({
           {audioQuizSchedule.map((q, i) => (
             <div
               key={`q-${q.checkpoint.id}`}
-              className="absolute top-0 h-full w-0.5 bg-[#d4af37]/90"
+              className="absolute top-0 h-full w-0.5 bg-brand-gold/90"
               style={{ left: `${q.pauseAtRatio * 100}%` }}
               title={`Quiz ${i + 1}`}
             />
           ))}
           <div
-            className="h-full rounded-full bg-gradient-to-r from-[#d4af37] to-[#f0e6c8] transition-[width] duration-150"
+            className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[#f0e6c8] transition-[width] duration-150"
             style={{ width: `${pct}%` }}
           />
           <div
-            className="absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#d4af37] bg-white opacity-0 shadow-md transition group-hover:opacity-100"
+            className="absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-brand-gold bg-white opacity-0 shadow-md transition group-hover:opacity-100"
             style={{ left: `${pct}%` }}
           />
         </div>
@@ -915,7 +916,7 @@ export function CinematicPlayer({
         {/* Controls row */}
         <div className="flex items-center justify-between gap-3">
           {/* Time */}
-          <span className="w-24 text-xs text-white/50 tabular-nums">
+          <span className="w-24 text-xs text-white/70 tabular-nums">
             {fmt(current)} / {loaded ? fmt(duration) : "--:--"}
           </span>
 
@@ -925,7 +926,7 @@ export function CinematicPlayer({
               type="button"
               disabled={!!quizOverlay}
               onClick={() => skip(-15)}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-white/60 hover:bg-white/10 hover:text-white transition disabled:opacity-40"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-white/80 hover:bg-white/10 hover:text-white transition disabled:opacity-40"
               title="-15s"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -936,7 +937,7 @@ export function CinematicPlayer({
               type="button"
               disabled={!!quizOverlay}
               onClick={toggle}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d4af37] text-[#1a3a5c] shadow-lg hover:bg-[#e0bf4d] transition disabled:opacity-40 active:scale-95"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-gold text-brand-navy shadow-lg hover:bg-[#e0bf4d] transition disabled:opacity-40 active:scale-95"
             >
               {playing ? (
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -952,7 +953,7 @@ export function CinematicPlayer({
               type="button"
               disabled={!!quizOverlay}
               onClick={() => skip(15)}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-white/60 hover:bg-white/10 hover:text-white transition disabled:opacity-40"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-white/80 hover:bg-white/10 hover:text-white transition disabled:opacity-40"
               title="+15s"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -989,7 +990,7 @@ export function CinematicPlayer({
     {/* Keyboard shortcut hint */}
     <button
       onClick={() => setShowShortcuts(true)}
-      className="mt-2 flex items-center justify-center gap-1 text-[10px] text-white/30 hover:text-white/50 transition"
+      className="mt-2 flex items-center justify-center gap-1 text-[10px] text-white/50 hover:text-white/70 transition"
       title="Voir les raccourcis clavier"
     >
       <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1096,8 +1097,8 @@ function SlideBackground({ kind }: { kind: Slide["kind"] }) {
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }} />
           {/* Gold accent rings */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full border border-[#d4af37]/6" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[350px] w-[350px] rounded-full border border-[#d4af37]/8" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full border border-brand-gold/6" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[350px] w-[350px] rounded-full border border-brand-gold/8" />
         </div>
       );
 
@@ -1107,8 +1108,8 @@ function SlideBackground({ kind }: { kind: Slide["kind"] }) {
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* Floating abstract blobs via box-shadows trick */}
           <div className="absolute top-[-40px] right-[-40px] h-48 w-48 rounded-full bg-blue-600/10 blur-2xl" />
-          <div className="absolute bottom-[-60px] left-[-20px] h-56 w-56 rounded-full bg-[#1a3a5c]/40 blur-3xl" />
-          <div className="absolute top-1/2 left-1/4 h-32 w-32 rounded-full bg-[#d4af37]/5 blur-2xl" />
+          <div className="absolute bottom-[-60px] left-[-20px] h-56 w-56 rounded-full bg-brand-navy/40 blur-3xl" />
+          <div className="absolute top-1/2 left-1/4 h-32 w-32 rounded-full bg-brand-gold/5 blur-2xl" />
         </div>
       );
 
@@ -1131,7 +1132,7 @@ function SlideBackground({ kind }: { kind: Slide["kind"] }) {
             backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px)",
             backgroundSize: "100% 25%",
           }} />
-          <div className="absolute top-0 right-0 h-full w-1/3 bg-gradient-to-l from-[#d4af37]/5 to-transparent" />
+          <div className="absolute top-0 right-0 h-full w-1/3 bg-gradient-to-l from-brand-gold/5 to-transparent" />
         </div>
       );
 
@@ -1166,7 +1167,7 @@ function SlideBackground({ kind }: { kind: Slide["kind"] }) {
           <div className="absolute inset-0" style={{
             background: "radial-gradient(ellipse 80% 60% at 30% 50%, rgba(212,175,55,0.08) 0%, transparent 60%)",
           }} />
-          <div className="absolute top-0 left-0 h-full w-2 bg-gradient-to-b from-[#d4af37]/20 via-[#d4af37]/40 to-[#d4af37]/20" />
+          <div className="absolute top-0 left-0 h-full w-2 bg-gradient-to-b from-brand-gold/20 via-brand-gold/40 to-brand-gold/20" />
         </div>
       );
 
@@ -1232,33 +1233,33 @@ function TitleSlide({ title, subtitle, avatar }: { title: string; subtitle: stri
       `}</style>
       {/* Decorative gold line */}
       <div className="mx-auto mb-5 flex items-center gap-3">
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-        <div className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
-        <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-brand-gold/50" />
+        <div className="h-1.5 w-1.5 rounded-full bg-brand-gold" />
+        <div className="h-px flex-1 bg-gradient-to-l from-transparent to-brand-gold/50" />
       </div>
-      <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#d4af37]">{subtitle}</p>
+      <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-brand-gold">{subtitle}</p>
       <h2 className="mt-4 text-2xl font-black text-white sm:text-4xl leading-tight drop-shadow-lg">
         {title}
       </h2>
       {avatar && (
         <div className="mt-7 flex items-center justify-center gap-3">
           <div
-            className="flex h-11 w-11 items-center justify-center rounded-full text-sm font-bold text-white ring-2 ring-[#d4af37]/30 shadow-xl"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-sm font-bold text-white ring-2 ring-brand-gold/30 shadow-xl"
             style={{ backgroundColor: avatar.accentColor }}
           >
             {avatar.initials}
           </div>
           <div className="text-left">
             <p className="text-sm font-semibold text-white/90">{avatar.name}</p>
-            <p className="text-xs text-white/50">{avatar.role}</p>
+            <p className="text-xs text-white/70">{avatar.role}</p>
           </div>
         </div>
       )}
       {/* Decorative bottom line */}
       <div className="mx-auto mt-5 flex items-center gap-3">
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#d4af37]/30" />
-        <div className="h-1 w-1 rounded-full bg-[#d4af37]/50" />
-        <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#d4af37]/30" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-brand-gold/30" />
+        <div className="h-1 w-1 rounded-full bg-brand-gold/50" />
+        <div className="h-px flex-1 bg-gradient-to-l from-transparent to-brand-gold/30" />
       </div>
     </div>
   );
@@ -1278,7 +1279,7 @@ function ConceptSlide({ concept, index, total }: { concept: KeyConcept; index: n
           to   { opacity: 1; transform: translateX(0); }
         }
       `}</style>
-      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-[#d4af37] mb-5">
+      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-5">
         Concept {index + 1} / {total}
       </p>
       <div className={`rounded-2xl border-2 ${colors.border} ${colors.bg} p-7 backdrop-blur-sm relative overflow-hidden`}>
@@ -1343,7 +1344,7 @@ function StatsSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
       className="w-full max-w-2xl"
       style={{ animation: "fadeIn 0.5s ease-out both" }}
     >
-      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-[#d4af37] mb-6">
+      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-6">
         Chiffres cles
       </p>
       <div className={`grid gap-4 ${stats.length <= 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"}`}>
@@ -1356,8 +1357,8 @@ function StatsSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
             <p className={`text-3xl font-black tabular-nums ${STAT_COLORS[s.color] ?? "text-white"}`}>
               {counters[i]}
             </p>
-            {s.unit && <p className="text-xs text-white/50 font-medium mt-1">{s.unit}</p>}
-            <p className="mt-2 text-[11px] text-white/40 font-medium leading-tight">{s.label}</p>
+            {s.unit && <p className="text-xs text-white/70 font-medium mt-1">{s.unit}</p>}
+            <p className="mt-2 text-[11px] text-white/60 font-medium leading-tight">{s.label}</p>
           </div>
         ))}
       </div>
@@ -1379,7 +1380,10 @@ function ChartSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
   const maxVal = useMemo(() => Math.max(...values, 1), [values]);
 
   useEffect(() => {
-    if (!isActive) { setHeights(stats.map(() => 0)); return; }
+    if (!isActive) {
+      const timeout = setTimeout(() => setHeights(stats.map(() => 0)), 0);
+      return () => clearTimeout(timeout);
+    }
     const timeout = setTimeout(() => {
       setHeights(values.map((v) => (v / maxVal) * 100));
     }, 100);
@@ -1391,7 +1395,7 @@ function ChartSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
       className="w-full max-w-xl"
       style={{ animation: "fadeIn 0.5s ease-out both" }}
     >
-      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-[#d4af37] mb-6">
+      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-6">
         Visualisation
       </p>
       <div className="flex items-end gap-3 h-40 px-2">
@@ -1399,7 +1403,7 @@ function ChartSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
           <div key={i} className="flex flex-col items-center gap-2 flex-1">
             <span className={`text-xs font-black tabular-nums ${STAT_COLORS[s.color] ?? "text-white"}`}>
               {s.value}
-              {s.unit ? <span className="text-[9px] font-normal text-white/40 ml-0.5">{s.unit}</span> : null}
+              {s.unit ? <span className="text-[9px] font-normal text-white/60 ml-0.5">{s.unit}</span> : null}
             </span>
             <div className="relative w-full flex-1 flex items-end">
               <div
@@ -1412,7 +1416,7 @@ function ChartSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
                 }}
               />
             </div>
-            <p className="text-[9px] text-white/40 font-medium text-center leading-tight max-w-[60px]">
+            <p className="text-[9px] text-white/60 font-medium text-center leading-tight max-w-[60px]">
               {s.label}
             </p>
           </div>
@@ -1429,7 +1433,7 @@ function ComparisonSlide({ title, colA, colB, rows }: { title: string; colA: str
       className="w-full max-w-2xl"
       style={{ animation: "fadeIn 0.5s ease-out both" }}
     >
-      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-[#d4af37] mb-3">
+      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-3">
         Comparatif
       </p>
       <h3 className="text-center text-base font-bold text-white mb-4 sm:text-lg">{title}</h3>
@@ -1439,7 +1443,7 @@ function ComparisonSlide({ title, colA, colB, rows }: { title: string; colA: str
             <tr className="border-b border-white/10">
               <th className="px-3 py-2.5 text-left text-[10px] font-bold uppercase text-white/35 w-1/4">Critere</th>
               <th className="px-3 py-2.5 text-left text-[10px] font-bold uppercase text-white/80 w-[37.5%]">{colA}</th>
-              <th className="px-3 py-2.5 text-left text-[10px] font-bold uppercase text-[#d4af37] w-[37.5%]">{colB}</th>
+              <th className="px-3 py-2.5 text-left text-[10px] font-bold uppercase text-brand-gold w-[37.5%]">{colB}</th>
             </tr>
           </thead>
           <tbody>
@@ -1449,11 +1453,11 @@ function ComparisonSlide({ title, colA, colB, rows }: { title: string; colA: str
                 className="border-b border-white/5 last:border-0"
                 style={{ animation: `fadeIn 0.4s ease-out ${i * 0.07}s both` }}
               >
-                <td className="px-3 py-2.5 text-xs font-semibold text-white/50">{r.label}</td>
+                <td className="px-3 py-2.5 text-xs font-semibold text-white/70">{r.label}</td>
                 <td className={`px-3 py-2.5 text-xs ${r.highlight === "a" ? "font-bold text-white bg-white/5" : "text-white/45"}`}>
                   {r.highlight === "a" && <span className="mr-1 text-emerald-400">&#x2714;</span>}{r.colA}
                 </td>
-                <td className={`px-3 py-2.5 text-xs ${r.highlight === "b" ? "font-bold text-[#d4af37] bg-[#d4af37]/5" : "text-white/45"}`}>
+                <td className={`px-3 py-2.5 text-xs ${r.highlight === "b" ? "font-bold text-brand-gold bg-brand-gold/5" : "text-white/45"}`}>
                   {r.highlight === "b" && <span className="mr-1 text-emerald-400">&#x2714;</span>}{r.colB}
                 </td>
               </tr>
@@ -1469,7 +1473,7 @@ function ComparisonSlide({ title, colA, colB, rows }: { title: string; colA: str
 function TakeawaysSlide({ items }: { items: string[] }) {
   return (
     <div className="w-full max-w-lg">
-      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-[#d4af37] mb-5">
+      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-5">
         A retenir
       </p>
       <ul className="space-y-2.5">
@@ -1501,7 +1505,7 @@ function ProcessSlide({ steps }: { steps: string[] }) {
   const isVertical = steps.length > 3;
   return (
     <div className="w-full max-w-lg">
-      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-[#d4af37] mb-6">
+      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-6">
         Processus
       </p>
       <div className={`flex ${isVertical ? "flex-col gap-3" : "flex-row items-center gap-2"}`}>
@@ -1512,9 +1516,9 @@ function ProcessSlide({ steps }: { steps: string[] }) {
             style={{ animation: `fadeIn 0.4s ease-out ${i * 0.1}s both`, opacity: 0 }}
           >
             {/* Step box */}
-            <div className={`rounded-xl border border-[#d4af37]/25 bg-[#d4af37]/10 ${isVertical ? "px-3 py-2.5 flex-1" : "px-3 py-3 w-full text-center"}`}>
+            <div className={`rounded-xl border border-brand-gold/25 bg-brand-gold/10 ${isVertical ? "px-3 py-2.5 flex-1" : "px-3 py-3 w-full text-center"}`}>
               <div className={`flex ${isVertical ? "items-center gap-3" : "flex-col items-center gap-1.5"}`}>
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#d4af37] text-[10px] font-black text-[#1a3a5c]">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold text-[10px] font-black text-brand-navy">
                   {i + 1}
                 </span>
                 <p className="text-xs font-medium text-white/80 leading-tight">{step}</p>
@@ -1522,7 +1526,7 @@ function ProcessSlide({ steps }: { steps: string[] }) {
             </div>
             {/* Arrow between steps */}
             {i < steps.length - 1 && (
-              <div className={`text-[#d4af37]/50 font-bold ${isVertical ? "text-lg leading-none" : "text-base"}`}>
+              <div className={`text-brand-gold/50 font-bold ${isVertical ? "text-lg leading-none" : "text-base"}`}>
                 {isVertical ? "↓" : "→"}
               </div>
             )}
@@ -1543,12 +1547,12 @@ function HighlightSlide({ statement }: { statement: string }) {
       {/* Decorative frame */}
       <div className="relative px-8 py-10">
         {/* Corner ornaments */}
-        <div className="absolute top-0 left-0 h-8 w-8 border-l-2 border-t-2 border-[#d4af37]/50 rounded-tl-lg" />
-        <div className="absolute top-0 right-0 h-8 w-8 border-r-2 border-t-2 border-[#d4af37]/50 rounded-tr-lg" />
-        <div className="absolute bottom-0 left-0 h-8 w-8 border-l-2 border-b-2 border-[#d4af37]/50 rounded-bl-lg" />
-        <div className="absolute bottom-0 right-0 h-8 w-8 border-r-2 border-b-2 border-[#d4af37]/50 rounded-br-lg" />
+        <div className="absolute top-0 left-0 h-8 w-8 border-l-2 border-t-2 border-brand-gold/50 rounded-tl-lg" />
+        <div className="absolute top-0 right-0 h-8 w-8 border-r-2 border-t-2 border-brand-gold/50 rounded-tr-lg" />
+        <div className="absolute bottom-0 left-0 h-8 w-8 border-l-2 border-b-2 border-brand-gold/50 rounded-bl-lg" />
+        <div className="absolute bottom-0 right-0 h-8 w-8 border-r-2 border-b-2 border-brand-gold/50 rounded-br-lg" />
 
-        <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#d4af37] mb-6">
+        <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-gold mb-6">
           Point cle
         </p>
         <blockquote className="text-xl font-black text-white leading-tight sm:text-3xl drop-shadow-lg">
@@ -1570,20 +1574,20 @@ function TrainerTipSlide({ concept, avatar }: { concept: KeyConcept; avatar?: Mo
       {avatar && (
         <div className="flex items-center gap-3 mb-5">
           <div
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-base font-black text-white ring-4 ring-[#d4af37]/30 shadow-xl"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-base font-black text-white ring-4 ring-brand-gold/30 shadow-xl"
             style={{ backgroundColor: avatar.accentColor }}
           >
             {avatar.initials}
           </div>
           <div>
             <p className="text-sm font-bold text-white">{avatar.name}</p>
-            <p className="text-xs text-[#d4af37]">{avatar.role}</p>
+            <p className="text-xs text-brand-gold">{avatar.role}</p>
           </div>
         </div>
       )}
 
       {/* Speech bubble */}
-      <div className="relative rounded-2xl border-2 border-[#d4af37]/35 bg-[#d4af37]/8 px-6 py-5 backdrop-blur-sm">
+      <div className="relative rounded-2xl border-2 border-brand-gold/35 bg-brand-gold/8 px-6 py-5 backdrop-blur-sm">
         {/* Speech bubble triangle */}
         {avatar && (
           <div
@@ -1595,7 +1599,7 @@ function TrainerTipSlide({ concept, avatar }: { concept: KeyConcept; avatar?: Mo
             }}
           />
         )}
-        <p className="text-[10px] font-bold uppercase tracking-widest text-[#d4af37] mb-3">
+        <p className="text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-3">
           Conseil formateur :
         </p>
         <div className="flex items-start gap-3">
@@ -1627,11 +1631,11 @@ function EndSlide({ title }: { title: string }) {
         </div>
       </div>
       <h2 className="mt-5 text-xl font-black text-white sm:text-2xl">{title}</h2>
-      <p className="mt-2 text-sm text-white/50">Lecon terminee — passez a la suite</p>
+      <p className="mt-2 text-sm text-white/70">Lecon terminee — passez a la suite</p>
       <div className="mx-auto mt-5 flex items-center justify-center gap-2">
-        <div className="h-1.5 w-1.5 rounded-full bg-[#d4af37]/40" />
-        <div className="h-1.5 w-1.5 rounded-full bg-[#d4af37]/70" />
-        <div className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
+        <div className="h-1.5 w-1.5 rounded-full bg-brand-gold/40" />
+        <div className="h-1.5 w-1.5 rounded-full bg-brand-gold/70" />
+        <div className="h-1.5 w-1.5 rounded-full bg-brand-gold" />
       </div>
     </div>
   );

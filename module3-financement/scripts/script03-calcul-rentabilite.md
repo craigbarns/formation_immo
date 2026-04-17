@@ -169,7 +169,7 @@ Professional real estate investment analysis concept, modern tablet displaying R
 
 [B-ROLL : Graphique montrant l'évolution de la valeur d'un bien sur le long terme]
 
-**NARRATION :"
+**NARRATION :**
 
 "Enfin, pour les investisseurs les plus avancés, il existe le TRI, le Taux de Rentabilité Interne. [PAUSE 1s] C'est un indicateur qui intègre non seulement les loyers et les charges, mais aussi la plus-value potentielle à la revente."
 
@@ -187,7 +187,7 @@ Professional real estate investment analysis concept, modern tablet displaying R
 
 [B-ROLL : Fiche complète d'un appartement T3 avec toutes les caractéristiques]
 
-**NARRATION :"
+**NARRATION :**
 
 "Mettons tout ça en pratique avec un cas concret. [PAUSE 1s] Un appartement T3 acheté 250 000 euros, frais de notaire inclus."
 
@@ -213,7 +213,7 @@ Professional real estate investment analysis concept, modern tablet displaying R
 
 [B-ROLL : Agent immobilier professionnel avec une calculatrice et des documents bien organisés]
 
-**NARRATION :"
+**NARRATION :**
 
 "Vous maîtrisez maintenant les calculs de rentabilité. [PAUSE 1s] Retenez ces points clés :"
 

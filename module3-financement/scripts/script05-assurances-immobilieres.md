@@ -95,7 +95,7 @@ Professional insurance protection concept, modern insurance policy documents wit
 
 [B-ROLL : Contrat d'assurance emprunteur avec les garanties décès, invalidité, incapacité]
 
-**NARRATION :"
+**NARRATION :**
 
 "Deuxième assurance essentielle : l'assurance emprunteur. [PAUSE 1s] Elle est obligatoire pour obtenir un crédit immobilier, et pour cause : elle protège l'emprunteur et sa famille en cas de coup dur."
 
@@ -121,7 +121,7 @@ Professional insurance protection concept, modern insurance policy documents wit
 
 [B-ROLL : Contrat d'assurance GLI avec les conditions de prise en charge]
 
-**NARRATION :"
+**NARRATION :**
 
 "Troisième assurance, particulièrement importante pour les investisseurs locatifs : la GLI, Garantie des Loyers Impayés. [PAUSE 1s] Elle protège le propriétaire contre le risque de défaut de paiement du locataire."
 
@@ -147,7 +147,7 @@ Professional insurance protection concept, modern insurance policy documents wit
 
 [B-ROLL : Immeuble d'habitation avec le contrat d'assurance copropriété en surimpression]
 
-**NARRATION :"
+**NARRATION :**
 
 "Pour les biens en copropriété, il existe l'assurance copropriété, souscrite par le syndic pour le compte de tous les copropriétaires. [PAUSE 1s] Elle couvre les parties communes et les équipements collectifs."
 
@@ -169,7 +169,7 @@ Professional insurance protection concept, modern insurance policy documents wit
 
 [B-ROLL : Chantier de construction avec le contrat d'assurance dommages ouvrage]
 
-**NARRATION :"
+**NARRATION :**
 
 "Pour les propriétaires qui font construire ou réaliser des travaux importants, il existe l'assurance dommages ouvrage. [PAUSE 1s] Elle est obligatoire pour tout projet de construction de plus de 100 000 euros."
 
@@ -191,7 +191,7 @@ Professional insurance protection concept, modern insurance policy documents wit
 
 [B-ROLL : Profil du couple Petit, propriétaires d'un appartement loué, avec leurs assurances actuelles]
 
-**NARRATION :"
+**NARRATION :**
 
 "Analysons le cas du couple Petit, propriétaires d'un appartement de 80 m² loué 1 000 euros par mois. [PAUSE 1s] Quelles assurances doivent-ils avoir ?"
 
@@ -213,7 +213,7 @@ Professional insurance protection concept, modern insurance policy documents wit
 
 [B-ROLL : Agent immobilier professionnel avec un tableau récapitulatif des assurances]
 
-**NARRATION :"
+**NARRATION :**
 
 "Vous savez maintenant quelles assurances sont essentielles pour vos clients. [PAUSE 1s] Retenez ces points clés :"
 

@@ -30,14 +30,11 @@ export function AdvancedCreditSimulator() {
   const [revenus, setRevenus] = useState(4000);
   const [charges, setCharges] = useState(0);
   const [insuranceRate, setInsuranceRate] = useState(0.36);
-  const [tracked, setTracked] = useState(false);
+  const [tracked] = useState(() => {
+    if (typeof window !== 'undefined') recordSimulatorUsed("credit");
+    return true;
+  });
 
-  useEffect(() => {
-    if (!tracked) {
-      recordSimulatorUsed("credit");
-      setTracked(true);
-    }
-  }, [tracked]);
 
   const result = useMemo<SimulationResult>(() => {
     const principal = montant - apport;
@@ -127,7 +124,7 @@ export function AdvancedCreditSimulator() {
           <button
             key={p.label}
             onClick={() => applyPreset(p)}
-            className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-700 transition hover:border-[#1a3a5c]/40 hover:bg-[#1a3a5c]/5"
+            className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-700 transition hover:border-brand-navy/40 hover:bg-brand-navy/5"
           >
             {p.label}
           </button>
@@ -144,7 +141,7 @@ export function AdvancedCreditSimulator() {
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-4">
           <h4 className="font-semibold text-zinc-800 flex items-center gap-2">
-            <Calculator className="h-4 w-4 text-[#d4af37]" />
+            <Calculator className="h-4 w-4 text-brand-gold" />
             Projet immobilier
           </h4>
           
@@ -156,7 +153,7 @@ export function AdvancedCreditSimulator() {
         
         <div className="space-y-4">
           <h4 className="font-semibold text-zinc-800 flex items-center gap-2">
-            <TrendingUp className="h-4 w-4 text-[#d4af37]" />
+            <TrendingUp className="h-4 w-4 text-brand-gold" />
             Situation financière
           </h4>
           
@@ -187,7 +184,7 @@ export function AdvancedCreditSimulator() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <div className="text-center p-3 rounded-xl bg-zinc-50 border border-zinc-100">
-            <p className="text-2xl font-bold text-[#d4af37]">{formatCurrency(result.monthlyPayment)}</p>
+            <p className="text-2xl font-bold text-brand-gold">{formatCurrency(result.monthlyPayment)}</p>
             <p className="text-xs text-zinc-500">Mensualité totale</p>
           </div>
           <div className="text-center p-3 rounded-xl bg-zinc-50 border border-zinc-100">

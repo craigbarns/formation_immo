@@ -289,11 +289,11 @@ export const COURSE: CourseModule[] = [
         ],
       },
       {
-        slug: "offre-achat-avants-contrats",
-        title: "Offre d'achat & avants-contrats",
-        scriptFile: "module2-transaction/scripts/06-offre-achat-avants-contrats.md",
+        slug: "offre-achat-avant-contrats",
+        title: "Offre d'achat & avant-contrats",
+        scriptFile: "module2-transaction/scripts/06-offre-achat-avant-contrats.md",
         videoUrl: null,
-        audioUrl: "/audio/06-offre-achat-avants-contrats.mp3",
+        audioUrl: "/audio/06-offre-achat-avant-contrats.mp3",
         duration: 60,
         difficulty: "avance",
         objectives: [

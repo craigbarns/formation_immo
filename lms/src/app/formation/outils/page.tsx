@@ -14,7 +14,7 @@ export default function OutilsPage() {
   return (
     <div className="space-y-12">
       {/* Header */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1a3a5c] via-[#244b75] to-[#0f2540] px-6 py-10 text-white shadow-2xl md:px-10 md:py-12">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-navy via-[#244b75] to-[#0f2540] px-6 py-10 text-white shadow-2xl md:px-10 md:py-12">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.07]"
           style={{
@@ -22,7 +22,7 @@ export default function OutilsPage() {
           }}
           aria-hidden
         />
-        <nav className="mb-6 flex items-center gap-2 text-sm text-white/60">
+        <nav className="mb-6 flex items-center gap-2 text-sm text-white/80">
           <Link href="/formation" className="transition hover:text-white">Parcours</Link>
           <span>/</span>
           <span className="text-white">Outils interactifs</span>
@@ -32,13 +32,13 @@ export default function OutilsPage() {
             🧮
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#d4af37]">Formation 42h</p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">Formation 42h</p>
             <h1 className="mt-1 text-3xl font-black leading-tight tracking-tight md:text-4xl">
               Outils interactifs
             </h1>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/75">
               Simulateurs professionnels et entraînements pratiques — conçus pour maîtriser le
-              financement, la rentabilité, la négociation et l'argumentaire vendeur comme un expert.
+              financement, la rentabilité, la négociation et l&apos;argumentaire vendeur comme un expert.
             </p>
           </div>
         </div>
@@ -54,7 +54,7 @@ export default function OutilsPage() {
               <span className="text-2xl">{t.icon}</span>
               <div>
                 <p className="text-sm font-bold">{t.label}</p>
-                <p className="text-[11px] text-white/60">{t.tag}</p>
+                <p className="text-[11px] text-white/80">{t.tag}</p>
               </div>
             </a>
           ))}
@@ -115,7 +115,7 @@ export default function OutilsPage() {
       <div className="border-t border-zinc-200 pt-6">
         <Link
           href="/formation"
-          className="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-700 shadow-sm transition hover:border-[#1a3a5c]/30 hover:shadow-md"
+          className="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold text-zinc-700 shadow-sm transition hover:border-brand-navy/30 hover:shadow-md"
         >
           ← Retour au parcours
         </Link>
@@ -156,7 +156,7 @@ function ToolHeader({
         <span className={`rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide ${colors[tagColor]}`}>
           {tag}
         </span>
-        <h2 className="mt-0.5 text-xl font-bold text-[#1a3a5c]">{title}</h2>
+        <h2 className="mt-0.5 text-xl font-bold text-brand-navy">{title}</h2>
       </div>
       <div className="h-px flex-1 bg-gradient-to-r from-zinc-200 to-transparent" aria-hidden />
     </div>

@@ -42,6 +42,9 @@ export function getNotesState(): NotesState {
 
 function saveState(state: NotesState) {
   localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(state));
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent("notes-state-changed", { detail: state }));
+  }
 }
 
 export function getNotesForLesson(moduleSlug: string, lessonSlug: string): Note[] {

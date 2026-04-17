@@ -1774,11 +1774,11 @@ const CALLOUTS: TrainerCallout[] = [
     avatarColor: "#059669",
   },
 
-  // ── transaction / offre-achat-avants-contrats ──────────
+  // ── transaction / offre-achat-avant-contrats ──────────
   {
     id: "offre-tip-1",
     moduleSlug: "transaction",
-    lessonSlug: "offre-achat-avants-contrats",
+    lessonSlug: "offre-achat-avant-contrats",
     type: "tip",
     title: "Conseil pro",
     body: "Une offre d'achat bien rédigée mentionne toujours : le prix proposé, le délai de validité (5 à 10 jours), les conditions suspensives (prêt, vente en cours) et une photocopie de la pièce d'identité de l'acquéreur. Une offre incomplète est une offre faible.",
@@ -1788,7 +1788,7 @@ const CALLOUTS: TrainerCallout[] = [
   {
     id: "offre-warning-1",
     moduleSlug: "transaction",
-    lessonSlug: "offre-achat-avants-contrats",
+    lessonSlug: "offre-achat-avant-contrats",
     type: "warning",
     title: "Attention !",
     body: "Ne promettez jamais à un acheteur que le vendeur 'va sûrement accepter'. Tant qu'une offre n'est pas signée et retournée avec la mention 'bon pour accord', elle ne crée aucune obligation pour le vendeur.",
@@ -1798,7 +1798,7 @@ const CALLOUTS: TrainerCallout[] = [
   {
     id: "offre-fact-1",
     moduleSlug: "transaction",
-    lessonSlug: "offre-achat-avants-contrats",
+    lessonSlug: "offre-achat-avant-contrats",
     type: "fact",
     title: "Chiffre clé",
     body: "Environ 65 % des transactions aboutissent après une offre d'achat. Les 35 % restants passent directement par compromis. L'offre reste l'étape la plus courante en zone tendue où la concurrence entre acheteurs est forte.",
@@ -1808,7 +1808,7 @@ const CALLOUTS: TrainerCallout[] = [
   {
     id: "offre-example-1",
     moduleSlug: "transaction",
-    lessonSlug: "offre-achat-avants-contrats",
+    lessonSlug: "offre-achat-avant-contrats",
     type: "example",
     title: "Exemple concret",
     body: "Promesse unilatérale : le vendeur s'engage seul. L'acquéreur paie un dépôt de garantie (souvent 5 %) et dispose d'un délai de réflexion (option). Compromis synallagmatique : les deux parties sont engagées dès la signature. Le compromis est plus sécurisant pour le vendeur.",

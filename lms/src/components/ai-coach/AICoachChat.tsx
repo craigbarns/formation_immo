@@ -150,30 +150,30 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-        className="relative flex h-[80vh] w-full max-w-md flex-col overflow-hidden rounded-2xl border border-[#d4af37]/30 bg-[#0f1f33] shadow-2xl"
+        className="relative flex h-[80vh] w-full max-w-md flex-col overflow-hidden rounded-2xl border border-brand-gold/30 bg-[#0f1f33] shadow-2xl"
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-white/10 bg-gradient-to-r from-[#1a3a5c] to-[#0f1f33] px-4 py-3">
+        <div className="flex items-center justify-between border-b border-white/10 bg-gradient-to-r from-brand-navy to-[#0f1f33] px-4 py-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#d4af37] to-[#f0c040] text-[#1a3a5c]">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-[#f0c040] text-brand-navy">
               <Bot className="h-5 w-5" />
             </div>
             <div>
               <h3 className="font-bold text-white">Marie, votre coach</h3>
-              <p className="text-[10px] text-white/50">Propulsée par IA • En ligne</p>
+              <p className="text-[10px] text-white/70">Propulsée par IA • En ligne</p>
             </div>
           </div>
           <div className="flex items-center gap-1">
             <button
               onClick={handleClearChat}
-              className="rounded-full p-2 text-white/40 hover:bg-white/10 hover:text-white"
+              className="rounded-full p-2 text-white/60 hover:bg-white/10 hover:text-white"
               title="Effacer la conversation"
             >
               <RotateCcw className="h-4 w-4" />
             </button>
             <button
               onClick={onClose}
-              className="rounded-full p-2 text-white/40 hover:bg-white/10 hover:text-white"
+              className="rounded-full p-2 text-white/60 hover:bg-white/10 hover:text-white"
             >
               <X className="h-5 w-5" />
             </button>
@@ -193,13 +193,13 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
                 <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
                   msg.role === "user" 
                     ? "bg-white/10 text-white" 
-                    : "bg-gradient-to-br from-[#d4af37] to-[#f0c040] text-[#1a3a5c]"
+                    : "bg-gradient-to-br from-brand-gold to-[#f0c040] text-brand-navy"
                 }`}>
                   {msg.role === "user" ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
                 </div>
                 <div className={`max-w-[80%] rounded-2xl px-4 py-2 text-sm ${
                   msg.role === "user"
-                    ? "bg-[#d4af37]/20 text-white"
+                    ? "bg-brand-gold/20 text-white"
                     : "bg-white/10 text-white/90"
                 }`}>
                   {msg.content.split("\n").map((line, i) => (
@@ -217,9 +217,9 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="rounded-xl border border-[#d4af37]/20 bg-[#d4af37]/5 p-3"
+              className="rounded-xl border border-brand-gold/20 bg-brand-gold/5 p-3"
             >
-              <div className="flex items-center gap-2 text-[#d4af37]">
+              <div className="flex items-center gap-2 text-brand-gold">
                 <Sparkles className="h-4 w-4" />
                 <span className="text-xs font-semibold">Suggestion personnalisée</span>
               </div>
@@ -231,10 +231,10 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex items-center gap-2 text-white/40"
+              className="flex items-center gap-2 text-white/60"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#d4af37] to-[#f0c040]">
-                <Bot className="h-4 w-4 text-[#1a3a5c]" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-[#f0c040]">
+                <Bot className="h-4 w-4 text-brand-navy" />
               </div>
               <div className="flex gap-1">
                 <span className="animate-bounce">.</span>
@@ -256,17 +256,17 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Posez votre question..."
-              className="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/30 focus:border-[#d4af37]/50 focus:outline-none focus:ring-1 focus:ring-[#d4af37]/30"
+              className="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/30 focus:border-brand-gold/50 focus:outline-none focus:ring-1 focus:ring-brand-gold/30"
             />
             <button
               onClick={handleSend}
               disabled={!input.trim() || isLoading}
-              className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#d4af37] text-[#1a3a5c] transition hover:bg-[#e0bf4d] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold text-brand-navy transition hover:bg-[#e0bf4d] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Send className="h-4 w-4" />
             </button>
           </div>
-          <p className="mt-2 text-[10px] text-center text-white/30">
+          <p className="mt-2 text-[10px] text-center text-white/50">
             Marie est une IA expérimentale. Vérifiez les informations importantes.
           </p>
         </div>

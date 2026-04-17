@@ -82,7 +82,7 @@ export function LessonMap({
           <button
             key={f.id}
             onClick={() => scrollTo(f.anchor)}
-            className="flex items-center gap-1.5 rounded-full border border-[#1a3a5c]/15 bg-white px-3 py-1 text-[11px] font-semibold text-[#1a3a5c] shadow-sm transition hover:border-[#d4af37]/50 hover:bg-[#d4af37]/5 hover:shadow-md"
+            className="flex items-center gap-1.5 rounded-full border border-brand-navy/15 bg-white px-3 py-1 text-[11px] font-semibold text-brand-navy shadow-sm transition hover:border-brand-gold/50 hover:bg-brand-gold/5 hover:shadow-md"
           >
             <span>{f.icon}</span>
             <span>{f.label}</span>
@@ -99,10 +99,10 @@ export function LessonMap({
           >
             <div className="flex items-center gap-2">
               <span className="text-base">📚</span>
-              <span className="text-sm font-semibold text-[#1a3a5c]">
+              <span className="text-sm font-semibold text-brand-navy">
                 Programme de la leçon
                 {totalDuration && (
-                  <span className="ml-2 rounded-full bg-[#d4af37]/15 px-2 py-0.5 text-[10px] font-bold text-[#7a6008]">
+                  <span className="ml-2 rounded-full bg-brand-gold/15 px-2 py-0.5 text-[10px] font-bold text-[#7a6008]">
                     {totalDuration}
                   </span>
                 )}
@@ -123,7 +123,7 @@ export function LessonMap({
             <div className="border-t border-zinc-100 px-5 py-4 space-y-5">
               {/* Expert quote */}
               {expertQuote && (
-                <blockquote className="rounded-xl border-l-4 border-[#d4af37] bg-[#d4af37]/5 py-3 pl-4 pr-3">
+                <blockquote className="rounded-xl border-l-4 border-brand-gold bg-brand-gold/5 py-3 pl-4 pr-3">
                   <p className="text-sm italic leading-relaxed text-zinc-700">&ldquo;{expertQuote.text}&rdquo;</p>
                   <footer className="mt-2 text-[11px] font-semibold text-zinc-500">
                     — {expertQuote.author}
@@ -141,7 +141,7 @@ export function LessonMap({
                   <ul className="space-y-1.5">
                     {objectives.map((obj, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm text-zinc-700">
-                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#1a3a5c] text-[10px] font-bold text-white">
+                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-navy text-[10px] font-bold text-white">
                           {i + 1}
                         </span>
                         {obj}

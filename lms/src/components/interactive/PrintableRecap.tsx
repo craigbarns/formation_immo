@@ -52,7 +52,7 @@ export function PrintableRecap({
       {/* Trigger button */}
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-2 rounded-xl border border-[#d4af37]/40 bg-[#d4af37]/5 px-4 py-2.5 text-sm font-semibold text-[#7a6008] transition hover:bg-[#d4af37]/15 hover:shadow-sm"
+        className="flex items-center gap-2 rounded-xl border border-brand-gold/40 bg-brand-gold/5 px-4 py-2.5 text-sm font-semibold text-[#7a6008] transition hover:bg-brand-gold/15 hover:shadow-sm"
       >
         🖨️ Fiche récap imprimable
       </button>
@@ -70,11 +70,11 @@ export function PrintableRecap({
               id="print-controls"
               className="flex items-center justify-between border-b border-zinc-100 px-6 py-4"
             >
-              <p className="text-sm font-bold text-[#1a3a5c]">Fiche récap — {lessonTitle}</p>
+              <p className="text-sm font-bold text-brand-navy">Fiche récap — {lessonTitle}</p>
               <div className="flex gap-2">
                 <button
                   onClick={() => window.print()}
-                  className="flex items-center gap-2 rounded-xl bg-[#1a3a5c] px-4 py-2 text-sm font-bold text-white shadow-md transition hover:bg-[#142d45]"
+                  className="flex items-center gap-2 rounded-xl bg-brand-navy px-4 py-2 text-sm font-bold text-white shadow-md transition hover:bg-brand-navy-deep"
                 >
                   🖨️ Imprimer
                 </button>

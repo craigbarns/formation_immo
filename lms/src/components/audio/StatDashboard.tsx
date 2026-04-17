@@ -3,8 +3,8 @@
 import type { StatCard } from "@/data/lesson-keyconcepts";
 
 const COLOR_MAP: Record<string, { bg: string; text: string; border: string }> = {
-  navy: { bg: "bg-[#1a3a5c]/5", text: "text-[#1a3a5c]", border: "border-[#1a3a5c]/20" },
-  gold: { bg: "bg-[#d4af37]/8", text: "text-[#8a7318]", border: "border-[#d4af37]/30" },
+  navy: { bg: "bg-brand-navy/5", text: "text-brand-navy", border: "border-brand-navy/20" },
+  gold: { bg: "bg-brand-gold/8", text: "text-[#8a7318]", border: "border-brand-gold/30" },
   green: { bg: "bg-emerald-50", text: "text-emerald-700", border: "border-emerald-200" },
   red: { bg: "bg-red-50", text: "text-red-700", border: "border-red-200" },
   blue: { bg: "bg-blue-50", text: "text-blue-700", border: "border-blue-200" },

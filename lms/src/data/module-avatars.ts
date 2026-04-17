@@ -1,6 +1,6 @@
 /**
  * Avatars pédagogiques — un personnage expert par module.
- * Voix ElevenLabs + Mistral Voxtral : référence unique `formateur-voices.json`.
+ * Voix Mistral Voxtral : référence unique `formateur-voices.json`.
  */
 
 import formateurVoices from "./formateur-voices.json";
@@ -10,10 +10,6 @@ export type ModuleAvatar = {
   name: string;
   role: string;
   description: string;
-  /** ElevenLabs — vidéos / avatar */
-  voiceId: string;
-  voiceProvider: "elevenlabs";
-  voiceStyle: string;
   /** Mistral Voxtral — narration MP3 (`npm run audio:generate`) */
   mistralVoiceId: string;
   mistralVoiceLabel: string;
@@ -34,9 +30,6 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
     role: "Juriste & experte conformité",
     description:
       "Experte en droit immobilier et conformité ALUR. 20 ans d'expérience en transactions et contentieux.",
-    voiceId: v.juridique.elevenLabsVoiceId,
-    voiceProvider: "elevenlabs",
-    voiceStyle: "Ton posé, autorité bienveillante",
     mistralVoiceId: v.juridique.mistralVoiceId,
     mistralVoiceLabel: v.juridique.mistralVoiceLabel,
     portraitPrompt:
@@ -50,9 +43,6 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
     role: "Négociatrice senior",
     description:
       "Top négociatrice, 15 ans de terrain. Spécialiste estimation et closing en Île-de-France.",
-    voiceId: v.transaction.elevenLabsVoiceId,
-    voiceProvider: "elevenlabs",
-    voiceStyle: "Chaleureuse, pédagogue",
     mistralVoiceId: v.transaction.mistralVoiceId,
     mistralVoiceLabel: v.transaction.mistralVoiceLabel,
     portraitPrompt:
@@ -66,9 +56,6 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
     role: "Courtière & analyste financière",
     description:
       "Ancienne banquière reconvertie courtière. Experte crédit, fiscalité et montages financiers immobiliers.",
-    voiceId: v.financement.elevenLabsVoiceId,
-    voiceProvider: "elevenlabs",
-    voiceStyle: "Pédagogue, rigueur analytique",
     mistralVoiceId: v.financement.mistralVoiceId,
     mistralVoiceLabel: v.financement.mistralVoiceLabel,
     portraitPrompt:
@@ -82,9 +69,6 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
     role: "Directrice marketing digital",
     description:
       "Experte marketing digital immobilier, ex-SeLoger. Maîtrise photo, SEO, réseaux sociaux et portails.",
-    voiceId: v.marketing.elevenLabsVoiceId,
-    voiceProvider: "elevenlabs",
-    voiceStyle: "Moderne, dynamique",
     mistralVoiceId: v.marketing.mistralVoiceId,
     mistralVoiceLabel: v.marketing.mistralVoiceLabel,
     portraitPrompt:
@@ -98,9 +82,6 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
     role: "Directrice d'agence",
     description:
       "30 ans d'expérience terrain. Experte visites, closing et fidélisation client. Formatrice certifiée.",
-    voiceId: v.terrain.elevenLabsVoiceId,
-    voiceProvider: "elevenlabs",
-    voiceStyle: "Charisme, autorité terrain",
     mistralVoiceId: v.terrain.mistralVoiceId,
     mistralVoiceLabel: v.terrain.mistralVoiceLabel,
     portraitPrompt:

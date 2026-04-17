@@ -2,12 +2,14 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { ProChecklist } from "@/data/pro-checklists";
+import { recordChecklistComplete } from "@/lib/gamification";
+import { createClient } from "@/lib/supabase/client";
 
 function storageKey(clId: string) {
   return `pro-checklist-${clId}`;
 }
 
-function loadChecked(clId: string): Set<string> {
+function loadLocalChecked(clId: string): Set<string> {
   if (typeof window === "undefined") return new Set();
   try {
     const raw = localStorage.getItem(storageKey(clId));
@@ -19,12 +21,58 @@ function loadChecked(clId: string): Set<string> {
   }
 }
 
-function saveChecked(clId: string, set: Set<string>) {
+function saveLocalChecked(clId: string, set: Set<string>) {
   try {
     localStorage.setItem(storageKey(clId), JSON.stringify([...set]));
   } catch {
     /* ignore */
   }
+}
+
+async function loadSupabaseChecked(clId: string): Promise<Set<string> | null> {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data } = await supabase
+    .from("user_settings")
+    .select("pro_checklists")
+    .eq("user_id", user.id)
+    .single();
+
+  if (!data?.pro_checklists) return null;
+
+  const checklists = data.pro_checklists as Record<string, string[]>;
+  const arr = checklists[clId];
+  if (!Array.isArray(arr)) return null;
+
+  return new Set(arr);
+}
+
+async function saveSupabaseChecked(clId: string, set: Set<string>) {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return;
+
+  const { data } = await supabase
+    .from("user_settings")
+    .select("pro_checklists")
+    .eq("user_id", user.id)
+    .single();
+
+  const current = (data?.pro_checklists as Record<string, string[]> | undefined) || {};
+  const next = { ...current, [clId]: [...set] };
+
+  await supabase
+    .from("user_settings")
+    .upsert(
+      {
+        user_id: user.id,
+        pro_checklists: next,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "user_id" },
+    );
 }
 
 export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }) {
@@ -34,7 +82,24 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
 
   useEffect(() => {
     if (!cl) return;
-    setChecked(loadChecked(cl.id));
+
+    let cancelled = false;
+
+    async function load() {
+      const fromSupabase = await loadSupabaseChecked(cl.id);
+      if (cancelled) return;
+
+      if (fromSupabase) {
+        setChecked(fromSupabase);
+      } else {
+        setChecked(loadLocalChecked(cl.id));
+      }
+    }
+
+    load();
+    return () => {
+      cancelled = true;
+    };
   }, [cl?.id]);
 
   const toggle = useCallback(
@@ -44,7 +109,8 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
         const next = new Set(prev);
         if (next.has(itemId)) next.delete(itemId);
         else next.add(itemId);
-        saveChecked(cl.id, next);
+        saveLocalChecked(cl.id, next);
+        saveSupabaseChecked(cl.id, next).catch(() => {});
         return next;
       });
     },
@@ -104,11 +170,17 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
   const total = cl.items.length;
   const done = cl.items.filter((i) => checked.has(i.id)).length;
 
+  useEffect(() => {
+    if (done === total && total > 0) {
+      recordChecklistComplete(cl.id);
+    }
+  }, [done, total, cl.id]);
+
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#1a3a5c]/15 bg-white shadow-lg">
-      <div className="flex flex-col gap-4 border-b border-[#1a3a5c]/10 bg-gradient-to-br from-[#1a3a5c] to-[#0f2840] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
+      <div className="flex flex-col gap-4 border-b border-brand-navy/10 bg-gradient-to-br from-brand-navy to-[#0f2840] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d4af37]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
             Checklist pro
           </p>
           <h2 className="mt-1 flex items-center gap-2 text-xl font-bold text-white sm:text-2xl">
@@ -128,7 +200,7 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
           <button
             type="button"
             onClick={downloadTxt}
-            className="rounded-lg border border-[#d4af37]/50 bg-[#d4af37] px-4 py-2 text-sm font-bold text-[#1a3a5c] transition hover:brightness-105"
+            className="rounded-lg border border-brand-gold/50 bg-brand-gold px-4 py-2 text-sm font-bold text-brand-navy transition hover:brightness-105"
           >
             Télécharger (.txt)
           </button>
@@ -143,12 +215,12 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
               type="button"
               onClick={() => setTab(i)}
               className={`relative px-4 py-3 text-sm font-medium transition ${
-                i === tab ? "text-[#1a3a5c]" : "text-zinc-400 hover:text-zinc-600"
+                i === tab ? "text-brand-navy" : "text-zinc-400 hover:text-zinc-600"
               }`}
             >
               {c.title}
               {i === tab && (
-                <span className="absolute inset-x-2 bottom-0 h-0.5 rounded-full bg-[#d4af37]" />
+                <span className="absolute inset-x-2 bottom-0 h-0.5 rounded-full bg-brand-gold" />
               )}
             </button>
           ))}
@@ -159,13 +231,13 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
         <div className="mb-6 flex items-center justify-between gap-3">
           <p className="text-sm text-zinc-600">
             Progression :{" "}
-            <span className="font-bold tabular-nums text-[#1a3a5c]">
+            <span className="font-bold tabular-nums text-brand-navy">
               {done}/{total}
             </span>
           </p>
           <div className="h-2 flex-1 max-w-xs overflow-hidden rounded-full bg-zinc-100">
             <div
-              className="h-full rounded-full bg-[#d4af37] transition-[width]"
+              className="h-full rounded-full bg-brand-gold transition-[width]"
               style={{ width: total ? `${(done / total) * 100}%` : "0%" }}
             />
           </div>
@@ -175,18 +247,18 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
           {byCategory.map(({ category, items }) =>
             items.length === 0 ? null : (
               <div key={category}>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#1a3a5c]">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-brand-navy">
                   {category}
                 </h3>
                 <ul className="mt-3 space-y-2">
                   {items.map((it) => (
                     <li key={it.id}>
-                      <label className="flex cursor-pointer gap-3 rounded-xl border border-zinc-100 bg-zinc-50/50 px-4 py-3 transition hover:border-[#1a3a5c]/20">
+                      <label className="flex cursor-pointer gap-3 rounded-xl border border-zinc-100 bg-zinc-50/50 px-4 py-3 transition hover:border-brand-navy/20">
                         <input
                           type="checkbox"
                           checked={checked.has(it.id)}
                           onChange={() => toggle(it.id)}
-                          className="mt-1 h-4 w-4 shrink-0 rounded border-zinc-300 text-[#1a3a5c] focus:ring-[#d4af37]"
+                          className="mt-1 h-4 w-4 shrink-0 rounded border-zinc-300 text-brand-navy focus:ring-brand-gold"
                         />
                         <span className="flex-1 text-sm text-zinc-800">{it.text}</span>
                       </label>

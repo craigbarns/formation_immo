@@ -10,14 +10,11 @@ export function NetVendeurSimulator() {
   const [honoraires, setHonoraires] = useState(5);
   const [chargeAcquereur, setChargeAcquereur] = useState(true);
   const [copied, setCopied] = useState<number | null>(null);
-  const [tracked, setTracked] = useState(false);
+  const [tracked] = useState(() => {
+    if (typeof window !== 'undefined') recordSimulatorUsed("net-vendeur");
+    return true;
+  });
 
-  useEffect(() => {
-    if (!tracked) {
-      recordSimulatorUsed("net-vendeur");
-      setTracked(true);
-    }
-  }, [tracked]);
 
   const montantHonoraires = (prixFai * honoraires) / 100;
   const netVendeur = chargeAcquereur ? prixFai : prixFai - montantHonoraires;
@@ -51,7 +48,7 @@ export function NetVendeurSimulator() {
           <button
             key={p.label}
             onClick={() => { setPrixFai(p.prix); setHonoraires(p.taux); }}
-            className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-700 transition hover:border-[#1a3a5c]/40 hover:bg-[#1a3a5c]/5"
+            className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-700 transition hover:border-brand-navy/40 hover:bg-brand-navy/5"
           >
             {p.label}
           </button>
@@ -67,15 +64,15 @@ export function NetVendeurSimulator() {
       <div className="grid gap-6 md:grid-cols-2">
         {/* Inputs */}
         <div className="space-y-5 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-          <h4 className="flex items-center gap-2 text-sm font-bold text-[#1a3a5c]">
-            <Calculator size={16} className="text-[#d4af37]" /> Paramètres
+          <h4 className="flex items-center gap-2 text-sm font-bold text-brand-navy">
+            <Calculator size={16} className="text-brand-gold" /> Paramètres
           </h4>
 
           <div className="space-y-4">
             <div>
               <div className="flex justify-between text-sm font-medium text-zinc-700">
                 <label>Prix de vente FAI</label>
-                <span className="font-bold text-[#d4af37]">{prixFai.toLocaleString("fr-FR")} €</span>
+                <span className="font-bold text-brand-gold">{prixFai.toLocaleString("fr-FR")} €</span>
               </div>
               <input
                 type="range"
@@ -84,14 +81,14 @@ export function NetVendeurSimulator() {
                 step={5000}
                 value={prixFai}
                 onChange={(e) => setPrixFai(Number(e.target.value))}
-                className="mt-2 h-2 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 accent-[#1a3a5c]"
+                className="mt-2 h-2 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 accent-brand-navy"
               />
             </div>
 
             <div>
               <div className="flex justify-between text-sm font-medium text-zinc-700">
                 <label>Taux d'honoraires</label>
-                <span className="font-bold text-[#d4af37]">{honoraires} %</span>
+                <span className="font-bold text-brand-gold">{honoraires} %</span>
               </div>
               <input
                 type="range"
@@ -100,7 +97,7 @@ export function NetVendeurSimulator() {
                 step={0.5}
                 value={honoraires}
                 onChange={(e) => setHonoraires(Number(e.target.value))}
-                className="mt-2 h-2 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 accent-[#1a3a5c]"
+                className="mt-2 h-2 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 accent-brand-navy"
               />
             </div>
 
@@ -109,7 +106,7 @@ export function NetVendeurSimulator() {
                 type="checkbox"
                 checked={chargeAcquereur}
                 onChange={(e) => setChargeAcquereur(e.target.checked)}
-                className="h-5 w-5 rounded border-zinc-300 text-[#1a3a5c] focus:ring-[#1a3a5c]"
+                className="h-5 w-5 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy"
               />
               <div>
                 <p className="text-sm font-semibold text-zinc-800">Honoraires à charge de l'acquéreur</p>
@@ -154,14 +151,14 @@ export function NetVendeurSimulator() {
 
       {/* Phrases */}
       <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-        <h4 className="text-sm font-bold text-[#1a3a5c]">Phrases d'argumentaire prêtes à l'emploi</h4>
+        <h4 className="text-sm font-bold text-brand-navy">Phrases d'argumentaire prêtes à l'emploi</h4>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {phrases.map((p, i) => (
             <motion.button
               key={i}
               whileHover={{ scale: 1.01 }}
               onClick={() => handleCopy(p, i)}
-              className="relative text-left rounded-xl border border-zinc-200 bg-zinc-50 p-4 transition hover:border-[#d4af37]/50 hover:shadow-sm"
+              className="relative text-left rounded-xl border border-zinc-200 bg-zinc-50 p-4 transition hover:border-brand-gold/50 hover:shadow-sm"
             >
               <span className="absolute right-3 top-3 text-zinc-400">
                 {copied === i ? <CheckCircle2 size={14} className="text-emerald-500" /> : <Copy size={14} />}

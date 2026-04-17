@@ -76,20 +76,20 @@ export function AudioPlayer({ src, title, avatar }: Props) {
   const pct = duration > 0 ? (current / duration) * 100 : 0;
 
   return (
-    <div className="rounded-2xl border-2 border-[#1a3a5c]/15 bg-gradient-to-br from-[#1a3a5c] to-[#0f2a42] p-5 shadow-xl">
+    <div className="rounded-2xl border-2 border-brand-navy/15 bg-gradient-to-br from-brand-navy to-[#0f2a42] p-5 shadow-xl">
       <audio ref={ref} src={src} preload="metadata" />
 
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
         {avatar ? (
           <div
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white ring-2 ring-[#d4af37]/50"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white ring-2 ring-brand-gold/50"
             style={{ backgroundColor: avatar.accentColor }}
           >
             {avatar.initials}
           </div>
         ) : (
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#d4af37]/20 text-[#d4af37]">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-gold/20 text-brand-gold">
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
               <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
             </svg>
@@ -98,10 +98,10 @@ export function AudioPlayer({ src, title, avatar }: Props) {
         <div className="min-w-0 flex-1">
           <p className="text-sm font-bold text-white truncate">{title}</p>
           {avatar && (
-            <p className="text-xs text-white/60">{avatar.name} — {avatar.role}</p>
+            <p className="text-xs text-white/80">{avatar.name} — {avatar.role}</p>
           )}
         </div>
-        <div className="flex items-center gap-1 text-[10px] text-white/50">
+        <div className="flex items-center gap-1 text-[10px] text-white/70">
           {loaded && <span>{fmt(duration)}</span>}
         </div>
       </div>
@@ -123,7 +123,7 @@ export function AudioPlayer({ src, title, avatar }: Props) {
                 key={i}
                 className={`flex-1 rounded-sm transition-colors duration-150 ${
                   isPlayed
-                    ? "bg-[#d4af37]"
+                    ? "bg-brand-gold"
                     : "bg-white/15 group-hover:bg-white/25"
                 }`}
                 style={{ height: `${Math.round(Math.min(95, Math.max(15, h)))}%` }}
@@ -139,7 +139,7 @@ export function AudioPlayer({ src, title, avatar }: Props) {
       </div>
 
       {/* Time display */}
-      <div className="mt-2 flex items-center justify-between text-[11px] text-white/50 tabular-nums px-1">
+      <div className="mt-2 flex items-center justify-between text-[11px] text-white/70 tabular-nums px-1">
         <span>{fmt(current)}</span>
         <span>{loaded ? `-${fmt(Math.max(0, duration - current))}` : "--:--"}</span>
       </div>
@@ -159,7 +159,7 @@ export function AudioPlayer({ src, title, avatar }: Props) {
 
         <button
           onClick={toggle}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#d4af37] text-[#1a3a5c] shadow-lg shadow-[#d4af37]/30 hover:bg-[#e0bf4d] transition-all hover:scale-105 active:scale-95"
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/30 hover:bg-[#e0bf4d] transition-all hover:scale-105 active:scale-95"
         >
           {playing ? (
             <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">

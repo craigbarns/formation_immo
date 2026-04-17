@@ -34,7 +34,7 @@ function QuizCard({ q }: { q: QuizCheckpoint }) {
                 }}
                 className={`w-full rounded-lg border px-4 py-2.5 text-left text-sm transition ${
                   !reveal
-                    ? "border-zinc-200 hover:border-[#1a3a5c]/30 hover:bg-zinc-50"
+                    ? "border-zinc-200 hover:border-brand-navy/30 hover:bg-zinc-50"
                     : correct
                       ? "border-emerald-400 bg-emerald-50 text-emerald-900"
                       : selected
@@ -49,7 +49,7 @@ function QuizCard({ q }: { q: QuizCheckpoint }) {
         })}
       </ul>
       {showExplain && picked !== null && (
-        <div className="mt-4 rounded-lg border border-[#d4af37]/25 bg-[#d4af37]/5 px-4 py-3 text-sm text-zinc-700">
+        <div className="mt-4 rounded-lg border border-brand-gold/25 bg-brand-gold/5 px-4 py-3 text-sm text-zinc-700">
           {q.explanation}
         </div>
       )}
@@ -69,7 +69,7 @@ export function QuizCheckpointsSection({
   return (
     <section className="space-y-4">
       <div>
-        <h2 className="text-sm font-bold uppercase tracking-wide text-[#1a3a5c]">{title}</h2>
+        <h2 className="text-sm font-bold uppercase tracking-wide text-brand-navy">{title}</h2>
         <p className="mt-1 text-sm text-zinc-600">
           Testez votre compréhension avant de passer à la suite.
         </p>

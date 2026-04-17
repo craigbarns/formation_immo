@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useSpring, useTransform } from "framer-motion";
 
 interface AnimatedCounterProps {
@@ -18,7 +18,7 @@ export function AnimatedCounter({
   prefix = "",
   className = "",
 }: AnimatedCounterProps) {
-  const [mounted, setMounted] = useState(false);
+  const hasAnimated = useRef(false);
 
   const spring = useSpring(0, {
     stiffness: 50,
@@ -31,11 +31,11 @@ export function AnimatedCounter({
   );
 
   useEffect(() => {
-    setMounted(true);
     spring.set(value);
+    hasAnimated.current = true;
   }, [spring, value]);
 
-  if (!mounted) {
+  if (!hasAnimated.current) {
     return (
       <span className={className}>
         {prefix}

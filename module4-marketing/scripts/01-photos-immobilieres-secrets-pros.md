@@ -241,7 +241,7 @@ Pour aller plus loin, je vous recommande trois ressources. [PAUSE 1s] La chaîne
 
 [B-ROLL : Logo de la formation, appel à l'action]
 
-Souvenez-vous : dans l'immobilier digital, votre photo est votre vitrine. [PAUSE 2s] Une photo professionnelle ne ment pas, elle révèle le potentiel. Elle crise l'émotion qui mène à la visite, puis à la vente.
+Souvenez-vous : dans l'immobilier digital, votre photo est votre vitrine. [PAUSE 2s] Une photo professionnelle ne ment pas, elle révèle le potentiel. Elle crée l'émotion qui mène à la visite, puis à la vente.
 
 [B-ROLL : Montage final de belles photos immobilières professionnelles]
 

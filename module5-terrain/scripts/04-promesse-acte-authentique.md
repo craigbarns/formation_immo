@@ -29,7 +29,7 @@ Elegant notary office with clients signing property documents, warm wood panelin
 
 [B-roll: Gros plan sur une main tenant un stylo, hésitant au-dessus d'un document]
 
-Le 15 mars 2024. [PAUSE 1s] Étude notariale Me Lefranc, 45 rue de Varenne, 75007 Paris. [PAUSE 1s] Vos clients sont là. Le vendeur aussi. Les documents sont prêts. Et pourtant... quelque chose peut encore tout faire échouer. [PAUSE 2s]
+Le 15 mars 2026. [PAUSE 1s] Étude notariale Me Lefranc, 45 rue de Varenne, 75007 Paris. [PAUSE 1s] Vos clients sont là. Le vendeur aussi. Les documents sont prêts. Et pourtant... quelque chose peut encore tout faire échouer. [PAUSE 2s]
 
 [B-roll: Tensions subtiles, regards échangés, atmosphère électrique]
 
@@ -175,7 +175,7 @@ Entre le compromis et l'acte, l'imprévisible arrive. Toujours. [PAUSE 1s] Votre
 
 [B-roll: Étude notariale, ambiance solennelle, documents officiels]
 
-Le jour de l'acte authentique est arrivé. [PAUSE 1s] C'est le aboutissement de mois de travail. Pour vous. Pour vos clients. Pour le vendeur. [PAUSE 2s]
+Le jour de l'acte authentique est arrivé. [PAUSE 1s] C'est l'aboutissement de mois de travail. Pour vous. Pour vos clients. Pour le vendeur. [PAUSE 2s]
 
 [B-roll: Clients arrivant à l'étude, souriants, confiants]
 

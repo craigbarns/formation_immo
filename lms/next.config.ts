@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
+import path from "node:path";
 
 const nextConfig: NextConfig = {
-  /** Micro / caméra réservés à l’origine de l’app (widgets ou futurs iframes D-ID sur votre domaine). */
+  /** Force la racine Turbopack au dossier de l'app pour éviter la détection d'un lockfile parent. */
+  turbopack: {
+    root: path.join(__dirname),
+  },
+  /** Micro / caméra réservés à l’origine de l’app. */
   async headers() {
     return [
       {

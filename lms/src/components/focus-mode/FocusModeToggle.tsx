@@ -6,12 +6,11 @@ import { Eye, EyeOff } from "lucide-react";
 const FOCUS_MODE_KEY = "formation-focus-mode";
 
 export function useFocusMode() {
-  const [isFocusMode, setIsFocusMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem(FOCUS_MODE_KEY);
-    if (saved === "true") setIsFocusMode(true);
-  }, []);
+  const [isFocusMode, setIsFocusMode] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem(FOCUS_MODE_KEY) === "true";
+  });
 
   const toggleFocusMode = () => {
     const newValue = !isFocusMode;
@@ -30,8 +29,8 @@ export function FocusModeToggle() {
       onClick={toggleFocusMode}
       className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium transition-all ${
         isFocusMode
-          ? "bg-[#d4af37]/20 text-[#d4af37] ring-1 ring-[#d4af37]/40"
-          : "bg-white/10 text-white/60 hover:bg-white/20 hover:text-white"
+          ? "bg-brand-gold/20 text-brand-gold ring-1 ring-brand-gold/40"
+          : "bg-white/10 text-white/80 hover:bg-white/20 hover:text-white"
       }`}
       title={isFocusMode ? "Désactiver le mode focus" : "Activer le mode focus"}
     >

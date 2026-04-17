@@ -3,6 +3,8 @@
  * All state persisted in localStorage under a single key.
  */
 
+import { PRO_CHECKLISTS } from "@/data/pro-checklists";
+
 const STORAGE_KEY = "formation-immobilier-gamification";
 
 // ── XP rewards ──────────────────────────────────────────────
@@ -20,6 +22,11 @@ export const XP_REWARDS = {
   STREAK_BONUS_14: 400,
   STREAK_BONUS_30: 1000,
   SIMULATOR_USED: 50,
+  CHECKLIST_COMPLETE: 75,
+  ALL_CHECKLISTS: 300,
+  FLASHCARD_REVIEW: 5,
+  HALF_COURSE: 200,
+  THREE_QUARTERS: 400,
 } as const;
 
 // ── Levels ──────────────────────────────────────────────────
@@ -52,8 +59,14 @@ export type BadgeId =
   | "streak-30"
   | "simulator-credit"
   | "simulator-rentabilite"
+  | "simulator-negotiation"
   | "speed-demon"
-  | "quiz-master";
+  | "quiz-master"
+  | "checklist-complete"
+  | "all-checklists"
+  | "flashcard-master"
+  | "half-course"
+  | "three-quarters";
 
 export type Badge = {
   id: BadgeId;
@@ -79,8 +92,14 @@ export const BADGES: Badge[] = [
   { id: "streak-30", name: "Marathonien", description: "30 jours consecutifs", icon: "🔥", rarity: "legendary" },
   { id: "simulator-credit", name: "Banquier", description: "Utilisez le simulateur de credit", icon: "🏦", rarity: "common" },
   { id: "simulator-rentabilite", name: "Investisseur", description: "Utilisez le simulateur de rentabilite", icon: "📊", rarity: "common" },
+  { id: "simulator-negotiation", name: "Tacticien", description: "Utilisez le simulateur de negociation", icon: "⚔️", rarity: "common" },
   { id: "speed-demon", name: "Rapide", description: "Terminez une lecon en moins de 5 minutes", icon: "⚡", rarity: "rare" },
   { id: "quiz-master", name: "Quiz Master", description: "Repondez correctement a 50 QCM", icon: "🧠", rarity: "epic" },
+  { id: "checklist-complete", name: "Checklist Pro", description: "Completez votre premiere checklist professionnelle", icon: "✅", rarity: "common" },
+  { id: "all-checklists", name: "Expert Checklists", description: "Completez toutes les checklists professionnelles", icon: "📋", rarity: "epic" },
+  { id: "flashcard-master", name: "Memoire d'elephant", description: "Revisez 100 flashcards avec succes", icon: "🐘", rarity: "rare" },
+  { id: "half-course", name: "A mi-parcours", description: "Completez 50% de la formation", icon: "🛤️", rarity: "rare" },
+  { id: "three-quarters", name: "Presque la", description: "Completez 75% de la formation", icon: "🏁", rarity: "epic" },
 ];
 
 // ── State types ─────────────────────────────────────────────
@@ -97,6 +116,9 @@ export type GamificationState = {
   examScores: Record<string, { score: number; total: number; date: string }>;
   xpHistory: { amount: number; reason: string; date: string }[];
   moduleTimers: Record<string, number>; // moduleSlug -> total seconds
+  dailyActivity: Record<string, number>; // YYYY-MM-DD -> activity count
+  completedChecklists: string[]; // checklist IDs completed
+  flashcardsReviewed: number;
 };
 
 const DEFAULT_STATE: GamificationState = {
@@ -112,11 +134,19 @@ const DEFAULT_STATE: GamificationState = {
   examScores: {},
   xpHistory: [],
   moduleTimers: {},
+  dailyActivity: {},
+  completedChecklists: [],
+  flashcardsReviewed: 0,
 };
 
 // ── Helpers ─────────────────────────────────────────────────
 function today(): string {
   return new Date().toISOString().slice(0, 10);
+}
+
+function bumpDailyActivity(state: GamificationState, count: number) {
+  const d = today();
+  state.dailyActivity[d] = (state.dailyActivity[d] || 0) + count;
 }
 
 function yesterday(): string {
@@ -137,7 +167,11 @@ export function getGamificationState(): GamificationState {
 }
 
 function save(state: GamificationState) {
+  if (typeof window === 'undefined') return;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent("gamification-state-changed", { detail: state }));
+  }
 }
 
 export type Level = (typeof LEVELS)[number];
@@ -220,6 +254,7 @@ export function updateStreak(): { state: GamificationState; newBadges: BadgeId[]
 
   // Daily XP
   state.xp += XP_REWARDS.DAILY_LOGIN;
+  bumpDailyActivity(state, 1);
 
   save(state);
   return { state, newBadges };
@@ -229,6 +264,7 @@ export function recordQuizCorrect(): GamificationState {
   const state = getGamificationState();
   state.totalQuizCorrect += 1;
   state.xp += XP_REWARDS.QUIZ_CORRECT;
+  bumpDailyActivity(state, 1);
 
   if (state.totalQuizCorrect >= 50 && !state.earnedBadges.includes("quiz-master")) {
     state.earnedBadges.push("quiz-master");
@@ -247,6 +283,7 @@ export function recordExamScore(
   state.examScores[moduleSlug] = { score, total, date: new Date().toISOString() };
   state.totalExamsTaken += 1;
   state.xp += XP_REWARDS.EXAM_PASS;
+  bumpDailyActivity(state, 1);
 
   if (!state.earnedBadges.includes("first-exam")) {
     state.earnedBadges.push("first-exam");
@@ -269,16 +306,58 @@ export function recordSimulatorUsed(simulatorId: string): GamificationState {
   if (!state.simulatorsUsed.includes(simulatorId)) {
     state.simulatorsUsed.push(simulatorId);
     state.xp += XP_REWARDS.SIMULATOR_USED;
+    bumpDailyActivity(state, 1);
 
     const badgeMap: Record<string, BadgeId> = {
       credit: "simulator-credit",
       rentabilite: "simulator-rentabilite",
+      negociation: "simulator-negotiation",
     };
     const badge = badgeMap[simulatorId];
     if (badge && !state.earnedBadges.includes(badge)) {
       state.earnedBadges.push(badge);
     }
   }
+  save(state);
+  return state;
+}
+
+export function recordChecklistComplete(clId: string): { state: GamificationState; isNew: boolean; newBadges: BadgeId[] } {
+  const state = getGamificationState();
+  const newBadges: BadgeId[] = [];
+  let isNew = false;
+
+  if (!state.completedChecklists.includes(clId)) {
+    state.completedChecklists.push(clId);
+    state.xp += XP_REWARDS.CHECKLIST_COMPLETE;
+    bumpDailyActivity(state, 1);
+    isNew = true;
+
+    if (!state.earnedBadges.includes("checklist-complete")) {
+      state.earnedBadges.push("checklist-complete");
+      newBadges.push("checklist-complete");
+    }
+
+    if (state.completedChecklists.length >= PRO_CHECKLISTS.length && !state.earnedBadges.includes("all-checklists")) {
+      state.earnedBadges.push("all-checklists");
+      state.xp += XP_REWARDS.ALL_CHECKLISTS;
+      newBadges.push("all-checklists");
+    }
+  }
+
+  save(state);
+  return { state, isNew, newBadges };
+}
+
+export function recordFlashcardReviewed(count = 1): GamificationState {
+  const state = getGamificationState();
+  state.flashcardsReviewed += count;
+  bumpDailyActivity(state, count);
+
+  if (state.flashcardsReviewed >= 100 && !state.earnedBadges.includes("flashcard-master")) {
+    state.earnedBadges.push("flashcard-master");
+  }
+
   save(state);
   return state;
 }
@@ -297,10 +376,23 @@ export function recordModuleTime(moduleSlug: string, seconds: number): Gamificat
   return state;
 }
 
+function countCompletedLessons(): number {
+  if (typeof window === 'undefined') return 0;
+  try {
+    const raw = localStorage.getItem("formation-immobilier-progress");
+    if (!raw) return 0;
+    const obj = JSON.parse(raw) as Record<string, boolean>;
+    return Object.values(obj).filter(Boolean).length;
+  } catch {
+    return 0;
+  }
+}
+
 export function completeLesson(lessonKey: string): { state: GamificationState; newBadges: BadgeId[] } {
   const state = getGamificationState();
   const newBadges: BadgeId[] = [];
   state.xp += XP_REWARDS.LESSON_COMPLETE;
+  bumpDailyActivity(state, 1);
 
   if (!state.earnedBadges.includes("first-lesson")) {
     state.earnedBadges.push("first-lesson");
@@ -312,6 +404,19 @@ export function completeLesson(lessonKey: string): { state: GamificationState; n
   if (time > 0 && time < 300 && !state.earnedBadges.includes("speed-demon")) {
     state.earnedBadges.push("speed-demon");
     newBadges.push("speed-demon");
+  }
+
+  // Check course progression badges
+  const completedCount = countCompletedLessons();
+  if (completedCount >= 18 && !state.earnedBadges.includes("half-course")) {
+    state.earnedBadges.push("half-course");
+    state.xp += XP_REWARDS.HALF_COURSE;
+    newBadges.push("half-course");
+  }
+  if (completedCount >= 27 && !state.earnedBadges.includes("three-quarters")) {
+    state.earnedBadges.push("three-quarters");
+    state.xp += XP_REWARDS.THREE_QUARTERS;
+    newBadges.push("three-quarters");
   }
 
   save(state);

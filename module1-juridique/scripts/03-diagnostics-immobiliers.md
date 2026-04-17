@@ -252,15 +252,15 @@ Il décrit le mode d'assainissement des eaux usées : tout-à-l'égout, fosse se
 
 #### PARTIE 4 : L'ÉTAT DES RISQUES ET POLLUTIONS (1 minute)
 
-[B-ROLL : Apparition du titre "PARTIE 4 : ERNMT - ÉTAT DES RISQUES"]
+[B-ROLL : Apparition du titre "PARTIE 4 : ERP — ÉTAT DES RISQUES ET POLLUTIONS"]
 
 **NARRATION :**
 
 Terminons par un diagnostic souvent méconnu mais crucial : l'état des risques et pollutions.
 
-[B-ROLL : Exemple d'ERNMT avec les différents risques listés]
+[B-ROLL : Exemple d'ERP avec les différents risques listés]
 
-L'ERNMT, ou État des Risques Naturels, Miniers et Technologiques, recense les risques auxquels le bien est exposé.
+L'ERP, ou État des Risques et Pollutions, recense les risques naturels, miniers, technologiques, sismiques, radon, pollution des sols et bruit auxquels le bien est exposé. [PAUSE 1s] Ce nouveau nom — instauré en 2018 puis enrichi par la loi Climat — remplace l'ancienne dénomination ERNMT que vous trouverez encore parfois dans les vieux dossiers.
 
 [B-ROLL : Carte de France avec les différents risques colorisés]
 
@@ -276,13 +276,13 @@ L'ERNMT, ou État des Risques Naturels, Miniers et Technologiques, recense les r
 
 [B-ROLL : Calendrier 6 mois]
 
-**Qui le réalise** ? Un diagnostiqueur certifié ERNMT.
+**Qui le réalise** ? Le vendeur ou le bailleur le remplit lui-même à partir des informations communales — formulaire Cerfa officiel + extraits cartographiques téléchargeables sur Géorisques.gouv.fr. [PAUSE 1s] Aucun diagnostiqueur certifié n'est requis : c'est une déclaration sur l'honneur appuyée sur les arrêtés préfectoraux en vigueur.
 
-[B-ROLL : Certificat certification ERNMT]
+[B-ROLL : Capture d'écran Géorisques.gouv.fr avec formulaire ERP pré-rempli]
 
-**Coût** : entre 50 et 150 euros.
+**Coût** : gratuit (le formulaire en ligne génère le document automatiquement).
 
-[B-ROLL : Exemple d'ERNMT mentionnant plusieurs risques]
+[B-ROLL : Exemple d'ERP mentionnant plusieurs risques]
 
 **Point important** : si un risque est identifié, l'acquéreur doit en être informé avant la signature du compromis. [PAUSE 1s] C'est une obligation légale qui peut influencer son consentement. [PAUSE 2s]
 
@@ -306,11 +306,11 @@ Le DPE : obligatoire pour tous. [PAUSE 1s] La maison est de 1985, donc postérie
 
 [B-ROLL : Carte des zones termites montrant Versailles hors zone]
 
-Installation électrique de plus de 15 ans : diagnostic électricité obligatoire. [PAUSE 1s] Installation gaz de plus de 15 ans : diagnostic gaz obligatoire. [PAUSE 1s] Raccordée au tout-à-l'égout : pas d'assainissement. [PAUSE 1s] ERNMT : obligatoire, Versailles a des PPR.
+Installation électrique de plus de 15 ans : diagnostic électricité obligatoire. [PAUSE 1s] Installation gaz de plus de 15 ans : diagnostic gaz obligatoire. [PAUSE 1s] Raccordée au tout-à-l'égout : pas d'assainissement. [PAUSE 1s] ERP : obligatoire, Versailles a des PPR.
 
 [B-ROLL : Récapitulatif des diagnostics avec coûts]
 
-**Total des diagnostics obligatoires** : DPE, électricité, gaz, ERNMT. [PAUSE 1s] **Coût total estimé** : 150 + 150 + 120 + 80 = 500 euros.
+**Total des diagnostics obligatoires** : DPE, électricité, gaz, ERP. [PAUSE 1s] **Coût total estimé** : 150 + 150 + 120 + 0 (ERP gratuit, fait par le vendeur) = 420 euros.
 
 [B-ROLL : Agent expliquant les diagnostics aux propriétaires]
 
@@ -367,7 +367,7 @@ Dans la prochaine vidéo, nous explorerons les différents types de mandats. [PA
 | 2:15-2:20 | Installations gaz | 5s |
 | 2:20-2:25 | Schémas assainissement | 5s |
 | 2:25-2:30 | Raccordé vs non raccordé | 5s |
-| 2:30-2:35 | Exemple ERNMT | 5s |
+| 2:30-2:35 | Exemple ERP | 5s |
 | 2:35-2:40 | Carte PPR | 5s |
 | 3:00-3:05 | Titre "CAS PRATIQUE" | 5s |
 | 3:05-3:10 | Maison années 80 Versailles | 5s |
@@ -390,7 +390,7 @@ Dans la prochaine vidéo, nous explorerons les différents types de mandats. [PA
 4. **Termites** : zones à risque uniquement, 6 mois validité, 100-250€
 5. **Électricité/Gaz** : +15 ans, 3 ans validité, 80-200€
 6. **Assainissement** : non raccordés, illimité, 150-400€
-7. **ERNMT** : presque tous les biens, 6 mois, 50-150€
+7. **ERP** : tous les biens en zone à risque (≈ 80 % du territoire), validité 6 mois, **gratuit** (formulaire Géorisques)
 8. **Bonnes pratiques** : vérifier certification, constituer réseau de confiance, expliquer aux clients
 
 ---

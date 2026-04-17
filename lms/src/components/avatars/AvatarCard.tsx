@@ -24,7 +24,7 @@ export function AvatarCard({ avatar }: { avatar: ModuleAvatar }) {
           {avatar.initials}
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="font-bold text-[#1a3a5c]">{avatar.name}</h3>
+          <h3 className="font-bold text-brand-navy">{avatar.name}</h3>
           <p className="text-sm font-medium" style={{ color: avatar.accentColor }}>
             {avatar.role}
           </p>
@@ -35,20 +35,14 @@ export function AvatarCard({ avatar }: { avatar: ModuleAvatar }) {
       {/* Voice info */}
       <div className="mt-3 flex flex-wrap gap-2">
         <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-[10px] font-medium text-zinc-600">
-          ElevenLabs: {avatar.voiceId.slice(0, 8)}...
-        </span>
-        <span className="rounded-full bg-sky-50 px-2.5 py-0.5 text-[10px] font-medium text-sky-800" title={avatar.mistralVoiceLabel}>
-          Mistral: {avatar.mistralVoiceId.slice(0, 8)}...
-        </span>
-        <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-[10px] font-medium text-zinc-600">
-          {avatar.voiceStyle}
+          {avatar.mistralVoiceLabel}
         </span>
       </div>
 
       {/* Midjourney prompt */}
       <button
         onClick={() => setShowPrompt(!showPrompt)}
-        className="mt-3 text-xs font-medium text-[#1a3a5c] hover:underline"
+        className="mt-3 text-xs font-medium text-brand-navy hover:underline"
       >
         {showPrompt ? "Masquer le prompt" : "Voir le prompt Midjourney"}
       </button>
@@ -57,7 +51,7 @@ export function AvatarCard({ avatar }: { avatar: ModuleAvatar }) {
           <p className="text-xs leading-relaxed text-zinc-700 font-mono">{avatar.portraitPrompt}</p>
           <button
             onClick={copyPrompt}
-            className="mt-2 rounded bg-[#1a3a5c] px-3 py-1 text-[10px] font-bold text-white hover:bg-[#142d45]"
+            className="mt-2 rounded bg-brand-navy px-3 py-1 text-[10px] font-bold text-white hover:bg-brand-navy-deep"
           >
             {copied ? "Copie !" : "Copier le prompt"}
           </button>

@@ -117,7 +117,7 @@ L'absence d'une annexe obligatoire peut entraîner la nullité de certaines clau
 
 [B-ROLL : Carte de France avec zones d'encadrement actives : Paris, Lille, Bordeaux, Lyon...]
 
-En 2024, l'encadrement est applicable dans plusieurs métropoles dont Paris, la petite couronne, Lille, Lyon (à vérifier selon évolutions), Bordeaux et d'autres territoires en zone tendue.
+En 2026, l'encadrement est applicable dans plusieurs métropoles dont Paris, la petite couronne, Lille, Lyon, Bordeaux et d'autres territoires en zone tendue.
 
 [B-ROLL : Formule de calcul : loyer de référence + 20% maximum]
 

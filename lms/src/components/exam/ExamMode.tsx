@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ExamQuestion, ModuleExam } from "@/data/exam-questions";
 import { recordExamScore } from "@/lib/gamification";
+import { createClient } from "@/lib/supabase/client";
 
 type ExamState = "intro" | "running" | "review";
 
@@ -45,19 +46,32 @@ function AnimatedCounter({ value, total }: { value: number; total: number }) {
   );
 }
 
-/* ── Previous score from localStorage ──────────────────────────── */
-function getPreviousScore(moduleSlug: string): { score: number; total: number } | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const raw = localStorage.getItem("formation-gamification");
-    if (!raw) return null;
-    const state = JSON.parse(raw);
-    const entry = state?.examScores?.[moduleSlug];
-    if (!entry) return null;
-    return { score: entry.score, total: entry.total };
-  } catch {
-    return null;
+/* ── Previous score from Supabase / localStorage fallback ──────────── */
+async function getPreviousScore(moduleSlug: string): Promise<{ score: number; total: number } | null> {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    // Fallback localStorage
+    if (typeof window === "undefined") return null;
+    try {
+      const raw = localStorage.getItem("formation-gamification");
+      if (!raw) return null;
+      const state = JSON.parse(raw);
+      const entry = state?.examScores?.[moduleSlug];
+      if (!entry) return null;
+      return { score: entry.score, total: entry.total };
+    } catch {
+      return null;
+    }
   }
+  const { data } = await supabase
+    .from("gamification_state")
+    .select("exam_scores")
+    .eq("user_id", user.id)
+    .single();
+  const entry = data?.exam_scores?.[moduleSlug];
+  if (!entry) return null;
+  return { score: entry.score, total: entry.total };
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -69,12 +83,11 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [timeLeft, setTimeLeft] = useState(exam.duration * 60);
   const [prevScore, setPrevScore] = useState<{ score: number; total: number } | null>(null);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Load previous score on mount
   useEffect(() => {
-    setPrevScore(getPreviousScore(exam.moduleSlug));
+    getPreviousScore(exam.moduleSlug).then(setPrevScore);
   }, [exam.moduleSlug]);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const startExam = useCallback(() => {
     setAnswers({});
@@ -138,7 +151,7 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
     return (
       <div className="animate-scale-in rounded-2xl overflow-hidden border border-brand-navy/15 shadow-xl">
         {/* Header gradient */}
-        <div className="bg-gradient-to-br from-brand-navy via-[#1e4a73] to-[#2d5a87] px-8 py-8 text-white text-center">
+        <div className="bg-gradient-to-br from-brand-navy via-[#1e4a73] to-brand-navy-soft px-8 py-8 text-white text-center">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 text-3xl shadow-lg ring-1 ring-white/25 mb-4">
             📝
           </div>

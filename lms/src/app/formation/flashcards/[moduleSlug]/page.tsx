@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { COURSE } from "@/data/course";
 import { getFlashcardsForModule } from "@/data/flashcards";
 import { getAvatarForModule } from "@/data/module-avatars";
-import { FlashcardDeck } from "@/components/flashcards/FlashcardDeck";
 import { FlashcardSM2 } from "@/components/flashcards/FlashcardSM2";
 
 type Props = { params: Promise<{ moduleSlug: string }> };
@@ -21,15 +20,15 @@ export default async function FlashcardsPage({ params }: Props) {
   return (
     <div>
       <div className="mb-6 text-sm text-zinc-500">
-        <Link href="/formation" className="hover:text-[#1a3a5c]">
+        <Link href="/formation" className="hover:text-brand-navy">
           Parcours
         </Link>
         <span className="mx-2">/</span>
-        <Link href={`/formation/${mod.slug}`} className="hover:text-[#1a3a5c]">
+        <Link href={`/formation/${mod.slug}`} className="hover:text-brand-navy">
           {mod.title.replace(/^Module \d+ — /, "")}
         </Link>
         <span className="mx-2">/</span>
-        <span className="text-[#1a3a5c] font-medium">Flashcards</span>
+        <span className="text-brand-navy font-medium">Flashcards</span>
       </div>
 
       {/* Header with avatar */}
@@ -43,7 +42,7 @@ export default async function FlashcardsPage({ params }: Props) {
           </div>
         )}
         <div>
-          <h1 className="text-2xl font-bold text-[#1a3a5c]">
+          <h1 className="text-2xl font-bold text-brand-navy">
             Flashcards — {mod.title.replace(/^Module \d+ — /, "")}
           </h1>
           <p className="text-sm text-zinc-600">
@@ -60,13 +59,13 @@ export default async function FlashcardsPage({ params }: Props) {
             <div className="flex gap-2">
               <Link
                 href={`?mode=classic`}
-                className="rounded-lg bg-[#1a3a5c] px-4 py-2 text-sm font-medium text-white"
+                className="rounded-lg bg-brand-navy px-4 py-2 text-sm font-medium text-white"
               >
                 Classique
               </Link>
               <Link
                 href={`?mode=sm2`}
-                className="rounded-lg border border-[#d4af37] px-4 py-2 text-sm font-medium text-[#d4af37] hover:bg-[#d4af37]/10"
+                className="rounded-lg border border-brand-gold px-4 py-2 text-sm font-medium text-brand-gold hover:bg-brand-gold/10"
               >
                 Répétition espacée (SM-2)
               </Link>

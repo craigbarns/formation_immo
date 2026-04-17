@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Brain, ArrowRight, TrendingUp, AlertCircle, Sparkles } from "lucide-react";
-import { getGamificationState } from "@/lib/gamification";
+import { createClient } from "@/lib/supabase/client";
+import { getGamificationState, type GamificationState } from "@/lib/gamification";
 import { getStoredProgress } from "@/components/LessonProgress";
 import { COURSE } from "@/data/course";
 
@@ -17,12 +18,13 @@ interface Recommendation {
   priority: number;
 }
 
-function generateRecommendations(): Recommendation[] {
+function generateRecommendations(
+  gamification: GamificationState,
+  progress: Record<string, boolean>,
+): Recommendation[] {
   const recommendations: Recommendation[] = [];
-  const gamification = getGamificationState();
-  const progress = getStoredProgress();
   const modules = COURSE;
-  
+
   // Find weak areas from exam scores
   const weakModules: string[] = [];
   for (const [moduleSlug, score] of Object.entries(gamification.examScores)) {
@@ -31,7 +33,7 @@ function generateRecommendations(): Recommendation[] {
       weakModules.push(moduleSlug);
     }
   }
-  
+
   // Find incomplete lessons
   const incompleteLessons: { moduleSlug: string; lessonSlug: string; title: string }[] = [];
   for (const mod of modules) {
@@ -46,7 +48,7 @@ function generateRecommendations(): Recommendation[] {
       }
     }
   }
-  
+
   // Find next lesson in sequence
   if (incompleteLessons.length > 0) {
     const nextLesson = incompleteLessons[0];
@@ -59,7 +61,7 @@ function generateRecommendations(): Recommendation[] {
       priority: 10,
     });
   }
-  
+
   // Recommend review for weak modules
   for (const weakModule of weakModules.slice(0, 1)) {
     const mod = modules.find(m => m.slug === weakModule);
@@ -73,7 +75,7 @@ function generateRecommendations(): Recommendation[] {
       });
     }
   }
-  
+
   // Recommend practice if many lessons completed
   const completedCount = Object.values(progress).filter(Boolean).length;
   if (completedCount >= 5) {
@@ -88,14 +90,14 @@ function generateRecommendations(): Recommendation[] {
       });
     }
   }
-  
+
   // Recommend new module if current one is complete
   const currentModule = modules.find(m => {
     const moduleLessons = m.lessons.map(l => `${m.slug}/${l.slug}`);
     const completedInModule = moduleLessons.filter(k => progress[k]).length;
     return completedInModule > 0 && completedInModule < m.lessons.length;
   });
-  
+
   if (!currentModule && incompleteLessons.length > 0) {
     const nextModuleSlug = incompleteLessons[0].moduleSlug;
     const nextModule = modules.find(m => m.slug === nextModuleSlug);
@@ -109,14 +111,69 @@ function generateRecommendations(): Recommendation[] {
       });
     }
   }
-  
+
   // Sort by priority
   return recommendations.sort((a, b) => b.priority - a.priority).slice(0, 3);
 }
 
 export function AdaptiveLearningPath() {
-  const recommendations = useMemo(() => generateRecommendations(), []);
-  
+  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+
+  useEffect(() => {
+    async function load() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+
+      let gamification: GamificationState;
+      let progress: Record<string, boolean>;
+
+      if (!user) {
+        gamification = getGamificationState();
+        progress = getStoredProgress();
+      } else {
+        const { data: gamificationData } = await supabase
+          .from("gamification_state")
+          .select("*")
+          .eq("user_id", user.id)
+          .single();
+
+        gamification = gamificationData
+          ? {
+              xp: gamificationData.xp,
+              earnedBadges: gamificationData.earned_badges || [],
+              streak: gamificationData.streak,
+              lastLoginDate: gamificationData.last_login_date,
+              totalQuizCorrect: gamificationData.total_quiz_correct,
+              totalExamsTaken: gamificationData.total_exams_taken,
+              totalExamsPerfect: gamificationData.total_exams_perfect,
+              simulatorsUsed: gamificationData.simulators_used || [],
+              lessonTimes: gamificationData.lesson_times || {},
+              examScores: gamificationData.exam_scores || {},
+              xpHistory: gamificationData.xp_history || [],
+              moduleTimers: gamificationData.module_timers || {},
+              dailyActivity: gamificationData.daily_activity || {},
+              completedChecklists: gamificationData.completed_checklists || [],
+              flashcardsReviewed: gamificationData.flashcards_reviewed,
+            }
+          : getGamificationState();
+
+        const { data: progressData } = await supabase
+          .from("lesson_progress")
+          .select("lesson_key, completed")
+          .eq("user_id", user.id);
+
+        progress = {};
+        progressData?.forEach((row) => {
+          progress[row.lesson_key] = row.completed;
+        });
+      }
+
+      setRecommendations(generateRecommendations(gamification, progress));
+    }
+
+    load();
+  }, []);
+
   if (recommendations.length === 0) {
     return (
       <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-6 text-center">
@@ -135,7 +192,7 @@ export function AdaptiveLearningPath() {
         <Brain className="h-4 w-4" />
         <span>Parcours personnalisé selon votre progression</span>
       </div>
-      
+
       {recommendations.map((rec, index) => (
         <motion.div
           key={`${rec.type}-${rec.moduleSlug}`}
@@ -144,11 +201,11 @@ export function AdaptiveLearningPath() {
           transition={{ delay: index * 0.1 }}
         >
           <Link
-            href={rec.lessonSlug 
-              ? `/formation/${rec.moduleSlug}/${rec.lessonSlug}` 
+            href={rec.lessonSlug
+              ? `/formation/${rec.moduleSlug}/${rec.lessonSlug}`
               : `/formation/${rec.moduleSlug}`
             }
-            className="group flex items-center gap-4 rounded-xl border border-zinc-200 bg-white p-4 transition hover:border-[#d4af37]/50 hover:bg-zinc-50"
+            className="group flex items-center gap-4 rounded-xl border border-zinc-200 bg-white p-4 transition hover:border-brand-gold/50 hover:bg-zinc-50"
           >
             <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${
               rec.type === "continue" ? "bg-blue-100 text-blue-600" :
@@ -161,7 +218,7 @@ export function AdaptiveLearningPath() {
                rec.type === "practice" ? <Brain className="h-6 w-6" /> :
                <Sparkles className="h-6 w-6" />}
             </div>
-            
+
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <span className={`text-xs font-bold uppercase tracking-wider ${
@@ -176,13 +233,13 @@ export function AdaptiveLearningPath() {
                    "Explorer"}
                 </span>
               </div>
-              <h4 className="truncate font-semibold text-zinc-900 group-hover:text-[#1a3a5c] transition">
+              <h4 className="truncate font-semibold text-zinc-900 group-hover:text-brand-navy transition">
                 {rec.title}
               </h4>
               <p className="text-xs text-zinc-500">{rec.reason}</p>
             </div>
-            
-            <ArrowRight className="h-5 w-5 text-zinc-400 transition group-hover:text-[#d4af37] group-hover:translate-x-1" />
+
+            <ArrowRight className="h-5 w-5 text-zinc-400 transition group-hover:text-brand-gold group-hover:translate-x-1" />
           </Link>
         </motion.div>
       ))}

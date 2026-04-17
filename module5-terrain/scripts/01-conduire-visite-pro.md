@@ -99,7 +99,7 @@ L'arrivée est votre première scène. Elle doit être parfaite. [PAUSE 2s]
 
 [B-roll: Gros plan sur des chaussures cirées, une cravate bien nouée, une poignée de main ferme]
 
-**Règle numéro trois : l'accueil.** [PAUSE 1s] Sourire sincère. Poignée de main ferme mais pas écrasante. Contact visuel. Présentez-vous clairement : "Bonjour, je suis Marc Durand, votre conseiller immobilier. Ravie de vous rencontrer." [PAUSE 1s] Utilisez leurs prénoms dès que possible. Cela crée un lien immédiat.
+**Règle numéro trois : l'accueil.** [PAUSE 1s] Sourire sincère. Poignée de main ferme mais pas écrasante. Contact visuel. Présentez-vous clairement : "Bonjour, je suis Marc Durand, votre conseiller immobilier. Ravi de vous rencontrer." [PAUSE 1s] Utilisez leurs prénoms dès que possible. Cela crée un lien immédiat.
 
 [B-roll: Agent serrant la main d'un couple, échange de sourires chaleureux]
 
@@ -113,7 +113,7 @@ Vous ne leur montrez pas encore l'appartement. Vous leur vendez déjà un style 
 
 ---
 
-[05:30-07:30] **PHASE 3 : LA VISITE - LE CHORÉGRAPHIE PARFAITE**
+[05:30-07:30] **PHASE 3 : LA VISITE — LA CHORÉGRAPHIE PARFAITE**
 
 [B-roll: Plan de l'appartement avec flèches indiquant le parcours de visite optimal]
 
@@ -129,7 +129,7 @@ La visite elle-même suit une chorégraphie précise. [PAUSE 1s] Commencez toujo
 
 [B-roll: Couple discutant, imaginant leur vie dans l'appartement]
 
-**Technique de l'objection anticipée :** Chaque bien a des défauts. Votre job ? Les mentionner avant qu'ils ne les voient. [PAUSE 1s] Cela crée la confiance. "Le deuxième chambre est plus petite, c'est vrai. Mais elle fait quatorze mètres carrés, ce qui est correct pour un appartement de cette époque. Et surtout, elle a une exposition plein sud."
+**Technique de l'objection anticipée :** Chaque bien a des défauts. Votre job ? Les mentionner avant qu'ils ne les voient. [PAUSE 1s] Cela crée la confiance. "La deuxième chambre est plus petite, c'est vrai. Mais elle fait quatorze mètres carrés, ce qui est correct pour un appartement de cette époque. Et surtout, elle a une exposition plein sud."
 
 [B-roll: Chambre plus petite mais ensoleillée, clients comprenant l'avantage]
 

@@ -40,7 +40,7 @@ export function VideoWithSubtitles({
   const [isMuted, setIsMuted] = useState(false);
   const [showSubtitles, setShowSubtitles] = useState(true);
   const [cues, setCues] = useState<SubtitleCue[]>([]);
-  const [currentCue, setCurrentCue] = useState<SubtitleCue | null>(null);
+  const currentCue = cues.find(c => currentTime >= c.start && currentTime <= c.end) || null;
   const [showControls, setShowControls] = useState(true);
   const controlsTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -80,15 +80,11 @@ export function VideoWithSubtitles({
         .then(r => r.text())
         .then(parseSRT)
         .then(setCues)
-        .catch(console.error);
+        .catch(() => { /* ignore */ });
     }
   }, [srtUrl]);
 
-  // Update current cue
-  useEffect(() => {
-    const cue = cues.find(c => currentTime >= c.start && currentTime <= c.end);
-    setCurrentCue(cue || null);
-  }, [currentTime, cues]);
+
 
   // Progress tracking
   useEffect(() => {

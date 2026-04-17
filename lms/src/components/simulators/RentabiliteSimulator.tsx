@@ -12,14 +12,11 @@ export function RentabiliteSimulator() {
   const [vacance, setVacance] = useState(5);
   const [travaux, setTravaux] = useState(5000);
   const [gestion, setGestion] = useState(7);
-  const [tracked, setTracked] = useState(false);
+  const [tracked] = useState(() => {
+    if (typeof window !== 'undefined') recordSimulatorUsed("rentabilite");
+    return true;
+  });
 
-  useEffect(() => {
-    if (!tracked) {
-      recordSimulatorUsed("rentabilite");
-      setTracked(true);
-    }
-  }, [tracked]);
 
   const totalAcquisition = price + price * (notaryFees / 100) + travaux;
   const loyerAnnuelBrut = monthlyRent * 12;
@@ -36,8 +33,8 @@ export function RentabiliteSimulator() {
   const anneesRetour = revenuNet > 0 ? totalAcquisition / revenuNet : Infinity;
 
   return (
-    <div className="rounded-2xl border-2 border-[#1a3a5c]/15 bg-white shadow-lg">
-      <div className="border-b border-zinc-100 bg-gradient-to-r from-[#1a3a5c] to-[#2d5a7c] px-6 py-4 text-white rounded-t-2xl">
+    <div className="rounded-2xl border-2 border-brand-navy/15 bg-white shadow-lg">
+      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[#2d5a7c] px-6 py-4 text-white rounded-t-2xl">
         <h3 className="text-lg font-bold">Simulateur de Rentabilite Locative</h3>
         <p className="mt-1 text-xs text-white/70">Comparez rentabilite brute et nette en temps reel</p>
       </div>
@@ -125,9 +122,9 @@ export function RentabiliteSimulator() {
         {/* Results */}
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-xl border border-[#1a3a5c]/15 bg-[#1a3a5c]/5 p-4 text-center">
+            <div className="rounded-xl border border-brand-navy/15 bg-brand-navy/5 p-4 text-center">
               <p className="text-xs text-zinc-500">Rentabilite brute</p>
-              <p className="text-3xl font-bold text-[#1a3a5c]">{rentaBrute.toFixed(2)}%</p>
+              <p className="text-3xl font-bold text-brand-navy">{rentaBrute.toFixed(2)}%</p>
             </div>
             <div className={`rounded-xl border p-4 text-center ${
               rentaNette >= 5
@@ -149,7 +146,7 @@ export function RentabiliteSimulator() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-[#d4af37]/30 bg-[#d4af37]/10 p-4 text-center">
+          <div className="rounded-xl border border-brand-gold/30 bg-brand-gold/10 p-4 text-center">
             <p className="text-xs text-zinc-500">Cash-flow mensuel net</p>
             <p className={`text-2xl font-bold ${cashFlowMensuel >= 0 ? "text-emerald-600" : "text-red-600"}`}>
               {cashFlowMensuel >= 0 ? "+" : ""}{Math.round(cashFlowMensuel).toLocaleString("fr-FR")} EUR
@@ -225,7 +222,7 @@ function SliderInput({
     <div>
       <div className="flex items-baseline justify-between">
         <label className="text-xs font-medium text-zinc-600">{label}</label>
-        <span className="text-xs font-bold text-[#1a3a5c]">{format(value)}</span>
+        <span className="text-xs font-bold text-brand-navy">{format(value)}</span>
       </div>
       <input
         type="range"
@@ -234,7 +231,7 @@ function SliderInput({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="mt-1 w-full accent-[#1a3a5c]"
+        className="mt-1 w-full accent-brand-navy"
       />
     </div>
   );
@@ -244,7 +241,7 @@ function DetailRow({ label, value, bold }: { label: string; value: string; bold?
   return (
     <div className="flex items-center justify-between text-xs">
       <span className="text-zinc-500">{label}</span>
-      <span className={bold ? "font-bold text-[#1a3a5c]" : "text-zinc-700"}>{value}</span>
+      <span className={bold ? "font-bold text-brand-navy" : "text-zinc-700"}>{value}</span>
     </div>
   );
 }

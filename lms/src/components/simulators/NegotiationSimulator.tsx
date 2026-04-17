@@ -356,21 +356,21 @@ export function NegotiationSimulator() {
   return (
     <div className="flex flex-col h-[720px] max-h-[88vh] rounded-2xl border border-zinc-200/80 bg-white shadow-xl overflow-hidden font-sans">
       {/* Header */}
-      <div className="bg-[#1a3a5c] text-white px-6 py-4 flex items-center justify-between shadow-md z-10 relative">
+      <div className="bg-brand-navy text-white px-6 py-4 flex items-center justify-between shadow-md z-10 relative">
         <div className="flex items-center gap-3">
           <div className="bg-white/10 p-2 rounded-xl backdrop-blur-sm border border-white/20">
-            <Bot size={24} className="text-[#d4af37]" />
+            <Bot size={24} className="text-brand-gold" />
           </div>
           <div>
             <h3 className="font-bold text-lg leading-tight">{scenario.title}</h3>
-            <p className="text-white/60 text-xs">Simulateur de Négociation • Tour {Math.min(step + 1, scenario.messages.length)} / {scenario.messages.length}</p>
+            <p className="text-white/80 text-xs">Simulateur de Négociation • Tour {Math.min(step + 1, scenario.messages.length)} / {scenario.messages.length}</p>
           </div>
         </div>
         <div className="flex flex-col items-end">
-          <span className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-1">Score</span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-white/70 mb-1">Score</span>
           <div className="w-32 h-2.5 bg-white/20 rounded-full overflow-hidden">
             <motion.div
-              className={`h-full ${score > 70 ? "bg-emerald-400" : score < 40 ? "bg-red-400" : "bg-[#d4af37]"}`}
+              className={`h-full ${score > 70 ? "bg-emerald-400" : score < 40 ? "bg-red-400" : "bg-brand-gold"}`}
               initial={{ width: 0 }}
               animate={{ width: `${score}%` }}
               transition={{ duration: 0.5, ease: "easeOut" }}
@@ -395,7 +395,7 @@ export function NegotiationSimulator() {
                 {/* Avatar */}
                 <div className="shrink-0 mt-1">
                   {msg.sender === "bot" ? (
-                    <div className="w-8 h-8 rounded-full bg-[#1a3a5c] flex items-center justify-center text-white shadow-sm">
+                    <div className="w-8 h-8 rounded-full bg-brand-navy flex items-center justify-center text-white shadow-sm">
                       <span className="text-xs font-bold">D</span>
                     </div>
                   ) : (
@@ -408,7 +408,7 @@ export function NegotiationSimulator() {
                 {/* Bubble */}
                 <div className="flex flex-col gap-1.5">
                   <div className={`px-4 py-3 shadow-sm ${
-                    msg.sender === "user" ? "bg-[#1a3a5c] text-white rounded-2xl rounded-tr-sm" : "bg-white border border-zinc-200 text-zinc-800 rounded-2xl rounded-tl-sm"
+                    msg.sender === "user" ? "bg-brand-navy text-white rounded-2xl rounded-tr-sm" : "bg-white border border-zinc-200 text-zinc-800 rounded-2xl rounded-tl-sm"
                   }`}>
                     <p className="text-sm leading-relaxed">{msg.text}</p>
                   </div>
@@ -447,11 +447,11 @@ export function NegotiationSimulator() {
               <h4 className={`text-center text-xl font-bold ${feedback.color}`}>{feedback.label}</h4>
               <p className="mt-2 text-center text-sm text-zinc-600">{feedback.message}</p>
               <div className="mt-4 text-center">
-                <p className="text-3xl font-black text-[#1a3a5c]">{score}<span className="text-lg text-zinc-400">/100</span></p>
+                <p className="text-3xl font-black text-brand-navy">{score}<span className="text-lg text-zinc-400">/100</span></p>
               </div>
               <button
                 onClick={restart}
-                className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#1a3a5c] px-4 py-2.5 text-sm font-bold text-white shadow transition hover:bg-[#142d45]"
+                className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-brand-navy px-4 py-2.5 text-sm font-bold text-white shadow transition hover:bg-brand-navy-deep"
               >
                 <RotateCcw size={16} />
                 {SCENARIOS.length > 1 ? "Changer de scénario" : "Recommencer"}
@@ -464,7 +464,7 @@ export function NegotiationSimulator() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start pt-2">
             <div className="flex gap-3 max-w-[75%]">
               <div className="shrink-0">
-                <div className="w-8 h-8 rounded-full bg-[#1a3a5c] flex items-center justify-center text-white shadow-sm">
+                <div className="w-8 h-8 rounded-full bg-brand-navy flex items-center justify-center text-white shadow-sm">
                   <span className="text-xs font-bold">D</span>
                 </div>
               </div>
@@ -488,9 +488,9 @@ export function NegotiationSimulator() {
               <button
                 key={opt.id}
                 onClick={() => handleOptionSelect(opt, messages.length - 1)}
-                className="w-full text-left p-3 rounded-xl border border-zinc-200 hover:border-[#d4af37] hover:bg-amber-50/50 transition-all group flex items-start gap-3 shadow-sm hover:shadow-md"
+                className="w-full text-left p-3 rounded-xl border border-zinc-200 hover:border-brand-gold hover:bg-amber-50/50 transition-all group flex items-start gap-3 shadow-sm hover:shadow-md"
               >
-                <div className="mt-1 opacity-0 group-hover:opacity-100 transition-opacity text-[#d4af37]">
+                <div className="mt-1 opacity-0 group-hover:opacity-100 transition-opacity text-brand-gold">
                   <Send size={14} />
                 </div>
                 <span className="text-sm font-medium text-zinc-700 group-hover:text-zinc-900 leading-snug">{opt.text}</span>

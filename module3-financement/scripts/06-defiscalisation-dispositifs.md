@@ -182,7 +182,7 @@ La réduction est calculée sur les dépenses de travaux dans la limite de 400 0
 
 Votre rôle n'est pas de vendre la défiscalisation comme argument principal. [PAUSE 1s] Votre rôle est de conseiller votre client sur la pertinence globale de l'investissement : localisation, qualité du bien, demande locative réelle, perspective de revente. [PAUSE 2s]
 
-Cas pratique. [PAUSE 1s] Un client souhaite investir dans un appartement neuf T2 à Bordeaux à 280 000 euros. [PAUSE 1s] Avec le Pinel (si applicable avant fin 2024) sur 9 ans, la réduction est de 15% soit 42 000 euros — environ 4 667 euros par an. [PAUSE 1s] Mais si la revente à terme est difficile faute de demande, l'avantage fiscal peut être effacé par une moins-value. [PAUSE 2s]
+Cas pratique. [PAUSE 1s] Un client souhaite investir dans un appartement neuf T2 à Bordeaux à 280 000 euros. [PAUSE 1s] Avec le Pinel (si investissements engagés avant le 31/12/2024) sur 9 ans, la réduction est de 15% soit 42 000 euros — environ 4 667 euros par an. [PAUSE 1s] Mais si la revente à terme est difficile faute de demande, l'avantage fiscal peut être effacé par une moins-value. [PAUSE 2s]
 
 ---
 

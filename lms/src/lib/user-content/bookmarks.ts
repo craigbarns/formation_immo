@@ -39,6 +39,9 @@ export function getBookmarksState(): BookmarksState {
 
 function saveState(state: BookmarksState) {
   localStorage.setItem(BOOKMARKS_STORAGE_KEY, JSON.stringify(state));
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent("bookmarks-state-changed", { detail: state }));
+  }
 }
 
 export function isBookmarked(moduleSlug: string, lessonSlug: string): boolean {

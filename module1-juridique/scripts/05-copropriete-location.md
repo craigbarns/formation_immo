@@ -52,7 +52,7 @@ Les chiffres parlent d'eux-mêmes. [PAUSE 1s] En France, on compte près de 3 mi
 
 [B-ROLL : Graphique montrant l'évolution des contentieux copropriété et location]
 
-Pourtant, 40% des contentieux immobiliers concernent la location. [PAUSE 1ss] Et les problèmes de copropriété représentent 25% des difficultés rencontrées lors des transactions.
+Pourtant, 40% des contentieux immobiliers concernent la location. [PAUSE 1s] Et les problèmes de copropriété représentent 25% des difficultés rencontrées lors des transactions.
 
 [B-ROLL : Images de réunions de copropriété tendues, de locataires et propriétaires en conflit]
 
@@ -82,7 +82,7 @@ C'est un immeuble ou un groupe d'immeubles dont la propriété est répartie ent
 
 [B-ROLL : Schéma d'un immeuble montrant lots privatifs et parties communes]
 
-La base juridique ? [PAUSE 1s] La Loi n° 65-557 du 10 juillet 1965, dite "Loi ALUR de 1965", et le Décret n° 67-223 du 17 mars 1967. [PAUSE 1s] Ces textes ont été modernisés par la Loi ALUR de 2014.
+La base juridique ? [PAUSE 1s] La **Loi n° 65-557 du 10 juillet 1965**, dite "Loi de 1965", qui fixe le statut juridique de la copropriété des immeubles bâtis, complétée par le **Décret n° 67-223 du 17 mars 1967**. [PAUSE 1s] Ces textes fondateurs ont ensuite été profondément modernisés par la **Loi ALUR du 24 mars 2014** — qui a imposé l'immatriculation obligatoire des copropriétés, renforcé l'information de l'acquéreur (état daté, carnet d'entretien) et encadré la gestion des syndics. [PAUSE 1s] Ne confondez jamais : Loi de 1965 = socle, Loi ALUR 2014 = mise à jour majeure.
 
 [B-ROLL : Documents juridiques avec les références de loi]
 
@@ -419,7 +419,7 @@ Ce module juridique touche à sa fin. [PAUSE 1s] Vous avez maintenant les bases 
 ## 📚 RÉFÉRENCES JURIDIQUES CITÉES
 
 ### Copropriété :
-- Loi n° 65-557 du 10 juillet 1965 (loi ALUR 1965)
+- Loi n° 65-557 du 10 juillet 1965 (loi de 1965)
 - Décret n° 67-223 du 17 mars 1967
 - Loi ALUR 2014 (modernisation)
 - Article 8 Loi n° 2025-127 (dossier diagnostic technique)

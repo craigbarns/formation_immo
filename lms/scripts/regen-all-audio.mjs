@@ -156,7 +156,7 @@ async function main() {
   console.log(`\n${"=".repeat(50)}`);
   console.log(`✅ Terminé : ${ok} généré(s), ${skipped} ignoré(s), ${failed} échoué(s)`);
   console.log(`\n📂 Fichiers dans: lms/public/audio/`);
-  console.log(`\n🎬 Prochaine étape : node scripts/heygen-cli.mjs lesson --test`);
+  console.log(`\n🎬 Les fichiers audio sont prêts dans public/audio/`);
 }
 
 main().catch((e) => {

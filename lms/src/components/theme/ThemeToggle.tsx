@@ -51,15 +51,15 @@ export function ThemeToggle() {
 
 export function ThemeToggleSimple() {
   const [mounted, setMounted] = useState(false);
-  
+
   useEffect(() => {
-    setMounted(true);
+    requestAnimationFrame(() => setMounted(true));
   }, []);
   
   // Prevent hydration mismatch
   if (!mounted) {
     return (
-      <div className="p-2.5 rounded-xl bg-white/10 text-white/50">
+      <div className="p-2.5 rounded-xl bg-white/10 text-white/70">
         <Sun className="w-5 h-5" />
       </div>
     );
@@ -77,7 +77,7 @@ function ThemeToggleSimpleInner() {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={toggleTheme}
-      className="rounded-xl bg-white/10 p-2.5 text-white outline-none transition-colors hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-amber-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a3a5c]"
+      className="rounded-xl bg-white/10 p-2.5 text-white outline-none transition-colors hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-amber-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
       aria-label={resolvedTheme === "dark" ? "Passer en mode clair" : "Passer en mode sombre"}
     >
       <motion.div

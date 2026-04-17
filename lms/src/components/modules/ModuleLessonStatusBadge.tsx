@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Check } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 import { lessonId } from "@/data/course";
 import { getStoredProgress } from "@/components/LessonProgress";
 import {
@@ -21,14 +22,29 @@ export function ModuleLessonStatusBadge({
   accentColor: string;
 }) {
   const id = lessonId(moduleSlug, lessonSlug);
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState<boolean>(false);
 
-  const refresh = useCallback(() => {
-    setDone(!!getStoredProgress()[id]);
+  const refresh = useCallback(async () => {
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      setDone(!!getStoredProgress()[id]);
+    } else {
+      const { data } = await supabase
+        .from("lesson_progress")
+        .select("completed")
+        .eq("user_id", user.id)
+        .eq("lesson_key", id)
+        .single();
+      setDone(!!data?.completed);
+    }
   }, [id]);
 
   useEffect(() => {
     refresh();
+  }, [refresh]);
+
+  useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key === null || e.key === FORMATION_PROGRESS_STORAGE_KEY) refresh();
     };

@@ -23,7 +23,7 @@ export function LessonAvatarBanner({ avatar }: { avatar: ModuleAvatar }) {
           {avatar.name}
         </p>
         <p className="text-xs leading-snug text-zinc-600">
-          {avatar.role} — {avatar.voiceStyle}
+          {avatar.role} — {avatar.mistralVoiceLabel}
         </p>
       </div>
     </div>

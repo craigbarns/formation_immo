@@ -11,7 +11,6 @@ import { DashboardAnalytics } from "./DashboardAnalytics";
 import { StaggerContainer, StaggerItem, ScrollReveal } from "@/components/animations";
 import { DailyGoalTracker } from "@/components/retention";
 import { AdaptiveLearningPath } from "@/components/learning-path";
-import { AICoachButton } from "@/components/ai-coach";
 import { Greeting } from "@/components/Greeting";
 
 export default function FormationHomePage() {

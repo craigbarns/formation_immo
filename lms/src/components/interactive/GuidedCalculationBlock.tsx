@@ -43,7 +43,7 @@ function StepCard({
             ? "border-emerald-300 bg-emerald-50 shadow-md"
             : isWrong
               ? "border-red-300 bg-red-50"
-              : "border-[#d4af37]/40 bg-white shadow-lg ring-1 ring-[#d4af37]/20"
+              : "border-brand-gold/40 bg-white shadow-lg ring-1 ring-brand-gold/20"
       }`}
     >
       {/* Step number + title */}
@@ -54,13 +54,13 @@ function StepCard({
               ? "bg-zinc-200 text-zinc-400"
               : isCorrect
                 ? "bg-emerald-500 text-white"
-                : "bg-[#1a3a5c] text-white"
+                : "bg-brand-navy text-white"
           }`}
         >
           {isLocked ? "🔒" : isCorrect ? "✓" : step.stepNumber}
         </div>
         <div className="flex-1">
-          <p className="font-bold text-[#1a3a5c]">{step.title}</p>
+          <p className="font-bold text-brand-navy">{step.title}</p>
           {!isLocked && (
             <p className="mt-1 text-sm leading-relaxed text-zinc-600">{step.instruction}</p>
           )}
@@ -71,7 +71,7 @@ function StepCard({
         <div className="border-t border-zinc-100 px-5 pb-5 pt-4 space-y-4">
           {/* Formula */}
           {step.formula && (
-            <div className="rounded-xl bg-[#0f1f33] px-4 py-3 font-mono text-sm text-[#d4af37]">
+            <div className="rounded-xl bg-[#0f1f33] px-4 py-3 font-mono text-sm text-brand-gold">
               {step.formula}
             </div>
           )}
@@ -79,7 +79,7 @@ function StepCard({
           {/* Input row */}
           {!isCorrect && (
             <div className="flex flex-wrap items-center gap-3">
-              <div className="flex flex-1 items-center overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm focus-within:border-[#d4af37] focus-within:ring-2 focus-within:ring-[#d4af37]/20">
+              <div className="flex flex-1 items-center overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm focus-within:border-brand-gold focus-within:ring-2 focus-within:ring-brand-gold/20">
                 <input
                   type="text"
                   inputMode="decimal"
@@ -95,14 +95,14 @@ function StepCard({
               </div>
               <button
                 onClick={validate}
-                className="rounded-xl bg-[#1a3a5c] px-5 py-2.5 text-sm font-bold text-white shadow-md transition hover:bg-[#142d45]"
+                className="rounded-xl bg-brand-navy px-5 py-2.5 text-sm font-bold text-white shadow-md transition hover:bg-brand-navy-deep"
               >
                 Vérifier
               </button>
               {step.hint && (
                 <button
                   onClick={() => setShowHint((v) => !v)}
-                  className="rounded-xl border border-[#d4af37]/40 px-4 py-2.5 text-sm font-semibold text-[#7a6008] transition hover:bg-[#d4af37]/10"
+                  className="rounded-xl border border-brand-gold/40 px-4 py-2.5 text-sm font-semibold text-[#7a6008] transition hover:bg-brand-gold/10"
                 >
                   {showHint ? "Masquer l'indice" : "💡 Indice"}
                 </button>
@@ -112,7 +112,7 @@ function StepCard({
 
           {/* Hint */}
           {showHint && step.hint && !isCorrect && (
-            <div className="rounded-xl border border-[#d4af37]/30 bg-[#d4af37]/5 px-4 py-3 text-sm text-[#7a6008]">
+            <div className="rounded-xl border border-brand-gold/30 bg-brand-gold/5 px-4 py-3 text-sm text-[#7a6008]">
               <span className="font-semibold">Indice : </span>{step.hint}
             </div>
           )}
@@ -173,15 +173,15 @@ function CalcView({ calc }: { calc: GuidedCalculation }) {
   return (
     <div className="space-y-6">
       {/* Scenario */}
-      <div className="rounded-2xl border border-[#1a3a5c]/15 bg-gradient-to-br from-[#1a3a5c]/[0.04] to-white p-5">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#d4af37]">Situation</p>
+      <div className="rounded-2xl border border-brand-navy/15 bg-gradient-to-br from-brand-navy/[0.04] to-white p-5">
+        <p className="text-xs font-bold uppercase tracking-widest text-brand-gold">Situation</p>
         <p className="mt-2 text-sm leading-relaxed text-zinc-700">{calc.scenario}</p>
         <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
           {calc.propertyContext.map((ctx) => (
             <div key={ctx.label} className="rounded-xl border border-zinc-200 bg-white p-3 text-center shadow-sm">
               <div className="text-xl">{ctx.icon}</div>
               <p className="mt-1 text-xs font-bold text-zinc-500">{ctx.label}</p>
-              <p className="mt-0.5 text-sm font-bold text-[#1a3a5c]">{ctx.value}</p>
+              <p className="mt-0.5 text-sm font-bold text-brand-navy">{ctx.value}</p>
             </div>
           ))}
         </div>
@@ -195,7 +195,7 @@ function CalcView({ calc }: { calc: GuidedCalculation }) {
         </div>
         <div className="h-2 overflow-hidden rounded-full bg-zinc-100">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-[#1a3a5c] to-[#d4af37] transition-all duration-500"
+            className="h-full rounded-full bg-gradient-to-r from-brand-navy to-brand-gold transition-all duration-500"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -215,8 +215,8 @@ function CalcView({ calc }: { calc: GuidedCalculation }) {
 
       {/* Final summary */}
       {complete && (
-        <div className="rounded-2xl border-2 border-[#d4af37]/40 bg-gradient-to-br from-[#d4af37]/10 to-amber-50 p-6">
-          <p className="text-sm font-bold uppercase tracking-widest text-[#d4af37]">
+        <div className="rounded-2xl border-2 border-brand-gold/40 bg-gradient-to-br from-brand-gold/10 to-amber-50 p-6">
+          <p className="text-sm font-bold uppercase tracking-widest text-brand-gold">
             🎓 Bilan de l&apos;analyse
           </p>
           <p className="mt-3 text-sm leading-relaxed text-zinc-700">{calc.finalSummary}</p>
@@ -241,10 +241,10 @@ export function GuidedCalculationBlock({
   if (calculations.length === 0) return null;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#1a3a5c]/15 bg-white shadow-lg">
+    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
       {/* Header */}
-      <div className="border-b border-zinc-100 bg-gradient-to-r from-[#1a3a5c] to-[#244b75] px-5 py-4 sm:px-7">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-[#d4af37]">
+      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[#244b75] px-5 py-4 sm:px-7">
+        <p className="text-[11px] font-bold uppercase tracking-widest text-brand-gold">
           Calcul guidé
         </p>
         <p className="mt-0.5 text-sm font-semibold text-white/90">
@@ -260,7 +260,7 @@ export function GuidedCalculationBlock({
               key={c.id}
               onClick={() => setActive(i)}
               className={`shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
-                i === active ? "bg-[#1a3a5c] text-white" : "text-zinc-600 hover:bg-zinc-200"
+                i === active ? "bg-brand-navy text-white" : "text-zinc-600 hover:bg-zinc-200"
               }`}
             >
               {c.title}

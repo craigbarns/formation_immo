@@ -8,9 +8,12 @@ import { GlobalSearch } from "@/components/search";
 import { MagneticButton } from "@/components/animations";
 import { ThemeToggleSimple } from "@/components/theme";
 import { FrenchCoach } from "@/components/coach/FrenchCoach";
+import { LogoutButton } from "@/components/auth/LogoutButton";
+import { useSyncSupabase } from "@/hooks/useSyncSupabase";
 
 export function FormationShell({ children }: { children: React.ReactNode }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  useSyncSupabase();
 
   return (
     <div className="formation-canvas text-zinc-900">
@@ -60,7 +63,7 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
               <button
                 type="button"
                 onClick={() => setIsSearchOpen(true)}
-                className="flex items-center gap-2 rounded-full px-3 py-2 text-[13px] font-semibold text-white/80 outline-none transition hover:bg-white/15 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a3a5c]"
+                className="flex items-center gap-2 rounded-full px-3 py-2 text-[13px] font-semibold text-white/80 outline-none transition hover:bg-white/15 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
               >
                 <Search className="w-4 h-4" />
                 <span className="hidden sm:inline">Rechercher</span>
@@ -76,12 +79,7 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
             <NavItem href="/formation/examen/juridique">Examens</NavItem>
             <NavItem href="/formation/profil">Profil</NavItem>
             <ThemeToggleSimple />
-            <a
-              href="/api/logout"
-              className="ml-1 rounded-full border border-white/40 bg-white/10 px-3.5 py-2 text-xs font-semibold text-white shadow-sm outline-none transition hover:border-amber-200/60 hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-amber-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a3a5c]"
-            >
-              Déconnexion
-            </a>
+            <LogoutButton />
           </nav>
         </div>
       </header>
@@ -147,7 +145,7 @@ function NavItem({ href, children }: { href: string; children: React.ReactNode }
   return (
     <Link
       href={href}
-      className="rounded-full px-3 py-2 text-[13px] font-semibold text-white drop-shadow-sm outline-none transition hover:bg-white/15 hover:text-amber-50 focus-visible:ring-2 focus-visible:ring-amber-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a3a5c]"
+      className="rounded-full px-3 py-2 text-[13px] font-semibold text-white drop-shadow-sm outline-none transition hover:bg-white/15 hover:text-amber-50 focus-visible:ring-2 focus-visible:ring-amber-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
     >
       {children}
     </Link>

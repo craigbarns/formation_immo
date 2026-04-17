@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Flame, X, Clock, Trophy } from "lucide-react";
-import { getGamificationState, updateStreak } from "@/lib/gamification";
+import { createClient } from "@/lib/supabase/client";
+import { updateStreak } from "@/lib/gamification";
 
 interface StreakReminderProps {
   onDismiss?: () => void;
@@ -15,12 +16,56 @@ export function StreakReminder({ onDismiss }: StreakReminderProps) {
   const [variant, setVariant] = useState<"morning" | "evening" | "broken" | null>(null);
 
   useEffect(() => {
-    // Check if we should show reminder
-    const checkReminder = () => {
-      const state = getGamificationState();
-      const lastLogin = state.lastLoginDate;
+    const checkReminder = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
       const today = new Date().toISOString().slice(0, 10);
-      
+
+      // ── Check if already dismissed today ──
+      let dismissed: string | null = null;
+      if (user) {
+        const { data } = await supabase
+          .from("user_settings")
+          .select("streak_reminder_dismissed")
+          .eq("user_id", user.id)
+          .single();
+        dismissed = data?.streak_reminder_dismissed ?? null;
+      } else {
+        dismissed = localStorage.getItem("streak-reminder-dismissed");
+      }
+
+      if (dismissed === today) {
+        setShow(false);
+        return;
+      }
+
+      // ── Load gamification state ──
+      let state: { streak: number; last_login_date?: string; lastLoginDate?: string } | null = null;
+      if (user) {
+        const { data } = await supabase
+          .from("gamification_state")
+          .select("streak, last_login_date")
+          .eq("user_id", user.id)
+          .single();
+        state = data ?? null;
+      } else {
+        const raw = localStorage.getItem("formation-immobilier-gamification");
+        if (raw) {
+          try {
+            state = JSON.parse(raw);
+          } catch {
+            state = null;
+          }
+        }
+      }
+
+      if (!state) {
+        setShow(false);
+        return;
+      }
+
+      const lastLogin = state.last_login_date || state.lastLoginDate || "";
+
       // Already logged in today
       if (lastLogin === today) {
         setShow(false);
@@ -31,9 +76,9 @@ export function StreakReminder({ onDismiss }: StreakReminderProps) {
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
       const yesterdayStr = yesterday.toISOString().slice(0, 10);
-      
+
       const hours = new Date().getHours();
-      
+
       if (lastLogin === yesterdayStr && state.streak > 0) {
         // Streak at risk
         if (hours >= 18) {
@@ -50,17 +95,30 @@ export function StreakReminder({ onDismiss }: StreakReminderProps) {
     };
 
     checkReminder();
-    
+
     // Check every hour
     const interval = setInterval(checkReminder, 60 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
-  const handleDismiss = () => {
+  const handleDismiss = async () => {
     setShow(false);
     onDismiss?.();
+
     // Remember dismissal for today
-    localStorage.setItem("streak-reminder-dismissed", new Date().toISOString().slice(0, 10));
+    const today = new Date().toISOString().slice(0, 10);
+    localStorage.setItem("streak-reminder-dismissed", today);
+
+    // Write to Supabase if logged in
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      await supabase.from("user_settings").upsert({
+        user_id: user.id,
+        streak_reminder_dismissed: today,
+        updated_at: new Date().toISOString(),
+      }, { onConflict: "user_id" });
+    }
   };
 
   const handleContinue = () => {
@@ -69,14 +127,6 @@ export function StreakReminder({ onDismiss }: StreakReminderProps) {
     setShow(false);
     onDismiss?.();
   };
-
-  // Check if already dismissed today
-  useEffect(() => {
-    const dismissed = localStorage.getItem("streak-reminder-dismissed");
-    if (dismissed === new Date().toISOString().slice(0, 10)) {
-      setShow(false);
-    }
-  }, []);
 
   if (!show || !variant) return null;
 
@@ -100,7 +150,7 @@ export function StreakReminder({ onDismiss }: StreakReminderProps) {
           
           <button
             onClick={handleDismiss}
-            className="absolute right-2 top-2 rounded-full p-1 text-white/40 hover:bg-white/10 hover:text-white"
+            className="absolute right-2 top-2 rounded-full p-1 text-white/60 hover:bg-white/10 hover:text-white"
           >
             <X className="h-4 w-4" />
           </button>

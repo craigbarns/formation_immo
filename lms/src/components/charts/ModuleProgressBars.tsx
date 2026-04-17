@@ -48,7 +48,7 @@ export function ModuleProgressBars({ progress }: ModuleProgressBarsProps) {
                     </span>
                     <div>
                       <p className="font-semibold text-gray-900 text-sm">
-                        {module.title.replace("Module ", "M")}
+                        {module.title.replace(/^Module (\d+) — /, "M$1 · ")}
                       </p>
                       <p className="text-xs text-gray-500">
                         {completed}/{total} leçons

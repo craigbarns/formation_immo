@@ -47,10 +47,10 @@ const ICONS: Record<string, string> = {
 
 const TYPE_STYLES: Record<string, string> = {
   definition: "border-blue-200 bg-blue-50",
-  rule: "border-[#1a3a5c]/20 bg-[#1a3a5c]/5",
+  rule: "border-brand-navy/20 bg-brand-navy/5",
   tip: "border-emerald-200 bg-emerald-50",
   warning: "border-amber-200 bg-amber-50",
-  stat: "border-[#d4af37]/30 bg-[#d4af37]/5",
+  stat: "border-brand-gold/30 bg-brand-gold/5",
 };
 
 const TYPE_LABELS: Record<string, string> = {
@@ -63,10 +63,10 @@ const TYPE_LABELS: Record<string, string> = {
 
 const TYPE_LABEL_STYLES: Record<string, string> = {
   definition: "bg-blue-100 text-blue-700",
-  rule: "bg-[#1a3a5c]/10 text-[#1a3a5c]",
+  rule: "bg-brand-navy/10 text-brand-navy",
   tip: "bg-emerald-100 text-emerald-700",
   warning: "bg-amber-100 text-amber-800",
-  stat: "bg-[#d4af37]/15 text-[#8a7318]",
+  stat: "bg-brand-gold/15 text-[#8a7318]",
 };
 
 export function KeyConceptsPanel({ concepts }: { concepts: KeyConcept[] }) {
@@ -81,7 +81,7 @@ export function KeyConceptsPanel({ concepts }: { concepts: KeyConcept[] }) {
             <span className="text-xl shrink-0">{ICONS[c.icon] ?? "📌"}</span>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 flex-wrap">
-                <h4 className="font-bold text-[#1a3a5c] text-sm">{c.title}</h4>
+                <h4 className="font-bold text-brand-navy text-sm">{c.title}</h4>
                 <span
                   className={`rounded-full px-2 py-0.5 text-[9px] font-bold ${
                     TYPE_LABEL_STYLES[c.type] ?? "bg-zinc-100 text-zinc-600"

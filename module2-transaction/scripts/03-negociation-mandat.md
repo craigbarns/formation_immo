@@ -51,7 +51,7 @@ Elegant real estate agent in sophisticated office, signing contract with satisfi
 
 [B-ROLL : Agent qui attend, regard vers la porte, puis déception]
 
-"La vérité, c'est que le propriétaire ATTEND que vous concluiez. Il veut que vous le guidiez. Qu vous lui disiez quoi faire. S'il ne signe pas, ce n'est pas parce qu'il n'est pas intéressé. C'est parce que vous ne lui avez pas demandé."
+"La vérité, c'est que le propriétaire ATTEND que vous concluiez. Il veut que vous le guidiez. Qu'il vous voie comme l'expert qui sait. S'il ne signe pas, ce n'est pas parce qu'il n'est pas intéressé — c'est parce que vous ne lui avez pas demandé."
 
 ---
 
@@ -169,13 +169,13 @@ Elegant real estate agent in sophisticated office, signing contract with satisfi
 
 "J'ai préparé le terrain. Rendez-vous pris en précisant que nous pourrions signer. Documents envoyés par mail la veille. Contrat imprimé dans mon attaché-case."
 
-[B-ROLL : L'estimation en cours, les propriétaires qui hochhent]
+[B-ROLL : L'estimation en cours, les propriétaires qui hochent]
 
 "L'estimation se passe bien. Ils sont d'accord sur le prix : 680 000 euros. Ils posent des questions sur le délai. Signal d'achat numéro un. Ils me parlent de leur future maison en Ardèche. Signal d'achat numéro deux. Ils demandent des précisions sur mes honoraires. Signal d'achat numéro trois."
 
 [B-ROLL : Agent qui note mentalement les signaux]
 
-"Je présente mon argumentaire de valeur. Mes ventes dans le secteur. Ma méthode. Mon engagement. Ils écoutent attentivement. Ils se regardent. Ils hochhent."
+"Je présente mon argumentaire de valeur. Mes ventes dans le secteur. Ma méthode. Mon engagement. Ils écoutent attentivement. Ils se regardent. Ils hochent."
 
 [B-ROLL : Le moment du closing approche]
 

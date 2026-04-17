@@ -40,7 +40,7 @@ export const MODULE_SHOWCASE: Record<string, ModuleShowcase> = {
       "Scripts prêts pour vos rendez-vous clients",
       "Lexique juridique vulgarisé pour vendre la valeur de votre conseil",
     ],
-    heroGradient: "from-[#0f2840] via-[#1a3a5c] to-[#1e3a5f]",
+    heroGradient: "from-[#0f2840] via-brand-navy to-[#1e3a5f]",
     lessonTeaser: {
       "loi-alur": "Cadre 2026 : ce qui vous concerne au quotidien en vitrine et en mandat.",
       "parcours-interactif": "Mettez-vous en situation : transparence des honoraires sans friction.",

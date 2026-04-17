@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
 import { getGamificationState, getLevelForXP, LEVELS, type GamificationState } from "@/lib/gamification";
 import { BadgesGrid } from "@/components/gamification/BadgesGrid";
 import { GlobalTimeTracker } from "@/components/gamification/ModuleTimeTracker";
@@ -11,7 +12,44 @@ export function ProfileContent() {
   const [state, setState] = useState<GamificationState | null>(null);
 
   useEffect(() => {
-    setState(getGamificationState());
+    async function load() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        const { data } = await supabase
+          .from("gamification_state")
+          .select("*")
+          .eq("user_id", user.id)
+          .single();
+
+        if (data) {
+          setState({
+            xp: data.xp,
+            earnedBadges: data.earned_badges || [],
+            streak: data.streak,
+            lastLoginDate: data.last_login_date,
+            totalQuizCorrect: data.total_quiz_correct,
+            totalExamsTaken: data.total_exams_taken,
+            totalExamsPerfect: data.total_exams_perfect,
+            simulatorsUsed: data.simulators_used || [],
+            lessonTimes: data.lesson_times || {},
+            examScores: data.exam_scores || {},
+            xpHistory: data.xp_history || [],
+            moduleTimers: data.module_timers || {},
+            dailyActivity: data.daily_activity || {},
+            completedChecklists: data.completed_checklists || [],
+            flashcardsReviewed: data.flashcards_reviewed,
+          });
+          return;
+        }
+      }
+
+      // Fallback to localStorage if not logged in or no Supabase data
+      setState(getGamificationState());
+    }
+
+    load();
   }, []);
 
   if (!state) return null;
@@ -22,20 +60,20 @@ export function ProfileContent() {
   return (
     <div className="mt-8 space-y-8">
       {/* Level & XP Card */}
-      <div className="rounded-2xl border-2 border-[#1a3a5c]/15 bg-gradient-to-br from-[#1a3a5c] to-[#2d5a7c] p-6 text-white shadow-lg">
+      <div className="rounded-2xl border-2 border-brand-navy/15 bg-gradient-to-br from-brand-navy to-[#2d5a7c] p-6 text-white shadow-lg">
         <div className="flex flex-wrap items-center gap-6">
           <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-white/10 text-4xl backdrop-blur">
             {current.icon}
           </div>
           <div className="flex-1">
-            <p className="text-xs font-bold uppercase tracking-wider text-[#d4af37]">
+            <p className="text-xs font-bold uppercase tracking-wider text-brand-gold">
               Niveau {current.level}
             </p>
             <h2 className="text-2xl font-bold">{current.title}</h2>
             <div className="mt-2 flex items-center gap-3">
               <div className="h-3 flex-1 overflow-hidden rounded-full bg-white/20">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-[#d4af37] to-[#f0e6c8] transition-all duration-700"
+                  className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[#f0e6c8] transition-all duration-700"
                   style={{ width: `${progressToNext}%` }}
                 />
               </div>
@@ -44,7 +82,7 @@ export function ProfileContent() {
               </span>
             </div>
             {next && (
-              <p className="mt-1 text-xs text-white/60">
+              <p className="mt-1 text-xs text-white/80">
                 {next.xpRequired - state.xp} XP pour atteindre {next.icon} {next.title}
               </p>
             )}
@@ -71,7 +109,7 @@ export function ProfileContent() {
                 key={lvl.level}
                 className={`flex items-center gap-1.5 rounded-lg border px-3 py-2 text-xs transition ${
                   reached
-                    ? "border-[#d4af37]/50 bg-[#d4af37]/10 font-bold text-[#1a3a5c]"
+                    ? "border-brand-gold/50 bg-brand-gold/10 font-bold text-brand-navy"
                     : "border-zinc-200 bg-zinc-50 text-zinc-400"
                 }`}
               >
@@ -136,7 +174,7 @@ export function ProfileContent() {
             {[...state.xpHistory].reverse().slice(0, 20).map((entry, i) => (
               <div key={i} className="flex items-center justify-between text-xs">
                 <span className="text-zinc-500">{entry.reason}</span>
-                <span className="font-bold text-[#d4af37]">+{entry.amount} XP</span>
+                <span className="font-bold text-brand-gold">+{entry.amount} XP</span>
               </div>
             ))}
           </div>

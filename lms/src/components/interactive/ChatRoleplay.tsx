@@ -74,9 +74,9 @@ export function ChatRoleplay({ scenario }: { scenario: ChatRoleplayScenario }) {
   );
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#1a3a5c]/15 bg-white shadow-lg">
-      <div className="border-b border-[#1a3a5c]/10 bg-gradient-to-r from-[#1a3a5c] to-[#142d45] px-5 py-5 sm:px-8">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d4af37]">
+    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
+      <div className="border-b border-brand-navy/10 bg-gradient-to-r from-brand-navy to-brand-navy-deep px-5 py-5 sm:px-8">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
           Simulation conversationnelle
         </p>
         <h2 className="mt-1 text-xl font-bold text-white sm:text-2xl">{scenario.title}</h2>
@@ -93,12 +93,12 @@ export function ChatRoleplay({ scenario }: { scenario: ChatRoleplayScenario }) {
               <div
                 className={`max-w-[92%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm sm:max-w-[85%] ${
                   ln.role === "vous"
-                    ? "rounded-br-sm bg-[#1a3a5c] text-white"
+                    ? "rounded-br-sm bg-brand-navy text-white"
                     : "rounded-bl-sm border border-zinc-200 bg-white text-zinc-800"
                 }`}
               >
                 {ln.role === "client" && (
-                  <p className="mb-1 text-[10px] font-bold uppercase tracking-wide text-[#d4af37]">
+                  <p className="mb-1 text-[10px] font-bold uppercase tracking-wide text-brand-gold">
                     Client
                   </p>
                 )}
@@ -110,14 +110,14 @@ export function ChatRoleplay({ scenario }: { scenario: ChatRoleplayScenario }) {
 
         {pendingChoose && !finished && (
           <div className="border-t border-zinc-200 bg-white px-4 py-4 sm:px-8">
-            <p className="text-xs font-semibold text-[#1a3a5c]">{pendingChoose.prompt}</p>
+            <p className="text-xs font-semibold text-brand-navy">{pendingChoose.prompt}</p>
             <div className="mt-3 flex flex-col gap-2">
               {pendingChoose.options.map((opt) => (
                 <button
                   key={opt.next}
                   type="button"
                   onClick={() => pickOption(opt.label, opt.next)}
-                  className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-left text-sm text-zinc-800 transition hover:border-[#1a3a5c]/40 hover:bg-[#1a3a5c]/5"
+                  className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-left text-sm text-zinc-800 transition hover:border-brand-navy/40 hover:bg-brand-navy/5"
                 >
                   {opt.label}
                 </button>
@@ -131,7 +131,7 @@ export function ChatRoleplay({ scenario }: { scenario: ChatRoleplayScenario }) {
             <button
               type="button"
               onClick={reset}
-              className="rounded-xl bg-[#1a3a5c] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#142d45]"
+              className="rounded-xl bg-brand-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-navy-deep"
             >
               Rejouer la conversation
             </button>

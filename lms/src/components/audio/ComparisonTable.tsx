@@ -12,7 +12,7 @@ type Props = {
 export function ComparisonTable({ title, colAHeader, colBHeader, rows }: Props) {
   return (
     <div className="rounded-xl border-2 border-zinc-200 bg-white overflow-hidden shadow-sm">
-      <div className="bg-[#1a3a5c] px-4 py-3">
+      <div className="bg-brand-navy px-4 py-3">
         <h4 className="text-sm font-bold text-white">{title}</h4>
       </div>
       <div className="overflow-x-auto">
@@ -22,10 +22,10 @@ export function ComparisonTable({ title, colAHeader, colBHeader, rows }: Props) 
               <th className="px-4 py-2.5 text-left text-xs font-bold text-zinc-500 uppercase tracking-wide w-1/4">
                 Critere
               </th>
-              <th className="px-4 py-2.5 text-left text-xs font-bold text-[#1a3a5c] uppercase tracking-wide w-[37.5%]">
+              <th className="px-4 py-2.5 text-left text-xs font-bold text-brand-navy uppercase tracking-wide w-[37.5%]">
                 {colAHeader}
               </th>
-              <th className="px-4 py-2.5 text-left text-xs font-bold text-[#d4af37] uppercase tracking-wide w-[37.5%]">
+              <th className="px-4 py-2.5 text-left text-xs font-bold text-brand-gold uppercase tracking-wide w-[37.5%]">
                 {colBHeader}
               </th>
             </tr>
@@ -37,7 +37,7 @@ export function ComparisonTable({ title, colAHeader, colBHeader, rows }: Props) 
                 <td
                   className={`px-4 py-3 text-xs ${
                     r.highlight === "a"
-                      ? "font-bold text-[#1a3a5c] bg-[#1a3a5c]/5"
+                      ? "font-bold text-brand-navy bg-brand-navy/5"
                       : "text-zinc-600"
                   }`}
                 >
@@ -47,7 +47,7 @@ export function ComparisonTable({ title, colAHeader, colBHeader, rows }: Props) 
                 <td
                   className={`px-4 py-3 text-xs ${
                     r.highlight === "b"
-                      ? "font-bold text-[#8a7318] bg-[#d4af37]/5"
+                      ? "font-bold text-[#8a7318] bg-brand-gold/5"
                       : "text-zinc-600"
                   }`}
                 >

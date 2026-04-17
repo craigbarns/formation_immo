@@ -40,7 +40,7 @@ function FieldRow({
           inputMode="decimal"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`min-w-[120px] flex-1 rounded-lg border px-3 py-2 text-sm tabular-nums outline-none ring-2 ring-transparent transition focus:border-[#d4af37] focus:ring-[#d4af37]/30 ${border}`}
+          className={`min-w-[120px] flex-1 rounded-lg border px-3 py-2 text-sm tabular-nums outline-none ring-2 ring-transparent transition focus:border-brand-gold focus:ring-brand-gold/30 ${border}`}
           placeholder="Votre calcul"
           autoComplete="off"
         />
@@ -66,8 +66,11 @@ export function CaseStudyBlock({ studies }: { studies: CaseStudy[] }) {
 
   const resetKey = study?.id ?? "";
   useEffect(() => {
-    setValues({});
-    setStatus({});
+    const timer = setTimeout(() => {
+      setValues({});
+      setStatus({});
+    }, 0);
+    return () => clearTimeout(timer);
   }, [resetKey]);
 
   const checkField = useCallback((field: CaseStudyField, raw: string): FieldStatus => {
@@ -98,9 +101,9 @@ export function CaseStudyBlock({ studies }: { studies: CaseStudy[] }) {
   if (studies.length === 0 || !study) return null;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#1a3a5c]/15 bg-white shadow-lg">
-      <div className="border-b border-[#1a3a5c]/10 bg-gradient-to-r from-[#1a3a5c] to-[#142d45] px-5 py-5 sm:px-8">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d4af37]">
+    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
+      <div className="border-b border-brand-navy/10 bg-gradient-to-r from-brand-navy to-brand-navy-deep px-5 py-5 sm:px-8">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
           Étude de cas chiffrée
         </p>
         <h2 className="mt-1 text-xl font-bold text-white sm:text-2xl">{study.title}</h2>
@@ -115,12 +118,12 @@ export function CaseStudyBlock({ studies }: { studies: CaseStudy[] }) {
               type="button"
               onClick={() => setActive(i)}
               className={`relative px-4 py-3 text-sm font-medium transition ${
-                i === active ? "text-[#1a3a5c]" : "text-zinc-400 hover:text-zinc-600"
+                i === active ? "text-brand-navy" : "text-zinc-400 hover:text-zinc-600"
               }`}
             >
               Cas {i + 1}
               {i === active && (
-                <span className="absolute inset-x-2 bottom-0 h-0.5 rounded-full bg-[#d4af37]" />
+                <span className="absolute inset-x-2 bottom-0 h-0.5 rounded-full bg-brand-gold" />
               )}
             </button>
           ))}
@@ -143,7 +146,7 @@ export function CaseStudyBlock({ studies }: { studies: CaseStudy[] }) {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-sm font-bold text-[#1a3a5c]">Vos calculs</h3>
+          <h3 className="text-sm font-bold text-brand-navy">Vos calculs</h3>
           {study.questions.map((q) => (
             <FieldRow
               key={q.id}

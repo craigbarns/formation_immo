@@ -133,8 +133,8 @@ export function AudioWithAvatar({ audioUrl, title, size = "md", className = "" }
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <div
-        className={`relative shrink-0 rounded-full bg-[#1a3a5c]/5 p-0.5 transition-shadow duration-300 ${
-          playing ? "shadow-[0_0_0_3px_rgba(212,175,55,0.45)] ring-2 ring-[#d4af37]/70" : ""
+        className={`relative shrink-0 rounded-full bg-brand-navy/5 p-0.5 transition-shadow duration-300 ${
+          playing ? "shadow-[0_0_0_3px_rgba(212,175,55,0.45)] ring-2 ring-brand-gold/70" : ""
         }`}
       >
         <span className="sr-only">Avatar dont la bouche suit la narration</span>

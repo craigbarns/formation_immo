@@ -42,9 +42,9 @@ export function DragDropExerciseBlock({ exercises }: Props) {
   if (exercises.length === 0) return null;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#1a3a5c]/15 bg-white shadow-[0_25px_50px_-12px_rgba(26,58,92,0.18)] ring-1 ring-black/5">
+    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-[0_25px_50px_-12px_rgba(26,58,92,0.18)] ring-1 ring-black/5">
       {/* En-tete */}
-      <div className="relative border-b border-[#1a3a5c]/10 bg-[#1a3a5c] px-5 py-5 sm:px-8">
+      <div className="relative border-b border-brand-navy/10 bg-brand-navy px-5 py-5 sm:px-8">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.07]"
           style={{
@@ -52,7 +52,7 @@ export function DragDropExerciseBlock({ exercises }: Props) {
           }}
         />
         <div className="relative">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d4af37]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
             Exercice interactif
           </p>
           <h2 className="mt-1.5 text-xl font-bold leading-snug tracking-tight text-white sm:text-2xl">
@@ -63,20 +63,20 @@ export function DragDropExerciseBlock({ exercises }: Props) {
 
       {/* Onglets si plusieurs exercices */}
       {exercises.length > 1 && (
-        <div className="flex gap-1 border-b border-[#1a3a5c]/10 bg-slate-50 px-5 sm:px-8">
+        <div className="flex gap-1 border-b border-brand-navy/10 bg-slate-50 px-5 sm:px-8">
           {exercises.map((ex, i) => (
             <button
               key={ex.id}
               onClick={() => setActiveTab(i)}
               className={`relative px-4 py-3 text-sm font-medium transition-colors ${
                 i === activeTab
-                  ? "text-[#1a3a5c]"
+                  ? "text-brand-navy"
                   : "text-zinc-400 hover:text-zinc-600"
               }`}
             >
               Exercice {i + 1}
               {i === activeTab && (
-                <span className="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-[#d4af37]" />
+                <span className="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-brand-gold" />
               )}
             </button>
           ))}
@@ -172,7 +172,7 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
       {/* Slots numerotes */}
       <div className="mb-6 space-y-3">
         {placedItems.map((itemIdx, slotIdx) => {
-          let borderColor = "border-[#1a3a5c]/15";
+          let borderColor = "border-brand-navy/15";
           let bgColor = "bg-slate-50";
           if (validated && itemIdx !== null) {
             const isCorrect = itemIdx === correctOrder[slotIdx];
@@ -182,7 +182,7 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
 
           return (
             <div key={slotIdx} className="flex items-center gap-3">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#1a3a5c] text-xs font-bold text-white">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-navy text-xs font-bold text-white">
                 {slotIdx + 1}
               </span>
               <button
@@ -190,9 +190,9 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
                 disabled={validated || itemIdx === null}
                 className={`min-h-[48px] w-full rounded-xl border-2 ${borderColor} ${bgColor} px-4 py-3 text-left text-sm font-medium transition-all ${
                   itemIdx !== null && !validated
-                    ? "cursor-pointer text-[#1a3a5c] hover:border-red-300 hover:bg-red-50/50"
+                    ? "cursor-pointer text-brand-navy hover:border-red-300 hover:bg-red-50/50"
                     : itemIdx !== null
-                      ? "cursor-default text-[#1a3a5c]"
+                      ? "cursor-default text-brand-navy"
                       : "cursor-default text-zinc-300"
                 }`}
               >
@@ -226,7 +226,7 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
               <button
                 key={itemIdx}
                 onClick={() => handlePickItem(itemIdx)}
-                className="rounded-xl border-2 border-[#d4af37]/30 bg-white px-4 py-3 text-sm font-medium text-[#1a3a5c] shadow-sm transition-all hover:border-[#d4af37] hover:bg-[#d4af37]/5 hover:shadow-md active:scale-[0.97]"
+                className="rounded-xl border-2 border-brand-gold/30 bg-white px-4 py-3 text-sm font-medium text-brand-navy shadow-sm transition-all hover:border-brand-gold hover:bg-brand-gold/5 hover:shadow-md active:scale-[0.97]"
               >
                 {exercise.items[itemIdx]}
               </button>
@@ -237,13 +237,13 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
 
       {/* Score + boutons */}
       {validated && (
-        <div className="mb-6 rounded-xl border border-[#1a3a5c]/10 bg-gradient-to-r from-[#1a3a5c]/5 to-transparent p-4">
+        <div className="mb-6 rounded-xl border border-brand-navy/10 bg-gradient-to-r from-brand-navy/5 to-transparent p-4">
           <div className="flex items-center gap-3">
-            <span className="text-3xl font-bold text-[#1a3a5c]">
+            <span className="text-3xl font-bold text-brand-navy">
               {score}/{totalSlots}
             </span>
             <div>
-              <p className="text-sm font-semibold text-[#1a3a5c]">
+              <p className="text-sm font-semibold text-brand-navy">
                 {score === totalSlots
                   ? "Parfait !"
                   : score >= totalSlots / 2
@@ -257,7 +257,7 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
               </p>
             </div>
             {score === totalSlots && (
-              <span className="ml-auto rounded-full bg-[#d4af37]/15 px-3 py-1.5 text-xs font-bold text-[#d4af37]">
+              <span className="ml-auto rounded-full bg-brand-gold/15 px-3 py-1.5 text-xs font-bold text-brand-gold">
                 +25 XP
               </span>
             )}
@@ -270,7 +270,7 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
           <button
             onClick={handleValidate}
             disabled={!allPlaced}
-            className="rounded-xl bg-[#1a3a5c] px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#1a3a5c]/90 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-xl bg-brand-navy px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-brand-navy/90 disabled:cursor-not-allowed disabled:opacity-40"
           >
             Verifier
           </button>
@@ -278,7 +278,7 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
         {validated && (
           <button
             onClick={handleRetry}
-            className="rounded-xl border-2 border-[#1a3a5c]/20 bg-white px-6 py-3 text-sm font-semibold text-[#1a3a5c] transition-all hover:border-[#1a3a5c]/40 hover:bg-slate-50"
+            className="rounded-xl border-2 border-brand-navy/20 bg-white px-6 py-3 text-sm font-semibold text-brand-navy transition-all hover:border-brand-navy/40 hover:bg-slate-50"
           >
             Recommencer
           </button>
@@ -429,7 +429,7 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {/* Colonne gauche */}
         <div className="space-y-2">
-          <p className="mb-2 text-xs font-bold uppercase tracking-widest text-[#1a3a5c]/60">
+          <p className="mb-2 text-xs font-bold uppercase tracking-widest text-brand-navy/60">
             Elements
           </p>
           {leftItems.map((label, leftIdx) => {
@@ -452,10 +452,10 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
                   validated
                     ? `cursor-default ${validationClass}`
                     : isSelected
-                      ? "border-[#d4af37] bg-[#d4af37]/10 text-[#1a3a5c] shadow-md"
+                      ? "border-brand-gold bg-brand-gold/10 text-brand-navy shadow-md"
                       : isMatched && color
                         ? `${color.border} ${color.bg} ${color.text}`
-                        : "border-[#1a3a5c]/15 bg-white text-[#1a3a5c] hover:border-[#d4af37]/50 hover:bg-[#d4af37]/5"
+                        : "border-brand-navy/15 bg-white text-brand-navy hover:border-brand-gold/50 hover:bg-brand-gold/5"
                 }`}
               >
                 <span className="flex items-center gap-2">
@@ -475,7 +475,7 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
 
         {/* Colonne droite */}
         <div className="space-y-2">
-          <p className="mb-2 text-xs font-bold uppercase tracking-widest text-[#1a3a5c]/60">
+          <p className="mb-2 text-xs font-bold uppercase tracking-widest text-brand-navy/60">
             Definitions
           </p>
           {shuffledRight.map((def, rightIdx) => {
@@ -489,12 +489,12 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
                 disabled={validated}
                 className={`w-full rounded-xl border-2 px-4 py-3 text-left text-sm transition-all ${
                   validated
-                    ? "cursor-default border-[#1a3a5c]/10 bg-slate-50 text-zinc-600"
+                    ? "cursor-default border-brand-navy/10 bg-slate-50 text-zinc-600"
                     : isMatched && color
                       ? `${color.border} ${color.bg} ${color.text}`
                       : selectedLeft !== null
-                        ? "border-[#1a3a5c]/15 bg-white text-zinc-600 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/5"
-                        : "border-[#1a3a5c]/10 bg-slate-50 text-zinc-500"
+                        ? "border-brand-navy/15 bg-white text-zinc-600 hover:border-brand-gold/50 hover:bg-brand-gold/5"
+                        : "border-brand-navy/10 bg-slate-50 text-zinc-500"
                 }`}
               >
                 {def}
@@ -506,13 +506,13 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
 
       {/* Score + boutons */}
       {validated && (
-        <div className="mb-6 rounded-xl border border-[#1a3a5c]/10 bg-gradient-to-r from-[#1a3a5c]/5 to-transparent p-4">
+        <div className="mb-6 rounded-xl border border-brand-navy/10 bg-gradient-to-r from-brand-navy/5 to-transparent p-4">
           <div className="flex items-center gap-3">
-            <span className="text-3xl font-bold text-[#1a3a5c]">
+            <span className="text-3xl font-bold text-brand-navy">
               {score}/{leftItems.length}
             </span>
             <div>
-              <p className="text-sm font-semibold text-[#1a3a5c]">
+              <p className="text-sm font-semibold text-brand-navy">
                 {score === leftItems.length
                   ? "Parfait !"
                   : score >= leftItems.length / 2
@@ -526,7 +526,7 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
               </p>
             </div>
             {score === leftItems.length && (
-              <span className="ml-auto rounded-full bg-[#d4af37]/15 px-3 py-1.5 text-xs font-bold text-[#d4af37]">
+              <span className="ml-auto rounded-full bg-brand-gold/15 px-3 py-1.5 text-xs font-bold text-brand-gold">
                 +25 XP
               </span>
             )}
@@ -539,7 +539,7 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
           <button
             onClick={handleValidate}
             disabled={!allMatched}
-            className="rounded-xl bg-[#1a3a5c] px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#1a3a5c]/90 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-xl bg-brand-navy px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-brand-navy/90 disabled:cursor-not-allowed disabled:opacity-40"
           >
             Verifier
           </button>
@@ -547,7 +547,7 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
         {validated && (
           <button
             onClick={handleRetry}
-            className="rounded-xl border-2 border-[#1a3a5c]/20 bg-white px-6 py-3 text-sm font-semibold text-[#1a3a5c] transition-all hover:border-[#1a3a5c]/40 hover:bg-slate-50"
+            className="rounded-xl border-2 border-brand-navy/20 bg-white px-6 py-3 text-sm font-semibold text-brand-navy transition-all hover:border-brand-navy/40 hover:bg-slate-50"
           >
             Recommencer
           </button>

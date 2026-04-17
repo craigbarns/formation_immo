@@ -27,8 +27,8 @@ export function AudioLessonView({ audioUrl, title, avatar, visuals }: Props) {
           {/* Key concepts */}
           {visuals.keyConcepts.length > 0 && (
             <section>
-              <h3 className="mb-3 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-[#1a3a5c]">
-                <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#1a3a5c] text-xs text-white">
+              <h3 className="mb-3 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-brand-navy">
+                <span className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-navy text-xs text-white">
                   &#x1F4A1;
                 </span>
                 Concepts cles
@@ -40,8 +40,8 @@ export function AudioLessonView({ audioUrl, title, avatar, visuals }: Props) {
           {/* Stats dashboard */}
           {visuals.stats && visuals.stats.length > 0 && (
             <section>
-              <h3 className="mb-3 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-[#1a3a5c]">
-                <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#d4af37] text-xs text-[#1a3a5c]">
+              <h3 className="mb-3 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-brand-navy">
+                <span className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-gold text-xs text-brand-navy">
                   &#x1F4CA;
                 </span>
                 Chiffres a connaitre
@@ -53,8 +53,8 @@ export function AudioLessonView({ audioUrl, title, avatar, visuals }: Props) {
           {/* Comparison table */}
           {visuals.comparison && (
             <section>
-              <h3 className="mb-3 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-[#1a3a5c]">
-                <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#1a3a5c]/10 text-xs text-[#1a3a5c]">
+              <h3 className="mb-3 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-brand-navy">
+                <span className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-navy/10 text-xs text-brand-navy">
                   &#x2194;&#xFE0F;
                 </span>
                 Comparatif

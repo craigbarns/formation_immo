@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getGamificationState, getLevelForXP } from "@/lib/gamification";
+import { createClient } from "@/lib/supabase/client";
 import { GlobalTimeTracker } from "@/components/gamification/ModuleTimeTracker";
 import { motion } from "framer-motion";
 import { Medal, CheckCircle2, Flame } from "lucide-react";
@@ -15,12 +16,35 @@ export function DashboardGamification() {
   const [quizCorrect, setQuizCorrect] = useState(0);
 
   useEffect(() => {
-    const state = getGamificationState();
-    setXp(state.xp);
-    setStreak(state.streak);
-    setBadges(state.earnedBadges.length);
-    setQuizCorrect(state.totalQuizCorrect);
-    setMounted(true);
+    requestAnimationFrame(() => setMounted(true));
+
+    async function load() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        const { data } = await supabase
+          .from("gamification_state")
+          .select("xp, streak, earned_badges, total_quiz_correct")
+          .eq("user_id", user.id)
+          .single();
+
+        if (data) {
+          setXp(data.xp ?? 0);
+          setStreak(data.streak ?? 0);
+          setBadges((data.earned_badges ?? []).length);
+          setQuizCorrect(data.total_quiz_correct ?? 0);
+        }
+      } else {
+        const state = getGamificationState();
+        setXp(state.xp);
+        setStreak(state.streak);
+        setBadges(state.earnedBadges.length);
+        setQuizCorrect(state.totalQuizCorrect);
+      }
+    }
+
+    load();
   }, []);
 
   if (!mounted) return (
@@ -40,7 +64,7 @@ export function DashboardGamification() {
       className="mb-6 space-y-4"
     >
       {/* Level progress card */}
-      <div className="rounded-2xl border border-zinc-200/50 bg-gradient-to-br from-[#1a3a5c] via-[#244b75] to-[#1a3a5c] p-6 text-white shadow-xl relative overflow-hidden">
+      <div className="rounded-2xl border border-zinc-200/50 bg-gradient-to-br from-brand-navy via-[#244b75] to-brand-navy p-6 text-white shadow-xl relative overflow-hidden">
         {/* Decorative glass highlight */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-[0.03] rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3 pointer-events-none" />
         
@@ -70,13 +94,13 @@ export function DashboardGamification() {
                   initial={{ width: 0 }}
                   animate={{ width: `${progressToNext}%` }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
-                  className="h-full rounded-full bg-gradient-to-r from-[#d4af37] via-[#f9e596] to-[#d4af37] shadow-[0_0_10px_rgba(212,175,55,0.4)]"
+                  className="h-full rounded-full bg-gradient-to-r from-brand-gold via-[#f9e596] to-brand-gold shadow-[0_0_10px_rgba(212,175,55,0.4)]"
                 />
               </div>
               <AnimatedCounter value={xp} suffix=" XP" duration={1.5} className="text-sm font-bold tabular-nums tracking-wide text-amber-100" />
             </div>
             {next && (
-              <p className="mt-1.5 text-xs font-medium text-white/50 tracking-wide">
+              <p className="mt-1.5 text-xs font-medium text-white/70 tracking-wide">
                 Encore <span className="text-white/80">{next.xpRequired - xp} XP</span> pour le statut {next.title} {next.icon}
               </p>
             )}

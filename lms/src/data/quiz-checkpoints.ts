@@ -1302,11 +1302,11 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
     difficulty: "easy",
   },
 
-  // ── transaction / offre-achat-avants-contrats ──────────
+  // ── transaction / offre-achat-avant-contrats ──────────
   {
     id: "qc-tra-offr-01",
     moduleSlug: "transaction",
-    lessonSlug: "offre-achat-avants-contrats",
+    lessonSlug: "offre-achat-avant-contrats",
     question: "Quelle est la durée de validité usuelle d'une offre d'achat ?",
     options: [
       { label: "24 heures", isCorrect: false },
@@ -1320,7 +1320,7 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   {
     id: "qc-tra-offr-02",
     moduleSlug: "transaction",
-    lessonSlug: "offre-achat-avants-contrats",
+    lessonSlug: "offre-achat-avant-contrats",
     question: "Dans une promesse unilatérale de vente, qui est engagé contractuellement ?",
     options: [
       { label: "Les deux parties", isCorrect: false },
@@ -1334,7 +1334,7 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   {
     id: "qc-tra-offr-03",
     moduleSlug: "transaction",
-    lessonSlug: "offre-achat-avants-contrats",
+    lessonSlug: "offre-achat-avant-contrats",
     question: "Quel délai a le notaire pour enregistrer une promesse unilatérale de vente ?",
     options: [
       { label: "24 heures", isCorrect: false },

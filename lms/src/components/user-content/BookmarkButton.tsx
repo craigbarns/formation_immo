@@ -21,14 +21,13 @@ export function BookmarkButton({
   moduleTitle,
   variant = "icon",
 }: BookmarkButtonProps) {
-  const [bookmarked, setBookmarked] = useState(false);
+  const [bookmarked, setBookmarked] = useState(() => isBookmarked(moduleSlug, lessonSlug));
   const [mounted, setMounted] = useState(false);
   const { success, info } = useToast();
 
   useEffect(() => {
-    setMounted(true);
-    setBookmarked(isBookmarked(moduleSlug, lessonSlug));
-  }, [moduleSlug, lessonSlug]);
+    requestAnimationFrame(() => setMounted(true));
+  }, []);
 
   const handleToggle = () => {
     const result = toggleBookmark(moduleSlug, lessonSlug, lessonTitle, moduleTitle);

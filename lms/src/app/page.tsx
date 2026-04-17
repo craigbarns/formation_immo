@@ -115,7 +115,7 @@ export default function HomePage() {
                 className="flex flex-col items-center rounded-2xl border border-white/12 bg-white/6 px-6 py-3 backdrop-blur-sm"
               >
                 <span className="text-2xl font-black text-brand-gold">{val}</span>
-                <span className="mt-0.5 text-[11px] font-semibold uppercase tracking-wider text-white/60">{label}</span>
+                <span className="mt-0.5 text-[11px] font-semibold uppercase tracking-wider text-white/80">{label}</span>
               </div>
             ))}
           </div>
@@ -185,12 +185,12 @@ export default function HomePage() {
                         <Icon className="h-5 w-5" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-[10px] font-bold uppercase tracking-wider text-white/40">Module {mod.num}</p>
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Module {mod.num}</p>
                         <h3 className="mt-0.5 text-base font-bold text-white leading-snug">{mod.title}</h3>
                       </div>
                     </div>
                     <p className="mt-3 text-sm leading-relaxed text-white/65">{mod.desc}</p>
-                    <p className="mt-3 text-[11px] font-semibold text-white/40">{mod.lessons} leçons</p>
+                    <p className="mt-3 text-[11px] font-semibold text-white/60">{mod.lessons} leçons</p>
                   </div>
                 );
               })}
@@ -274,7 +274,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      <footer className="border-t border-white/10 py-8 text-center text-xs text-white/40">
+      <footer className="border-t border-white/10 py-8 text-center text-xs text-white/60">
         <p>Formation agent immobilier — 42 h · ATC Education · NDA 75331582333</p>
       </footer>
     </div>

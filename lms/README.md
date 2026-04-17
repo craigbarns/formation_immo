@@ -69,61 +69,6 @@ node scripts/mistral-voxtral-tts.mjs --input ../module1-juridique/scripts/mon-te
 
 Ne commitez **jamais** la clé API.
 
-### Voix ElevenLabs (français — avatar / échantillons)
-
-Utilisé pour les **IDs de voix** dans `src/data/formateur-voices.json` (colonnes ElevenLabs des formateurs) et pour générer des **MP3 de test** avant production D-ID.
-
-1. Créez une clé API sur [elevenlabs.io](https://elevenlabs.io) (Developer → API keys).
-2. Dans `lms/.env.local` : `ELEVENLABS_API_KEY=…` — **ne jamais commiter** ; en cas de fuite, **révoquez la clé** sur le dashboard.
-3. Paramètres TTS recommandés (modèle multilingue + réglages voix) : `src/data/elevenlabs-tts-fr-defaults.json`.
-4. Lister les voix du compte (tri par pertinence FR approximative) :
-
-```bash
-cd lms
-npm run elevenlabs:voices
-```
-
-5. Générer des **échantillons MP3** (même phrase en français, top 8 voix) :
-
-```bash
-npm run elevenlabs:samples
-```
-
-Fichiers : `public/audio/elevenlabs-fr-samples/`. Une seule voix :  
-`node scripts/elevenlabs-french-voices.mjs --sample <VOICE_ID>`.
-
-6. Recopiez les `voice_id` choisis dans `formateur-voices.json` (`elevenLabsVoiceId` par module).
-
-Les entrées actuelles utilisent des **voix françaises** (catalogue / Voice Library ElevenLabs). Si une voix est absente de votre compte, ajoutez-la depuis [Voice Library](https://elevenlabs.io/voice-library) ou remplacez l’ID par celui affiché dans le détail de la voix.
-
-### Génération D-ID (1ʳᵉ leçon)
-
-Scripts dans `scripts/` (variables `DID_API_USER` et `DID_API_SECRET`, jamais commitées) :
-
-| Script | Rôle |
-|--------|------|
-| `did-test.mjs` | Test court (une phrase) |
-| `did-generate-lesson-01.mjs` | Vidéo à partir de `module1-juridique/scripts/01-loi-alur-2026.md` |
-
-```bash
-export DID_API_USER="…"
-export DID_API_SECRET="…"
-node scripts/did-generate-lesson-01.mjs --short   # intro + problématique (moins de crédits)
-node scripts/did-generate-lesson-01.mjs           # narration complète (~9 min, beaucoup de crédits)
-```
-
-- **402** : ajouter des crédits sur [studio.d-id.com](https://studio.d-id.com/).  
-- L’URL MP4 renvoyée est **temporaire** : téléchargez le fichier ou uploadez sur YouTube (non listé), puis mettez l’URL stable dans `course.ts`.
-
-### Avatars D-ID (remplace HeyGen / LiveAvatar)
-
-Le dépôt **n’intègre plus** HeyGen ni LiveAvatar. La chaîne de production est : **scripts Markdown** → **TTS** (Mistral Voxtral ou ElevenLabs) → **D-ID** (Talking Photo / API) → **MP4** → URL stable dans `src/data/course.ts` (`videoUrl`).
-
-- **Guide détaillé** : `lms/docs/D-ID-INTEGRATION.md`
-- **Page exemple (beats + prompts)** : `/formation/interactive-avatar` — données dans `src/data/lesson-avatar-scripts.ts`
-- **Démo hors formation** : `/demo-did` (l’ancienne `/demo-liveavatar` redirige ici)
-- **Marie (présentation pédagogique)** : `/formation/marie-did` (l’ancienne `/formation/marie-heygen` redirige ici)
-
 ## Progression élève
 
 Stockée dans **localStorage** du navigateur (clé `formation-immobilier-progress`). Pour une progression serveur multi-appareils, il faudra une base de données et des comptes utilisateurs (NextAuth + Prisma, Clerk, Supabase, etc.).

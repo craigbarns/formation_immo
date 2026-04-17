@@ -69,33 +69,33 @@ French tax incentive schemes concept, elegant comparison table with Pinel Denorm
 
 ---
 
-**[SOUS-PARTIE A : LE DISPOSITIF PINEL]**
+**[SOUS-PARTIE A : LE DISPOSITIF PINEL — DISPOSITIF CLOS]**
 
-[B-ROLL : Logo Pinel en grand avec un appartement neuf en arrière-plan]
+[B-ROLL : Logo Pinel barré « CLOS AU 31/12/2024 » avec un appartement neuf en arrière-plan]
 
 **NARRATION :**
 
-"Commençons par le plus connu : le dispositif Pinel. [PAUSE 1s] Créé en 2014, il a connu plusieurs évolutions et reste en 2026 le dispositif de référence pour l'investissement locatif dans le neuf."
+"Commençons par le plus connu : le dispositif Pinel. [PAUSE 1s] Attention, point essentiel à retenir : le Pinel a été définitivement clos au 31 décembre 2024. Aucun nouvel investissement Pinel n'est possible depuis le 1er janvier 2025."
 
-[B-ROLL : Infographie récapitulative des conditions Pinel]
+[B-ROLL : Calendrier 31 décembre 2024 entouré en rouge, puis « FIN » sur le logo Pinel]
 
-"Le principe est simple : en achetant un logement neuf et en vous engageant à le louer pendant 6, 9 ou 12 ans, vous bénéficiez d'une réduction d'impôt proportionnelle à la durée d'engagement. [PAUSE 1s] Le taux de réduction est de 10,5 % pour 6 ans, 15 % pour 9 ans, et 17,5 % pour 12 ans."
+"Mais attention, le Pinel reste un sujet d'actualité pour vos clients en 2026 et au-delà. [PAUSE 1s] Pourquoi ? Parce que les investissements engagés avant la clôture continuent de produire leurs effets fiscaux pendant 6, 9 ou 12 ans. Vos clients qui ont signé un Pinel en 2024 bénéficieront de la réduction d'impôt jusqu'en 2030, 2033 ou 2036 selon leur engagement."
 
-[B-ROLL : Calcul animé : investissement 300 000 € x 17,5% = 52 500 € de réduction d'impôt]
+[B-ROLL : Infographie « Pinel pré-2025 : effets fiscaux jusqu'en 2036 »]
 
-"Prenons un exemple. Vous achetez un bien de 300 000 euros. [PAUSE 1s] Sur 12 ans, vous pouvez déduire 52 500 euros de votre impôt sur le revenu. C'est une économie substantielle, répartie sur la durée de l'engagement."
+"Rappelons donc rapidement le mécanisme, car vous accompagnerez encore longtemps des investisseurs Pinel. [PAUSE 1s] Le principe : achat d'un logement neuf, engagement de location pendant 6, 9 ou 12 ans, et réduction d'impôt proportionnelle. [PAUSE 1s] Pour les investissements 2024, les taux étaient de 9 % sur 6 ans, 12 % sur 9 ans et 14 % sur 12 ans dans le cadre du Pinel classique. Le Pinel+ (logements respectant des critères de qualité renforcés) conservait des taux supérieurs jusqu'à 14 % sur 12 ans."
 
-[B-ROLL : Carte de France avec les zones Pinel A, A bis, B1, B2 colorées différemment]
+[B-ROLL : Calcul animé : investissement 300 000 € engagé en 2024 × 14 % = 42 000 € de réduction étalée sur 12 ans]
 
-"Mais attention aux contraintes ! [PAUSE 1s] Le dispositif Pinel ne s'applique qu'à certaines zones géographiques : les zones A bis, A, et B1, correspondant aux grandes agglomérations et aux zones tendues où le besoin de logements est le plus fort."
+"Concrètement : un client qui a engagé 300 000 euros en Pinel+ 12 ans en 2024 percevra 42 000 euros de réduction d'impôt étalée sur la durée. [PAUSE 1s] Votre rôle d'agent : vérifier qu'il respecte ses engagements de location, plafonds de loyers et ressources locataires, sous peine de remise en cause."
 
-[B-ROLL : Tableau des plafonds de loyers et de ressources des locataires]
+[B-ROLL : Carte de France avec zones A bis, A, B1 colorées + tableau plafonds 2024]
 
-"Il existe aussi des plafonds de loyers et de ressources des locataires. [PAUSE 1s] En zone A bis, le loyer maximum est de 19,39 euros par mètre carré. En zone A, 14,38 euros. En zone B1, 11,47 euros. Ces montants sont indexés chaque année."
+"Pour mémoire, les conditions à respecter pendant toute la durée de l'engagement : zonage A bis, A ou B1, plafonds de loyers (19,89 €/m² en A bis, 14,76 €/m² en A, 11,89 €/m² en B1 — barèmes 2024 indexés chaque année), et plafonds de ressources des locataires. [PAUSE 1s] En cas de revente avant la fin de l'engagement, ou de location à un membre du foyer fiscal hors conditions, l'avantage fiscal est intégralement repris."
 
-[B-ROLL : Document de déclaration d'impôt avec la case Pinel remplie]
+[B-ROLL : Pictogramme « ALTERNATIVES 2026 » avec flèches vers Denormandie, LMNP, déficit foncier]
 
-"Pour bénéficier du Pinel, vous devez respecter toutes ces conditions et déclarer votre investissement dans votre déclaration d'impôt. [PAUSE 1s] La réduction s'applique chaque année, tant que vous respectez vos engagements de location."
+"Et pour vos nouveaux clients investisseurs en 2026 ? [PAUSE 1s] Les alternatives existent : Denormandie pour l'ancien rénové (que nous voyons juste après), LMNP pour le meublé, déficit foncier pour les travaux dans l'ancien locatif. [PAUSE 1s] Maîtriser ces dispositifs vivants devient stratégique."
 
 ---
 
@@ -103,7 +103,7 @@ French tax incentive schemes concept, elegant comparison table with Pinel Denorm
 
 [B-ROLL : Logo Denormandie avec une maison ancienne en rénovation]
 
-**NARRATION :"
+**NARRATION :**
 
 "Passons maintenant au dispositif Denormandie. [PAUSE 1s] C'est le cousin du Pinel, mais pour l'ancien rénové. Créé en 2019, il vise à encourager la réhabilitation du parc immobilier ancien."
 
@@ -133,7 +133,7 @@ French tax incentive schemes concept, elegant comparison table with Pinel Denorm
 
 [B-ROLL : Logo LMNP avec un appartement meublé moderne]
 
-**NARRATION :"
+**NARRATION :**
 
 "Troisième dispositif : le statut LMNP, Loueur en Meublé Non Professionnel. [PAUSE 1s] Contrairement au Pinel et au Denormandie, ce n'est pas une réduction d'impôt, mais un régime fiscal avantageux pour la location meublée."
 
@@ -163,13 +163,13 @@ French tax incentive schemes concept, elegant comparison table with Pinel Denorm
 
 [B-ROLL : Tableau comparatif des trois dispositifs avec leurs avantages et inconvénients]
 
-**NARRATION :"
+**NARRATION :**
 
-"Alors, comment choisir entre Pinel, Denormandie et LMNP ? [PAUSE 1s] La réponse dépend de l'objectif patrimonial de votre client et de son profil fiscal."
+"Alors, comment choisir entre les dispositifs fiscaux disponibles ? [PAUSE 1s] Pour les nouveaux investissements en 2026, seuls Denormandie et LMNP restent ouverts. Le Pinel, lui, est clos depuis le 31 décembre 2024, mais vous accompagnerez encore longtemps des investisseurs qui l'ont souscrit avant cette date. [PAUSE 1s] La réponse dépend de l'objectif patrimonial de votre client et de son profil fiscal."
 
 [B-ROLL : Profils d'investisseurs qui correspondent à chaque dispositif]
 
-"Le Pinel est idéal pour l'investisseur qui veut du neuf dans une grande ville, avec une réduction d'impôt garantie sur le long terme. [PAUSE 1s] C'est un dispositif sécurisant, parfait pour les profils prudents."
+"Le Pinel reste un sujet d'actualité pour les investissements engagés avant le 31 décembre 2024 : achat dans le neuf, zones A bis, A ou B1, réduction d'impôt étalée sur 6 à 12 ans. [PAUSE 1s] Pour les nouveaux projets en 2026, il n'est plus disponible. [PAUSE 1s] Il faut donc orienter vos clients vers les dispositifs encore ouverts."
 
 [B-ROLL : Images de rénovation urbaine et de maisons anciennes rénovées]
 
@@ -189,13 +189,13 @@ French tax incentive schemes concept, elegant comparison table with Pinel Denorm
 
 [B-ROLL : Profil de Madame Leroy, 42 ans, avec ses caractéristiques fiscales et patrimoniales]
 
-**NARRATION :"
+**NARRATION :**
 
 "Analysons le cas de Madame Leroy, 42 ans, imposée à 41 %. [PAUSE 1s] Elle cherche à investir 280 000 euros et veut réduire son impôt. Quel dispositif lui conseiller ?"
 
 [B-ROLL : Calculs comparatifs des trois dispositifs s'affichant côte à côte]
 
-"Option Pinel : elle achète un T3 neuf à Lyon pour 280 000 euros. [PAUSE 1s] Sur 12 ans, elle bénéficie d'une réduction d'impôt de 49 000 euros, soit environ 4 083 euros par an."
+"Option Pinel (si investissement engagé avant le 31/12/2024) : elle aurait pu acheter un T3 neuf à Lyon pour 280 000 euros. [PAUSE 1s] Sur 12 ans, la réduction d'impôt aurait été de 49 000 euros, soit environ 4 083 euros par an. [PAUSE 1s] Mais en 2026, ce dispositif est clos pour les nouvelles acquisitions."
 
 [B-ROLL : Détails du calcul Denormandie]
 
@@ -207,7 +207,7 @@ French tax incentive schemes concept, elegant comparison table with Pinel Denorm
 
 [B-ROLL : Récapitulatif comparatif final]
 
-"Pour Madame Leroy, les trois dispositifs sont intéressants. [PAUSE 1s] Le choix dépendra de son appétence pour le neuf ou l'ancien, de sa volonté de réaliser des travaux, et de sa capacité à gérer un logement meublé."
+"Pour Madame Leroy en 2026, seuls Denormandie et LMNP sont réellement accessibles pour un nouvel investissement. [PAUSE 1s] Le Pinel n'étant plus ouvert, le choix dépendra de son appétence pour l'ancien rénové ou le meublé, de sa volonté de réaliser des travaux, et de sa capacité à gérer un logement meublé."
 
 ---
 
@@ -215,13 +215,13 @@ French tax incentive schemes concept, elegant comparison table with Pinel Denorm
 
 [B-ROLL : Agent immobilier professionnel avec un tableau comparatif des trois dispositifs]
 
-**NARRATION :"
+**NARRATION :**
 
 "Vous savez maintenant comment orienter vos clients vers le bon dispositif fiscal. [PAUSE 1s] Retenez ces points essentiels :"
 
 [B-ROLL : Checklist animée avec les critères de choix]
 
-"Premièrement, le Pinel pour du neuf dans les grandes agglomérations avec engagement de location. Deuxièmement, le Denormandie pour l'ancien rénové dans les villes éligibles. Troisièmement, le LMNP pour la location meublée avec avantages fiscaux sur le revenu."
+"Premièrement, le Pinel est clos depuis le 31 décembre 2024 : il ne concerne plus que les investissements déjà engagés. Deuxièmement, le Denormandie pour l'ancien rénové dans les villes éligibles. Troisièmement, le LMNP pour la location meublée avec avantages fiscaux sur le revenu."
 
 [B-ROLL : Agent conseillant un client avec des documents détaillés]
 
@@ -250,7 +250,7 @@ French tax incentive schemes concept, elegant comparison table with Pinel Denorm
 
 ### 🎯 POINTS CLÉS À RETENIR
 
-1. **Pinel** : Neuf, zones A/A bis/B1, 10,5%-17,5% de réduction selon durée
+1. **Pinel** : Dispositif clos au 31/12/2024 — investissements pré-2025 toujours bénéficiaires jusqu'à leur terme
 2. **Denormandie** : Ancien rénové, travaux >25%, villes éligibles
 3. **LMNP** : Location meublée, abattement 50%, régime BIC
 4. **Critères de choix** : Objectif patrimonial, zone géographique, appétence gestion

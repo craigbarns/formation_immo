@@ -85,13 +85,13 @@ export function VideoEmbed({ url, title }: Props) {
                 animate={{ scale: 1, y: 0 }}
                 className="bg-white rounded-2xl p-6 sm:p-8 max-w-lg w-full shadow-2xl text-center space-y-6"
               >
-                <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mx-auto text-[#d4af37]">
+                <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mx-auto text-brand-gold">
                   <HelpCircle size={24} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#1a3a5c]">Question interactive</h3>
+                  <h3 className="text-xl font-bold text-brand-navy">Question interactive</h3>
                   <p className="text-zinc-600 mt-2 text-sm leading-relaxed">
-                    Avant de continuer, vérifions votre compréhension : quel est le délai légal de rétractation après la signature d'un compromis selon la loi SRU ?
+                    Avant de continuer, vérifions votre compréhension : quel est le délai légal de rétractation après la signature d&apos;un compromis selon la loi SRU ?
                   </p>
                 </div>
                 
@@ -107,10 +107,10 @@ export function VideoEmbed({ url, title }: Props) {
                         if(opt.isCorrect) handleContinue();
                         else alert("Pas tout à fait. Réessayez !"); // In a real app we'd show nice UI feedback
                       }}
-                      className="w-full relative flex items-center justify-between px-4 py-3 border border-zinc-200 rounded-xl hover:border-[#1a3a5c] hover:bg-slate-50 transition-colors group"
+                      className="w-full relative flex items-center justify-between px-4 py-3 border border-zinc-200 rounded-xl hover:border-brand-navy hover:bg-slate-50 transition-colors group"
                     >
-                      <span className="font-semibold text-zinc-700 group-hover:text-[#1a3a5c]">{opt.label}</span>
-                      {opt.isCorrect && interactiveAnswered ? <CheckCircle size={18} className="text-green-500" /> : <div className="w-4 h-4 rounded-full border border-zinc-300 group-hover:border-[#1a3a5c]"></div>}
+                      <span className="font-semibold text-zinc-700 group-hover:text-brand-navy">{opt.label}</span>
+                      {opt.isCorrect && interactiveAnswered ? <CheckCircle size={18} className="text-green-500" /> : <div className="w-4 h-4 rounded-full border border-zinc-300 group-hover:border-brand-navy"></div>}
                     </button>
                   ))}
                 </div>

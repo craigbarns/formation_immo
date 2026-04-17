@@ -28,12 +28,12 @@ const themeLabel: Record<(typeof SUPPORTS_VISUELS)[number]["theme"], string> = {
 export default function SupportsVisuelsPage() {
   return (
     <div>
-      <Link href="/formation" className="text-sm text-zinc-500 hover:text-[#1a3a5c]">
+      <Link href="/formation" className="text-sm text-zinc-500 hover:text-brand-navy">
         ← Retour au parcours
       </Link>
 
-      <header className="mt-6 rounded-2xl border border-zinc-200 bg-gradient-to-br from-[#1a3a5c] to-[#0f2438] p-8 text-white shadow-lg">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#d4af37]">
+      <header className="mt-6 rounded-2xl border border-zinc-200 bg-gradient-to-br from-brand-navy to-[#0f2438] p-8 text-white shadow-lg">
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">
           Ressources élèves
         </p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
@@ -56,7 +56,7 @@ export default function SupportsVisuelsPage() {
             <li key={s.id}>
               <a
                 href={`#${s.id}`}
-                className="inline-block rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-medium text-[#1a3a5c] transition hover:border-[#1a3a5c]/40 hover:bg-[#1a3a5c]/5"
+                className="inline-block rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-medium text-brand-navy transition hover:border-brand-navy/40 hover:bg-brand-navy/5"
               >
                 {s.title}
               </a>
@@ -69,7 +69,7 @@ export default function SupportsVisuelsPage() {
         {SUPPORTS_VISUELS.map((meta, i) => (
           <li key={meta.id} id={meta.id} className="scroll-mt-24">
             <div className="mb-4 flex flex-wrap items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1a3a5c] text-sm font-bold text-white">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-navy text-sm font-bold text-white">
                 {i + 1}
               </span>
               <span
@@ -87,7 +87,7 @@ export default function SupportsVisuelsPage() {
         Ces contenus sont pédagogiques et ne remplacent pas un conseil personnalisé (notaire,
         expert-comptable, banque).
         <div className="mt-4">
-          <Link href="/formation/outils" className="font-semibold text-[#1a3a5c] hover:underline">
+          <Link href="/formation/outils" className="font-semibold text-brand-navy hover:underline">
             Voir aussi les simulateurs interactifs →
           </Link>
         </div>

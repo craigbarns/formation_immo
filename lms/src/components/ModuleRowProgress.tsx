@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { createClient } from "@/lib/supabase/client";
 import { getStoredProgress } from "@/components/LessonProgress";
 import { countModuleProgress } from "@/lib/formation-journey";
 import {
@@ -10,6 +11,7 @@ import {
 } from "@/constants/formation-storage";
 
 export function ModuleRowProgress({ moduleSlug }: { moduleSlug: string }) {
+  const supabase = createClient();
   const [pct, setPct] = useState<number | null>(null);
   const [label, setLabel] = useState("");
 
@@ -20,7 +22,29 @@ export function ModuleRowProgress({ moduleSlug }: { moduleSlug: string }) {
   }, [moduleSlug]);
 
   useEffect(() => {
-    refresh();
+    async function load() {
+      const { data: { user } } = await supabase.auth.getUser();
+      let progress: Record<string, boolean>;
+      if (!user) {
+        progress = getStoredProgress();
+      } else {
+        const { data } = await supabase
+          .from("lesson_progress")
+          .select("lesson_key, completed")
+          .eq("user_id", user.id);
+        progress = {};
+        data?.forEach((row) => {
+          if (row.completed) progress[row.lesson_key] = true;
+        });
+      }
+      const { done, total, pct: p } = countModuleProgress(moduleSlug, progress);
+      setPct(p);
+      setLabel(`${done}/${total} leçons`);
+    }
+    load();
+  }, [moduleSlug, supabase]);
+
+  useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key === null || e.key === FORMATION_PROGRESS_STORAGE_KEY) refresh();
     };

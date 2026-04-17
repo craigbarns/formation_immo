@@ -83,7 +83,7 @@ Charismatic real estate negotiator in modern meeting room, intense discussion wi
 
 ---
 
-**TECHNIQUE 2 : L'ANCrage** (2:55 - 4:00)
+**TECHNIQUE 2 : L'ancrage** (2:55 - 4:00)
 
 [B-ROLL : Visualisation d'un ancrage, point de référence qui s'établit]
 

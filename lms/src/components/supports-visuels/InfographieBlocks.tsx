@@ -13,7 +13,7 @@ function LessonLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#1a3a5c]/8 px-4 py-2 text-sm font-semibold text-[#1a3a5c] hover:bg-[#1a3a5c]/12 transition-colors"
+      className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-navy/8 px-4 py-2 text-sm font-semibold text-brand-navy hover:bg-brand-navy/12 transition-colors"
     >
       {label} →
     </Link>
@@ -27,14 +27,14 @@ export function InfographieBlocks({ id, meta }: { id: string; meta: SupportVisue
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6 }}
-      className="rounded-3xl border border-zinc-200/80 bg-white p-6 shadow-xl shadow-[#1a3a5c]/[0.03] md:p-10 mb-8 overflow-hidden"
+      className="rounded-3xl border border-zinc-200/80 bg-white p-6 shadow-xl shadow-brand-navy/[0.03] md:p-10 mb-8 overflow-hidden"
     >
       <div className="flex flex-wrap items-start justify-between gap-4 border-b border-zinc-100 pb-8">
         <div>
           <p className="text-xs font-black uppercase tracking-widest text-[#c9a227] flex items-center gap-2">
             <Scale size={14} /> {meta.moduleLabel}
           </p>
-          <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#1a3a5c] md:text-3xl">{meta.title}</h2>
+          <h2 className="mt-2 text-2xl font-bold tracking-tight text-brand-navy md:text-3xl">{meta.title}</h2>
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-zinc-600">{meta.summary}</p>
         </div>
       </div>
@@ -131,14 +131,14 @@ function BlockChecklist() {
             viewport={{ once: true }}
             className={`rounded-2xl border-2 ${p.border} ${p.bg} p-5 shadow-sm hover:shadow-md transition-shadow`}
           >
-            <h3 className="text-center flex flex-col items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#1a3a5c]">
+            <h3 className="text-center flex flex-col items-center gap-2 text-sm font-bold uppercase tracking-wider text-brand-navy">
               <CheckCircle2 className={p.title === "Après la visite" ? "text-emerald-500" : "text-sky-500"} />
               {p.title}
             </h3>
             <ul className="mt-4 space-y-3 text-sm font-medium text-zinc-800">
               {p.items.map((t) => (
                 <li key={t} className="flex items-start gap-2.5">
-                  <input type="checkbox" className="mt-0.5 h-4 w-4 shrink-0 rounded border-zinc-300 text-[#1a3a5c] focus:ring-[#1a3a5c]" />
+                  <input type="checkbox" className="mt-0.5 h-4 w-4 shrink-0 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy" />
                   <span className="leading-tight">{t}</span>
                 </li>
               ))}
@@ -157,7 +157,7 @@ function BlockChecklist() {
             { who: "Au syndic", q: ["Travaux prévus ?", "Procès en cours ?", "Budget prévisionnel ?"] },
           ].map((col) => (
             <div key={col.who} className="rounded-lg border border-zinc-200 bg-zinc-50/50 p-4">
-              <p className="text-xs font-bold uppercase text-[#1a3a5c]">{col.who}</p>
+              <p className="text-xs font-bold uppercase text-brand-navy">{col.who}</p>
               <ul className="mt-2 list-disc space-y-1 pl-4 text-sm text-zinc-700">
                 {col.q.map((x) => (
                   <li key={x}>{x}</li>
@@ -225,13 +225,13 @@ function BlockMatrice() {
             <thead>
               <tr className="bg-zinc-100">
                 <th className="border border-zinc-200 p-3 text-zinc-500" scope="col" />
-                <th className="border border-zinc-200 p-3 font-semibold text-[#1a3a5c]" scope="col">
+                <th className="border border-zinc-200 p-3 font-semibold text-brand-navy" scope="col">
                   Faible
                 </th>
-                <th className="border border-zinc-200 p-3 font-semibold text-[#1a3a5c]" scope="col">
+                <th className="border border-zinc-200 p-3 font-semibold text-brand-navy" scope="col">
                   Moyen
                 </th>
-                <th className="border border-zinc-200 p-3 font-semibold text-[#1a3a5c]" scope="col">
+                <th className="border border-zinc-200 p-3 font-semibold text-brand-navy" scope="col">
                   Élevé
                 </th>
               </tr>
@@ -264,27 +264,27 @@ function BlockMatrice() {
       </div>
       <div className="space-y-6">
         <div>
-          <h3 className="text-sm font-bold uppercase text-[#1a3a5c]">Stratégies de mitigation</h3>
+          <h3 className="text-sm font-bold uppercase text-brand-navy">Stratégies de mitigation</h3>
           <ol className="mt-2 space-y-2 text-sm text-zinc-700">
             <li>
-              <strong className="text-[#1a3a5c]">[1]</strong> Assurance loyers impayés
+              <strong className="text-brand-navy">[1]</strong> Assurance loyers impayés
             </li>
             <li>
-              <strong className="text-[#1a3a5c]">[2]</strong> Diagnostic complet
+              <strong className="text-brand-navy">[2]</strong> Diagnostic complet
             </li>
             <li>
-              <strong className="text-[#1a3a5c]">[3]</strong> Zone tendue privilégiée
+              <strong className="text-brand-navy">[3]</strong> Zone tendue privilégiée
             </li>
             <li>
-              <strong className="text-[#1a3a5c]">[4]</strong> Fonds de précaution
+              <strong className="text-brand-navy">[4]</strong> Fonds de précaution
             </li>
             <li>
-              <strong className="text-[#1a3a5c]">[5]</strong> Caution bancaire
+              <strong className="text-brand-navy">[5]</strong> Caution bancaire
             </li>
           </ol>
         </div>
         <div>
-          <h3 className="text-sm font-bold uppercase text-[#1a3a5c]">Due diligence</h3>
+          <h3 className="text-sm font-bold uppercase text-brand-navy">Due diligence</h3>
           <ul className="mt-2 space-y-1.5 text-sm text-zinc-700">
             {[
               "DPE (performance énergétique)",
@@ -312,33 +312,33 @@ function BlockNegociation() {
       <div className="flex flex-col items-center gap-6">
         <motion.div 
           whileHover={{ scale: 1.05 }}
-          className="rounded-[2rem] border-4 border-[#1a3a5c] bg-white px-10 py-6 text-center shadow-xl"
+          className="rounded-[2rem] border-4 border-brand-navy bg-white px-10 py-6 text-center shadow-xl"
         >
-          <p className="text-3xl font-black tracking-widest text-[#1a3a5c]">WIN-WIN</p>
+          <p className="text-3xl font-black tracking-widest text-brand-navy">WIN-WIN</p>
           <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-zinc-500">Objectif : valeur bilatérale</p>
         </motion.div>
         <div className="grid w-full max-w-md grid-cols-2 gap-4">
           <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-sky-400 bg-sky-50 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
-            <p className="font-bold text-[#1a3a5c] text-sm">DÉLAIS</p>
+            <p className="font-bold text-brand-navy text-sm">DÉLAIS</p>
             <p className="mt-1.5 text-[11px] text-zinc-600">Flexibilité calendaire</p>
           </motion.div>
-          <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-[#1a3a5c] bg-[#1a3a5c]/5 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
-            <p className="font-bold text-[#1a3a5c] text-sm">PRIX</p>
+          <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-brand-navy bg-brand-navy/5 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
+            <p className="font-bold text-brand-navy text-sm">PRIX</p>
             <p className="mt-1.5 text-[11px] text-zinc-600">Analyser les comparables</p>
           </motion.div>
           <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-amber-500 bg-amber-50 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
-            <p className="font-bold text-[#1a3a5c] text-sm">CONDITIONS</p>
+            <p className="font-bold text-brand-navy text-sm">CONDITIONS</p>
             <p className="mt-1.5 text-[11px] text-zinc-600">Clauses suspensives</p>
           </motion.div>
           <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-emerald-500 bg-emerald-50 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
-            <p className="font-bold text-[#1a3a5c] text-sm">GARANTIES</p>
+            <p className="font-bold text-brand-navy text-sm">GARANTIES</p>
             <p className="mt-1.5 text-[11px] text-zinc-600">Financement assuré</p>
           </motion.div>
         </div>
       </div>
       <div className="space-y-6">
         <div>
-          <h3 className="text-sm font-bold uppercase text-[#1a3a5c]">Techniques clés</h3>
+          <h3 className="text-sm font-bold uppercase text-brand-navy">Techniques clés</h3>
           <ul className="mt-2 space-y-2 text-sm text-zinc-700">
             <li>
               <strong>[1] Ancrage</strong> — premier chiffre mentionné
@@ -387,7 +387,7 @@ function BlockRentabilite() {
         whileHover={{ scale: 1.02 }}
         className="rounded-2xl border-2 border-amber-200 bg-gradient-to-r from-amber-50 to-amber-100 p-8 text-center shadow-sm"
       >
-        <p className="text-sm font-black tracking-widest flex justify-center items-center gap-2 uppercase text-[#1a3a5c]"><TrendingUp size={18} /> Rentabilité brute</p>
+        <p className="text-sm font-black tracking-widest flex justify-center items-center gap-2 uppercase text-brand-navy"><TrendingUp size={18} /> Rentabilité brute</p>
         <p className="mt-4 font-mono text-xl font-bold text-zinc-900 md:text-2xl">
           (Loyer mensuel × 12) ÷ Prix d’achat total × 100
         </p>
@@ -397,7 +397,7 @@ function BlockRentabilite() {
       </motion.div>
       <div className="grid gap-4 md:grid-cols-2">
         <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4">
-          <h3 className="text-sm font-bold text-[#1a3a5c]">Données (exemple)</h3>
+          <h3 className="text-sm font-bold text-brand-navy">Données (exemple)</h3>
           <ul className="mt-3 space-y-2 text-sm">
             <li className="flex justify-between">
               <span>Prix d’achat</span>
@@ -418,7 +418,7 @@ function BlockRentabilite() {
           </ul>
         </div>
         <div className="rounded-xl border border-emerald-200 bg-emerald-50/50 p-4">
-          <h3 className="text-sm font-bold text-[#1a3a5c]">Calcul</h3>
+          <h3 className="text-sm font-bold text-brand-navy">Calcul</h3>
           <ul className="mt-3 space-y-2 text-sm">
             <li className="flex justify-between">
               <span>Total investi</span>
@@ -436,7 +436,7 @@ function BlockRentabilite() {
         </div>
       </div>
       <div>
-        <h3 className="text-center text-sm font-bold uppercase text-[#1a3a5c]">
+        <h3 className="text-center text-sm font-bold uppercase text-brand-navy">
           Ordres de grandeur selon le type
         </h3>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
@@ -453,7 +453,7 @@ function BlockRentabilite() {
         </div>
       </div>
       <div className="rounded-lg border border-emerald-300 bg-white p-4 text-sm">
-        <p className="font-semibold text-[#1a3a5c]">Rentabilité nette (charges déduites)</p>
+        <p className="font-semibold text-brand-navy">Rentabilité nette (charges déduites)</p>
         <p className="mt-2 font-mono text-zinc-800">
           Rentabilité brute − (Charges annuelles ÷ Total investi × 100)
         </p>
@@ -478,19 +478,19 @@ function BlockTimeline() {
     <div className="space-y-8">
       <div className="overflow-x-auto pb-4">
         <div className="relative flex min-w-[640px] items-start justify-between px-4">
-          <div className="absolute left-8 right-8 top-5 h-0.5 bg-[#1a3a5c]/30" aria-hidden />
+          <div className="absolute left-8 right-8 top-5 h-0.5 bg-brand-navy/30" aria-hidden />
           {steps.map((s) => (
             <div key={s.day} className="relative z-10 flex w-28 flex-col items-center text-center">
               <span className="text-xs font-bold text-[#c9a227]">{s.day}</span>
               <div className="mt-2 h-4 w-4 rounded-full border-4 border-[#c9a227] bg-white shadow" />
-              <p className="mt-3 text-sm font-bold text-[#1a3a5c]">{s.title}</p>
+              <p className="mt-3 text-sm font-bold text-brand-navy">{s.title}</p>
               <p className="mt-1 text-[11px] text-zinc-500">{s.sub}</p>
             </div>
           ))}
         </div>
       </div>
       <div>
-        <h3 className="text-sm font-bold uppercase text-[#1a3a5c]">Documents requis (dossier type)</h3>
+        <h3 className="text-sm font-bold uppercase text-brand-navy">Documents requis (dossier type)</h3>
         <ul className="mt-3 grid gap-2 sm:grid-cols-2 md:grid-cols-3">
           {[
             "Pièce d’identité",
@@ -531,7 +531,7 @@ function BlockFinancement() {
           aria-label="Répartition indicative : 25 % apport, 75 % crédit"
         >
           <div className="absolute inset-8 flex items-center justify-center rounded-full bg-white text-center shadow">
-            <span className="text-sm font-bold text-[#1a3a5c]">100 %</span>
+            <span className="text-sm font-bold text-brand-navy">100 %</span>
           </div>
         </div>
         <div className="grid max-w-lg flex-1 gap-6 sm:grid-cols-2">
@@ -545,7 +545,7 @@ function BlockFinancement() {
             </ul>
           </div>
           <div>
-            <h3 className="text-xs font-bold uppercase text-[#1a3a5c]">Crédit immobilier</h3>
+            <h3 className="text-xs font-bold uppercase text-brand-navy">Crédit immobilier</h3>
             <ul className="mt-2 list-disc space-y-1 pl-4 text-sm text-zinc-700">
               <li>Taux négociables</li>
               <li>Durée : souvent 15–25 ans</li>
@@ -556,7 +556,7 @@ function BlockFinancement() {
         </div>
       </div>
       <div>
-        <h3 className="text-center text-sm font-bold uppercase text-[#1a3a5c]">Indicateurs clés</h3>
+        <h3 className="text-center text-sm font-bold uppercase text-brand-navy">Indicateurs clés</h3>
         <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
           {[
             { k: "Taux d’endettement", v: "≈ 33 %", c: "bg-emerald-100 text-emerald-900" },
@@ -583,7 +583,7 @@ function BlockFiscal() {
           {
             title: "Micro-BIC",
             sub: "Location meublée",
-            border: "border-[#1a3a5c]",
+            border: "border-brand-navy",
             items: [
               "Abattement 50 %",
               "Plafond 77 700 €",
@@ -595,7 +595,7 @@ function BlockFiscal() {
           {
             title: "Réel BIC",
             sub: "Location meublée pro",
-            border: "border-[#1a3a5c]",
+            border: "border-brand-navy",
             items: [
               "Charges réelles déductibles",
               "Amortissements possibles",
@@ -621,7 +621,7 @@ function BlockFiscal() {
             key={b.title}
             className={`flex flex-col rounded-xl border-2 ${b.border} bg-white p-4 shadow-sm`}
           >
-            <h3 className="text-lg font-bold text-[#1a3a5c]">{b.title}</h3>
+            <h3 className="text-lg font-bold text-brand-navy">{b.title}</h3>
             <p className="text-xs uppercase text-zinc-500">{b.sub}</p>
             <ul className="mt-3 flex-1 list-disc space-y-1.5 pl-4 text-sm text-zinc-700">
               {b.items.map((t) => (
@@ -672,10 +672,10 @@ function BlockDiagnostics() {
         <table className="w-full min-w-[520px] border-collapse text-sm">
           <thead className="bg-zinc-100">
             <tr>
-              <th className="border border-zinc-200 p-3 text-left font-semibold text-[#1a3a5c]">Diagnostic</th>
-              <th className="border border-zinc-200 p-3 text-left font-semibold text-[#1a3a5c]">Validité</th>
-              <th className="border border-zinc-200 p-3 text-left font-semibold text-[#1a3a5c]">Condition</th>
-              <th className="border border-zinc-200 p-3 text-center font-semibold text-[#1a3a5c]">⚠️</th>
+              <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Diagnostic</th>
+              <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Validité</th>
+              <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Condition</th>
+              <th className="border border-zinc-200 p-3 text-center font-semibold text-brand-navy">⚠️</th>
             </tr>
           </thead>
           <tbody>
@@ -683,7 +683,7 @@ function BlockDiagnostics() {
               <tr key={r.name} className="hover:bg-zinc-50/60">
                 <td className="border border-zinc-200 p-3 font-medium text-zinc-800">
                   <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" className="h-4 w-4 rounded border-zinc-300 text-[#1a3a5c] focus:ring-[#1a3a5c]" />
+                    <input type="checkbox" className="h-4 w-4 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy" />
                     {r.name}
                   </label>
                 </td>
@@ -744,7 +744,7 @@ function BlockMandats() {
             className={`rounded-2xl border-2 ${c.color} p-5 shadow-sm hover:shadow-md transition-shadow`}
           >
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-bold text-[#1a3a5c]">{c.title}</h3>
+              <h3 className="text-lg font-bold text-brand-navy">{c.title}</h3>
               <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase ${c.badge}`}>{c.success}</span>
             </div>
             <p className="mt-1 text-xs text-zinc-500">Délai moyen : {c.delay}</p>
@@ -759,7 +759,7 @@ function BlockMandats() {
         ))}
       </div>
       <div>
-        <h3 className="text-sm font-bold uppercase text-[#1a3a5c]">Clauses obligatoires dans tout mandat</h3>
+        <h3 className="text-sm font-bold uppercase text-brand-navy">Clauses obligatoires dans tout mandat</h3>
         <ul className="mt-3 grid gap-2 sm:grid-cols-2">
           {[
             "Honoraires TTC et en euros (< 600 k€)",
@@ -769,7 +769,7 @@ function BlockMandats() {
             "Mentions sur le fonds de garantie",
           ].map((t) => (
             <li key={t} className="flex items-start gap-2 text-sm text-zinc-700">
-              <input type="checkbox" className="mt-0.5 h-4 w-4 rounded border-zinc-300 text-[#1a3a5c] focus:ring-[#1a3a5c]" />
+              <input type="checkbox" className="mt-0.5 h-4 w-4 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy" />
               {t}
             </li>
           ))}
@@ -802,9 +802,9 @@ function BlockReseaux() {
         <table className="w-full min-w-[480px] border-collapse text-sm">
           <thead className="bg-zinc-100">
             <tr>
-              <th className="border border-zinc-200 p-3 text-left font-semibold text-[#1a3a5c]">Jour</th>
-              <th className="border border-zinc-200 p-3 text-left font-semibold text-[#1a3a5c]">Format</th>
-              <th className="border border-zinc-200 p-3 text-left font-semibold text-[#1a3a5c]">Exemple de hook</th>
+              <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Jour</th>
+              <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Format</th>
+              <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Exemple de hook</th>
             </tr>
           </thead>
           <tbody>
@@ -812,7 +812,7 @@ function BlockReseaux() {
               <tr key={w.day} className="hover:bg-zinc-50/60">
                 <td className="border border-zinc-200 p-3 font-medium text-zinc-800">{w.day}</td>
                 <td className="border border-zinc-200 p-3">
-                  <span className="rounded-full bg-[#1a3a5c]/10 px-2 py-0.5 text-xs font-semibold text-[#1a3a5c]">{w.type}</span>
+                  <span className="rounded-full bg-brand-navy/10 px-2 py-0.5 text-xs font-semibold text-brand-navy">{w.type}</span>
                 </td>
                 <td className="border border-zinc-200 p-3 italic text-zinc-600">« {w.hook} »</td>
               </tr>
@@ -821,11 +821,11 @@ function BlockReseaux() {
         </table>
       </div>
       <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-5">
-        <h3 className="text-sm font-bold uppercase text-[#1a3a5c]">Checklist engagement</h3>
+        <h3 className="text-sm font-bold uppercase text-brand-navy">Checklist engagement</h3>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
           {checks.map((c) => (
             <label key={c} className="flex items-start gap-2 text-sm text-zinc-700 cursor-pointer">
-              <input type="checkbox" className="mt-0.5 h-4 w-4 rounded border-zinc-300 text-[#1a3a5c] focus:ring-[#1a3a5c]" />
+              <input type="checkbox" className="mt-0.5 h-4 w-4 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy" />
               <span dangerouslySetInnerHTML={{ __html: c }} />
             </label>
           ))}
@@ -856,12 +856,12 @@ function BlockNetVendeur() {
     <div className="space-y-6">
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-          <h3 className="text-sm font-bold uppercase text-[#1a3a5c]">Paramètres</h3>
+          <h3 className="text-sm font-bold uppercase text-brand-navy">Paramètres</h3>
           <div className="space-y-3">
             <div>
               <label className="flex justify-between text-sm text-zinc-600">
                 <span>Prix FAI</span>
-                <span className="font-semibold text-[#d4af37]">{prixFai.toLocaleString("fr-FR")} €</span>
+                <span className="font-semibold text-brand-gold">{prixFai.toLocaleString("fr-FR")} €</span>
               </label>
               <input
                 type="range"
@@ -870,13 +870,13 @@ function BlockNetVendeur() {
                 step={5000}
                 value={prixFai}
                 onChange={(e) => setPrixFai(Number(e.target.value))}
-                className="mt-2 w-full accent-[#1a3a5c]"
+                className="mt-2 w-full accent-brand-navy"
               />
             </div>
             <div>
               <label className="flex justify-between text-sm text-zinc-600">
                 <span>Honoraires (%)</span>
-                <span className="font-semibold text-[#d4af37]">{honoraires} %</span>
+                <span className="font-semibold text-brand-gold">{honoraires} %</span>
               </label>
               <input
                 type="range"
@@ -885,7 +885,7 @@ function BlockNetVendeur() {
                 step={0.5}
                 value={honoraires}
                 onChange={(e) => setHonoraires(Number(e.target.value))}
-                className="mt-2 w-full accent-[#1a3a5c]"
+                className="mt-2 w-full accent-brand-navy"
               />
             </div>
             <label className="flex items-center gap-2 text-sm text-zinc-700">
@@ -893,7 +893,7 @@ function BlockNetVendeur() {
                 type="checkbox"
                 checked={fraisAcquereur}
                 onChange={(e) => setFraisAcquereur(e.target.checked)}
-                className="h-4 w-4 rounded border-zinc-300 text-[#1a3a5c] focus:ring-[#1a3a5c]"
+                className="h-4 w-4 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy"
               />
               Honoraires à la charge de l'acquéreur
             </label>
@@ -914,11 +914,11 @@ function BlockNetVendeur() {
         </div>
       </div>
       <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-5">
-        <h3 className="text-sm font-bold uppercase text-[#1a3a5c]">Phrases d'argumentaire prêtes à l'emploi</h3>
+        <h3 className="text-sm font-bold uppercase text-brand-navy">Phrases d'argumentaire prêtes à l'emploi</h3>
         <ul className="mt-4 space-y-3">
           {phrases.map((p, i) => (
             <li key={i} className="flex gap-3 text-sm text-zinc-700">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1a3a5c] text-xs font-bold text-white">{i + 1}</span>
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-navy text-xs font-bold text-white">{i + 1}</span>
               <span className="leading-relaxed">{p}</span>
             </li>
           ))}

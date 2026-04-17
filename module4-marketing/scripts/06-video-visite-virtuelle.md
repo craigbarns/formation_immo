@@ -1,4 +1,4 @@
-# SCRIPT VIDÉO 6 : VIDÉO IMMOBILIÈRE ET VISITE VIRTUELLE — LE STANDARD 2025
+# SCRIPT VIDÉO 6 : VIDÉO IMMOBILIÈRE ET VISITE VIRTUELLE — LE STANDARD 2026
 
 > **Narration audio (TTS)** : texte nettoyé dans `*.narration.txt`. Régénérer avec `node lms/scripts/extract-narration-for-audio.mjs`, puis MP3 via `node lms/scripts/mistral-voxtral-tts.mjs`.
 
@@ -34,7 +34,7 @@ Les annonces avec une vidéo de présentation génèrent 403% plus de demandes d
 
 [B-ROLL : Acquéreurs regardant une visite virtuelle depuis leur canapé]
 
-En 2025, vos clients recherchent des biens depuis leur téléphone, souvent à des centaines de kilomètres de distance. [PAUSE 1s] La vidéo et la visite virtuelle ne sont plus des options — elles sont devenues le standard attendu.
+En 2026, vos clients recherchent des biens depuis leur téléphone, souvent à des centaines de kilomètres de distance. [PAUSE 1s] La vidéo et la visite virtuelle ne sont plus des options — elles sont devenues le standard attendu.
 
 [B-ROLL : Agent immobilier filmant avec son iPhone + gimbal]
 
@@ -48,7 +48,7 @@ Et la bonne nouvelle ? Vous n'avez pas besoin d'un budget production pour créer
 
 **NARRATION :**
 
-Il existe trois formats vidéo essentiels pour un agent immobilier en 2025. Chacun répond à un objectif précis.
+Il existe trois formats vidéo essentiels pour un agent immobilier en 2026. Chacun répond à un objectif précis.
 
 [B-ROLL : Titre "FORMAT 1 : LA VIDÉO COURTE (30-60 secondes)"]
 

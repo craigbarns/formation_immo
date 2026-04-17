@@ -32,7 +32,7 @@ Elegant notary office interior, mahogany desk with legal documents spread out, g
 
 Le compromis de vente. [PAUSE 2s] Pour beaucoup d'agents, ces trois mots provoquent une montée d'adrénaline. [PAUSE 1s] Pas l'excitation positive, non. [PAUSE 1s] Cette angoisse de l'erreur qui pourrait tout faire capoter.
 
-[B-ROLL : Plan sur un agent immobilier qui relit feverishusement un document en marmonnant]
+[B-ROLL : Plan sur un agent immobilier qui relit fébrilement un document en marmonnant]
 
 "Et si j'ai oublié une clause ?" [PAUSE 1s] "Et si la description du bien est inexacte ?" [PAUSE 1s] "Et si le délai de rétractation n'est pas respecté ?"
 
@@ -267,7 +267,7 @@ Dans la prochaine vidéo, nous explorerons les diagnostics immobiliers. [PAUSE 1
 | Timing | Description du B-roll | Durée |
 |--------|----------------------|-------|
 | 0:00-0:05 | Main tremblante + sueur | 5s |
-| 0:05-0:10 | Agent relisant feverishusement | 5s |
+| 0:05-0:10 | Agent relisant fébrilement | 5s |
 | 0:10-0:15 | Agent professionnel serein | 5s |
 | 0:30-0:35 | Infographie statistiques | 5s |
 | 0:35-0:40 | Tribunaux + dossiers | 5s |

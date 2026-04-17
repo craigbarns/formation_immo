@@ -1,15 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+function getGreeting() {
+  const h = new Date().getHours();
+  if (h >= 5 && h < 12) return "Bonjour 👋";
+  if (h >= 12 && h < 18) return "Bon après-midi 👋";
+  return "Bonsoir 👋";
+}
 
 export function Greeting() {
-  const [greeting, setGreeting] = useState("Bienvenue");
-
-  useEffect(() => {
-    const h = new Date().getHours();
-    if (h >= 5 && h < 12) setGreeting("Bonjour 👋");
-    else if (h >= 12 && h < 18) setGreeting("Bon après-midi 👋");
-    else setGreeting("Bonsoir 👋");
-  }, []);
-
+  const [greeting] = useState(getGreeting);
   return <span>{greeting}</span>;
 }

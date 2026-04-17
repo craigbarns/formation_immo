@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import { lessonId } from "@/data/course";
 import type { ModuleShowcase } from "@/data/module-showcase";
 import { getStoredProgress } from "@/components/LessonProgress";
@@ -66,13 +67,28 @@ export function ModuleLanding({
   const [modulePct, setModulePct] = useState<number | null>(null);
 
   useEffect(() => {
-    const p = getStoredProgress();
-    let done = 0;
-    for (const l of lessons) {
-      if (p[lessonId(moduleSlug, l.slug)]) done++;
+    async function load() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      let p: Record<string, boolean>;
+      if (!user) {
+        p = getStoredProgress();
+      } else {
+        const { data } = await supabase
+          .from("lesson_progress")
+          .select("lesson_key, completed")
+          .eq("user_id", user.id);
+        p = {};
+        data?.forEach((row) => { p[row.lesson_key] = row.completed; });
+      }
+      let done = 0;
+      for (const l of lessons) {
+        if (p[lessonId(moduleSlug, l.slug)]) done++;
+      }
+      setModulePct(Math.round((done / lessons.length) * 100));
     }
-    setModulePct(Math.round((done / lessons.length) * 100));
-  }, [lessons, moduleSlug]);
+    load();
+  }, [moduleSlug, lessons]);
 
   const gradientClass = useMemo(() => showcase.heroGradient, [showcase.heroGradient]);
 
@@ -154,7 +170,7 @@ export function ModuleLanding({
                 </div>
                 <div>
                   <p className="text-lg font-bold leading-tight">{avatar.name}</p>
-                  <p className="mt-1 text-sm font-medium text-[#d4af37]">{avatar.role}</p>
+                  <p className="mt-1 text-sm font-medium text-brand-gold">{avatar.role}</p>
                 </div>
               </div>
               <p className="mt-4 text-sm leading-relaxed text-white/85">{avatar.description}</p>
@@ -166,7 +182,7 @@ export function ModuleLanding({
                   </div>
                   <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/20">
                     <div
-                      className="h-full rounded-full bg-[#d4af37] transition-all duration-500"
+                      className="h-full rounded-full bg-brand-gold transition-all duration-500"
                       style={{ width: `${modulePct}%` }}
                     />
                   </div>
@@ -179,7 +195,7 @@ export function ModuleLanding({
 
       {/* Bénéfices */}
       <section className="card-elevated rounded-3xl border border-zinc-200/80 p-6 md:p-8">
-        <h2 className="text-sm font-bold uppercase tracking-wide text-[#1a3a5c]">
+        <h2 className="text-sm font-bold uppercase tracking-wide text-brand-navy">
           Ce que vous emportez
         </h2>
         <ul className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -204,7 +220,7 @@ export function ModuleLanding({
               key={line}
               className="text-center text-xs font-medium leading-relaxed text-zinc-600 sm:text-left"
             >
-              <span className="mr-1 text-[#d4af37]" aria-hidden>
+              <span className="mr-1 text-brand-gold" aria-hidden>
                 ★
               </span>
               {line}
@@ -217,7 +233,7 @@ export function ModuleLanding({
       <section className="flex flex-wrap gap-3">
         <Link
           href={flashcardsHref}
-          className="rounded-xl border-2 border-[#1a3a5c]/20 bg-[#1a3a5c]/5 px-5 py-3 text-sm font-bold text-[#1a3a5c] transition hover:bg-[#1a3a5c]/10"
+          className="rounded-xl border-2 border-brand-navy/20 bg-brand-navy/5 px-5 py-3 text-sm font-bold text-brand-navy transition hover:bg-brand-navy/10"
         >
           Flashcards du module
         </Link>
@@ -239,7 +255,7 @@ export function ModuleLanding({
       <section>
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 className="text-xl font-bold text-[#1a3a5c]">Programme détaillé</h2>
+            <h2 className="text-xl font-bold text-brand-navy">Programme détaillé</h2>
             <p className="mt-1 text-sm text-zinc-500">
               Cliquez pour ouvrir la leçon — audio disponible sur chaque fiche.
             </p>
@@ -272,11 +288,11 @@ export function ModuleLanding({
                     />
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-bold text-zinc-900 group-hover:text-[#1a3a5c]">
+                        <span className="font-bold text-zinc-900 group-hover:text-brand-navy">
                           {lesson.title}
                         </span>
                         {lesson.interactive && (
-                          <span className="rounded-md bg-[#1a3a5c]/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#1a3a5c]">
+                          <span className="rounded-md bg-brand-navy/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-navy">
                             Interactif
                           </span>
                         )}
@@ -335,12 +351,12 @@ export function ModuleLanding({
         {prevModule ? (
           <Link
             href={prevModule.href}
-            className="card-elevated rounded-2xl border border-zinc-200 p-5 transition hover:border-[#1a3a5c]/25"
+            className="card-elevated rounded-2xl border border-zinc-200 p-5 transition hover:border-brand-navy/25"
           >
             <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">
               Module précédent
             </p>
-            <p className="mt-2 font-semibold text-[#1a3a5c]">{prevModule.title}</p>
+            <p className="mt-2 font-semibold text-brand-navy">{prevModule.title}</p>
           </Link>
         ) : (
           <div />
@@ -348,12 +364,12 @@ export function ModuleLanding({
         {nextModule ? (
           <Link
             href={nextModule.href}
-            className="card-elevated rounded-2xl border border-zinc-200 bg-gradient-to-br from-[#1a3a5c]/[0.04] to-amber-50/30 p-5 transition hover:border-[#d4af37]/40"
+            className="card-elevated rounded-2xl border border-zinc-200 bg-gradient-to-br from-brand-navy/[0.04] to-amber-50/30 p-5 transition hover:border-brand-gold/40"
           >
             <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">
               Module suivant
             </p>
-            <p className="mt-2 font-semibold text-[#1a3a5c]">{nextModule.title} →</p>
+            <p className="mt-2 font-semibold text-brand-navy">{nextModule.title} →</p>
           </Link>
         ) : (
           <Link

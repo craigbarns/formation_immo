@@ -179,7 +179,7 @@ REFRAMING : "Bien sûr, c'est un engagement important. [PAUSE 1s] Permettez-moi 
 
 [B-roll: Carte du quartier, points d'intérêt qui apparaissent]
 
-REFRAMING : "Dites-moi ce qui vous dérange dans le quartier. [PAUSE 1s] Vous savez, le Marais d'il y a dix ans n'est pas le Marais d'aujourdourd'hui. Les nouveaux commerces arrivent. Le métro ligne 11 est en extension. Les prix ont pris 20% en deux ans. Ce quartier, vous ne le reconnaîtrez plus dans trois ans." [PAUSE 2s]
+REFRAMING : "Dites-moi ce qui vous dérange dans le quartier. [PAUSE 1s] Vous savez, le Marais d'il y a dix ans n'est pas le Marais d'aujourd'hui. Les nouveaux commerces arrivent. Le métro ligne 11 est en extension. Les prix ont pris 20% en deux ans. Ce quartier, vous ne le reconnaîtrez plus dans trois ans." [PAUSE 2s]
 
 [B-roll: Photos du quartier avant/après, chantiers, nouveaux commerces]
 
@@ -209,7 +209,7 @@ Reprenons notre cas concret. Le 42 rue de Rivoli. 650 000 euros. 45 m². Sans as
 
 [B-roll: Documents, signature en cours]
 
-"Je ne vous demande pas de décider maintenant. Je vous demande de ne pas laisser passer cette chance. [PAUSE 1s] Faisons une offre ce soir. À prix. Sans négocier. Pour montrer votre sérieux. Et verrons ce qui se passe." [PAUSE 2s]
+"Je ne vous demande pas de décider maintenant. Je vous demande de ne pas laisser passer cette chance. [PAUSE 1s] Faisons une offre ce soir. À prix. Sans négocier. Pour montrer votre sérieux. Et nous verrons ce qui se passe." [PAUSE 2s]
 
 ---
 

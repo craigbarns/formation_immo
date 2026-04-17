@@ -204,7 +204,7 @@ export function AvatarIllustration({
 
   // Speaking mouth animation
   useEffect(() => {
-    if (!isSpeaking) { setMouthOpen(false); return; }
+    if (!isSpeaking) return;
     const id = setInterval(() => setMouthOpen((v) => !v), 180);
     return () => clearInterval(id);
   }, [isSpeaking]);

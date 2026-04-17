@@ -9,7 +9,7 @@ function StepDetail({ step }: { step: TimelineStep }) {
       <p>{step.description}</p>
       {step.keyDocuments && step.keyDocuments.length > 0 && (
         <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-[#1a3a5c]">Documents</p>
+          <p className="text-xs font-bold uppercase tracking-wide text-brand-navy">Documents</p>
           <ul className="mt-2 list-inside list-disc space-y-1 text-zinc-600">
             {step.keyDocuments.map((d) => (
               <li key={d}>{d}</li>
@@ -19,12 +19,12 @@ function StepDetail({ step }: { step: TimelineStep }) {
       )}
       {step.tips && step.tips.length > 0 && (
         <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-[#d4af37]">Conseils pro</p>
+          <p className="text-xs font-bold uppercase tracking-wide text-brand-gold">Conseils pro</p>
           <ul className="mt-2 space-y-2">
             {step.tips.map((t) => (
               <li
                 key={t}
-                className="rounded-lg border border-[#d4af37]/20 bg-[#d4af37]/5 px-3 py-2 text-zinc-700"
+                className="rounded-lg border border-brand-gold/20 bg-brand-gold/5 px-3 py-2 text-zinc-700"
               >
                 {t}
               </li>
@@ -43,12 +43,12 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
   if (!t) return null;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#1a3a5c]/15 bg-white shadow-lg">
-      <div className="border-b border-[#1a3a5c]/10 bg-[#f8fafc] px-5 py-5 sm:px-8">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d4af37]">
+    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
+      <div className="border-b border-brand-navy/10 bg-[#f8fafc] px-5 py-5 sm:px-8">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
           Frise chronologique
         </p>
-        <h2 className="mt-1 text-xl font-bold text-[#1a3a5c] sm:text-2xl">{t.title}</h2>
+        <h2 className="mt-1 text-xl font-bold text-brand-navy sm:text-2xl">{t.title}</h2>
         <p className="mt-2 max-w-3xl text-sm text-zinc-600">{t.description}</p>
       </div>
 
@@ -64,7 +64,7 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
               }}
               className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition ${
                 i === ti
-                  ? "bg-[#1a3a5c] text-white"
+                  ? "bg-brand-navy text-white"
                   : "text-zinc-500 hover:bg-zinc-50 hover:text-zinc-800"
               }`}
             >
@@ -77,7 +77,7 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
       <div className="px-5 py-6 sm:px-8 sm:py-8">
         <div className="relative">
           <div
-            className="absolute left-[19px] top-0 hidden h-full w-px bg-[#1a3a5c]/20 sm:block"
+            className="absolute left-[19px] top-0 hidden h-full w-px bg-brand-navy/20 sm:block"
             aria-hidden
           />
           <ul className="space-y-3">
@@ -90,11 +90,11 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
                     onClick={() => setOpenId(expanded ? null : step.id)}
                     className={`flex w-full flex-col rounded-xl border text-left transition sm:flex-row sm:items-start sm:gap-4 ${
                       expanded
-                        ? "border-[#1a3a5c]/40 bg-[#1a3a5c]/5 shadow-md"
-                        : "border-zinc-200 bg-white hover:border-[#1a3a5c]/25"
+                        ? "border-brand-navy/40 bg-brand-navy/5 shadow-md"
+                        : "border-zinc-200 bg-white hover:border-brand-navy/25"
                     }`}
                   >
-                    <span className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#1a3a5c]/30 bg-white text-lg sm:flex">
+                    <span className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-brand-navy/30 bg-white text-lg sm:flex">
                       {step.icon}
                     </span>
                     <div className="flex-1 px-4 py-4">
@@ -106,11 +106,11 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
                           {step.duration}
                         </span>
                       </div>
-                      <h3 className="mt-2 text-base font-bold text-[#1a3a5c]">{step.title}</h3>
+                      <h3 className="mt-2 text-base font-bold text-brand-navy">{step.title}</h3>
                       {!expanded && (
                         <p className="mt-1 line-clamp-2 text-sm text-zinc-500">{step.description}</p>
                       )}
-                      <p className="mt-2 text-xs font-medium text-[#d4af37]">
+                      <p className="mt-2 text-xs font-medium text-brand-gold">
                         {expanded ? "Masquer le détail" : "Voir le détail"}
                       </p>
                     </div>

@@ -14,13 +14,15 @@ const FocusModeContext = createContext<FocusModeContextType | null>(null);
 const FOCUS_MODE_KEY = "formation-focus-mode";
 
 export function FocusModeProvider({ children }: { children: ReactNode }) {
-  const [isFocusMode, setIsFocusMode] = useState(false);
+  const [isFocusMode, setIsFocusMode] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem(FOCUS_MODE_KEY) === "true";
+  });
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem(FOCUS_MODE_KEY);
-    if (saved === "true") setIsFocusMode(true);
+    requestAnimationFrame(() => setMounted(true));
   }, []);
 
   const toggleFocusMode = () => {

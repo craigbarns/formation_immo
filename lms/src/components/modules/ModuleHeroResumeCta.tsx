@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import { getStoredProgress } from "@/components/LessonProgress";
 import { findResumeInModule } from "@/lib/formation-journey";
 import {
@@ -16,16 +17,30 @@ type Props = {
 };
 
 export function ModuleHeroResumeCta({ moduleSlug, firstLessonHref, examenHref }: Props) {
-  const [resume, setResume] = useState<{ href: string; lessonTitle: string } | null | undefined>(
-    undefined,
-  );
+  const [resume, setResume] = useState<{ href: string; lessonTitle: string; lessonSlug: string } | null | undefined>(undefined);
 
-  const refresh = useCallback(() => {
-    setResume(findResumeInModule(moduleSlug, getStoredProgress()));
+  const refresh = useCallback(async () => {
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    let progress: Record<string, boolean>;
+    if (!user) {
+      progress = getStoredProgress();
+    } else {
+      const { data } = await supabase
+        .from("lesson_progress")
+        .select("lesson_key, completed")
+        .eq("user_id", user.id);
+      progress = {};
+      data?.forEach((row) => { progress[row.lesson_key] = row.completed; });
+    }
+    setResume(findResumeInModule(moduleSlug, progress));
   }, [moduleSlug]);
 
   useEffect(() => {
     refresh();
+  }, [refresh]);
+
+  useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key === null || e.key === FORMATION_PROGRESS_STORAGE_KEY) refresh();
     };

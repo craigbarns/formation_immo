@@ -7,9 +7,9 @@
       "env": {
         "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
       },
-      "runtimeArgs": ["node_modules/next/dist/bin/next", "start"],
+      "runtimeArgs": ["node_modules/next/dist/bin/next", "dev"],
       "port": 3000,
-      "cwd": "/Users/gregorybaranes/Downloads/formation-immobiliere/lms"
+      "cwd": "/Users/gregorybaranes/Desktop/formation_immo_local/lms"
     }
   ]
 }

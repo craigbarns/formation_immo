@@ -23,7 +23,7 @@ Modern real estate agent in co-working space, making phone calls with headset, m
 
 [B-ROLL : Montage rapide d'un téléphone qui sonne, des agents au téléphone, des rendez-vous qui se prennent]
 
-"Vous faites cinquante appels. Vous obtenez deux rendez-vous. Et aucun ne se transforme en mandat. [PAUSE 2s] Sound familiar ?"
+"Vous faites cinquante appels. Vous obtenez deux rendez-vous. Et aucun ne se transforme en mandat. [PAUSE 2s] Ça vous parle ?"
 
 [B-ROLL : Agent frustré qui raccroche, regarde son téléphone avec découragement]
 

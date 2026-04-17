@@ -12,7 +12,7 @@
 | **Durée** | 10 minutes |
 | **Mot compté** | ~1 580 mots |
 | **Voix recommandée** | ElevenLabs - "Léa" (voix féminine dynamique, moderne) ou "Antoine" (voix masculine jeune, inspirante) |
-| **Ratio** | 16:9 (format paysage standard) ou 9:16 pour extraets verticaux |
+| **Ratio** | 16:9 (format paysage standard) ou 9:16 pour extraits verticaux |
 | **Résolution** | 1080p minimum |
 
 ---

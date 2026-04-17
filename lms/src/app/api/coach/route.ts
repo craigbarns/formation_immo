@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     });
 
     return result.toTextStreamResponse();
-  } catch (err) {
+  } catch (_err) {
     return new Response(
       JSON.stringify({ error: "Erreur coach IA" }),
       { status: 500, headers: { "Content-Type": "application/json" } }

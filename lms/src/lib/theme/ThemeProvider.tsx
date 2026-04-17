@@ -4,6 +4,8 @@ import {
   createContext,
   useContext,
   useEffect,
+  useMemo,
+  useReducer,
   useState,
   ReactNode,
 } from "react";
@@ -22,59 +24,44 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const STORAGE_KEY = "formation-theme";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("system");
-  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return "system";
+    if (typeof window === 'undefined') return "system";
+    return (localStorage.getItem(STORAGE_KEY) as Theme | null) ?? "system";
+  });
   const [mounted, setMounted] = useState(false);
+  const [, forceUpdate] = useReducer((x: number) => x + 1, 0);
 
   useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem(STORAGE_KEY) as Theme | null;
-    if (saved) {
-      setThemeState(saved);
-    }
+    requestAnimationFrame(() => setMounted(true));
   }, []);
+
+  const resolvedTheme = useMemo<"light" | "dark">(() => {
+    if (!mounted || typeof window === 'undefined') return "light";
+    if (theme === "system") {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    return theme;
+  }, [theme, mounted]);
 
   useEffect(() => {
     if (!mounted) return;
-
     const root = document.documentElement;
-    const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const resolveTheme = () => {
-      if (theme === "system") {
-        return systemDark.matches ? "dark" : "light";
-      }
-      return theme;
-    };
-
-    const resolved = resolveTheme();
-    setResolvedTheme(resolved);
-
-    if (resolved === "dark") {
+    if (resolvedTheme === "dark") {
       root.classList.add("dark");
     } else {
       root.classList.remove("dark");
     }
-
     localStorage.setItem(STORAGE_KEY, theme);
-  }, [theme, mounted]);
+  }, [theme, resolvedTheme, mounted]);
 
   // Listen to system changes
   useEffect(() => {
     if (!mounted || theme !== "system") return;
-
     const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = () => {
-      const resolved = systemDark.matches ? "dark" : "light";
-      setResolvedTheme(resolved);
-      const root = document.documentElement;
-      if (resolved === "dark") {
-        root.classList.add("dark");
-      } else {
-        root.classList.remove("dark");
-      }
+      forceUpdate();
     };
-
     systemDark.addEventListener("change", handleChange);
     return () => systemDark.removeEventListener("change", handleChange);
   }, [theme, mounted]);

@@ -170,6 +170,33 @@ body {
     @apply overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04),0_16px_40px_rgba(26,58,92,0.07)] transition-shadow duration-300 hover:shadow-[0_8px_32px_rgba(26,58,92,0.12)];
   }
 
+  /* Surface unifiée pour cartes de contenu (alternative légère à .interactive-block) */
+  .surface-card {
+    @apply rounded-2xl border border-zinc-200/80 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md;
+  }
+
+  .surface-card-soft {
+    @apply rounded-2xl border border-brand-navy/10 bg-gradient-to-br from-white to-brand-gold-soft/30 shadow-sm;
+  }
+
+  /* Padding standardisé pour cartes (S / M / L) */
+  .p-card-sm { @apply px-4 py-3 sm:px-5 sm:py-4; }
+  .p-card    { @apply px-5 py-4 sm:px-6 sm:py-5; }
+  .p-card-lg { @apply px-6 py-5 sm:px-8 sm:py-7; }
+
+  /* Anneau de focus standardisé pour boutons / liens (contraste WCAG AA) */
+  .focus-ring-brand {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+  }
+
+  .focus-ring-brand-dark {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy;
+  }
+
+  /* Texte secondaire lisible (WCAG AA) sur fond sombre — remplace text-white/60 */
+  .text-on-dark-muted { @apply text-white/80; }
+  .text-on-dark-soft  { @apply text-white/90; }
+
   /* Badge de type d'exercice */
   .activity-badge {
     @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold;

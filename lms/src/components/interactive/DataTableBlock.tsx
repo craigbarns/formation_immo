@@ -8,14 +8,14 @@ const BADGE_COLORS: Record<string, string> = {
   red: "bg-red-100 text-red-700 border border-red-200",
   blue: "bg-blue-100 text-blue-700 border border-blue-200",
   gold: "bg-amber-100 text-amber-700 border border-amber-200",
-  navy: "bg-[#1a3a5c]/10 text-[#1a3a5c] border border-[#1a3a5c]/20",
+  navy: "bg-brand-navy/10 text-brand-navy border border-brand-navy/20",
 };
 
 function Cell({ cell }: { cell: TableCell }) {
   return (
     <td
       className={`px-3 py-2.5 text-sm ${
-        cell.highlight ? "bg-[#d4af37]/10 font-semibold text-[#7a6008]" : "text-zinc-700"
+        cell.highlight ? "bg-brand-gold/10 font-semibold text-[#7a6008]" : "text-zinc-700"
       }`}
     >
       <div className="flex flex-wrap items-center gap-1.5">
@@ -90,11 +90,11 @@ function TableView({ table }: { table: DataTable }) {
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
             placeholder="Filtrer..."
-            className="rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-sm text-zinc-800 outline-none placeholder:text-zinc-400 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
+            className="rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-sm text-zinc-800 outline-none placeholder:text-zinc-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20"
           />
           <button
             onClick={() => downloadCSV(table)}
-            className="flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:border-[#1a3a5c]/30 hover:text-[#1a3a5c]"
+            className="flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:border-brand-navy/30 hover:text-brand-navy"
             title="Télécharger CSV"
           >
             ⬇ CSV
@@ -106,7 +106,7 @@ function TableView({ table }: { table: DataTable }) {
       <div className="overflow-x-auto rounded-xl border border-zinc-200 shadow-sm">
         <table className="w-full border-collapse text-left">
           <thead>
-            <tr className="bg-[#1a3a5c]">
+            <tr className="bg-brand-navy">
               {table.headers.map((h, i) => (
                 <th
                   key={i}
@@ -118,7 +118,7 @@ function TableView({ table }: { table: DataTable }) {
                   <div className="flex items-center gap-1.5">
                     {h}
                     {table.sortable && (
-                      <span className="text-white/40">
+                      <span className="text-white/60">
                         {sortCol === i ? (sortAsc ? "↑" : "↓") : "↕"}
                       </span>
                     )}
@@ -131,7 +131,7 @@ function TableView({ table }: { table: DataTable }) {
             {rows.map((row, ri) => (
               <tr
                 key={ri}
-                className={`border-t border-zinc-100 transition hover:bg-[#d4af37]/5 ${
+                className={`border-t border-zinc-100 transition hover:bg-brand-gold/5 ${
                   ri % 2 === 0 ? "bg-white" : "bg-zinc-50/60"
                 }`}
               >
@@ -165,17 +165,17 @@ export function DataTableBlock({ tables }: { tables: DataTable[] }) {
   if (tables.length === 0) return null;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#1a3a5c]/15 bg-white shadow-lg">
+    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
       {/* Header */}
-      <div className="border-b border-zinc-100 bg-gradient-to-r from-[#1a3a5c] to-[#244b75] px-5 py-4 sm:px-7">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-[#d4af37]">
+      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[#244b75] px-5 py-4 sm:px-7">
+        <p className="text-[11px] font-bold uppercase tracking-widest text-brand-gold">
           Tableaux de référence
         </p>
         <p className="mt-0.5 text-sm font-semibold text-white/90">
           {tables[active].title}
         </p>
         {tables[active].description && (
-          <p className="mt-1 text-xs text-white/60">{tables[active].description}</p>
+          <p className="mt-1 text-xs text-white/80">{tables[active].description}</p>
         )}
       </div>
 
@@ -188,7 +188,7 @@ export function DataTableBlock({ tables }: { tables: DataTable[] }) {
               onClick={() => setActive(i)}
               className={`flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
                 i === active
-                  ? "bg-[#1a3a5c] text-white"
+                  ? "bg-brand-navy text-white"
                   : "text-zinc-600 hover:bg-zinc-200"
               }`}
             >

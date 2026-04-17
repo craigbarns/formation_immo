@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import { BADGES, getGamificationState, type BadgeId } from "@/lib/gamification";
 
 const RARITY_BORDER = {
@@ -21,7 +22,23 @@ export function BadgesGrid() {
   const [earned, setEarned] = useState<BadgeId[]>([]);
 
   useEffect(() => {
-    setEarned(getGamificationState().earnedBadges);
+    async function load() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data } = await supabase
+          .from("gamification_state")
+          .select("earned_badges")
+          .eq("user_id", user.id)
+          .single();
+        if (data) {
+          setEarned(data.earned_badges || []);
+          return;
+        }
+      }
+      setEarned(getGamificationState().earnedBadges);
+    }
+    load();
   }, []);
 
   return (
@@ -38,7 +55,7 @@ export function BadgesGrid() {
             }`}
           >
             <div className="text-3xl">{badge.icon}</div>
-            <p className="mt-1 text-xs font-bold text-[#1a3a5c]">{badge.name}</p>
+            <p className="mt-1 text-xs font-bold text-brand-navy">{badge.name}</p>
             <p className="mt-0.5 text-[10px] text-zinc-500">{badge.description}</p>
             {unlocked && (
               <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[10px] text-white shadow">
