@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getLesson, getPrevNext, lessonId } from "@/data/course";
+import { getLesson, getPrevNext, lessonId, type Lesson } from "@/data/course";
 import { getInteractiveScenario } from "@/data/interactive-scenarios";
 import { getAvatarForModule } from "@/data/module-avatars";
-import { getVisuals } from "@/data/lesson-keyconcepts";
+import { getVisuals, type LessonVisuals } from "@/data/lesson-keyconcepts";
 import { getLessonAudioPlaybackSrc } from "@/lib/lesson-audio";
 import { getCaseStudies } from "@/data/case-studies";
 import { getChatRoleplay } from "@/data/chat-roleplay";
 import { getDragDropExercises } from "@/data/drag-drop-exercises";
 import { getProChecklists } from "@/data/pro-checklists";
-import { getQuizCheckpoints } from "@/data/quiz-checkpoints";
+import { getQuizCheckpoints, type QuizCheckpoint } from "@/data/quiz-checkpoints";
 import { getTimelines } from "@/data/timeline-data";
 import { getTrainerCallouts } from "@/data/trainer-callouts";
 import { getDataTables } from "@/data/data-tables";
@@ -42,6 +42,48 @@ import { AICoachButton } from "@/components/ai-coach";
 import { ReadingProgressBar } from "@/components/ReadingProgressBar";
 import { HeyGenVideoPlayer } from "@/components/avatars/HeyGenVideoPlayer";
 import { getHeyGenVideoUrl } from "@/lib/heygen-videos";
+import { getResolvedAudioQuizSchedule, type ResolvedAudioQuizItem } from "@/data/audio-quiz-schedule";
+
+/* ------------------------------------------------------------------ */
+/*  Fallbacks interactifs — rend le CinematicPlayer utile pour       */
+/*  TOUTES les leçons, même celles sans visuals ni audioQuiz manuel   */
+/* ------------------------------------------------------------------ */
+
+function buildFallbackVisuals(lesson: Lesson): LessonVisuals {
+  const icons = ["target", "zap", "shield", "star", "check-circle", "heart", "map-pin"];
+  return {
+    keyConcepts: lesson.objectives.slice(0, 5).map((obj, i) => ({
+      icon: icons[i % icons.length],
+      title: `Objectif ${i + 1}`,
+      description: obj,
+      type: "tip" as const,
+    })),
+    takeaways: lesson.objectives,
+  };
+}
+
+function buildFallbackAudioQuiz(
+  moduleSlug: string,
+  lessonSlug: string,
+  checkpoints: QuizCheckpoint[]
+): ResolvedAudioQuizItem[] {
+  const manual = getResolvedAudioQuizSchedule(moduleSlug, lessonSlug);
+  if (manual.length > 0) return manual;
+  if (checkpoints.length === 0) return [];
+  // Distribution équilibrée sur la piste audio (évite 0.0 et 1.0)
+  const ratios =
+    checkpoints.length === 1
+      ? [0.5]
+      : checkpoints.length === 2
+      ? [0.35, 0.7]
+      : checkpoints.length === 3
+      ? [0.25, 0.55, 0.8]
+      : [0.2, 0.4, 0.6, 0.8];
+  return checkpoints.slice(0, ratios.length).map((cp, i) => ({
+    pauseAtRatio: ratios[i],
+    checkpoint: cp,
+  }));
+}
 
 type Props = { params: Promise<{ moduleSlug: string; lessonSlug: string }> };
 
@@ -63,12 +105,14 @@ export default async function LessonPage({ params }: Props) {
   const avatar = getAvatarForModule(moduleSlug);
   const heygenVideoUrl = getHeyGenVideoUrl(moduleSlug, lessonSlug);
   const lessonVisuals = getVisuals(moduleSlug, lessonSlug);
+  const visualsForPlayer = lessonVisuals ?? buildFallbackVisuals(lesson);
   const caseStudies = getCaseStudies(moduleSlug, lessonSlug);
   const dragDropExercises = getDragDropExercises(moduleSlug, lessonSlug);
   const timelines = getTimelines(moduleSlug, lessonSlug);
   const proChecklists = getProChecklists(moduleSlug, lessonSlug);
   const chatRoleplay = getChatRoleplay(moduleSlug, lessonSlug);
   const quizCheckpoints = getQuizCheckpoints(moduleSlug, lessonSlug);
+  const audioQuizSchedule = buildFallbackAudioQuiz(moduleSlug, lessonSlug, quizCheckpoints);
   const trainerCallouts = getTrainerCallouts(moduleSlug, lessonSlug);
   const dataTables = getDataTables(moduleSlug, lessonSlug);
   const guidedCalculations = getGuidedCalculations(moduleSlug, lessonSlug);
@@ -254,7 +298,8 @@ export default async function LessonPage({ params }: Props) {
               audioUrl={audioSrc}
               title={lesson.title}
               avatar={avatar}
-              visuals={lessonVisuals}
+              visuals={visualsForPlayer}
+              audioQuizSchedule={audioQuizSchedule}
             />
           </section>
           </ScrollReveal>
