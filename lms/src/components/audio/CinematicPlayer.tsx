@@ -44,16 +44,27 @@ type ChapterLabel = {
 
 const SLIDE_KIND_TO_CHAPTER: Record<string, string> = {
   title: "Introduction",
-  concept: "Concepts cles",
-  stats: "Donnees",
-  chart: "Donnees",
+  concept: "Concepts clés",
+  stats: "Données",
+  chart: "Données",
   comparison: "Comparatif",
-  takeaways: "A retenir",
-  process: "A retenir",
-  highlight: "Concepts cles",
-  "trainer-tip": "Concepts cles",
+  takeaways: "À retenir",
+  process: "À retenir",
+  highlight: "Concepts clés",
+  "trainer-tip": "Concepts clés",
   end: "Fin",
 };
+
+const CHAPTER_INFO: Record<string, { icon: string; color: string; bg: string; gradient: string }> = {
+  "Introduction":   { icon: "📖", color: "#60a5fa", bg: "rgba(37,99,235,0.85)",   gradient: "from-blue-950/95 via-[#0f1f33]/98 to-[#0a1929]/98" },
+  "Concepts clés":  { icon: "🧠", color: "#a78bfa", bg: "rgba(109,40,217,0.85)",  gradient: "from-violet-950/95 via-[#0f1f33]/98 to-[#0a1929]/98" },
+  "Données":        { icon: "📊", color: "#22d3ee", bg: "rgba(8,145,178,0.85)",   gradient: "from-cyan-950/95 via-[#0f1f33]/98 to-[#0a1929]/98" },
+  "Comparatif":     { icon: "⚖️", color: "#fbbf24", bg: "rgba(180,83,9,0.85)",    gradient: "from-amber-950/95 via-[#0f1f33]/98 to-[#0a1929]/98" },
+  "À retenir":      { icon: "✅", color: "#34d399", bg: "rgba(4,120,87,0.85)",    gradient: "from-emerald-950/95 via-[#0f1f33]/98 to-[#0a1929]/98" },
+  "Fin":            { icon: "🎯", color: "#d4af37", bg: "rgba(120,90,10,0.85)",   gradient: "from-yellow-950/95 via-[#0f1f33]/98 to-[#0a1929]/98" },
+};
+
+const CHAPTER_ORDER = ["Introduction", "Concepts clés", "Données", "Comparatif", "À retenir", "Fin"];
 
 function buildChapterLabels(slides: Slide[]): ChapterLabel[] {
   const chapters: ChapterLabel[] = [];
@@ -284,12 +295,27 @@ export function CinematicPlayer({
   const [shuffledQuizOptions, setShuffledQuizOptions] = useState<{ label: string; isCorrect: boolean }[]>([]);
   const [quizFeedback, setQuizFeedback] = useState<"idle" | "wrong">("idle");
   const [manualSlide, setManualSlide] = useState<number | null>(null);
+  const [chapterFlash, setChapterFlash] = useState<{ name: string; icon: string; color: string; gradient: string } | null>(null);
+  const lastChapterRef = useRef<string>("");
 
   const slides = useMemo(() => buildSlides(title, visuals), [title, visuals]);
   const chapters = useMemo(() => buildChapterLabels(slides), [slides]);
 
   clearedQuizRef.current = clearedQuizCount;
   playingRef.current = playing;
+
+  /* ---------- Chapter transition flash ---------- */
+  useEffect(() => {
+    if (!currentChapter) return;
+    const name = currentChapter.name;
+    if (name === lastChapterRef.current) return;
+    lastChapterRef.current = name;
+    const info = CHAPTER_INFO[name];
+    if (!info) return;
+    setChapterFlash({ name, icon: info.icon, color: info.color, gradient: info.gradient });
+    const timer = setTimeout(() => setChapterFlash(null), 1800);
+    return () => clearTimeout(timer);
+  }, [currentChapter?.name]);
 
   /* ---------- Audio logic ---------- */
 
@@ -595,6 +621,40 @@ export function CinematicPlayer({
     >
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
 
+      {/* ── CHAPTER PROGRESS BAR ───────────────────────── */}
+      <div className="flex bg-[#080f1a] border-b border-white/5">
+        {chapters.map((ch) => {
+          const info = CHAPTER_INFO[ch.name];
+          const isActive = currentChapter?.name === ch.name;
+          const isPast = currentChapter
+            ? CHAPTER_ORDER.indexOf(ch.name) < CHAPTER_ORDER.indexOf(currentChapter.name)
+            : false;
+          return (
+            <button
+              key={ch.name}
+              type="button"
+              onClick={() => goToSlide(ch.startSlide)}
+              className="flex-1 flex flex-col items-center gap-0.5 py-1.5 transition-all duration-300 hover:bg-white/5"
+              title={ch.name}
+            >
+              <span className="text-sm leading-none" style={{ filter: isActive || isPast ? "none" : "grayscale(1) opacity(0.3)" }}>
+                {info?.icon ?? "●"}
+              </span>
+              <span
+                className="text-[7px] font-bold uppercase tracking-wide leading-none transition-colors duration-300 hidden sm:block"
+                style={{ color: isActive ? (info?.color ?? "#d4af37") : isPast ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.15)" }}
+              >
+                {ch.name}
+              </span>
+              <div
+                className="mt-0.5 h-0.5 w-full rounded-full transition-all duration-500"
+                style={{ background: isActive ? (info?.color ?? "#d4af37") : isPast ? "rgba(255,255,255,0.15)" : "transparent" }}
+              />
+            </button>
+          );
+        })}
+      </div>
+
       {/* ── VIDEO AREA ─────────────────────────────────── */}
       <div
         className={`relative bg-gradient-to-br from-[#0f1f33] via-[#1a3a5c] to-[#0a1929] overflow-hidden ${
@@ -608,6 +668,68 @@ export function CinematicPlayer({
         <div className="relative flex h-full w-full items-center justify-center p-6 sm:p-10">
           <SlideRenderer slide={slide} avatar={avatar} isActive={true} />
         </div>
+
+        {/* Chapter flash overlay */}
+        {chapterFlash && (
+          <div
+            className={`absolute inset-0 z-30 flex flex-col items-center justify-center bg-gradient-to-br ${chapterFlash.gradient} pointer-events-none`}
+            style={{ animation: "chapterFlashIn 0.35s cubic-bezier(0.16,1,0.3,1) both" }}
+          >
+            <style>{`
+              @keyframes chapterFlashIn {
+                from { opacity: 0; transform: scale(1.04); }
+                to   { opacity: 1; transform: scale(1); }
+              }
+              @keyframes chapterFlashOut {
+                from { opacity: 1; }
+                to   { opacity: 0; }
+              }
+            `}</style>
+            {/* Animated ring */}
+            <div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: `radial-gradient(ellipse 60% 50% at 50% 50%, ${chapterFlash.color}18 0%, transparent 70%)`,
+              }}
+              aria-hidden
+            />
+            {/* Number indicator */}
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] mb-4" style={{ color: chapterFlash.color + "99" }}>
+              {CHAPTER_ORDER.indexOf(chapterFlash.name) + 1} / {CHAPTER_ORDER.filter(n => chapters.some(c => c.name === n)).length}
+            </p>
+            {/* Icon */}
+            <div
+              className="flex h-20 w-20 items-center justify-center rounded-full text-4xl mb-4 shadow-2xl"
+              style={{
+                background: `${chapterFlash.color}22`,
+                border: `2px solid ${chapterFlash.color}44`,
+                animation: "titleEntrance 0.5s cubic-bezier(0.16,1,0.3,1) 0.1s both",
+              }}
+            >
+              {chapterFlash.icon}
+            </div>
+            {/* Chapter name */}
+            <h3
+              className="text-3xl font-black tracking-tight sm:text-4xl"
+              style={{
+                color: "white",
+                animation: "titleEntrance 0.5s cubic-bezier(0.16,1,0.3,1) 0.15s both",
+                textShadow: `0 0 40px ${chapterFlash.color}66`,
+              }}
+            >
+              {chapterFlash.name}
+            </h3>
+            {/* Decorative line */}
+            <div
+              className="mt-4 h-0.5 rounded-full"
+              style={{
+                width: "60px",
+                background: `linear-gradient(90deg, transparent, ${chapterFlash.color}, transparent)`,
+                animation: "titleEntrance 0.5s cubic-bezier(0.16,1,0.3,1) 0.2s both",
+              }}
+            />
+          </div>
+        )}
 
         {/* Quiz overlay */}
         {quizOverlay && (
@@ -887,35 +1009,59 @@ function ChapterThumbnails({
   onGoTo: (i: number) => void;
 }) {
   return (
-    <div className="flex flex-col gap-1 pt-0.5">
-      {chapters.map((ch) => (
-        <div key={ch.name} className="flex items-center gap-1.5">
-          <span className="text-[8px] font-bold uppercase tracking-wider text-white/30 w-16 shrink-0 truncate">
-            {ch.name}
-          </span>
-          <div className="flex gap-0.5 flex-1">
-            {slides.slice(ch.startSlide, ch.endSlide + 1).map((_, offset) => {
-              const i = ch.startSlide + offset;
-              return (
-                <button
-                  key={i}
-                  type="button"
-                  disabled={quizLocked}
-                  onClick={() => onGoTo(i)}
-                  className={`flex-1 h-1.5 rounded-full transition-all duration-200 disabled:opacity-40 ${
-                    i === activeSlide
-                      ? "bg-[#d4af37] shadow-[0_0_6px_rgba(212,175,55,0.6)]"
-                      : i < activeSlide
-                      ? "bg-[#d4af37]/35"
-                      : "bg-white/10 hover:bg-white/20"
-                  }`}
-                  title={`Slide ${i + 1}`}
-                />
-              );
-            })}
+    <div className="flex flex-col gap-1.5 pt-1">
+      {chapters.map((ch) => {
+        const info = CHAPTER_INFO[ch.name];
+        const isActive = activeSlide >= ch.startSlide && activeSlide <= ch.endSlide;
+        const isPast = activeSlide > ch.endSlide;
+        const accentColor = info?.color ?? "#d4af37";
+        return (
+          <div key={ch.name} className="flex items-center gap-2">
+            {/* Chapter icon + label */}
+            <button
+              type="button"
+              disabled={quizLocked}
+              onClick={() => onGoTo(ch.startSlide)}
+              className="flex items-center gap-1 shrink-0 w-28 transition-opacity hover:opacity-80 disabled:opacity-40"
+              title={ch.name}
+            >
+              <span className="text-sm leading-none" style={{ filter: isActive || isPast ? "none" : "grayscale(1) opacity(0.3)" }}>
+                {info?.icon ?? "●"}
+              </span>
+              <span
+                className="text-[8px] font-bold uppercase tracking-wide truncate"
+                style={{ color: isActive ? accentColor : isPast ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.18)" }}
+              >
+                {ch.name}
+              </span>
+            </button>
+            {/* Slide dots */}
+            <div className="flex gap-0.5 flex-1">
+              {slides.slice(ch.startSlide, ch.endSlide + 1).map((_, offset) => {
+                const i = ch.startSlide + offset;
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    disabled={quizLocked}
+                    onClick={() => onGoTo(i)}
+                    className="flex-1 h-1.5 rounded-full transition-all duration-200 disabled:opacity-40"
+                    style={{
+                      background: i === activeSlide
+                        ? accentColor
+                        : i < activeSlide
+                        ? accentColor + "44"
+                        : "rgba(255,255,255,0.08)",
+                      boxShadow: i === activeSlide ? `0 0 6px ${accentColor}80` : "none",
+                    }}
+                    title={`Slide ${i + 1}`}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

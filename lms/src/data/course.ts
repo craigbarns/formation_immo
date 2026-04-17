@@ -159,7 +159,7 @@ export const COURSE: CourseModule[] = [
         title: "TRACFIN & lutte anti-blanchiment",
         scriptFile: "module1-juridique/scripts/07-tracfin-blanchiment.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/07-tracfin-blanchiment.mp3",
         duration: 60,
         difficulty: "avance",
         objectives: [
@@ -174,7 +174,7 @@ export const COURSE: CourseModule[] = [
         title: "Non-discrimination — obligations et conformité",
         scriptFile: "module1-juridique/scripts/08-non-discrimination.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/08-non-discrimination.mp3",
         duration: 60,
         difficulty: "intermediaire",
         objectives: [
@@ -189,7 +189,7 @@ export const COURSE: CourseModule[] = [
         title: "Baux d'habitation — loi du 6 juillet 1989",
         scriptFile: "module1-juridique/scripts/09-baux-habitation.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/09-baux-habitation.mp3",
         duration: 45,
         difficulty: "intermediaire",
         objectives: [
@@ -293,7 +293,7 @@ export const COURSE: CourseModule[] = [
         title: "Offre d'achat & avants-contrats",
         scriptFile: "module2-transaction/scripts/06-offre-achat-avants-contrats.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/06-offre-achat-avants-contrats.mp3",
         duration: 60,
         difficulty: "avance",
         objectives: [
@@ -308,7 +308,7 @@ export const COURSE: CourseModule[] = [
         title: "Réitération de l'acte authentique",
         scriptFile: "module2-transaction/scripts/07-acte-authentique-notaire.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/07-acte-authentique-notaire.mp3",
         duration: 60,
         difficulty: "avance",
         objectives: [
@@ -413,7 +413,7 @@ export const COURSE: CourseModule[] = [
         title: "Défiscalisation — dispositifs et stratégies",
         scriptFile: "module3-financement/scripts/06-defiscalisation-dispositifs.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/06-defiscalisation-dispositifs.mp3",
         duration: 90,
         difficulty: "intermediaire",
         objectives: [
@@ -517,7 +517,7 @@ export const COURSE: CourseModule[] = [
         title: "Vidéo immobilière & visite virtuelle 360°",
         scriptFile: "module4-marketing/scripts/06-video-visite-virtuelle.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/06-video-visite-virtuelle.mp3",
         duration: 60,
         difficulty: "debutant",
         objectives: [
@@ -532,7 +532,7 @@ export const COURSE: CourseModule[] = [
         title: "Personal branding & e-réputation",
         scriptFile: "module4-marketing/scripts/07-personal-branding-ereputation.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/07-personal-branding-ereputation.mp3",
         duration: 60,
         difficulty: "intermediaire",
         objectives: [
@@ -636,7 +636,7 @@ export const COURSE: CourseModule[] = [
         title: "R0 / R1 / R2 — Prise de mandat en 3 étapes",
         scriptFile: "module5-terrain/scripts/06-r0-r1-r2-prise-mandat.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/06-r0-r1-r2-prise-mandat.mp3",
         duration: 75,
         difficulty: "intermediaire",
         objectives: [
@@ -651,7 +651,7 @@ export const COURSE: CourseModule[] = [
         title: "Découverte client & suivi acquéreur",
         scriptFile: "module5-terrain/scripts/07-decouverte-client-suivi.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/07-decouverte-client-suivi.mp3",
         duration: 75,
         difficulty: "intermediaire",
         objectives: [
