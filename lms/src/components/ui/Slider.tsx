@@ -21,7 +21,7 @@ export function Slider({ label, value, onChange, min, max, step, format, id }: S
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <label htmlFor={sliderId} className="text-sm text-white/70">
+        <label htmlFor={sliderId} className="text-sm text-zinc-600">
           {label}
         </label>
         <span className="text-sm font-semibold text-brand-gold" aria-live="polite">
@@ -48,7 +48,7 @@ export function Slider({ label, value, onChange, min, max, step, format, id }: S
           aria-valuenow={value}
           aria-label={label}
         />
-        <div className="relative h-2 w-full overflow-hidden rounded-full bg-white/10">
+        <div className="relative h-2 w-full overflow-hidden rounded-full bg-zinc-200">
           <div
             className="h-full bg-gradient-to-r from-brand-gold to-[#f0c040] transition-all duration-75"
             style={{ width: `${percentage}%` }}
