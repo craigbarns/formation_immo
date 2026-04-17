@@ -28,21 +28,21 @@ const CHARACTERS: Record<ModuleSlug, {
   accentColor: string;
   clothingColor: string;
   gender: "m" | "f";
-  hairVariant: "short" | "pompadour" | "long" | "wavy" | "gray";
+  hairVariant: "short" | "pompadour" | "long" | "wavy" | "gray" | "elegant";
   hasBeard: boolean;
   hasGlasses: boolean;
 }> = {
   juridique: {
-    name: "Alexandre Verdier",
-    role: "Juriste immobilier",
+    name: "Alexia Vidal",
+    role: "Juriste & experte conformité",
     skinColor: "#C8956C",
     skinShadow: "#a87550",
     hairColor: "#2D1B00",
     eyeColor: "#3D2B1F",
     accentColor: "#1a3a5c",
     clothingColor: "#1a3a5c",
-    gender: "m",
-    hairVariant: "pompadour",
+    gender: "f",
+    hairVariant: "long",
     hasBeard: false,
     hasGlasses: false,
   },
@@ -61,17 +61,17 @@ const CHARACTERS: Record<ModuleSlug, {
     hasGlasses: false,
   },
   financement: {
-    name: "Thomas Mercier",
-    role: "Courtier & analyste",
+    name: "Sophie Mercier",
+    role: "Courtière & analyste financière",
     skinColor: "#FDBCB4",
     skinShadow: "#d99a92",
     hairColor: "#4A3728",
     eyeColor: "#2D4A3E",
     accentColor: "#059669",
     clothingColor: "#1f2d3d",
-    gender: "m",
-    hairVariant: "short",
-    hasBeard: true,
+    gender: "f",
+    hairVariant: "wavy",
+    hasBeard: false,
     hasGlasses: false,
   },
   marketing: {
@@ -89,16 +89,16 @@ const CHARACTERS: Record<ModuleSlug, {
     hasGlasses: false,
   },
   terrain: {
-    name: "Nicolas Aubert",
-    role: "Directeur d'agence",
+    name: "Nicole Arnaud",
+    role: "Directrice d'agence",
     skinColor: "#DEB887",
     skinShadow: "#c09060",
-    hairColor: "#888888",
+    hairColor: "#555555",
     eyeColor: "#2C3E50",
     accentColor: "#dc2626",
     clothingColor: "#1a2535",
-    gender: "m",
-    hairVariant: "gray",
+    gender: "f",
+    hairVariant: "elegant",
     hasBeard: false,
     hasGlasses: false,
   },
@@ -153,6 +153,20 @@ function HairPath({ variant, color }: { variant: string; color: string }) {
           <path d="M34 72 Q28 90 35 105 Q40 92 38 80 Z" fill={color} />
           {/* Right wave */}
           <path d="M126 72 Q132 90 125 105 Q120 92 122 80 Z" fill={color} />
+        </g>
+      );
+    case "elegant": // woman - chic short with silver highlights, mature professional
+      return (
+        <g>
+          {/* Main hair base */}
+          <ellipse cx="80" cy="53" rx="44" ry="27" fill={color} />
+          {/* Slight side volume */}
+          <path d="M34 68 Q30 82 38 92 Q40 80 38 70 Z" fill={color} />
+          <path d="M126 68 Q130 82 122 92 Q120 80 122 70 Z" fill={color} />
+          {/* Silver/white highlight streaks for distinguished look */}
+          <path d="M55 38 Q60 30 70 34 Q62 38 55 38Z" fill="white" opacity="0.45" />
+          <path d="M105 38 Q100 30 90 34 Q98 38 105 38Z" fill="white" opacity="0.45" />
+          <path d="M72 30 Q80 24 88 30 Q80 28 72 30Z" fill="white" opacity="0.3" />
         </g>
       );
     default:

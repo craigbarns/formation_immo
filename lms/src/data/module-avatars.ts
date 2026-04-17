@@ -31,16 +31,16 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
   {
     moduleSlug: "juridique",
     name: v.juridique.name,
-    role: "Juriste immobilier",
+    role: "Juriste & experte conformité",
     description:
-      "Expert en droit immobilier et conformité ALUR. 20 ans d'expérience en transactions et contentieux.",
+      "Experte en droit immobilier et conformité ALUR. 20 ans d'expérience en transactions et contentieux.",
     voiceId: v.juridique.elevenLabsVoiceId,
     voiceProvider: "elevenlabs",
-    voiceStyle: "Narrateur posé, ton d'autorité",
+    voiceStyle: "Ton posé, autorité bienveillante",
     mistralVoiceId: v.juridique.mistralVoiceId,
     mistralVoiceLabel: v.juridique.mistralVoiceLabel,
     portraitPrompt:
-      "Professional headshot, French male lawyer 50 years old, silver temples, navy suit, gold tie pin, warm confident smile, law office background with legal books, soft studio lighting, photorealistic --ar 1:1 --style raw --s 250 --q 2",
+      "Professional headshot, French female lawyer 48 years old, elegant dark suit, pearl earrings, warm authoritative smile, law office with legal books background, soft studio lighting, photorealistic --ar 1:1 --style raw --s 250 --q 2",
     accentColor: "#1a3a5c",
     initials: "AV",
   },
@@ -63,18 +63,18 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
   {
     moduleSlug: "financement",
     name: v.financement.name,
-    role: "Courtier & analyste financier",
+    role: "Courtière & analyste financière",
     description:
-      "Ancien banquier reconverti courtier. Expert crédit, fiscalité et montages financiers immobiliers.",
+      "Ancienne banquière reconvertie courtière. Experte crédit, fiscalité et montages financiers immobiliers.",
     voiceId: v.financement.elevenLabsVoiceId,
     voiceProvider: "elevenlabs",
-    voiceStyle: "Mature, professionnel bancaire",
+    voiceStyle: "Pédagogue, rigueur analytique",
     mistralVoiceId: v.financement.mistralVoiceId,
     mistralVoiceLabel: v.financement.mistralVoiceLabel,
     portraitPrompt:
-      "Professional headshot, French man 42 years old, well-groomed beard, charcoal suit white shirt, analytical confident expression, financial office with screens showing charts, warm lighting, photorealistic --ar 1:1 --style raw --s 250 --q 2",
+      "Professional headshot, French woman 40 years old, sharp analytical expression, tailored charcoal blazer, confident professional smile, financial office with charts on screens background, warm lighting, photorealistic --ar 1:1 --style raw --s 250 --q 2",
     accentColor: "#059669",
-    initials: "TM",
+    initials: "SM",
   },
   {
     moduleSlug: "marketing",
@@ -95,16 +95,16 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
   {
     moduleSlug: "terrain",
     name: v.terrain.name,
-    role: "Directeur d'agence",
+    role: "Directrice d'agence",
     description:
-      "30 ans d'expérience terrain. Expert visites, closing et fidélisation client. Formateur certifié.",
+      "30 ans d'expérience terrain. Experte visites, closing et fidélisation client. Formatrice certifiée.",
     voiceId: v.terrain.elevenLabsVoiceId,
     voiceProvider: "elevenlabs",
-    voiceStyle: "Autorité rassurante, charisme",
+    voiceStyle: "Charisme, autorité terrain",
     mistralVoiceId: v.terrain.mistralVoiceId,
     mistralVoiceLabel: v.terrain.mistralVoiceLabel,
     portraitPrompt:
-      "Professional headshot, French man 52 years old, distinguished salt-and-pepper hair, premium navy overcoat, commanding warm presence, upscale property entrance background, golden hour light, photorealistic --ar 1:1 --style raw --s 250 --q 2",
+      "Professional headshot, French woman 50 years old, distinguished silver highlights in dark hair, premium navy coat, commanding warm smile, upscale property entrance background, golden hour light, photorealistic --ar 1:1 --style raw --s 250 --q 2",
     accentColor: "#dc2626",
     initials: "NA",
   },

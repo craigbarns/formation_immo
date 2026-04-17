@@ -17,19 +17,19 @@ const INTRO_MESSAGES: Record<string, string[]> = {
     "Chaque leçon est construite autour de cas concrets. Lisez attentivement — ces informations vous protègent et protègent vos clients.",
   ],
   transaction: [
-    "Prête à découvrir les techniques des meilleurs négociateurs ? Dans ce module, chaque outil que vous apprenez vous rapproche du closing.",
+    "Prête à découvrir les techniques des meilleures négociatrices ? Dans ce module, chaque outil que vous apprenez vous rapproche du closing.",
     "La négociation, ça s'entraîne. Suivez les étapes et mettez en pratique dès votre prochaine visite.",
   ],
   financement: [
     "Les chiffres ne mentent pas. Dans ce module, vous allez comprendre les mécanismes du crédit et de la fiscalité pour mieux conseiller vos clients.",
-    "Un bon agent immobilier maîtrise les aspects financiers. C'est ce qui vous donne de la crédibilité face aux acheteurs et investisseurs.",
+    "Une bonne agente immobilière maîtrise les aspects financiers. C'est ce qui vous donne de la crédibilité face aux acheteurs et investisseurs.",
   ],
   marketing: [
     "Dans l'immobilier d'aujourd'hui, votre visibilité digitale est aussi importante que votre réseau. On va construire ça ensemble.",
     "Photos, annonces, réseaux sociaux, SEO — chaque leçon vous donne un outil concret à appliquer dès cette semaine.",
   ],
   terrain: [
-    "Le terrain, c'est là où tout se concrétise. Ce module vous donne les techniques des meilleurs closers français.",
+    "Le terrain, c'est là où tout se concrétise. Ce module vous donne les techniques des meilleures directrices d'agence.",
     "30 ans d'expérience condensés en quelques leçons. Allez, on y va — votre prochain mandat exclusif commence ici.",
   ],
 };
@@ -94,7 +94,7 @@ export function LessonPresenterPanel({
           </div>
           <p className="font-bold text-zinc-800">{char.name}</p>
           <p className="text-xs text-zinc-500 mt-0.5 line-clamp-1">
-            Votre formateur pour : <span className="font-medium text-zinc-700">{lessonTitle}</span>
+            Votre formatrice pour : <span className="font-medium text-zinc-700">{lessonTitle}</span>
           </p>
         </div>
 
