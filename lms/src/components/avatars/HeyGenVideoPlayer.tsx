@@ -3,8 +3,6 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, Pause, Maximize2, Volume2, VolumeX } from "lucide-react";
-import { AvatarIllustration } from "./AvatarIllustration";
-import type { ModuleSlug } from "./AvatarIllustration";
 
 interface HeyGenVideoPlayerProps {
   videoUrl: string;
@@ -13,6 +11,15 @@ interface HeyGenVideoPlayerProps {
   presenterName: string;
   presenterRole: string;
   accentColor?: string;
+}
+
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
 }
 
 export function HeyGenVideoPlayer({
@@ -103,13 +110,11 @@ export function HeyGenVideoPlayer({
               className="absolute inset-0 flex flex-col items-center justify-center bg-black/55 backdrop-blur-sm"
             >
               {/* Avatar preview */}
-              <div className="mb-4 opacity-90">
-                <AvatarIllustration
-                  moduleSlug={moduleSlug as ModuleSlug}
-                  size="md"
-                  expression="neutral"
-                  animated
-                />
+              <div
+                className="mb-4 flex h-16 w-16 items-center justify-center rounded-full text-lg font-bold text-white shadow-lg opacity-90"
+                style={{ backgroundColor: accentColor }}
+              >
+                {getInitials(presenterName)}
               </div>
               <p className="text-white font-bold text-lg mb-1">{presenterName}</p>
               <p

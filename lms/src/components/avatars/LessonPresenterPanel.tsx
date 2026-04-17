@@ -2,8 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { AvatarIllustration, CHARACTERS } from "./AvatarIllustration";
-import type { ModuleSlug } from "./AvatarIllustration";
+import { MODULE_AVATARS } from "@/data/module-avatars";
 
 interface LessonPresenterPanelProps {
   moduleSlug: string;
@@ -39,13 +38,12 @@ export function LessonPresenterPanel({
   lessonTitle,
   isAudioPlaying = false,
 }: LessonPresenterPanelProps) {
-  const slug = moduleSlug as ModuleSlug;
-  const char = CHARACTERS[slug];
+  const avatar = MODULE_AVATARS.find((a) => a.moduleSlug === moduleSlug);
   const messages = INTRO_MESSAGES[moduleSlug] || [];
   const [msgIndex, setMsgIndex] = useState(0);
   const [expanded, setExpanded] = useState(false);
 
-  if (!char) return null;
+  if (!avatar) return null;
 
   return (
     <motion.div
@@ -53,20 +51,19 @@ export function LessonPresenterPanel({
       animate={{ opacity: 1, y: 0 }}
       className="mb-8 overflow-hidden rounded-2xl border shadow-lg"
       style={{
-        borderColor: `${char.accentColor}30`,
-        background: `linear-gradient(135deg, ${char.accentColor}0e 0%, white 60%, ${char.accentColor}06 100%)`,
+        borderColor: `${avatar.accentColor}30`,
+        background: `linear-gradient(135deg, ${avatar.accentColor}0e 0%, white 60%, ${avatar.accentColor}06 100%)`,
       }}
     >
       <div className="flex items-center gap-5 p-4 md:p-5">
         {/* Avatar */}
         <div className="shrink-0">
-          <AvatarIllustration
-            moduleSlug={slug}
-            isSpeaking={isAudioPlaying}
-            expression={isAudioPlaying ? "focused" : "neutral"}
-            size="md"
-            animated
-          />
+          <div
+            className="flex h-14 w-14 items-center justify-center rounded-full text-base font-bold text-white shadow-md"
+            style={{ backgroundColor: avatar.accentColor }}
+          >
+            {avatar.initials}
+          </div>
         </div>
 
         {/* Info */}
@@ -74,9 +71,9 @@ export function LessonPresenterPanel({
           <div className="flex flex-wrap items-center gap-2 mb-1">
             <span
               className="rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
-              style={{ backgroundColor: char.accentColor }}
+              style={{ backgroundColor: avatar.accentColor }}
             >
-              {char.role}
+              {avatar.role}
             </span>
             {isAudioPlaying && (
               <motion.span
@@ -92,7 +89,7 @@ export function LessonPresenterPanel({
               </motion.span>
             )}
           </div>
-          <p className="font-bold text-zinc-800">{char.name}</p>
+          <p className="font-bold text-zinc-800">{avatar.name}</p>
           <p className="text-xs text-zinc-500 mt-0.5 line-clamp-1">
             Votre formatrice pour : <span className="font-medium text-zinc-700">{lessonTitle}</span>
           </p>
@@ -102,7 +99,7 @@ export function LessonPresenterPanel({
         <button
           onClick={() => setExpanded((v) => !v)}
           className="shrink-0 rounded-xl border px-3 py-1.5 text-xs font-semibold transition hover:opacity-80"
-          style={{ borderColor: `${char.accentColor}40`, color: char.accentColor }}
+          style={{ borderColor: `${avatar.accentColor}40`, color: avatar.accentColor }}
         >
           {expanded ? "Fermer" : "Message"}
         </button>
@@ -118,7 +115,7 @@ export function LessonPresenterPanel({
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="border-t px-5 py-4" style={{ borderColor: `${char.accentColor}20` }}>
+            <div className="border-t px-5 py-4" style={{ borderColor: `${avatar.accentColor}20` }}>
               <AnimatePresence mode="wait">
                 <motion.p
                   key={msgIndex}
@@ -135,7 +132,7 @@ export function LessonPresenterPanel({
                   <button
                     onClick={() => setMsgIndex((i) => (i + 1) % messages.length)}
                     className="text-xs font-semibold underline-offset-2 hover:underline"
-                    style={{ color: char.accentColor }}
+                    style={{ color: avatar.accentColor }}
                   >
                     Message suivant &rarr;
                   </button>
