@@ -314,10 +314,11 @@ export function CinematicPlayer({
   }, [audioQuizSchedule, duration, clearedQuizCount]);
 
   const activeSlide = useMemo(() => {
-    // Pas d'auto-advance temporelle mécanique — l'utilisateur navigue manuellement
-    // ou via les checkpoints quiz. Cela évite la désynchronisation voix/slides.
-    return manualSlide ?? 0;
-  }, [manualSlide]);
+    if (manualSlide !== null) return manualSlide;
+    if (!loaded || duration === 0) return 0;
+    const perSlide = duration / slides.length;
+    return Math.min(slides.length - 1, Math.floor(current / perSlide));
+  }, [current, duration, slides.length, loaded, manualSlide]);
 
   const slide = slides[activeSlide];
   const currentChapter = getChapterForSlide(chapters, activeSlide);
@@ -342,7 +343,14 @@ export function CinematicPlayer({
     const onTime = () => {
       const t = el.currentTime;
       setCurrent(t);
-      // On ne réinitialise plus manualSlide ici : le clic utilisateur est respecté
+      // Clear manual slide une fois l'audio passé à la slide suivante (respect du clic utilisateur)
+      setManualSlide((prev) => {
+        if (prev === null || !el.duration) return prev;
+        const perSlide = el.duration / slides.length;
+        const boundary = (prev + 1) * perSlide;
+        if (t >= boundary - 0.05) return null;
+        return prev;
+      });
       if (!audioQuizSchedule.length || !el.duration) return;
       const idx = clearedQuizRef.current;
       if (idx >= audioQuizSchedule.length) return;
