@@ -32,6 +32,7 @@ export async function signup(formData: FormData) {
       data: {
         full_name: formData.get("full_name") as string,
       },
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://formation-immo.vercel.app"}/auth/callback?next=/formation`,
     },
   };
 
