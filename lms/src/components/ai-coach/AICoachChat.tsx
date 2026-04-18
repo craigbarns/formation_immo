@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Send, Bot, User, Sparkles, X, RotateCcw, Volume2, VolumeX } from "lucide-react";
+import { Send, Bot, User, Sparkles, X, RotateCcw, Volume2, VolumeX, Mic, MicOff } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getConversationHistory, getPersonalizedRecommendation } from "./ai-coach-service";
 import { addMessageToMemory, clearCoachMemory, type ChatMessage } from "./ai-coach-storage";
@@ -14,6 +14,14 @@ interface AICoachChatProps {
   onClose: () => void;
 }
 
+// Web Speech API types
+declare global {
+  interface Window {
+    SpeechRecognition: typeof SpeechRecognition;
+    webkitSpeechRecognition: typeof SpeechRecognition;
+  }
+}
+
 export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClose }: AICoachChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -22,9 +30,18 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   const [playingIndex, setPlayingIndex] = useState<string | null>(null);
   const [autoSpeak, setAutoSpeak] = useState(false);
   const [audioError, setAudioError] = useState<string | null>(null);
+  const [isListening, setIsListening] = useState(false);
+  const [speechSupported, setSpeechSupported] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
+
+  // Check speech recognition support
+  useEffect(() => {
+    const supported = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
+    setSpeechSupported(supported);
+  }, []);
 
   // Load conversation history on mount
   useEffect(() => {
@@ -60,6 +77,77 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages.length, isLoading]);
+
+  // Cleanup speech recognition on unmount
+  useEffect(() => {
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, []);
+
+  const startListening = useCallback(() => {
+    if (!speechSupported) return;
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = "fr-FR";
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+
+    let finalTranscript = "";
+
+    recognition.onstart = () => {
+      setIsListening(true);
+      setAudioError(null);
+    };
+
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      let interim = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript;
+        } else {
+          interim += transcript;
+        }
+      }
+      setInput(finalTranscript + interim);
+    };
+
+    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+      console.error("Speech recognition error:", event.error);
+      if (event.error !== "aborted" && event.error !== "no-speech") {
+        setAudioError("Micro : " + event.error);
+      }
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+      if (finalTranscript.trim()) {
+        setInput(finalTranscript.trim());
+        // Auto-send after a short delay to let the user see the text
+        setTimeout(() => {
+          setAutoSpeak(true); // Enable auto-speak for voice conversations
+          // Trigger send via a ref or directly
+        }, 300);
+      }
+    };
+
+    recognitionRef.current = recognition;
+    recognition.start();
+  }, [speechSupported]);
+
+  const stopListening = useCallback(() => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+      recognitionRef.current = null;
+    }
+    setIsListening(false);
+  }, []);
 
   const speak = useCallback(async (text: string, msgId: string) => {
     if (audioRef.current) {
@@ -115,7 +203,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     }
   }, [playingIndex]);
 
-  const handleSend = async () => {
+  const handleSend = useCallback(async () => {
     if (!input.trim() || isLoading) return;
 
     const userMessage = input.trim();
@@ -181,7 +269,17 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [input, isLoading, messages, moduleSlug, lessonSlug, lessonTitle]);
+
+  // Auto-send after voice input
+  useEffect(() => {
+    if (!isListening && input.trim() && !isLoading && autoSpeak) {
+      const timer = setTimeout(() => {
+        handleSend();
+      }, 600);
+      return () => clearTimeout(timer);
+    }
+  }, [isListening, input, isLoading, autoSpeak, handleSend]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -199,6 +297,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
       timestamp: new Date().toISOString(),
     }]);
     setPlayingIndex(null);
+    setAutoSpeak(false);
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current = null;
@@ -355,25 +454,41 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
         {/* Input */}
         <div className="border-t border-white/10 bg-white/5 p-4">
           <div className="flex gap-2">
+            {speechSupported && (
+              <button
+                onClick={isListening ? stopListening : startListening}
+                title={isListening ? "Arrêter l'écoute" : "Parler à Marie (microphone)"}
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition ${
+                  isListening
+                    ? "bg-red-500 text-white animate-pulse"
+                    : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
+                }`}
+              >
+                {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+              </button>
+            )}
             <input
               ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Posez votre question..."
-              className="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/30 focus:border-brand-gold/50 focus:outline-none focus:ring-1 focus:ring-brand-gold/30"
+              placeholder={isListening ? "Écoute en cours..." : "Posez votre question..."}
+              disabled={isListening}
+              className="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/30 focus:border-brand-gold/50 focus:outline-none focus:ring-1 focus:ring-brand-gold/30 disabled:opacity-50"
             />
             <button
               onClick={handleSend}
-              disabled={!input.trim() || isLoading}
+              disabled={!input.trim() || isLoading || isListening}
               className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold text-brand-navy transition hover:bg-[#e0bf4d] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Send className="h-4 w-4" />
             </button>
           </div>
           <p className="mt-2 text-[10px] text-center text-white/50">
-            Marie est une IA expérimentale. Vérifiez les informations importantes.
+            {speechSupported
+              ? "🎤 Cliquez sur le micro pour parler à Marie • Elle vous répondra à voix haute"
+              : "Marie est une IA expérimentale. Vérifiez les informations importantes."}
           </p>
         </div>
       </motion.div>

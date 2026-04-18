@@ -1,11 +1,19 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { MessageCircle, X, Send, Bot, User, Volume2, VolumeX } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, Volume2, VolumeX, Mic, MicOff } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+}
+
+// Web Speech API types
+declare global {
+  interface Window {
+    SpeechRecognition: typeof SpeechRecognition;
+    webkitSpeechRecognition: typeof SpeechRecognition;
+  }
 }
 
 export function CoachChat() {
@@ -23,8 +31,16 @@ export function CoachChat() {
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
   const [autoSpeak, setAutoSpeak] = useState(false);
   const [audioError, setAudioError] = useState<string | null>(null);
+  const [isListening, setIsListening] = useState(false);
+  const [speechSupported, setSpeechSupported] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
+
+  useEffect(() => {
+    const supported = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
+    setSpeechSupported(supported);
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -32,19 +48,95 @@ export function CoachChat() {
     }
   }, [messages, streaming]);
 
-  // Lecture auto quand un message assistant arrive et autoSpeak est actif
+  // Auto-speak when a new assistant message arrives
   useEffect(() => {
     if (autoSpeak && !isLoading && messages.length > 0) {
       const lastMsg = messages[messages.length - 1];
-      if (lastMsg.role === "assistant") {
+      if (lastMsg.role === "assistant" && lastMsg.content.length > 10) {
         speak(lastMsg.content, messages.length - 1);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages.length, isLoading]);
 
-  const speak = useCallback(async (text: string, index: number) => {
-    // Stopper l'audio en cours
+  // Cleanup speech recognition on unmount
+  useEffect(() => {
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, []);
+
+  // Auto-send after voice input
+  useEffect(() => {
+    if (!isListening && input.trim() && !isLoading && autoSpeak) {
+      const timer = setTimeout(() => {
+        handleSend();
+      }, 600);
+      return () => clearTimeout(timer);
+    }
+  }, [isListening, input, isLoading, autoSpeak]);
+
+  const startListening = useCallback(() => {
+    if (!speechSupported) return;
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = "fr-FR";
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+
+    let finalTranscript = "";
+
+    recognition.onstart = () => {
+      setIsListening(true);
+      setAudioError(null);
+    };
+
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      let interim = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript;
+        } else {
+          interim += transcript;
+        }
+      }
+      setInput(finalTranscript + interim);
+    };
+
+    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+      console.error("Speech recognition error:", event.error);
+      if (event.error !== "aborted" && event.error !== "no-speech") {
+        setAudioError("Micro : " + event.error);
+      }
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+      if (finalTranscript.trim()) {
+        setInput(finalTranscript.trim());
+        setAutoSpeak(true);
+      }
+    };
+
+    recognitionRef.current = recognition;
+    recognition.start();
+  }, [speechSupported]);
+
+  const stopListening = useCallback(() => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+      recognitionRef.current = null;
+    }
+    setIsListening(false);
+  }, []);
+
+  async function speak(text: string, index: number) {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current = null;
@@ -64,7 +156,6 @@ export function CoachChat() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
       });
-
       if (!res.ok) {
         const err = await res.text();
         console.error("TTS error:", res.status, err);
@@ -72,31 +163,27 @@ export function CoachChat() {
         setPlayingIndex(null);
         return;
       }
-
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
       audioRef.current = audio;
-
       audio.onended = () => {
         setPlayingIndex(null);
         URL.revokeObjectURL(url);
         audioRef.current = null;
       };
-
       audio.onerror = () => {
-        setAudioError("Erreur lecture audio");
+        console.error("Audio play error");
         setPlayingIndex(null);
         URL.revokeObjectURL(url);
         audioRef.current = null;
       };
-
       await audio.play();
     } catch {
       setAudioError("Erreur lecture audio");
       setPlayingIndex(null);
     }
-  }, [playingIndex]);
+  }
 
   async function handleSend() {
     if (!input.trim() || isLoading) return;
@@ -189,7 +276,6 @@ export function CoachChat() {
               <p className="text-sm font-bold">Coach Marie</p>
               <p className="text-[11px] text-white/70">Expert immobilier IA</p>
             </div>
-            {/* Toggle vocal auto */}
             <button
               onClick={() => setAutoSpeak((a) => !a)}
               title={autoSpeak ? "Désactiver la voix auto" : "Activer la voix auto"}
@@ -223,7 +309,7 @@ export function CoachChat() {
                 >
                   {m.role === "user" ? <User className="h-3.5 w-3.5" /> : <Bot className="h-3.5 w-3.5" />}
                 </div>
-                <div className="flex max-w-[80%] flex-col gap-1.5">
+                <div className="flex max-w-[80%] flex-col gap-1">
                   <div
                     className={`rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                       m.role === "user"
@@ -281,22 +367,41 @@ export function CoachChat() {
 
           {/* Input */}
           <div className="flex items-center gap-2 border-t border-zinc-100 p-3">
+            {speechSupported && (
+              <button
+                onClick={isListening ? stopListening : startListening}
+                title={isListening ? "Arrêter l'écoute" : "Parler à Marie"}
+                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition ${
+                  isListening
+                    ? "bg-red-500 text-white animate-pulse"
+                    : "bg-zinc-100 text-zinc-500 hover:bg-zinc-200 hover:text-zinc-700"
+                }`}
+              >
+                {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+              </button>
+            )}
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Pose ta question..."
-              className="flex-1 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition-colors focus:border-brand-navy/30 focus:bg-white"
+              placeholder={isListening ? "Écoute en cours..." : "Pose ta question..."}
+              disabled={isListening}
+              className="flex-1 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition-colors focus:border-brand-navy/30 focus:bg-white disabled:opacity-50"
             />
             <button
               onClick={handleSend}
-              disabled={!input.trim() || isLoading}
+              disabled={!input.trim() || isLoading || isListening}
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-navy text-white transition-all hover:bg-brand-navy/90 disabled:opacity-40 disabled:hover:bg-brand-navy"
             >
               <Send className="h-4 w-4" />
             </button>
           </div>
+          {speechSupported && (
+            <p className="pb-2 text-center text-[10px] text-zinc-400">
+              🎤 Cliquez sur le micro pour parler à Marie
+            </p>
+          )}
         </div>
       )}
     </>
