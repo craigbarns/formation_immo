@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Bot, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -17,11 +17,15 @@ const HIDE_ON_PAGES = ["/formation/oral", "/formation/roleplay", "/formation/tes
 
 export function AICoachButton({ moduleSlug, lessonSlug, lessonTitle, variant = "floating" }: AICoachButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => { setMounted(true); }, []);
 
   const hidden = pathname ? HIDE_ON_PAGES.some(p => pathname.startsWith(p)) : false;
 
-  if (hidden) return null;
+  // Don't render at all during SSR / initial hydration to avoid flash on hide-pages
+  if (!mounted || hidden) return null;
 
   if (variant === "inline") {
     return (
