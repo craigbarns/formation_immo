@@ -1,6 +1,25 @@
 import { NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function POST(request: Request) {
+  // ── Auth ──
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
+  }
+
+  // ── Rate limit ──
+  const { allowed } = checkRateLimit(user.id + ":tts");
+  if (!allowed) {
+    return NextResponse.json(
+      { error: "Trop de requêtes. Réessaie dans une minute." },
+      { status: 429 }
+    );
+  }
+
   const { text } = await request.json() as { text: string };
 
   if (!text || text.length > 4096) {

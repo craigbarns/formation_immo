@@ -1,5 +1,7 @@
 import { streamText } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
+import { createClient } from "@/lib/supabase/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 const openai = createOpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -25,6 +27,26 @@ Ton style :
 Tu as accès au contexte de la leçon en cours pour des réponses ultra-ciblées.`;
 
 export async function POST(request: Request) {
+  // ── Auth ──
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return new Response(
+      JSON.stringify({ error: "Non authentifié" }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  // ── Rate limit ──
+  const { allowed } = checkRateLimit(user.id);
+  if (!allowed) {
+    return new Response(
+      JSON.stringify({ error: "Trop de requêtes. Réessaie dans une minute." }),
+      { status: 429, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
   const { messages, moduleSlug, lessonSlug, lessonTitle } = await request.json() as {
     messages: { role: "user" | "assistant"; content: string }[];
     moduleSlug?: string;
