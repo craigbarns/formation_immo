@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Bot, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AICoachChat } from "./AICoachChat";
@@ -12,8 +13,15 @@ interface AICoachButtonProps {
   variant?: "floating" | "inline";
 }
 
+const HIDE_ON_PAGES = ["/formation/oral", "/formation/roleplay", "/formation/test-conversationnel"];
+
 export function AICoachButton({ moduleSlug, lessonSlug, lessonTitle, variant = "floating" }: AICoachButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  const hidden = pathname ? HIDE_ON_PAGES.some(p => pathname.startsWith(p)) : false;
+
+  if (hidden) return null;
 
   if (variant === "inline") {
     return (
