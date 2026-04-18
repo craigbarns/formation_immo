@@ -99,6 +99,49 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     return audioCtxRef.current;
   }, []);
 
+  const loadServerHistory = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/coach/history?moduleSlug=${encodeURIComponent(moduleSlug || '')}&lessonSlug=${encodeURIComponent(lessonSlug || '')}`);
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      if (data.messages?.length > 0) {
+        setMessages(data.messages.map((m: any) => ({
+          id: m.id,
+          role: m.role,
+          content: m.content,
+          timestamp: m.created_at,
+        })));
+        return;
+      }
+    } catch {
+      // fallback to localStorage
+    }
+    const history = getConversationHistory();
+    if (history.length === 0) {
+      const greeting: ChatMessage = {
+        id: "greeting",
+        role: "assistant",
+        content: "Bonjour ! Je suis Marie, votre coach immobilier personnel. Je peux vous aider à comprendre les concepts de la formation, vous motiver, ou répondre à vos questions sur l'immobilier. Que puis-je faire pour vous ?",
+        timestamp: new Date().toISOString(),
+      };
+      setMessages([greeting]);
+    } else {
+      setMessages(history);
+    }
+  }, [moduleSlug, lessonSlug]);
+
+  const saveServerMessage = useCallback(async (role: "user" | "assistant", content: string) => {
+    try {
+      await fetch("/api/coach/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role, content, moduleSlug, lessonSlug, lessonTitle }),
+      });
+    } catch {
+      // silent fail — localStorage fallback already handles this
+    }
+  }, [moduleSlug, lessonSlug, lessonTitle]);
+
   const processNextTTS = useCallback(async () => {
     if (isProcessingTTSRef.current || pendingTTSRef.current.length === 0) return;
     isProcessingTTSRef.current = true;
@@ -140,21 +183,10 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   // Load conversation history on mount
   useEffect(() => {
     if (isOpen) {
-      const history = getConversationHistory();
-      if (history.length === 0) {
-        const greeting: ChatMessage = {
-          id: "greeting",
-          role: "assistant",
-          content: "Bonjour ! Je suis Marie, votre coach immobilier personnel. Je peux vous aider à comprendre les concepts de la formation, vous motiver, ou répondre à vos questions sur l'immobilier. Que puis-je faire pour vous ?",
-          timestamp: new Date().toISOString(),
-        };
-        setMessages([greeting]);
-      } else {
-        setMessages(history);
-      }
+      loadServerHistory();
       inputRef.current?.focus();
     }
-  }, [isOpen]);
+  }, [isOpen, loadServerHistory]);
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -288,6 +320,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     };
 
     setMessages(prev => [...prev, userMsg, assistantMsg]);
+    saveServerMessage("user", userMessage);
 
     let ttsBuffer = "";
     const spokenSentences = new Set<string>();
@@ -340,6 +373,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
 
       addMessageToMemory({ role: "user", content: userMessage, context: { moduleSlug, lessonSlug, lessonTitle } });
       addMessageToMemory({ role: "assistant", content: accText });
+      saveServerMessage("assistant", accText);
 
     } catch {
       setMessages(prev =>
@@ -351,7 +385,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     } finally {
       setIsLoading(false);
     }
-  }, [input, isLoading, messages, moduleSlug, lessonSlug, lessonTitle, autoSpeak, enqueueTTS, ensureAudioContext]);
+  }, [input, isLoading, messages, moduleSlug, lessonSlug, lessonTitle, autoSpeak, enqueueTTS, ensureAudioContext, saveServerMessage]);
 
   // Auto-send after voice input
   useEffect(() => {
