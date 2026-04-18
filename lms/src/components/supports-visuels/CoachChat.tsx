@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, Bot, User, Volume2 } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { MessageCircle, X, Send, Bot, User, Volume2, VolumeX } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
@@ -21,7 +21,10 @@ export function CoachChat() {
   const [isLoading, setIsLoading] = useState(false);
   const [streaming, setStreaming] = useState("");
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
+  const [autoSpeak, setAutoSpeak] = useState(false);
+  const [audioError, setAudioError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -29,45 +32,71 @@ export function CoachChat() {
     }
   }, [messages, streaming]);
 
-  async function speak(text: string, index: number) {
+  // Lecture auto quand un message assistant arrive et autoSpeak est actif
+  useEffect(() => {
+    if (autoSpeak && !isLoading && messages.length > 0) {
+      const lastMsg = messages[messages.length - 1];
+      if (lastMsg.role === "assistant") {
+        speak(lastMsg.content, messages.length - 1);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages.length, isLoading]);
+
+  const speak = useCallback(async (text: string, index: number) => {
+    // Stopper l'audio en cours
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+
     if (playingIndex === index) {
       setPlayingIndex(null);
       return;
     }
+
     setPlayingIndex(index);
+    setAudioError(null);
+
     try {
       const res = await fetch("/api/tts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
       });
+
       if (!res.ok) {
         const err = await res.text();
         console.error("TTS error:", res.status, err);
-        alert(`Erreur TTS (${res.status}) — vérifie la console (F12)`);
+        setAudioError(`Erreur vocale (${res.status})`);
         setPlayingIndex(null);
         return;
       }
+
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
-      audio.load();
+      audioRef.current = audio;
+
       audio.onended = () => {
         setPlayingIndex(null);
         URL.revokeObjectURL(url);
+        audioRef.current = null;
       };
-      audio.onerror = (e) => {
-        console.error("Audio play error:", e);
+
+      audio.onerror = () => {
+        setAudioError("Erreur lecture audio");
         setPlayingIndex(null);
         URL.revokeObjectURL(url);
+        audioRef.current = null;
       };
+
       await audio.play();
-    } catch (e) {
-      console.error("Speak error:", e);
-      alert("Erreur lecture audio — vérifie la console (F12)");
+    } catch {
+      setAudioError("Erreur lecture audio");
       setPlayingIndex(null);
     }
-  }
+  }, [playingIndex]);
 
   async function handleSend() {
     if (!input.trim() || isLoading) return;
@@ -78,6 +107,7 @@ export function CoachChat() {
     setInput("");
     setIsLoading(true);
     setStreaming("");
+    setAudioError(null);
 
     try {
       const res = await fetch("/api/coach", {
@@ -159,6 +189,18 @@ export function CoachChat() {
               <p className="text-sm font-bold">Coach Marie</p>
               <p className="text-[11px] text-white/70">Expert immobilier IA</p>
             </div>
+            {/* Toggle vocal auto */}
+            <button
+              onClick={() => setAutoSpeak((a) => !a)}
+              title={autoSpeak ? "Désactiver la voix auto" : "Activer la voix auto"}
+              className={`rounded-lg p-1.5 transition-colors ${
+                autoSpeak
+                  ? "bg-brand-gold text-brand-navy"
+                  : "text-white/70 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              {autoSpeak ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+            </button>
             <button
               onClick={() => setIsOpen(false)}
               className="rounded-lg p-1 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
@@ -181,7 +223,7 @@ export function CoachChat() {
                 >
                   {m.role === "user" ? <User className="h-3.5 w-3.5" /> : <Bot className="h-3.5 w-3.5" />}
                 </div>
-                <div className="flex max-w-[80%] flex-col gap-1">
+                <div className="flex max-w-[80%] flex-col gap-1.5">
                   <div
                     className={`rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                       m.role === "user"
@@ -194,14 +236,14 @@ export function CoachChat() {
                   {m.role === "assistant" && (
                     <button
                       onClick={() => speak(m.content, i)}
-                      className={`self-start rounded-lg px-2 py-1 text-[10px] font-semibold uppercase tracking-wider transition-colors ${
+                      className={`self-start flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all ${
                         playingIndex === i
-                          ? "bg-brand-gold/20 text-brand-gold"
-                          : "text-zinc-400 hover:text-brand-navy hover:bg-zinc-100"
+                          ? "bg-brand-gold/20 text-brand-gold animate-pulse"
+                          : "text-zinc-500 hover:text-brand-navy hover:bg-zinc-100 border border-transparent hover:border-zinc-200"
                       }`}
                     >
-                      <Volume2 className="inline h-3 w-3 mr-1" />
-                      {playingIndex === i ? "Lecture..." : "Écouter"}
+                      <Volume2 className={`h-3.5 w-3.5 ${playingIndex === i ? "animate-bounce" : ""}`} />
+                      {playingIndex === i ? "Lecture en cours..." : "Écouter Marie"}
                     </button>
                   )}
                 </div>
@@ -228,6 +270,11 @@ export function CoachChat() {
                   <span className="ml-1 inline-block h-2 w-2 animate-bounce rounded-full bg-brand-navy/40 [animation-delay:0.15s]" />
                   <span className="ml-1 inline-block h-2 w-2 animate-bounce rounded-full bg-brand-navy/40 [animation-delay:0.3s]" />
                 </div>
+              </div>
+            )}
+            {audioError && (
+              <div className="mx-4 rounded-lg bg-red-50 px-3 py-2 text-xs text-red-600 text-center">
+                {audioError}
               </div>
             )}
           </div>
