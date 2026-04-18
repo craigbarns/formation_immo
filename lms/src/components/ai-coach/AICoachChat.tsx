@@ -5,6 +5,9 @@ import { Send, Bot, User, Sparkles, X, RotateCcw, Volume2, VolumeX, Mic, MicOff 
 import { motion, AnimatePresence } from "framer-motion";
 import { getConversationHistory, getPersonalizedRecommendation } from "./ai-coach-service";
 import { addMessageToMemory, clearCoachMemory, type ChatMessage } from "./ai-coach-storage";
+import { savePlacementResult } from "@/app/actions/placement";
+import type { SpeechRecognitionType, SpeechRecognitionEvent, SpeechRecognitionErrorEvent } from "./ai-coach-types";
+import { getAudioContext, cleanForTTS } from "./ai-coach-utils";
 
 interface AICoachChatProps {
   moduleSlug?: string;
@@ -12,69 +15,12 @@ interface AICoachChatProps {
   lessonTitle?: string;
   isOpen: boolean;
   onClose: () => void;
+  mode?: "coach" | "roleplay" | "oral-exam" | "placement";
 }
 
-// Web Speech API — minimal types for build
-type SpeechRecognitionEvent = {
-  resultIndex: number;
-  results: {
-    [index: number]: {
-      [index: number]: { transcript: string };
-      isFinal: boolean;
-    };
-    length: number;
-  };
-};
+/* ─── shared types & helpers imported from ai-coach-types.ts & ai-coach-utils.ts ─── */
 
-type SpeechRecognitionErrorEvent = {
-  error: string;
-};
-
-type SpeechRecognitionType = {
-  lang: string;
-  continuous: boolean;
-  interimResults: boolean;
-  maxAlternatives: number;
-  onstart: (() => void) | null;
-  onresult: ((event: SpeechRecognitionEvent) => void) | null;
-  onerror: ((event: SpeechRecognitionErrorEvent) => void) | null;
-  onend: (() => void) | null;
-  start: () => void;
-  stop: () => void;
-};
-
-type SpeechRecognitionConstructor = new () => SpeechRecognitionType;
-
-declare global {
-  interface Window {
-    SpeechRecognition?: SpeechRecognitionConstructor;
-    webkitSpeechRecognition?: SpeechRecognitionConstructor;
-  }
-}
-
-/* ─── Web Audio API helper ─── */
-function getAudioContext(): AudioContext | null {
-  if (typeof window === "undefined") return null;
-  const AC = (window as any).AudioContext || (window as any).webkitAudioContext;
-  return AC ? new AC() : null;
-}
-
-function cleanForTTS(text: string): string {
-  return text
-    .replace(/\*\*(.*?)\*\*/g, "$1")     // **gras** → gras
-    .replace(/\*(.*?)\*/g, "$1")          // *italique* → italique
-    .replace(/\n\d+\.\s*/g, ". ")        // "1. " "2. " → pause
-    .replace(/\n-\s*/g, ". ")            // "- " → pause
-    .replace(/\n#/g, ". ")               // titres markdown
-    .replace(/\n\n/g, ". ")              // paragraphes
-    .replace(/\n/g, " ")                  // retours ligne simples
-    .replace(/:\s*/g, ", ")               // deux-points → virgule
-    .replace(/;\s*/g, ", ")               // point-virgule → virgule
-    .replace(/\s+/g, " ")                 // espaces multiples
-    .trim();
-}
-
-export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClose }: AICoachChatProps) {
+export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClose, mode = "coach" }: AICoachChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -84,6 +30,8 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   const [audioError, setAudioError] = useState<string | null>(null);
   const [isListening, setIsListening] = useState(false);
   const [speechSupported, setSpeechSupported] = useState(false);
+  const [placementResult, setPlacementResult] = useState<{ level: string; message: string } | null>(null);
+  const [placementSaved, setPlacementSaved] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const recognitionRef = useRef<SpeechRecognitionType | null>(null);
@@ -105,7 +53,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
       if (!res.ok) throw new Error();
       const data = await res.json();
       if (data.messages?.length > 0) {
-        setMessages(data.messages.map((m: any) => ({
+        setMessages(data.messages.map((m: { id: string; role: "user" | "assistant"; content: string; created_at: string }) => ({
           id: m.id,
           role: m.role,
           content: m.content,
@@ -118,10 +66,18 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     }
     const history = getConversationHistory();
     if (history.length === 0) {
+      const greetingText =
+        mode === "roleplay"
+          ? "Salut ! Je suis ton prospect du jour. On peut dire que je cherche un appartement et que ma banque vient de me refuser un prêt… à toi de me convaincre ! Tu peux me parler normalement, je réagis comme un vrai client."
+          : mode === "oral-exam"
+            ? "Bonjour, je suis Marie votre examinatrice ALUR. Nous allons procéder à un oral blanc de 5 questions. Répondez-moi à l'oral ou par écrit. Je vous donnerai un score à la fin. Prêt ? Commençons."
+            : mode === "placement"
+              ? "Bonjour ! Je suis Marie. Avant de commencer ta formation, j'aimerais évaluer ton niveau actuel en immobilier. Ce n'est pas un examen, il n'y a pas de mauvaise réponse. On va discuter de 5 à 7 questions, et je m'adapterai à tes réponses. Prêt ?"
+              : "Bonjour ! Je suis Marie, votre coach immobilier personnel. Je peux vous aider à comprendre les concepts de la formation, vous motiver, ou répondre à vos questions sur l'immobilier. Que puis-je faire pour vous ?";
       const greeting: ChatMessage = {
         id: "greeting",
         role: "assistant",
-        content: "Bonjour ! Je suis Marie, votre coach immobilier personnel. Je peux vous aider à comprendre les concepts de la formation, vous motiver, ou répondre à vos questions sur l'immobilier. Que puis-je faire pour vous ?",
+        content: greetingText,
         timestamp: new Date().toISOString(),
       };
       setMessages([greeting]);
@@ -192,6 +148,25 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // Parse placement result from last assistant message
+  useEffect(() => {
+    if (mode !== "placement" || messages.length === 0) return;
+    const lastMsg = messages[messages.length - 1];
+    if (lastMsg.role !== "assistant") return;
+    const text = lastMsg.content;
+    if (text.includes("---BILAN---") && text.includes("---FIN BILAN---")) {
+      try {
+        const jsonMatch = text.match(/---BILAN---\s*({[\s\S]*?})\s*---FIN BILAN---/);
+        if (jsonMatch) {
+          const data = JSON.parse(jsonMatch[1]);
+          setPlacementResult({ level: data.niveauGlobal, message: data.message });
+        }
+      } catch {
+        // ignore parse errors
+      }
+    }
+  }, [messages, mode]);
 
   // (streaming TTS handles auto-speak — no fallback needed)
 
@@ -330,7 +305,12 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
         .filter(m => m.id !== "greeting")
         .map(m => ({ role: m.role as "user" | "assistant", content: m.content }));
 
-      const response = await fetch("/api/coach", {
+      const endpoint =
+        mode === "roleplay" ? "/api/coach/roleplay" :
+        mode === "oral-exam" ? "/api/coach/oral" :
+        mode === "placement" ? "/api/coach/placement" :
+        "/api/coach";
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: apiMessages, moduleSlug, lessonSlug, lessonTitle }),
@@ -491,6 +471,28 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
             </motion.div>
           )}
           {audioError && <div className="rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-300 text-center">{audioError}</div>}
+          {mode === "placement" && placementResult && (
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="rounded-xl border border-brand-gold/30 bg-brand-gold/10 p-4 text-center">
+              <p className="text-sm font-bold text-brand-gold">Niveau détecté : {placementResult.level.toUpperCase()}</p>
+              <p className="mt-1 text-xs text-white/80">{placementResult.message}</p>
+              {!placementSaved ? (
+                <button
+                  onClick={async () => {
+                    const res = await savePlacementResult({
+                      level: placementResult.level as "debutant" | "intermediaire" | "avance",
+                      percentage: placementResult.level === "avance" ? 85 : placementResult.level === "intermediaire" ? 65 : 35,
+                    });
+                    if (res.success) setPlacementSaved(true);
+                  }}
+                  className="mt-2 inline-flex items-center gap-1.5 rounded-lg bg-brand-gold px-4 py-2 text-xs font-bold text-brand-navy transition hover:brightness-105"
+                >
+                  💾 Sauvegarder mon niveau
+                </button>
+              ) : (
+                <p className="mt-2 text-xs font-bold text-emerald-400">✅ Résultat sauvegardé !</p>
+              )}
+            </motion.div>
+          )}
           <div ref={messagesEndRef} />
         </div>
 

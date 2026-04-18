@@ -6,34 +6,28 @@ import { CoachRequestSchema } from "@/lib/validation";
 
 const openai = createOpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-const SYSTEM_PROMPT = `Tu es Marie, coach experte en immobilier français avec 15 ans d'expérience terrain.
-Tu accompagnes des agents immobiliers en formation professionnelle (certification Loi ALUR).
+const SYSTEM_PROMPT = `Tu es un prospect immobilier français réaliste. Tu ne donnes JAMAIS de conseils — tu poses des questions, tu lèves des objections, tu négocies.
 
-Tes domaines d'expertise :
-- Juridique : Loi ALUR 2026, compromis de vente, diagnostics, mandats, copropriété
-- Transaction : estimation, prospection, négociation mandat, techniques avancées, CRM
-- Financement : crédit immobilier, fiscalité, rentabilité locative, dispositifs fiscaux, assurances
-- Marketing : photos pro, annonces, portails (SeLoger, Leboncoin), réseaux sociaux, SEO
-- Terrain : visites, argumentaire, closing, promesse, fidélisation
+Scénarios possibles (adapté au contexte de la leçon) :
+- Primo-accédant pressé et anxieux : "C'est trop cher, ma banque dit non", "Je veux visiter ce soir"
+- Vendeur sceptique : "L'autre agent prend 3% de commission", "Pourquoi vous ?"
+- Investisseur locatif froid : "Quel rendement net ?", "Le DPE c'est quoi déjà ?"
+- Propriétaire bailleur méfiant : "Vos locataires sont sélectionnés comment ?"
 
-Ton style :
-- Direct, chaleureux, professionnel
-- Réponds toujours en français
-- Donne des exemples concrets et chiffrés
-- Maximum 3-4 phrases par réponse sauf si l'étudiant demande plus de détails
-- Utilise occasionnellement des emojis (max 2 par message)
-- Tutoie l'étudiant (c'est une formation dynamique)
-- Si tu ne sais pas, dis-le honnêtement
+Règles STRICTES :
+- Tu es le CLIENT, pas l'agent. Tu ne dois JAMAIS dire "en tant qu'agent" ou donner des conseils professionnels.
+- Réponds en français, langage oral réaliste (hésitations, formulations naturelles).
+- Sois crédible : un vrai prospect ne connaît pas le jargon ALUR. Il dit "les papiers" pas "les diagnostics techniques".
+- Si l'élève te parle comme à un pote, adapte-toi. Si elle est trop commerciale, mets des objections.
+- Maximum 2-3 phrases par réponse. Un vrai prospect ne fait pas des discours.
+- Utilise occasionnellement des emojis (max 1).
+- En fin de session (quand l'élève dit "stop" ou similaire), tu peux donner un bref feedback (3 lignes max) sur ce qu'elle a bien fait et ce qu'elle peut améliorer.`;
 
-Tu as accès au contexte de la leçon en cours pour des réponses ultra-ciblées.`;
-
-// Simple prompt-injection guard: block context-leak attempts
 function sanitizeContextNote(note: string): string {
   return note.replace(/\[CONTEXTE:/gi, "(CONTEXTE:");
 }
 
 export async function POST(request: Request) {
-  // ── Auth ──
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -44,8 +38,7 @@ export async function POST(request: Request) {
     );
   }
 
-  // ── Rate limit ──
-  const { allowed } = checkRateLimit(user.id);
+  const { allowed } = checkRateLimit(user.id + ":roleplay");
   if (!allowed) {
     return new Response(
       JSON.stringify({ error: "Trop de requêtes. Réessaie dans une minute." }),
@@ -53,7 +46,6 @@ export async function POST(request: Request) {
     );
   }
 
-  // ── Validation ──
   let body: unknown;
   try {
     body = await request.json();
@@ -75,12 +67,10 @@ export async function POST(request: Request) {
   const { messages, moduleSlug, lessonSlug, lessonTitle } = parse.data;
 
   const rawContext = lessonTitle
-    ? `\n\n[CONTEXTE: L'étudiant est en train de travailler sur la leçon "${lessonTitle}" (${moduleSlug}/${lessonSlug}). Adapte tes réponses à ce contexte.]`
+    ? `\n\n[CONTEXTE: L'élève travaille sur "${lessonTitle}" (${moduleSlug}/${lessonSlug}). Adapte ton rôle de prospect à ce contexte.]`
     : "";
 
   const contextNote = sanitizeContextNote(rawContext);
-
-  // Truncate history to last 10 messages (~5 exchanges) to control cost
   const recentMessages = messages.slice(-10);
 
   try {
@@ -88,13 +78,13 @@ export async function POST(request: Request) {
       model: openai("gpt-4o-mini"),
       system: SYSTEM_PROMPT + contextNote,
       messages: recentMessages,
-      temperature: 0.7,
+      temperature: 0.85, // plus créatif pour un prospect réaliste
     });
 
     return result.toTextStreamResponse();
   } catch (_err) {
     return new Response(
-      JSON.stringify({ error: "Erreur coach IA" }),
+      JSON.stringify({ error: "Erreur roleplay" }),
       { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }

@@ -43,6 +43,7 @@ export function AICoachButton({ moduleSlug, lessonSlug, lessonTitle, variant = "
   return (
     <>
       <motion.button
+        data-coach-trigger
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.05 }}

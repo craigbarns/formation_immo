@@ -4,6 +4,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ExamQuestion, ModuleExam } from "@/data/exam-questions";
 import { recordExamScore } from "@/lib/gamification";
 import { createClient } from "@/lib/supabase/client";
+import { saveUserAnswers } from "@/app/actions/user-answers";
+import { generateFlashcardsFromMistakes } from "@/app/actions/flashcards-auto";
 
 type ExamState = "intro" | "running" | "review";
 
@@ -80,21 +82,67 @@ async function getPreviousScore(moduleSlug: string): Promise<{ score: number; to
 export function ExamMode({ exam }: { exam: ModuleExam }) {
   const [state, setState] = useState<ExamState>("intro");
   const [current, setCurrent] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [answers, setAnswers] = useState<Record<string, number | string>>({});
   const [timeLeft, setTimeLeft] = useState(exam.duration * 60);
   const [prevScore, setPrevScore] = useState<{ score: number; total: number } | null>(null);
+  const [generatingCards, setGeneratingCards] = useState(false);
+  const [cardsGenerated, setCardsGenerated] = useState(false);
+  const [cardsError, setCardsError] = useState(false);
+  const [openGrades, setOpenGrades] = useState<Record<string, { score: number; feedback: string; strengths: string; improvements: string }>>({});
+  const [isGrading, setIsGrading] = useState(false);
 
   useEffect(() => {
     getPreviousScore(exam.moduleSlug).then(setPrevScore);
   }, [exam.moduleSlug]);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const submitExamRef = useRef<(() => void) | null>(null);
 
   const startExam = useCallback(() => {
     setAnswers({});
+    setOpenGrades({});
     setCurrent(0);
     setTimeLeft(exam.duration * 60);
     setState("running");
+    setIsGrading(false);
   }, [exam.duration]);
+
+  const submitExam = useCallback(async () => {
+    if (isGrading) return; // prevent double-submit
+    if (timerRef.current) clearInterval(timerRef.current);
+
+    // Grade open questions before review
+    const openQuestions = exam.questions.filter(q => q.type === "open" && answers[q.id] !== undefined);
+    if (openQuestions.length > 0) {
+      setIsGrading(true);
+      const grades: Record<string, { score: number; feedback: string; strengths: string; improvements: string }> = {};
+      await Promise.all(openQuestions.map(async (q) => {
+        try {
+          const res = await fetch("/api/coach/grade", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              question: q.question,
+              userAnswer: answers[q.id] as string,
+              modelAnswer: q.modelAnswer || "",
+            }),
+          });
+          if (res.ok) {
+            const data = await res.json();
+            grades[q.id] = data;
+          }
+        } catch {
+          grades[q.id] = { score: 0, feedback: "Erreur de notation", strengths: "", improvements: "" };
+        }
+      }));
+      setOpenGrades(grades);
+      setIsGrading(false);
+    }
+
+    setState("review");
+  }, [exam.questions, answers, isGrading]);
+
+  // Keep submitExam accessible in timer closure
+  useEffect(() => { submitExamRef.current = submitExam; }, [submitExam]);
 
   // Timer
   useEffect(() => {
@@ -103,7 +151,7 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
       setTimeLeft((t) => {
         if (t <= 1) {
           clearInterval(timerRef.current!);
-          setState("review");
+          submitExamRef.current?.();
           return 0;
         }
         return t - 1;
@@ -114,26 +162,51 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
     };
   }, [state]);
 
-  const submitExam = useCallback(() => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    setState("review");
-  }, []);
-
   // Score
   const { score, total } = useMemo(() => {
     let s = 0;
     for (const q of exam.questions) {
-      if (answers[q.id] === q.correctIndex) s++;
+      if (q.type === "open") {
+        const g = openGrades[q.id];
+        if (g && g.score >= 60) s++;
+      } else {
+        if (answers[q.id] === q.correctIndex) s++;
+      }
     }
     return { score: s, total: exam.questions.length };
-  }, [answers, exam.questions]);
+  }, [answers, exam.questions, openGrades]);
 
-  // Save score on review
+  // Save score + log every answer on review
   useEffect(() => {
     if (state === "review") {
       recordExamScore(exam.moduleSlug, score, total);
+
+      const timeSpent = exam.duration * 60 - timeLeft;
+      const perQuestion = Math.round(timeSpent / exam.questions.length);
+
+      const answerLogs = exam.questions.map((q) => {
+        const isOpen = q.type === "open";
+        const userAns = answers[q.id];
+        const grade = openGrades[q.id];
+        return {
+          questionId: q.id,
+          moduleSlug: exam.moduleSlug,
+          questionText: q.question,
+          selectedAnswer: userAns !== undefined
+            ? (isOpen ? String(userAns) : q.options?.[userAns as number] ?? "(non répondu)")
+            : "(non répondu)",
+          correctAnswer: isOpen ? (q.modelAnswer || "") : (q.options?.[q.correctIndex ?? 0] ?? ""),
+          isCorrect: isOpen
+            ? (grade ? grade.score >= 60 : false)
+            : (answers[q.id] === q.correctIndex),
+          timeSpentSeconds: perQuestion,
+          source: "exam" as const,
+        };
+      });
+
+      saveUserAnswers(answerLogs).catch(() => {});
     }
-  }, [state, exam.moduleSlug, score, total]);
+  }, [state, exam, answers, score, total, timeLeft, openGrades]);
 
   const answeredCount = Object.keys(answers).length;
   const mins = Math.floor(timeLeft / 60);
@@ -265,6 +338,35 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
             >
               Réviser les flashcards
             </a>
+            {score < total && !cardsGenerated && !cardsError && (
+              <button
+                onClick={async () => {
+                  setGeneratingCards(true);
+                  setCardsError(false);
+                  const res = await generateFlashcardsFromMistakes(exam.moduleSlug, 5);
+                  setGeneratingCards(false);
+                  if (res.success) {
+                    setCardsGenerated(true);
+                  } else {
+                    setCardsError(true);
+                  }
+                }}
+                disabled={generatingCards}
+                className="rounded-xl border-2 border-emerald-600 px-6 py-2.5 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50 disabled:opacity-50"
+              >
+                {generatingCards ? "Génération…" : "📚 Flashcards auto depuis erreurs"}
+              </button>
+            )}
+            {cardsGenerated && (
+              <span className="rounded-xl bg-emerald-50 px-6 py-2.5 text-sm font-semibold text-emerald-700">
+                ✅ Flashcards créées !
+              </span>
+            )}
+            {cardsError && (
+              <span className="rounded-xl bg-red-50 px-6 py-2.5 text-sm font-semibold text-red-700">
+                ❌ Erreur de génération — réessaie plus tard
+              </span>
+            )}
           </div>
         </div>
 
@@ -276,7 +378,7 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
             </h3>
             <div className="space-y-4">
               {exam.questions.map((q, i) => (
-                <ReviewQuestion key={q.id} question={q} answer={answers[q.id]} index={i} />
+                <ReviewQuestion key={q.id} question={q} answer={answers[q.id]} index={i} grade={openGrades[q.id]} />
               ))}
             </div>
           </div>
@@ -346,30 +448,39 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
       {/* Question */}
       <div className="bg-white p-6">
         <h3 className="text-lg font-bold leading-snug text-brand-navy">{q.question}</h3>
-        <ul className="mt-5 space-y-2.5">
-          {q.options.map((opt, i) => {
-            const selected = answers[q.id] === i;
-            return (
-              <li key={i}>
-                <button
-                  onClick={() => setAnswers((prev) => ({ ...prev, [q.id]: i }))}
-                  className={`flex w-full items-start gap-3 rounded-xl border-2 px-4 py-3.5 text-left text-sm transition-all duration-150 ${
-                    selected
-                      ? "border-brand-navy bg-brand-navy/[0.06] scale-[1.01] text-brand-navy shadow-sm"
-                      : "border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50/80"
-                  }`}
-                >
-                  <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-all ${
-                    selected ? "bg-brand-navy text-white scale-110" : "bg-zinc-100 text-zinc-500"
-                  }`}>
-                    {String.fromCharCode(65 + i)}
-                  </span>
-                  <span className="pt-0.5 leading-snug">{opt}</span>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        {q.type === "open" ? (
+          <textarea
+            value={(answers[q.id] as string) || ""}
+            onChange={(e) => setAnswers((prev) => ({ ...prev, [q.id]: e.target.value }))}
+            placeholder="Rédigez votre réponse ici…"
+            className="mt-5 w-full min-h-[8rem] rounded-xl border-2 border-zinc-200 bg-white px-4 py-3 text-sm outline-none focus:border-brand-navy/30 focus:bg-zinc-50 transition-all resize-y"
+          />
+        ) : (
+          <ul className="mt-5 space-y-2.5">
+            {q.options?.map((opt, i) => {
+              const selected = answers[q.id] === i;
+              return (
+                <li key={i}>
+                  <button
+                    onClick={() => setAnswers((prev) => ({ ...prev, [q.id]: i }))}
+                    className={`flex w-full items-start gap-3 rounded-xl border-2 px-4 py-3.5 text-left text-sm transition-all duration-150 ${
+                      selected
+                        ? "border-brand-navy bg-brand-navy/[0.06] scale-[1.01] text-brand-navy shadow-sm"
+                        : "border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50/80"
+                    }`}
+                  >
+                    <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-all ${
+                      selected ? "bg-brand-navy text-white scale-110" : "bg-zinc-100 text-zinc-500"
+                    }`}>
+                      {String.fromCharCode(65 + i)}
+                    </span>
+                    <span className="pt-0.5 leading-snug">{opt}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
 
       {/* Navigation */}
@@ -409,10 +520,11 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
           </button>
         ) : (
           <button
-            onClick={submitExam}
-            className="rounded-lg bg-brand-gold px-6 py-2 text-sm font-bold text-brand-navy shadow transition hover:brightness-[1.05]"
+            onClick={() => submitExam()}
+            disabled={isGrading}
+            className="rounded-lg bg-brand-gold px-6 py-2 text-sm font-bold text-brand-navy shadow transition hover:brightness-[1.05] disabled:opacity-50"
           >
-            Terminer l&apos;examen ✓
+            {isGrading ? "Notation IA en cours…" : "Terminer l'examen ✓"}
           </button>
         )}
       </div>
@@ -425,13 +537,18 @@ function ReviewQuestion({
   question,
   answer,
   index,
+  grade,
 }: {
   question: ExamQuestion;
-  answer: number | undefined;
+  answer: number | string | undefined;
   index: number;
+  grade?: { score: number; feedback: string; strengths: string; improvements: string };
 }) {
-  const correct = answer === question.correctIndex;
-  const unanswered = answer === undefined;
+  const isOpen = question.type === "open";
+  const unanswered = answer === undefined || (isOpen && String(answer).trim() === "");
+  const correct = isOpen
+    ? (grade ? grade.score >= 60 : false)
+    : answer === question.correctIndex;
 
   return (
     <div className={`rounded-xl border p-4 ${
@@ -450,26 +567,50 @@ function ReviewQuestion({
         <div className="flex-1">
           <p className="text-sm font-medium text-zinc-800">
             <span className="text-zinc-400">Q{index + 1}.</span> {question.question}
+            {isOpen && <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-700">OUVERTE</span>}
           </p>
-          <div className="mt-2 space-y-1">
-            {question.options.map((opt, i) => (
-              <p
-                key={i}
-                className={`text-xs ${
-                  i === question.correctIndex
-                    ? "font-bold text-emerald-700"
-                    : i === answer && i !== question.correctIndex
-                      ? "text-red-600 line-through"
-                      : "text-zinc-500"
-                }`}
-              >
-                {String.fromCharCode(65 + i)}. {opt}
-                {i === question.correctIndex && " ✓"}
-                {i === answer && i !== question.correctIndex && " (votre réponse)"}
+          {isOpen ? (
+            <div className="mt-2 space-y-2">
+              <p className="text-xs text-zinc-700">
+                <span className="font-semibold">Votre réponse :</span>{" "}
+                {unanswered ? "(non répondu)" : String(answer)}
               </p>
-            ))}
-          </div>
-          {!correct && !unanswered && (
+              {grade && (
+                <div className="rounded-lg border border-amber-200 bg-amber-50/60 p-3 text-xs space-y-1">
+                  <p className="font-bold text-amber-800">Note IA : {grade.score}/100</p>
+                  <p className="text-zinc-700">{grade.feedback}</p>
+                  {grade.strengths && <p className="text-emerald-700">✓ {grade.strengths}</p>}
+                  {grade.improvements && <p className="text-red-600">→ {grade.improvements}</p>}
+                </div>
+              )}
+              {question.modelAnswer && (
+                <div className="rounded-lg border border-emerald-200 bg-emerald-50/40 p-3 text-xs">
+                  <p className="font-semibold text-emerald-800">Réponse modèle :</p>
+                  <p className="mt-1 text-zinc-700">{question.modelAnswer}</p>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="mt-2 space-y-1">
+              {question.options?.map((opt, i) => (
+                <p
+                  key={i}
+                  className={`text-xs ${
+                    i === question.correctIndex
+                      ? "font-bold text-emerald-700"
+                      : i === answer && i !== question.correctIndex
+                        ? "text-red-600 line-through"
+                        : "text-zinc-500"
+                  }`}
+                >
+                  {String.fromCharCode(65 + i)}. {opt}
+                  {i === question.correctIndex && " ✓"}
+                  {i === answer && i !== question.correctIndex && " (votre réponse)"}
+                </p>
+              ))}
+            </div>
+          )}
+          {!correct && !unanswered && !isOpen && (
             <p className="mt-2 text-xs italic text-zinc-600">{question.explanation}</p>
           )}
           {unanswered && (

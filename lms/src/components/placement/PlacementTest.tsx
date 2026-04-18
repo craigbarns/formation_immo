@@ -12,6 +12,7 @@ import {
   AlertTriangle,
   BookOpen,
   ArrowRight,
+  Sparkles,
 } from "lucide-react";
 import {
   PLACEMENT_QUESTIONS,
@@ -112,9 +113,19 @@ export function PlacementTest() {
             onClick={() => setStep("running")}
             className="btn-primary-solid mt-8 inline-flex w-full items-center justify-center gap-2 py-4 text-lg"
           >
-            Commencer le test
+            Commencer le test QCM
             <ArrowRight className="h-5 w-5" />
           </button>
+
+          <div className="mt-4 text-center">
+            <Link
+              href="/formation/test-conversationnel"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-navy underline-offset-2 hover:underline"
+            >
+              <Sparkles className="h-4 w-4 text-brand-gold" />
+              Essayer le test conversationnel avec Marie (plus rapide + adaptatif)
+            </Link>
+          </div>
         </div>
       </div>
     );

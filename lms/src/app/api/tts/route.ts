@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { TTSRequestSchema } from "@/lib/validation";
 
 export async function POST(request: Request) {
-  // ── Auth ──
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -11,7 +11,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
   }
 
-  // ── Rate limit ──
   const { allowed } = checkRateLimit(user.id + ":tts");
   if (!allowed) {
     return NextResponse.json(
@@ -20,11 +19,22 @@ export async function POST(request: Request) {
     );
   }
 
-  const { text } = await request.json() as { text: string };
-
-  if (!text || text.length > 4096) {
-    return NextResponse.json({ error: "Texte invalide ou trop long" }, { status: 400 });
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Body JSON invalide" }, { status: 400 });
   }
+
+  const parse = TTSRequestSchema.safeParse(body);
+  if (!parse.success) {
+    return NextResponse.json(
+      { error: "Payload invalide", issues: parse.error.issues },
+      { status: 400 }
+    );
+  }
+
+  const { text } = parse.data;
 
   try {
     const res = await fetch("https://api.openai.com/v1/audio/speech", {
@@ -42,8 +52,12 @@ export async function POST(request: Request) {
     });
 
     if (!res.ok) {
-      const err = await res.text();
-      return NextResponse.json({ error: "Erreur TTS", detail: err }, { status: res.status });
+      const errText = await res.text().catch(() => "OpenAI TTS error");
+      console.error("[TTS] OpenAI error:", res.status, errText);
+      return NextResponse.json(
+        { error: "Erreur synthèse vocale" },
+        { status: 500 }
+      );
     }
 
     const audioBuffer = await res.arrayBuffer();
@@ -51,9 +65,14 @@ export async function POST(request: Request) {
       headers: {
         "Content-Type": "audio/mpeg",
         "Content-Length": String(audioBuffer.byteLength),
+        "Cache-Control": "public, max-age=86400",
       },
     });
-  } catch {
-    return NextResponse.json({ error: "Erreur serveur TTS" }, { status: 500 });
+  } catch (err) {
+    console.error("[TTS] Exception:", err);
+    return NextResponse.json(
+      { error: "Erreur serveur TTS" },
+      { status: 500 }
+    );
   }
 }

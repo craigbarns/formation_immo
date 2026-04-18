@@ -344,7 +344,7 @@ export default async function LessonPage({ params }: Props) {
         {quizCheckpoints.length > 0 && (
           <ScrollReveal>
           <section id="section-quiz" className="card-elevated rounded-2xl border-brand-navy/8 bg-gradient-to-br from-white to-zinc-50/80 p-6 md:p-8">
-            <QuizCheckpointsSection checkpoints={quizCheckpoints} />
+            <QuizCheckpointsSection checkpoints={quizCheckpoints} moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
           </section>
           </ScrollReveal>
         )}

@@ -5,8 +5,10 @@
 export type ExamQuestion = {
   id: string;
   question: string;
-  options: string[];
-  correctIndex: number;
+  type?: "qcm" | "open";
+  options?: string[];
+  correctIndex?: number;
+  modelAnswer?: string;
   explanation: string;
 };
 
@@ -173,6 +175,13 @@ export const MODULE_EXAMS: ModuleExam[] = [
         ],
         correctIndex: 1,
         explanation: "Article L271-1 CCH : 10 jours calendaires de rétractation pour l'acquéreur non-pro après remise du compromis (LRAR ou main propre). Délai d'ordre public, non négociable.",
+      },
+      {
+        id: "j14",
+        question: "Expliquez avec vos mots : qu'est-ce qu'un mandat exclusif et quels sont ses avantages pour le vendeur et pour l'agent ?",
+        type: "open",
+        modelAnswer: "Le mandat exclusif confie la vente d'un bien immobilier à un seul agent. Pour le vendeur, il garantit une meilleure visibilité (l'agent investit davantage en marketing), un suivi personnalisé et souvent un délai de vente plus court. Pour l'agent, il sécurise sa rémunération, lui permet de maîtriser la commercialisation et de négocier sereinement avec les acquéreurs sans crainte d'être court-circuité.",
+        explanation: "Un bon agent doit savoir argumenter les 2 types de mandats (simple vs exclusif) en mettant en valeur les bénéfices concrets pour chaque partie.",
       },
     ],
   },

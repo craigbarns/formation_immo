@@ -4,8 +4,9 @@ import { useState } from "react";
 import type { QuizCheckpoint } from "@/data/quiz-checkpoints";
 import { sounds } from "@/lib/sounds";
 import { addXP, XP_REWARDS } from "@/lib/gamification";
+import { saveUserAnswers } from "@/app/actions/user-answers";
 
-function QuizCard({ q }: { q: QuizCheckpoint }) {
+function QuizCard({ q, moduleSlug, lessonSlug }: { q: QuizCheckpoint; moduleSlug?: string; lessonSlug?: string }) {
   const [picked, setPicked] = useState<number | null>(null);
   const [showExplain, setShowExplain] = useState(false);
 
@@ -25,12 +26,25 @@ function QuizCard({ q }: { q: QuizCheckpoint }) {
                 onClick={() => {
                   setPicked(i);
                   setShowExplain(true);
-                  if (opt.isCorrect) {
+                  const isCorrect = opt.isCorrect;
+                  if (isCorrect) {
                     sounds.quizCorrect();
                     addXP(XP_REWARDS.QUIZ_CORRECT, "Bonne réponse QCM");
                   } else {
                     sounds.quizWrong();
                   }
+                  // Log answer
+                  const correctOption = q.options.find(o => o.isCorrect);
+                  saveUserAnswers([{
+                    questionId: q.id,
+                    moduleSlug: moduleSlug || q.moduleSlug,
+                    lessonSlug: lessonSlug || q.lessonSlug,
+                    questionText: q.question,
+                    selectedAnswer: opt.label,
+                    correctAnswer: correctOption?.label || "",
+                    isCorrect,
+                    source: "quiz",
+                  }]).catch(() => {});
                 }}
                 className={`w-full rounded-lg border px-4 py-2.5 text-left text-sm transition ${
                   !reveal
@@ -60,9 +74,13 @@ function QuizCard({ q }: { q: QuizCheckpoint }) {
 export function QuizCheckpointsSection({
   checkpoints,
   title = "Questions de vérification",
+  moduleSlug,
+  lessonSlug,
 }: {
   checkpoints: QuizCheckpoint[];
   title?: string;
+  moduleSlug?: string;
+  lessonSlug?: string;
 }) {
   if (checkpoints.length === 0) return null;
 
@@ -76,7 +94,7 @@ export function QuizCheckpointsSection({
       </div>
       <div className="grid gap-4 md:grid-cols-1">
         {checkpoints.map((q) => (
-          <QuizCard key={q.id} q={q} />
+          <QuizCard key={q.id} q={q} moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
         ))}
       </div>
     </section>

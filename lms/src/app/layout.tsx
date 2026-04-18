@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/lib/theme";
 import { FocusModeProvider } from "@/components/focus-mode";
 import { AICoachButton } from "@/components/ai-coach";
 import { StreakReminder } from "@/components/retention";
+import { ProactiveCoachBanner } from "@/components/ai-coach/ProactiveCoachBanner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,6 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
@@ -56,6 +58,7 @@ export default function RootLayout({
             <ToastProvider>
               {children}
               <StreakReminder />
+              <ProactiveCoachBanner />
               <AICoachButton />
             </ToastProvider>
           </FocusModeProvider>
@@ -64,5 +67,4 @@ export default function RootLayout({
     </html>
   );
 }
-// Build timestamp: sam. 11 avr. 2026 12:51:41 CEST
-// Deploy: sam. 11 avr. 2026 13:00:24 CEST
+

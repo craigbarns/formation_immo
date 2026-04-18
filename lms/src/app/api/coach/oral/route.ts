@@ -6,34 +6,27 @@ import { CoachRequestSchema } from "@/lib/validation";
 
 const openai = createOpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-const SYSTEM_PROMPT = `Tu es Marie, coach experte en immobilier français avec 15 ans d'expérience terrain.
-Tu accompagnes des agents immobiliers en formation professionnelle (certification Loi ALUR).
+const SYSTEM_PROMPT = `Tu es Marie, examinatrice officielle de la certification ALUR (Loi Hoguet). Tu conduis un oral blanc de 5 questions pour un agent immobilier en formation.
 
-Tes domaines d'expertise :
-- Juridique : Loi ALUR 2026, compromis de vente, diagnostics, mandats, copropriété
-- Transaction : estimation, prospection, négociation mandat, techniques avancées, CRM
-- Financement : crédit immobilier, fiscalité, rentabilité locative, dispositifs fiscaux, assurances
-- Marketing : photos pro, annonces, portails (SeLoger, Leboncoin), réseaux sociaux, SEO
-- Terrain : visites, argumentaire, closing, promesse, fidélisation
+RÈGLES STRICTES :
+1. Tu poses EXACTEMENT 5 questions, une par une. Numérote-les clairement : "Question 1/5", "Question 2/5", etc.
+2. Tu attends la réponse de l'élève avant de passer à la question suivante. NE JAMAIS poser plusieurs questions d'un coup.
+3. Les questions doivent couvrir différents aspects : juridique, technique, éthique/professionnelle.
+4. Après la 5e réponse (quand l'élève a répondu à la question 5), tu dois obligatoirement :
+   - Donner un score global sur 100 points
+   - Un verdict : "Validé" (≥ 60) ou "Non validé" (< 60)
+   - 3 lignes de feedback constructif (points forts + axes d'amélioration)
+   - Dire : "Fin de l'oral blanc. Vous pouvez repasser quand vous voulez !"
+5. Si l'élève dit "stop", "fin", "résultat", ou similaire avant la question 5, termine immédiatement l'oral avec le score partiel.
+6. Ne donne JAMAIS la réponse correcte avant la fin de l'oral. En cours d'oral, tu poses juste la question suivante.
+7. Adapte les questions au contexte de la leçon si fourni.
+8. Langage professionnel mais bienveillant.`;
 
-Ton style :
-- Direct, chaleureux, professionnel
-- Réponds toujours en français
-- Donne des exemples concrets et chiffrés
-- Maximum 3-4 phrases par réponse sauf si l'étudiant demande plus de détails
-- Utilise occasionnellement des emojis (max 2 par message)
-- Tutoie l'étudiant (c'est une formation dynamique)
-- Si tu ne sais pas, dis-le honnêtement
-
-Tu as accès au contexte de la leçon en cours pour des réponses ultra-ciblées.`;
-
-// Simple prompt-injection guard: block context-leak attempts
 function sanitizeContextNote(note: string): string {
   return note.replace(/\[CONTEXTE:/gi, "(CONTEXTE:");
 }
 
 export async function POST(request: Request) {
-  // ── Auth ──
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -44,8 +37,7 @@ export async function POST(request: Request) {
     );
   }
 
-  // ── Rate limit ──
-  const { allowed } = checkRateLimit(user.id);
+  const { allowed } = checkRateLimit(user.id + ":oral");
   if (!allowed) {
     return new Response(
       JSON.stringify({ error: "Trop de requêtes. Réessaie dans une minute." }),
@@ -53,7 +45,6 @@ export async function POST(request: Request) {
     );
   }
 
-  // ── Validation ──
   let body: unknown;
   try {
     body = await request.json();
@@ -75,26 +66,24 @@ export async function POST(request: Request) {
   const { messages, moduleSlug, lessonSlug, lessonTitle } = parse.data;
 
   const rawContext = lessonTitle
-    ? `\n\n[CONTEXTE: L'étudiant est en train de travailler sur la leçon "${lessonTitle}" (${moduleSlug}/${lessonSlug}). Adapte tes réponses à ce contexte.]`
+    ? `\n\n[CONTEXTE: L'élève prépare l'oral ALUR sur le thème "${lessonTitle}" (${moduleSlug}/${lessonSlug}).]`
     : "";
 
   const contextNote = sanitizeContextNote(rawContext);
-
-  // Truncate history to last 10 messages (~5 exchanges) to control cost
-  const recentMessages = messages.slice(-10);
+  const recentMessages = messages.slice(-12); // un peu plus d'historique pour l'oral
 
   try {
     const result = streamText({
       model: openai("gpt-4o-mini"),
       system: SYSTEM_PROMPT + contextNote,
       messages: recentMessages,
-      temperature: 0.7,
+      temperature: 0.6,
     });
 
     return result.toTextStreamResponse();
   } catch (_err) {
     return new Response(
-      JSON.stringify({ error: "Erreur coach IA" }),
+      JSON.stringify({ error: "Erreur oral ALUR" }),
       { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }

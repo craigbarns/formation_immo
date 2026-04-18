@@ -22,7 +22,7 @@ export function AuthCheck({ children }: { children: React.ReactNode }) {
       }
 
       // If already on test page, no need to redirect
-      if (pathname === "/formation/test") {
+      if (pathname === "/formation/test" || pathname === "/formation/test-conversationnel") {
         setChecking(false);
         return;
       }
