@@ -14,11 +14,7 @@ export async function POST(request: Request) {
         Authorization: `Token ${process.env.DEEPGRAM_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        model: "aura-2",
-        language: "fr",
-        text,
-      }),
+      body: JSON.stringify({ text }),
     });
 
     if (!res.ok) {
