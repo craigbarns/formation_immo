@@ -1,7 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  ArrowLeft,
+  Banknote,
+  Briefcase,
+  FileSpreadsheet,
+  Gavel,
+  HandCoins,
+  Sparkles,
+  Wrench,
+} from "lucide-react";
 import { InfographieBlocks } from "@/components/supports-visuels/InfographieBlocks";
 import { SUPPORTS_VISUELS } from "@/data/supports-visuels";
+
+type Theme = (typeof SUPPORTS_VISUELS)[number]["theme"];
 
 export const metadata: Metadata = {
   title: "Supports visuels & fiches",
@@ -9,15 +21,7 @@ export const metadata: Metadata = {
     "Infographies interactives : investissement, négociation, financement, fiscalité et parcours juridique.",
 };
 
-const themeStyles: Record<(typeof SUPPORTS_VISUELS)[number]["theme"], string> = {
-  investissement: "bg-emerald-100 text-emerald-900",
-  negociation: "bg-amber-100 text-amber-900",
-  credit: "bg-sky-100 text-sky-900",
-  juridique: "bg-indigo-100 text-indigo-900",
-  fiscalite: "bg-violet-100 text-violet-900",
-};
-
-const themeLabel: Record<(typeof SUPPORTS_VISUELS)[number]["theme"], string> = {
+const THEME_LABEL: Record<Theme, string> = {
   investissement: "Investissement",
   negociation: "Négociation",
   credit: "Crédit",
@@ -25,73 +29,293 @@ const themeLabel: Record<(typeof SUPPORTS_VISUELS)[number]["theme"], string> = {
   fiscalite: "Fiscalité",
 };
 
+// Couleurs sémantiques cohérentes pour chaque thème
+const THEME_PALETTE: Record<
+  Theme,
+  { chip: string; chipHover: string; ring: string; dot: string; soft: string; text: string; accent: string }
+> = {
+  investissement: {
+    chip: "bg-emerald-50 text-emerald-900 border-emerald-200",
+    chipHover: "hover:bg-emerald-100 hover:border-emerald-400",
+    ring: "ring-emerald-400/40",
+    dot: "bg-emerald-500",
+    soft: "bg-emerald-50/60",
+    text: "text-emerald-700",
+    accent: "#10b981",
+  },
+  negociation: {
+    chip: "bg-amber-50 text-amber-900 border-amber-200",
+    chipHover: "hover:bg-amber-100 hover:border-amber-400",
+    ring: "ring-amber-400/40",
+    dot: "bg-amber-500",
+    soft: "bg-amber-50/60",
+    text: "text-amber-700",
+    accent: "#f59e0b",
+  },
+  credit: {
+    chip: "bg-sky-50 text-sky-900 border-sky-200",
+    chipHover: "hover:bg-sky-100 hover:border-sky-400",
+    ring: "ring-sky-400/40",
+    dot: "bg-sky-500",
+    soft: "bg-sky-50/60",
+    text: "text-sky-700",
+    accent: "#0ea5e9",
+  },
+  juridique: {
+    chip: "bg-indigo-50 text-indigo-900 border-indigo-200",
+    chipHover: "hover:bg-indigo-100 hover:border-indigo-400",
+    ring: "ring-indigo-400/40",
+    dot: "bg-indigo-500",
+    soft: "bg-indigo-50/60",
+    text: "text-indigo-700",
+    accent: "#6366f1",
+  },
+  fiscalite: {
+    chip: "bg-violet-50 text-violet-900 border-violet-200",
+    chipHover: "hover:bg-violet-100 hover:border-violet-400",
+    ring: "ring-violet-400/40",
+    dot: "bg-violet-500",
+    soft: "bg-violet-50/60",
+    text: "text-violet-700",
+    accent: "#8b5cf6",
+  },
+};
+
+const THEME_ICON: Record<Theme, React.ComponentType<{ className?: string }>> = {
+  investissement: Briefcase,
+  negociation: HandCoins,
+  credit: Banknote,
+  juridique: Gavel,
+  fiscalite: FileSpreadsheet,
+};
+
 export default function SupportsVisuelsPage() {
+  // Regroupement par thème pour le sommaire
+  const byTheme = (Object.keys(THEME_LABEL) as Theme[])
+    .map((theme) => ({
+      theme,
+      sheets: SUPPORTS_VISUELS.filter((s) => s.theme === theme),
+    }))
+    .filter((g) => g.sheets.length > 0);
+
   return (
-    <div>
-      <Link href="/formation" className="text-sm text-zinc-500 hover:text-brand-navy">
-        ← Retour au parcours
+    <div className="space-y-12">
+      {/* Breadcrumb */}
+      <Link
+        href="/formation"
+        className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition-colors hover:text-brand-navy"
+      >
+        <ArrowLeft className="h-4 w-4" aria-hidden /> Retour au parcours
       </Link>
 
-      <header className="mt-6 rounded-2xl border border-zinc-200 bg-gradient-to-br from-brand-navy to-[#0f2438] p-8 text-white shadow-lg">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">
-          Ressources élèves
-        </p>
-        <h1 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
-          Supports visuels & fiches opérationnelles
-        </h1>
-        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/85">
-          Chaque fiche existe en <strong>version web interactive</strong> (cocher, relire, zoomer)
-          et en <strong>image HD téléchargeable</strong> pour vos prises de notes ou présentations.
-          Les formules ont été revues pour éviter les ambiguïtés (ex. rentabilité brute).
-        </p>
+      {/* Hero premium */}
+      <header className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-navy via-[#244b75] to-[#0f2540] px-6 py-10 text-white shadow-2xl md:px-10 md:py-12">
+        {/* Pattern décoratif */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand-gold/15 blur-3xl"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -bottom-32 -left-16 h-72 w-72 rounded-full bg-sky-300/10 blur-3xl"
+          aria-hidden
+        />
+
+        <div className="relative">
+          <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-gold/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gold">
+            <Sparkles className="h-3.5 w-3.5" aria-hidden /> Ressources élèves
+          </p>
+          <h1 className="mt-4 text-3xl font-black leading-[1.1] tracking-tight md:text-4xl">
+            Supports visuels & fiches opérationnelles
+          </h1>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/80">
+            Chaque fiche existe en <strong className="font-semibold text-white">version web interactive</strong>{" "}
+            (cocher, relire, zoomer) et en <strong className="font-semibold text-white">image HD téléchargeable</strong>{" "}
+            pour vos prises de notes ou présentations. Les formules ont été revues pour éviter les
+            ambiguïtés — par exemple la rentabilité brute.
+          </p>
+
+          {/* Stats */}
+          <div className="mt-6 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+            <StatCell value={SUPPORTS_VISUELS.length} label="fiches" />
+            <StatCell value={byTheme.length} label="thématiques" />
+            <StatCell value="100%" label="interactives" />
+            <StatCell value="HD" label="téléchargeables" />
+          </div>
+        </div>
       </header>
 
+      {/* Filtres / sommaire par thème */}
       <nav
-        className="mt-8 rounded-xl border border-zinc-200 bg-white p-4 shadow-sm"
-        aria-label="Accès rapide aux fiches"
+        aria-label="Sommaire par thème"
+        className="rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm md:p-7"
       >
-        <p className="text-xs font-bold uppercase text-zinc-500">Accès rapide</p>
-        <ul className="mt-3 flex flex-wrap gap-2">
-          {SUPPORTS_VISUELS.map((s) => (
-            <li key={s.id}>
-              <a
-                href={`#${s.id}`}
-                className="inline-block rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-medium text-brand-navy transition hover:border-brand-navy/40 hover:bg-brand-navy/5"
-              >
-                {s.title}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="flex flex-wrap items-baseline justify-between gap-3">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-gold">
+              Sommaire
+            </p>
+            <h2 className="mt-1 text-lg font-bold text-brand-navy">
+              Naviguez par thématique
+            </h2>
+          </div>
+          <p className="text-xs text-zinc-500">
+            Cliquez une fiche pour y accéder directement.
+          </p>
+        </div>
+
+        <div className="mt-6 space-y-5">
+          {byTheme.map((group) => {
+            const palette = THEME_PALETTE[group.theme];
+            const Icon = THEME_ICON[group.theme];
+            return (
+              <div key={group.theme}>
+                <div className="mb-3 flex items-center gap-2">
+                  <span
+                    className={`inline-flex h-8 w-8 items-center justify-center rounded-lg ${palette.chip} border`}
+                  >
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <h3 className={`text-sm font-bold ${palette.text}`}>
+                    {THEME_LABEL[group.theme]}
+                  </h3>
+                  <span className="text-xs text-zinc-400">
+                    · {group.sheets.length} fiche{group.sheets.length > 1 ? "s" : ""}
+                  </span>
+                </div>
+                <ul className="flex flex-wrap gap-2">
+                  {group.sheets.map((s) => (
+                    <li key={s.id}>
+                      <a
+                        href={`#${s.id}`}
+                        className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-medium transition-all ${palette.chip} ${palette.chipHover} hover:-translate-y-0.5 hover:shadow-sm`}
+                      >
+                        <span className={`h-1.5 w-1.5 rounded-full ${palette.dot}`} />
+                        {s.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
       </nav>
 
-      <ol className="mt-12 space-y-16">
-        {SUPPORTS_VISUELS.map((meta, i) => (
-          <li key={meta.id} id={meta.id} className="scroll-mt-24">
-            <div className="mb-4 flex flex-wrap items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-navy text-sm font-bold text-white">
-                {i + 1}
-              </span>
-              <span
-                className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase ${themeStyles[meta.theme]}`}
-              >
-                {themeLabel[meta.theme]}
-              </span>
-            </div>
-            <InfographieBlocks id={meta.id} meta={meta} />
-          </li>
-        ))}
+      {/* Liste des fiches */}
+      <ol className="space-y-12">
+        {SUPPORTS_VISUELS.map((meta, i) => {
+          const palette = THEME_PALETTE[meta.theme];
+          const Icon = THEME_ICON[meta.theme];
+          return (
+            <li key={meta.id} id={meta.id} className="scroll-mt-24">
+              <div className="mb-5 flex flex-wrap items-center gap-3">
+                <span
+                  className="flex h-9 w-9 items-center justify-center rounded-xl text-sm font-black text-white shadow-md"
+                  style={{ backgroundColor: palette.accent }}
+                  aria-label={`Fiche numéro ${i + 1}`}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${palette.chip}`}
+                >
+                  <Icon className="h-3 w-3" />
+                  {THEME_LABEL[meta.theme]}
+                </span>
+                <span className="text-[11px] text-zinc-400">
+                  Fiche {i + 1} sur {SUPPORTS_VISUELS.length}
+                </span>
+              </div>
+              <InfographieBlocks id={meta.id} meta={meta} />
+            </li>
+          );
+        })}
       </ol>
 
-      <div className="mt-16 rounded-xl border border-dashed border-zinc-300 bg-zinc-50 p-6 text-center text-sm text-zinc-600">
-        Ces contenus sont pédagogiques et ne remplacent pas un conseil personnalisé (notaire,
-        expert-comptable, banque).
-        <div className="mt-4">
-          <Link href="/formation/outils" className="font-semibold text-brand-navy hover:underline">
-            Voir aussi les simulateurs interactifs →
-          </Link>
-        </div>
+      {/* Footer + cross-links */}
+      <section className="grid gap-4 md:grid-cols-3">
+        <Link
+          href="/formation/aide-memoire"
+          className="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md"
+        >
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-navy/10 text-brand-navy">
+            <FileSpreadsheet className="h-5 w-5" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-sm font-bold text-brand-navy">Aide-mémoire</p>
+            <p className="mt-0.5 text-xs leading-relaxed text-zinc-600">
+              9 fiches imprimables : textes, deadlines, sanctions.
+            </p>
+            <p className="mt-2 text-xs font-semibold text-brand-navy/70 group-hover:text-brand-navy">
+              Consulter →
+            </p>
+          </div>
+        </Link>
+
+        <Link
+          href="/formation/outils"
+          className="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md"
+        >
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold">
+            <Wrench className="h-5 w-5" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-sm font-bold text-brand-navy">Simulateurs</p>
+            <p className="mt-0.5 text-xs leading-relaxed text-zinc-600">
+              Crédit, rentabilité, capacité, net vendeur.
+            </p>
+            <p className="mt-2 text-xs font-semibold text-brand-navy/70 group-hover:text-brand-navy">
+              Lancer un simulateur →
+            </p>
+          </div>
+        </Link>
+
+        <Link
+          href="/formation/flashcards/juridique"
+          className="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md"
+        >
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
+            <Sparkles className="h-5 w-5" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-sm font-bold text-brand-navy">Flashcards</p>
+            <p className="mt-0.5 text-xs leading-relaxed text-zinc-600">
+              360 cartes, révision espacée par leçon.
+            </p>
+            <p className="mt-2 text-xs font-semibold text-brand-navy/70 group-hover:text-brand-navy">
+              Réviser →
+            </p>
+          </div>
+        </Link>
+      </section>
+
+      {/* Disclaimer */}
+      <div className="rounded-2xl border border-dashed border-zinc-300 bg-zinc-50/80 p-5 text-center text-sm leading-relaxed text-zinc-600">
+        Ces contenus sont pédagogiques et ne remplacent pas un conseil personnalisé
+        (notaire, expert-comptable, banque).
       </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+function StatCell({ value, label }: { value: string | number; label: string }) {
+  return (
+    <div className="rounded-2xl border border-white/15 bg-white/8 px-3 py-3 text-center backdrop-blur-sm">
+      <p className="text-2xl font-black leading-none tracking-tight text-white">
+        {value}
+      </p>
+      <p className="mt-1.5 text-[10px] font-medium uppercase tracking-wider text-white/65">
+        {label}
+      </p>
     </div>
   );
 }
