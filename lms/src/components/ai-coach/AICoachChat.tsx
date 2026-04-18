@@ -209,7 +209,8 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
         return;
       }
 
-      const blob = await res.blob();
+      const arrayBuffer = await res.arrayBuffer();
+      const blob = new Blob([arrayBuffer], { type: "audio/mpeg" });
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
       audioRef.current = audio;
