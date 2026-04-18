@@ -46,6 +46,12 @@ declare global {
   }
 }
 
+/* ─── Audio queue for streaming TTS ─── */
+interface QueuedAudio {
+  url: string;
+  audio: HTMLAudioElement;
+}
+
 export function CoachChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -67,6 +73,10 @@ export function CoachChat() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const recognitionRef = useRef<SpeechRecognitionType | null>(null);
 
+  // ── Streaming TTS queue ──
+  const audioQueueRef = useRef<QueuedAudio[]>([]);
+  const isPlayingQueueRef = useRef(false);
+
   useEffect(() => {
     const supported = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
     setSpeechSupported(supported);
@@ -78,39 +88,56 @@ export function CoachChat() {
     }
   }, [messages, streaming]);
 
-  // Auto-speak when a new assistant message arrives
-  useEffect(() => {
-    if (autoSpeak && !isLoading && messages.length > 0) {
-      const lastMsg = messages[messages.length - 1];
-      if (lastMsg.role === "assistant" && lastMsg.content.length > 10) {
-        speak(lastMsg.content, messages.length - 1);
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messages.length, isLoading]);
-
-  // Cleanup speech recognition on unmount
+  // Cleanup
   useEffect(() => {
     return () => {
-      if (recognitionRef.current) {
-        recognitionRef.current.stop();
-      }
+      if (recognitionRef.current) recognitionRef.current.stop();
+      audioQueueRef.current.forEach((item) => URL.revokeObjectURL(item.url));
+      audioQueueRef.current = [];
     };
   }, []);
 
-  // Auto-send after voice input
-  useEffect(() => {
-    if (!isListening && input.trim() && !isLoading && autoSpeak) {
-      const timer = setTimeout(() => {
-        handleSend();
-      }, 600);
-      return () => clearTimeout(timer);
+  const playNextInQueue = useCallback(() => {
+    if (isPlayingQueueRef.current || audioQueueRef.current.length === 0) return;
+    isPlayingQueueRef.current = true;
+    const item = audioQueueRef.current.shift()!;
+    item.audio.onended = () => {
+      URL.revokeObjectURL(item.url);
+      isPlayingQueueRef.current = false;
+      playNextInQueue();
+    };
+    item.audio.onerror = () => {
+      URL.revokeObjectURL(item.url);
+      isPlayingQueueRef.current = false;
+      playNextInQueue();
+    };
+    item.audio.play().catch(() => {
+      isPlayingQueueRef.current = false;
+      playNextInQueue();
+    });
+  }, []);
+
+  const enqueueTTS = useCallback(async (text: string) => {
+    try {
+      const res = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      if (!res.ok) return;
+      const arrayBuffer = await res.arrayBuffer();
+      const blob = new Blob([arrayBuffer], { type: "audio/mpeg" });
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      audioQueueRef.current.push({ url, audio });
+      playNextInQueue();
+    } catch {
+      // ignore
     }
-  }, [isListening, input, isLoading, autoSpeak]);
+  }, [playNextInQueue]);
 
   const startListening = useCallback(() => {
     if (!speechSupported) return;
-
     const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognitionCtor) return;
     const recognition = new SpeechRecognitionCtor();
@@ -125,28 +152,21 @@ export function CoachChat() {
       setIsListening(true);
       setAudioError(null);
     };
-
     recognition.onresult = (event: SpeechRecognitionEvent) => {
       let interim = "";
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
-          finalTranscript += transcript;
-        } else {
-          interim += transcript;
-        }
+        if (event.results[i].isFinal) finalTranscript += transcript;
+        else interim += transcript;
       }
       setInput(finalTranscript + interim);
     };
-
     recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
-      console.error("Speech recognition error:", event.error);
       if (event.error !== "aborted" && event.error !== "no-speech") {
         setAudioError("Micro : " + event.error);
       }
       setIsListening(false);
     };
-
     recognition.onend = () => {
       setIsListening(false);
       if (finalTranscript.trim()) {
@@ -154,7 +174,6 @@ export function CoachChat() {
         setAutoSpeak(true);
       }
     };
-
     recognitionRef.current = recognition;
     recognition.start();
   }, [speechSupported]);
@@ -172,15 +191,12 @@ export function CoachChat() {
       audioRef.current.pause();
       audioRef.current = null;
     }
-
     if (playingIndex === index) {
       setPlayingIndex(null);
       return;
     }
-
     setPlayingIndex(index);
     setAudioError(null);
-
     try {
       const res = await fetch("/api/tts", {
         method: "POST",
@@ -188,8 +204,6 @@ export function CoachChat() {
         body: JSON.stringify({ text }),
       });
       if (!res.ok) {
-        const err = await res.text();
-        console.error("TTS error:", res.status, err);
         setAudioError(`Erreur vocale (${res.status})`);
         setPlayingIndex(null);
         return;
@@ -205,7 +219,6 @@ export function CoachChat() {
         audioRef.current = null;
       };
       audio.onerror = () => {
-        console.error("Audio play error");
         setPlayingIndex(null);
         URL.revokeObjectURL(url);
         audioRef.current = null;
@@ -228,15 +241,15 @@ export function CoachChat() {
     setStreaming("");
     setAudioError(null);
 
+    let ttsBuffer = "";
+    const spokenSentences = new Set<string>();
+
     try {
       const res = await fetch("/api/coach", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: allMessages.map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
+          messages: allMessages.map((m) => ({ role: m.role, content: m.content })),
           moduleSlug: "supports-visuels",
           lessonSlug: "fiches",
           lessonTitle: "Supports visuels & fiches opérationnelles",
@@ -262,6 +275,24 @@ export function CoachChat() {
         const chunk = decoder.decode(value, { stream: true });
         full += chunk;
         setStreaming(full);
+
+        // ── Real-time TTS ──
+        if (autoSpeak) {
+          ttsBuffer += chunk;
+          const parts = ttsBuffer.split(/(?<=[.!?;:\n])\s+/);
+          ttsBuffer = parts.pop() || "";
+          for (const part of parts) {
+            const sentence = part.trim();
+            if (sentence.length > 5 && !spokenSentences.has(sentence)) {
+              spokenSentences.add(sentence);
+              enqueueTTS(sentence);
+            }
+          }
+        }
+      }
+
+      if (autoSpeak && ttsBuffer.trim().length > 5 && !spokenSentences.has(ttsBuffer.trim())) {
+        enqueueTTS(ttsBuffer.trim());
       }
 
       setMessages((prev) => [...prev, { role: "assistant", content: full }]);
@@ -275,6 +306,14 @@ export function CoachChat() {
       setIsLoading(false);
     }
   }
+
+  // Auto-send after voice input
+  useEffect(() => {
+    if (!isListening && input.trim() && !isLoading && autoSpeak) {
+      const timer = setTimeout(() => handleSend(), 600);
+      return () => clearTimeout(timer);
+    }
+  }, [isListening, input, isLoading, autoSpeak]);
 
   return (
     <>
@@ -431,7 +470,7 @@ export function CoachChat() {
           </div>
           {speechSupported && (
             <p className="pb-2 text-center text-[10px] text-zinc-400">
-              🎤 Cliquez sur le micro pour parler à Marie
+              🎤 Cliquez sur le micro pour parler à Marie • Elle répond en temps réel
             </p>
           )}
         </div>

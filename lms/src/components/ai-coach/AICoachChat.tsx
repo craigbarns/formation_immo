@@ -52,6 +52,12 @@ declare global {
   }
 }
 
+/* ─── Audio queue for streaming TTS ─── */
+interface QueuedAudio {
+  url: string;
+  audio: HTMLAudioElement;
+}
+
 export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClose }: AICoachChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -66,6 +72,49 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   const inputRef = useRef<HTMLInputElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const recognitionRef = useRef<SpeechRecognitionType | null>(null);
+
+  // ── Streaming TTS queue ──
+  const audioQueueRef = useRef<QueuedAudio[]>([]);
+  const isPlayingQueueRef = useRef(false);
+
+  const playNextInQueue = useCallback(() => {
+    if (isPlayingQueueRef.current || audioQueueRef.current.length === 0) return;
+    isPlayingQueueRef.current = true;
+    const item = audioQueueRef.current.shift()!;
+    item.audio.onended = () => {
+      URL.revokeObjectURL(item.url);
+      isPlayingQueueRef.current = false;
+      playNextInQueue();
+    };
+    item.audio.onerror = () => {
+      URL.revokeObjectURL(item.url);
+      isPlayingQueueRef.current = false;
+      playNextInQueue();
+    };
+    item.audio.play().catch(() => {
+      isPlayingQueueRef.current = false;
+      playNextInQueue();
+    });
+  }, []);
+
+  const enqueueTTS = useCallback(async (text: string) => {
+    try {
+      const res = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      if (!res.ok) return;
+      const arrayBuffer = await res.arrayBuffer();
+      const blob = new Blob([arrayBuffer], { type: "audio/mpeg" });
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      audioQueueRef.current.push({ url, audio });
+      playNextInQueue();
+    } catch {
+      // ignore TTS errors in streaming mode
+    }
+  }, [playNextInQueue]);
 
   // Check speech recognition support
   useEffect(() => {
@@ -97,7 +146,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Auto-speak when a new assistant message arrives
+  // Auto-speak when a new assistant message arrives (non-streaming fallback)
   useEffect(() => {
     if (autoSpeak && !isLoading && messages.length > 0) {
       const lastMsg = messages[messages.length - 1];
@@ -114,6 +163,9 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
       if (recognitionRef.current) {
         recognitionRef.current.stop();
       }
+      // drain queue
+      audioQueueRef.current.forEach((item) => URL.revokeObjectURL(item.url));
+      audioQueueRef.current = [];
     };
   }, []);
 
@@ -160,11 +212,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
       setIsListening(false);
       if (finalTranscript.trim()) {
         setInput(finalTranscript.trim());
-        // Auto-send after a short delay to let the user see the text
-        setTimeout(() => {
-          setAutoSpeak(true); // Enable auto-speak for voice conversations
-          // Trigger send via a ref or directly
-        }, 300);
+        setAutoSpeak(true);
       }
     };
 
@@ -261,6 +309,10 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
 
     setMessages(prev => [...prev, userMsg, assistantMsg]);
 
+    // ── streaming TTS: sentence buffer ──
+    let ttsBuffer = "";
+    const spokenSentences = new Set<string>();
+
     try {
       const apiMessages = [...messages, userMsg]
         .filter(m => m.id !== "greeting")
@@ -286,6 +338,25 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
         setMessages(prev =>
           prev.map(m => m.id === assistantId ? { ...m, content: accText } : m)
         );
+
+        // ── Real-time TTS: extract complete sentences ──
+        if (autoSpeak) {
+          ttsBuffer += chunk;
+          const parts = ttsBuffer.split(/(?<=[.!?;:\n])\s+/);
+          ttsBuffer = parts.pop() || "";
+          for (const part of parts) {
+            const sentence = part.trim();
+            if (sentence.length > 5 && !spokenSentences.has(sentence)) {
+              spokenSentences.add(sentence);
+              enqueueTTS(sentence);
+            }
+          }
+        }
+      }
+
+      // Flush remaining buffer
+      if (autoSpeak && ttsBuffer.trim().length > 5 && !spokenSentences.has(ttsBuffer.trim())) {
+        enqueueTTS(ttsBuffer.trim());
       }
 
       addMessageToMemory({ role: "user", content: userMessage, context: { moduleSlug, lessonSlug, lessonTitle } });
@@ -301,7 +372,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     } finally {
       setIsLoading(false);
     }
-  }, [input, isLoading, messages, moduleSlug, lessonSlug, lessonTitle]);
+  }, [input, isLoading, messages, moduleSlug, lessonSlug, lessonTitle, autoSpeak, enqueueTTS]);
 
   // Auto-send after voice input
   useEffect(() => {
@@ -334,6 +405,8 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
       audioRef.current.pause();
       audioRef.current = null;
     }
+    audioQueueRef.current.forEach((item) => URL.revokeObjectURL(item.url));
+    audioQueueRef.current = [];
   };
 
   const recommendation = getPersonalizedRecommendation();
@@ -519,7 +592,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
           </div>
           <p className="mt-2 text-[10px] text-center text-white/50">
             {speechSupported
-              ? "🎤 Cliquez sur le micro pour parler à Marie • Elle vous répondra à voix haute"
+              ? "🎤 Cliquez sur le micro pour parler à Marie • Elle vous répondra à voix haute en temps réel"
               : "Marie est une IA expérimentale. Vérifiez les informations importantes."}
           </p>
         </div>
