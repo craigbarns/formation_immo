@@ -36,11 +36,14 @@ export async function POST(request: Request) {
     ? `\n\n[CONTEXTE: L'étudiant est en train de travailler sur la leçon "${lessonTitle}" (${moduleSlug}/${lessonSlug}). Adapte tes réponses à ce contexte.]`
     : "";
 
+  // Truncate history to last 10 messages (~5 exchanges) to control cost
+  const recentMessages = messages.slice(-10);
+
   try {
     const result = streamText({
       model: openai("gpt-4o-mini"),
       system: SYSTEM_PROMPT + contextNote,
-      messages,
+      messages: recentMessages,
       temperature: 0.7,
     });
 

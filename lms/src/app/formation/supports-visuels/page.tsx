@@ -362,7 +362,7 @@ export default function SupportsVisuelsPage() {
         (notaire, expert-comptable, banque).
       </div>
 
-      <CoachChat />
+      <CoachChat moduleSlug="supports-visuels" lessonSlug="fiches" lessonTitle="Supports visuels & fiches opérationnelles" />
     </div>
   );
 }
