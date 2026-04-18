@@ -65,7 +65,7 @@ export function CoachChat() {
   const [speechSupported, setSpeechSupported] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const recognitionRef = useRef<SpeechRecognitionType | null>(null);
 
   useEffect(() => {
     const supported = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
@@ -111,8 +111,9 @@ export function CoachChat() {
   const startListening = useCallback(() => {
     if (!speechSupported) return;
 
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
+    const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognitionCtor) return;
+    const recognition = new SpeechRecognitionCtor();
     recognition.lang = "fr-FR";
     recognition.continuous = false;
     recognition.interimResults = true;

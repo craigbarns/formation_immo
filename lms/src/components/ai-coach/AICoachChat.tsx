@@ -65,7 +65,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const recognitionRef = useRef<SpeechRecognitionType | null>(null);
 
   // Check speech recognition support
   useEffect(() => {
@@ -120,8 +120,9 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   const startListening = useCallback(() => {
     if (!speechSupported) return;
 
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
+    const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognitionCtor) return;
+    const recognition = new SpeechRecognitionCtor();
     recognition.lang = "fr-FR";
     recognition.continuous = false;
     recognition.interimResults = true;
