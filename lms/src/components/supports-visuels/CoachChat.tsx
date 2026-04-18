@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, Bot, User } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, Volume2 } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
@@ -20,6 +20,7 @@ export function CoachChat() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [streaming, setStreaming] = useState("");
+  const [playingIndex, setPlayingIndex] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,6 +28,39 @@ export function CoachChat() {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages, streaming]);
+
+  async function speak(text: string, index: number) {
+    if (playingIndex === index) {
+      setPlayingIndex(null);
+      return;
+    }
+    setPlayingIndex(index);
+    try {
+      const res = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      if (!res.ok) {
+        setPlayingIndex(null);
+        return;
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      audio.onended = () => {
+        setPlayingIndex(null);
+        URL.revokeObjectURL(url);
+      };
+      audio.onerror = () => {
+        setPlayingIndex(null);
+        URL.revokeObjectURL(url);
+      };
+      await audio.play();
+    } catch {
+      setPlayingIndex(null);
+    }
+  }
 
   async function handleSend() {
     if (!input.trim() || isLoading) return;
@@ -140,14 +174,29 @@ export function CoachChat() {
                 >
                   {m.role === "user" ? <User className="h-3.5 w-3.5" /> : <Bot className="h-3.5 w-3.5" />}
                 </div>
-                <div
-                  className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
-                    m.role === "user"
-                      ? "bg-brand-navy text-white rounded-br-sm"
-                      : "bg-zinc-100 text-zinc-800 rounded-bl-sm"
-                  }`}
-                >
-                  {m.content}
+                <div className="flex max-w-[80%] flex-col gap-1">
+                  <div
+                    className={`rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
+                      m.role === "user"
+                        ? "bg-brand-navy text-white rounded-br-sm"
+                        : "bg-zinc-100 text-zinc-800 rounded-bl-sm"
+                    }`}
+                  >
+                    {m.content}
+                  </div>
+                  {m.role === "assistant" && (
+                    <button
+                      onClick={() => speak(m.content, i)}
+                      className={`self-start rounded-lg px-2 py-1 text-[10px] font-semibold uppercase tracking-wider transition-colors ${
+                        playingIndex === i
+                          ? "bg-brand-gold/20 text-brand-gold"
+                          : "text-zinc-400 hover:text-brand-navy hover:bg-zinc-100"
+                      }`}
+                    >
+                      <Volume2 className="inline h-3 w-3 mr-1" />
+                      {playingIndex === i ? "Lecture..." : "Écouter"}
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
