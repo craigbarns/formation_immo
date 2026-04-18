@@ -53,6 +53,21 @@ function getAudioContext(): AudioContext | null {
   return AC ? new AC() : null;
 }
 
+function cleanForTTS(text: string): string {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, "$1")     // **gras** → gras
+    .replace(/\*(.*?)\*/g, "$1")          // *italique* → italique
+    .replace(/\n\d+\.\s*/g, ". ")        // "1. " "2. " → pause
+    .replace(/\n-\s*/g, ". ")            // "- " → pause
+    .replace(/\n#/g, ". ")               // titres markdown
+    .replace(/\n\n/g, ". ")              // paragraphes
+    .replace(/\n/g, " ")                  // retours ligne simples
+    .replace(/:\s*/g, ", ")               // deux-points → virgule
+    .replace(/;\s*/g, ", ")               // point-virgule → virgule
+    .replace(/\s+/g, " ")                 // espaces multiples
+    .trim();
+}
+
 export function CoachChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -103,11 +118,13 @@ export function CoachChat() {
   const processNextTTS = useCallback(async () => {
     if (isProcessingTTSRef.current || pendingTTSRef.current.length === 0) return;
     isProcessingTTSRef.current = true;
-    const text = pendingTTSRef.current.shift()!;
+    const rawText = pendingTTSRef.current.shift()!;
+    const text = cleanForTTS(rawText);
+    if (!text) { isProcessingTTSRef.current = false; processNextTTS(); return; }
     const ctx = ensureAudioContext();
     if (!ctx) { isProcessingTTSRef.current = false; processNextTTS(); return; }
     try {
-      const res = await fetch("/api/tts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
+      const res = await fetch("/api/tts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text: cleanForTTS(text) }) });
       if (!res.ok) { isProcessingTTSRef.current = false; processNextTTS(); return; }
       const audioBuffer = await ctx.decodeAudioData((await res.arrayBuffer()).slice(0));
       const source = ctx.createBufferSource();
