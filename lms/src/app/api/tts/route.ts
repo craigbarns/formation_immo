@@ -8,13 +8,18 @@ export async function POST(request: Request) {
   }
 
   try {
-    const res = await fetch("https://api.deepgram.com/v1/speak", {
+    const res = await fetch("https://api.openai.com/v1/audio/speech", {
       method: "POST",
       headers: {
-        Authorization: `Token ${process.env.DEEPGRAM_API_KEY}`,
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({
+        model: "tts-1",
+        voice: "alloy",
+        input: text,
+        response_format: "mp3",
+      }),
     });
 
     if (!res.ok) {
@@ -25,7 +30,7 @@ export async function POST(request: Request) {
     const audioBuffer = await res.arrayBuffer();
     return new NextResponse(audioBuffer, {
       headers: {
-        "Content-Type": "audio/wav",
+        "Content-Type": "audio/mpeg",
         "Content-Length": String(audioBuffer.byteLength),
       },
     });
