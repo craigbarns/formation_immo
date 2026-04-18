@@ -631,7 +631,7 @@ export const MODULE_EXAMS: ModuleExam[] = [
         question: "Une visite virtuelle 3D type Matterport augmente en moyenne le taux de prise de RDV de :",
         options: [
           "5%",
-          "30 à 50% selon les études",
+          "30 à 50% selon les baromètres sectoriels",
           "Aucun impact démontré",
           "200% systématiquement",
         ],

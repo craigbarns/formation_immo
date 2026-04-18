@@ -469,7 +469,7 @@ export const LESSON_VISUALS: Record<string, LessonVisuals> = {
   },
   "terrain/decouverte-client": {
     keyConcepts: [
-      { icon: "search", title: "Iceberg client", description: "73% des acheteurs signent pour un bien différent de leur demande initiale", type: "stat" },
+      { icon: "search", title: "Iceberg client", description: "Une majorité d'acheteurs signent finalement pour un bien différent de leur demande initiale", type: "stat" },
       { icon: "users", title: "4 catégories", description: "Contexte de vie — Critères absolus — Dimension financière — Projet futur", type: "definition" },
       { icon: "target", title: "Suivi 30 jours", description: "Structurer un suivi acquéreur sur 30 jours pour convertir sans forcer", type: "tip" },
     ],

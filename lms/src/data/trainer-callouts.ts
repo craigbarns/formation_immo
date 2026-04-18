@@ -2011,7 +2011,7 @@ const CALLOUTS: TrainerCallout[] = [
     lessonSlug: "r0-r1-r2",
     type: "fact",
     title: "Chiffre clé",
-    body: "80 % des mandats se signent après la 3e à 5e relance. La plupart des agents abandonnent après 1 ou 2 contacts. La persévérance structurée est le facteur numéro 1 de succès en prospection immobilière.",
+    body: "La majorité des mandats se signent après plusieurs relances structurées. La plupart des agents abandonnent après 1 ou 2 contacts. La persévérance structurée est le facteur numéro 1 de succès en prospection immobilière.",
     avatarInitials: "NT",
     avatarColor: "#2563eb",
   },

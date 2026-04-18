@@ -329,7 +329,7 @@ export const COURSE: CourseModule[] = [
     title: "Module 3 — Financement & fiscalité",
     summary: "Crédit, fiscalité, rentabilité, dispositifs, assurances.",
     description:
-      "Devenez le conseiller financier de confiance de vos clients : crédit immobilier 2026, optimisation fiscale, calcul de rentabilité locative, dispositifs de défiscalisation et assurances. Ce module vous différencie de 90% des agents.",
+      "Devenez le conseiller financier de confiance de vos clients : crédit immobilier 2026, optimisation fiscale, calcul de rentabilité locative, dispositifs de défiscalisation et assurances. Ce module vous différencie de la majorité des agents.",
     lessons: [
       {
         slug: "credit",

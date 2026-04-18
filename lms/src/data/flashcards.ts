@@ -845,7 +845,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-esti-06",
         question: "Impact d'un DPE F/G sur la valeur d'un bien en 2026 ?",
         answer:
-          "Décote moyenne de 12 à 20% (baromètre LPI-SeLoger 2025), plus 20-40k€ de travaux anticipés.",
+          "Décote moyenne de 12 à 20% selon les baromètres sectoriels, plus 20-40k€ de travaux anticipés.",
         category: "Estimation",
         difficulty: 2,
       },
@@ -869,7 +869,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-esti-09",
         question: "Délai moyen de vente en France en 2026 ?",
         answer:
-          "93 jours (Baromètre FNAIM T1 2026). Varie selon tension du marché : 45 j Paris, 110 j secteurs ruraux.",
+          "Environ 90 jours selon les baromètres sectoriels. Varie selon tension du marché : 45 j Paris, 110 j secteurs ruraux.",
         category: "Estimation",
         difficulty: 1,
       },

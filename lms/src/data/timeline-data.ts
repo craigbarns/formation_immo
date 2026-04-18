@@ -728,7 +728,7 @@ const TIMELINES: InteractiveTimeline[] = [
         id: "prosp-s5",
         title: "Suivi et relance post-RDV",
         duration: "J+1 à J+21",
-        description: "80 % des mandats se signent après la 3e ou 4e relance. Planifiez : J+1 (email récap), J+7 (appel marché), J+14 (nouvelle vente dans le secteur), J+21 (dernière offre de service).",
+        description: "La majorité des mandats se signent après plusieurs relances structurées. Planifiez : J+1 (email récap), J+7 (appel marché), J+14 (nouvelle vente dans le secteur), J+21 (dernière offre de service).",
         keyDocuments: ["Email de suivi type", "Alerte nouvelles ventes secteur"],
         tips: ["La régularité du suivi montre votre sérieux. Un vendeur qui hésite choisira toujours l'agent qui reste présent."],
         icon: "📞",
