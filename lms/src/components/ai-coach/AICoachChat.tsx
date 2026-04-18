@@ -162,16 +162,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Auto-speak when a new assistant message arrives (non-streaming fallback)
-  useEffect(() => {
-    if (autoSpeak && !isLoading && messages.length > 0) {
-      const lastMsg = messages[messages.length - 1];
-      if (lastMsg.role === "assistant" && lastMsg.content.length > 10) {
-        speak(lastMsg.content, lastMsg.id);
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messages.length, isLoading]);
+  // (streaming TTS handles auto-speak — no fallback needed)
 
   // Cleanup
   useEffect(() => {
