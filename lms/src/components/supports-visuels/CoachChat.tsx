@@ -73,6 +73,21 @@ export function CoachChat() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const recognitionRef = useRef<SpeechRecognitionType | null>(null);
 
+  // ── Web Audio API context (unlocked on user gesture) ──
+  const audioCtxRef = useRef<AudioContext | null>(null);
+
+  const ensureAudioContext = useCallback(() => {
+    if (typeof window === "undefined") return null;
+    if (!audioCtxRef.current) {
+      const AC = (window as any).AudioContext || (window as any).webkitAudioContext;
+      if (AC) audioCtxRef.current = new AC();
+    }
+    if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
+      audioCtxRef.current.resume();
+    }
+    return audioCtxRef.current;
+  }, []);
+
   // ── Streaming TTS queue ──
   const audioQueueRef = useRef<QueuedAudio[]>([]);
   const isPlayingQueueRef = useRef(false);
@@ -102,16 +117,15 @@ export function CoachChat() {
     isPlayingQueueRef.current = true;
     const item = audioQueueRef.current.shift()!;
     item.audio.onended = () => {
-      URL.revokeObjectURL(item.url);
       isPlayingQueueRef.current = false;
       playNextInQueue();
     };
     item.audio.onerror = () => {
-      URL.revokeObjectURL(item.url);
       isPlayingQueueRef.current = false;
       playNextInQueue();
     };
-    item.audio.play().catch(() => {
+    item.audio.play().catch((e) => {
+      console.error("Audio play error:", e);
       isPlayingQueueRef.current = false;
       playNextInQueue();
     });
@@ -127,9 +141,9 @@ export function CoachChat() {
       if (!res.ok) return;
       const arrayBuffer = await res.arrayBuffer();
       const blob = new Blob([arrayBuffer], { type: "audio/mpeg" });
-      const url = URL.createObjectURL(blob);
-      const audio = new Audio(url);
-      audioQueueRef.current.push({ url, audio });
+      const audio = new Audio();
+      audio.srcObject = blob;
+      audioQueueRef.current.push({ url: "", audio });
       playNextInQueue();
     } catch {
       // ignore
@@ -137,6 +151,7 @@ export function CoachChat() {
   }, [playNextInQueue]);
 
   const startListening = useCallback(() => {
+    ensureAudioContext(); // unlock audio on user gesture
     if (!speechSupported) return;
     const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognitionCtor) return;
@@ -210,17 +225,15 @@ export function CoachChat() {
       }
       const arrayBuffer = await res.arrayBuffer();
       const blob = new Blob([arrayBuffer], { type: "audio/mpeg" });
-      const url = URL.createObjectURL(blob);
-      const audio = new Audio(url);
+      const audio = new Audio();
+      audio.srcObject = blob;
       audioRef.current = audio;
       audio.onended = () => {
         setPlayingIndex(null);
-        URL.revokeObjectURL(url);
         audioRef.current = null;
       };
       audio.onerror = () => {
         setPlayingIndex(null);
-        URL.revokeObjectURL(url);
         audioRef.current = null;
       };
       await audio.play();
@@ -231,6 +244,7 @@ export function CoachChat() {
   }
 
   async function handleSend() {
+    ensureAudioContext(); // unlock audio on user gesture
     if (!input.trim() || isLoading) return;
 
     const userMsg: Message = { role: "user", content: input.trim() };
