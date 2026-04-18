@@ -199,15 +199,16 @@ export function CoachChat() {
         const chunk = decoder.decode(value, { stream: true }); full += chunk; setStreaming(full);
         if (autoSpeak) {
           ttsBuffer += chunk;
-          const parts = ttsBuffer.split(/(?<=[.!?;:\n])\s+/);
+          const parts = ttsBuffer.split(/(?<=[.!?])\s+/);
           ttsBuffer = parts.pop() || "";
           for (const part of parts) {
             const sentence = part.trim();
-            if (sentence.length > 5 && !spokenSentences.has(sentence)) { spokenSentences.add(sentence); enqueueTTS(sentence); }
+            if (sentence.length > 3 && !spokenSentences.has(sentence)) { spokenSentences.add(sentence); enqueueTTS(sentence); }
           }
         }
       }
-      if (autoSpeak && ttsBuffer.trim().length > 5 && !spokenSentences.has(ttsBuffer.trim())) enqueueTTS(ttsBuffer.trim());
+      const remaining = ttsBuffer.trim();
+      if (autoSpeak && remaining.length > 0 && !spokenSentences.has(remaining)) enqueueTTS(remaining);
       setMessages(p => [...p, { role: "assistant", content: full }]); setStreaming("");
     } catch { setMessages(p => [...p, { role: "assistant", content: "Oups, une erreur est survenue. Réessaie dans un instant !" }]); }
     finally { setIsLoading(false); }

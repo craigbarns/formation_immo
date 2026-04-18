@@ -321,11 +321,11 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
 
         if (autoSpeak) {
           ttsBuffer += chunk;
-          const parts = ttsBuffer.split(/(?<=[.!?;:\n])\s+/);
+          const parts = ttsBuffer.split(/(?<=[.!?])\s+/);
           ttsBuffer = parts.pop() || "";
           for (const part of parts) {
             const sentence = part.trim();
-            if (sentence.length > 5 && !spokenSentences.has(sentence)) {
+            if (sentence.length > 3 && !spokenSentences.has(sentence)) {
               spokenSentences.add(sentence);
               enqueueTTS(sentence);
             }
@@ -333,8 +333,10 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
         }
       }
 
-      if (autoSpeak && ttsBuffer.trim().length > 5 && !spokenSentences.has(ttsBuffer.trim())) {
-        enqueueTTS(ttsBuffer.trim());
+      // Flush remaining text (even short fragments)
+      const remaining = ttsBuffer.trim();
+      if (autoSpeak && remaining.length > 0 && !spokenSentences.has(remaining)) {
+        enqueueTTS(remaining);
       }
 
       addMessageToMemory({ role: "user", content: userMessage, context: { moduleSlug, lessonSlug, lessonTitle } });
