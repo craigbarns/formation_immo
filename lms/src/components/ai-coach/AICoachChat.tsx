@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { Send, Bot, User, Sparkles, X, RotateCcw } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { Send, Bot, User, Sparkles, X, RotateCcw, Volume2, VolumeX } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getConversationHistory, getPersonalizedRecommendation } from "./ai-coach-service";
 import { addMessageToMemory, clearCoachMemory, type ChatMessage } from "./ai-coach-storage";
@@ -19,15 +19,18 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showRecommendation, setShowRecommendation] = useState(true);
+  const [playingIndex, setPlayingIndex] = useState<string | null>(null);
+  const [autoSpeak, setAutoSpeak] = useState(false);
+  const [audioError, setAudioError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Load conversation history on mount
   useEffect(() => {
     if (isOpen) {
       const history = getConversationHistory();
       if (history.length === 0) {
-        // Add initial greeting
         const greeting: ChatMessage = {
           id: "greeting",
           role: "assistant",
@@ -47,6 +50,71 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // Auto-speak when a new assistant message arrives
+  useEffect(() => {
+    if (autoSpeak && !isLoading && messages.length > 0) {
+      const lastMsg = messages[messages.length - 1];
+      if (lastMsg.role === "assistant" && lastMsg.content.length > 10) {
+        speak(lastMsg.content, lastMsg.id);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages.length, isLoading]);
+
+  const speak = useCallback(async (text: string, msgId: string) => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+
+    if (playingIndex === msgId) {
+      setPlayingIndex(null);
+      return;
+    }
+
+    setPlayingIndex(msgId);
+    setAudioError(null);
+
+    try {
+      const res = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+
+      if (!res.ok) {
+        const err = await res.text();
+        console.error("TTS error:", res.status, err);
+        setAudioError(`Erreur vocale (${res.status})`);
+        setPlayingIndex(null);
+        return;
+      }
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      audioRef.current = audio;
+
+      audio.onended = () => {
+        setPlayingIndex(null);
+        URL.revokeObjectURL(url);
+        audioRef.current = null;
+      };
+
+      audio.onerror = () => {
+        setAudioError("Erreur lecture audio");
+        setPlayingIndex(null);
+        URL.revokeObjectURL(url);
+        audioRef.current = null;
+      };
+
+      await audio.play();
+    } catch {
+      setAudioError("Erreur lecture audio");
+      setPlayingIndex(null);
+    }
+  }, [playingIndex]);
+
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
@@ -54,6 +122,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     setInput("");
     setIsLoading(true);
     setShowRecommendation(false);
+    setAudioError(null);
 
     const userMsg: ChatMessage = {
       id: `user-${Date.now()}`,
@@ -73,7 +142,6 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     setMessages(prev => [...prev, userMsg, assistantMsg]);
 
     try {
-      // Build API messages from current conversation (exclude synthetic greeting)
       const apiMessages = [...messages, userMsg]
         .filter(m => m.id !== "greeting")
         .map(m => ({ role: m.role as "user" | "assistant", content: m.content }));
@@ -100,7 +168,6 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
         );
       }
 
-      // Persist to local memory
       addMessageToMemory({ role: "user", content: userMessage, context: { moduleSlug, lessonSlug, lessonTitle } });
       addMessageToMemory({ role: "assistant", content: accText });
 
@@ -131,6 +198,11 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
       content: "Conversation effacée. Comment puis-je vous aider ?",
       timestamp: new Date().toISOString(),
     }]);
+    setPlayingIndex(null);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
   };
 
   const recommendation = getPersonalizedRecommendation();
@@ -164,16 +236,28 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
             </div>
           </div>
           <div className="flex items-center gap-1">
+            {/* Auto-speak toggle */}
+            <button
+              onClick={() => setAutoSpeak(a => !a)}
+              title={autoSpeak ? "Désactiver la voix auto" : "Activer la voix auto"}
+              className={`rounded-full p-2 transition ${
+                autoSpeak
+                  ? "bg-brand-gold text-brand-navy"
+                  : "text-white/50 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              {autoSpeak ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+            </button>
             <button
               onClick={handleClearChat}
-              className="rounded-full p-2 text-on-dark-muted hover:bg-white/10 hover:text-white"
+              className="rounded-full p-2 text-white/50 hover:bg-white/10 hover:text-white transition"
               title="Effacer la conversation"
             >
               <RotateCcw className="h-4 w-4" />
             </button>
             <button
               onClick={onClose}
-              className="rounded-full p-2 text-on-dark-muted hover:bg-white/10 hover:text-white"
+              className="rounded-full p-2 text-white/50 hover:bg-white/10 hover:text-white transition"
             >
               <X className="h-5 w-5" />
             </button>
@@ -197,16 +281,31 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
                 }`}>
                   {msg.role === "user" ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
                 </div>
-                <div className={`max-w-[80%] rounded-2xl px-4 py-2 text-sm ${
-                  msg.role === "user"
-                    ? "bg-brand-gold/20 text-white"
-                    : "bg-white/10 text-white/90"
-                }`}>
-                  {msg.content.split("\n").map((line, i) => (
-                    <p key={i} className={i > 0 ? "mt-2" : ""}>
-                      {line}
-                    </p>
-                  ))}
+                <div className="flex max-w-[80%] flex-col gap-1.5">
+                  <div className={`rounded-2xl px-4 py-2 text-sm ${
+                    msg.role === "user"
+                      ? "bg-brand-gold/20 text-white"
+                      : "bg-white/10 text-white/90"
+                  }`}>
+                    {msg.content.split("\n").map((line, i) => (
+                      <p key={i} className={i > 0 ? "mt-2" : ""}>
+                        {line}
+                      </p>
+                    ))}
+                  </div>
+                  {msg.role === "assistant" && msg.content.length > 5 && (
+                    <button
+                      onClick={() => speak(msg.content, msg.id)}
+                      className={`self-start flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all ${
+                        playingIndex === msg.id
+                          ? "bg-brand-gold/20 text-brand-gold animate-pulse"
+                          : "text-white/40 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/10"
+                      }`}
+                    >
+                      <Volume2 className={`h-3.5 w-3.5 ${playingIndex === msg.id ? "animate-bounce" : ""}`} />
+                      {playingIndex === msg.id ? "Lecture en cours..." : "Écouter Marie"}
+                    </button>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -243,6 +342,13 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
               </div>
             </motion.div>
           )}
+
+          {audioError && (
+            <div className="rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-300 text-center">
+              {audioError}
+            </div>
+          )}
+
           <div ref={messagesEndRef} />
         </div>
 

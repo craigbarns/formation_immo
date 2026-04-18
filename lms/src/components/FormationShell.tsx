@@ -7,7 +7,6 @@ import { XPBar } from "@/components/gamification/XPBar";
 import { GlobalSearch } from "@/components/search";
 import { MagneticButton } from "@/components/animations";
 import { ThemeToggleSimple } from "@/components/theme";
-import { FrenchCoach } from "@/components/coach/FrenchCoach";
 import { LogoutButton } from "@/components/auth/LogoutButton";
 import { useSyncSupabase } from "@/hooks/useSyncSupabase";
 
@@ -126,9 +125,6 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
 
       {/* Global Search */}
       <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-
-      {/* French Coach */}
-      <FrenchCoach />
 
       {/* Mobile bottom nav */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t border-zinc-200/90 bg-white/95 px-2 py-2 backdrop-blur-md md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
