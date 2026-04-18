@@ -72,10 +72,10 @@ export function CoachChat() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<SpeechRecognitionType | null>(null);
 
-  // ── Web Audio ──
+  // ── Web Audio (sequential TTS queue) ──
   const audioCtxRef = useRef<AudioContext | null>(null);
-  const isPlayingQueueRef = useRef(false);
-  const audioQueueRef = useRef<ArrayBuffer[]>([]);
+  const isProcessingTTSRef = useRef(false);
+  const pendingTTSRef = useRef<string[]>([]);
 
   useEffect(() => {
     const supported = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
@@ -89,7 +89,7 @@ export function CoachChat() {
   useEffect(() => {
     return () => {
       if (recognitionRef.current) recognitionRef.current.stop();
-      audioQueueRef.current = [];
+      pendingTTSRef.current = [];
       if (audioCtxRef.current) audioCtxRef.current.close();
     };
   }, []);
@@ -100,34 +100,31 @@ export function CoachChat() {
     return audioCtxRef.current;
   }, []);
 
-  const playNextInQueue = useCallback(async () => {
-    if (isPlayingQueueRef.current || audioQueueRef.current.length === 0) return;
-    isPlayingQueueRef.current = true;
-    const buffer = audioQueueRef.current.shift()!;
+  const processNextTTS = useCallback(async () => {
+    if (isProcessingTTSRef.current || pendingTTSRef.current.length === 0) return;
+    isProcessingTTSRef.current = true;
+    const text = pendingTTSRef.current.shift()!;
     const ctx = ensureAudioContext();
-    if (!ctx) { isPlayingQueueRef.current = false; return; }
+    if (!ctx) { isProcessingTTSRef.current = false; processNextTTS(); return; }
     try {
-      const audioBuffer = await ctx.decodeAudioData(buffer.slice(0));
+      const res = await fetch("/api/tts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
+      if (!res.ok) { isProcessingTTSRef.current = false; processNextTTS(); return; }
+      const audioBuffer = await ctx.decodeAudioData((await res.arrayBuffer()).slice(0));
       const source = ctx.createBufferSource();
       source.buffer = audioBuffer;
       source.connect(ctx.destination);
-      source.onended = () => { isPlayingQueueRef.current = false; playNextInQueue(); };
+      source.onended = () => { isProcessingTTSRef.current = false; processNextTTS(); };
       source.start();
-    } catch (e) {
-      console.error("Web Audio decode error:", e);
-      isPlayingQueueRef.current = false;
-      playNextInQueue();
+    } catch {
+      isProcessingTTSRef.current = false;
+      processNextTTS();
     }
   }, [ensureAudioContext]);
 
-  const enqueueTTS = useCallback(async (text: string) => {
-    try {
-      const res = await fetch("/api/tts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
-      if (!res.ok) return;
-      audioQueueRef.current.push(await res.arrayBuffer());
-      playNextInQueue();
-    } catch { /* ignore */ }
-  }, [playNextInQueue]);
+  const enqueueTTS = useCallback((text: string) => {
+    pendingTTSRef.current.push(text);
+    processNextTTS();
+  }, [processNextTTS]);
 
   const startListening = useCallback(() => {
     ensureAudioContext();

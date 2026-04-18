@@ -73,64 +73,46 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   const inputRef = useRef<HTMLInputElement>(null);
   const recognitionRef = useRef<SpeechRecognitionType | null>(null);
 
-  // ── Web Audio ──
+  // ── Web Audio (sequential TTS queue) ──
   const audioCtxRef = useRef<AudioContext | null>(null);
-  const isPlayingQueueRef = useRef(false);
-  const audioQueueRef = useRef<ArrayBuffer[]>([]);
+  const isProcessingTTSRef = useRef(false);
+  const pendingTTSRef = useRef<string[]>([]);
 
   const ensureAudioContext = useCallback(() => {
-    if (!audioCtxRef.current) {
-      audioCtxRef.current = getAudioContext();
-    }
-    if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
-      audioCtxRef.current.resume();
-    }
+    if (!audioCtxRef.current) audioCtxRef.current = getAudioContext();
+    if (audioCtxRef.current && audioCtxRef.current.state === "suspended") audioCtxRef.current.resume();
     return audioCtxRef.current;
   }, []);
 
-  const playNextInQueue = useCallback(async () => {
-    if (isPlayingQueueRef.current || audioQueueRef.current.length === 0) return;
-    isPlayingQueueRef.current = true;
-    const buffer = audioQueueRef.current.shift()!;
-
+  const processNextTTS = useCallback(async () => {
+    if (isProcessingTTSRef.current || pendingTTSRef.current.length === 0) return;
+    isProcessingTTSRef.current = true;
+    const text = pendingTTSRef.current.shift()!;
     const ctx = ensureAudioContext();
-    if (!ctx) {
-      isPlayingQueueRef.current = false;
-      return;
-    }
-
-    try {
-      const audioBuffer = await ctx.decodeAudioData(buffer.slice(0));
-      const source = ctx.createBufferSource();
-      source.buffer = audioBuffer;
-      source.connect(ctx.destination);
-      source.onended = () => {
-        isPlayingQueueRef.current = false;
-        playNextInQueue();
-      };
-      source.start();
-    } catch (e) {
-      console.error("Web Audio decode error:", e);
-      isPlayingQueueRef.current = false;
-      playNextInQueue();
-    }
-  }, [ensureAudioContext]);
-
-  const enqueueTTS = useCallback(async (text: string) => {
+    if (!ctx) { isProcessingTTSRef.current = false; processNextTTS(); return; }
     try {
       const res = await fetch("/api/tts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
       });
-      if (!res.ok) return;
-      const arrayBuffer = await res.arrayBuffer();
-      audioQueueRef.current.push(arrayBuffer);
-      playNextInQueue();
+      if (!res.ok) { isProcessingTTSRef.current = false; processNextTTS(); return; }
+      const audioBuffer = await ctx.decodeAudioData((await res.arrayBuffer()).slice(0));
+      const source = ctx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(ctx.destination);
+      source.onended = () => { isProcessingTTSRef.current = false; processNextTTS(); };
+      source.start();
     } catch {
-      // ignore
+      isProcessingTTSRef.current = false;
+      processNextTTS();
     }
-  }, [playNextInQueue]);
+  }, [ensureAudioContext]);
+
+  const enqueueTTS = useCallback((text: string) => {
+    pendingTTSRef.current.push(text);
+    processNextTTS();
+  }, [processNextTTS]);
 
   // Check speech recognition support
   useEffect(() => {
@@ -168,7 +150,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   useEffect(() => {
     return () => {
       if (recognitionRef.current) recognitionRef.current.stop();
-      audioQueueRef.current = [];
+      pendingTTSRef.current = [];
       if (audioCtxRef.current) audioCtxRef.current.close();
     };
   }, []);
@@ -379,7 +361,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     }]);
     setPlayingIndex(null);
     setAutoSpeak(false);
-    audioQueueRef.current = [];
+    pendingTTSRef.current = [];
   };
 
   const recommendation = getPersonalizedRecommendation();
