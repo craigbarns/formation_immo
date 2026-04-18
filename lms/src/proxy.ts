@@ -10,18 +10,54 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next({ request });
   }
 
-  return await updateSession(request);
+  const { response, user, supabase } = await updateSession(request);
+  const pathname = request.nextUrl.pathname;
+
+  // Only check auth/placement on page routes (not API, not static files)
+  const isPageRoute =
+    !pathname.startsWith("/api/") &&
+    !pathname.startsWith("/_next/") &&
+    !pathname.startsWith("/static/") &&
+    !pathname.match(/\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js|json)$/);
+
+  if (!isPageRoute) return response;
+
+  // Public pages — no auth check needed
+  const publicPages = ["/", "/login", "/register"];
+  if (publicPages.includes(pathname)) return response;
+
+  // Not authenticated → login
+  if (!user) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  // Placement test pages — exempt from placement check (avoid infinite loop)
+  const placementExempt = [
+    "/formation/test",
+    "/formation/test-conversationnel",
+  ];
+  if (placementExempt.some((p) => pathname.startsWith(p))) {
+    return response;
+  }
+
+  // Formation pages — require placement test
+  if (pathname.startsWith("/formation")) {
+    const { data: placement } = await supabase
+      .from("placement_results")
+      .select("user_id")
+      .eq("user_id", user.id)
+      .single();
+
+    if (!placement) {
+      return NextResponse.redirect(new URL("/formation/test", request.url));
+    }
+  }
+
+  return response;
 }
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public folder
-     */
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

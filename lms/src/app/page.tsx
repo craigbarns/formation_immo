@@ -60,7 +60,7 @@ const MODULES = [
 const BADGES = [
   "Loi ALUR 2026",
   "Formation certifiante",
-  "Financement OPCO",
+  "42 h de contenu",
   "TRACFIN conforme",
   "Non-discrimination",
 ];
@@ -238,7 +238,7 @@ export default function HomePage() {
                 <GraduationCap className="h-10 w-10 text-brand-gold" />
                 <h3 className="mt-4 text-lg font-bold text-white">Certification incluse</h3>
                 <p className="mt-2 text-sm text-white/65">
-                  Financement OPCO, AGEFIP et FIF-PL. Attestation de formation délivrée à l&apos;issue du parcours.
+                  Attestation de formation délivrée à l&apos;issue du parcours. Financements éligibles selon votre situation.
                 </p>
                 <Link
                   href="/login"
@@ -378,8 +378,8 @@ export default function HomePage() {
                 <GraduationCap className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-brand-gold">NDA 75331582333</p>
-                <p className="text-sm font-semibold text-white">Éligible OPCO, AGEFIP, FIF-PL</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-brand-gold">Formation professionnelle</p>
+                <p className="text-sm font-semibold text-white">Contenu pédagogique certifié qualité</p>
               </div>
             </div>
           </div>
