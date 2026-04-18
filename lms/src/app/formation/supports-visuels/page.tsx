@@ -1,25 +1,25 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
   Banknote,
   Briefcase,
+  Download,
   FileSpreadsheet,
+  Filter,
   Gavel,
   HandCoins,
   Sparkles,
   Wrench,
+  X,
 } from "lucide-react";
 import { InfographieBlocks } from "@/components/supports-visuels/InfographieBlocks";
 import { SUPPORTS_VISUELS } from "@/data/supports-visuels";
 
 type Theme = (typeof SUPPORTS_VISUELS)[number]["theme"];
-
-export const metadata: Metadata = {
-  title: "Supports visuels & fiches",
-  description:
-    "Infographies interactives : investissement, négociation, financement, fiscalité et parcours juridique.",
-};
 
 const THEME_LABEL: Record<Theme, string> = {
   investissement: "Investissement",
@@ -90,6 +90,24 @@ const THEME_ICON: Record<Theme, React.ComponentType<{ className?: string }>> = {
 };
 
 export default function SupportsVisuelsPage() {
+  const [activeTheme, setActiveTheme] = useState<Theme | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Barre de progression sticky
+  useEffect(() => {
+    const onScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const filteredSheets = activeTheme
+    ? SUPPORTS_VISUELS.filter((s) => s.theme === activeTheme)
+    : SUPPORTS_VISUELS;
+
   // Regroupement par thème pour le sommaire
   const byTheme = (Object.keys(THEME_LABEL) as Theme[])
     .map((theme) => ({
@@ -100,6 +118,15 @@ export default function SupportsVisuelsPage() {
 
   return (
     <div className="space-y-12">
+      {/* Barre de progression sticky */}
+      <div className="fixed left-0 right-0 top-0 z-50 h-1 bg-transparent">
+        <motion.div
+          className="h-full bg-gradient-to-r from-brand-gold to-amber-400"
+          style={{ width: `${scrollProgress}%` }}
+          transition={{ duration: 0.1 }}
+        />
+      </div>
+
       {/* Breadcrumb */}
       <Link
         href="/formation"
@@ -157,87 +184,119 @@ export default function SupportsVisuelsPage() {
         className="rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm md:p-7"
       >
         <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-gold">
-              Sommaire
-            </p>
-            <h2 className="mt-1 text-lg font-bold text-brand-navy">
-              Naviguez par thématique
-            </h2>
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-navy/10">
+              <Filter className="h-5 w-5 text-brand-navy" />
+            </div>
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-gold">
+                Filtrer par thème
+              </p>
+              <h2 className="mt-0.5 text-lg font-bold text-brand-navy">
+                Naviguez par thématique
+              </h2>
+            </div>
           </div>
-          <p className="text-xs text-zinc-500">
-            Cliquez une fiche pour y accéder directement.
-          </p>
+          {activeTheme && (
+            <button
+              onClick={() => setActiveTheme(null)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-100"
+            >
+              <X className="h-3 w-3" /> Réinitialiser
+            </button>
+          )}
         </div>
 
-        <div className="mt-6 space-y-5">
+        <div className="mt-6 flex flex-wrap gap-2.5">
           {byTheme.map((group) => {
             const palette = THEME_PALETTE[group.theme];
             const Icon = THEME_ICON[group.theme];
+            const isActive = activeTheme === group.theme;
             return (
-              <div key={group.theme}>
-                <div className="mb-3 flex items-center gap-2">
-                  <span
-                    className={`inline-flex h-8 w-8 items-center justify-center rounded-lg ${palette.chip} border`}
-                  >
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <h3 className={`text-sm font-bold ${palette.text}`}>
-                    {THEME_LABEL[group.theme]}
-                  </h3>
-                  <span className="text-xs text-zinc-400">
-                    · {group.sheets.length} fiche{group.sheets.length > 1 ? "s" : ""}
-                  </span>
-                </div>
-                <ul className="flex flex-wrap gap-2">
-                  {group.sheets.map((s) => (
-                    <li key={s.id}>
-                      <a
-                        href={`#${s.id}`}
-                        className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-medium transition-all ${palette.chip} ${palette.chipHover} hover:-translate-y-0.5 hover:shadow-sm`}
-                      >
-                        <span className={`h-1.5 w-1.5 rounded-full ${palette.dot}`} />
-                        {s.title}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <button
+                key={group.theme}
+                onClick={() => setActiveTheme(isActive ? null : group.theme)}
+                className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-semibold transition-all ${
+                  isActive
+                    ? `${palette.chip} ring-2 ${palette.ring} shadow-md`
+                    : `bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50`
+                }`}
+              >
+                <Icon className={`h-4 w-4 ${isActive ? palette.text : "text-zinc-400"}`} />
+                {THEME_LABEL[group.theme]}
+                <span className={`ml-1 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+                  isActive ? "bg-white/60" : "bg-zinc-100 text-zinc-500"
+                }`}>
+                  {group.sheets.length}
+                </span>
+              </button>
             );
           })}
         </div>
+
+        {activeTheme && (
+          <motion.p
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-4 text-sm text-zinc-500"
+          >
+            Affichage de {filteredSheets.length} fiche{filteredSheets.length > 1 ? "s" : ""} sur {SUPPORTS_VISUELS.length}
+          </motion.p>
+        )}
       </nav>
 
       {/* Liste des fiches */}
-      <ol className="space-y-12">
-        {SUPPORTS_VISUELS.map((meta, i) => {
-          const palette = THEME_PALETTE[meta.theme];
-          const Icon = THEME_ICON[meta.theme];
-          return (
-            <li key={meta.id} id={meta.id} className="scroll-mt-24">
-              <div className="mb-5 flex flex-wrap items-center gap-3">
-                <span
-                  className="flex h-9 w-9 items-center justify-center rounded-xl text-sm font-black text-white shadow-md"
-                  style={{ backgroundColor: palette.accent }}
-                  aria-label={`Fiche numéro ${i + 1}`}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span
-                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${palette.chip}`}
-                >
-                  <Icon className="h-3 w-3" />
-                  {THEME_LABEL[meta.theme]}
-                </span>
-                <span className="text-[11px] text-zinc-400">
-                  Fiche {i + 1} sur {SUPPORTS_VISUELS.length}
-                </span>
-              </div>
-              <InfographieBlocks id={meta.id} meta={meta} />
-            </li>
-          );
-        })}
-      </ol>
+      <AnimatePresence mode="wait">
+        <motion.ol
+          key={activeTheme ?? "all"}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.35 }}
+          className="space-y-12"
+        >
+          {filteredSheets.map((meta, i) => {
+            const palette = THEME_PALETTE[meta.theme];
+            const Icon = THEME_ICON[meta.theme];
+            const globalIndex = SUPPORTS_VISUELS.findIndex((s) => s.id === meta.id);
+            return (
+              <motion.li
+                key={meta.id}
+                id={meta.id}
+                className="scroll-mt-24"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
+              >
+                <div className="mb-5 flex flex-wrap items-center gap-3">
+                  <span
+                    className="flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black text-white shadow-lg"
+                    style={{ backgroundColor: palette.accent }}
+                    aria-label={`Fiche numéro ${globalIndex + 1}`}
+                  >
+                    {String(globalIndex + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider ${palette.chip}`}
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+                    {THEME_LABEL[meta.theme]}
+                  </span>
+                  <span className="text-[11px] text-zinc-400">
+                    Fiche {globalIndex + 1} sur {SUPPORTS_VISUELS.length}
+                  </span>
+                  <button className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-500 transition-all hover:border-zinc-300 hover:text-brand-navy hover:shadow-sm">
+                    <Download className="h-3.5 w-3.5" />
+                    Télécharger HD
+                  </button>
+                </div>
+                <InfographieBlocks id={meta.id} meta={meta} themeColor={palette.accent} />
+              </motion.li>
+            );
+          })}
+        </motion.ol>
+      </AnimatePresence>
 
       {/* Footer + cross-links */}
       <section className="grid gap-4 md:grid-cols-3">

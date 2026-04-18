@@ -20,29 +20,46 @@ function LessonLink({ href, label }: { href: string; label: string }) {
   );
 }
 
-export function InfographieBlocks({ id, meta }: { id: string; meta: SupportVisuelMeta }) {
+export function InfographieBlocks({ id, meta, themeColor = "#1a3a5c" }: { id: string; meta: SupportVisuelMeta; themeColor?: string }) {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6 }}
-      className="rounded-3xl border border-zinc-200/80 bg-white p-6 shadow-xl shadow-brand-navy/[0.03] md:p-10 mb-8 overflow-hidden"
+      className="relative mb-8 overflow-hidden rounded-3xl border border-zinc-200/80 bg-white shadow-xl shadow-brand-navy/[0.03]"
     >
-      <div className="flex flex-wrap items-start justify-between gap-4 border-b border-zinc-100 pb-8">
-        <div>
-          <p className="text-xs font-black uppercase tracking-widest text-[#c9a227] flex items-center gap-2">
-            <Scale size={14} /> {meta.moduleLabel}
-          </p>
-          <h2 className="mt-2 text-2xl font-bold tracking-tight text-brand-navy md:text-3xl">{meta.title}</h2>
-          <p className="mt-3 max-w-2xl text-base leading-relaxed text-zinc-600">{meta.summary}</p>
+      {/* Bordure supérieure colorée par thème */}
+      <div className="h-1.5 w-full" style={{ backgroundColor: themeColor }} />
+
+      <div className="p-6 md:p-10">
+        <div className="flex flex-wrap items-start justify-between gap-4 border-b border-zinc-100 pb-8">
+          <div className="flex-1">
+            <div className="flex items-center gap-2">
+              <span
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-white shadow-sm"
+                style={{ backgroundColor: themeColor }}
+              >
+                <Scale size={14} />
+              </span>
+              <p className="text-xs font-black uppercase tracking-widest text-[#c9a227]">
+                {meta.moduleLabel}
+              </p>
+            </div>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-brand-navy md:text-3xl">
+              {meta.title}
+            </h2>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-zinc-600">
+              {meta.summary}
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div className="mt-10 mb-8 relative z-10">{renderInteractive(id)}</div>
+        <div className="relative z-10 mb-8 mt-10">{renderInteractive(id)}</div>
 
-      <div className="pt-6 border-t border-zinc-100 flex items-center justify-between">
-        <LessonLink href={meta.hrefLesson} label="Aller à la Leçon associée" />
+        <div className="flex items-center justify-between border-t border-zinc-100 pt-6">
+          <LessonLink href={meta.hrefLesson} label="Aller à la Leçon associée" />
+        </div>
       </div>
     </motion.div>
   );
