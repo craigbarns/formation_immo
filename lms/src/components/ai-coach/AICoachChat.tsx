@@ -52,10 +52,11 @@ declare global {
   }
 }
 
-/* ─── Audio queue for streaming TTS ─── */
-interface QueuedAudio {
-  url: string;
-  audio: HTMLAudioElement;
+/* ─── Web Audio API helper ─── */
+function getAudioContext(): AudioContext | null {
+  if (typeof window === "undefined") return null;
+  const AC = (window as any).AudioContext || (window as any).webkitAudioContext;
+  return AC ? new AC() : null;
 }
 
 export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClose }: AICoachChatProps) {
@@ -70,17 +71,16 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   const [speechSupported, setSpeechSupported] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const recognitionRef = useRef<SpeechRecognitionType | null>(null);
 
-  // ── Web Audio API context (unlocked on user gesture) ──
+  // ── Web Audio ──
   const audioCtxRef = useRef<AudioContext | null>(null);
+  const isPlayingQueueRef = useRef(false);
+  const audioQueueRef = useRef<ArrayBuffer[]>([]);
 
   const ensureAudioContext = useCallback(() => {
-    if (typeof window === "undefined") return null;
     if (!audioCtxRef.current) {
-      const AC = (window as any).AudioContext || (window as any).webkitAudioContext;
-      if (AC) audioCtxRef.current = new AC();
+      audioCtxRef.current = getAudioContext();
     }
     if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
       audioCtxRef.current.resume();
@@ -88,28 +88,33 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     return audioCtxRef.current;
   }, []);
 
-  // ── Streaming TTS queue ──
-  const audioQueueRef = useRef<QueuedAudio[]>([]);
-  const isPlayingQueueRef = useRef(false);
-
-  const playNextInQueue = useCallback(() => {
+  const playNextInQueue = useCallback(async () => {
     if (isPlayingQueueRef.current || audioQueueRef.current.length === 0) return;
     isPlayingQueueRef.current = true;
-    const item = audioQueueRef.current.shift()!;
-    item.audio.onended = () => {
+    const buffer = audioQueueRef.current.shift()!;
+
+    const ctx = ensureAudioContext();
+    if (!ctx) {
+      isPlayingQueueRef.current = false;
+      return;
+    }
+
+    try {
+      const audioBuffer = await ctx.decodeAudioData(buffer.slice(0));
+      const source = ctx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(ctx.destination);
+      source.onended = () => {
+        isPlayingQueueRef.current = false;
+        playNextInQueue();
+      };
+      source.start();
+    } catch (e) {
+      console.error("Web Audio decode error:", e);
       isPlayingQueueRef.current = false;
       playNextInQueue();
-    };
-    item.audio.onerror = () => {
-      isPlayingQueueRef.current = false;
-      playNextInQueue();
-    };
-    item.audio.play().catch((e) => {
-      console.error("Audio play error:", e);
-      isPlayingQueueRef.current = false;
-      playNextInQueue();
-    });
-  }, []);
+    }
+  }, [ensureAudioContext]);
 
   const enqueueTTS = useCallback(async (text: string) => {
     try {
@@ -120,13 +125,10 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
       });
       if (!res.ok) return;
       const arrayBuffer = await res.arrayBuffer();
-      const blob = new Blob([arrayBuffer], { type: "audio/mpeg" });
-      const audio = new Audio();
-      audio.srcObject = blob;
-      audioQueueRef.current.push({ url: "", audio });
+      audioQueueRef.current.push(arrayBuffer);
       playNextInQueue();
     } catch {
-      // ignore TTS errors in streaming mode
+      // ignore
     }
   }, [playNextInQueue]);
 
@@ -171,22 +173,18 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages.length, isLoading]);
 
-  // Cleanup speech recognition on unmount
+  // Cleanup
   useEffect(() => {
     return () => {
-      if (recognitionRef.current) {
-        recognitionRef.current.stop();
-      }
-      // drain queue
-      audioQueueRef.current.forEach((item) => URL.revokeObjectURL(item.url));
+      if (recognitionRef.current) recognitionRef.current.stop();
       audioQueueRef.current = [];
+      if (audioCtxRef.current) audioCtxRef.current.close();
     };
   }, []);
 
   const startListening = useCallback(() => {
-    ensureAudioContext(); // unlock audio on user gesture
+    ensureAudioContext(); // unlock on user gesture
     if (!speechSupported) return;
-
     const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognitionCtor) return;
     const recognition = new SpeechRecognitionCtor();
@@ -201,28 +199,21 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
       setIsListening(true);
       setAudioError(null);
     };
-
     recognition.onresult = (event: SpeechRecognitionEvent) => {
       let interim = "";
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
-          finalTranscript += transcript;
-        } else {
-          interim += transcript;
-        }
+        if (event.results[i].isFinal) finalTranscript += transcript;
+        else interim += transcript;
       }
       setInput(finalTranscript + interim);
     };
-
     recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
-      console.error("Speech recognition error:", event.error);
       if (event.error !== "aborted" && event.error !== "no-speech") {
         setAudioError("Micro : " + event.error);
       }
       setIsListening(false);
     };
-
     recognition.onend = () => {
       setIsListening(false);
       if (finalTranscript.trim()) {
@@ -230,10 +221,9 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
         setAutoSpeak(true);
       }
     };
-
     recognitionRef.current = recognition;
     recognition.start();
-  }, [speechSupported]);
+  }, [speechSupported, ensureAudioContext]);
 
   const stopListening = useCallback(() => {
     if (recognitionRef.current) {
@@ -244,18 +234,19 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   }, []);
 
   const speak = useCallback(async (text: string, msgId: string) => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current = null;
-    }
-
     if (playingIndex === msgId) {
       setPlayingIndex(null);
       return;
     }
-
     setPlayingIndex(msgId);
     setAudioError(null);
+
+    const ctx = ensureAudioContext();
+    if (!ctx) {
+      setAudioError("Audio non supporté");
+      setPlayingIndex(null);
+      return;
+    }
 
     try {
       const res = await fetch("/api/tts", {
@@ -263,41 +254,26 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
       });
-
       if (!res.ok) {
-        const err = await res.text();
-        console.error("TTS error:", res.status, err);
         setAudioError(`Erreur vocale (${res.status})`);
         setPlayingIndex(null);
         return;
       }
-
       const arrayBuffer = await res.arrayBuffer();
-      const blob = new Blob([arrayBuffer], { type: "audio/mpeg" });
-      const audio = new Audio();
-      audio.srcObject = blob;
-      audioRef.current = audio;
-
-      audio.onended = () => {
-        setPlayingIndex(null);
-        audioRef.current = null;
-      };
-
-      audio.onerror = () => {
-        setAudioError("Erreur lecture audio");
-        setPlayingIndex(null);
-        audioRef.current = null;
-      };
-
-      await audio.play();
+      const audioBuffer = await ctx.decodeAudioData(arrayBuffer.slice(0));
+      const source = ctx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(ctx.destination);
+      source.onended = () => setPlayingIndex(null);
+      source.start();
     } catch {
       setAudioError("Erreur lecture audio");
       setPlayingIndex(null);
     }
-  }, [playingIndex]);
+  }, [playingIndex, ensureAudioContext]);
 
   const handleSend = useCallback(async () => {
-    ensureAudioContext(); // unlock audio on user gesture
+    ensureAudioContext(); // unlock on user gesture
     if (!input.trim() || isLoading) return;
 
     const userMessage = input.trim();
@@ -323,7 +299,6 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
 
     setMessages(prev => [...prev, userMsg, assistantMsg]);
 
-    // ── streaming TTS: sentence buffer ──
     let ttsBuffer = "";
     const spokenSentences = new Set<string>();
 
@@ -353,7 +328,6 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
           prev.map(m => m.id === assistantId ? { ...m, content: accText } : m)
         );
 
-        // ── Real-time TTS: extract complete sentences ──
         if (autoSpeak) {
           ttsBuffer += chunk;
           const parts = ttsBuffer.split(/(?<=[.!?;:\n])\s+/);
@@ -368,7 +342,6 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
         }
       }
 
-      // Flush remaining buffer
       if (autoSpeak && ttsBuffer.trim().length > 5 && !spokenSentences.has(ttsBuffer.trim())) {
         enqueueTTS(ttsBuffer.trim());
       }
@@ -386,14 +359,12 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     } finally {
       setIsLoading(false);
     }
-  }, [input, isLoading, messages, moduleSlug, lessonSlug, lessonTitle, autoSpeak, enqueueTTS]);
+  }, [input, isLoading, messages, moduleSlug, lessonSlug, lessonTitle, autoSpeak, enqueueTTS, ensureAudioContext]);
 
   // Auto-send after voice input
   useEffect(() => {
     if (!isListening && input.trim() && !isLoading && autoSpeak) {
-      const timer = setTimeout(() => {
-        handleSend();
-      }, 600);
+      const timer = setTimeout(() => handleSend(), 600);
       return () => clearTimeout(timer);
     }
   }, [isListening, input, isLoading, autoSpeak, handleSend]);
@@ -415,11 +386,6 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     }]);
     setPlayingIndex(null);
     setAutoSpeak(false);
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current = null;
-    }
-    audioQueueRef.current.forEach((item) => URL.revokeObjectURL(item.url));
     audioQueueRef.current = [];
   };
 
@@ -429,20 +395,13 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-end p-4 sm:p-6">
-      {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-        onClick={onClose}
-      />
-      
-      {/* Chat Panel */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
       <motion.div
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 20, scale: 0.95 }}
         className="relative flex h-[80vh] w-full max-w-md flex-col overflow-hidden rounded-2xl border border-brand-gold/30 bg-[#0f1f33] shadow-2xl"
       >
-        {/* Header */}
         <div className="flex items-center justify-between border-b border-white/10 bg-gradient-to-r from-brand-navy to-[#0f1f33] px-4 py-3">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-[#f0c040] text-brand-navy">
@@ -454,72 +413,37 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
             </div>
           </div>
           <div className="flex items-center gap-1">
-            {/* Auto-speak toggle */}
             <button
               onClick={() => setAutoSpeak(a => !a)}
               title={autoSpeak ? "Désactiver la voix auto" : "Activer la voix auto"}
               className={`rounded-full p-2 transition ${
-                autoSpeak
-                  ? "bg-brand-gold text-brand-navy"
-                  : "text-white/50 hover:bg-white/10 hover:text-white"
+                autoSpeak ? "bg-brand-gold text-brand-navy" : "text-white/50 hover:bg-white/10 hover:text-white"
               }`}
             >
               {autoSpeak ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
             </button>
-            <button
-              onClick={handleClearChat}
-              className="rounded-full p-2 text-white/50 hover:bg-white/10 hover:text-white transition"
-              title="Effacer la conversation"
-            >
+            <button onClick={handleClearChat} className="rounded-full p-2 text-white/50 hover:bg-white/10 hover:text-white transition" title="Effacer la conversation">
               <RotateCcw className="h-4 w-4" />
             </button>
-            <button
-              onClick={onClose}
-              className="rounded-full p-2 text-white/50 hover:bg-white/10 hover:text-white transition"
-            >
+            <button onClick={onClose} className="rounded-full p-2 text-white/50 hover:bg-white/10 hover:text-white transition">
               <X className="h-5 w-5" />
             </button>
           </div>
         </div>
 
-        {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           <AnimatePresence>
             {messages.map((msg) => (
-              <motion.div
-                key={msg.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`flex gap-2 ${msg.role === "user" ? "flex-row-reverse" : ""}`}
-              >
-                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
-                  msg.role === "user" 
-                    ? "bg-white/10 text-white" 
-                    : "bg-gradient-to-br from-brand-gold to-[#f0c040] text-brand-navy"
-                }`}>
+              <motion.div key={msg.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className={`flex gap-2 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
+                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${msg.role === "user" ? "bg-white/10 text-white" : "bg-gradient-to-br from-brand-gold to-[#f0c040] text-brand-navy"}`}>
                   {msg.role === "user" ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
                 </div>
                 <div className="flex max-w-[80%] flex-col gap-1.5">
-                  <div className={`rounded-2xl px-4 py-2 text-sm ${
-                    msg.role === "user"
-                      ? "bg-brand-gold/20 text-white"
-                      : "bg-white/10 text-white/90"
-                  }`}>
-                    {msg.content.split("\n").map((line, i) => (
-                      <p key={i} className={i > 0 ? "mt-2" : ""}>
-                        {line}
-                      </p>
-                    ))}
+                  <div className={`rounded-2xl px-4 py-2 text-sm ${msg.role === "user" ? "bg-brand-gold/20 text-white" : "bg-white/10 text-white/90"}`}>
+                    {msg.content.split("\n").map((line, i) => <p key={i} className={i > 0 ? "mt-2" : ""}>{line}</p>)}
                   </div>
                   {msg.role === "assistant" && msg.content.length > 5 && (
-                    <button
-                      onClick={() => speak(msg.content, msg.id)}
-                      className={`self-start flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all ${
-                        playingIndex === msg.id
-                          ? "bg-brand-gold/20 text-brand-gold animate-pulse"
-                          : "text-white/40 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/10"
-                      }`}
-                    >
+                    <button onClick={() => speak(msg.content, msg.id)} className={`self-start flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all ${playingIndex === msg.id ? "bg-brand-gold/20 text-brand-gold animate-pulse" : "text-white/40 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/10"}`}>
                       <Volume2 className={`h-3.5 w-3.5 ${playingIndex === msg.id ? "animate-bounce" : ""}`} />
                       {playingIndex === msg.id ? "Lecture en cours..." : "Écouter Marie"}
                     </button>
@@ -528,87 +452,33 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
               </motion.div>
             ))}
           </AnimatePresence>
-          
-          {/* Personalized Recommendation */}
           {showRecommendation && messages.length <= 2 && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="rounded-xl border border-brand-gold/20 bg-brand-gold/5 p-3"
-            >
-              <div className="flex items-center gap-2 text-brand-gold">
-                <Sparkles className="h-4 w-4" />
-                <span className="text-xs font-semibold">Suggestion personnalisée</span>
-              </div>
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="rounded-xl border border-brand-gold/20 bg-brand-gold/5 p-3">
+              <div className="flex items-center gap-2 text-brand-gold"><Sparkles className="h-4 w-4" /><span className="text-xs font-semibold">Suggestion personnalisée</span></div>
               <p className="mt-1 text-xs text-white/70">{recommendation}</p>
             </motion.div>
           )}
-          
           {isLoading && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex items-center gap-2 text-on-dark-muted"
-            >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-[#f0c040]">
-                <Bot className="h-4 w-4 text-brand-navy" />
-              </div>
-              <div className="flex gap-1">
-                <span className="animate-bounce">.</span>
-                <span className="animate-bounce" style={{ animationDelay: "0.1s" }}>.</span>
-                <span className="animate-bounce" style={{ animationDelay: "0.2s" }}>.</span>
-              </div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2 text-on-dark-muted">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-[#f0c040]"><Bot className="h-4 w-4 text-brand-navy" /></div>
+              <div className="flex gap-1"><span className="animate-bounce">.</span><span className="animate-bounce" style={{ animationDelay: "0.1s" }}>.</span><span className="animate-bounce" style={{ animationDelay: "0.2s" }}>.</span></div>
             </motion.div>
           )}
-
-          {audioError && (
-            <div className="rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-300 text-center">
-              {audioError}
-            </div>
-          )}
-
+          {audioError && <div className="rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-300 text-center">{audioError}</div>}
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
         <div className="border-t border-white/10 bg-white/5 p-4">
           <div className="flex gap-2">
             {speechSupported && (
-              <button
-                onClick={isListening ? stopListening : startListening}
-                title={isListening ? "Arrêter l'écoute" : "Parler à Marie (microphone)"}
-                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition ${
-                  isListening
-                    ? "bg-red-500 text-white animate-pulse"
-                    : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
-                }`}
-              >
+              <button onClick={isListening ? stopListening : startListening} title={isListening ? "Arrêter l'écoute" : "Parler à Marie (microphone)"} className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition ${isListening ? "bg-red-500 text-white animate-pulse" : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"}`}>
                 {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
               </button>
             )}
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder={isListening ? "Écoute en cours..." : "Posez votre question..."}
-              disabled={isListening}
-              className="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/30 focus:border-brand-gold/50 focus:outline-none focus:ring-1 focus:ring-brand-gold/30 disabled:opacity-50"
-            />
-            <button
-              onClick={handleSend}
-              disabled={!input.trim() || isLoading || isListening}
-              className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold text-brand-navy transition hover:bg-[#e0bf4d] disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <Send className="h-4 w-4" />
-            </button>
+            <input ref={inputRef} type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder={isListening ? "Écoute en cours..." : "Posez votre question..."} disabled={isListening} className="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/30 focus:border-brand-gold/50 focus:outline-none focus:ring-1 focus:ring-brand-gold/30 disabled:opacity-50" />
+            <button onClick={handleSend} disabled={!input.trim() || isLoading || isListening} className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold text-brand-navy transition hover:bg-[#e0bf4d] disabled:opacity-50 disabled:cursor-not-allowed"><Send className="h-4 w-4" /></button>
           </div>
-          <p className="mt-2 text-[10px] text-center text-white/50">
-            {speechSupported
-              ? "🎤 Cliquez sur le micro pour parler à Marie • Elle vous répondra à voix haute en temps réel"
-              : "Marie est une IA expérimentale. Vérifiez les informations importantes."}
-          </p>
+          <p className="mt-2 text-[10px] text-center text-white/50">{speechSupported ? "🎤 Cliquez sur le micro pour parler à Marie • Elle vous répondra à voix haute en temps réel" : "Marie est une IA expérimentale. Vérifiez les informations importantes."}</p>
         </div>
       </motion.div>
     </div>

@@ -1,7 +1,7 @@
 import { streamText } from "ai";
-import { createMistral } from "@ai-sdk/mistral";
+import { createOpenAI } from "@ai-sdk/openai";
 
-const mistral = createMistral({ apiKey: process.env.MISTRAL_API_KEY });
+const openai = createOpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const SYSTEM_PROMPT = `Tu es Marie, coach experte en immobilier français avec 15 ans d'expérience terrain.
 Tu accompagnes des agents immobiliers en formation professionnelle (certification Loi ALUR).
@@ -38,10 +38,9 @@ export async function POST(request: Request) {
 
   try {
     const result = streamText({
-      model: mistral("mistral-small-latest"),
+      model: openai("gpt-4o-mini"),
       system: SYSTEM_PROMPT + contextNote,
       messages,
-      maxOutputTokens: 400,
       temperature: 0.7,
     });
 
