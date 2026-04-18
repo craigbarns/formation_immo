@@ -42,22 +42,29 @@ export function CoachChat() {
         body: JSON.stringify({ text }),
       });
       if (!res.ok) {
+        const err = await res.text();
+        console.error("TTS error:", res.status, err);
+        alert(`Erreur TTS (${res.status}) — vérifie la console (F12)`);
         setPlayingIndex(null);
         return;
       }
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
+      audio.load();
       audio.onended = () => {
         setPlayingIndex(null);
         URL.revokeObjectURL(url);
       };
-      audio.onerror = () => {
+      audio.onerror = (e) => {
+        console.error("Audio play error:", e);
         setPlayingIndex(null);
         URL.revokeObjectURL(url);
       };
       await audio.play();
-    } catch {
+    } catch (e) {
+      console.error("Speak error:", e);
+      alert("Erreur lecture audio — vérifie la console (F12)");
       setPlayingIndex(null);
     }
   }
