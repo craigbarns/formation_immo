@@ -17,7 +17,7 @@ import {
   X,
 } from "lucide-react";
 import { InfographieBlocks } from "@/components/supports-visuels/InfographieBlocks";
-import { CoachChat } from "@/components/supports-visuels/CoachChat";
+
 import { SUPPORTS_VISUELS } from "@/data/supports-visuels";
 
 type Theme = (typeof SUPPORTS_VISUELS)[number]["theme"];
@@ -362,7 +362,7 @@ export default function SupportsVisuelsPage() {
         (notaire, expert-comptable, banque).
       </div>
 
-      <CoachChat moduleSlug="supports-visuels" lessonSlug="fiches" lessonTitle="Supports visuels & fiches opérationnelles" />
+
     </div>
   );
 }

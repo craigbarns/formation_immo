@@ -154,7 +154,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
       const res = await fetch("/api/tts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: cleanForTTS(text) }),
+        body: JSON.stringify({ text }),
       });
       if (!res.ok) { isProcessingTTSRef.current = false; processNextTTS(); return; }
       const audioBuffer = await ctx.decodeAudioData((await res.arrayBuffer()).slice(0));

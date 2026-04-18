@@ -19,14 +19,18 @@ interface ThemeContextType {
   toggleTheme: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const ThemeContext = createContext<ThemeContextType>({
+  theme: "system",
+  setTheme: () => {},
+  resolvedTheme: "light",
+  toggleTheme: () => {},
+});
 
 const STORAGE_KEY = "formation-theme";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window === 'undefined') return "system";
-    if (typeof window === 'undefined') return "system";
+    if (typeof window === "undefined") return "system";
     return (localStorage.getItem(STORAGE_KEY) as Theme | null) ?? "system";
   });
   const [mounted, setMounted] = useState(false);
@@ -37,7 +41,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const resolvedTheme = useMemo<"light" | "dark">(() => {
-    if (!mounted || typeof window === 'undefined') return "light";
+    if (!mounted || typeof window === "undefined") return "light";
     if (theme === "system") {
       return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
@@ -59,16 +63,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!mounted || theme !== "system") return;
     const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = () => {
-      forceUpdate();
-    };
+    const handleChange = () => forceUpdate();
     systemDark.addEventListener("change", handleChange);
     return () => systemDark.removeEventListener("change", handleChange);
   }, [theme, mounted]);
 
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
-  };
+  const setTheme = (newTheme: Theme) => setThemeState(newTheme);
 
   const toggleTheme = () => {
     setThemeState((prev) => {
@@ -78,24 +78,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  // Prevent flash
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
   return (
-    <ThemeContext.Provider
-      value={{ theme, setTheme, resolvedTheme, toggleTheme }}
-    >
+    <ThemeContext.Provider value={{ theme, setTheme, resolvedTheme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 }
 
 export function useTheme() {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error("useTheme must be used within ThemeProvider");
-  }
-  return context;
+  return useContext(ThemeContext);
 }
