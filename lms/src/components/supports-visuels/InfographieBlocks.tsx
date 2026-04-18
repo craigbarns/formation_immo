@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ExternalLink, CheckCircle2, AlertTriangle, Scale, Target, TrendingUp, ShieldCheck, HelpCircle } from "lucide-react";
+import { ExternalLink, CheckCircle2, AlertTriangle, Scale, Target, TrendingUp, ShieldCheck, HelpCircle, Check } from "lucide-react";
 import type { SupportVisuelMeta } from "@/data/supports-visuels";
 
 const navy = "#1a3a5c";
@@ -135,10 +135,13 @@ function BlockChecklist() {
               <CheckCircle2 className={p.title === "Après la visite" ? "text-emerald-500" : "text-sky-500"} />
               {p.title}
             </h3>
-            <ul className="mt-4 space-y-3 text-sm font-medium text-zinc-800">
+            <ul className="mt-4 space-y-2.5 text-sm font-medium text-zinc-800">
               {p.items.map((t) => (
                 <li key={t} className="flex items-start gap-2.5">
-                  <input type="checkbox" className="mt-0.5 h-4 w-4 shrink-0 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy" />
+                  <Check
+                    className={`mt-0.5 h-4 w-4 shrink-0 ${p.title === "Après la visite" ? "text-emerald-500" : "text-sky-500"}`}
+                    aria-hidden
+                  />
                   <span className="leading-tight">{t}</span>
                 </li>
               ))}
@@ -294,9 +297,9 @@ function BlockMatrice() {
               "Surface Carrez",
               "Charges de copropriété",
             ].map((t) => (
-              <li key={t} className="flex gap-2">
-                <input type="checkbox" className="mt-0.5 h-4 w-4 rounded border-zinc-300" />
-                {t}
+              <li key={t} className="flex items-start gap-2">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-navy/70" aria-hidden />
+                <span>{t}</span>
               </li>
             ))}
           </ul>
@@ -500,9 +503,9 @@ function BlockTimeline() {
             "Relevés bancaires",
             "Contrat de travail",
           ].map((t) => (
-            <li key={t} className="flex gap-2 text-sm text-zinc-700">
-              <input type="checkbox" className="mt-0.5 h-4 w-4 rounded border-zinc-300" />
-              {t}
+            <li key={t} className="flex items-start gap-2 text-sm text-zinc-700">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" aria-hidden />
+              <span>{t}</span>
             </li>
           ))}
         </ul>
@@ -682,10 +685,7 @@ function BlockDiagnostics() {
             {rows.map((r) => (
               <tr key={r.name} className="hover:bg-zinc-50/60">
                 <td className="border border-zinc-200 p-3 font-medium text-zinc-800">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" className="h-4 w-4 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy" />
-                    {r.name}
-                  </label>
+                  {r.name}
                 </td>
                 <td className="border border-zinc-200 p-3 text-zinc-700">{r.valid}</td>
                 <td className="border border-zinc-200 p-3 text-zinc-600">{r.condition}</td>
@@ -769,8 +769,8 @@ function BlockMandats() {
             "Mentions sur le fonds de garantie",
           ].map((t) => (
             <li key={t} className="flex items-start gap-2 text-sm text-zinc-700">
-              <input type="checkbox" className="mt-0.5 h-4 w-4 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy" />
-              {t}
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-navy/70" aria-hidden />
+              <span>{t}</span>
             </li>
           ))}
         </ul>
@@ -824,10 +824,10 @@ function BlockReseaux() {
         <h3 className="text-sm font-bold uppercase text-brand-navy">Checklist engagement</h3>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
           {checks.map((c) => (
-            <label key={c} className="flex items-start gap-2 text-sm text-zinc-700 cursor-pointer">
-              <input type="checkbox" className="mt-0.5 h-4 w-4 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy" />
+            <div key={c} className="flex items-start gap-2 text-sm text-zinc-700">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" aria-hidden />
               <span dangerouslySetInnerHTML={{ __html: c }} />
-            </label>
+            </div>
           ))}
         </div>
       </div>
