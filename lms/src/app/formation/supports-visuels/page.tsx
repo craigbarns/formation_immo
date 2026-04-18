@@ -17,6 +17,7 @@ import {
   X,
 } from "lucide-react";
 import { InfographieBlocks } from "@/components/supports-visuels/InfographieBlocks";
+import { CoachChat } from "@/components/supports-visuels/CoachChat";
 import { SUPPORTS_VISUELS } from "@/data/supports-visuels";
 
 type Theme = (typeof SUPPORTS_VISUELS)[number]["theme"];
@@ -360,6 +361,8 @@ export default function SupportsVisuelsPage() {
         Ces contenus sont pédagogiques et ne remplacent pas un conseil personnalisé
         (notaire, expert-comptable, banque).
       </div>
+
+      <CoachChat />
     </div>
   );
 }
