@@ -8,16 +8,16 @@ export async function POST(request: Request) {
   }
 
   try {
-    const res = await fetch("https://api.mistral.ai/v1/audio/speech", {
+    const res = await fetch("https://api.openai.com/v1/audio/speech", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.MISTRAL_API_KEY}`,
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "voxtral-mini-tts-2603",
+        model: "tts-1",
         input: text,
-        voice: "fr_female",
+        voice: "nova",
         response_format: "mp3",
       }),
     });
