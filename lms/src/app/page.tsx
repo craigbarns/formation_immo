@@ -1,5 +1,18 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, BookOpen, Scale, TrendingUp, Megaphone, MapPin, GraduationCap } from "lucide-react";
+import {
+  ArrowRight,
+  CheckCircle2,
+  BookOpen,
+  Scale,
+  TrendingUp,
+  Megaphone,
+  MapPin,
+  GraduationCap,
+  Sparkles,
+  Layers,
+  Target,
+  ShieldCheck,
+} from "lucide-react";
 
 const MODULES = [
   {
@@ -52,6 +65,30 @@ const BADGES = [
   "Non-discrimination",
 ];
 
+/** Compétences acquises — affichées en section "Outcomes" */
+const OUTCOMES = [
+  {
+    icon: Scale,
+    title: "Maîtriser le cadre légal 2026",
+    desc: "Loi Hoguet, ALUR, Climat, Lemoine — tous les textes à jour avec sanctions et cas pratiques.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Closer 30 % de mandats en plus",
+    desc: "Méthode BANT, technique CRAC, Ben Franklin Close — scripts terrain testés sur 1 000+ visites.",
+  },
+  {
+    icon: BookOpen,
+    title: "Optimiser le financement client",
+    desc: "Calcul HCSF, défiscalisation 2026 (Denormandie, LMNP, déficit foncier 21 400 €), démembrement.",
+  },
+  {
+    icon: Megaphone,
+    title: "Construire un personal branding fort",
+    desc: "LinkedIn algorithmé, Matterport ROI, photo pro, SEO local — feuille de route 30 / 60 / 90 jours.",
+  },
+];
+
 export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col overflow-hidden bg-brand-navy text-white">
@@ -98,17 +135,18 @@ export default function HomePage() {
             </span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
-            42 heures structurées en 5 modules : juridique, transaction, financement, marketing et terrain.
-            Scripts vidéo, QCM, simulateurs et fiches pratiques — tout ce qu&apos;il vous faut pour performer.
+            <span className="font-semibold text-white">42 heures structurées en 5 modules</span> — du cadre légal 2026 au closing terrain.
+            36 leçons vidéo, 65 QCM, 8 simulateurs, 360 flashcards et 35+ cas pratiques pour devenir l&apos;agent que les clients recommandent.
           </p>
 
           {/* Stats row */}
           <div className="mx-auto mt-10 flex flex-wrap justify-center gap-3">
             {[
               ["42h", "de formation"],
-              ["5", "modules"],
-              ["36+", "leçons"],
-              ["75+", "questions QCM"],
+              ["36", "leçons"],
+              ["65", "questions QCM"],
+              ["35+", "cas pratiques"],
+              ["360+", "flashcards"],
             ].map(([val, label]) => (
               <div
                 key={label}
@@ -213,12 +251,50 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Atouts */}
+        {/* Outcomes — ce que vous saurez faire */}
         <section className="border-t border-white/10 px-6 py-16">
           <div className="mx-auto max-w-6xl">
+            <div className="mb-12 text-center">
+              <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-gold/10 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-brand-gold">
+                <Target className="h-3 w-3" /> Résultats concrets
+              </p>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">
+                Ce que vous saurez faire à la fin
+              </h2>
+              <p className="mx-auto mt-3 max-w-xl text-sm text-white/70">
+                4 compétences transformatrices, mesurables et activables dès le lendemain.
+              </p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              {OUTCOMES.map((o) => {
+                const Icon = o.icon;
+                return (
+                  <div
+                    key={o.title}
+                    className="group flex gap-5 rounded-2xl border border-white/12 bg-gradient-to-br from-white/8 to-white/3 p-6 transition hover:border-brand-gold/40 hover:from-white/10"
+                  >
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-base font-bold text-white">{o.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-white/70">{o.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Atouts */}
+        <section className="border-t border-white/10 bg-white/[0.02] px-6 py-16">
+          <div className="mx-auto max-w-6xl">
             <div className="mb-10 text-center">
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-gold">Méthode pédagogique</p>
-              <h2 className="mt-3 text-3xl font-bold">Concret, actionnable, complet</h2>
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-on-dark-muted">
+                <Sparkles className="h-3 w-3" /> Méthode pédagogique
+              </p>
+              <h2 className="mt-4 text-3xl font-bold">Concret, actionnable, complet</h2>
             </div>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {[
@@ -229,29 +305,82 @@ export default function HomePage() {
                 },
                 {
                   icon: "✅",
-                  title: "QCM progressifs",
-                  desc: "75+ questions avec explications détaillées et références juridiques.",
+                  title: "65 QCM expliqués",
+                  desc: "Questions chronométrées avec explications détaillées et références juridiques.",
                 },
                 {
                   icon: "🧮",
-                  title: "Simulateurs",
-                  desc: "Crédit, rentabilité, négociation — exercez-vous sur des cas réels.",
+                  title: "8 simulateurs",
+                  desc: "Crédit, capacité d'emprunt, rentabilité, net vendeur — cas réels chiffrés.",
                 },
                 {
                   icon: "📋",
-                  title: "Fiches pratiques",
-                  desc: "Templates, grilles de conformité et fiches récap téléchargeables.",
+                  title: "36 checklists pro",
+                  desc: "Une grille de conformité par leçon : mandats, visites, R0/R1/R2, closing.",
+                },
+                {
+                  icon: "🃏",
+                  title: "360 flashcards",
+                  desc: "Système SM-2 (espacement intelligent) — 10 cartes par leçon pour la mémorisation longue.",
+                },
+                {
+                  icon: "💼",
+                  title: "35+ cas pratiques",
+                  desc: "Études de cas avec questions débriefées : ALUR, Tracfin, négociation, fiscalité.",
+                },
+                {
+                  icon: "🎯",
+                  title: "Test de positionnement",
+                  desc: "Évaluation initiale + parcours personnalisé selon vos modules faibles / forts.",
+                },
+                {
+                  icon: "🏆",
+                  title: "Certification",
+                  desc: "Examen final 5×15 min + attestation LinkedIn téléchargeable.",
                 },
               ].map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-6"
+                  className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/20 hover:bg-white/8"
                 >
                   <div className="text-3xl">{item.icon}</div>
                   <h3 className="mt-4 font-bold text-white">{item.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-white/65">{item.desc}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Garantie qualité */}
+        <section className="border-t border-white/10 px-6 py-12">
+          <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-6 rounded-3xl border border-brand-gold/20 bg-gradient-to-r from-brand-gold/5 via-brand-gold/10 to-brand-gold/5 px-8 py-6 text-center sm:gap-10">
+            <div className="flex items-center gap-3 text-left">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-gold/20 text-brand-gold">
+                <ShieldCheck className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-brand-gold">Mise à jour 2026</p>
+                <p className="text-sm font-semibold text-white">Loi Climat, Lemoine, HCSF — déjà intégrés</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 text-left">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-gold/20 text-brand-gold">
+                <Layers className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-brand-gold">100 % en ligne</p>
+                <p className="text-sm font-semibold text-white">Apprenez à votre rythme, sur tous appareils</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 text-left">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-gold/20 text-brand-gold">
+                <GraduationCap className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-brand-gold">NDA 75331582333</p>
+                <p className="text-sm font-semibold text-white">Éligible OPCO, AGEFIP, FIF-PL</p>
+              </div>
             </div>
           </div>
         </section>
