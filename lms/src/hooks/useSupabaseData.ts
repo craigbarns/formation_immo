@@ -116,7 +116,44 @@ export function useGamificationState() {
     setLoading(false);
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (cancelled) return;
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+      const { data } = await supabase
+        .from("gamification_state")
+        .select("*")
+        .eq("user_id", user.id)
+        .single();
+      if (cancelled) return;
+      if (data) {
+        setState({
+          xp: data.xp,
+          earnedBadges: data.earned_badges || [],
+          streak: data.streak,
+          lastLoginDate: data.last_login_date,
+          totalQuizCorrect: data.total_quiz_correct,
+          totalExamsTaken: data.total_exams_taken,
+          totalExamsPerfect: data.total_exams_perfect,
+          simulatorsUsed: data.simulators_used || [],
+          lessonTimes: data.lesson_times || {},
+          examScores: data.exam_scores || {},
+          xpHistory: data.xp_history || [],
+          moduleTimers: data.module_timers || {},
+          dailyActivity: data.daily_activity || {},
+          completedChecklists: data.completed_checklists || [],
+          flashcardsReviewed: data.flashcards_reviewed,
+        });
+      }
+      setLoading(false);
+    })();
+    return () => { cancelled = true; };
+  }, []);
 
   const save = useCallback(async (next: Partial<GamificationState>) => {
     const { data: { user } } = await supabase.auth.getUser();
@@ -182,7 +219,29 @@ export function useBookmarks() {
     setLoading(false);
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (cancelled) return;
+      if (!user) { setLoading(false); return; }
+      const { data } = await supabase
+        .from("bookmarks")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false });
+      if (cancelled) return;
+      setBookmarks((data || []).map((b) => ({
+        id: b.id,
+        moduleSlug: b.module_slug,
+        lessonSlug: b.lesson_slug,
+        lessonTitle: b.lesson_title,
+        moduleTitle: b.module_title,
+      })));
+      setLoading(false);
+    })();
+    return () => { cancelled = true; };
+  }, []);
 
   const add = useCallback(async (item: Omit<BookmarkItem, "id">) => {
     const { data: { user } } = await supabase.auth.getUser();
@@ -250,7 +309,31 @@ export function useNotes(moduleSlug?: string, lessonSlug?: string) {
     setLoading(false);
   }, [moduleSlug, lessonSlug]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (cancelled) return;
+      if (!user) { setLoading(false); return; }
+
+      let query = supabase.from("notes").select("*").eq("user_id", user.id);
+      if (moduleSlug) query = query.eq("module_slug", moduleSlug);
+      if (lessonSlug) query = query.eq("lesson_slug", lessonSlug);
+
+      const { data } = await query.order("created_at", { ascending: true });
+      if (cancelled) return;
+      setNotes((data || []).map((n) => ({
+        id: n.id,
+        moduleSlug: n.module_slug,
+        lessonSlug: n.lesson_slug,
+        content: n.content,
+        color: n.color,
+        createdAt: n.created_at,
+      })));
+      setLoading(false);
+    })();
+    return () => { cancelled = true; };
+  }, [moduleSlug, lessonSlug]);
 
   const add = useCallback(async (content: string, color: string = "yellow") => {
     if (!moduleSlug || !lessonSlug) return;

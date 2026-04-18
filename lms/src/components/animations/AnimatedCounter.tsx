@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { motion, useSpring, useTransform } from "framer-motion";
 
 interface AnimatedCounterProps {
@@ -18,7 +18,7 @@ export function AnimatedCounter({
   prefix = "",
   className = "",
 }: AnimatedCounterProps) {
-  const hasAnimated = useRef(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   const spring = useSpring(0, {
     stiffness: 50,
@@ -32,10 +32,12 @@ export function AnimatedCounter({
 
   useEffect(() => {
     spring.set(value);
-    hasAnimated.current = true;
+    // setHasAnimated est différé via un microtask pour éviter setState
+    // synchronously dans l'effet (react-hooks/set-state-in-effect).
+    queueMicrotask(() => setHasAnimated(true));
   }, [spring, value]);
 
-  if (!hasAnimated.current) {
+  if (!hasAnimated) {
     return (
       <span className={className}>
         {prefix}

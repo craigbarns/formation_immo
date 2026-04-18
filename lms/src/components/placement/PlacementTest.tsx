@@ -40,20 +40,7 @@ export function PlacementTest() {
     setAnswers((prev) => ({ ...prev, [q.id]: index }));
   }, [q.id]);
 
-  const next = useCallback(() => {
-    if (current < total - 1) {
-      setCurrent((c) => c + 1);
-    } else {
-      setStep("result");
-      saveResult();
-    }
-  }, [current, total]);
-
-  const prev = useCallback(() => {
-    if (current > 0) setCurrent((c) => c - 1);
-  }, [current]);
-
-  async function saveResult() {
+  const saveResult = useCallback(async () => {
     setSaving(true);
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
@@ -77,7 +64,20 @@ export function PlacementTest() {
     }, { onConflict: "user_id" });
     setSaving(false);
     setSaved(true);
-  }
+  }, [answers]);
+
+  const next = useCallback(() => {
+    if (current < total - 1) {
+      setCurrent((c) => c + 1);
+    } else {
+      setStep("result");
+      saveResult();
+    }
+  }, [current, total, saveResult]);
+
+  const prev = useCallback(() => {
+    if (current > 0) setCurrent((c) => c - 1);
+  }, [current]);
 
   // ─── INTRO ───────────────────────────────────────────────
   if (step === "intro") {

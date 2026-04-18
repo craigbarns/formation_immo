@@ -304,13 +304,18 @@ const PAIR_COLORS = [
 ];
 
 function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
-  const matchPairs = exercise.matchPairs ?? [];
-  const leftItems = matchPairs.map((p) => p.left);
+  // Mémoïsation stable de matchPairs pour préserver la référence entre rendus
+  // (sinon React Compiler ne peut pas conserver les memos en aval).
+  const matchPairs = useMemo(
+    () => exercise.matchPairs ?? [],
+    [exercise.matchPairs],
+  );
+  const leftItems = useMemo(() => matchPairs.map((p) => p.left), [matchPairs]);
 
   const shuffledRight = useMemo(() => {
     const items = matchPairs.map((p) => p.right);
     return shuffleDeterministic(items, `${exercise.id}:match`);
-  }, [exercise.id, exercise.matchPairs]);
+  }, [exercise.id, matchPairs]);
 
   const [selectedLeft, setSelectedLeft] = useState<number | null>(null);
   const [matches, setMatches] = useState<Map<number, number>>(new Map());

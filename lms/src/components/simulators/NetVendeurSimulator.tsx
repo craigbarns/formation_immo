@@ -87,7 +87,7 @@ export function NetVendeurSimulator() {
 
             <div>
               <div className="flex justify-between text-sm font-medium text-zinc-700">
-                <label>Taux d'honoraires</label>
+                <label>Taux d&apos;honoraires</label>
                 <span className="font-bold text-brand-gold">{honoraires} %</span>
               </div>
               <input
@@ -109,7 +109,7 @@ export function NetVendeurSimulator() {
                 className="h-5 w-5 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy"
               />
               <div>
-                <p className="text-sm font-semibold text-zinc-800">Honoraires à charge de l'acquéreur</p>
+                <p className="text-sm font-semibold text-zinc-800">Honoraires à charge de l&apos;acquéreur</p>
                 <p className="text-xs text-zinc-500">Le vendeur touche le prix FAI intégralement.</p>
               </div>
             </label>
@@ -141,7 +141,7 @@ export function NetVendeurSimulator() {
 
           <div className="mt-5 rounded-xl bg-white/70 p-3 text-xs text-emerald-900">
             {chargeAcquereur ? (
-              <p>✅ L'acquéreur paie les honoraires. Le vendeur reçoit le prix FAI en intégralité.</p>
+              <p>✅ L&apos;acquéreur paie les honoraires. Le vendeur reçoit le prix FAI en intégralité.</p>
             ) : (
               <p>ℹ️ Les honoraires sont déduits du prix FAI. Net vendeur = {Math.round(netVendeur).toLocaleString("fr-FR")} €.</p>
             )}
@@ -151,7 +151,7 @@ export function NetVendeurSimulator() {
 
       {/* Phrases */}
       <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-        <h4 className="text-sm font-bold text-brand-navy">Phrases d'argumentaire prêtes à l'emploi</h4>
+        <h4 className="text-sm font-bold text-brand-navy">Phrases d&apos;argumentaire prêtes à l&apos;emploi</h4>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {phrases.map((p, i) => (
             <motion.button

@@ -77,9 +77,9 @@ export function CapaciteEmpruntSimulator() {
           <div className="mt-5 rounded-xl bg-zinc-50 p-4 text-xs text-zinc-600">
             <p className="font-semibold text-zinc-800">Comment ça marche ?</p>
             <ul className="mt-2 list-disc space-y-1 pl-4">
-              <li>La mensualité maximale = revenus × taux d'endettement cible.</li>
-              <li>La capacité d'emprunt est calculée avec la formule de l'annuité.</li>
-              <li>Le prix max du bien = capacité d'emprunt + apport personnel.</li>
+              <li>La mensualité maximale = revenus × taux d&apos;endettement cible.</li>
+              <li>La capacité d&apos;emprunt est calculée avec la formule de l&apos;annuité.</li>
+              <li>Le prix max du bien = capacité d&apos;emprunt + apport personnel.</li>
             </ul>
           </div>
         </motion.div>

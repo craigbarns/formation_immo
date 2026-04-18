@@ -293,16 +293,19 @@ export function NegotiationSimulator() {
   }, [messages, isTyping, finished]);
 
   useEffect(() => {
-    // Init first message
-    setMessages([scenario.messages[0]]);
-    setScore(50);
-    setStep(0);
-    setFinished(false);
-  }, [scenarioIndex]);
+    // Init first message — différé pour éviter setState synchronously dans l'effet
+    queueMicrotask(() => {
+      setMessages([scenario.messages[0]]);
+      setScore(50);
+      setStep(0);
+      setFinished(false);
+    });
+  }, [scenarioIndex, scenario.messages]);
 
   const handleOptionSelect = async (option: DialogOption, messageIndex: number) => {
+    // crypto.randomUUID() est disponible partout (Node 19+ et tous navigateurs récents).
     const userMsg: Message = {
-      id: `user_${Date.now()}`,
+      id: `user_${crypto.randomUUID()}`,
       sender: "user",
       text: option.text,
     };

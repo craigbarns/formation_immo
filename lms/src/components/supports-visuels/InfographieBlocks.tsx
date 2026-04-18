@@ -832,7 +832,7 @@ function BlockReseaux() {
         </div>
       </div>
       <div className="rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm text-amber-950">
-        <strong>Règle 80/20 :</strong> 80 % de contenu utile / informatif, 20 % de promotion directe. Un compte trop promotionnel perd jusqu'à 40 % d'engagement.
+        <strong>Règle 80/20 :</strong> 80 % de contenu utile / informatif, 20 % de promotion directe. Un compte trop promotionnel perd jusqu&apos;à 40 % d&apos;engagement.
       </div>
     </div>
   );
@@ -895,7 +895,7 @@ function BlockNetVendeur() {
                 onChange={(e) => setFraisAcquereur(e.target.checked)}
                 className="h-4 w-4 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy"
               />
-              Honoraires à la charge de l'acquéreur
+              Honoraires à la charge de l&apos;acquéreur
             </label>
           </div>
         </div>
@@ -914,7 +914,7 @@ function BlockNetVendeur() {
         </div>
       </div>
       <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-5">
-        <h3 className="text-sm font-bold uppercase text-brand-navy">Phrases d'argumentaire prêtes à l'emploi</h3>
+        <h3 className="text-sm font-bold uppercase text-brand-navy">Phrases d&apos;argumentaire prêtes à l&apos;emploi</h3>
         <ul className="mt-4 space-y-3">
           {phrases.map((p, i) => (
             <li key={i} className="flex gap-3 text-sm text-zinc-700">

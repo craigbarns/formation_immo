@@ -206,7 +206,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
           <div className="max-h-[60vh] overflow-y-auto">
             {results.length === 0 ? (
               <div className="p-8 text-center text-gray-500">
-                <p>Aucun résultat pour "{query}"</p>
+                <p>Aucun résultat pour &ldquo;{query}&rdquo;</p>
               </div>
             ) : (
               <div className="p-2">

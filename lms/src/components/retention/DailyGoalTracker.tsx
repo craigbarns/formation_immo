@@ -47,27 +47,40 @@ export function useDailyGoal() {
 
   const goalRef = useRef(goal);
   const progressRef = useRef(progress);
-  goalRef.current = goal;
-  progressRef.current = progress;
+
+  // Synchronise les refs avec le state à chaque rendu via un effet
+  // (les writes pendant le render sont interdits par react-hooks/refs).
+  useEffect(() => {
+    goalRef.current = goal;
+  }, [goal]);
+  useEffect(() => {
+    progressRef.current = progress;
+  }, [progress]);
 
   useEffect(() => {
+    let cancelled = false;
     const localGoal = getLocalDailyGoal();
     const localProgress = getLocalDailyProgress();
-    setGoal(localGoal);
-    setProgress(localProgress);
-    goalRef.current = localGoal;
-    progressRef.current = localProgress;
+    queueMicrotask(() => {
+      if (cancelled) return;
+      setGoal(localGoal);
+      setProgress(localProgress);
+      goalRef.current = localGoal;
+      progressRef.current = localProgress;
+    });
 
-    async function loadFromSupabase() {
+    (async () => {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (cancelled || !user) return;
 
       const { data } = await supabase
         .from("user_settings")
         .select("daily_goal, daily_progress")
         .eq("user_id", user.id)
         .single();
+
+      if (cancelled) return;
 
       if (data?.daily_goal) {
         const g = data.daily_goal as DailyGoal;
@@ -83,9 +96,9 @@ export function useDailyGoal() {
         setProgress(p);
         progressRef.current = p;
       }
-    }
+    })();
 
-    loadFromSupabase();
+    return () => { cancelled = true; };
   }, []);
 
   const saveToSupabase = async (goalData: DailyGoal, progressData: DailyProgress) => {

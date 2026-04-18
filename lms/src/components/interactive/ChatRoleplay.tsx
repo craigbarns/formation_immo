@@ -14,6 +14,10 @@ export function ChatRoleplay({ scenario }: { scenario: ChatRoleplayScenario }) {
   const [finished, setFinished] = useState(false);
   const runRef = useRef(0);
 
+  // Ref vers la dernière version de `follow` pour permettre l'auto-référence
+  // dans les setTimeout sans déclencher react-hooks/immutability.
+  const followRef = useRef<(id: string) => void>(() => {});
+
   const follow = useCallback(
     (id: string) => {
       const n = scenario.nodes[id];
@@ -32,7 +36,7 @@ export function ChatRoleplay({ scenario }: { scenario: ChatRoleplayScenario }) {
           const tid = ++runRef.current;
           setTimeout(() => {
             if (tid !== runRef.current) return;
-            follow(nx.id);
+            followRef.current(nx.id);
           }, 450);
         }
       } else if (n.kind === "end") {
@@ -42,6 +46,10 @@ export function ChatRoleplay({ scenario }: { scenario: ChatRoleplayScenario }) {
     },
     [scenario.nodes],
   );
+
+  useEffect(() => {
+    followRef.current = follow;
+  }, [follow]);
 
   const reset = useCallback(() => {
     runRef.current += 1;
@@ -56,7 +64,8 @@ export function ChatRoleplay({ scenario }: { scenario: ChatRoleplayScenario }) {
   }, [follow, scenario.startId]);
 
   useEffect(() => {
-    reset();
+    // Différé via microtask pour éviter setState synchronously dans l'effet
+    queueMicrotask(reset);
   }, [scenario.id, reset]);
 
   const pickOption = useCallback(

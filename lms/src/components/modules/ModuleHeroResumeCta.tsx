@@ -37,8 +37,26 @@ export function ModuleHeroResumeCta({ moduleSlug, firstLessonHref, examenHref }:
   }, [moduleSlug]);
 
   useEffect(() => {
-    refresh();
-  }, [refresh]);
+    let cancelled = false;
+    (async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      let progress: Record<string, boolean>;
+      if (!user) {
+        progress = getStoredProgress();
+      } else {
+        const { data } = await supabase
+          .from("lesson_progress")
+          .select("lesson_key, completed")
+          .eq("user_id", user.id);
+        progress = {};
+        data?.forEach((row) => { progress[row.lesson_key] = row.completed; });
+      }
+      if (cancelled) return;
+      setResume(findResumeInModule(moduleSlug, progress));
+    })();
+    return () => { cancelled = true; };
+  }, [moduleSlug]);
 
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {

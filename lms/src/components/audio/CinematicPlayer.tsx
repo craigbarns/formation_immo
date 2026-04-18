@@ -69,7 +69,7 @@ const CHAPTER_ORDER = ["Introduction", "Concepts clés", "Données", "Comparatif
 function buildChapterLabels(slides: Slide[]): ChapterLabel[] {
   const chapters: ChapterLabel[] = [];
   let lastChapter = "";
-  let startSlide = 0;
+  const startSlide = 0;
 
   slides.forEach((s, i) => {
     const ch = SLIDE_KIND_TO_CHAPTER[s.kind] ?? "Concepts cles";

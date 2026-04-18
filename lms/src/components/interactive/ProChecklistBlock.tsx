@@ -165,16 +165,19 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
     URL.revokeObjectURL(a.href);
   }, [cl, checked]);
 
-  if (checklists.length === 0 || !cl) return null;
+  const total = cl?.items.length ?? 0;
+  const done = cl ? cl.items.filter((i) => checked.has(i.id)).length : 0;
+  const checklistId = cl?.id;
 
-  const total = cl.items.length;
-  const done = cl.items.filter((i) => checked.has(i.id)).length;
-
+  // Hook avant tout early-return pour respecter les rules-of-hooks.
   useEffect(() => {
+    if (!checklistId) return;
     if (done === total && total > 0) {
-      recordChecklistComplete(cl.id);
+      recordChecklistComplete(checklistId);
     }
-  }, [done, total, cl.id]);
+  }, [done, total, checklistId]);
+
+  if (checklists.length === 0 || !cl) return null;
 
   return (
     <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">

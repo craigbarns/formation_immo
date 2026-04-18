@@ -191,7 +191,7 @@ export function AdvancedCreditSimulator() {
             <p className={`text-2xl font-bold ${result.debtRatio > 35 ? "text-red-500" : "text-emerald-600"}`}>
               {result.debtRatio.toFixed(1)}%
             </p>
-            <p className="text-xs text-zinc-500">Taux d'endettement</p>
+            <p className="text-xs text-zinc-500">Taux d&apos;endettement</p>
           </div>
           <div className="text-center p-3 rounded-xl bg-zinc-50 border border-zinc-100">
             <p className="text-2xl font-bold text-zinc-900">{formatCurrency(result.totalInterest)}</p>
@@ -205,7 +205,7 @@ export function AdvancedCreditSimulator() {
 
         {/* Amortissement */}
         <div className="mb-4 rounded-xl border border-zinc-100 bg-zinc-50 p-4">
-          <h5 className="mb-3 text-sm font-semibold text-zinc-800">Tableau d'amortissement simplifié</h5>
+          <h5 className="mb-3 text-sm font-semibold text-zinc-800">Tableau d&apos;amortissement simplifié</h5>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[360px] border-collapse text-sm">
               <thead className="bg-zinc-100">

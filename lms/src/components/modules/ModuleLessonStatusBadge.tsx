@@ -41,8 +41,26 @@ export function ModuleLessonStatusBadge({
   }, [id]);
 
   useEffect(() => {
-    refresh();
-  }, [refresh]);
+    let cancelled = false;
+    (async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (cancelled) return;
+      if (!user) {
+        setDone(!!getStoredProgress()[id]);
+      } else {
+        const { data } = await supabase
+          .from("lesson_progress")
+          .select("completed")
+          .eq("user_id", user.id)
+          .eq("lesson_key", id)
+          .single();
+        if (cancelled) return;
+        setDone(!!data?.completed);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [id]);
 
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {

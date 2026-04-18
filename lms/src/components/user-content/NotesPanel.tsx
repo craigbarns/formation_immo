@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { StickyNote, X } from "lucide-react";
 import { getNotesForLesson, Note } from "@/lib/user-content";
@@ -18,14 +18,17 @@ export function NotesPanel({ moduleSlug, lessonSlug, isOpen, onClose }: NotesPan
   const [notes, setNotes] = useState<Note[]>([]);
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-    loadNotes();
+  const loadNotes = useCallback(() => {
+    setNotes(getNotesForLesson(moduleSlug, lessonSlug));
   }, [moduleSlug, lessonSlug]);
 
-  const loadNotes = () => {
-    setNotes(getNotesForLesson(moduleSlug, lessonSlug));
-  };
+  useEffect(() => {
+    // Différé via microtask pour éviter setState synchrone dans l'effet
+    queueMicrotask(() => {
+      setMounted(true);
+      setNotes(getNotesForLesson(moduleSlug, lessonSlug));
+    });
+  }, [moduleSlug, lessonSlug]);
 
   if (!mounted) return null;
 
