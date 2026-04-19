@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "duration": 513.094,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.311,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 31.46,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 63.921,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 99.761,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 132.857,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 164.397,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 196.885,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 228.061,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 258.625,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 293.245,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 325.224,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 358.966,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 389.524,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 425.879,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 458.805,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 497.552,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "loger,",
+      "start": 0.491,
+      "end": 1.251
+    },
+    {
+      "term": "millions",
+      "start": 1.531,
+      "end": 1.811
+    },
+    {
+      "term": "visites",
+      "start": 1.971,
+      "end": 2.291
+    },
+    {
+      "term": "visiteurs",
+      "start": 5.392,
+      "end": 5.812
+    },
+    {
+      "term": "deux",
+      "start": 6.952,
+      "end": 7.092
+    },
+    {
+      "term": "plateformes",
+      "start": 7.132,
+      "end": 7.672
+    },
+    {
+      "term": "Pourtant,",
+      "start": 11.733,
+      "end": 12.613
+    },
+    {
+      "term": "combien",
+      "start": 12.653,
+      "end": 12.993
+    },
+    {
+      "term": "d'agents",
+      "start": 13.013,
+      "end": 13.353
+    },
+    {
+      "term": "algorithmes",
+      "start": 16.634,
+      "end": 17.234
+    }
+  ]
+}

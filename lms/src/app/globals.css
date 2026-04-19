@@ -276,8 +276,8 @@ textarea:focus {
   --module-financement: #142d45;
   --module-marketing: #d4af37;
   --module-terrain: #3b6e8f;
-  --surface-dark: var(--surface-dark);
-  --brand-navy-light: var(--brand-navy-light);
-  --brand-gold-light: var(--brand-gold-light);
-  --brand-gold-hover: var(--brand-gold-hover);
+  --surface-dark: #0f172a;
+  --brand-navy-light: #2d5a87;
+  --brand-gold-light: #f0e6c8;
+  --brand-gold-hover: #e5c158;
 }

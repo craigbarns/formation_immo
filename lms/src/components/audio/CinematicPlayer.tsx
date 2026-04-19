@@ -867,7 +867,7 @@ export function CinematicPlayer({
           isFullscreen ? "flex-1" : "aspect-video"
         }`}
         style={{
-          background: `linear-gradient(135deg, ${theme.primary} 0%, ${theme.secondary}22 50%, ${theme.primary} 100%)`,
+          background: `linear-gradient(135deg, ${theme.primary} 0%, ${theme.secondary} 50%, ${theme.primary} 100%)`,
         }}
       >
         {/* Module watermark */}
