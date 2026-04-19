@@ -1,6 +1,6 @@
 # LMS — Formation immobilier (Next.js)
 
-Application web **maison** pour diffuser le parcours **42 h** : 5 modules, 25 leçons, lecture des scripts Markdown depuis le dépôt parent `formation-immobiliere/`.
+Application web **maison** pour diffuser le parcours **42 h** : 5 modules, **36 leçons**, lecture des scripts Markdown depuis le dépôt parent `formation-immobiliere/`.
 
 ## Prérequis
 

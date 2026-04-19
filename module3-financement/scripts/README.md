@@ -134,10 +134,10 @@ Chaque script suit la structure pédagogique suivante :
 
 ---
 
-## 🚀 Utilisation pour HeyGen/Synthesia
+## 🚀 Utilisation pour pipeline vidéo interne
 
 ### Étapes de production :
-1. **Importer le script** dans l'éditeur HeyGen/Synthesia
+1. **Importer le script** dans l'éditeur pipeline vidéo interne
 2. **Sélectionner la voix** recommandée (ElevenLabs)
 3. **Générer les visuels** avec les prompts Midjourney
 4. **Assembler le B-roll** selon les indications [crochets]

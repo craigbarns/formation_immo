@@ -155,7 +155,7 @@ Chaque script inclut un prompt Midjourney pour le visuel principal :
 
 Ces scripts sont prêts à l'enregistrement avec :
 - ElevenLabs pour la voix off
-- HeyGen ou Synthesia pour l'avatar IA
+- pipeline vidéo interne pour l'avatar IA
 - Midjourney pour les visuels
 - Montage vidéo standard pour assembler
 

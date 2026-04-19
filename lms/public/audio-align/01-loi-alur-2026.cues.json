@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "duration": 470.686,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.031,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 31.698,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 62.491,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 94.059,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 124.896,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 160.88,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 193.74,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 225.618,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 257.849,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 289.705,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 324.261,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 355.364,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 390.582,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 426.102,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 456.285,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "avez",
+      "start": 0.371,
+      "end": 0.532
+    },
+    {
+      "term": "cette",
+      "start": 0.872,
+      "end": 1.012
+    },
+    {
+      "term": "changements",
+      "start": 2.694,
+      "end": 3.015
+    },
+    {
+      "term": "chaque",
+      "start": 5.197,
+      "end": 5.457
+    },
+    {
+      "term": "nouvelle",
+      "start": 5.497,
+      "end": 5.798
+    },
+    {
+      "term": "plus",
+      "start": 6.939,
+      "end": 7.179
+    },
+    {
+      "term": "immobilier",
+      "start": 8.02,
+      "end": 9.102
+    },
+    {
+      "term": "Allure",
+      "start": 10.744,
+      "end": 11.104
+    },
+    {
+      "term": "encore.",
+      "start": 11.505,
+      "end": 12.245
+    },
+    {
+      "term": "sont",
+      "start": 14.989,
+      "end": 15.169
+    }
+  ]
+}

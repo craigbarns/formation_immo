@@ -254,5 +254,5 @@ Dans la prochaine vidéo, nous verrons comment transformer la promesse en acte a
 
 ---
 
-*Script prêt pour enregistrement HeyGen/Synthesia*
+*Script prêt pour enregistrement pipeline vidéo interne*
 *Version 1.0 - Module 5 TERRAIN*

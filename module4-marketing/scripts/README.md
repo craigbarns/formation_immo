@@ -1,6 +1,6 @@
 # MODULE 4 : MARKETING DIGITAL - SCRIPTS VIDÉO COMPLETS
 
-## 📚 Formation Immobilière - Scripts Avatar IA (HeyGen/Synthesia)
+## 📚 Formation Immobilière - Scripts Avatar IA (pipeline vidéo interne)
 
 ---
 
@@ -199,7 +199,7 @@ Avant production, vérifier :
 
 ### Outils Recommandés
 - **ElevenLabs** : Génération de voix IA
-- **HeyGen/Synthesia** : Création d'avatars
+- **pipeline vidéo interne** : Création d'avatars
 - **Midjourney** : Génération d'images
 - **Canva** : Création de visuels
 - **CapCut** : Montage vidéo mobile

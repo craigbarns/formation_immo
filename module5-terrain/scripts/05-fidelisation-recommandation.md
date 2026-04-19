@@ -303,5 +303,5 @@ Je vous félicite d'être arrivé jusqu'ici. Et je vous dis à très bientôt po
 
 ---
 
-*Script prêt pour enregistrement HeyGen/Synthesia*
+*Script prêt pour enregistrement pipeline vidéo interne*
 *Version 1.0 - Module 5 TERRAIN*

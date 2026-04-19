@@ -214,5 +214,5 @@ Je vous retrouve dans la prochaine vidéo pour découvrir "L'argumentaire qui co
 
 ---
 
-*Script prêt pour enregistrement HeyGen/Synthesia*
+*Script prêt pour enregistrement pipeline vidéo interne*
 *Version 1.0 - Module 5 TERRAIN*

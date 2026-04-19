@@ -223,4 +223,4 @@ Professional real estate agent in modern office, analyzing property documents an
 
 ---
 
-*Script prêt pour enregistrement HeyGen/Synthesia*
+*Script prêt pour enregistrement pipeline vidéo interne*

@@ -269,4 +269,4 @@ Modern real estate professional using CRM software on multiple screens, customer
 
 ---
 
-*Script prêt pour enregistrement HeyGen/Synthesia*
+*Script prêt pour enregistrement pipeline vidéo interne*

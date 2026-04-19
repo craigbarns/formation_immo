@@ -11,7 +11,7 @@
 
 ## 📋 PRÉSENTATION
 
-Cette formation complète de **42 heures** de contenu pédagogique (5 × 8 h + 2 h ouverture/clôture) couvre l'ensemble des compétences nécessaires pour exercer la profession d'agent immobilier en conformité avec la législation 2026. Les **évaluations** (10 h au total) peuvent être proposées en option ou en parcours allongé — voir `AVATARS-CASTING-ET-PACKAGING-COMMERCIAL.md` pour le détail des volumes.
+Cette formation complète de **42 heures** de contenu pédagogique couvre l'ensemble des compétences nécessaires pour exercer la profession d'agent immobilier en conformité avec la législation 2026. Elle est structurée en **5 modules / 36 leçons** dans le LMS. Les **évaluations** (10 h au total) peuvent être proposées en option ou en parcours allongé — voir `AVATARS-CASTING-ET-PACKAGING-COMMERCIAL.md` pour le détail des volumes.
 
 ### 🎯 Objectifs
 - Maîtriser le cadre juridique ALUR et la conformité
@@ -35,7 +35,7 @@ formation-immobiliere/
 │   └── module5-plan-pedagogique.md     # Module 5 Terrain (8h+2h)
 │
 ├── 📁 module1-juridique/
-│   ├── 📁 scripts/                     # 5 scripts vidéo HeyGen/Synthesia
+│   ├── 📁 scripts/                     # 9 scripts/lessons (incluant conformité avancée)
 │   │   ├── 01-loi-alur-2026.md
 │   │   ├── 02-compromis-vente.md
 │   │   ├── 03-diagnostics-immobiliers.md
@@ -59,7 +59,7 @@ formation-immobiliere/
 │       └── README.md
 │
 ├── 📁 module2-transaction/
-│   ├── 📁 scripts/                     # 5 scripts vidéo
+│   ├── 📁 scripts/                     # 7 scripts/lessons
 │   │   ├── 01-estimation-immobiliere.md
 │   │   ├── 02-prospection-scripts.md
 │   │   ├── 03-negociation-mandat.md
@@ -83,7 +83,7 @@ formation-immobiliere/
 │       └── README.md
 │
 ├── 📁 module3-financement/
-│   ├── 📁 scripts/                     # 5 scripts vidéo
+│   ├── 📁 scripts/                     # 6 scripts/lessons
 │   │   ├── script01-credit-immobilier-2026.md
 │   │   ├── script02-fiscalite-immobiliere.md
 │   │   ├── script03-calcul-rentabilite.md
@@ -111,7 +111,7 @@ formation-immobiliere/
 │       └── README.md
 │
 ├── 📁 module4-marketing/
-│   ├── 📁 scripts/                     # 5 scripts vidéo
+│   ├── 📁 scripts/                     # 7 scripts/lessons
 │   │   ├── 01-photos-immobilieres-secrets-pros.md
 │   │   ├── 02-rediger-annonces-qui-vendent.md
 │   │   ├── 03-maitriser-seloger-leboncoin.md
@@ -134,7 +134,7 @@ formation-immobiliere/
 │       └── README.md
 │
 ├── 📁 module5-terrain/
-│   ├── 📁 scripts/                     # 5 scripts vidéo
+│   ├── 📁 scripts/                     # 7 scripts/lessons
 │   │   ├── 01-conduire-visite-pro.md
 │   │   ├── 02-argumentaire-convertit.md
 │   │   ├── 03-techniques-closing-avancees.md
@@ -184,14 +184,14 @@ formation-immobiliere/
 | Type de livrable | Quantité | Détails |
 |------------------|----------|---------|
 | **Plans pédagogiques** | 6 | 1 global + 5 par module |
-| **Scripts vidéo** | 25 | 5 par module (8-10 min chacun) |
+| **Leçons/scripts LMS** | 36 | 5 modules (mix vidéo, audio, interactif) |
 | **Présentations** | 5 | 12 slides par module |
 | **Templates pratiques** | 20+ | Excel `.xlsx` (8) générés par script + équivalents Word en `.md` |
 | **Cas pratiques évaluation** | 5 | Dossier `evaluation/` |
 | **Attestation / vente / intro vidéo** | 3 | `certification/`, `marketing/`, `videos/` |
 | **QCM** | 50 | 10 par module avec explications |
-| **Prompts Midjourney** | 25+ | Visuels pour les 25 vidéos |
-| **Storyboards** | 25 | Détaillés avec B-roll |
+| **Prompts Midjourney** | 25+ | Base visuelle historique, extensible à 36 leçons |
+| **Storyboards** | 25+ | Base existante, enrichissement en cours |
 | **Voix ElevenLabs** | 15+ | Recommandations par vidéo |
 | **Guide de l'élève** | 1 | 30 pages synthétiques |
 
@@ -211,14 +211,14 @@ formation-immobiliere/
 
 ---
 
-## 🎙️ PRODUCTION VIDÉO (HeyGen/Synthesia)
+## 🎙️ PRODUCTION VIDÉO (pipeline vidéo interne)
 
 ### Casting avatars & packaging commercial
 Un document dédié définit les **5 animateurs virtuels** (un par module), les prompts visuels et les **offres Starter / Pro / Academy** : voir `AVATARS-CASTING-ET-PACKAGING-COMMERCIAL.md`.
 
 ### Scripts prêts à l'emploi
-- 25 scripts complets (8-10 minutes chacun)
-- Durée totale : ~4h de contenu vidéo
+- 36 leçons/scripts (dont scénarios interactifs)
+- Durée totale du parcours LMS : 42h (vidéo/audio/exercices/quiz)
 - Indications B-roll détaillées
 - Pauses pour le rythme
 - Prompts Midjourney pour les visuels
@@ -259,7 +259,7 @@ Tous les contenus respectent :
 1. Sélectionner les scripts dans chaque `module*/scripts/`
 2. Générer les visuels avec les prompts Midjourney
 3. Enregistrer les voix sur ElevenLabs
-4. Monter sur HeyGen/Synthesia selon les storyboards
+4. Monter sur pipeline vidéo interne selon les storyboards
 
 ### Pour les participants
 1. Suivre la formation selon le plan pédagogique
@@ -272,7 +272,7 @@ Tous les contenus respectent :
 ## 📞 CONTACTS ET RESSOURCES
 
 ### Outils recommandés
-- **Vidéo IA** : HeyGen, Synthesia
+- **Vidéo IA** : pipeline vidéo interne
 - **Voix IA** : ElevenLabs
 - **Visuels IA** : Midjourney V6
 - **Présentations** : PowerPoint, Gamma, Canva

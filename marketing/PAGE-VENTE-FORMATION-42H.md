@@ -27,7 +27,7 @@ Juridique, transaction, financement, marketing digital, visites et closing : une
 | Livrable | Détail |
 |----------|--------|
 | **42 h** de contenu | 5 modules équilibrés + ouverture/clôture |
-| **25 scripts vidéo** | Base pour tournage avec avatars (HeyGen / Synthesia) |
+| **36 leçons/scénarios** | Base de production multimodale (vidéo, audio, interactif) |
 | **Templates** | Excel, fiches Word/Markdown, checklists |
 | **50 QCM** | Auto-évaluation + corrigés commentés |
 | **5 cas pratiques** | Évaluation finale module par module |

@@ -258,4 +258,4 @@ French tax incentive schemes concept, elegant comparison table with Pinel Denorm
 
 ---
 
-*Script prêt pour enregistrement HeyGen/Synthesia - Module 3 Formation Immobilière*
+*Script prêt pour enregistrement pipeline vidéo interne - Module 3 Formation Immobilière*

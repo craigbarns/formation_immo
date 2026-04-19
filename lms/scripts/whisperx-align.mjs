@@ -92,7 +92,6 @@ for (const f of mp3Files) {
   const cmd = `"${whisperxBin}" "${f.mp3}" \
     --model large-v2 \
     --language fr \
-    --align_model VOXPOPULI \
     --output_format json \
     --output_dir "${alignDir}"`;
 

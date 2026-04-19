@@ -265,4 +265,4 @@ Elegant real estate agent in sophisticated office, signing contract with satisfi
 
 ---
 
-*Script prêt pour enregistrement HeyGen/Synthesia*
+*Script prêt pour enregistrement pipeline vidéo interne*

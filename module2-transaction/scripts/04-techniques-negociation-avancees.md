@@ -289,4 +289,4 @@ Charismatic real estate negotiator in modern meeting room, intense discussion wi
 
 ---
 
-*Script prêt pour enregistrement HeyGen/Synthesia*
+*Script prêt pour enregistrement pipeline vidéo interne*

@@ -226,4 +226,4 @@ Professional real estate finance concept, modern banking office interior with gl
 
 ---
 
-*Script prêt pour enregistrement HeyGen/Synthesia - Module 3 Formation Immobilière*
+*Script prêt pour enregistrement pipeline vidéo interne - Module 3 Formation Immobilière*

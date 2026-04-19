@@ -203,7 +203,7 @@ export const COURSE: CourseModule[] = [
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // MODULE 2 — TRANSACTION & NÉGOCIATION  (450 min = 7h30)
+  // MODULE 2 — TRANSACTION & NÉGOCIATION  (420 min = 7h)
   // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "transaction",
@@ -427,7 +427,7 @@ export const COURSE: CourseModule[] = [
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // MODULE 4 — MARKETING DIGITAL  (450 min = 7h30)
+  // MODULE 4 — MARKETING DIGITAL  (420 min = 7h)
   // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "marketing",
@@ -546,7 +546,7 @@ export const COURSE: CourseModule[] = [
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // MODULE 5 — VISITE, CLOSING & FIDÉLISATION  (540 min = 9h)
+  // MODULE 5 — VISITE, CLOSING & FIDÉLISATION  (600 min = 10h)
   // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "terrain",

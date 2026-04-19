@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "duration": 414.397,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.231,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 32.255,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 65.545,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 96.462,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 127.012,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 157.153,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 188.417,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 220.932,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 251.94,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 283.138,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 314.419,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 349.025,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 379.575,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 413.813,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "instant.",
+      "start": 0.812,
+      "end": 1.472
+    },
+    {
+      "term": "arrivez",
+      "start": 1.673,
+      "end": 1.953
+    },
+    {
+      "term": "devant",
+      "start": 1.993,
+      "end": 2.193
+    },
+    {
+      "term": "immeuble",
+      "start": 2.593,
+      "end": 2.874
+    },
+    {
+      "term": "arrondissement",
+      "start": 3.815,
+      "end": 4.235
+    },
+    {
+      "term": "Paris,",
+      "start": 4.375,
+      "end": 4.976
+    },
+    {
+      "term": "client",
+      "start": 7.058,
+      "end": 7.338
+    },
+    {
+      "term": "Leur",
+      "start": 11.222,
+      "end": 11.362
+    },
+    {
+      "term": "précis,",
+      "start": 14.645,
+      "end": 15.345
+    },
+    {
+      "term": "encore",
+      "start": 16.246,
+      "end": 16.467
+    }
+  ]
+}

@@ -139,7 +139,7 @@ Chaque script inclut un prompt Midjourney optimisé pour:
 
 ## 🚀 PROCHAINES ÉTAPES
 
-1. **Enregistrement vidéo:** Utiliser HeyGen ou Synthesia avec les voix recommandées
+1. **Enregistrement vidéo:** Utiliser pipeline vidéo interne avec les voix recommandées
 2. **Génération visuels:** Utiliser les prompts Midjourney fournis
 3. **Montage:** Assembler selon les indications B-roll
 4. **Musique:** Intégrer les suggestions musicales

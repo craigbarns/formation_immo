@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "duration": 454.295,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.031,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 33,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 63.688,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 96.4,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 127.085,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 170.992,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 203.096,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 236.667,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 266.849,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 305.498,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 337.939,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 371.555,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 402.931,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 438.025,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "pièces",
+      "start": 1.592,
+      "end": 2.133
+    },
+    {
+      "term": "avec",
+      "start": 2.173,
+      "end": 2.413
+    },
+    {
+      "term": "Cette",
+      "start": 3.875,
+      "end": 4.055
+    },
+    {
+      "term": "chaque",
+      "start": 5.136,
+      "end": 5.336
+    },
+    {
+      "term": "biens",
+      "start": 7.938,
+      "end": 8.139
+    },
+    {
+      "term": "sont",
+      "start": 8.199,
+      "end": 8.399
+    },
+    {
+      "term": "première",
+      "start": 9.56,
+      "end": 9.9
+    },
+    {
+      "term": "estimation,",
+      "start": 9.94,
+      "end": 11.061
+    },
+    {
+      "term": "mandats",
+      "start": 13.544,
+      "end": 13.824
+    },
+    {
+      "term": "propriétaires",
+      "start": 15.366,
+      "end": 16.086
+    }
+  ]
+}

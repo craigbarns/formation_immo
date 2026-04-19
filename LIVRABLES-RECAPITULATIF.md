@@ -348,7 +348,7 @@ guide-eleve/
 1. Sélectionner les scripts par module
 2. Générer les visuels avec Midjourney (prompts fournis)
 3. Enregistrer les voix sur ElevenLabs (recommandations fournies)
-4. Monter les vidéos sur HeyGen/Synthesia (storyboards fournis)
+4. Monter les vidéos sur pipeline vidéo interne (storyboards fournis)
 5. Intégrer les B-roll selon les indications
 
 ---

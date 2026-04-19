@@ -123,11 +123,11 @@ Avant d'enregistrer chaque vidéo :
 
 1. Générer les visuels Midjourney pour chaque vidéo
 2. Enregistrer les voix avec ElevenLabs
-3. Produire les vidéos sur HeyGen/Synthesia
+3. Produire les vidéos sur pipeline vidéo interne
 4. Assembler avec les éléments B-roll
 5. Ajouter les graphiques et animations
 
 ---
 
 *Scripts créés pour la formation immobilière - Module 2 : Transaction*
-*Format prêt pour enregistrement HeyGen/Synthesia*
+*Format prêt pour enregistrement pipeline vidéo interne*

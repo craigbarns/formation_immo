@@ -1,6 +1,6 @@
 # Casting avatars & packaging commercial — Formation 42 h
 
-Ce document complète le plan pédagogique existant : il définit **qui présente quoi** (avatars cohérents pour HeyGen, Synthesia, Colossyan, etc.) et **comment positionner l’offre** pour la vente.
+Ce document complète le plan pédagogique existant : il définit **qui présente quoi** (avatars cohérents pour pipeline vidéo interne, Colossyan, etc.) et **comment positionner l’offre** pour la vente.
 
 ---
 

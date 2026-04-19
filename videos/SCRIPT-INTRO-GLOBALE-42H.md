@@ -1,4 +1,4 @@
-# Vidéo d’introduction — Parcours 42 h (HeyGen / Synthesia)
+# Vidéo d’introduction — Parcours 42 h (pipeline vidéo interne)
 
 **Durée cible :** 3 min 30  
 **Avatars suggérés :** Sarah Benali (M2) + Thomas Mercier (M3) — ou un seul présentateur institutionnel.

@@ -277,4 +277,4 @@ Modern real estate agent in co-working space, making phone calls with headset, m
 
 ---
 
-*Script prêt pour enregistrement HeyGen/Synthesia*
+*Script prêt pour enregistrement pipeline vidéo interne*
