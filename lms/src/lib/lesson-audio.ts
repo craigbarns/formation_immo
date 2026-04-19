@@ -49,3 +49,13 @@ export function getLessonModuleListAudioSrc(lesson: Lesson): string | null {
 export function isLessonAudioFilePresent(src: string): boolean {
   return publicFileExists(src);
 }
+
+/**
+ * URL de l'alignment WhisperX pour une leçon.
+ * Correspond au basename du MP3 avec extension .alignment.json
+ */
+export function getLessonAlignmentUrl(lesson: Lesson): string | null {
+  const audioSrc = getLessonAudioPlaybackSrc(lesson);
+  if (!audioSrc) return null;
+  return audioSrc.replace(/\.mp3$/, ".alignment.json").replace("/audio/", "/audio-align/");
+}

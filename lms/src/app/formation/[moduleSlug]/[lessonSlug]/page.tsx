@@ -6,7 +6,7 @@ import { getLesson, getPrevNext, lessonId, type Lesson } from "@/data/course";
 import { getInteractiveScenario } from "@/data/interactive-scenarios";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getVisuals, type LessonVisuals } from "@/data/lesson-keyconcepts";
-import { getLessonAudioPlaybackSrc } from "@/lib/lesson-audio";
+import { getLessonAudioPlaybackSrc, getLessonAlignmentUrl } from "@/lib/lesson-audio";
 import { getCaseStudies } from "@/data/case-studies";
 import { getChatRoleplay } from "@/data/chat-roleplay";
 import { getDragDropExercises } from "@/data/drag-drop-exercises";
@@ -115,6 +115,7 @@ export default async function LessonPage({ params }: Props) {
       ? getInteractiveScenario(lesson.interactiveScenarioId)
       : null;
   const audioSrc = getLessonAudioPlaybackSrc(lesson);
+  const alignmentUrl = getLessonAlignmentUrl(lesson);
   const avatar = getAvatarForModule(moduleSlug);
   const lessonVisuals = getVisuals(moduleSlug, lessonSlug);
   const visualsForPlayer = lessonVisuals ?? buildFallbackVisuals(lesson);
@@ -284,9 +285,11 @@ export default async function LessonPage({ params }: Props) {
             </h2>
             <CinematicPlayer
               audioUrl={audioSrc}
+              alignmentUrl={alignmentUrl}
               title={lesson.title}
               avatar={avatar}
               visuals={visualsForPlayer}
+              moduleSlug={moduleSlug}
               audioQuizSchedule={audioQuizSchedule}
             />
           </section>

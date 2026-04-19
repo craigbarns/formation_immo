@@ -7,6 +7,17 @@ import type { QuizCheckpoint } from "@/data/quiz-checkpoints";
 import type { ResolvedAudioQuizItem } from "@/data/audio-quiz-schedule";
 import confetti from "canvas-confetti";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
+import { KaraokeOverlay } from "./KaraokeOverlay";
+import { KineticFlash } from "./KineticFlash";
+import { SubtitleOverlay } from "./SubtitleOverlay";
+import { ProgressPreview } from "./ProgressPreview";
+import { compactAlignment, type LessonAlignment } from "@/lib/audio-alignment";
+import { loadLessonCues, findActiveSlideFromCues, type LessonCues } from "@/lib/lesson-cues";
+import { getModuleTheme } from "@/data/module-themes";
+import { saveProgress, loadProgress, clearProgress } from "@/lib/playback-progress";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
+import { addBookmark, loadBookmarks, removeBookmark, type AudioBookmark } from "@/lib/audio-bookmarks";
+import { createAudioStats, updateStatsOnPlay, updateStatsOnPause, updateStatsOnSeek, finalizeStats, type AudioStats } from "@/lib/audio-stats";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                               */
@@ -30,7 +41,9 @@ type Props = {
   avatar?: ModuleAvatar;
   visuals: LessonVisuals | null;
   moduleTitle?: string;
+  moduleSlug?: string;
   audioQuizSchedule?: ResolvedAudioQuizItem[];
+  alignmentUrl?: string | null;
 };
 
 /* ------------------------------------------------------------------ */
@@ -269,11 +282,15 @@ function shuffleOptions(q: QuizCheckpoint): { label: string; isCorrect: boolean 
 
 export function CinematicPlayer({
   audioUrl,
+  alignmentUrl,
   title,
   avatar,
   visuals,
+  moduleTitle,
+  moduleSlug,
   audioQuizSchedule = [],
 }: Props) {
+  const theme = getModuleTheme(moduleSlug ?? "");
   const audioRef = useRef<HTMLAudioElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const playingRef = useRef(false);
@@ -300,6 +317,17 @@ export function CinematicPlayer({
   const [chapterFlash, setChapterFlash] = useState<{ name: string; icon: string; color: string; gradient: string } | null>(null);
   const lastChapterRef = useRef<string>("");
 
+  const [karaokeEnabled, setKaraokeEnabled] = useState(false);
+  const [subtitlesEnabled, setSubtitlesEnabled] = useState(false);
+  const [alignment, setAlignment] = useState<LessonAlignment | null>(null);
+  const [cues, setCues] = useState<LessonCues | null>(null);
+  const [srtContent, setSrtContent] = useState<string | null>(null);
+  const [resumeTime, setResumeTime] = useState<number | null>(null);
+  const [bookmarks, setBookmarks] = useState<AudioBookmark[]>([]);
+  const [showBookmarks, setShowBookmarks] = useState(false);
+  const [audioStats, setAudioStats] = useState<AudioStats>(createAudioStats);
+  const reducedMotion = useReducedMotion();
+
   const slides = useMemo(() => buildSlides(title, visuals), [title, visuals]);
   const chapters = useMemo(() => buildChapterLabels(slides), [slides]);
 
@@ -318,9 +346,13 @@ export function CinematicPlayer({
   const activeSlide = useMemo(() => {
     if (manualSlide !== null) return manualSlide;
     if (!loaded || duration === 0) return 0;
+    if (cues) {
+      return Math.min(slides.length - 1, findActiveSlideFromCues(cues, current));
+    }
+    // Fallback linéaire si pas de cues
     const perSlide = duration / slides.length;
     return Math.min(slides.length - 1, Math.floor(current / perSlide));
-  }, [current, duration, slides.length, loaded, manualSlide]);
+  }, [current, duration, slides.length, loaded, manualSlide, cues]);
 
   const slide = slides[activeSlide];
   const currentChapter = getChapterForSlide(chapters, activeSlide);
@@ -369,7 +401,10 @@ export function CinematicPlayer({
         setQuizFeedback("idle");
       }
     };
-    const onEnd = () => setPlaying(false);
+    const onEnd = () => {
+      setPlaying(false);
+      setAudioStats((s) => finalizeStats(s));
+    };
     el.addEventListener("loadedmetadata", onMeta);
     el.addEventListener("timeupdate", onTime);
     el.addEventListener("ended", onEnd);
@@ -385,22 +420,67 @@ export function CinematicPlayer({
     setQuizOverlay(null);
     setQuizFeedback("idle");
     setManualSlide(null);
+    setKaraokeEnabled(false);
+    setSubtitlesEnabled(false);
+    setAlignment(null);
+    setCues(null);
+    setSrtContent(null);
+
+    // Charge la progression sauvegardée
+    const saved = loadProgress(audioUrl);
+    setResumeTime(saved);
+
+    // Charge les bookmarks
+    setBookmarks(loadBookmarks(audioUrl));
   }, [audioUrl]);
+
+  /* ---------- Load alignment + cues JSON ---------- */
+  useEffect(() => {
+    if (!alignmentUrl) return;
+    fetch(alignmentUrl)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((raw) => {
+        if (raw && raw.segments && raw.word_segments) {
+          setAlignment(compactAlignment(raw));
+        }
+      })
+      .catch(() => setAlignment(null));
+
+    const cuesUrl = alignmentUrl.replace(".alignment.json", ".cues.json");
+    loadLessonCues(cuesUrl).then(setCues).catch(() => setCues(null));
+
+    // Charge le SRT si disponible
+    const srtUrl = alignmentUrl.replace(".alignment.json", ".srt");
+    fetch(srtUrl)
+      .then((r) => (r.ok ? r.text() : null))
+      .then((text) => setSrtContent(text))
+      .catch(() => setSrtContent(null));
+  }, [alignmentUrl]);
 
   /* ---------- Controls ---------- */
 
   const toggle = useCallback(() => {
     const el = audioRef.current;
     if (!el) return;
-    if (playing) { el.pause(); setPlaying(false); }
-    else { el.play(); setPlaying(true); }
-  }, [playing]);
+    if (playing) {
+      el.pause();
+      setPlaying(false);
+      setAudioStats((s) => updateStatsOnPause(s));
+    } else {
+      el.play();
+      setPlaying(true);
+      setAudioStats((s) => updateStatsOnPlay(s, speed));
+    }
+  }, [playing, speed]);
 
   const skip = useCallback((delta: number) => {
     const el = audioRef.current;
     if (!el) return;
     const cap = maxSeekTime();
-    el.currentTime = Math.max(0, Math.min(cap, el.currentTime + delta));
+    const from = el.currentTime;
+    const to = Math.max(0, Math.min(cap, el.currentTime + delta));
+    el.currentTime = to;
+    setAudioStats((s) => updateStatsOnSeek(s, from, to));
   }, [maxSeekTime]);
 
   const seekBar = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -409,7 +489,10 @@ export function CinematicPlayer({
     const rect = e.currentTarget.getBoundingClientRect();
     const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
     const cap = maxSeekTime();
-    el.currentTime = Math.min(ratio * el.duration, cap);
+    const from = el.currentTime;
+    const to = Math.min(ratio * el.duration, cap);
+    el.currentTime = to;
+    setAudioStats((s) => updateStatsOnSeek(s, from, to));
   }, [maxSeekTime]);
 
   const goToSlide = useCallback((i: number) => {
@@ -458,30 +541,47 @@ export function CinematicPlayer({
   useEffect(() => {
     if (slide.kind === "end" && !hasTriggeredConfetti.current) {
       hasTriggeredConfetti.current = true;
-      const end = Date.now() + 1000;
-      const colors = ["#d4af37", "#1a3a5c", "#10b981"];
+      const end = Date.now() + 1500;
+      const colors = [theme.primary, theme.secondary, "#d4af37", "#ffffff"];
       
       (function frame() {
         confetti({
-          particleCount: 3,
+          particleCount: 4,
           angle: 60,
           spread: 55,
           origin: { x: 0 },
           colors: colors,
+          ticks: 200,
+          gravity: 0.8,
+          scalar: 1.2,
         });
         confetti({
-          particleCount: 3,
+          particleCount: 4,
           angle: 120,
           spread: 55,
           origin: { x: 1 },
           colors: colors,
+          ticks: 200,
+          gravity: 0.8,
+          scalar: 1.2,
+        });
+        confetti({
+          particleCount: 3,
+          angle: 90,
+          spread: 100,
+          origin: { y: 0.6 },
+          colors: colors,
+          ticks: 200,
+          gravity: 0.6,
+          scalar: 1.5,
+          shapes: ["circle", "square"],
         });
         if (Date.now() < end) {
           requestAnimationFrame(frame);
         }
       }());
     }
-  }, [slide.kind]);
+  }, [slide.kind, theme]);
 
   /* ---------- Fullscreen ---------- */
 
@@ -523,10 +623,33 @@ export function CinematicPlayer({
         const el = audioRef.current;
         if (el) el.currentTime = 0;
       }
+      if (e.key === "k" || e.key === "K") {
+        e.preventDefault();
+        setKaraokeEnabled((v) => !v);
+      }
+      if (e.key === "c" || e.key === "C") {
+        e.preventDefault();
+        setSubtitlesEnabled((v) => !v);
+      }
+      if (e.key === "b" || e.key === "B") {
+        e.preventDefault();
+        const el = audioRef.current;
+        if (!el) return;
+        const bm = addBookmark(audioUrl, el.currentTime);
+        setBookmarks((prev) => [...prev, bm]);
+        // Flash visuel temporaire
+        const flash = document.createElement("div");
+        flash.className = "fixed inset-0 z-[9999] pointer-events-none";
+        flash.style.background = "rgba(212,175,55,0.15)";
+        flash.style.transition = "opacity 0.3s ease";
+        document.body.appendChild(flash);
+        requestAnimationFrame(() => { flash.style.opacity = "0"; });
+        setTimeout(() => flash.remove(), 300);
+      }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [toggle, navigateSlide, cycleSpeed, toggleFullscreen, skip]);
+  }, [toggle, navigateSlide, cycleSpeed, toggleFullscreen, skip, audioUrl]);
 
   /* ---------- Pause on blur (auto-pause when switching tabs) ---------- */
   useEffect(() => {
@@ -553,6 +676,17 @@ export function CinematicPlayer({
   useEffect(() => {
     localStorage.setItem("cinematic-player-speed", String(speed));
   }, [speed]);
+
+  /* ---------- Save playback progress ---------- */
+  useEffect(() => {
+    if (!loaded || !audioUrl) return;
+    const interval = setInterval(() => {
+      if (playingRef.current && audioRef.current) {
+        saveProgress(audioUrl, audioRef.current.currentTime, duration);
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [audioUrl, loaded, duration]);
 
   /* ---------- Fullscreen Escape Handler ---------- */
   useEffect(() => {
@@ -617,6 +751,18 @@ export function CinematicPlayer({
               <span className="text-white/80">Mute / Unmute</span>
               <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">M</kbd>
             </div>
+            <div className="flex justify-between py-2 border-b border-white/10">
+              <span className="text-white/80">Karaoké on / off</span>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">K</kbd>
+            </div>
+            <div className="flex justify-between py-2 border-b border-white/10">
+              <span className="text-white/80">Sous-titres on / off</span>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">C</kbd>
+            </div>
+            <div className="flex justify-between py-2 border-b border-white/10">
+              <span className="text-white/80">Ajouter un bookmark</span>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">B</kbd>
+            </div>
             <div className="flex justify-between py-2">
               <span className="text-white/80">Revenir au début</span>
               <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">0 ou Home</kbd>
@@ -671,34 +817,71 @@ export function CinematicPlayer({
 
       {/* ── VIDEO AREA ─────────────────────────────────── */}
       <div
-        className={`relative bg-gradient-to-br from-[var(--surface-dark)] via-brand-navy to-[var(--surface-dark)] overflow-hidden ${
+        className={`relative overflow-hidden ${
           isFullscreen ? "flex-1" : "aspect-video"
         }`}
+        style={{
+          background: `linear-gradient(135deg, ${theme.primary} 0%, ${theme.secondary}22 50%, ${theme.primary} 100%)`,
+        }}
       >
+        {/* Module watermark */}
+        <div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+          style={{ opacity: theme.watermarkOpacity }}
+        >
+          <span className="text-[20rem] leading-none">{theme.watermark}</span>
+        </div>
+
+        {/* Voice signature */}
+        <div
+          className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 text-3xs font-medium tracking-wider uppercase pointer-events-none"
+          style={{ color: theme.voiceSignatureColor }}
+        >
+          {theme.voiceSignature}
+        </div>
+
         {/* Slide-specific background patterns */}
         <SlideBackground kind={slide.kind} />
 
-        {/* Slide content */}
+        {/* Slide content avec transition */}
         <div className="relative flex h-full w-full items-center justify-center p-6 sm:p-10">
-          <SlideRenderer slide={slide} avatar={avatar} isActive={true} />
+          <div
+            key={activeSlide}
+            className="h-full w-full"
+            style={{
+              animation: reducedMotion ? undefined : "slideEnter 0.5s cubic-bezier(0.16,1,0.3,1) both",
+            }}
+          >
+            <SlideRenderer slide={slide} avatar={avatar} isActive={true} reducedMotion={reducedMotion} audioStats={audioStats} />
+          </div>
+          {!reducedMotion && (
+            <style>{`
+              @keyframes slideEnter {
+                from { opacity: 0; transform: translateY(12px) scale(0.98); }
+                to   { opacity: 1; transform: translateY(0) scale(1); }
+              }
+            `}</style>
+          )}
         </div>
 
         {/* Chapter flash overlay */}
         {chapterFlash && (
           <div
             className={`absolute inset-0 z-30 flex flex-col items-center justify-center bg-gradient-to-br ${chapterFlash.gradient} pointer-events-none`}
-            style={{ animation: "chapterFlashIn 0.35s cubic-bezier(0.16,1,0.3,1) both" }}
+            style={{ animation: reducedMotion ? undefined : "chapterFlashIn 0.35s cubic-bezier(0.16,1,0.3,1) both" }}
           >
-            <style>{`
-              @keyframes chapterFlashIn {
-                from { opacity: 0; transform: scale(1.04); }
-                to   { opacity: 1; transform: scale(1); }
-              }
-              @keyframes chapterFlashOut {
-                from { opacity: 1; }
-                to   { opacity: 0; }
-              }
-            `}</style>
+            {!reducedMotion && (
+              <style>{`
+                @keyframes chapterFlashIn {
+                  from { opacity: 0; transform: scale(1.04); }
+                  to   { opacity: 1; transform: scale(1); }
+                }
+                @keyframes chapterFlashOut {
+                  from { opacity: 1; }
+                  to   { opacity: 0; }
+                }
+              `}</style>
+            )}
             {/* Animated ring */}
             <div
               className="absolute inset-0 rounded-full"
@@ -744,6 +927,74 @@ export function CinematicPlayer({
             />
           </div>
         )}
+
+        {/* Bookmarks panel */}
+        {showBookmarks && (
+          <div className="absolute top-16 left-4 z-30 max-h-[60%] overflow-y-auto rounded-xl border border-white/10 bg-black/70 p-3 backdrop-blur-md shadow-xl">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-bold text-brand-gold">Bookmarks</span>
+              <button
+                onClick={() => setShowBookmarks(false)}
+                className="text-white/60 hover:text-white text-xs"
+              >
+                ✕
+              </button>
+            </div>
+            {bookmarks.length === 0 ? (
+              <p className="text-2xs text-white/50">Appuyez sur B pendant la lecture</p>
+            ) : (
+              <ul className="space-y-1">
+                {bookmarks.map((bm) => (
+                  <li key={bm.id} className="flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        const el = audioRef.current;
+                        if (!el) return;
+                        el.currentTime = bm.time;
+                        setCurrent(bm.time);
+                        setShowBookmarks(false);
+                      }}
+                      className="flex-1 text-left rounded px-2 py-1 text-2xs text-white/80 hover:bg-white/10 transition"
+                    >
+                      {fmt(bm.time)} — {bm.label}
+                    </button>
+                    <button
+                      onClick={() => {
+                        removeBookmark(audioUrl, bm.id);
+                        setBookmarks((prev) => prev.filter((b) => b.id !== bm.id));
+                      }}
+                      className="text-white/40 hover:text-red-400 text-xs px-1"
+                    >
+                      ✕
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+
+        {/* Karaoke overlay */}
+        <KaraokeOverlay
+          alignment={alignment}
+          currentTime={current}
+          visible={karaokeEnabled && playing && !quizOverlay && !showBookmarks}
+        />
+
+        {/* Subtitles overlay */}
+        <SubtitleOverlay
+          srtContent={srtContent}
+          currentTime={current}
+          visible={subtitlesEnabled && !quizOverlay && !karaokeEnabled}
+        />
+
+        {/* Kinetic typography — key terms flash */}
+        <KineticFlash
+          alignment={alignment}
+          visuals={visuals}
+          currentTime={current}
+          visible={playing && !quizOverlay && !karaokeEnabled && !subtitlesEnabled}
+        />
 
         {/* Quiz overlay */}
         {quizOverlay && (
@@ -866,23 +1117,67 @@ export function CinematicPlayer({
 
         {/* Big play overlay if paused */}
         {!playing && !quizOverlay && (
-          <button
-            onClick={toggle}
-            className="absolute inset-0 flex items-center justify-center bg-black/20 transition hover:bg-black/30"
-            aria-label="Lancer la lecture"
-          >
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-gold text-brand-navy shadow-xl shadow-brand-gold/30 transition hover:scale-110 active:scale-100">
-              <svg className="h-7 w-7 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-          </button>
+          <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+            {resumeTime !== null && resumeTime > 5 ? (
+              <div className="flex flex-col items-center gap-4">
+                <button
+                  onClick={() => {
+                    const el = audioRef.current;
+                    if (!el) return;
+                    el.currentTime = resumeTime;
+                    setCurrent(resumeTime);
+                    setResumeTime(null);
+                    el.play();
+                    setPlaying(true);
+                  }}
+                  className="flex items-center gap-3 rounded-full bg-brand-gold px-6 py-3 text-brand-navy shadow-xl shadow-brand-gold/30 transition hover:scale-105 active:scale-100"
+                >
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                  <span className="font-bold text-sm">Reprendre à {fmt(resumeTime)}</span>
+                </button>
+                <button
+                  onClick={() => {
+                    clearProgress(audioUrl);
+                    setResumeTime(null);
+                    toggle();
+                  }}
+                  className="text-xs text-white/60 hover:text-white/90 transition underline underline-offset-2"
+                >
+                  Recommencer depuis le début
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={toggle}
+                className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-gold text-brand-navy shadow-xl shadow-brand-gold/30 transition hover:scale-110 active:scale-100"
+                aria-label="Lancer la lecture"
+              >
+                <svg className="h-7 w-7 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </button>
+            )}
+          </div>
         )}
       </div>
 
       {/* ── CONTROLS BAR ───────────────────────────────── */}
       <div className="bg-[var(--surface-dark)] px-4 py-3 space-y-2">
-        {/* Progress bar */}
+        {/* Progress bar with preview */}
+        <ProgressPreview
+          slides={slides}
+          chapters={chapters}
+          duration={duration}
+          quizLocked={!!quizOverlay}
+          onSeek={(ratio) => {
+            const el = audioRef.current;
+            if (!el) return;
+            const cap = maxSeekTime();
+            el.currentTime = Math.min(ratio * el.duration, cap);
+          }}
+        />
         <div
           onClick={quizOverlay ? undefined : seekBar}
           className={`relative h-2 rounded-full bg-white/10 group ${
@@ -902,6 +1197,22 @@ export function CinematicPlayer({
               className="absolute top-0 h-full w-0.5 bg-brand-gold/90"
               style={{ left: `${q.pauseAtRatio * 100}%` }}
               title={`Quiz ${i + 1}`}
+            />
+          ))}
+          {bookmarks.map((bm) => (
+            <button
+              key={bm.id}
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                const el = audioRef.current;
+                if (!el) return;
+                el.currentTime = bm.time;
+                setCurrent(bm.time);
+              }}
+              className="absolute -top-0.5 h-3 w-3 -translate-x-1/2 rounded-full bg-brand-gold shadow-sm hover:scale-125 transition"
+              style={{ left: `${duration > 0 ? (bm.time / duration) * 100 : 0}%` }}
+              title={bm.label}
             />
           ))}
           <div
@@ -963,11 +1274,47 @@ export function CinematicPlayer({
             </button>
           </div>
 
-          {/* Speed + keyboard hint */}
+          {/* Karaoke toggle + speed */}
           <div className="flex items-center gap-2 w-24 justify-end">
-            <span className="hidden sm:inline text-6xs text-white/25 tabular-nums select-none">
-              &#x2190;&#x2192; slides
-            </span>
+            {alignment && (
+              <button
+                onClick={() => setKaraokeEnabled((v) => !v)}
+                className={`rounded-full border px-2 py-0.5 text-2xs font-bold transition tabular-nums ${
+                  karaokeEnabled
+                    ? "border-brand-gold bg-brand-gold/20 text-brand-gold"
+                    : "border-white/20 text-white/80 hover:bg-white/10"
+                }`}
+                title="Karaoké (K)"
+              >
+                K
+              </button>
+            )}
+            {srtContent && (
+              <button
+                onClick={() => setSubtitlesEnabled((v) => !v)}
+                className={`rounded-full border px-2 py-0.5 text-2xs font-bold transition tabular-nums ${
+                  subtitlesEnabled
+                    ? "border-brand-gold bg-brand-gold/20 text-brand-gold"
+                    : "border-white/20 text-white/80 hover:bg-white/10"
+                }`}
+                title="Sous-titres (C)"
+              >
+                CC
+              </button>
+            )}
+            <button
+              onClick={() => setShowBookmarks((v) => !v)}
+              className={`rounded-full border px-2 py-0.5 text-2xs font-bold transition tabular-nums ${
+                showBookmarks || bookmarks.length > 0
+                  ? bookmarks.length > 0
+                    ? "border-brand-gold bg-brand-gold/20 text-brand-gold"
+                    : "border-white/20 text-white/80 hover:bg-white/10"
+                  : "border-white/20 text-white/80 hover:bg-white/10"
+              }`}
+              title={`Bookmarks (${bookmarks.length}) — B`}
+            >
+              🔖 {bookmarks.length > 0 ? bookmarks.length : ""}
+            </button>
             <button
               onClick={cycleSpeed}
               className="rounded-full border border-white/20 px-2 py-0.5 text-2xs font-bold text-white/80 hover:bg-white/10 transition tabular-nums"
@@ -1190,10 +1537,10 @@ function SlideBackground({ kind }: { kind: Slide["kind"] }) {
 /*  Slide Renderer                                                      */
 /* ------------------------------------------------------------------ */
 
-function SlideRenderer({ slide, avatar, isActive }: { slide: Slide; avatar?: ModuleAvatar; isActive: boolean }) {
+function SlideRenderer({ slide, avatar, isActive, reducedMotion, audioStats }: { slide: Slide; avatar?: ModuleAvatar; isActive: boolean; reducedMotion?: boolean; audioStats?: AudioStats }) {
   switch (slide.kind) {
     case "title":
-      return <TitleSlide title={slide.title} subtitle={slide.subtitle} avatar={avatar} />;
+      return <TitleSlide title={slide.title} subtitle={slide.subtitle} avatar={avatar} reducedMotion={reducedMotion} />;
     case "concept":
       return <ConceptSlide concept={slide.concept} index={slide.index} total={slide.total} />;
     case "stats":
@@ -1211,7 +1558,7 @@ function SlideRenderer({ slide, avatar, isActive }: { slide: Slide; avatar?: Mod
     case "trainer-tip":
       return <TrainerTipSlide concept={slide.concept} avatar={avatar} />;
     case "end":
-      return <EndSlide title={slide.title} />;
+      return <EndSlide title={slide.title} stats={audioStats} />;
   }
 }
 
@@ -1220,18 +1567,20 @@ function SlideRenderer({ slide, avatar, isActive }: { slide: Slide; avatar?: Mod
 /* ------------------------------------------------------------------ */
 
 /* ── TITLE SLIDE ─── */
-function TitleSlide({ title, subtitle, avatar }: { title: string; subtitle: string; avatar?: ModuleAvatar }) {
+function TitleSlide({ title, subtitle, avatar, reducedMotion }: { title: string; subtitle: string; avatar?: ModuleAvatar; reducedMotion?: boolean }) {
   return (
     <div
       className="text-center w-full max-w-xl"
-      style={{ animation: "titleEntrance 0.7s cubic-bezier(0.16,1,0.3,1) both" }}
+      style={{ animation: reducedMotion ? undefined : "titleEntrance 0.7s cubic-bezier(0.16,1,0.3,1) both" }}
     >
-      <style>{`
-        @keyframes titleEntrance {
-          from { opacity: 0; transform: scale(0.95) translateY(12px); }
-          to   { opacity: 1; transform: scale(1) translateY(0); }
-        }
-      `}</style>
+      {!reducedMotion && (
+        <style>{`
+          @keyframes titleEntrance {
+            from { opacity: 0; transform: scale(0.95) translateY(12px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+          }
+        `}</style>
+      )}
       {/* Decorative gold line */}
       <div className="mx-auto mb-5 flex items-center gap-3">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent to-brand-gold/50" />
@@ -1616,7 +1965,7 @@ function TrainerTipSlide({ concept, avatar }: { concept: KeyConcept; avatar?: Mo
 }
 
 /* ── END SLIDE ─── */
-function EndSlide({ title }: { title: string }) {
+function EndSlide({ title, stats }: { title: string; stats?: AudioStats }) {
   return (
     <div
       className="text-center"
@@ -1633,6 +1982,28 @@ function EndSlide({ title }: { title: string }) {
       </div>
       <h2 className="mt-5 text-xl font-black text-white sm:text-2xl">{title}</h2>
       <p className="mt-2 text-sm text-white/80">Lecon terminee — passez a la suite</p>
+
+      {stats && stats.endedAt && (
+        <div className="mt-4 grid grid-cols-2 gap-3 max-w-xs mx-auto">
+          <div className="rounded-lg bg-white/5 px-3 py-2">
+            <p className="text-2xs text-white/50 uppercase">Pauses</p>
+            <p className="text-lg font-bold text-brand-gold">{stats.pauseCount}</p>
+          </div>
+          <div className="rounded-lg bg-white/5 px-3 py-2">
+            <p className="text-2xs text-white/50 uppercase">Retours</p>
+            <p className="text-lg font-bold text-brand-gold">{stats.rewindCount}</p>
+          </div>
+          <div className="rounded-lg bg-white/5 px-3 py-2">
+            <p className="text-2xs text-white/50 uppercase">Vitesse moy.</p>
+            <p className="text-lg font-bold text-brand-gold">{stats.avgSpeed}x</p>
+          </div>
+          <div className="rounded-lg bg-white/5 px-3 py-2">
+            <p className="text-2xs text-white/50 uppercase">Sauts</p>
+            <p className="text-lg font-bold text-brand-gold">{stats.seekCount}</p>
+          </div>
+        </div>
+      )}
+
       <div className="mx-auto mt-5 flex items-center justify-center gap-2">
         <div className="h-1.5 w-1.5 rounded-full bg-brand-gold/40" />
         <div className="h-1.5 w-1.5 rounded-full bg-brand-gold/70" />
