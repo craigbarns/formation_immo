@@ -7,6 +7,7 @@ import { BadgesGrid } from "@/components/gamification/BadgesGrid";
 import { GlobalTimeTracker } from "@/components/gamification/ModuleTimeTracker";
 import { CertificateGenerator } from "@/components/certificate/CertificateGenerator";
 import { CertificatePreview } from "@/components/certificate";
+import { FormationCalendar } from "@/components/learning-path/FormationCalendar";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 export function ProfileContent() {
@@ -122,6 +123,9 @@ export function ProfileContent() {
           })}
         </div>
       </div>
+
+      {/* Calendar */}
+      <FormationCalendar />
 
       {/* Time tracker */}
       <GlobalTimeTracker />
