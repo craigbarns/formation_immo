@@ -19,14 +19,14 @@ D) L'État français via une subvention
 
 **Bonne réponse : C**
 
-**Explication :** La loi ALUR (loi n°2014-366 du 24 mars 2014) a réformé la répartition des honoraires d'agence. Désormais, les honoraires sont à la charge du vendeur ET de l'acquéreur, selon une répartition qui doit être clairement définie dans le mandat de vente. Cette répartition doit être mentionnée de manière très visible dans tous les documents commerciaux. L'objectif était d'augmenter la transparence pour les acquéreurs.
+**Explication :** La loi Hoguet (70-9) et ses décrets imposent la mention des honoraires dans le mandat : montant, taux et charge supportée (vendeur ou acquéreur selon le mandat). Il n'y a pas de « répartition » obligatoire entre vendeur et acquéreur : la charge est supportée par l'une ou l'autre partie, comme défini contractuellement dans le mandat. L'ALUR a simplement renforcé l'obligation d'affichage transparent (prix TTC, net vendeur, honoraires).
 
 **Pourquoi les autres sont fausses :**
-- **A)** Faux : Ce n'est plus uniquement à la charge de l'acquéreur depuis la loi ALUR. L'ancien système où l'acquéreur payait seul les honoraires a été modifié.
-- **B)** Faux : Ce n'est pas uniquement à la charge du vendeur. La loi prévoit une répartition entre les deux parties.
-- **D)** Faux : Il n'existe aucune subvention étatique pour le paiement des honoraires d'agence immobilière.
+- **A)** Faux : ce n'est pas systématiquement à la charge de l'acquéreur ; cela dépend du mandat.
+- **B)** Faux : ce n'est pas systématiquement à la charge du vendeur ; cela dépend du mandat.
+- **D)** Faux : il n'existe aucune subvention étatique pour le paiement des honoraires d'agence immobilière.
 
-**Référence juridique :** Article 5 de la loi n°2014-366 du 24 mars 2014 (loi ALUR) et Article L.121-1 du Code de la consommation
+**Référence juridique :** Loi Hoguet 70-9, décret 72-678, ALUR 2014-366 (art. 5)
 
 ---
 
@@ -155,14 +155,14 @@ D) 1 an
 
 **Bonne réponse : B**
 
-**Explication :** Pour un bail meublé, la durée minimale du bail est de 3 mois. Le bail peut être conclu pour une durée plus longue (jusqu'à 1 an renouvelable tacitement), mais le propriétaire ne peut pas imposer une durée inférieure à 3 mois. Cette durée minimale vise à protéger le locataire contre des locations trop courtes et précaires. Le locataire peut cependant quitter le logement à tout moment moyennant un préavis de 1 mois. Pour un bail vide, la durée minimale est d'1 an (3 ans si le propriétaire est une personne morale).
+**Explication :** Pour un bail meublé, la durée minimale est d'1 an (9 mois pour un étudiant). Elle se renouvelle tacitement par périodes d'1 an (ou 9 mois pour un étudiant), sauf dénonciation par l'une ou l'autre partie dans les conditions légales de préavis. Le locataire peut quitter le logement à tout moment moyennant un préavis de 1 mois. Pour un bail vide, la durée minimale est de 3 ans avec un bailleur personne physique (6 ans pour une personne morale).
 
 **Pourquoi les autres sont fausses :**
-- **A)** Faux : 1 mois est inférieur à la durée minimale légale pour un bail meublé.
-- **C)** Faux : 6 mois n'est pas la durée minimale, c'est une durée possible mais supérieure au minimum légal.
-- **D)** Faux : 1 an est la durée minimale pour un bail vide (lorsque le propriétaire est une personne physique), pas pour un bail meublé.
+- **A)** Faux : 1 mois n'est pas la durée du bail, c'est le préavis du locataire en bail meublé.
+- **C)** Faux : 6 mois n'est pas la durée minimale d'un bail meublé.
+- **D)** Faux : 1 an est bien la durée minimale d'un bail meublé (pas celle d'un bail vide).
 
-**Référence juridique :** Article L.631-7 du Code de la construction et de l'habitation (loi ALUR) et décret n°2015-1437 du 5 novembre 2015
+**Référence juridique :** Article L.631-7 du Code de la construction et de l'habitation (loi n° 89-462 du 6 juillet 1989)
 
 ---
 

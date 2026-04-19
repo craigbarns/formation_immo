@@ -10,8 +10,8 @@
 |---|---|---|
 | Modules | 5 | `src/data/course.ts` |
 | Leçons | 36 | `src/data/course.ts` (flatMap) |
-| Questions QCM examens | 180 | `src/data/exam-questions.ts` |
-| Questions quiz checkpoints | ~120 | `src/data/quiz-checkpoints.ts` |
+| Questions QCM examens | 79 | `src/data/exam-questions.ts` |
+| Questions quiz checkpoints | 103 | `src/data/quiz-checkpoints.ts` |
 | Flashcards | 200+ | `src/data/flashcards.ts` |
 | MP3 audio | 36 | `public/audio/` |
 | Alignements WhisperX | 36 | `public/audio-align/` |
@@ -53,7 +53,7 @@
 | **Loc'Avantages** | 15 % à 65 % selon conventionnement | 31/12/2027 | Art. 199 tricies CGI |
 | **Pinel** | Fermé | 31/12/2024 | Non reconduit |
 | **Malraux** | 22 % (AVAP) / 30 % (secteur sauvegardé) | Permanent | Art. 199 tervicies CGI |
-| **Cosse** | Loyer plafond selon zone | Permanent | Art. 199 sexvicies CGI |
+| **Loc'Avantages** (remplace Cosse) | 15 % à 65 % selon conventionnement | 31/12/2027 | Art. 199 tricies CGI |
 
 > **Correction appliquée** : les taux Denormandie 12 ans étaient erronés à 18 % dans certains callouts ; corrigés en **21 %**.
 

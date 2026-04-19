@@ -10,19 +10,41 @@ export type ExamResultInput = {
   durationSeconds: number;
 };
 
+const MAX_ATTEMPTS = 3;
+const COOLDOWN_DAYS = 15;
+
 export async function submitExamResult(input: ExamResultInput) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { error: "Non authentifié" };
 
   // Count previous attempts
-  const { count } = await supabase
+  const { data: previousAttempts } = await supabase
     .from("exam_results")
-    .select("*", { count: "exact", head: true })
+    .select("created_at")
     .eq("user_id", user.id)
-    .eq("module_slug", input.moduleSlug);
+    .eq("module_slug", input.moduleSlug)
+    .order("created_at", { ascending: false });
 
-  const attemptNumber = (count ?? 0) + 1;
+  const attemptCount = previousAttempts?.length ?? 0;
+
+  // Limite de tentatives
+  if (attemptCount >= MAX_ATTEMPTS) {
+    return { error: `Limite de ${MAX_ATTEMPTS} tentatives atteinte pour ce module.` };
+  }
+
+  // Délai de carence (15 jours)
+  if (previousAttempts && previousAttempts.length > 0) {
+    const lastAttempt = new Date(previousAttempts[0].created_at);
+    const now = new Date();
+    const daysSinceLastAttempt = (now.getTime() - lastAttempt.getTime()) / (1000 * 60 * 60 * 24);
+    if (daysSinceLastAttempt < COOLDOWN_DAYS) {
+      const daysLeft = Math.ceil(COOLDOWN_DAYS - daysSinceLastAttempt);
+      return { error: `Délai de carence : ${daysLeft} jour(s) restant(s) avant la prochaine tentative.` };
+    }
+  }
+
+  const attemptNumber = attemptCount + 1;
 
   const { data, error } = await supabase
     .from("exam_results")
@@ -87,6 +109,22 @@ export async function issueCertificate(studentName: string, modules: string[], f
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { error: "Non authentifié" };
+
+  // Check lesson completion ≥ 80%
+  const { data: progressRows } = await supabase
+    .from("lesson_progress")
+    .select("lesson_key")
+    .eq("user_id", user.id)
+    .eq("completed", true);
+
+  const completedLessons = progressRows?.length ?? 0;
+  // Total lessons = 36 (hardcoded from course structure)
+  const totalLessons = 36;
+  const completionPct = Math.round((completedLessons / totalLessons) * 100);
+
+  if (completionPct < 80) {
+    return { error: `Complétion insuffisante (${completionPct}%). Minimum requis : 80%.` };
+  }
 
   // Check if all modules passed (score >= 70)
   const { data: results } = await supabase

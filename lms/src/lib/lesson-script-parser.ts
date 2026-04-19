@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import type { LessonVisuals, KeyConcept, StatCard, ComparisonRow } from "@/data/lesson-keyconcepts";
 
-const PROJECT_ROOT = path.resolve(process.cwd(), "..");
+const PROJECT_ROOT = path.resolve(/*turbopackIgnore: true*/ process.cwd(), "..");
 
 function findScriptFile(relPath: string): string | null {
   const candidates = [

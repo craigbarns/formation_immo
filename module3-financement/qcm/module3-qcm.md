@@ -228,14 +228,14 @@
 **C.** 12 ans pour 21% de réduction  
 **D.** 12 ans pour 18% de réduction  
 
-**✅ BONNE RÉPONSE : D - 12 ans pour 18% de réduction**
+**✅ BONNE RÉPONSE : C - 12 ans pour 21% de réduction**
 
 **📚 EXPLICATION DÉTAILLÉE :**
 
-**Pourquoi D est correct :**
-- Denormandie : réhabilitation de logements anciens en zones tendues
-- Durées et taux : 6 ans = 12% | 9 ans = 18% | **12 ans = 18%** (pas 21%)
-- Le taux de 21% n'existe pas dans le dispositif Denormandie
+**Pourquoi C est correct :**
+- Denormandie : réhabilitation de logements anciens en zones éligibles (centres-villes dégradés)
+- Durées et taux : 6 ans = 12% | 9 ans = 18% | **12 ans = 21%**
+- Le taux de 21% est le taux maximal du dispositif Denormandie
 - Plafond de réduction : 300 000 € par personne (2 millions pour les sociétés)
 
 **Pourquoi les autres sont incorrectes :**

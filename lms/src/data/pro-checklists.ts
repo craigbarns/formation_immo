@@ -750,9 +750,9 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
       },
       {
         id: "df-02",
-        text: "Loi Cosse / Louer Abordable : déduction 15 % à 85 % des revenus fonciers",
+        text: "Loc'Avantages (ex-Cosse) : réduction d'impôt 15 % à 65 % selon conventionnement ANAH",
         category: "Dispositifs actifs en 2025",
-        tip: "Convention ANAH requise. Loyer inférieur au marché selon la zone. Très avantageux pour les TMI élevés (30 %+).",
+        tip: "Convention ANAH requise. Loyer inférieur au marché selon la zone. Très avantageux pour les TMI élevés (30 %+). Prorogé jusqu'au 31/12/2027.",
       },
       {
         id: "df-03",

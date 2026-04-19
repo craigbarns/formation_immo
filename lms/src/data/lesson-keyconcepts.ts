@@ -384,7 +384,7 @@ export const LESSON_VISUALS: Record<string, LessonVisuals> = {
   "financement/defiscalisation": {
     keyConcepts: [
       { icon: "calendar", title: "Dispositifs historiques", description: "Besson, Robien, Borloo, Scellier, Duflot, Pinel — chacun avec ses propres règles", type: "definition" },
-      { icon: "target", title: "Dispositifs actifs 2026", description: "Denormandie, Cosse, Malraux, Monuments Historiques", type: "tip" },
+      { icon: "target", title: "Dispositifs actifs 2026", description: "Denormandie, Loc'Avantages, Malraux, Monuments Historiques", type: "tip" },
       { icon: "alert-triangle", title: "Fin du Pinel", description: "Le Pinel a pris fin le 31 décembre 2024 — orienter vers les dispositifs remplaçants", type: "warning" },
     ],
     stats: [

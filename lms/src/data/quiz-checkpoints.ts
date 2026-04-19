@@ -1402,7 +1402,7 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
       { label: "Pinel", isCorrect: true },
       { label: "Cosse", isCorrect: false },
     ],
-    explanation: "Le dispositif Pinel, qui a connu plusieurs prolongations, a définitivement pris fin le 31 décembre 2024. Les investisseurs doivent désormais se tourner vers Denormandie, Cosse ou Malraux.",
+    explanation: "Le dispositif Pinel, qui a connu plusieurs prolongations, a définitivement pris fin le 31 décembre 2024. Les investisseurs doivent désormais se tourner vers Denormandie, Loc'Avantages ou Malraux.",
     difficulty: "easy",
   },
   {

@@ -1875,7 +1875,7 @@ const CALLOUTS: TrainerCallout[] = [
     lessonSlug: "defiscalisation",
     type: "warning",
     title: "Attention !",
-    body: "Le dispositif Pinel a pris fin le 31 décembre 2024. Toute promesse de montage Pinel pour une acquisition en 2025 est une erreur professionnelle grave. Orientez vos clients vers Denormandie, Cosse ou Malraux selon leur profil.",
+    body: "Le dispositif Pinel a pris fin le 31 décembre 2024. Toute promesse de montage Pinel pour une acquisition en 2025 est une erreur professionnelle grave. Orientez vos clients vers Denormandie, Loc'Avantages ou Malraux selon leur profil.",
     avatarInitials: "AD",
     avatarColor: "#dc2626",
   },

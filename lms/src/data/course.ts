@@ -418,7 +418,7 @@ export const COURSE: CourseModule[] = [
         difficulty: "intermediaire",
         objectives: [
           "Connaître l'histoire des dispositifs Besson, Robien, Scellier, Pinel",
-          "Maîtriser les dispositifs actifs en 2025 : Denormandie, Cosse, Malraux",
+          "Maîtriser les dispositifs actifs en 2025 : Denormandie, Loc'Avantages, Malraux",
           "Expliquer la fin du Pinel (31/12/2024) à vos clients investisseurs",
           "Orienter vers un conseiller en gestion de patrimoine pour l'optimisation fiscale",
         ],

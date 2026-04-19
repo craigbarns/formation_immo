@@ -156,7 +156,7 @@ Dans ce flot de nouveautés, il est important de rappeler ce qui reste inchangé
 
 [B-ROLL : Icône de bouclier avec coche verte]
 
-**Premier constant : le délai de rétractation de dix jours.** [PAUSE 1s] Que ce soit pour un mandat ou une offre d'achat, ce délai reste intangible. [PAUSE 1s] Il court à partir de la première présentation de la lettre recommandée ou de l'accusé de réception de la signature électronique.
+**Premier constant : le délai de rétractation de dix jours.** [PAUSE 1s] Ce délai s'applique à l'acquéreur particulier dans le cadre d'un compromis ou d'une promesse de vente. Il ne s'applique ni au mandat ni à l'offre d'achat. [PAUSE 1s] Il court à partir de la première présentation de la lettre recommandée ou de l'accusé de réception de la signature électronique.
 
 [B-ROLL : Calendrier animé montrant les 10 jours de rétractation]
 
