@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "duration": 433.164,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.231,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 35.139,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 73.583,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 104.6,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 139.328,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 169.361,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 200.394,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 230.797,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 260.968,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 291.58,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 321.959,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 353.233,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 384.717,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 415.995,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Paris.",
+      "start": 7.233,
+      "end": 7.813
+    },
+    {
+      "term": "sont",
+      "start": 8.314,
+      "end": 8.434
+    },
+    {
+      "term": "vendeur",
+      "start": 9.074,
+      "end": 9.354
+    },
+    {
+      "term": "aussi,",
+      "start": 9.394,
+      "end": 9.894
+    },
+    {
+      "term": "documents",
+      "start": 10.034,
+      "end": 10.334
+    },
+    {
+      "term": "peut",
+      "start": 12.455,
+      "end": 12.595
+    },
+    {
+      "term": "encore",
+      "start": 12.635,
+      "end": 12.895
+    },
+    {
+      "term": "Entre",
+      "start": 14.095,
+      "end": 14.315
+    },
+    {
+      "term": "promesse",
+      "start": 14.456,
+      "end": 14.756
+    },
+    {
+      "term": "vente",
+      "start": 14.896,
+      "end": 15.156
+    }
+  ]
+}

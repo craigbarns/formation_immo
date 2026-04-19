@@ -45,7 +45,7 @@ import { LessonJourneyBadge } from "@/components/LessonJourneyBadge";
 import { AICoachButton } from "@/components/ai-coach";
 import { ReadingProgressBar } from "@/components/ReadingProgressBar";
 import { getResolvedAudioQuizSchedule, type ResolvedAudioQuizItem } from "@/data/audio-quiz-schedule";
-import { buildVisualsFromScript } from "@/lib/lesson-script-parser";
+import { buildVisualsFromScript, buildRecapFromScript } from "@/lib/lesson-script-parser";
 
 /* ------------------------------------------------------------------ */
 /*  Fallbacks interactifs — rend le CinematicPlayer utile pour       */
@@ -136,6 +136,7 @@ export default async function LessonPage({ params }: Props) {
   const trainerCallouts = getTrainerCallouts(moduleSlug, lessonSlug);
   const dataTables = getDataTables(moduleSlug, lessonSlug);
   const guidedCalculations = getGuidedCalculations(moduleSlug, lessonSlug);
+  const recapData = lesson.scriptFile ? buildRecapFromScript(lesson.scriptFile) : null;
   const hasInteractiveWorkshop =
     dragDropExercises.length > 0 ||
     caseStudies.length > 0 ||
@@ -229,6 +230,10 @@ export default async function LessonPage({ params }: Props) {
               moduleTitle={mod.title}
               lessonTitle={lesson.title}
               avatarName={avatar?.name}
+              objectives={lesson.objectives}
+              introduction={recapData?.introduction}
+              sections={recapData?.sections}
+              keyTerms={recapData?.keyTerms}
             />
             <AICoachButton 
               moduleSlug={moduleSlug}

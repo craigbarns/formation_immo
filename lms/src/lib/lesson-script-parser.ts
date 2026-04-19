@@ -218,6 +218,84 @@ export function buildVisualsFromScript(scriptFile: string): LessonVisuals | null
   return buildFromText(allNarration, extractHeadings(md), md);
 }
 
+/* ------------------------------------------------------------------ */
+/*  Données pour PrintableRecap                                        */
+/* ------------------------------------------------------------------ */
+
+export type RecapData = {
+  introduction?: string;
+  sections?: { icon: string; title: string; duration: string }[];
+  keyTerms?: { term: string; definition: string }[];
+};
+
+export function buildRecapFromScript(scriptFile: string): RecapData | null {
+  const filePath = findScriptFile(scriptFile);
+  if (!filePath) return null;
+
+  let md: string;
+  try {
+    md = fs.readFileSync(filePath, "utf8");
+  } catch {
+    return null;
+  }
+
+  const narrationBlocks = extractNarrationBlocks(md);
+
+  // Introduction = premier paragraphe de narration (hors questions)
+  let introduction = "";
+  for (const block of narrationBlocks) {
+    const sentences = block.split(/[.!?]+/).map((s) => s.trim()).filter((s) => s.length > 30);
+    const firstReal = sentences.find((s) => !s.includes("?") && !s.toLowerCase().includes("pause"));
+    if (firstReal) {
+      introduction = cleanNarrationText(firstReal).slice(0, 300);
+      break;
+    }
+  }
+
+  // Sections = headings niveau 3-4 nettoyés
+  const headings = extractHeadings(md).filter((h) => h.level >= 3);
+  const sections = headings.slice(0, 8).map((h) => ({
+    icon: "📌",
+    title: cleanHeadingTitle(h.title),
+    duration: "",
+  }));
+
+  // Key terms = phrases en gras qui contiennent un deux-points ou une parenthèse explicative
+  const keyTerms: { term: string; definition: string }[] = [];
+  const boldDefs = md.match(/\*\*([^*]+)\*\*\s*[:\-–]\s*([^\n]+)/g) || [];
+  for (const bd of boldDefs.slice(0, 6)) {
+    const m = bd.match(/\*\*([^*]+)\*\*\s*[:\-–]\s*(.+)/);
+    if (m) {
+      const term = m[1].trim().slice(0, 50);
+      const def = m[2].trim().replace(/[*_]/g, "").slice(0, 200);
+      if (term && def && !keyTerms.some((k) => k.term === term)) {
+        keyTerms.push({ term, definition: def });
+      }
+    }
+  }
+
+  // Fallback key terms: bold phrases followed by explanation in parentheses
+  if (keyTerms.length === 0) {
+    const parens = md.match(/\*\*([^*]+)\*\*\s*\(([^)]+)\)/g) || [];
+    for (const p of parens.slice(0, 6)) {
+      const m = p.match(/\*\*([^*]+)\*\*\s*\(([^)]+)\)/);
+      if (m) {
+        const term = m[1].trim().slice(0, 50);
+        const def = m[2].trim().slice(0, 200);
+        if (term && def && !keyTerms.some((k) => k.term === term)) {
+          keyTerms.push({ term, definition: def });
+        }
+      }
+    }
+  }
+
+  return {
+    ...(introduction ? { introduction } : {}),
+    ...(sections.length > 0 ? { sections } : {}),
+    ...(keyTerms.length > 0 ? { keyTerms } : {}),
+  };
+}
+
 function buildFromText(text: string, headings: { level: number; title: string }[], rawMd: string): LessonVisuals {
   const concepts: KeyConcept[] = [];
   const usedTitles = new Set<string>();
