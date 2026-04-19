@@ -58,14 +58,7 @@ for (const root of roots) {
       continue;
     }
 
-    const header = [
-      `# Narration audio (extrait automatiquement)`,
-      `# Source: ${path.basename(mdPath)}`,
-      `# Ne pas éditer la structure des scripts vidéo : régénérer avec node lms/scripts/extract-narration-for-audio.mjs`,
-      ``,
-    ].join("\n");
-
-    fs.writeFileSync(outPath, header + text + "\n", "utf8");
+    fs.writeFileSync(outPath, text + "\n", "utf8");
     console.log(`✓ ${path.relative(repoRoot, outPath)} (${text.length} car.)`);
     total++;
   }
