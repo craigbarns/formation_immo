@@ -60,7 +60,7 @@ export function CertificateGenerator() {
           setGameState(state);
           setExamsPassed(
             Object.values(state.examScores).filter(
-              (e) => e.score / e.total >= 0.8,
+              (e) => e.score / e.total >= 0.7,
             ).length
           );
         } else {
@@ -81,7 +81,7 @@ export function CertificateGenerator() {
         setGameState(state);
         setExamsPassed(
           Object.values(state.examScores).filter(
-            (e) => e.score / e.total >= 0.8,
+            (e) => e.score / e.total >= 0.7,
           ).length
         );
       }

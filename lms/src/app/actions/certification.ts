@@ -88,7 +88,7 @@ export async function issueCertificate(studentName: string, modules: string[], f
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { error: "Non authentifié" };
 
-  // Check if all modules passed (score >= 60)
+  // Check if all modules passed (score >= 70)
   const { data: results } = await supabase
     .from("exam_results")
     .select("module_slug, score")
@@ -99,7 +99,7 @@ export async function issueCertificate(studentName: string, modules: string[], f
   const passedModules = new Set(results?.map((r) => r.module_slug) ?? []);
   const allPassed = modules.every((m) => passedModules.has(m));
 
-  if (!allPassed) return { error: "Tous les modules doivent être validés (score ≥ 60%)" };
+  if (!allPassed) return { error: "Tous les modules doivent être validés (score ≥ 70%)" };
   if (finalScore < 70) return { error: "Score final insuffisant (minimum 70%)" };
 
   const certNumber = generateCertNumber();

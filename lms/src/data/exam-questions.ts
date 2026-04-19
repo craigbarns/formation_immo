@@ -138,7 +138,7 @@ export const MODULE_EXAMS: ModuleExam[] = [
           "La date exacte de la vente",
         ],
         correctIndex: 1,
-        explanation: "La loi Hoguet et ses décrets imposent la mention des honoraires et de leur répartition dans le mandat.",
+        explanation: "La loi Hoguet et ses décrets imposent la mention des honoraires et de leur charge supportée (vendeur ou acquéreur) dans le mandat."
       },
       {
         id: "j11",
@@ -893,7 +893,7 @@ export const MODULE_EXAMS: ModuleExam[] = [
         question: "Les honoraires d'agence sont encadrés par :",
         options: ["Aucune réglementation", "La loi Hoguet (affichage obligatoire et répartition)", "Un décret du ministère du Logement", "La Chambre de Commerce"],
         correctIndex: 1,
-        explanation: "La loi Hoguet impose l'affichage des honoraires en vitrine et sur chaque annonce, ainsi que la mention de leur répartition entre vendeur et acheteur.",
+        explanation: "La loi Hoguet impose l'affichage des honoraires en vitrine et sur chaque annonce, ainsi que la mention de leur charge supportée (vendeur ou acquéreur selon le mandat)."
       },
       {
         id: "te24",

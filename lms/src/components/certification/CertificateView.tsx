@@ -21,7 +21,7 @@ function generateCertNumber(completedAt: string): string {
 function getMention(score: number): string {
   if (score >= 90) return "Excellent";
   if (score >= 85) return "Très Bien";
-  if (score >= 80) return "Bien";
+  if (score >= 75) return "Bien";
   if (score >= 70) return "Réussite";
   return "Non validé";
 }

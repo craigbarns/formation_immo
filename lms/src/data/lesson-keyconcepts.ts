@@ -49,7 +49,7 @@ export const LESSON_VISUALS: Record<string, LessonVisuals> = {
     stats: [
       { label: "Formation obligatoire", value: "42", unit: "heures", color: "gold" },
       { label: "Renouvellement carte", value: "3", unit: "ans", color: "navy" },
-      { label: "Delai retractation", value: "10", unit: "jours", color: "blue" },
+      { label: "Delai retractation", value: "10", unit: "jours (acquéreur)", color: "blue" }
     ],
     takeaways: [
       "La loi ALUR encadre l'ensemble de l'activite d'agent immobilier",
@@ -61,7 +61,7 @@ export const LESSON_VISUALS: Record<string, LessonVisuals> = {
   "juridique/compromis": {
     keyConcepts: [
       { icon: "file-signature", title: "Compromis synallagmatique", description: "Engagement bilateral : vendeur et acheteur sont lies", type: "definition" },
-      { icon: "clock", title: "Delai SRU", description: "10 jours de retractation sans justification apres notification", type: "rule" },
+      { icon: "clock", title: "Delai SRU", description: "10 jours de retractation sans justification pour l'acquéreur particulier apres notification du compromis", type: "rule" },
       { icon: "shield", title: "Conditions suspensives", description: "Pret, servitudes, preemption, diagnostics", type: "tip" },
     ],
     stats: [

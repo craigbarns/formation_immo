@@ -58,8 +58,8 @@ export function ExamScoresChart({ scores }: ExamScoresChartProps) {
           }
 
           const getColor = (pct: number) => {
-            if (pct >= 80) return "bg-emerald-500";
-            if (pct >= 60) return "bg-yellow-500";
+            if (pct >= 70) return "bg-emerald-500";
+            if (pct >= 50) return "bg-yellow-500";
             return "bg-red-500";
           };
 

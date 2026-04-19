@@ -143,7 +143,7 @@ export function ProfileContent() {
           <div className="space-y-2">
             {examResults.map(([slug, result]) => {
               const pct = Math.round((result.score / result.total) * 100);
-              const passed = pct >= 80;
+              const passed = pct >= 70;
               return (
                 <div key={slug} className="flex items-center justify-between rounded-lg border border-zinc-100 p-3">
                   <div>

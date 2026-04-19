@@ -90,7 +90,7 @@ export const COURSE: CourseModule[] = [
         objectives: [
           "Rédiger un compromis conforme sans risque de nullité",
           "Sécuriser les 7 conditions suspensives indispensables",
-          "Gérer le délai de rétractation de 10 jours SRU",
+          "Gérer le délai de rétractation de 10 jours SRU (acquéreur particulier)",
           "Éviter les 5 erreurs qui font capoter une vente",
         ],
       },
@@ -300,7 +300,7 @@ export const COURSE: CourseModule[] = [
           "Rédiger une offre d'achat juridiquement sécurisée",
           "Distinguer promesse unilatérale et synallagmatique",
           "Maîtriser les conditions suspensives et leurs conséquences",
-          "Gérer le délai de rétractation de 10 jours francs",
+          "Gérer le délai de rétractation de 10 jours francs (acquéreur particulier)",
         ],
       },
       {
@@ -612,7 +612,7 @@ export const COURSE: CourseModule[] = [
         objectives: [
           "Rédiger une promesse unilatérale de vente sécurisée",
           "Sécuriser les conditions suspensives de crédit",
-          "Gérer le délai légal de rétractation de 10 jours",
+          "Gérer le délai légal de rétractation de 10 jours (acquéreur particulier)",
           "Préparer le passage chez le notaire sans accroc",
         ],
       },

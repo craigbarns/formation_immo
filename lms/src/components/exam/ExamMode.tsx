@@ -36,7 +36,7 @@ function AnimatedCounter({ value, total }: { value: number; total: number }) {
         <circle cx="60" cy="60" r="52" strokeWidth="8" fill="none" className="stroke-zinc-100" />
         <circle
           cx="60" cy="60" r="52" strokeWidth="8" fill="none"
-          stroke={pct >= 80 ? "#10b981" : pct >= 50 ? "#f59e0b" : "#ef4444"}
+          stroke={pct >= 70 ? "#10b981" : pct >= 50 ? "#f59e0b" : "#ef4444"}
           strokeDasharray={`${2 * Math.PI * 52}`}
           strokeDashoffset={`${2 * Math.PI * 52 * (1 - pct / 100)}`}
           strokeLinecap="round"
@@ -171,7 +171,7 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
     for (const q of exam.questions) {
       if (q.type === "open") {
         const g = openGrades[q.id];
-        if (g && g.score >= 60) s++;
+        if (g && g.score >= 70) s++;
       } else {
         if (answers[q.id] === q.correctIndex) s++;
       }
@@ -191,13 +191,13 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
         questionId: q.id,
         selected: answers[q.id] as number ?? -1,
         correct: q.type === "open"
-          ? (openGrades[q.id]?.score ?? 0) >= 60
+          ? (openGrades[q.id]?.score ?? 0) >= 70
           : answers[q.id] === q.correctIndex,
       }));
       submitExamResult({
         moduleSlug: exam.moduleSlug,
         score: pct,
-        passed: pct >= 60,
+        passed: pct >= 70,
         answers: formattedAnswers,
         durationSeconds,
       }).catch(() => {});
@@ -218,7 +218,7 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
             : "(non répondu)",
           correctAnswer: isOpen ? (q.modelAnswer || "") : (q.options?.[q.correctIndex ?? 0] ?? ""),
           isCorrect: isOpen
-            ? (grade ? grade.score >= 60 : false)
+            ? (grade ? grade.score >= 70 : false)
             : (answers[q.id] === q.correctIndex),
           timeSpentSeconds: perQuestion,
           source: "exam" as const,
@@ -255,10 +255,10 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
           {prevScore && prevPct !== null && (
             <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm backdrop-blur-sm">
               <span className="text-white/80">Dernier score :</span>
-              <span className={`font-bold ${prevPct >= 80 ? "text-emerald-300" : "text-amber-300"}`}>
+              <span className={`font-bold ${prevPct >= 70 ? "text-emerald-300" : "text-amber-300"}`}>
                 {prevScore.score}/{prevScore.total} ({prevPct}%)
               </span>
-              {prevPct >= 80 ? <EmojiIcon emoji="✓" className="h-4 w-4 text-emerald-300" /> : " — à améliorer"}
+              {prevPct >= 70 ? <EmojiIcon emoji="✓" className="h-4 w-4 text-emerald-300" /> : " — à améliorer"}
             </div>
           )}
         </div>
@@ -277,7 +277,7 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
 
           <div className="mt-6 flex justify-center gap-3">
             <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-3 text-center">
-              <p className="text-lg font-black text-emerald-700">80%+</p>
+              <p className="text-lg font-black text-emerald-700">70%+</p>
               <p className="text-xs text-emerald-600 font-medium inline-flex items-center justify-center gap-1">
                 = Réussi <EmojiIcon emoji="✓" className="h-3.5 w-3.5" />
               </p>
@@ -308,7 +308,7 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
 
   /* ─── RESULTS SCREEN ─────────────────────────────────────────── */
   if (state === "review") {
-    const passed = score / total >= 0.8;
+    const passed = score / total >= 0.7;
     const isPerfect = score === total;
     let resultMsg = "";
     let resultSub = "";
@@ -570,7 +570,7 @@ function ReviewQuestion({
   const isOpen = question.type === "open";
   const unanswered = answer === undefined || (isOpen && String(answer).trim() === "");
   const correct = isOpen
-    ? (grade ? grade.score >= 60 : false)
+    ? (grade ? grade.score >= 70 : false)
     : answer === question.correctIndex;
 
   return (
