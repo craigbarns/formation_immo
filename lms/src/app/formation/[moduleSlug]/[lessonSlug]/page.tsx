@@ -290,6 +290,7 @@ export default async function LessonPage({ params }: Props) {
               avatar={avatar}
               visuals={visualsForPlayer}
               moduleSlug={moduleSlug}
+              lessonSlug={lessonSlug}
               audioQuizSchedule={audioQuizSchedule}
             />
           </section>

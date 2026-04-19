@@ -18,6 +18,11 @@ import { saveProgress, loadProgress, clearProgress } from "@/lib/playback-progre
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { addBookmark, loadBookmarks, removeBookmark, type AudioBookmark } from "@/lib/audio-bookmarks";
 import { createAudioStats, updateStatsOnPlay, updateStatsOnPause, updateStatsOnSeek, finalizeStats, type AudioStats } from "@/lib/audio-stats";
+import { generateClipLink, copyToClipboard, parseClipTimeFromUrl } from "@/lib/shareable-clip";
+            <div className="flex justify-between py-2 border-b border-white/10">
+              <span className="text-white/80">Partager le moment</span>
+              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">S</kbd>
+            </div>
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                               */
@@ -42,6 +47,7 @@ type Props = {
   visuals: LessonVisuals | null;
   moduleTitle?: string;
   moduleSlug?: string;
+  lessonSlug?: string;
   audioQuizSchedule?: ResolvedAudioQuizItem[];
   alignmentUrl?: string | null;
 };
@@ -288,6 +294,7 @@ export function CinematicPlayer({
   visuals,
   moduleTitle,
   moduleSlug,
+  lessonSlug,
   audioQuizSchedule = [],
 }: Props) {
   const theme = getModuleTheme(moduleSlug ?? "");
@@ -456,6 +463,29 @@ export function CinematicPlayer({
       .then((text) => setSrtContent(text))
       .catch(() => setSrtContent(null));
   }, [alignmentUrl]);
+
+  /* ---------- Parse ?t= timestamp from URL ---------- */
+  useEffect(() => {
+    const clipTime = parseClipTimeFromUrl();
+    if (clipTime !== null && clipTime > 0) {
+      const el = audioRef.current;
+      if (el && loaded) {
+        el.currentTime = clipTime;
+        setCurrent(clipTime);
+      } else {
+        // Attendre que l'audio soit chargé
+        const checkLoaded = setInterval(() => {
+          const audioEl = audioRef.current;
+          if (audioEl && audioEl.duration > 0) {
+            audioEl.currentTime = clipTime;
+            setCurrent(clipTime);
+            clearInterval(checkLoaded);
+          }
+        }, 200);
+        setTimeout(() => clearInterval(checkLoaded), 5000);
+      }
+    }
+  }, [loaded]);
 
   /* ---------- Controls ---------- */
 
@@ -646,10 +676,25 @@ export function CinematicPlayer({
         requestAnimationFrame(() => { flash.style.opacity = "0"; });
         setTimeout(() => flash.remove(), 300);
       }
+      if (e.key === "s" || e.key === "S") {
+        e.preventDefault();
+        const el = audioRef.current;
+        if (!el || !moduleSlug || !lessonSlug) return;
+        const clip = generateClipLink(window.location.origin, moduleSlug, lessonSlug, el.currentTime);
+        copyToClipboard(clip.url);
+        // Flash visuel temporaire
+        const flash = document.createElement("div");
+        flash.className = "fixed inset-0 z-[9999] pointer-events-none";
+        flash.style.background = "rgba(96,165,250,0.15)";
+        flash.style.transition = "opacity 0.3s ease";
+        document.body.appendChild(flash);
+        requestAnimationFrame(() => { flash.style.opacity = "0"; });
+        setTimeout(() => flash.remove(), 300);
+      }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [toggle, navigateSlide, cycleSpeed, toggleFullscreen, skip, audioUrl]);
+  }, [toggle, navigateSlide, cycleSpeed, toggleFullscreen, skip, audioUrl, moduleSlug]);
 
   /* ---------- Pause on blur (auto-pause when switching tabs) ---------- */
   useEffect(() => {
@@ -1315,6 +1360,29 @@ export function CinematicPlayer({
             >
               🔖 {bookmarks.length > 0 ? bookmarks.length : ""}
             </button>
+            {moduleSlug && lessonSlug && (
+              <button
+                onClick={async () => {
+                  const el = audioRef.current;
+                  if (!el) return;
+                  const clip = generateClipLink(window.location.origin, moduleSlug, lessonSlug, el.currentTime);
+                  const ok = await copyToClipboard(clip.url);
+                  if (ok) {
+                    const flash = document.createElement("div");
+                    flash.className = "fixed inset-0 z-[9999] pointer-events-none";
+                    flash.style.background = "rgba(96,165,250,0.15)";
+                    flash.style.transition = "opacity 0.3s ease";
+                    document.body.appendChild(flash);
+                    requestAnimationFrame(() => { flash.style.opacity = "0"; });
+                    setTimeout(() => flash.remove(), 300);
+                  }
+                }}
+                className="rounded-full border border-white/20 px-2 py-0.5 text-2xs font-bold text-white/80 hover:bg-white/10 transition"
+                title="Partager le moment (S)"
+              >
+                🔗
+              </button>
+            )}
             <button
               onClick={cycleSpeed}
               className="rounded-full border border-white/20 px-2 py-0.5 text-2xs font-bold text-white/80 hover:bg-white/10 transition tabular-nums"
