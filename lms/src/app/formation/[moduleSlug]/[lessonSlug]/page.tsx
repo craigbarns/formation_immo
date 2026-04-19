@@ -43,6 +43,7 @@ import { NotesPanelButton } from "./NotesPanelButton";
 import { LessonJourneyBadge } from "@/components/LessonJourneyBadge";
 import { AICoachButton } from "@/components/ai-coach";
 import { ReadingProgressBar } from "@/components/ReadingProgressBar";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import { getResolvedAudioQuizSchedule, type ResolvedAudioQuizItem } from "@/data/audio-quiz-schedule";
 import { buildVisualsFromScript, buildRecapFromScript } from "@/lib/lesson-script-parser";
 import { CinematicPlayer } from "@/components/audio/CinematicPlayerLazy";
@@ -152,6 +153,7 @@ export default async function LessonPage({ params }: Props) {
   return (
     <div>
       <ReadingProgressBar />
+      <ScrollProgress />
       {/* Avatar banner */}
       {avatar && (
         <LessonPresenterPanel
