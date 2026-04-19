@@ -1693,37 +1693,91 @@ function TitleSlide({ title, subtitle, avatar, reducedMotion }: { title: string;
 function ConceptSlide({ concept, index, total }: { concept: KeyConcept; index: number; total: number }) {
   const colors = TYPE_COLORS[concept.type] ?? TYPE_COLORS.rule;
   return (
-    <div
-      className="w-full max-w-lg"
-      style={{ animation: "slideFromRight 0.5s cubic-bezier(0.16,1,0.3,1) both" }}
-    >
-      <style>{`
-        @keyframes slideFromRight {
-          from { opacity: 0; transform: translateX(30px); }
-          to   { opacity: 1; transform: translateX(0); }
-        }
-      `}</style>
-      <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-5">
+    <div className="w-full max-w-lg">
+      <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-4"
+        style={{ animation: "fadeInUp 0.4s 0.1s both cubic-bezier(0.16,1,0.3,1)" }}>
         Concept {index + 1} / {total}
       </p>
-      <div className={`rounded-2xl border-2 ${colors.border} ${colors.bg} p-7 backdrop-blur-sm relative overflow-hidden`}>
-        {/* Subtle corner accent */}
-        <div className={`absolute top-0 right-0 w-16 h-16 opacity-20 rounded-bl-3xl ${colors.bg}`} />
-        <div className="relative">
-          <div className="flex items-center justify-center gap-3 mb-1">
-            <EmojiIcon emoji={CONCEPT_ICONS[concept.icon] ?? "📌"} className="h-10 w-10" />
-            <span className={`inline-block rounded-full px-3 py-1 text-2xs font-bold uppercase ${colors.text} bg-white/10 border ${colors.border}`}>
-              {TYPE_LABELS[concept.type] ?? concept.type}
-            </span>
+
+      <div
+        className={`rounded-2xl border ${colors.border} p-8 relative overflow-hidden`}
+        style={{
+          background: "rgba(0,0,0,0.4)",
+          backdropFilter: "blur(20px) saturate(1.3)",
+          WebkitBackdropFilter: "blur(20px) saturate(1.3)",
+          animation: "fadeInUp 0.5s 0.15s both cubic-bezier(0.16,1,0.3,1)",
+        }}
+      >
+        {/* Giant watermark icon */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none opacity-[0.04]">
+          <EmojiIcon emoji={CONCEPT_ICONS[concept.icon] ?? "📌"} className="h-48 w-48" />
+        </div>
+
+        {/* Floating type badge */}
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-2xs font-bold uppercase ${colors.text} border ${colors.border} shadow-lg`}
+            style={{
+              background: "rgba(0,0,0,0.6)",
+              backdropFilter: "blur(8px)",
+              animation: "fadeInDown 0.4s 0.3s both cubic-bezier(0.16,1,0.3,1)",
+            }}
+          >
+            <span className="h-1.5 w-1.5 rounded-full" style={{ background: colors.text.replace("text-", "") === "text-brand-gold" ? "#d4af37" : "currentColor" }} />
+            {TYPE_LABELS[concept.type] ?? concept.type}
+          </span>
+        </div>
+
+        {/* Top decorative line */}
+        <div className="mx-auto mb-6 flex items-center gap-2" style={{ animation: "fadeIn 0.5s 0.35s both" }}>
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-brand-gold/40" />
+          <div className="h-1 w-1 rounded-full bg-brand-gold/60" />
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-brand-gold/40" />
+        </div>
+
+        <div className="relative text-center">
+          <div className="mx-auto mb-4 h-14 w-14"
+            style={{ animation: "scaleIn 0.5s 0.25s both cubic-bezier(0.16,1,0.3,1)", filter: "drop-shadow(0 0 12px rgba(212,175,55,0.2))" }}>
+            <EmojiIcon emoji={CONCEPT_ICONS[concept.icon] ?? "📌"} className="h-14 w-14" />
           </div>
-          <h3 className="mt-4 text-center text-xl font-black text-white sm:text-2xl leading-tight">
+
+          <h3 className="text-xl font-black text-white sm:text-2xl leading-tight"
+            style={{ animation: "fadeInUp 0.5s 0.3s both cubic-bezier(0.16,1,0.3,1)" }}>
             {concept.title}
           </h3>
-          <p className="mt-3 text-center text-sm leading-relaxed text-white/80">
+
+          <p className="mt-3 text-sm leading-relaxed text-white/75 max-w-sm mx-auto"
+            style={{ animation: "fadeInUp 0.5s 0.4s both cubic-bezier(0.16,1,0.3,1)" }}>
             {concept.description}
           </p>
         </div>
+
+        {/* Bottom decorative line */}
+        <div className="mx-auto mt-6 flex items-center gap-2" style={{ animation: "fadeIn 0.5s 0.5s both" }}>
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-brand-gold/20" />
+          <div className="h-0.5 w-0.5 rounded-full bg-brand-gold/40" />
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-brand-gold/20" />
+        </div>
       </div>
+
+      <style>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(16px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+          from { opacity: 0; transform: translateY(-10px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+          from { opacity: 0; transform: scale(0.8); }
+          to   { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
@@ -1964,24 +2018,39 @@ function ProcessSlide({ steps }: { steps: string[] }) {
 /* ── HIGHLIGHT SLIDE ─── */
 function HighlightSlide({ statement }: { statement: string }) {
   return (
-    <div
-      className="w-full max-w-xl text-center"
-      style={{ animation: "fadeIn 0.6s ease-out both" }}
-    >
-      {/* Decorative frame */}
-      <div className="relative px-8 py-10">
+    <div className="w-full max-w-xl text-center">
+      <div className="relative px-8 py-10"
+        style={{
+          background: "rgba(0,0,0,0.35)",
+          backdropFilter: "blur(16px)",
+          borderRadius: "1rem",
+          border: "1px solid rgba(212,175,55,0.15)",
+          animation: "fadeIn 0.6s ease-out both",
+        }}>
+        {/* Glow behind */}
+        <div className="absolute inset-0 rounded-2xl opacity-30 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 50% 40% at 50% 50%, rgba(212,175,55,0.15), transparent 70%)" }} />
+
         {/* Corner ornaments */}
-        <div className="absolute top-0 left-0 h-8 w-8 border-l-2 border-t-2 border-brand-gold/50 rounded-tl-lg" />
-        <div className="absolute top-0 right-0 h-8 w-8 border-r-2 border-t-2 border-brand-gold/50 rounded-tr-lg" />
-        <div className="absolute bottom-0 left-0 h-8 w-8 border-l-2 border-b-2 border-brand-gold/50 rounded-bl-lg" />
-        <div className="absolute bottom-0 right-0 h-8 w-8 border-r-2 border-b-2 border-brand-gold/50 rounded-br-lg" />
+        <div className="absolute top-0 left-0 h-10 w-10 border-l-2 border-t-2 border-brand-gold/60 rounded-tl-xl" />
+        <div className="absolute top-0 right-0 h-10 w-10 border-r-2 border-t-2 border-brand-gold/60 rounded-tr-xl" />
+        <div className="absolute bottom-0 left-0 h-10 w-10 border-l-2 border-b-2 border-brand-gold/60 rounded-bl-xl" />
+        <div className="absolute bottom-0 right-0 h-10 w-10 border-r-2 border-b-2 border-brand-gold/60 rounded-br-xl" />
 
         <p className="text-2xs font-bold uppercase tracking-[0.3em] text-brand-gold mb-6">
           Point cle
         </p>
-        <blockquote className="text-xl font-black text-white leading-tight sm:text-3xl drop-shadow-lg">
+        <blockquote className="relative text-xl font-black text-white leading-tight sm:text-3xl"
+          style={{ textShadow: "0 0 30px rgba(212,175,55,0.2), 0 2px 10px rgba(0,0,0,0.5)" }}>
           &ldquo;{statement}&rdquo;
         </blockquote>
+
+        {/* Bottom accent */}
+        <div className="mx-auto mt-6 flex items-center justify-center gap-2">
+          <div className="h-px w-8 bg-gradient-to-r from-transparent to-brand-gold/50" />
+          <div className="h-1 w-1 rounded-full bg-brand-gold" />
+          <div className="h-px w-8 bg-gradient-to-l from-transparent to-brand-gold/50" />
+        </div>
       </div>
     </div>
   );
