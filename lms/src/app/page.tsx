@@ -361,20 +361,83 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* FAQ */}
+        <section className="border-t border-white/10 bg-white/[0.02] px-6 py-16">
+          <div className="mx-auto max-w-3xl">
+            <div className="mb-10 text-center">
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-3xs font-bold uppercase tracking-widest text-on-dark-muted">
+                <Sparkles className="h-3 w-3" /> Questions fréquentes
+              </p>
+              <h2 className="mt-4 text-3xl font-bold">Vous avez des questions ?</h2>
+            </div>
+            <div className="space-y-4">
+              {[
+                {
+                  q: "Quelle est la durée réelle de la formation ?",
+                  a: "42 heures au total : 40 heures de contenu pédagogique réparties en 5 modules + 2 heures d'examen final certifiant. Chaque module fait 8 heures avec QCM et cas pratiques intégrés.",
+                },
+                {
+                  q: "La certification a-t-elle une valeur officielle ?",
+                  a: "L'attestation atteste de la maîtrise des compétences enseignées (5 modules, 180 QCM, cas pratiques). Elle complète la carte professionnelle délivrée par la CCI mais ne la remplace pas. Numérotation unique et vérifiable.",
+                },
+                {
+                  q: "Puis-je utiliser cette formation pour mon équipe / mon centre ?",
+                  a: "Oui — licence multi-utilisateurs disponible. Centres de formation, agences et organismes certifiants : contactez-nous pour un devis personnalisé avec suivi des progressions.",
+                },
+                {
+                  q: "Le contenu est-il à jour avec la législation 2026 ?",
+                  a: "Oui — loi Climat, Lemoine, HCSF, ALUR 2026, TRACFIN renforcé. Mises à jour trimestrielles incluses dans l'abonnement.",
+                },
+              ].map((faq, i) => (
+                <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-5">
+                  <h3 className="font-bold text-white">{faq.q}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/80">{faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Social proof counter */}
+        <section className="border-t border-white/10 px-6 py-10">
+          <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-8 text-center">
+            <div>
+              <p className="text-2xl font-black text-brand-gold">42h</p>
+              <p className="text-2xs uppercase tracking-widest text-white/50">De formation</p>
+            </div>
+            <div className="h-8 w-px bg-white/10" />
+            <div>
+              <p className="text-2xl font-black text-brand-gold">36</p>
+              <p className="text-2xs uppercase tracking-widest text-white/50">Leçons</p>
+            </div>
+            <div className="h-8 w-px bg-white/10" />
+            <div>
+              <p className="text-2xl font-black text-brand-gold">180</p>
+              <p className="text-2xs uppercase tracking-widest text-white/50">QCM certifiants</p>
+            </div>
+            <div className="h-8 w-px bg-white/10" />
+            <div>
+              <p className="text-2xl font-black text-brand-gold">5</p>
+              <p className="text-2xs uppercase tracking-widest text-white/50">Modules</p>
+            </div>
+          </div>
+        </section>
+
         {/* Final CTA */}
         <section className="border-t border-white/10 px-6 py-16 text-center">
           <div className="mx-auto max-w-2xl">
-            <h2 className="text-3xl font-bold">Prêt à démarrer ?</h2>
+            <h2 className="text-3xl font-bold">Prêt à former vos agents ?</h2>
             <p className="mt-4 text-white/85 text-base">
-              Accédez immédiatement à l&apos;intégralité du contenu — leçons, QCM, simulateurs et fiches.
+              Accédez immédiatement à l&apos;intégralité du contenu — leçons audio, QCM, simulateurs, cas pratiques et attestation de certification.
             </p>
             <Link
               href="/login"
               className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-gold px-10 py-4 text-base font-bold text-brand-navy shadow-2xl shadow-black/30 transition hover:bg-yellow-300 active:scale-[0.98]"
             >
-              Accéder à la formation
+              Démarrer la formation
               <ArrowRight className="h-4 w-4" />
             </Link>
+            <p className="mt-4 text-2xs text-white/40">Accès immédiat · Mise à jour 2026 incluse · Support pédagogique</p>
           </div>
         </section>
       </main>

@@ -8,6 +8,7 @@ import type { ModuleShowcase } from "@/data/module-showcase";
 import { getStoredProgress } from "@/components/LessonProgress";
 import { ModuleLessonAudioControls } from "@/components/ModuleLessonAudioControls";
 import { ModuleHeroResumeCta } from "@/components/modules/ModuleHeroResumeCta";
+import { ModuleIntroPlayer } from "@/components/modules/ModuleIntroPlayer";
 import { ModuleLessonStatusBadge } from "@/components/modules/ModuleLessonStatusBadge";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
@@ -161,35 +162,32 @@ export function ModuleLanding({
           </div>
 
           {avatar && (
-            <aside className="rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-md">
-              <div className="flex items-start gap-4">
-                <div
-                  className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl text-xl font-bold text-white shadow-lg"
-                  style={{ backgroundColor: accent }}
-                >
-                  {avatar.initials}
-                </div>
-                <div>
-                  <p className="text-lg font-bold leading-tight">{avatar.name}</p>
-                  <p className="mt-1 text-sm font-medium text-brand-gold">{avatar.role}</p>
-                </div>
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-white/85">{avatar.description}</p>
-              {modulePct !== null && (
-                <div className="mt-5 rounded-xl bg-black/20 p-4">
-                  <div className="flex items-center justify-between text-xs font-semibold text-white/80">
-                    <span>Votre avancement</span>
-                    <span className="tabular-nums text-white">{modulePct}%</span>
+            <div className="space-y-4">
+              <ModuleIntroPlayer
+                moduleSlug={moduleSlug}
+                moduleTitle={moduleTitle}
+                avatarName={avatar.name}
+                avatarInitials={avatar.initials}
+                accentColor={accent}
+              />
+              <aside className="rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-md">
+                <p className="text-sm leading-relaxed text-white/85">{avatar.description}</p>
+                {modulePct !== null && (
+                  <div className="mt-5 rounded-xl bg-black/20 p-4">
+                    <div className="flex items-center justify-between text-xs font-semibold text-white/80">
+                      <span>Votre avancement</span>
+                      <span className="tabular-nums text-white">{modulePct}%</span>
+                    </div>
+                    <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/20">
+                      <div
+                        className="h-full rounded-full bg-brand-gold transition-all duration-500"
+                        style={{ width: `${modulePct}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/20">
-                    <div
-                      className="h-full rounded-full bg-brand-gold transition-all duration-500"
-                      style={{ width: `${modulePct}%` }}
-                    />
-                  </div>
-                </div>
-              )}
-            </aside>
+                )}
+              </aside>
+            </div>
           )}
         </div>
       </section>

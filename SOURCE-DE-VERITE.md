@@ -35,7 +35,7 @@
 | Audio MP3 (TTS) | 38 | ✅ Générés |
 | Alignment WhisperX | 5/38 | 🔄 En cours (~12h restantes) |
 | Slides interactifs | 36 leçons × ~8 slides | ✅ Automatisés via CinematicPlayer |
-| QCM | 77 questions | ✅ En LMS, cible 180 |
+| QCM | **180 questions** | ✅ Atteint (78 exam + 102 quiz) |
 | Cas pratiques | 5 | ✅ En LMS |
 | Vidéos | 1 intro | 🔄 Pipeline en développement |
 | Certification | Modèle d'attestation | 🔄 À finaliser |

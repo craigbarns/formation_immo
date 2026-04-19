@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "duration": 474.008,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.211,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 33.779,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 64.047,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 94.433,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 134.842,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 165.249,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 195.482,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 227.953,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 258.579,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 289.563,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 324.974,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 359.781,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 390.9,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 424.713,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 456.419,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "immobiliers,",
+      "start": 0.871,
+      "end": 1.811
+    },
+    {
+      "term": "documents",
+      "start": 2.011,
+      "end": 2.351
+    },
+    {
+      "term": "techniques",
+      "start": 2.391,
+      "end": 3.072
+    },
+    {
+      "term": "faire",
+      "start": 3.532,
+      "end": 3.812
+    },
+    {
+      "term": "transaction.",
+      "start": 4.472,
+      "end": 5.552
+    },
+    {
+      "term": "Vous",
+      "start": 5.572,
+      "end": 5.692
+    },
+    {
+      "term": "votre",
+      "start": 6.512,
+      "end": 6.712
+    },
+    {
+      "term": "chaque",
+      "start": 7.052,
+      "end": 7.252
+    },
+    {
+      "term": "semaine,",
+      "start": 7.272,
+      "end": 7.893
+    },
+    {
+      "term": "mais",
+      "start": 7.913,
+      "end": 8.053
+    }
+  ]
+}

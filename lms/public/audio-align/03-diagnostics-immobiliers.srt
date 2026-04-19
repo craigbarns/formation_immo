@@ -1,0 +1,647 @@
+1
+00:00:00,211 --> 00:00:05,551
+Les diagnostics immobiliers, ces documents
+techniques qui peuvent faire ou défaire
+une transaction.
+
+2
+00:00:05,572 --> 00:00:09,973
+Vous les voyez passer sur votre bureau
+chaque semaine, mais savez-vous vraiment
+ce qu'ils contiennent ?
+
+3
+00:00:09,993 --> 00:00:12,053
+Savez-vous les interpréter pour vos
+clients ?
+
+4
+00:00:12,073 --> 00:00:15,374
+C'est quoi déjà la différence entre DPE et
+diagnostics amiantes ?
+
+5
+00:00:15,394 --> 00:00:17,754
+Ce diagnostiqueur est-il vraiment certifié
+?
+
+6
+00:00:17,774 --> 00:00:19,614
+Combien ça coûte et qui paie ?
+
+7
+00:00:19,655 --> 00:00:23,495
+Aujourd'hui, nous allons décrypter
+ensemble tous les diagnostics
+obligatoires.
+
+8
+00:00:23,515 --> 00:00:28,597
+À la fin de cette vidéo, vous serez
+capables d'expliquer chaque diagnostic à
+vos clients avec assurance et précision.
+
+9
+00:00:29,317 --> 00:00:33,759
+En moyenne, chaque transaction immobilière
+nécessite 8 diagnostics obligatoires.
+
+10
+00:00:33,779 --> 00:00:40,420
+Le coût total varie entre 800 et 1500
+euros selon la surface, l'ancienneté et la
+localisation du bien.
+
+11
+00:00:40,441 --> 00:00:41,601
+Leur validité ?
+
+12
+00:00:41,621 --> 00:00:44,143
+De 6 mois à illimiter selon le type.
+
+13
+00:00:44,162 --> 00:00:44,463
+Pourtant,
+
+14
+00:00:44,942 --> 00:00:48,683
+De nombreux agents ne maîtrisent pas
+parfaitement la réglementation des
+diagnostics.
+
+15
+00:00:48,704 --> 00:00:55,865
+Résultat, des retards de transaction, des
+clients mécontents, des responsabilités
+engagées quand un problème survient après
+la vente.
+
+16
+00:00:55,886 --> 00:00:57,665
+Mais il y a une autre réalité.
+
+17
+00:00:57,686 --> 00:01:01,406
+Les agents qui maîtrisent les diagnostics
+gagnent la confiance de leurs clients.
+
+18
+00:01:01,447 --> 00:01:04,007
+Ils anticipent les problèmes avant qu'ils
+ne surviennent.
+
+19
+00:01:04,046 --> 00:01:08,168
+Et ils justifient plus facilement leurs
+honoraires en démontrant leur expertise
+technique.
+
+20
+00:01:08,188 --> 00:01:10,789
+Commençons par le diagnostic le plus
+visible, le DPE.
+
+21
+00:01:11,528 --> 00:01:13,811
+le Diagnostic de performance énergétique.
+
+22
+00:01:13,852 --> 00:01:18,819
+Le DPE évalue la consommation énergétique
+et l'impact en gaz à effet de serre d'un
+logement.
+
+23
+00:01:18,858 --> 00:01:23,784
+Il classe le bien de A à G, A étant le
+plus performant, G le moins performant.
+
+24
+00:01:23,825 --> 00:01:27,069
+Obligations, tous les biens en vente ou
+location depuis le 1er juillet 2021.
+
+25
+00:01:28,251 --> 00:01:30,471
+Avant, il y avait des seuils de surface.
+
+26
+00:01:30,492 --> 00:01:31,451
+Plus maintenant.
+
+27
+00:01:31,471 --> 00:01:34,393
+Même un studio de 8 m² doit avoir son DPE.
+
+28
+00:01:34,433 --> 00:01:36,632
+Validité, 10 ans maximum.
+
+29
+00:01:36,673 --> 00:01:42,594
+Mais attention, si des travaux
+d'amélioration énergétique ont été
+réalisés, le DPE doit être refait.
+
+30
+00:01:42,614 --> 00:01:43,775
+Qui le réalise ?
+
+31
+00:01:43,814 --> 00:01:47,615
+Un diagnostiqueur certifié, inscrit au
+registre des certifiés.
+
+32
+00:01:47,635 --> 00:01:50,016
+Vérifiez toujours son numéro de
+certification.
+
+33
+00:01:50,576 --> 00:01:55,397
+entre 150 et 350 euros selon la surface et
+la complexité du bien.
+
+34
+00:01:55,418 --> 00:02:03,140
+Point crucial, les passoires thermiques,
+classes F et G, doivent faire l'objet
+d'une mention obligatoire dans tous les
+documents de commercialisation.
+
+35
+00:02:03,159 --> 00:02:14,822
+L'article L126-26 du Code de la
+construction et de l'habitation, issu de
+la loi n°2021-1104 du 22 août 2021, dite
+loi climat et résilience, l'impose.
+
+36
+00:02:14,842 --> 00:02:16,521
+Passons au diagnostic santé.
+
+37
+00:02:16,562 --> 00:02:18,962
+Ceux qui protègent l'acquéreur contre les
+risques pour la santé.
+
+38
+00:02:19,643 --> 00:02:20,983
+Diagnostic amiante.
+
+39
+00:02:21,043 --> 00:02:29,745
+Il recherche la présence d'amiante, ce
+matériau cancérigène utilisé jusqu'en 1997
+pour l'isolation et la protection contre
+l'incendie.
+
+40
+00:02:29,784 --> 00:02:34,486
+Obligation, tous les biens dont le permis
+de construire date d'avant le 1er juillet
+1997.
+
+41
+00:02:35,627 --> 00:02:37,287
+Sans exception de surface.
+
+42
+00:02:37,326 --> 00:02:39,848
+Validité illimitée si négatif.
+
+43
+00:02:39,888 --> 00:02:44,028
+Si positif, un nouveau diagnostic est
+nécessaire après travaux de retrait.
+
+44
+00:02:44,068 --> 00:02:45,209
+Qui le réalise ?
+
+45
+00:02:45,248 --> 00:02:48,870
+Un diagnostiqueur certifié, formation
+spécifique amiante obligatoire.
+
+46
+00:02:49,490 --> 00:02:52,312
+coût entre 80 et 250 euros.
+
+47
+00:02:52,331 --> 00:02:54,312
+Diagnostic plomb ou crêpe.
+
+48
+00:02:54,372 --> 00:03:00,657
+Il recherche la présence de plomb dans les
+peintures utilisées avant 1949 pour sa
+couvrante et son brillant.
+
+49
+00:03:00,697 --> 00:03:01,537
+Obligation.
+
+50
+00:03:01,556 --> 00:03:03,598
+Tous les biens construits avant le 1er
+janvier 1949.
+
+51
+00:03:03,617 --> 00:03:04,019
+Sans exception.
+
+52
+00:03:06,479 --> 00:03:07,599
+Validité.
+
+53
+00:03:07,620 --> 00:03:11,080
+Un an pour la location, illimité pour la
+vente si négatif.
+
+54
+00:03:11,100 --> 00:03:12,382
+Qui le réalise ?
+
+55
+00:03:12,421 --> 00:03:14,521
+Un diagnostiqueur certifié plomb.
+
+56
+00:03:14,542 --> 00:03:15,461
+Coût ?
+
+57
+00:03:15,481 --> 00:03:17,242
+Entre 80 et 200 euros.
+
+58
+00:03:17,263 --> 00:03:18,862
+Diagnostic termites.
+
+59
+00:03:18,902 --> 00:03:23,264
+Il recherche la présence de termites, ces
+insectes xylophages qui détruisent le
+bois.
+
+60
+00:03:23,304 --> 00:03:24,264
+Obligation.
+
+61
+00:03:24,304 --> 00:03:27,224
+Uniquement dans les zones définies par
+arrêté préfectoral.
+
+62
+00:03:27,264 --> 00:03:29,246
+Consulter la carte des zones à risque.
+
+63
+00:03:29,286 --> 00:03:30,605
+Validité 6 mois.
+
+64
+00:03:30,626 --> 00:03:33,187
+C'est le diagnostic avec la validité la
+plus courte.
+
+65
+00:03:33,227 --> 00:03:33,907
+Qui le réalise ?
+
+66
+00:03:34,526 --> 00:03:36,608
+Un diagnostiqueur certifié termite.
+
+67
+00:03:36,627 --> 00:03:38,949
+Coût, entre 100 et 250 euros.
+
+68
+00:03:38,989 --> 00:03:40,969
+Continuons avec les diagnostics
+techniques.
+
+69
+00:03:40,990 --> 00:03:43,091
+Ceux qui évaluent l'état des
+installations.
+
+70
+00:03:43,131 --> 00:03:44,631
+Diagnostic électricité.
+
+71
+00:03:44,670 --> 00:03:47,913
+Il évalue la sécurité de l'installation
+électrique intérieure.
+
+72
+00:03:47,953 --> 00:03:51,894
+Obligation, tous les biens dont
+l'installation électrique date de plus de
+15 ans.
+
+73
+00:03:51,933 --> 00:03:56,276
+Le diagnostic doit mentionner l'absence de
+danger et la conformité aux normes en
+vigueur.
+
+74
+00:03:56,295 --> 00:03:57,817
+Validité, 3 ans.
+
+75
+00:03:57,856 --> 00:03:58,956
+Qui le réalise ?
+
+76
+00:03:58,997 --> 00:04:00,858
+Un diagnostiqueur certifié électricité.
+
+77
+00:04:01,337 --> 00:04:03,441
+Coût entre 100 et 200 euros.
+
+78
+00:04:03,461 --> 00:04:07,746
+Diagnostic gaz, il évalue la sécurité de
+l'installation intérieure de gaz.
+
+79
+00:04:07,786 --> 00:04:11,670
+Obligation, tous les biens dont
+l'installation gaz date de plus de 15 ans.
+
+80
+00:04:11,711 --> 00:04:13,652
+Validité, 3 ans.
+
+81
+00:04:13,693 --> 00:04:14,913
+Qui le réalise ?
+
+82
+00:04:14,954 --> 00:04:17,317
+Un diagnostiqueur certifié gaz.
+
+83
+00:04:18,579 --> 00:04:20,459
+entre 80 et 180 euros.
+
+84
+00:04:20,480 --> 00:04:22,182
+Diagnostic assainissement.
+
+85
+00:04:22,221 --> 00:04:34,673
+Il décrit le mode d'assainissement des
+eaux usées, tout-à-l'égout, fosses
+septiques, microstations, obligations,
+tous les biens non raccordés au
+tout-à-l'égout, 6 raccordements, un simple
+certificat de raccordement suffit.
+
+86
+00:04:34,694 --> 00:04:37,536
+Validité, illimité si aucun changement.
+
+87
+00:04:37,555 --> 00:04:38,697
+Qui le réalise ?
+
+88
+00:04:38,716 --> 00:04:40,619
+Un diagnostiqueur certifié assainissement.
+
+89
+00:04:41,759 --> 00:04:44,821
+entre 150 et 400 euros selon la
+complexité.
+
+90
+00:04:44,860 --> 00:04:49,523
+Terminons par un diagnostic souvent
+méconnu mais crucial, l'état des risques
+et pollutions.
+
+91
+00:04:49,562 --> 00:05:01,226
+L'ERP, ou état des risques et pollutions,
+recense les risques naturels, miniers,
+technologiques, sismiques, radons,
+pollution des sols et bruit auquel le bien
+est exposé.
+
+92
+00:05:01,266 --> 00:05:10,790
+Ce nouveau nom, instauré en 2018 puis
+enrichi par la loi climat, remplace
+l'ancienne dénomination ERNMT que vous
+trouverez encore parfois dans les vieux
+dossiers.
+
+93
+00:05:11,730 --> 00:05:12,829
+Quels risques ?
+
+94
+00:05:12,850 --> 00:05:24,934
+Inondations, séismes, radons, mouvements
+de terrain, pollution des sols, sites
+industriels, mines, obligations, tous les
+biens situés dans une zone couverte par un
+plan de prévention des risques ou
+équivalent.
+
+95
+00:05:24,973 --> 00:05:28,394
+En pratique, presque tous les biens en
+France métropolitaine.
+
+96
+00:05:28,415 --> 00:05:29,714
+Validité, 6 mois.
+
+97
+00:05:30,254 --> 00:05:31,516
+Qui le réalise ?
+
+98
+00:05:31,536 --> 00:05:35,521
+Le vendeur ou le bailleur le remplit
+lui-même à partir des informations
+communales.
+
+99
+00:05:35,560 --> 00:05:41,346
+Formulaire CERFA officiel plus extrait
+cartographique téléchargeable sur
+georisque.gouv.fr.
+
+100
+00:05:41,387 --> 00:05:43,928
+Aucun diagnosticeur certifié n'est requis.
+
+101
+00:05:43,949 --> 00:05:47,773
+C'est une déclaration sur l'honneur,
+appuyée sur les arrêtés préfectoraux en
+vigueur.
+
+102
+00:05:48,494 --> 00:05:49,855
+Coût, gratuit.
+
+103
+00:05:49,875 --> 00:05:53,197
+Le formulaire en ligne génère le document
+automatiquement.
+
+104
+00:05:53,237 --> 00:05:54,478
+Point important.
+
+105
+00:05:54,497 --> 00:05:59,740
+Si un risque est identifié, l'acquéreur
+doit en être informé avant la signature du
+compromis.
+
+106
+00:05:59,781 --> 00:06:03,142
+C'est une obligation légale qui peut
+influencer son consentement.
+
+107
+00:06:03,182 --> 00:06:05,004
+Imaginons une situation concrète.
+
+108
+00:06:05,024 --> 00:06:13,889
+Vous commercialisez une maison de 120 m² à
+Versailles, construite en 1985, située aux
+45 avenues de Paris, sept mains de 8000
+Versailles.
+
+109
+00:06:13,910 --> 00:06:15,951
+Quelles diagnostics sont obligatoires ?
+
+110
+00:06:15,971 --> 00:06:17,531
+Le DPE obligatoire pour tous.
+
+111
+00:06:18,112 --> 00:06:27,057
+La maison est de 1985, donc postérieur à
+1997, pas d'amiante, postérieur à 1949,
+pas de plomb.
+
+112
+00:06:27,077 --> 00:06:30,860
+Versailles n'est pas en zone thermite, pas
+de diagnostic thermite.
+
+113
+00:06:30,899 --> 00:06:35,163
+Installation électrique de plus de 15 ans,
+diagnostic électricité obligatoire.
+
+114
+00:06:35,202 --> 00:06:38,584
+Installation gaz de plus de 15 ans,
+diagnostic gaz obligatoire.
+
+115
+00:06:39,225 --> 00:06:41,946
+Raccordé ou tout à l'égout, pas
+d'assainissement.
+
+116
+00:06:41,966 --> 00:06:44,367
+ERP obligatoire, Versailles a des PPR.
+
+117
+00:06:44,387 --> 00:06:49,348
+Total des diagnostics obligatoires, DPE,
+électricité, gaz, ERP.
+
+118
+00:06:49,367 --> 00:06:57,230
+Coût total estimé 150 plus 150 plus 120
+plus 0, ERP gratuit, fait par le vendeur,
+égal à 420 euros.
+
+119
+00:06:57,250 --> 00:06:59,810
+Vous expliquez clairement au propriétaire.
+
+120
+00:06:59,831 --> 00:07:04,692
+Voici les diagnostics obligatoires pour
+votre bien, leurs coûts, leur validité.
+
+121
+00:07:04,713 --> 00:07:08,233
+Je vous recommande de les faire réaliser
+dès maintenant pour ne pas bloquer la
+vente.
+
+122
+00:07:09,014 --> 00:07:12,595
+Résultat, les propriétaires apprécient
+votre transparence.
+
+123
+00:07:12,615 --> 00:07:16,814
+Les diagnostics sont réalisés rapidement,
+le dossier est complet pour les visites.
+
+124
+00:07:16,834 --> 00:07:19,675
+Vous gagnez du temps et la confiance de
+vos clients.
+
+125
+00:07:19,716 --> 00:07:23,697
+Voilà, vous avez maintenant une vision
+complète des diagnostics immobiliers.
+
+126
+00:07:23,716 --> 00:07:29,038
+N'oubliez pas, maîtriser les diagnostics,
+c'est maîtriser un pan essentiel de votre
+métier.
+
+127
+00:07:29,077 --> 00:07:35,759
+Votre mission cette semaine, créer votre
+fiche récapitulative des diagnostics avec
+obligations, validités et coûts,
+
+128
+00:07:36,418 --> 00:07:43,531
+Constituez votre réseau de diagnostiqueurs
+certifiés de confiance, formez-vous à lire
+et expliquez chaque type de diagnostic.
+
+129
+00:07:43,550 --> 00:07:47,177
+Dans la prochaine vidéo, nous explorerons
+les différents types de mandats.
+
+130
+00:07:47,216 --> 00:07:53,466
+Simple, exclusif, semi-exclusif, comment
+choisir la bonne stratégie pour chaque
+bien.
+
+131
+00:07:53,507 --> 00:07:54,007
+À très vite !

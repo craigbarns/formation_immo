@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "duration": 531.136,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.211,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 31.387,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 64.707,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 94.794,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 127.655,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 158.711,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 190.14,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 224.362,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 257.207,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 294.155,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 325.398,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 357.682,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 389.307,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 420.236,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 451.634,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 485.295,
+      "source": "auto"
+    },
+    {
+      "index": 16,
+      "start": 517.414,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Appartement",
+      "start": 0.211,
+      "end": 1.372
+    },
+    {
+      "term": "chambres,",
+      "start": 3.112,
+      "end": 3.773
+    },
+    {
+      "term": "cuisine",
+      "start": 3.793,
+      "end": 4.173
+    },
+    {
+      "term": "équipée,",
+      "start": 4.193,
+      "end": 5.033
+    },
+    {
+      "term": "balcon,",
+      "start": 5.053,
+      "end": 5.734
+    },
+    {
+      "term": "euros.",
+      "start": 7.635,
+      "end": 8.335
+    },
+    {
+      "term": "Contactez-nous.",
+      "start": 8.375,
+      "end": 9.836
+    },
+    {
+      "term": "Technique,",
+      "start": 11.776,
+      "end": 12.557
+    },
+    {
+      "term": "avec",
+      "start": 14.158,
+      "end": 14.378
+    },
+    {
+      "term": "autres.",
+      "start": 14.638,
+      "end": 14.858
+    }
+  ]
+}
