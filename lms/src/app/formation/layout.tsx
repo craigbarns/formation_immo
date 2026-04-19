@@ -1,4 +1,5 @@
 import { FormationShell } from "@/components/FormationShell";
+import { StudyReminder } from "@/components/retention/StudyReminder";
 
 export default async function FormationLayout({
   children,
@@ -6,6 +7,9 @@ export default async function FormationLayout({
   children: React.ReactNode;
 }) {
   return (
-    <FormationShell>{children}</FormationShell>
+    <FormationShell>
+      {children}
+      <StudyReminder />
+    </FormationShell>
   );
 }
