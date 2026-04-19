@@ -18,8 +18,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!mod || !showcase) return { title: "Module" };
   const shortTitle = mod.title.replace(/^Module \d+ — /, "");
   return {
-    title: shortTitle,
-    description: showcase.subhead.slice(0, 160),
+    title: `${shortTitle} — Formation Agent Immobilier`,
+    description: `${showcase.subhead.slice(0, 120)}. ${mod.lessons.length} leçons, QCM certifiant et outils pratiques.`,
+    openGraph: {
+      title: shortTitle,
+      description: showcase.subhead,
+      type: "website",
+      locale: "fr_FR",
+    },
   };
 }
 

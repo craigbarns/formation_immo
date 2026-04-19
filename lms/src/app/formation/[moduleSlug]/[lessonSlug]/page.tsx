@@ -20,7 +20,6 @@ import { VideoEmbed } from "@/components/VideoEmbed";
 import { LessonProgress } from "@/components/LessonProgress";
 import { LessonTimer } from "@/components/gamification/LessonTimer";
 import { ModuleTimeTracker } from "@/components/gamification/ModuleTimeTracker";
-import { CinematicPlayer } from "@/components/audio/CinematicPlayer";
 import { LessonPresenterPanel } from "@/components/avatars/LessonPresenterPanel";
 import { LessonNotes } from "@/components/interactive/LessonNotes";
 import { QuizCheckpointsSection } from "@/components/interactive/QuizCheckpointsSection";
@@ -46,7 +45,7 @@ import { AICoachButton } from "@/components/ai-coach";
 import { ReadingProgressBar } from "@/components/ReadingProgressBar";
 import { getResolvedAudioQuizSchedule, type ResolvedAudioQuizItem } from "@/data/audio-quiz-schedule";
 import { buildVisualsFromScript, buildRecapFromScript } from "@/lib/lesson-script-parser";
-
+import { CinematicPlayer } from "@/components/audio/CinematicPlayerLazy";
 /* ------------------------------------------------------------------ */
 /*  Fallbacks interactifs — rend le CinematicPlayer utile pour       */
 /*  TOUTES les leçons, même celles sans visuals ni audioQuiz manuel   */
@@ -102,8 +101,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!result) return { title: "Leçon non trouvée" };
   const { module: mod, lesson } = result;
   return {
-    title: `${lesson.title} — ${mod.title}`,
-    description: lesson.objectives.join(" ") || `Leçon du module ${mod.title}`,
+    title: `${lesson.title} — ${mod.title} | Formation Agent Immobilier`,
+    description: `${lesson.objectives.join(" ").slice(0, 150)} — Leçon ${lesson.duration}min du module ${mod.title}.`,
+    openGraph: {
+      title: lesson.title,
+      description: lesson.objectives.join(" "),
+      type: "article",
+      locale: "fr_FR",
+    },
   };
 }
 
