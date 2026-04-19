@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calculator, Copy, CheckCircle2, RefreshCcw } from "lucide-react";
+import { Calculator, Copy, CheckCircle2, RefreshCcw, Info } from "lucide-react";
 import { recordSimulatorUsed } from "@/lib/gamification";
 
 export function NetVendeurSimulator() {
@@ -10,10 +10,9 @@ export function NetVendeurSimulator() {
   const [honoraires, setHonoraires] = useState(5);
   const [chargeAcquereur, setChargeAcquereur] = useState(true);
   const [copied, setCopied] = useState<number | null>(null);
-  const [tracked] = useState(() => {
-    if (typeof window !== 'undefined') recordSimulatorUsed("net-vendeur");
-    return true;
-  });
+  useEffect(() => {
+    recordSimulatorUsed("net-vendeur");
+  }, []);
 
 
   const montantHonoraires = (prixFai * honoraires) / 100;
@@ -63,7 +62,7 @@ export function NetVendeurSimulator() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* Inputs */}
-        <div className="space-y-5 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+        <div className="space-y-5 card-elevated p-5">
           <h4 className="flex items-center gap-2 text-sm font-bold text-brand-navy">
             <Calculator size={16} className="text-brand-gold" /> Paramètres
           </h4>
@@ -141,16 +140,16 @@ export function NetVendeurSimulator() {
 
           <div className="mt-5 rounded-xl bg-white/70 p-3 text-xs text-emerald-900">
             {chargeAcquereur ? (
-              <p>✅ L&apos;acquéreur paie les honoraires. Le vendeur reçoit le prix FAI en intégralité.</p>
+              <p className="inline-flex items-center gap-1"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> L&apos;acquéreur paie les honoraires. Le vendeur reçoit le prix FAI en intégralité.</p>
             ) : (
-              <p>ℹ️ Les honoraires sont déduits du prix FAI. Net vendeur = {Math.round(netVendeur).toLocaleString("fr-FR")} €.</p>
+              <p className="inline-flex items-center gap-1"><Info className="h-4 w-4 text-blue-500" /> Les honoraires sont déduits du prix FAI. Net vendeur = {Math.round(netVendeur).toLocaleString("fr-FR")} €.</p>
             )}
           </div>
         </motion.div>
       </div>
 
       {/* Phrases */}
-      <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+      <div className="card-elevated p-5">
         <h4 className="text-sm font-bold text-brand-navy">Phrases d&apos;argumentaire prêtes à l&apos;emploi</h4>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {phrases.map((p, i) => (

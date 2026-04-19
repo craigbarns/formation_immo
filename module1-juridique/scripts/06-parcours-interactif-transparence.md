@@ -48,11 +48,11 @@ Bienvenue dans la leçon la plus importante de ce module : la transparence des h
 
 ### PROBLÉMATIQUE (1 minute)
 
-[B-ROLL : Infographie animée avec chiffres clés : 1 247 contrôles DGCCRF en 2025, 38 % de non-conformités sur l'affichage des honoraires]
+[B-ROLL : Infographie animée sur les contrôles DGCCRF et l'importance de l'affichage des honoraires]
 
 **NARRATION :**
 
-En 2025, la DGCCRF, la répression des fraudes, a mené 1 247 contrôles ciblés sur les agences immobilières. [PAUSE 1s] Résultat : 38 % de non-conformités relevées sur l'affichage des honoraires. [PAUSE 1s] Près de quatre agences contrôlées sur dix.
+Chaque année, la DGCCRF, la répression des fraudes, mène des contrôles ciblés sur les agences immobilières. [PAUSE 1s] Les non-conformités sur l'affichage des honoraires restent fréquentes. [PAUSE 1s] La transparence n'est donc pas optionnelle, c'est une obligation légale.
 
 [B-ROLL : Images de procès-verbaux d'infractions, timbres rouges "NON CONFORME"]
 
@@ -318,7 +318,7 @@ Dans la prochaine leçon, nous aborderons le mandat exclusif et ses clauses sens
 4. **Double mandat caché** : interdit — seule la partie mandante rémunère l'agent pour une transaction donnée.
 5. **Toute modification d'honoraires** passe par un avenant écrit, signé, daté, avec nouveau délai de rétractation.
 6. **Traçabilité** : conservez mails, SMS, comptes rendus — votre dossier est votre meilleure défense en cas de contrôle DGCCRF.
-7. **Contrôles DGCCRF** : 38 % de non-conformités relevées en 2025 — la transparence n'est plus optionnelle.
+7. **Contrôles DGCCRF** : les contrôles sont réguliers — la transparence est une obligation légale.
 8. **Discours client** : expliquer sa valeur protège sa commission mieux que toute négociation défensive.
 
 ---

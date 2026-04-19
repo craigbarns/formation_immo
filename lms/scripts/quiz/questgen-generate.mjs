@@ -23,6 +23,7 @@ if (!moduleArg) {
 }
 
 // Patterns pour extraire des concepts clés du markdown
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const CONCEPT_PATTERNS = [
   /\*\*(.+?)\*\*/g,  // Texte en gras
   /`(.+?)`/g,        // Code inline
@@ -127,6 +128,7 @@ function generateQuestion(concept, module) {
   return template.generate(concept);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function generateQuiz(module, count) {
   const modulePath = resolve(ROOT, `module${getModuleNumber(module)}-${module}`, "scripts");
   

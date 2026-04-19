@@ -3,6 +3,7 @@ import { Calculator, Map, Megaphone, Scale, TrendingUp } from "lucide-react";
 import { CHEAT_SHEETS, type CheatSheet, type CheatSheetRow } from "@/data/cheat-sheets";
 import { COURSE } from "@/data/course";
 import { PrintButton } from "./PrintButton";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 export const metadata = {
   title: "Aide-mémoire — Fiches de référence | Formation immobilier",
@@ -47,7 +48,7 @@ export default function AideMemoirePage() {
   return (
     <div className="space-y-12">
       {/* Hero */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-navy via-[#244b75] to-[#0f2540] px-6 py-10 text-white shadow-2xl md:px-10 md:py-12 print:hidden">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-navy via-[var(--brand-navy-mid)] to-[var(--brand-navy-hero)] px-6 py-10 text-white shadow-2xl md:px-10 md:py-12 print:hidden">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.07]"
           style={{
@@ -64,7 +65,7 @@ export default function AideMemoirePage() {
         </nav>
         <div className="flex items-start gap-5">
           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-3xl shadow-inner ring-1 ring-white/20">
-            📑
+            <EmojiIcon emoji="📑" className="h-8 w-8" />
           </div>
           <div className="flex-1">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">
@@ -73,7 +74,7 @@ export default function AideMemoirePage() {
             <h1 className="mt-1 text-3xl font-black leading-tight tracking-tight md:text-4xl">
               Aide-mémoire pro
             </h1>
-            <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/75">
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/85">
               Les chiffres, deadlines, sanctions et seuils que vous devez connaître par
               cœur — concentrés en {CHEAT_SHEETS.length} fiches imprimables. À plastifier,
               à garder en visite ou en RDV.
@@ -118,7 +119,7 @@ function CheatSheetCard({ sheet }: { sheet: CheatSheet }) {
   const Icon = ICON_MAP[sheet.icon];
   return (
     <article
-      className="cheat-card overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm"
+      className="cheat-card overflow-hidden card-elevated"
       style={{ borderTopWidth: 4, borderTopColor: sheet.color }}
     >
       {/* Card header */}
@@ -141,7 +142,7 @@ function CheatSheetCard({ sheet }: { sheet: CheatSheet }) {
       <div className="space-y-4 px-5 py-4">
         {sheet.sections.map((section) => (
           <div key={section.title}>
-            <h4 className="mb-2 text-[11px] font-bold uppercase tracking-wider text-zinc-500">
+            <h4 className="mb-2 text-3xs font-bold uppercase tracking-wider text-zinc-500">
               {section.title}
             </h4>
             <ul className="space-y-1.5">
@@ -175,7 +176,7 @@ function CheatSheetCard({ sheet }: { sheet: CheatSheet }) {
 
       {/* Disclaimer */}
       {sheet.disclaimer && (
-        <footer className="border-t border-zinc-100 bg-zinc-50 px-5 py-3 text-[11px] italic leading-relaxed text-zinc-500">
+        <footer className="border-t border-zinc-100 bg-zinc-50 px-5 py-3 text-3xs italic leading-relaxed text-zinc-500">
           {sheet.disclaimer}
         </footer>
       )}

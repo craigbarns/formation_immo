@@ -182,13 +182,13 @@ export function FlashcardDeck({ cards, moduleSlug }: { cards: Flashcard[]; modul
               setCurrent(0);
               setFlipped(false);
             }}
-            className="rounded border border-zinc-300 px-2 py-1 text-[10px] font-medium text-zinc-600 hover:bg-zinc-50"
+            className="rounded border border-zinc-300 px-2 py-1 text-2xs font-medium text-zinc-600 hover:bg-zinc-50"
           >
             {showAll ? "A reviser uniquement" : "Toutes les cartes"}
           </button>
           <button
             onClick={resetAll}
-            className="rounded border border-zinc-300 px-2 py-1 text-[10px] font-medium text-zinc-600 hover:bg-zinc-50"
+            className="rounded border border-zinc-300 px-2 py-1 text-2xs font-medium text-zinc-600 hover:bg-zinc-50"
           >
             Reset
           </button>
@@ -211,11 +211,11 @@ export function FlashcardDeck({ cards, moduleSlug }: { cards: Flashcard[]; modul
         >
           {/* Category & difficulty */}
           <div className="flex items-center justify-between gap-2 mb-4">
-            <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-[10px] font-bold text-zinc-600">
+            <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-2xs font-bold text-zinc-600">
               {card.category}
             </span>
             <span
-              className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
+              className={`rounded-full px-2.5 py-0.5 text-2xs font-bold ${
                 DIFFICULTY_COLORS[card.difficulty]
               }`}
             >
@@ -300,7 +300,7 @@ export function FlashcardDeck({ cards, moduleSlug }: { cards: Flashcard[]; modul
         ))}
       </div>
 
-      <p className="mt-3 text-center text-[10px] text-zinc-400">
+      <p className="mt-3 text-center text-2xs text-zinc-400">
         Navigation : Espace/Droite = retourner/suivante, Gauche = precedente, Entree = retourner
       </p>
     </div>

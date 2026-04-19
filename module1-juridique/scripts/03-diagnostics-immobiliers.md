@@ -52,7 +52,7 @@ En moyenne, chaque transaction immobilière nécessite 8 diagnostics obligatoire
 
 [B-ROLL : Images de transactions bloquées à cause de diagnostics problématiques]
 
-Pourtant, 42% des agents admettent ne pas maîtriser parfaitement la réglementation des diagnostics. [PAUSE 1s] Résultat : des retards de transaction, des clients mécontents, des responsabilités engagées quand un problème survient après la vente.
+Pourtant, de nombreux agents ne maîtrisent pas parfaitement la réglementation des diagnostics. [PAUSE 1s] Résultat : des retards de transaction, des clients mécontents, des responsabilités engagées quand un problème survient après la vente.
 
 [B-ROLL : Agent professionnel qui présente les diagnostics avec aisance]
 
@@ -94,7 +94,7 @@ Le DPE évalue la consommation énergétique et l'impact en gaz à effet de serr
 
 [B-ROLL : Calculatrice montrant le coût moyen]
 
-**Point crucial depuis 2025** : les passoires thermiques, classes F et G, doivent faire l'objet d'une mention obligatoire dans tous les documents de commercialisation. [PAUSE 1s] L'article 8 de la Loi n° 2025-127 l'impose. [PAUSE 2s]
+**Point crucial** : les passoires thermiques, classes F et G, doivent faire l'objet d'une mention obligatoire dans tous les documents de commercialisation. [PAUSE 1s] L'article L. 126-26 du Code de la construction et de l'habitation, issu de la Loi n° 2021-1104 du 22 août 2021 dite "Loi Climat et Résilience", l'impose. [PAUSE 2s]
 
 ---
 
@@ -397,9 +397,9 @@ Dans la prochaine vidéo, nous explorerons les différents types de mandats. [PA
 
 ## 📚 RÉFÉRENCES JURIDIQUES CITÉES
 
-- Loi n° 2025-127 du 23 février 2025 (mention passoires thermiques)
-- Arrêté du 15 septembre 2025 (diagnostics obligatoires)
-- Code de la construction et de l'habitation : articles R. 134-1 à R. 134-5
+- Loi Climat et Résilience : Loi n° 2021-1104 du 22 août 2021
+- Article L. 126-26 du Code de la construction et de l'habitation (mention passoires thermiques)
+- Code de la construction et de l'habitation : articles R. 134-1 à R. 134-5 (diagnostics obligatoires)
 - Arrêtés préfectoraux zones termites
 - Plans de Prévention des Risques (PPR)
 

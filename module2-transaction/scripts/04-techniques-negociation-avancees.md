@@ -37,9 +37,9 @@ Charismatic real estate negotiator in modern meeting room, intense discussion wi
 
 #### [SEGMENT 2 - PROBLÉMATIQUE] (0:50 - 1:50)
 
-[B-ROLL : Statistiques : 30% des compromis ne se transforment pas en vente définitive]
+[B-ROLL : Scènes de négociations complexes et de compromis qui échouent]
 
-"Trente pour cent des compromis ne se transforment pas en vente définitive. Trente pour cent. Vous faites dix compromis, trois tombent à l'eau. Pourquoi ?"
+"Certains compromis ne se transforment pas en vente définitive. C'est plus fréquent qu'on ne le pense. Vous faites dix compromis, plusieurs peuvent tomber à l'eau. Pourquoi ?"
 
 [B-ROLL : Scènes de négociations ratées, tensions, incompréhensions]
 
@@ -281,7 +281,7 @@ Charismatic real estate negotiator in modern meeting room, intense discussion wi
 
 ### 🎯 POINTS CLÉS À RETENIR
 
-1. **30% des compromis** ne se transforment pas en vente
+1. **Certains compromis** ne se transforment pas en vente définitive
 2. **6 techniques** : Intérêts → Ancrage → Concessions → Principes → Silence → Séparation
 3. **Alignement des intérêts** : trouver ce que les deux parties veulent vraiment
 4. **Package de concessions** : créer de la valeur au-delà du prix

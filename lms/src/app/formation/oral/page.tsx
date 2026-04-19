@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, X, Mic, GraduationCap } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Mic, GraduationCap } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
 import { AICoachChat } from "@/components/ai-coach/AICoachChat";
 
 export default function OralExamPage() {

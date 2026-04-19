@@ -32,9 +32,9 @@ French real estate agent conducting professional property appraisal visit, confi
 
 Vous avez un RDV estimation. [PAUSE 1s] C'est peut-être le moment le plus important de votre activité. [PAUSE 1s] Parce que c'est là que tout se joue — pas au compromis, pas à l'offre — là, dans ce premier contact avec le propriétaire.
 
-[B-ROLL : Statistique : 60% des mandats sont perdus avant même la visite du bien]
+[B-ROLL : Agent immobilier qui perd un mandat faute de préparation]
 
-60% des mandats se perdent avant même d'avoir visité le bien. [PAUSE 1s] Soit parce que l'agent n'a pas préparé ses RDVs, soit parce qu'il est passé directement à l'estimation sans construire la relation.
+Beaucoup de mandats se perdent avant même d'avoir visité le bien. [PAUSE 1s] Soit parce que l'agent n'a pas préparé ses RDVs, soit parce qu'il est passé directement à l'estimation sans construire la relation.
 
 [B-ROLL : Méthode R0-R1-R2 schématisée]
 
@@ -175,7 +175,7 @@ R0, R1, R2. [PAUSE 1s] Trois rendez-vous, une méthode, zéro improvisation. [PA
 
 ## POINTS CLÉS À RETENIR
 
-1. 60% des mandats se perdent avant la visite — la préparation est décisive
+1. Beaucoup de mandats se perdent avant la visite — la préparation est décisive
 2. R0 : 5 questions clés de qualification — motivation, délai, concurrence, prix attendu, projet
 3. R1 : jamais de prix — uniquement visite, mesures, découverte client SONCAS
 4. R2 : dossier complet avec comparables, plan de vente, mandat prêt

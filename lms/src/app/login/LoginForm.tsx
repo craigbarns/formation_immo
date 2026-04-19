@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Loader2, Lock, Mail, Sparkles, UserPlus } from "lucide-react";
+import { Loader2, Lock, Mail, Sparkles, UserPlus, Home, ClipboardList, Scale, Briefcase, Building2, CircleDollarSign, Handshake } from "lucide-react";
 import { login } from "@/app/actions/auth";
 
 export default function LoginForm() {
@@ -40,10 +40,10 @@ export default function LoginForm() {
         .login-card { animation: fadeInCard 0.6s ease-out forwards; }
       `}</style>
 
-      <span className="pointer-events-none float-icon-1 fixed left-[6%] top-[12%] select-none text-5xl" aria-hidden>🏠</span>
-      <span className="pointer-events-none float-icon-2 fixed left-[12%] bottom-[18%] select-none text-4xl" aria-hidden>📋</span>
-      <span className="pointer-events-none float-icon-3 fixed right-[8%] top-[20%] select-none text-5xl" aria-hidden>⚖️</span>
-      <span className="pointer-events-none float-icon-4 fixed right-[14%] bottom-[14%] select-none text-4xl" aria-hidden>💼</span>
+      <span className="pointer-events-none float-icon-1 fixed left-[6%] top-[12%] select-none text-brand-navy/20" aria-hidden><Home className="h-12 w-12" /></span>
+      <span className="pointer-events-none float-icon-2 fixed left-[12%] bottom-[18%] select-none text-brand-navy/20" aria-hidden><ClipboardList className="h-10 w-10" /></span>
+      <span className="pointer-events-none float-icon-3 fixed right-[8%] top-[20%] select-none text-brand-navy/20" aria-hidden><Scale className="h-12 w-12" /></span>
+      <span className="pointer-events-none float-icon-4 fixed right-[14%] bottom-[14%] select-none text-brand-navy/20" aria-hidden><Briefcase className="h-10 w-10" /></span>
 
       <div className="login-card w-full max-w-md">
         <div className="mb-8 text-center">
@@ -53,8 +53,8 @@ export default function LoginForm() {
           </p>
 
           <div className="mt-5 flex justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-navy text-3xl shadow-lg ring-1 ring-brand-navy/20">
-              🏛️
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-navy shadow-lg ring-1 ring-brand-navy/20">
+              <Building2 className="h-8 w-8 text-white" />
             </div>
           </div>
 
@@ -147,12 +147,12 @@ export default function LoginForm() {
               </p>
               <ul className="space-y-2">
                 {[
-                  { icon: "⚖️", text: "Juridique & ALUR" },
-                  { icon: "💶", text: "Financement & fiscalité" },
-                  { icon: "🤝", text: "Techniques de vente" },
-                ].map(({ icon, text }) => (
+                  { Icon: Scale, text: "Juridique & ALUR" },
+                  { Icon: CircleDollarSign, text: "Financement & fiscalité" },
+                  { Icon: Handshake, text: "Techniques de vente" },
+                ].map(({ Icon, text }) => (
                   <li key={text} className="flex items-center gap-2.5 text-sm font-medium text-brand-navy">
-                    <span className="text-base" aria-hidden>{icon}</span>
+                    <span className="text-brand-gold" aria-hidden><Icon className="h-4 w-4" /></span>
                     {text}
                   </li>
                 ))}

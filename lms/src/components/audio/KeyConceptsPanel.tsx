@@ -1,6 +1,7 @@
 "use client";
 
 import type { KeyConcept } from "@/data/lesson-keyconcepts";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 const ICONS: Record<string, string> = {
   "balance-scale": "\u2696\uFE0F",
@@ -66,7 +67,7 @@ const TYPE_LABEL_STYLES: Record<string, string> = {
   rule: "bg-brand-navy/10 text-brand-navy",
   tip: "bg-emerald-100 text-emerald-700",
   warning: "bg-amber-100 text-amber-800",
-  stat: "bg-brand-gold/15 text-[#8a7318]",
+  stat: "bg-brand-gold/15 text-brand-gold-dark",
 };
 
 export function KeyConceptsPanel({ concepts }: { concepts: KeyConcept[] }) {
@@ -78,12 +79,12 @@ export function KeyConceptsPanel({ concepts }: { concepts: KeyConcept[] }) {
           className={`rounded-xl border-2 p-4 transition hover:shadow-md ${TYPE_STYLES[c.type] ?? "border-zinc-200 bg-white"}`}
         >
           <div className="flex items-start gap-3">
-            <span className="text-xl shrink-0">{ICONS[c.icon] ?? "📌"}</span>
+            <EmojiIcon emoji={ICONS[c.icon] ?? "📌"} className="h-5 w-5 shrink-0" />
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 flex-wrap">
                 <h4 className="font-bold text-brand-navy text-sm">{c.title}</h4>
                 <span
-                  className={`rounded-full px-2 py-0.5 text-[9px] font-bold ${
+                  className={`rounded-full px-2 py-0.5 text-2xs font-bold ${
                     TYPE_LABEL_STYLES[c.type] ?? "bg-zinc-100 text-zinc-600"
                   }`}
                 >

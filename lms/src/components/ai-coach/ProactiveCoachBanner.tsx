@@ -61,7 +61,7 @@ export function ProactiveCoachBanner() {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isActivePage]);
 
   const handleDismiss = () => {
     setDismissed(true);
@@ -87,7 +87,7 @@ export function ProactiveCoachBanner() {
         exit={{ opacity: 0, y: 50 }}
         className="fixed bottom-24 left-1/2 z-40 w-[calc(100%-2rem)] max-w-lg -translate-x-1/2"
       >
-        <div className="relative overflow-hidden rounded-2xl border border-brand-gold/30 bg-gradient-to-r from-brand-navy to-[#1e4a73] p-4 shadow-xl">
+        <div className="relative overflow-hidden rounded-2xl border border-brand-gold/30 bg-gradient-to-r from-brand-navy to-[var(--brand-navy-light)] p-4 shadow-xl">
           <div className="flex items-start gap-3">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-gold/20">
               <Lightbulb className="h-5 w-5 text-brand-gold" />
@@ -104,7 +104,8 @@ export function ProactiveCoachBanner() {
             </div>
             <button
               onClick={handleDismiss}
-              className="rounded-full p-1 text-white/50 transition hover:bg-white/10 hover:text-white"
+              aria-label="Fermer"
+              className="rounded-full p-1 text-white/80 transition hover:bg-white/10 hover:text-white"
             >
               <X className="h-4 w-4" />
             </button>

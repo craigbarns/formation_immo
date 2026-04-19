@@ -103,11 +103,11 @@ Comprendre les anciens dispositifs est essentiel. [PAUSE 1s] Vos clients propri�
 
 **NARRATION :**
 
-**La loi Cosse (depuis 2017).** [PAUSE 1s] Également appelée "Louer Abordable", ce dispositif permet une déduction du revenu brut foncier de 15% à 85% selon le niveau de loyer pratiqué. [PAUSE 1s] Le propriétaire signe une convention avec l'ANAH et loue à un loyer inférieur au marché. [PAUSE 2s]
+**Loc'Avantages (ex-Loi Cosse, depuis le 1er mars 2022).** [PAUSE 1s] Ce dispositif a remplacé la loi Cosse. Il prévoit une réduction d'impôt sur le revenu de 15% à 65% selon le niveau de loyer pratiqué. [PAUSE 1s] Le propriétaire signe une convention avec l'ANAH et loue à un loyer inférieur au marché. [PAUSE 1s] Base légale : article 199 tricies du Code général des impôts, créé par la loi n° 2021-1900 du 30 décembre 2021. [PAUSE 1s] Prorogé jusqu'au 31 décembre 2027 par l'article 88 de la loi de finances pour 2025. [PAUSE 2s]
 
 [B-ROLL : Centre-ville dégradé à rénover, avant/après]
 
-**La loi Denormandie (depuis 2019).** [PAUSE 1s] Extension du Pinel à l'ancien avec travaux dans les centres-villes dégradés. [PAUSE 1s] Réduction d'impôt de 12%, 18% ou 21% selon la durée de location (6, 9 ou 12 ans). [PAUSE 1s] Les travaux doivent représenter au moins 25% du coût total de l'opération. [PAUSE 2s]
+**La loi Denormandie (2019-2027).** [PAUSE 1s] Extension du Pinel à l'ancien avec travaux dans les centres-villes dégradés. [PAUSE 1s] Réduction d'impôt de 12%, 18% ou 21% selon la durée de location (6, 9 ou 12 ans). [PAUSE 1s] Les travaux doivent représenter au moins 25% du coût total de l'opération. [PAUSE 1s] Prorogée jusqu'au 31 décembre 2027 par l'article 42 de la loi du 9 avril 2024 et l'article 72 de la loi de finances pour 2024. [PAUSE 1s] Base légale : article 199 novovicies du Code général des impôts. [PAUSE 2s]
 
 [B-ROLL : Résidences gérées : étudiantes, seniors, EHPAD]
 
@@ -205,8 +205,8 @@ Maîtriser les dispositifs de défiscalisation, c'est devenir un conseiller indi
 | Borloo | 2006-2017 | 30-65% déduction | Expiré |
 | Scellier | 2009-2012 | 25% réduction | Expiré |
 | Duflot | 2013-2014 | 18% réduction | Expiré |
-| Cosse | Depuis 2017 | 15-85% déduction | Actif |
-| Denormandie | Depuis 2019 | 12-21% réduction | Actif |
+| Loc'Avantages (ex-Cosse) | 2022-2027 | 15-65% réduction d'impôt | Actif (prorogé fin 2027) |
+| Denormandie | 2019-2027 | 12-21% réduction | Actif (prorogé fin 2027) |
 | Censi-Bouvard | Jusqu'en 2022 | 11% réduction | Expiré |
 | Pinel | 2014-2024 | 10,5-17,5% réduction | Expiré fin 2024 |
 | Malraux | Permanent | 22-30% réduction travaux | Actif |
@@ -215,7 +215,7 @@ Maîtriser les dispositifs de défiscalisation, c'est devenir un conseiller indi
 
 1. La défiscalisation est un outil de politique publique du logement — les conditions varient selon les besoins de l'État
 2. Le dispositif Pinel a pris fin le 31 décembre 2024 — ne plus le proposer pour les nouvelles acquisitions
-3. Denormandie (ancien avec travaux) et Cosse (conventionnement ANAH) restent actifs en 2025
+3. Loc'Avantages (ex-Cosse, conventionnement ANAH) et Denormandie (ancien avec travaux) restent actifs, tous deux prorogés jusqu'au 31 décembre 2027
 4. Malraux : pour les immeubles en zones patrimoniales, réduction de 22 à 30% des travaux
 5. Conseil essentiel : la qualité intrinsèque du bien prime toujours sur l'avantage fiscal
 6. Un agent immobilier ne doit jamais jouer le rôle de conseiller fiscal — orienter vers un expert-comptable ou un conseiller en gestion de patrimoine

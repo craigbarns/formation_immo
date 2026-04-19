@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Parcours de formation",
+  description: "Accédez aux 5 modules de formation immobilière : juridique, transaction, financement, marketing et terrain.",
+};
 import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award } from "lucide-react";
 import { COURSE, getTotalCourseDurationMin, formatDuration } from "@/data/course";
 import { getAvatarForModule } from "@/data/module-avatars";
@@ -12,6 +18,7 @@ import { StaggerContainer, StaggerItem, ScrollReveal } from "@/components/animat
 import { DailyGoalTracker } from "@/components/retention";
 import { AdaptiveLearningPath } from "@/components/learning-path";
 import { Greeting } from "@/components/Greeting";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 export default function FormationHomePage() {
   const totalLessons = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
@@ -72,7 +79,7 @@ export default function FormationHomePage() {
                 <Layers className="h-5 w-5" aria-hidden />
               </span>
               <div>
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-zinc-500">
+                <dt className="text-2xs font-bold uppercase tracking-wide text-zinc-500">
                   Modules
                 </dt>
                 <dd className="text-xl font-bold tabular-nums text-brand-navy">{totalModules}</dd>
@@ -83,7 +90,7 @@ export default function FormationHomePage() {
                 <BookOpen className="h-5 w-5" aria-hidden />
               </span>
               <div>
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-zinc-500">
+                <dt className="text-2xs font-bold uppercase tracking-wide text-zinc-500">
                   Leçons
                 </dt>
                 <dd className="text-xl font-bold tabular-nums text-brand-navy">{totalLessons}</dd>
@@ -94,7 +101,7 @@ export default function FormationHomePage() {
                 <Clock className="h-5 w-5" aria-hidden />
               </span>
               <div>
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-zinc-500">
+                <dt className="text-2xs font-bold uppercase tracking-wide text-zinc-500">
                   Volume
                 </dt>
                 <dd className="text-xl font-bold tabular-nums text-brand-navy">{totalDuration}</dd>
@@ -105,7 +112,7 @@ export default function FormationHomePage() {
                 <Award className="h-5 w-5" aria-hidden />
               </span>
               <div>
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-emerald-600">
+                <dt className="text-2xs font-bold uppercase tracking-wide text-emerald-600">
                   Certifié
                 </dt>
                 <dd className="text-xs font-bold text-emerald-800">ALUR conforme</dd>
@@ -205,7 +212,7 @@ export default function FormationHomePage() {
                   {i + 1}
                 </span>
                 <span className="text-xs font-bold leading-snug text-brand-navy line-clamp-2">{mod.title.replace("Module 1 — ", "").replace("Module 2 — ", "").replace("Module 3 — ", "").replace("Module 4 — ", "").replace("Module 5 — ", "")}</span>
-                <span className="text-[10px] text-zinc-500 font-medium">{mod.lessons.length} leçons</span>
+                <span className="text-2xs text-zinc-500 font-medium">{mod.lessons.length} leçons</span>
               </Link>
             );
           })}
@@ -249,7 +256,7 @@ export default function FormationHomePage() {
                       <div>
                         <div className="flex items-center gap-3 flex-wrap">
                           <h3 className="text-xl font-bold text-brand-navy">{mod.title}</h3>
-                          <span className="rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-0.5 text-[11px] font-semibold text-zinc-500">
+                          <span className="rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-0.5 text-3xs font-semibold text-zinc-500">
                             {formatDuration(mod.lessons.reduce((a, l) => a + l.duration, 0))}
                           </span>
                         </div>
@@ -293,14 +300,14 @@ export default function FormationHomePage() {
                           href={`/formation/${mod.slug}/${lesson.slug}`}
                           className="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition hover:bg-zinc-50 hover:translate-x-1"
                         >
-                          <span className="flex items-center gap-2 flex-wrap text-[15px] text-zinc-800">
+                          <span className="flex items-center gap-2 flex-wrap text-sm text-zinc-800">
                             {lesson.interactiveScenarioId && (
-                              <span className="rounded-md bg-brand-navy/10 px-2 py-0.5 text-[10px] font-bold uppercase text-brand-navy">
+                              <span className="rounded-md bg-brand-navy/10 px-2 py-0.5 text-2xs font-bold uppercase text-brand-navy">
                                 Interactif
                               </span>
                             )}
                             {lesson.difficulty === "avance" && (
-                              <span className="rounded-md bg-amber-50 px-2 py-0.5 text-[10px] font-bold uppercase text-amber-700">
+                              <span className="rounded-md bg-amber-50 px-2 py-0.5 text-2xs font-bold uppercase text-amber-700">
                                 Avancé
                               </span>
                             )}
@@ -346,9 +353,11 @@ function QuickLink({
           : "border-zinc-200/90 bg-white hover:border-brand-navy/20 hover:shadow-md"
       }`}
     >
-      <div className="text-2xl transition duration-300 group-hover:scale-110">{icon}</div>
+      <div className="transition duration-300 group-hover:scale-110">
+        <EmojiIcon emoji={icon} className="h-7 w-7" />
+      </div>
       <p className="mt-2 text-sm font-bold text-brand-navy">{label}</p>
-      <p className="text-[10px] leading-snug text-zinc-500">{desc}</p>
+      <p className="text-2xs leading-snug text-zinc-500">{desc}</p>
     </Link>
   );
 }

@@ -74,7 +74,7 @@ export async function POST(request: Request) {
     const result = JSON.parse(jsonMatch[0]);
 
     return new Response(JSON.stringify(result), { headers: { "Content-Type": "application/json" } });
-  } catch (_err) {
+  } catch {
     return new Response(JSON.stringify({ error: "Erreur notation" }), { status: 500, headers: { "Content-Type": "application/json" } });
   }
 }

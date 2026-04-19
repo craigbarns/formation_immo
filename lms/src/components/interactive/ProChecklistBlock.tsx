@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { ProChecklist } from "@/data/pro-checklists";
 import { recordChecklistComplete } from "@/lib/gamification";
 import { createClient } from "@/lib/supabase/client";
@@ -100,7 +101,7 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
     return () => {
       cancelled = true;
     };
-  }, [cl?.id]);
+  }, [cl]);
 
   const toggle = useCallback(
     (itemId: string) => {
@@ -181,16 +182,16 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
 
   return (
     <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
-      <div className="flex flex-col gap-4 border-b border-brand-navy/10 bg-gradient-to-br from-brand-navy to-[#0f2840] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+      <div className="flex flex-col gap-4 border-b border-brand-navy/10 bg-gradient-to-br from-brand-navy to-[var(--brand-navy-deep)] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
+          <p className="text-3xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
             Checklist pro
           </p>
           <h2 className="mt-1 flex items-center gap-2 text-xl font-bold text-white sm:text-2xl">
-            <span aria-hidden>{cl.icon}</span>
+            <EmojiIcon emoji={cl.icon} className="h-6 w-6" />
             {cl.title}
           </h2>
-          <p className="mt-2 max-w-2xl text-sm text-white/75">{cl.description}</p>
+          <p className="mt-2 max-w-2xl text-sm text-white/85">{cl.description}</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <button

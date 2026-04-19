@@ -30,7 +30,7 @@ Real estate agent filming apartment tour with smartphone gimbal, modern Parisian
 
 **NARRATION :**
 
-Les annonces avec une vidéo de présentation génèrent 403% plus de demandes de visite que les annonces uniquement avec des photos. [PAUSE 2s] 403%. [PAUSE 1s] Et pourtant, moins de 15% des agents immobiliers utilisent la vidéo systématiquement dans leurs annonces.
+Les annonces avec une vidéo de présentation génèrent beaucoup plus de demandes de visite que les annonces uniquement avec des photos. [PAUSE 2s] Beaucoup plus. [PAUSE 1s] Et pourtant, peu d'agents immobiliers utilisent la vidéo systématiquement dans leurs annonces.
 
 [B-ROLL : Acquéreurs regardant une visite virtuelle depuis leur canapé]
 
@@ -177,7 +177,7 @@ La vidéo et la visite virtuelle ne sont pas des gadgets. [PAUSE 1s] Ce sont vos
 
 ## POINTS CLÉS À RETENIR
 
-1. +403% de demandes de visite avec la vidéo vs photos seules
+1. **Beaucoup plus** de demandes de visite avec la vidéo vs photos seules
 2. Équipement minimal : gimbal (~100€) + micro sans fil (~80€)
 3. Réglages : 4K 25fps, horizontal, grille activée
 4. Matterport : 30-45 min de scan pour un appartement standard

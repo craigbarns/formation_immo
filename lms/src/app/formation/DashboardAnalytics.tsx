@@ -283,7 +283,7 @@ export function DashboardAnalytics() {
             value={stats.lessonsCompleted}
             max={stats.totalLessons}
             size={140}
-            color="#1a3a5c"
+            color="var(--brand-navy)"
             label={`${stats.lessonsCompleted} leçons`}
             sublabel={`sur ${stats.totalLessons}`}
           />

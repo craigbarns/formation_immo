@@ -10,8 +10,8 @@ interface StreakFlameProps {
 
 export function StreakFlame({ streak, maxStreak = 30 }: StreakFlameProps) {
   const flames = Array.from({ length: Math.min(streak, maxStreak) }, (_, i) => i);
-  const cols = 6;
-  const rows = Math.ceil(flames.length / cols);
+  // const cols = 6;
+  // const rows = Math.ceil(flames.length / cols);
 
   return (
     <div className="space-y-4">
@@ -75,7 +75,7 @@ export function StreakFlame({ streak, maxStreak = 30 }: StreakFlameProps) {
       <div className="text-center">
         {streak >= 7 ? (
           <p className="text-sm text-orange-600 font-medium">
-            🔥 Superbe série ! Continue comme ça !
+            <Flame className="inline h-4 w-4 text-orange-500" /> Superbe série ! Continue comme ça !
           </p>
         ) : streak >= 3 ? (
           <p className="text-sm text-gray-600">

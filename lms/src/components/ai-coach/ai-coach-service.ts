@@ -123,7 +123,7 @@ function findRelevantKnowledge(message: string, context?: { moduleSlug?: string 
   const keywords = ["alur", "compromis", "négociation", "mandat", "financement", "crédit", "rentabilité", "pinel", "lmnp", "marketing", "prospection", "terrain", "viabilité", "cos"];
   for (const kw of keywords) {
     if (lowerMsg.includes(kw)) {
-      for (const [topic, facts] of Object.entries(KNOWLEDGE_BASE)) {
+      for (const [, facts] of Object.entries(KNOWLEDGE_BASE)) {
         if (facts.some(f => f.toLowerCase().includes(kw))) {
           relevant.push(...facts);
         }

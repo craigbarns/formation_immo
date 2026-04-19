@@ -6,6 +6,7 @@ import type { LessonVisuals, KeyConcept, StatCard, ComparisonRow } from "@/data/
 import type { QuizCheckpoint } from "@/data/quiz-checkpoints";
 import type { ResolvedAudioQuizItem } from "@/data/audio-quiz-schedule";
 import confetti from "canvas-confetti";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                               */
@@ -56,12 +57,12 @@ const SLIDE_KIND_TO_CHAPTER: Record<string, string> = {
 };
 
 const CHAPTER_INFO: Record<string, { icon: string; color: string; bg: string; gradient: string }> = {
-  "Introduction":   { icon: "📖", color: "#60a5fa", bg: "rgba(37,99,235,0.85)",   gradient: "from-blue-950/95 via-[#0f1f33]/98 to-[#0a1929]/98" },
-  "Concepts clés":  { icon: "🧠", color: "#a78bfa", bg: "rgba(109,40,217,0.85)",  gradient: "from-violet-950/95 via-[#0f1f33]/98 to-[#0a1929]/98" },
-  "Données":        { icon: "📊", color: "#22d3ee", bg: "rgba(8,145,178,0.85)",   gradient: "from-cyan-950/95 via-[#0f1f33]/98 to-[#0a1929]/98" },
-  "Comparatif":     { icon: "⚖️", color: "#fbbf24", bg: "rgba(180,83,9,0.85)",    gradient: "from-amber-950/95 via-[#0f1f33]/98 to-[#0a1929]/98" },
-  "À retenir":      { icon: "✅", color: "#34d399", bg: "rgba(4,120,87,0.85)",    gradient: "from-emerald-950/95 via-[#0f1f33]/98 to-[#0a1929]/98" },
-  "Fin":            { icon: "🎯", color: "#d4af37", bg: "rgba(120,90,10,0.85)",   gradient: "from-yellow-950/95 via-[#0f1f33]/98 to-[#0a1929]/98" },
+  "Introduction":   { icon: "📖", color: "#60a5fa", bg: "rgba(37,99,235,0.85)",   gradient: "from-blue-950/95 via-[var(--surface-dark)]/98 to-[var(--surface-dark)]/98" },
+  "Concepts clés":  { icon: "🧠", color: "#a78bfa", bg: "rgba(109,40,217,0.85)",  gradient: "from-violet-950/95 via-[var(--surface-dark)]/98 to-[var(--surface-dark)]/98" },
+  "Données":        { icon: "📊", color: "#22d3ee", bg: "rgba(8,145,178,0.85)",   gradient: "from-cyan-950/95 via-[var(--surface-dark)]/98 to-[var(--surface-dark)]/98" },
+  "Comparatif":     { icon: "⚖️", color: "#fbbf24", bg: "rgba(180,83,9,0.85)",    gradient: "from-amber-950/95 via-[var(--surface-dark)]/98 to-[var(--surface-dark)]/98" },
+  "À retenir":      { icon: "✅", color: "#34d399", bg: "rgba(4,120,87,0.85)",    gradient: "from-emerald-950/95 via-[var(--surface-dark)]/98 to-[var(--surface-dark)]/98" },
+  "Fin":            { icon: "🎯", color: "#d4af37", bg: "rgba(120,90,10,0.85)",   gradient: "from-yellow-950/95 via-[var(--surface-dark)]/98 to-[var(--surface-dark)]/98" },
 };
 
 const CHAPTER_ORDER = ["Introduction", "Concepts clés", "Données", "Comparatif", "À retenir", "Fin"];
@@ -69,7 +70,7 @@ const CHAPTER_ORDER = ["Introduction", "Concepts clés", "Données", "Comparatif
 function buildChapterLabels(slides: Slide[]): ChapterLabel[] {
   const chapters: ChapterLabel[] = [];
   let lastChapter = "";
-  const startSlide = 0;
+  // startSlide intentionally unused (reserved for future chapter logic)
 
   slides.forEach((s, i) => {
     const ch = SLIDE_KIND_TO_CHAPTER[s.kind] ?? "Concepts cles";
@@ -335,7 +336,7 @@ export function CinematicPlayer({
     setChapterFlash({ name, icon: info.icon, color: info.color, gradient: info.gradient });
     const timer = setTimeout(() => setChapterFlash(null), 1800);
     return () => clearTimeout(timer);
-  }, [currentChapter?.name]);
+  }, [currentChapter]);
 
   useEffect(() => {
     const el = audioRef.current;
@@ -377,7 +378,7 @@ export function CinematicPlayer({
       el.removeEventListener("timeupdate", onTime);
       el.removeEventListener("ended", onEnd);
     };
-  }, [audioQuizSchedule]);
+  }, [audioQuizSchedule, slides.length]);
 
   useEffect(() => {
     setClearedQuizCount(0);
@@ -577,14 +578,14 @@ export function CinematicPlayer({
         onClick={() => setShowShortcuts(false)}
       >
         <div 
-          className="w-full max-w-md rounded-2xl border border-brand-gold/30 bg-[#0f1f33] p-6 shadow-2xl"
+          className="w-full max-w-md rounded-2xl border border-brand-gold/30 bg-[var(--surface-dark)] p-6 shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-lg font-bold text-white">Raccourcis clavier</h3>
             <button 
               onClick={() => setShowShortcuts(false)}
-              className="rounded-full p-1 text-white/70 hover:bg-white/10 hover:text-white"
+              className="rounded-full p-1 text-white/80 hover:bg-white/10 hover:text-white"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -593,31 +594,31 @@ export function CinematicPlayer({
           </div>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between py-2 border-b border-white/10">
-              <span className="text-white/70">Lecture / Pause</span>
+              <span className="text-white/80">Lecture / Pause</span>
               <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">Espace</kbd>
             </div>
             <div className="flex justify-between py-2 border-b border-white/10">
-              <span className="text-white/70">Slide suivant / précédent</span>
+              <span className="text-white/80">Slide suivant / précédent</span>
               <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">→ ←</kbd>
             </div>
             <div className="flex justify-between py-2 border-b border-white/10">
-              <span className="text-white/70">Vitesse de lecture</span>
+              <span className="text-white/80">Vitesse de lecture</span>
               <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">↑</kbd>
             </div>
             <div className="flex justify-between py-2 border-b border-white/10">
-              <span className="text-white/70">Plein écran</span>
+              <span className="text-white/80">Plein écran</span>
               <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">↓ ou F</kbd>
             </div>
             <div className="flex justify-between py-2 border-b border-white/10">
-              <span className="text-white/70">-10 sec / +10 sec</span>
+              <span className="text-white/80">-10 sec / +10 sec</span>
               <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">J L</kbd>
             </div>
             <div className="flex justify-between py-2 border-b border-white/10">
-              <span className="text-white/70">Mute / Unmute</span>
+              <span className="text-white/80">Mute / Unmute</span>
               <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">M</kbd>
             </div>
             <div className="flex justify-between py-2">
-              <span className="text-white/70">Revenir au début</span>
+              <span className="text-white/80">Revenir au début</span>
               <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">0 ou Home</kbd>
             </div>
           </div>
@@ -635,7 +636,7 @@ export function CinematicPlayer({
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
 
       {/* ── CHAPTER PROGRESS BAR ───────────────────────── */}
-      <div className="flex bg-[#080f1a] border-b border-white/5">
+      <div className="flex bg-[var(--surface-dark)] border-b border-white/5">
         {chapters.map((ch) => {
           const info = CHAPTER_INFO[ch.name];
           const isActive = currentChapter?.name === ch.name;
@@ -650,18 +651,18 @@ export function CinematicPlayer({
               className="flex-1 flex flex-col items-center gap-0.5 py-1.5 transition-all duration-300 hover:bg-white/5"
               title={ch.name}
             >
-              <span className="text-sm leading-none" style={{ filter: isActive || isPast ? "none" : "grayscale(1) opacity(0.3)" }}>
-                {info?.icon ?? "●"}
+              <span className="flex h-4 w-4 items-center justify-center" style={{ filter: isActive || isPast ? "none" : "grayscale(1) opacity(0.3)" }}>
+                <EmojiIcon emoji={info?.icon ?? "●"} className="h-3.5 w-3.5" />
               </span>
               <span
-                className="text-[7px] font-bold uppercase tracking-wide leading-none transition-colors duration-300 hidden sm:block"
-                style={{ color: isActive ? (info?.color ?? "#d4af37") : isPast ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.15)" }}
+                className="text-4xs font-bold uppercase tracking-wide leading-none transition-colors duration-300 hidden sm:block"
+                style={{ color: isActive ? (info?.color ?? "var(--brand-gold)") : isPast ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.15)" }}
               >
                 {ch.name}
               </span>
               <div
                 className="mt-0.5 h-0.5 w-full rounded-full transition-all duration-500"
-                style={{ background: isActive ? (info?.color ?? "#d4af37") : isPast ? "rgba(255,255,255,0.15)" : "transparent" }}
+                style={{ background: isActive ? (info?.color ?? "var(--brand-gold)") : isPast ? "rgba(255,255,255,0.15)" : "transparent" }}
               />
             </button>
           );
@@ -670,7 +671,7 @@ export function CinematicPlayer({
 
       {/* ── VIDEO AREA ─────────────────────────────────── */}
       <div
-        className={`relative bg-gradient-to-br from-[#0f1f33] via-brand-navy to-[#0a1929] overflow-hidden ${
+        className={`relative bg-gradient-to-br from-[var(--surface-dark)] via-brand-navy to-[var(--surface-dark)] overflow-hidden ${
           isFullscreen ? "flex-1" : "aspect-video"
         }`}
       >
@@ -707,7 +708,7 @@ export function CinematicPlayer({
               aria-hidden
             />
             {/* Number indicator */}
-            <p className="text-[10px] font-bold uppercase tracking-[0.4em] mb-4" style={{ color: chapterFlash.color + "99" }}>
+            <p className="text-2xs font-bold uppercase tracking-[0.4em] mb-4" style={{ color: chapterFlash.color + "99" }}>
               {CHAPTER_ORDER.indexOf(chapterFlash.name) + 1} / {CHAPTER_ORDER.filter(n => chapters.some(c => c.name === n)).length}
             </p>
             {/* Icon */}
@@ -719,7 +720,7 @@ export function CinematicPlayer({
                 animation: "titleEntrance 0.5s cubic-bezier(0.16,1,0.3,1) 0.1s both",
               }}
             >
-              {chapterFlash.icon}
+              <EmojiIcon emoji={chapterFlash.icon} className="h-10 w-10" />
             </div>
             {/* Chapter name */}
             <h3
@@ -746,11 +747,11 @@ export function CinematicPlayer({
 
         {/* Quiz overlay */}
         {quizOverlay && (
-          <div className="absolute inset-0 z-20 flex items-center justify-center bg-[#0a1929]/92 p-4 backdrop-blur-sm">
-            <div className="max-h-[min(480px,85vh)] w-full max-w-lg overflow-y-auto rounded-2xl border border-brand-gold/40 bg-[#0f1f33] p-5 shadow-2xl sm:p-7">
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-[var(--surface-dark)]/92 p-4 backdrop-blur-sm">
+            <div className="max-h-[min(480px,85vh)] w-full max-w-lg overflow-y-auto rounded-2xl border border-brand-gold/40 bg-[var(--surface-dark)] p-5 shadow-2xl sm:p-7">
               {/* Gold bar at top */}
-              <div className="mb-4 h-1 w-16 rounded-full bg-gradient-to-r from-brand-gold to-[#f0c040]" />
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gold">
+              <div className="mb-4 h-1 w-16 rounded-full bg-gradient-to-r from-brand-gold to-[var(--brand-gold-light)]" />
+              <p className="text-3xs font-bold uppercase tracking-[0.2em] text-brand-gold">
                 Question de verification
               </p>
               <p className="mt-3 text-base font-semibold leading-snug text-white sm:text-lg">
@@ -764,7 +765,7 @@ export function CinematicPlayer({
                       onClick={() => handleQuizAnswer(opt.isCorrect)}
                       className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-left text-sm text-white/90 transition hover:border-brand-gold/50 hover:bg-white/10 active:scale-[0.99]"
                     >
-                      <span className="mr-3 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-white/25 text-[10px] font-bold text-white/70">
+                      <span className="mr-3 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-white/25 text-2xs font-bold text-white/80">
                         {String.fromCharCode(65 + i)}
                       </span>
                       {opt.label}
@@ -786,7 +787,7 @@ export function CinematicPlayer({
                 </div>
               )}
               {audioQuizSchedule.length > 0 && (
-                <p className="mt-4 text-[11px] text-on-dark-muted">
+                <p className="mt-4 text-3xs text-on-dark-muted">
                   La reprise de l&apos;audio se fait automatiquement apres la bonne reponse.
                 </p>
               )}
@@ -797,11 +798,11 @@ export function CinematicPlayer({
         {/* Chapter label + slide counter */}
         <div className="absolute top-3 right-3 flex items-center gap-2">
           {currentChapter && (
-            <span className="rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-gold/80 backdrop-blur-sm">
+            <span className="rounded-full bg-black/40 px-2.5 py-1 text-2xs font-bold uppercase tracking-wider text-brand-gold/80 backdrop-blur-sm">
               {currentChapter.name}
             </span>
           )}
-          <span className="rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-bold text-white/70 backdrop-blur-sm tabular-nums">
+          <span className="rounded-full bg-black/40 px-2.5 py-1 text-2xs font-bold text-white/80 backdrop-blur-sm tabular-nums">
             {activeSlide + 1} / {slides.length}
           </span>
         </div>
@@ -810,12 +811,12 @@ export function CinematicPlayer({
         {avatar && (
           <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full bg-black/40 px-3 py-1.5 backdrop-blur-sm">
             <div
-              className="flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-white shadow-md"
+              className="flex h-6 w-6 items-center justify-center rounded-full text-2xs font-bold text-white shadow-md"
               style={{ backgroundColor: avatar.accentColor }}
             >
               {avatar.initials}
             </div>
-            <span className="text-[11px] font-medium text-white/80">{avatar.name}</span>
+            <span className="text-3xs font-medium text-white/80">{avatar.name}</span>
           </div>
         )}
 
@@ -880,7 +881,7 @@ export function CinematicPlayer({
       </div>
 
       {/* ── CONTROLS BAR ───────────────────────────────── */}
-      <div className="bg-[#0f1f33] px-4 py-3 space-y-2">
+      <div className="bg-[var(--surface-dark)] px-4 py-3 space-y-2">
         {/* Progress bar */}
         <div
           onClick={quizOverlay ? undefined : seekBar}
@@ -904,7 +905,7 @@ export function CinematicPlayer({
             />
           ))}
           <div
-            className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[#f0e6c8] transition-[width] duration-150"
+            className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[var(--brand-gold-pale)] transition-[width] duration-150"
             style={{ width: `${pct}%` }}
           />
           <div
@@ -916,7 +917,7 @@ export function CinematicPlayer({
         {/* Controls row */}
         <div className="flex items-center justify-between gap-3">
           {/* Time */}
-          <span className="w-24 text-xs text-white/70 tabular-nums">
+          <span className="w-24 text-xs text-white/80 tabular-nums">
             {fmt(current)} / {loaded ? fmt(duration) : "--:--"}
           </span>
 
@@ -937,7 +938,7 @@ export function CinematicPlayer({
               type="button"
               disabled={!!quizOverlay}
               onClick={toggle}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-gold text-brand-navy shadow-lg hover:bg-[#e0bf4d] transition disabled:opacity-40 active:scale-95"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-gold text-brand-navy shadow-lg hover:bg-[var(--brand-gold-hover)] transition disabled:opacity-40 active:scale-95"
             >
               {playing ? (
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -964,12 +965,12 @@ export function CinematicPlayer({
 
           {/* Speed + keyboard hint */}
           <div className="flex items-center gap-2 w-24 justify-end">
-            <span className="hidden sm:inline text-[9px] text-white/25 tabular-nums select-none">
+            <span className="hidden sm:inline text-6xs text-white/25 tabular-nums select-none">
               &#x2190;&#x2192; slides
             </span>
             <button
               onClick={cycleSpeed}
-              className="rounded-full border border-white/20 px-2 py-0.5 text-[10px] font-bold text-white/70 hover:bg-white/10 transition tabular-nums"
+              className="rounded-full border border-white/20 px-2 py-0.5 text-2xs font-bold text-white/80 hover:bg-white/10 transition tabular-nums"
             >
               {speed}x
             </button>
@@ -990,7 +991,7 @@ export function CinematicPlayer({
     {/* Keyboard shortcut hint */}
     <button
       onClick={() => setShowShortcuts(true)}
-      className="mt-2 flex items-center justify-center gap-1 text-[10px] text-white/50 hover:text-white/70 transition"
+      className="mt-2 flex items-center justify-center gap-1 text-2xs text-white/80 hover:text-white/80 transition"
       title="Voir les raccourcis clavier"
     >
       <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1038,11 +1039,11 @@ function ChapterThumbnails({
               className="flex items-center gap-1 shrink-0 w-28 transition-opacity hover:opacity-80 disabled:opacity-40"
               title={ch.name}
             >
-              <span className="text-sm leading-none" style={{ filter: isActive || isPast ? "none" : "grayscale(1) opacity(0.3)" }}>
-                {info?.icon ?? "●"}
+              <span className="flex h-4 w-4 items-center justify-center" style={{ filter: isActive || isPast ? "none" : "grayscale(1) opacity(0.3)" }}>
+                <EmojiIcon emoji={info?.icon ?? "●"} className="h-3.5 w-3.5" />
               </span>
               <span
-                className="text-[8px] font-bold uppercase tracking-wide truncate"
+                className="text-5xs font-bold uppercase tracking-wide truncate"
                 style={{ color: isActive ? accentColor : isPast ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.18)" }}
               >
                 {ch.name}
@@ -1121,7 +1122,7 @@ function SlideBackground({ kind }: { kind: Slide["kind"] }) {
             backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }} />
-          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0a1929]/60 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[var(--surface-dark)]/60 to-transparent" />
         </div>
       );
 
@@ -1237,7 +1238,7 @@ function TitleSlide({ title, subtitle, avatar }: { title: string; subtitle: stri
         <div className="h-1.5 w-1.5 rounded-full bg-brand-gold" />
         <div className="h-px flex-1 bg-gradient-to-l from-transparent to-brand-gold/50" />
       </div>
-      <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-brand-gold">{subtitle}</p>
+      <p className="text-3xs font-bold uppercase tracking-[0.3em] text-brand-gold">{subtitle}</p>
       <h2 className="mt-4 text-2xl font-black text-white sm:text-4xl leading-tight drop-shadow-lg">
         {title}
       </h2>
@@ -1251,7 +1252,7 @@ function TitleSlide({ title, subtitle, avatar }: { title: string; subtitle: stri
           </div>
           <div className="text-left">
             <p className="text-sm font-semibold text-white/90">{avatar.name}</p>
-            <p className="text-xs text-white/70">{avatar.role}</p>
+            <p className="text-xs text-white/80">{avatar.role}</p>
           </div>
         </div>
       )}
@@ -1279,7 +1280,7 @@ function ConceptSlide({ concept, index, total }: { concept: KeyConcept; index: n
           to   { opacity: 1; transform: translateX(0); }
         }
       `}</style>
-      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-5">
+      <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-5">
         Concept {index + 1} / {total}
       </p>
       <div className={`rounded-2xl border-2 ${colors.border} ${colors.bg} p-7 backdrop-blur-sm relative overflow-hidden`}>
@@ -1287,15 +1288,15 @@ function ConceptSlide({ concept, index, total }: { concept: KeyConcept; index: n
         <div className={`absolute top-0 right-0 w-16 h-16 opacity-20 rounded-bl-3xl ${colors.bg}`} />
         <div className="relative">
           <div className="flex items-center justify-center gap-3 mb-1">
-            <span className="text-4xl drop-shadow-md">{CONCEPT_ICONS[concept.icon] ?? "\uD83D\uDCCC"}</span>
-            <span className={`inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase ${colors.text} bg-white/10 border ${colors.border}`}>
+            <EmojiIcon emoji={CONCEPT_ICONS[concept.icon] ?? "📌"} className="h-10 w-10" />
+            <span className={`inline-block rounded-full px-3 py-1 text-2xs font-bold uppercase ${colors.text} bg-white/10 border ${colors.border}`}>
               {TYPE_LABELS[concept.type] ?? concept.type}
             </span>
           </div>
           <h3 className="mt-4 text-center text-xl font-black text-white sm:text-2xl leading-tight">
             {concept.title}
           </h3>
-          <p className="mt-3 text-center text-sm leading-relaxed text-white/70">
+          <p className="mt-3 text-center text-sm leading-relaxed text-white/80">
             {concept.description}
           </p>
         </div>
@@ -1344,7 +1345,7 @@ function StatsSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
       className="w-full max-w-2xl"
       style={{ animation: "fadeIn 0.5s ease-out both" }}
     >
-      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-6">
+      <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-6">
         Chiffres cles
       </p>
       <div className={`grid gap-4 ${stats.length <= 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"}`}>
@@ -1357,8 +1358,8 @@ function StatsSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
             <p className={`text-3xl font-black tabular-nums ${STAT_COLORS[s.color] ?? "text-white"}`}>
               {counters[i]}
             </p>
-            {s.unit && <p className="text-xs text-white/70 font-medium mt-1">{s.unit}</p>}
-            <p className="mt-2 text-[11px] text-on-dark-muted font-medium leading-tight">{s.label}</p>
+            {s.unit && <p className="text-xs text-white/80 font-medium mt-1">{s.unit}</p>}
+            <p className="mt-2 text-3xs text-on-dark-muted font-medium leading-tight">{s.label}</p>
           </div>
         ))}
       </div>
@@ -1395,7 +1396,7 @@ function ChartSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
       className="w-full max-w-xl"
       style={{ animation: "fadeIn 0.5s ease-out both" }}
     >
-      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-6">
+      <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-6">
         Visualisation
       </p>
       <div className="flex items-end gap-3 h-40 px-2">
@@ -1403,7 +1404,7 @@ function ChartSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
           <div key={i} className="flex flex-col items-center gap-2 flex-1">
             <span className={`text-xs font-black tabular-nums ${STAT_COLORS[s.color] ?? "text-white"}`}>
               {s.value}
-              {s.unit ? <span className="text-[9px] font-normal text-on-dark-muted ml-0.5">{s.unit}</span> : null}
+              {s.unit ? <span className="text-6xs font-normal text-on-dark-muted ml-0.5">{s.unit}</span> : null}
             </span>
             <div className="relative w-full flex-1 flex items-end">
               <div
@@ -1416,7 +1417,7 @@ function ChartSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
                 }}
               />
             </div>
-            <p className="text-[9px] text-on-dark-muted font-medium text-center leading-tight max-w-[60px]">
+            <p className="text-6xs text-on-dark-muted font-medium text-center leading-tight max-w-[60px]">
               {s.label}
             </p>
           </div>
@@ -1433,7 +1434,7 @@ function ComparisonSlide({ title, colA, colB, rows }: { title: string; colA: str
       className="w-full max-w-2xl"
       style={{ animation: "fadeIn 0.5s ease-out both" }}
     >
-      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-3">
+      <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-3">
         Comparatif
       </p>
       <h3 className="text-center text-base font-bold text-white mb-4 sm:text-lg">{title}</h3>
@@ -1441,9 +1442,9 @@ function ComparisonSlide({ title, colA, colB, rows }: { title: string; colA: str
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-white/10">
-              <th className="px-3 py-2.5 text-left text-[10px] font-bold uppercase text-white/35 w-1/4">Critere</th>
-              <th className="px-3 py-2.5 text-left text-[10px] font-bold uppercase text-white/80 w-[37.5%]">{colA}</th>
-              <th className="px-3 py-2.5 text-left text-[10px] font-bold uppercase text-brand-gold w-[37.5%]">{colB}</th>
+              <th className="px-3 py-2.5 text-left text-2xs font-bold uppercase text-white/35 w-1/4">Critere</th>
+              <th className="px-3 py-2.5 text-left text-2xs font-bold uppercase text-white/80 w-[37.5%]">{colA}</th>
+              <th className="px-3 py-2.5 text-left text-2xs font-bold uppercase text-brand-gold w-[37.5%]">{colB}</th>
             </tr>
           </thead>
           <tbody>
@@ -1453,7 +1454,7 @@ function ComparisonSlide({ title, colA, colB, rows }: { title: string; colA: str
                 className="border-b border-white/5 last:border-0"
                 style={{ animation: `fadeIn 0.4s ease-out ${i * 0.07}s both` }}
               >
-                <td className="px-3 py-2.5 text-xs font-semibold text-white/70">{r.label}</td>
+                <td className="px-3 py-2.5 text-xs font-semibold text-white/80">{r.label}</td>
                 <td className={`px-3 py-2.5 text-xs ${r.highlight === "a" ? "font-bold text-white bg-white/5" : "text-white/45"}`}>
                   {r.highlight === "a" && <span className="mr-1 text-emerald-400">&#x2714;</span>}{r.colA}
                 </td>
@@ -1473,7 +1474,7 @@ function ComparisonSlide({ title, colA, colB, rows }: { title: string; colA: str
 function TakeawaysSlide({ items }: { items: string[] }) {
   return (
     <div className="w-full max-w-lg">
-      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-5">
+      <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-5">
         A retenir
       </p>
       <ul className="space-y-2.5">
@@ -1489,7 +1490,7 @@ function TakeawaysSlide({ items }: { items: string[] }) {
                 to   { opacity: 1; transform: translateY(0); }
               }
             `}</style>
-            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-[10px] font-bold text-white">
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-2xs font-bold text-white">
               {i + 1}
             </span>
             <p className="text-sm leading-relaxed text-white/80">{item}</p>
@@ -1505,7 +1506,7 @@ function ProcessSlide({ steps }: { steps: string[] }) {
   const isVertical = steps.length > 3;
   return (
     <div className="w-full max-w-lg">
-      <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-6">
+      <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-6">
         Processus
       </p>
       <div className={`flex ${isVertical ? "flex-col gap-3" : "flex-row items-center gap-2"}`}>
@@ -1518,7 +1519,7 @@ function ProcessSlide({ steps }: { steps: string[] }) {
             {/* Step box */}
             <div className={`rounded-xl border border-brand-gold/25 bg-brand-gold/10 ${isVertical ? "px-3 py-2.5 flex-1" : "px-3 py-3 w-full text-center"}`}>
               <div className={`flex ${isVertical ? "items-center gap-3" : "flex-col items-center gap-1.5"}`}>
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold text-[10px] font-black text-brand-navy">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold text-2xs font-black text-brand-navy">
                   {i + 1}
                 </span>
                 <p className="text-xs font-medium text-white/80 leading-tight">{step}</p>
@@ -1552,7 +1553,7 @@ function HighlightSlide({ statement }: { statement: string }) {
         <div className="absolute bottom-0 left-0 h-8 w-8 border-l-2 border-b-2 border-brand-gold/50 rounded-bl-lg" />
         <div className="absolute bottom-0 right-0 h-8 w-8 border-r-2 border-b-2 border-brand-gold/50 rounded-br-lg" />
 
-        <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-gold mb-6">
+        <p className="text-2xs font-bold uppercase tracking-[0.3em] text-brand-gold mb-6">
           Point cle
         </p>
         <blockquote className="text-xl font-black text-white leading-tight sm:text-3xl drop-shadow-lg">
@@ -1599,14 +1600,14 @@ function TrainerTipSlide({ concept, avatar }: { concept: KeyConcept; avatar?: Mo
             }}
           />
         )}
-        <p className="text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-3">
+        <p className="text-2xs font-bold uppercase tracking-widest text-brand-gold mb-3">
           Conseil formateur :
         </p>
         <div className="flex items-start gap-3">
-          <span className="text-3xl shrink-0">{CONCEPT_ICONS[concept.icon] ?? "\uD83D\uDCA1"}</span>
+          <EmojiIcon emoji={CONCEPT_ICONS[concept.icon] ?? "💡"} className="h-8 w-8 shrink-0" />
           <div>
             <h3 className="text-base font-black text-white mb-1">{concept.title}</h3>
-            <p className="text-sm leading-relaxed text-white/70">{concept.description}</p>
+            <p className="text-sm leading-relaxed text-white/80">{concept.description}</p>
           </div>
         </div>
       </div>
@@ -1631,7 +1632,7 @@ function EndSlide({ title }: { title: string }) {
         </div>
       </div>
       <h2 className="mt-5 text-xl font-black text-white sm:text-2xl">{title}</h2>
-      <p className="mt-2 text-sm text-white/70">Lecon terminee — passez a la suite</p>
+      <p className="mt-2 text-sm text-white/80">Lecon terminee — passez a la suite</p>
       <div className="mx-auto mt-5 flex items-center justify-center gap-2">
         <div className="h-1.5 w-1.5 rounded-full bg-brand-gold/40" />
         <div className="h-1.5 w-1.5 rounded-full bg-brand-gold/70" />

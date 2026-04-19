@@ -45,13 +45,13 @@ Aujourd'hui, nous allons voir comment accompagner vos clients de la promesse à 
 
 [00:35-01:45] **PROBLÉMATIQUE - LES DANGERS DE L'ENTRE-DEUX**
 
-[B-roll: Infographie montrant que 15% des compromis ne se concluent pas]
+[B-roll: Infographie montrant que certains compromis ne se concluent pas]
 
-Voici un chiffre qui fait froid dans le dos : 15% des compromis de vente ne se transforment jamais en acte authentique. [PAUSE 2s] Quinze pour cent. Cela représente des mois de travail. Des heures de visite. Des espoirs déçus. Des commissions envolées. [PAUSE 2s]
+Voici un constat qui fait froid dans le dos : certains compromis de vente ne se transforment jamais en acte authentique. [PAUSE 2s] Cela représente des mois de travail. Des heures de visite. Des espoirs déçus. Des commissions envolées. [PAUSE 2s]
 
 [B-roll: Graphique montrant les causes d'échec entre compromis et acte]
 
-Les principales causes ? [PAUSE 1s] Le refus de prêt bancaire, dans 40% des cas. [PAUSE 1s] La découverte d'un vice caché, dans 25% des cas. [PAUSE 1s] Le désistement d'une partie, dans 20% des cas. [PAUSE 1s] Et les autres causes diverses, dans 15% des cas. [PAUSE 2s]
+Les principales causes ? [PAUSE 1s] Le refus de prêt bancaire. [PAUSE 1s] La découverte d'un vice caché. [PAUSE 1s] Le désistement d'une partie. [PAUSE 1s] Et d'autres causes diverses. [PAUSE 2s]
 
 [B-roll: Chaque cause illustrée visuellement]
 

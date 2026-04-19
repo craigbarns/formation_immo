@@ -12,10 +12,9 @@ export function RentabiliteSimulator() {
   const [vacance, setVacance] = useState(5);
   const [travaux, setTravaux] = useState(5000);
   const [gestion, setGestion] = useState(7);
-  const [tracked] = useState(() => {
-    if (typeof window !== 'undefined') recordSimulatorUsed("rentabilite");
-    return true;
-  });
+  useEffect(() => {
+    recordSimulatorUsed("rentabilite");
+  }, []);
 
 
   const totalAcquisition = price + price * (notaryFees / 100) + travaux;
@@ -34,9 +33,9 @@ export function RentabiliteSimulator() {
 
   return (
     <div className="rounded-2xl border-2 border-brand-navy/15 bg-white shadow-lg">
-      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[#2d5a7c] px-6 py-4 text-white rounded-t-2xl">
+      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[var(--brand-navy-alt)] px-6 py-4 text-white rounded-t-2xl">
         <h3 className="text-lg font-bold">Simulateur de Rentabilite Locative</h3>
-        <p className="mt-1 text-xs text-white/70">Comparez rentabilite brute et nette en temps reel</p>
+        <p className="mt-1 text-xs text-white/80">Comparez rentabilite brute et nette en temps reel</p>
       </div>
 
       <div className="grid gap-6 p-6 md:grid-cols-2">
@@ -189,7 +188,7 @@ export function RentabiliteSimulator() {
                 );
               })}
             </div>
-            <div className="mt-1 flex justify-between text-[10px] text-zinc-400">
+            <div className="mt-1 flex justify-between text-2xs text-zinc-400">
               <span>Faible</span>
               <span>Moyen</span>
               <span>Excellent</span>

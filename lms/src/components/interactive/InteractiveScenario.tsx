@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import type { InteractiveScenario as Scenario, ScenarioStep } from "@/data/interactive-scenarios";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import Link from "next/link";
+import { Lightbulb } from "lucide-react";
 
 type Props = {
   scenario: Scenario;
@@ -56,7 +57,7 @@ export function InteractiveScenario({ scenario }: Props) {
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-[0_25px_50px_-12px_rgba(26,58,92,0.18)] ring-1 ring-black/5">
+    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-xl ring-1 ring-black/5">
       {/* En-tête avec motif */}
       <div className="relative border-b border-brand-navy/10 bg-brand-navy px-5 py-5 text-white sm:px-8">
         <div
@@ -67,7 +68,7 @@ export function InteractiveScenario({ scenario }: Props) {
         />
         <div className="relative flex flex-wrap items-start justify-between gap-4">
           <div className="max-w-xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
+            <p className="text-3xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
               Parcours interactif
             </p>
             <h2 className="mt-1.5 text-xl font-bold leading-snug tracking-tight text-white sm:text-2xl">
@@ -75,17 +76,17 @@ export function InteractiveScenario({ scenario }: Props) {
             </h2>
           </div>
           <div className="flex flex-col items-end gap-2">
-            <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-medium tabular-nums text-white/95">
+            <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-3xs font-medium tabular-nums text-white/95">
               Progression {progressApprox}%
             </span>
             {quizTotal > 0 ? (
-              <span className="rounded-full border border-white/20 bg-black/15 px-3 py-1 text-[11px] font-medium text-white/95">
+              <span className="rounded-full border border-white/20 bg-black/15 px-3 py-1 text-3xs font-medium text-white/95">
                 Score {score}/{quizTotal}
               </span>
             ) : null}
             <div className="h-1.5 w-32 overflow-hidden rounded-full bg-black/20 sm:w-40">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[#f0e6c8] transition-all duration-500"
+                className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[var(--brand-gold-pale)] transition-all duration-500"
                 style={{ width: `${progressApprox}%` }}
               />
             </div>
@@ -155,7 +156,7 @@ function StepVideo({
   return (
     <div>
       {step.badge ? (
-        <span className="inline-flex items-center rounded-full border border-brand-navy/15 bg-brand-navy/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand-navy">
+        <span className="inline-flex items-center rounded-full border border-brand-navy/15 bg-brand-navy/5 px-3 py-1 text-3xs font-semibold uppercase tracking-wide text-brand-navy">
           {step.badge}
         </span>
       ) : null}
@@ -175,7 +176,7 @@ function StepVideo({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={step.coverImageUrl}
-            alt=""
+            alt={step.title}
             className="aspect-[21/9] w-full object-cover sm:aspect-[2.4/1]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/50 to-transparent" />
@@ -259,7 +260,7 @@ function StepInfo({
         <button
           type="button"
           onClick={() => onNavigate(step.next)}
-          className="mt-8 w-full rounded-xl bg-brand-gold py-3 text-sm font-semibold text-brand-navy shadow-md transition hover:bg-[#c4a030] sm:w-auto sm:px-8"
+          className="mt-8 w-full rounded-xl bg-brand-gold py-3 text-sm font-semibold text-brand-navy shadow-md transition hover:bg-[var(--brand-gold-hover)] sm:w-auto sm:px-8"
         >
           Retour au choix
         </button>
@@ -277,7 +278,7 @@ function StepChoice({
 }) {
   return (
     <div>
-      <span className="inline-flex rounded-full border border-brand-gold/40 bg-brand-gold/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#8a7318]">
+      <span className="inline-flex rounded-full border border-brand-gold/40 bg-brand-gold/10 px-3 py-1 text-3xs font-semibold uppercase tracking-wide text-brand-gold-dark">
         Décision
       </span>
       <h3 className="mt-3 text-2xl font-bold text-brand-navy">{step.title}</h3>
@@ -290,7 +291,7 @@ function StepChoice({
               onClick={() => onNavigate(opt.next)}
               className="group flex w-full gap-4 rounded-2xl border-2 border-zinc-200 bg-white px-4 py-4 text-left shadow-sm transition hover:border-brand-navy hover:shadow-md focus:outline-none focus:ring-2 focus:ring-brand-gold/80"
             >
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-navy to-[#2d5a7c] text-sm font-bold text-white shadow-inner">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-navy to-[var(--brand-navy-alt)] text-sm font-bold text-white shadow-inner">
                 {String.fromCharCode(65 + i)}
               </span>
               <span className="pt-0.5 text-sm font-medium leading-snug text-zinc-800 group-hover:text-brand-navy">
@@ -335,7 +336,7 @@ function StepQuiz({
   return (
     <div>
       <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-brand-navy px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-brand-gold">
+        <span className="rounded-full bg-brand-navy px-3 py-1 text-3xs font-bold uppercase tracking-wide text-brand-gold">
           QCM
         </span>
         <span className="text-xs font-medium text-zinc-500">{step.title}</span>
@@ -373,9 +374,7 @@ function StepQuiz({
 
       {showExplain && picked !== null && !isCorrect ? (
         <div className="mt-5 flex gap-3 rounded-xl border border-amber-200/80 bg-amber-50/90 p-4 text-sm text-amber-950 shadow-sm">
-          <span className="text-lg" aria-hidden>
-            💡
-          </span>
+          <Lightbulb className="h-5 w-5 text-amber-600 shrink-0" aria-hidden="true" />
           <p className="leading-relaxed">{step.explanation}</p>
         </div>
       ) : null}
@@ -443,7 +442,7 @@ function StepComplete({
         <div className="mt-10">
           <Link
             href={step.nextLesson.href}
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-brand-gold to-[#e8d5a3] px-8 py-3.5 text-sm font-bold text-brand-navy shadow-lg shadow-amber-900/10 transition hover:from-[#c4a030] hover:to-brand-gold"
+            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-brand-gold to-[var(--brand-gold-pale)] px-8 py-3.5 text-sm font-bold text-brand-navy shadow-lg shadow-amber-900/10 transition hover:from-[var(--brand-gold-hover)] hover:to-brand-gold"
           >
             {step.nextLesson.label}
             <span aria-hidden>→</span>

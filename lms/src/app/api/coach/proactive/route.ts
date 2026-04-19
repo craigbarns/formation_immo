@@ -43,7 +43,7 @@ export async function POST(request: Request) {
   const parse = RequestSchema.safeParse(body);
   if (!parse.success) return NextResponse.json({ message: null });
 
-  const { currentLessonTimeMs, moduleSlug } = parse.data;
+  const { currentLessonTimeMs } = parse.data;
 
   const messages: ProactiveMessage[] = [];
 

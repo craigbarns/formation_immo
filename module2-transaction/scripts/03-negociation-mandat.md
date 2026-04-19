@@ -37,9 +37,9 @@ Elegant real estate agent in sophisticated office, signing contract with satisfi
 
 #### [SEGMENT 2 - PROBLÉMATIQUE] (0:50 - 1:50)
 
-[B-ROLL : Statistiques qui apparaissent : 60% des estimations ne se transforment pas en mandat]
+[B-ROLL : Graphique montrant la perte entre estimation et mandat]
 
-"Soyons honnêtes. Soixante pour cent des estimations ne se transforment pas en mandat. Soixante pour cent. Vous faites dix estimations, vous signez quatre mandats. C'est la moyenne du marché."
+"Soyons honnêtes. Beaucoup d'estimations ne se transforment pas en mandat. C'est un phénomène fréquent. Vous faites dix estimations, vous n'en signez que quelques-unes. C'est la réalité du marché."
 
 [B-ROLL : Graphique montrant la perte entre estimation et mandat]
 
@@ -257,7 +257,7 @@ Elegant real estate agent in sophisticated office, signing contract with satisfi
 
 ### 🎯 POINTS CLÉS À RETENIR
 
-1. **60% des estimations** ne se transforment pas en mandat
+1. **Beaucoup d'estimations** ne se transforment pas en mandat
 2. **5 clés** : Préparation → Signaux → Argumentaire → Question → Objections
 3. **Signaux d'achat** : questions sur délai, projection future, honoraires, documents
 4. **Question alternative** : "Quel mandat préférez-vous ?"

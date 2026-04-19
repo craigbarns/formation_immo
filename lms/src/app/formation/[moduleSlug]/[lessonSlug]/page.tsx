@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { Clock } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getLesson, getPrevNext, lessonId, type Lesson } from "@/data/course";
 import { getInteractiveScenario } from "@/data/interactive-scenarios";
@@ -16,25 +18,27 @@ import { getDataTables } from "@/data/data-tables";
 import { getGuidedCalculations } from "@/data/guided-calculations";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import { LessonProgress } from "@/components/LessonProgress";
-import { InteractiveScenario } from "@/components/interactive/InteractiveScenario";
 import { LessonTimer } from "@/components/gamification/LessonTimer";
 import { ModuleTimeTracker } from "@/components/gamification/ModuleTimeTracker";
 import { CinematicPlayer } from "@/components/audio/CinematicPlayer";
 import { LessonPresenterPanel } from "@/components/avatars/LessonPresenterPanel";
-import { CaseStudyBlock } from "@/components/interactive/CaseStudyBlock";
-import { ChatRoleplay } from "@/components/interactive/ChatRoleplay";
-import { DragDropExerciseBlock } from "@/components/interactive/DragDropExercise";
-import { InteractiveTimelineBlock } from "@/components/interactive/InteractiveTimelineBlock";
 import { LessonNotes } from "@/components/interactive/LessonNotes";
-import { ProChecklistBlock } from "@/components/interactive/ProChecklistBlock";
 import { QuizCheckpointsSection } from "@/components/interactive/QuizCheckpointsSection";
 import { TrainerCalloutBlock } from "@/components/interactive/TrainerCallout";
-import { DataTableBlock } from "@/components/interactive/DataTableBlock";
-import { GuidedCalculationBlock } from "@/components/interactive/GuidedCalculationBlock";
 import { LessonMap } from "@/components/interactive/LessonMap";
 import { PrintableRecap } from "@/components/interactive/PrintableRecap";
 import { LessonSpecialContent } from "@/components/interactive/LessonSpecialContent";
 import { ScrollReveal } from "@/components/animations";
+import {
+  InteractiveScenario,
+  CaseStudyBlock,
+  ChatRoleplay,
+  DragDropExerciseBlock,
+  InteractiveTimelineBlock,
+  ProChecklistBlock,
+  DataTableBlock,
+  GuidedCalculationBlock,
+} from "./LessonDynamicComponents";
 import { BookmarkButton } from "@/components/user-content/BookmarkButton";
 import { NotesPanelButton } from "./NotesPanelButton";
 import { LessonJourneyBadge } from "@/components/LessonJourneyBadge";
@@ -84,6 +88,17 @@ function buildFallbackAudioQuiz(
 }
 
 type Props = { params: Promise<{ moduleSlug: string; lessonSlug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { moduleSlug, lessonSlug } = await params;
+  const result = getLesson(moduleSlug, lessonSlug);
+  if (!result) return { title: "Leçon non trouvée" };
+  const { module: mod, lesson } = result;
+  return {
+    title: `${lesson.title} — ${mod.title}`,
+    description: lesson.objectives.join(" ") || `Leçon du module ${mod.title}`,
+  };
+}
 
 export const dynamic = "force-dynamic";
 
@@ -149,43 +164,41 @@ export default async function LessonPage({ params }: Props) {
           <LessonTimer lessonKey={key} moduleSlug={moduleSlug} />
         </div>
 
-        <header className="px-5 py-6 md:px-8 md:py-8">
+        <header className="px-5 py-5 md:px-8 md:py-6">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-gold">{mod.title}</p>
-          <div className="mt-2 flex flex-wrap items-start gap-3">
-            <h1 className="text-3xl font-bold leading-[1.15] tracking-tight text-brand-navy md:text-[2rem]">
-              {lesson.title}
-            </h1>
-            <div className="flex items-center gap-2 mt-1">
-              {lesson.duration && (
-                <span className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-0.5 text-[11px] font-semibold text-zinc-500">
-                  ⏱ {Math.floor(lesson.duration / 60) > 0 ? `${Math.floor(lesson.duration / 60)}h` : ""}{lesson.duration % 60 > 0 ? `${lesson.duration % 60}min` : ""}
-                </span>
-              )}
-              {lesson.difficulty && (
-                <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-bold ${
-                  lesson.difficulty === "avance" ? "bg-amber-50 text-amber-700" :
-                  lesson.difficulty === "intermediaire" ? "bg-blue-50 text-blue-700" :
-                  "bg-emerald-50 text-emerald-700"
-                }`}>
-                  {lesson.difficulty === "avance" ? "Avancé" : lesson.difficulty === "intermediaire" ? "Intermédiaire" : "Débutant"}
-                </span>
-              )}
-            </div>
-          </div>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-600 md:text-base">
-            Écoutez la narration, parcourez la fiche, puis cochez la leçon lorsque le contenu est
-            assimilé — vous gardez le contrôle sur votre rythme.
-          </p>
+          <h1 className="mt-1 text-2xl font-bold leading-tight tracking-tight text-brand-navy md:text-[1.75rem]">
+            {lesson.title}
+          </h1>
 
-          {/* Objectifs pédagogiques */}
+          {/* Meta row: timer + duration + difficulty + journey */}
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <LessonTimer lessonKey={key} moduleSlug={moduleSlug} />
+            {lesson.duration && (
+              <span className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-0.5 text-3xs font-semibold text-zinc-500">
+                <Clock className="h-3 w-3" /> {Math.floor(lesson.duration / 60) > 0 ? `${Math.floor(lesson.duration / 60)}h` : ""}{lesson.duration % 60 > 0 ? `${lesson.duration % 60}min` : ""}
+              </span>
+            )}
+            {lesson.difficulty && (
+              <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-3xs font-bold ${
+                lesson.difficulty === "avance" ? "bg-amber-50 text-amber-700" :
+                lesson.difficulty === "intermediaire" ? "bg-blue-50 text-blue-700" :
+                "bg-emerald-50 text-emerald-700"
+              }`}>
+                {lesson.difficulty === "avance" ? "Avancé" : lesson.difficulty === "intermediaire" ? "Intermédiaire" : "Débutant"}
+              </span>
+            )}
+            <LessonJourneyBadge moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
+          </div>
+
+          {/* Objectifs pédagogiques — compact */}
           {lesson.objectives && lesson.objectives.length > 0 && (
-            <div className="mt-4 rounded-2xl border border-brand-gold/25 bg-gradient-to-br from-amber-50/60 to-white p-4">
-              <p className="mb-2 text-xs font-bold uppercase tracking-wide text-brand-gold">
-                Ce que vous allez maîtriser
+            <div className="mt-4 rounded-xl border border-brand-gold/20 bg-brand-gold-soft/40 p-3">
+              <p className="mb-1.5 text-2xs font-bold uppercase tracking-wide text-brand-gold">
+                Objectifs
               </p>
-              <ul className="space-y-1.5">
+              <ul className="space-y-1">
                 {lesson.objectives.map((obj, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-zinc-700">
+                  <li key={i} className="flex items-start gap-1.5 text-sm text-zinc-700">
                     <span className="mt-0.5 text-brand-gold" aria-hidden>✓</span>
                     {obj}
                   </li>
@@ -194,10 +207,8 @@ export default async function LessonPage({ params }: Props) {
             </div>
           )}
 
-          <LessonJourneyBadge moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
-
-          {/* Actions: Bookmark + Notes + Recap + AI Coach */}
-          <div className="flex flex-wrap items-center gap-3 mt-5">
+          {/* Actions toolbar */}
+          <div className="flex flex-wrap items-center gap-2 mt-4">
             <BookmarkButton
               moduleSlug={moduleSlug}
               lessonSlug={lessonSlug}
@@ -224,7 +235,6 @@ export default async function LessonPage({ params }: Props) {
       {/* Lesson navigation map */}
       <div className="mt-6">
         <LessonMap
-          lessonTitle={lesson.title}
           hasVideo={!!lesson.videoUrl}
           hasScenario={!!interactive}
           hasQuiz={quizCheckpoints.length > 0}

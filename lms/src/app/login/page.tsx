@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import LoginForm from "./LoginForm";
+
+export const metadata: Metadata = {
+  title: "Connexion",
+  description: "Connectez-vous à votre espace Formation 42h.",
+};
 
 export default function LoginPage() {
   return (

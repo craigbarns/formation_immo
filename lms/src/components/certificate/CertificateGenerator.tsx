@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Building2, Lock } from "lucide-react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { getGamificationState, getLevelForXP, BADGES, type GamificationState } from "@/lib/gamification";
 import { COURSE } from "@/data/course";
 import { FORMATION_PROGRESS_STORAGE_KEY } from "@/constants/formation-storage";
@@ -282,12 +284,12 @@ export function CertificateGenerator() {
   if (loading) {
     return (
       <div className="rounded-2xl border-2 border-brand-navy/15 bg-white shadow-lg">
-        <div className="border-b border-zinc-100 bg-gradient-to-br from-brand-navy via-[#1e4a73] to-brand-navy-soft px-6 py-5 text-white rounded-t-2xl">
+        <div className="border-b border-zinc-100 bg-gradient-to-br from-brand-navy via-[var(--brand-navy-light)] to-brand-navy-soft px-6 py-5 text-white rounded-t-2xl">
           <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-xl">🏛️</span>
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15"><Building2 className="h-5 w-5 text-white" /></span>
             <div>
               <h3 className="text-lg font-bold">Certificat de formation</h3>
-              <p className="text-xs text-white/70">Chargement…</p>
+              <p className="text-xs text-white/80">Chargement…</p>
             </div>
           </div>
         </div>
@@ -300,12 +302,12 @@ export function CertificateGenerator() {
 
   return (
     <div className="rounded-2xl border-2 border-brand-navy/15 bg-white shadow-lg">
-      <div className="border-b border-zinc-100 bg-gradient-to-br from-brand-navy via-[#1e4a73] to-brand-navy-soft px-6 py-5 text-white rounded-t-2xl">
+      <div className="border-b border-zinc-100 bg-gradient-to-br from-brand-navy via-[var(--brand-navy-light)] to-brand-navy-soft px-6 py-5 text-white rounded-t-2xl">
         <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-xl">🏛️</span>
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15"><Building2 className="h-5 w-5 text-white" /></span>
           <div>
             <h3 className="text-lg font-bold">Certificat de formation</h3>
-            <p className="text-xs text-white/70">Générez votre attestation de réussite</p>
+            <p className="text-xs text-white/80">Générez votre attestation de réussite</p>
           </div>
         </div>
       </div>
@@ -313,7 +315,7 @@ export function CertificateGenerator() {
       <div className="p-6">
         {!canGenerate ? (
           <div className="rounded-xl border border-amber-200 bg-amber-50 p-6 text-center">
-            <div className="text-3xl">🔒</div>
+            <div className="flex justify-center"><Lock className="h-8 w-8 text-amber-500" /></div>
             <h4 className="mt-2 text-lg font-bold text-amber-800">Certificat verrouillé</h4>
             <p className="mt-2 text-sm text-amber-700">
               Pour générer votre certificat, vous devez :
@@ -321,13 +323,13 @@ export function CertificateGenerator() {
             <ul className="mt-3 space-y-2 text-sm text-amber-700">
               <li className="flex items-center justify-center gap-2">
                 <span className={completionPct >= 80 ? "text-emerald-600" : "text-amber-600"}>
-                  {completionPct >= 80 ? "✓" : "○"}
+                  <EmojiIcon emoji={completionPct >= 80 ? "✓" : "○"} className="h-4 w-4" />
                 </span>
                 Compléter au moins 80% des leçons ({completionPct}%/80%)
               </li>
               <li className="flex items-center justify-center gap-2">
                 <span className={examsPassed >= 3 ? "text-emerald-600" : "text-amber-600"}>
-                  {examsPassed >= 3 ? "✓" : "○"}
+                  <EmojiIcon emoji={examsPassed >= 3 ? "✓" : "○"} className="h-4 w-4" />
                 </span>
                 Réussir au moins 3 examens ({examsPassed}/3)
               </li>
@@ -349,7 +351,7 @@ export function CertificateGenerator() {
               <button
                 onClick={generateCertificate}
                 disabled={!name.trim()}
-                className="rounded-xl bg-brand-gold px-6 py-3 text-sm font-bold text-brand-navy shadow transition hover:bg-[#c4a030] disabled:opacity-50"
+                className="rounded-xl bg-brand-gold px-6 py-3 text-sm font-bold text-brand-navy shadow transition hover:bg-[var(--brand-gold-hover)] disabled:opacity-50"
               >
                 Générer le certificat
               </button>

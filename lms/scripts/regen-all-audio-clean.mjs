@@ -157,13 +157,13 @@ async function main() {
   for (let idx = 0; idx < mdPaths.length; idx++) {
     const mdPath = mdPaths[idx];
     const base = path.basename(mdPath, ".md");
-    const module = getModuleNameForScript(mdPath);
+    const moduleName = getModuleNameForScript(mdPath);
     const voiceId = getVoiceIdForScript(mdPath);
     const outPath = path.join(audioDir, `${base}.mp3`);
     const prefix = `[${idx + 1}/${mdPaths.length}]`;
 
     if (!voiceId) {
-      console.warn(`${prefix} ⚠ Voix introuvable pour ${base} (module: ${module})`);
+      console.warn(`${prefix} ⚠ Voix introuvable pour ${base} (module: ${moduleName})`);
       skipped++;
       continue;
     }
@@ -175,9 +175,9 @@ async function main() {
       continue;
     }
 
-    const label = FORMATEUR_VOICES[module]?.name ?? module;
+    const label = FORMATEUR_VOICES[moduleName]?.name ?? moduleName;
     console.log(`${prefix} 🎙 ${base}`);
-    console.log(`        Module : ${module}  |  Formateur : ${label}`);
+    console.log(`        Module : ${moduleName}  |  Formateur : ${label}`);
     console.log(`        Texte  : ${text.length} car.  |  Voix : ${voiceId.slice(0, 8)}...`);
 
     if (dryRun) {

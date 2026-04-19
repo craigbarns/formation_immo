@@ -27,7 +27,7 @@ export function Badge({
   };
 
   const sizes: Record<NonNullable<BadgeProps["size"]>, string> = {
-    sm: "px-2.5 py-0.5 text-[11px]",
+    sm: "px-2.5 py-0.5 text-3xs",
     md: "px-3 py-1 text-xs",
   };
 

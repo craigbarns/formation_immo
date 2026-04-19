@@ -68,7 +68,7 @@ export function Dialog({
             exit={{ opacity: 0, scale: 0.95, y: 8 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className={cn(
-              "w-full max-w-lg overflow-hidden rounded-2xl border border-zinc-200/90 bg-white shadow-[0_16px_64px_rgba(26,58,92,0.16)]",
+              "w-full max-w-lg overflow-hidden rounded-2xl border border-zinc-200/90 bg-white shadow-xl",
               className
             )}
           >

@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { getGamificationState, getLevelForXP, updateStreak } from "@/lib/gamification";
+import { getLevelForXP, updateStreak } from "@/lib/gamification";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 export function XPBar() {
   const [mounted, setMounted] = useState(false);
@@ -43,34 +44,34 @@ export function XPBar() {
     );
   }
 
-  const { current, next, progressToNext } = getLevelForXP(xp);
+  const { current, progressToNext } = getLevelForXP(xp);
 
   return (
     <div className="flex min-w-0 flex-shrink-0 items-center gap-2 sm:gap-3">
       {/* Streak */}
       {streak > 0 && (
         <div className="flex items-center gap-1 rounded-full border border-orange-300/50 bg-orange-50 px-2.5 py-1 text-xs font-bold text-orange-700">
-          <span className="text-sm">🔥</span>
+          <EmojiIcon emoji="🔥" className="h-4 w-4 text-orange-500" />
           {streak}j
         </div>
       )}
 
       {/* Level & XP */}
       <div className="flex items-center gap-2">
-        <span className="text-base">{current.icon}</span>
+        <EmojiIcon emoji={current.icon} className="h-4 w-4" />
         <div className="hidden sm:block">
           <div className="flex items-baseline gap-1.5">
             <span className="text-xs font-bold text-white">Niv. {current.level}</span>
-            <span className="text-[10px] text-white/80">{current.title}</span>
+            <span className="text-2xs text-white/80">{current.title}</span>
           </div>
           <div className="mt-0.5 flex items-center gap-2">
             <div className="h-1.5 w-20 overflow-hidden rounded-full bg-white/20">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[#f0e6c8] transition-all duration-700"
+                className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[var(--brand-gold-pale)] transition-all duration-700"
                 style={{ width: `${progressToNext}%` }}
               />
             </div>
-            <span className="text-[10px] tabular-nums text-white/70">{xp} XP</span>
+            <span className="text-2xs tabular-nums text-white/80">{xp} XP</span>
           </div>
         </div>
       </div>

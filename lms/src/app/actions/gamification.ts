@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import type { GamificationState, BadgeId } from "@/lib/gamification";
+import type { GamificationState } from "@/lib/gamification";
 
 const DEFAULT_GAMIFICATION_STATE: GamificationState = {
   xp: 0,

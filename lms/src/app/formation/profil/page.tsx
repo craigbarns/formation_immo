@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ProfileContent } from "./ProfileContent";
+
+export const metadata: Metadata = {
+  title: "Mon profil",
+  description: "Suivez votre progression, vos badges et générez votre certificat de formation.",
+};
 
 export default function ProfilPage() {
   return (
@@ -10,7 +16,7 @@ export default function ProfilPage() {
 
       <h1 className="mt-4 text-2xl font-bold text-brand-navy">Mon profil</h1>
       <p className="mt-2 text-zinc-600">
-        Suivez votre progression, vos badges et generez votre certificat.
+        Suivez votre progression, vos badges et générez votre certificat.
       </p>
 
       <ProfileContent />

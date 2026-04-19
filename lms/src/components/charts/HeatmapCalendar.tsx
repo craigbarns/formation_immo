@@ -12,8 +12,8 @@ interface HeatmapCalendarProps {
   data?: ActivityData[] | Record<string, number>;
 }
 
-const DAYS = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
-const MONTHS = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"];
+// const DAYS = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
+// const MONTHS = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"];
 
 export function HeatmapCalendar({ data }: HeatmapCalendarProps) {
   const [mounted, setMounted] = useState(false);

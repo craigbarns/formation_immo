@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, X, FileText, Bookmark, StickyNote, Command, ArrowRight } from "lucide-react";
-import { COURSE, Lesson, CourseModule } from "@/data/course";
+import { Search, X, FileText, Bookmark, StickyNote, ArrowRight } from "lucide-react";
+import { COURSE } from "@/data/course";
 import { getAllBookmarks } from "@/lib/user-content";
 import { searchNotes } from "@/lib/user-content";
 import { useRouter } from "next/navigation";
@@ -196,8 +196,9 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
               <button
                 onClick={onClose}
                 className="p-1 text-gray-400 hover:text-gray-600"
+                aria-label="Fermer la recherche"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5" aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -242,7 +243,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                       <p className="font-medium truncate">{result.title}</p>
                       <p
                         className={`text-sm truncate ${
-                          index === clampedSelectedIndex ? "text-white/70" : "text-gray-500"
+                          index === clampedSelectedIndex ? "text-white/80" : "text-gray-500"
                         }`}
                       >
                         {result.subtitle}

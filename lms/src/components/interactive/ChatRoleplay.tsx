@@ -85,7 +85,7 @@ export function ChatRoleplay({ scenario }: { scenario: ChatRoleplayScenario }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
       <div className="border-b border-brand-navy/10 bg-gradient-to-r from-brand-navy to-brand-navy-deep px-5 py-5 sm:px-8">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
+        <p className="text-3xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
           Simulation conversationnelle
         </p>
         <h2 className="mt-1 text-xl font-bold text-white sm:text-2xl">{scenario.title}</h2>
@@ -107,7 +107,7 @@ export function ChatRoleplay({ scenario }: { scenario: ChatRoleplayScenario }) {
                 }`}
               >
                 {ln.role === "client" && (
-                  <p className="mb-1 text-[10px] font-bold uppercase tracking-wide text-brand-gold">
+                  <p className="mb-1 text-2xs font-bold uppercase tracking-wide text-brand-gold">
                     Client
                   </p>
                 )}

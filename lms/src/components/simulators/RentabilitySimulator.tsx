@@ -32,10 +32,9 @@ export function RentabilitySimulator() {
   const [maintenance, setMaintenance] = useState(5);
   const [management, setManagement] = useState(8);
   const [isLMNP, setIsLMNP] = useState(false);
-  const [tracked] = useState(() => {
-    if (typeof window !== 'undefined') recordSimulatorUsed("rentabilite");
-    return true;
-  });
+  useEffect(() => {
+    recordSimulatorUsed("rentabilite");
+  }, []);
 
 
   const result = useMemo<RentabilityResult>(() => {
@@ -144,7 +143,7 @@ export function RentabilitySimulator() {
         key={result.netYield + (isLMNP ? "lmnp" : "")}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
+        className="card-elevated p-6"
       >
         {/* Recommendation */}
         <div className={`mb-6 rounded-xl ${rec.bg} p-4 text-center`}>

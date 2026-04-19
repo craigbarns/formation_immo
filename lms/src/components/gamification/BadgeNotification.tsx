@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { BadgeId } from "@/lib/gamification";
 import { getBadge } from "@/lib/gamification";
 import { sounds } from "@/lib/sounds";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 type Notification = { badgeId: BadgeId; show: boolean };
 
@@ -32,7 +33,7 @@ export function useBadgeNotification() {
       import("canvas-confetti").then((mod) => {
         const confetti = mod.default;
         const colors =
-          badge.rarity === "legendary" ? ["#d4af37", "#f0c040", "#fff8dc"] :
+          badge.rarity === "legendary" ? ["#d4af37", "var(--brand-gold-light)", "#fff8dc"] :
           badge.rarity === "epic"      ? ["#a855f7", "#c084fc", "#f0abfc"] :
           badge.rarity === "rare"      ? ["#3b82f6", "#60a5fa", "#bfdbfe"] :
                                          ["#22c55e", "#86efac", "#dcfce7"];
@@ -78,10 +79,10 @@ function BadgeToast({ badgeId, show }: { badgeId: BadgeId; show: boolean }) {
     >
       <div className="flex items-center gap-3">
         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-2xl shadow-inner">
-          {badge.icon}
+          <EmojiIcon emoji={badge.icon} className="h-6 w-6" />
         </div>
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-wider text-brand-gold">
+          <p className="text-2xs font-bold uppercase tracking-wider text-brand-gold">
             Nouveau badge {RARITY_LABELS[badge.rarity]}
           </p>
           <p className="text-sm font-bold text-brand-navy">{badge.name}</p>

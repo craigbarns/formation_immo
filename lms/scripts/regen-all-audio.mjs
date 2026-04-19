@@ -22,7 +22,6 @@ import { loadDotEnvLocal } from "./lib/env-local.mjs";
 import {
   getMistralVoiceIdForModuleSlug,
   getModuleSlugFromScriptMdPath,
-  describeVoiceChoiceForScriptMd,
 } from "./lib/lesson-mistral-voice.mjs";
 import { writeMistralTtsMp3File } from "./lib/mistral-tts.mjs";
 import { allLessonMarkdownPaths } from "./lib/script-discovery.mjs";

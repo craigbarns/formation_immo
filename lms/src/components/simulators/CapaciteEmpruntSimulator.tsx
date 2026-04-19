@@ -12,10 +12,9 @@ export function CapaciteEmpruntSimulator() {
   const [duree, setDuree] = useState(20);
   const [taux, setTaux] = useState(3.5);
   const [apport, setApport] = useState(30000);
-  const [tracked] = useState(() => {
-    if (typeof window !== 'undefined') recordSimulatorUsed("capacite-emprunt");
-    return true;
-  });
+  useEffect(() => {
+    recordSimulatorUsed("capacite-emprunt");
+  }, []);
 
 
   const result = useMemo(() => {
@@ -29,7 +28,7 @@ export function CapaciteEmpruntSimulator() {
     const isComfortable = resteAVivre >= 1500 && endettementCible <= 35;
 
     return { mensualiteMax, capaciteEmprunt, prixMaxBien, resteAVivre, isComfortable };
-  }, [revenus, charges, endettementCible, duree, taux, apport]);
+  }, [revenus, endettementCible, duree, taux, apport]);
 
   const formatCurrency = (n: number) =>
     new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
@@ -38,7 +37,7 @@ export function CapaciteEmpruntSimulator() {
     <div className="space-y-6">
       <div className="grid gap-6 md:grid-cols-2">
         {/* Inputs */}
-        <div className="space-y-5 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+        <div className="space-y-5 card-elevated p-5">
           <h4 className="flex items-center gap-2 text-sm font-bold text-brand-navy">
             <Wallet size={16} className="text-brand-gold" /> Situation financière
           </h4>
@@ -58,7 +57,7 @@ export function CapaciteEmpruntSimulator() {
           key={result.capaciteEmprunt}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm"
+          className="card-elevated p-5"
         >
           <div className="mb-4 flex justify-center">
             <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 ${result.isComfortable ? "bg-emerald-500/15 text-emerald-600" : "bg-amber-500/15 text-amber-600"}`}>
@@ -143,7 +142,7 @@ function ResultBox({
   };
   return (
     <div className="rounded-xl border border-zinc-100 bg-zinc-50 p-3 text-center">
-      <div className="mb-1 flex items-center justify-center gap-1 text-[10px] font-bold uppercase tracking-wide text-zinc-400">
+      <div className="mb-1 flex items-center justify-center gap-1 text-2xs font-bold uppercase tracking-wide text-zinc-400">
         {icon} {label}
       </div>
       <p className={`text-lg font-bold ${toneClasses[tone]}`}>{value}</p>

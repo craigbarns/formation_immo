@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { GuidedCalculation, CalcStep } from "@/data/guided-calculations";
 
 type StepStatus = "locked" | "active" | "correct" | "wrong";
@@ -57,7 +58,7 @@ function StepCard({
                 : "bg-brand-navy text-white"
           }`}
         >
-          {isLocked ? "🔒" : isCorrect ? "✓" : step.stepNumber}
+          {isLocked ? <EmojiIcon emoji="🔒" className="h-4 w-4" /> : isCorrect ? <EmojiIcon emoji="✓" className="h-4 w-4" /> : step.stepNumber}
         </div>
         <div className="flex-1">
           <p className="font-bold text-brand-navy">{step.title}</p>
@@ -71,7 +72,7 @@ function StepCard({
         <div className="border-t border-zinc-100 px-5 pb-5 pt-4 space-y-4">
           {/* Formula */}
           {step.formula && (
-            <div className="rounded-xl bg-[#0f1f33] px-4 py-3 font-mono text-sm text-brand-gold">
+            <div className="rounded-xl bg-[var(--surface-dark)] px-4 py-3 font-mono text-sm text-brand-gold">
               {step.formula}
             </div>
           )}
@@ -102,9 +103,9 @@ function StepCard({
               {step.hint && (
                 <button
                   onClick={() => setShowHint((v) => !v)}
-                  className="rounded-xl border border-brand-gold/40 px-4 py-2.5 text-sm font-semibold text-[#7a6008] transition hover:bg-brand-gold/10"
+                  className="rounded-xl border border-brand-gold/40 px-4 py-2.5 text-sm font-semibold text-brand-gold-dark transition hover:bg-brand-gold/10"
                 >
-                  {showHint ? "Masquer l'indice" : "💡 Indice"}
+                  {showHint ? "Masquer l'indice" : <span className="inline-flex items-center gap-1"><EmojiIcon emoji="💡" className="h-4 w-4" /> Indice</span>}
                 </button>
               )}
             </div>
@@ -112,7 +113,7 @@ function StepCard({
 
           {/* Hint */}
           {showHint && step.hint && !isCorrect && (
-            <div className="rounded-xl border border-brand-gold/30 bg-brand-gold/5 px-4 py-3 text-sm text-[#7a6008]">
+            <div className="rounded-xl border border-brand-gold/30 bg-brand-gold/5 px-4 py-3 text-sm text-brand-gold-dark">
               <span className="font-semibold">Indice : </span>{step.hint}
             </div>
           )}
@@ -120,7 +121,7 @@ function StepCard({
           {/* Wrong feedback */}
           {tried && isWrong && (
             <div className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
-              <span>❌</span>
+              <EmojiIcon emoji="❌" className="h-4 w-4 text-red-500 shrink-0" />
               <span>Pas tout à fait — réessayez ou utilisez l&apos;indice pour vous guider.</span>
             </div>
           )}
@@ -179,7 +180,7 @@ function CalcView({ calc }: { calc: GuidedCalculation }) {
         <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
           {calc.propertyContext.map((ctx) => (
             <div key={ctx.label} className="rounded-xl border border-zinc-200 bg-white p-3 text-center shadow-sm">
-              <div className="text-xl">{ctx.icon}</div>
+              <div><EmojiIcon emoji={ctx.icon} className="h-6 w-6" /></div>
               <p className="mt-1 text-xs font-bold text-zinc-500">{ctx.label}</p>
               <p className="mt-0.5 text-sm font-bold text-brand-navy">{ctx.value}</p>
             </div>
@@ -217,7 +218,7 @@ function CalcView({ calc }: { calc: GuidedCalculation }) {
       {complete && (
         <div className="rounded-2xl border-2 border-brand-gold/40 bg-gradient-to-br from-brand-gold/10 to-amber-50 p-6">
           <p className="text-sm font-bold uppercase tracking-widest text-brand-gold">
-            🎓 Bilan de l&apos;analyse
+            <span className="inline-flex items-center gap-1.5"><EmojiIcon emoji="🎓" className="h-4 w-4" /> Bilan de l&apos;analyse</span>
           </p>
           <p className="mt-3 text-sm leading-relaxed text-zinc-700">{calc.finalSummary}</p>
           <button
@@ -243,8 +244,8 @@ export function GuidedCalculationBlock({
   return (
     <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
       {/* Header */}
-      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[#244b75] px-5 py-4 sm:px-7">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-brand-gold">
+      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[var(--brand-navy-mid)] px-5 py-4 sm:px-7">
+        <p className="text-3xs font-bold uppercase tracking-widest text-brand-gold">
           Calcul guidé
         </p>
         <p className="mt-0.5 text-sm font-semibold text-white/90">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ChevronRight,
   ChevronLeft,
@@ -14,6 +14,7 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import {
   PLACEMENT_QUESTIONS,
   calculatePlacementResult,
@@ -28,7 +29,7 @@ export function PlacementTest() {
   const [step, setStep] = useState<Step>("intro");
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
-  const [reviewMode, setReviewMode] = useState(false);
+  const [, setReviewMode] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -154,7 +155,7 @@ export function PlacementTest() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-lg md:p-8">
+        <div className="card-elevated-lg p-6 md:p-8">
           {/* Question */}
           <div className="mb-2">
             <span className="inline-flex items-center rounded-full bg-brand-navy/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-brand-navy">
@@ -262,11 +263,11 @@ export function PlacementTest() {
           <p className="mt-2 text-sm font-medium text-zinc-500">{result.recommendation}</p>
 
           {saving && <p className="mt-4 text-xs text-zinc-400">Sauvegarde...</p>}
-          {saved && <p className="mt-4 text-xs text-emerald-600">✓ Résultats enregistrés</p>}
+          {saved && <p className="mt-4 text-xs text-emerald-600 inline-flex items-center justify-center gap-1"><EmojiIcon emoji="✓" className="h-3.5 w-3.5" /> Résultats enregistrés</p>}
         </div>
 
         {/* Module breakdown */}
-        <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-lg">
+        <div className="card-elevated-lg p-6">
           <h3 className="text-lg font-bold text-brand-navy">Détail par module</h3>
           <div className="mt-4 space-y-4">
             {Object.entries(result.moduleScores).map(([mod, scores]) => {
@@ -343,7 +344,7 @@ export function PlacementTest() {
           </button>
         </div>
 
-        <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-lg">
+        <div className="card-elevated-lg p-6">
           <div className="mb-4 flex items-center gap-3">
             {isCorrect ? (
               <CheckCircle2 className="h-6 w-6 text-emerald-500" />

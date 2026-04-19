@@ -4,7 +4,7 @@ import type { StatCard } from "@/data/lesson-keyconcepts";
 
 const COLOR_MAP: Record<string, { bg: string; text: string; border: string }> = {
   navy: { bg: "bg-brand-navy/5", text: "text-brand-navy", border: "border-brand-navy/20" },
-  gold: { bg: "bg-brand-gold/8", text: "text-[#8a7318]", border: "border-brand-gold/30" },
+  gold: { bg: "bg-brand-gold/8", text: "text-brand-gold-dark", border: "border-brand-gold/30" },
   green: { bg: "bg-emerald-50", text: "text-emerald-700", border: "border-emerald-200" },
   red: { bg: "bg-red-50", text: "text-red-700", border: "border-red-200" },
   blue: { bg: "bg-blue-50", text: "text-blue-700", border: "border-blue-200" },
@@ -26,7 +26,7 @@ export function StatDashboard({ stats }: { stats: StatCard[] }) {
             {s.unit && (
               <p className={`text-xs font-medium ${c.text} opacity-70`}>{s.unit}</p>
             )}
-            <p className="mt-1 text-[11px] text-zinc-500 font-medium">{s.label}</p>
+            <p className="mt-1 text-3xs text-zinc-500 font-medium">{s.label}</p>
           </div>
         );
       })}

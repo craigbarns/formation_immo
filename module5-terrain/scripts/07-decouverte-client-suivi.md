@@ -46,13 +46,13 @@ La découverte client est l'outil qui change tout. [PAUSE 2s]
 
 ### PARTIE 1 : POURQUOI LA DÉCOUVERTE CLIENT CHANGE TOUT (1 minute 30)
 
-[B-ROLL : Statistiques : 73% des acheteurs signent pour un bien qu'ils n'avaient pas imaginé]
+[B-ROLL : Acheteur découvrant un bien différent de sa demande initiale]
 
 **NARRATION :**
 
-73% des acheteurs finissent par acquérir un bien qui ne correspondait pas à leur demande initiale. [PAUSE 2s]
+De nombreux acheteurs finissent par acquérir un bien qui ne correspondait pas à leur demande initiale. [PAUSE 2s]
 
-Ce chiffre révèle quelque chose d'essentiel : [PAUSE 1s] les critères que vos clients vous énoncent au premier RDV sont leurs critères rationnels. [PAUSE 1s] Pas forcément leurs critères réels. [PAUSE 2s]
+Ce constat révèle quelque chose d'essentiel : [PAUSE 1s] les critères que vos clients vous énoncent au premier RDV sont leurs critères rationnels. [PAUSE 1s] Pas forcément leurs critères réels. [PAUSE 2s]
 
 [B-ROLL : Iceberg — partie visible vs partie immergée]
 
@@ -189,7 +189,7 @@ Les meilleurs agents ne vendent pas des biens — ils comprennent des vies. [PAU
 
 ## POINTS CLÉS À RETENIR
 
-1. 73% des acheteurs signent pour un bien différent de leur demande initiale
+1. De nombreux acheteurs signent pour un bien différent de leur demande initiale
 2. Les critères exprimés = partie émergée de l'iceberg — chercher les besoins profonds
 3. 4 catégories de questions : contexte, critères absolus, finances, freins
 4. Fiche acquéreur à mettre à jour après chaque contact dans le CRM

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { MessageCircle, BarChart3, Sparkles } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { AICoachChat } from "@/components/ai-coach/AICoachChat";
 
 export default function PlacementConversationalPage() {

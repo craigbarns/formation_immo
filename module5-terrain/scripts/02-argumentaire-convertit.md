@@ -45,7 +45,7 @@ Aujourd'hui, je vais vous apprendre à construire des arguments qui ne réfutent
 
 [00:35-01:45] **PROBLÉMATIQUE - L'ÉCHEC DES ARGUMENTS CLASSIQUES**
 
-[B-roll: Infographie montrant 68% des clients ne se souviennent que de 3 arguments après une visite]
+[B-roll: Infographie montrant que les clients ne retiennent que peu d'arguments après une visite]
 
 Écoutez ce chiffre : après une visite de 45 minutes, vos clients ne se souviennent en moyenne que de trois arguments. Trois. [PAUSE 2s] Et pourtant, la plupart des agents enchaînent quinze, vingt arguments techniques sans discontinuer. Surface, orientation, DPE, charges, travaux, copropriété, localisation, transport, écoles...
 

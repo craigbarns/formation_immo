@@ -1,11 +1,7 @@
 /**
  * Tokens de design — source de vérité unique pour les couleurs, espacements et rayons.
- * Les valeurs CSS correspondantes sont définies dans `src/app/globals.css` (:root / .dark).
- *
- * Ré-exporte aussi le ThemeProvider et useTheme depuis le dossier theme/.
+ * Les valeurs CSS correspondantes sont définies dans `src/app/globals.css` (:root).
  */
-
-export { ThemeProvider, useTheme } from "./theme/index";
 
 export const colors = {
   brand: {

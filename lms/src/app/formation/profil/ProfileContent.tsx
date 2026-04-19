@@ -7,6 +7,7 @@ import { BadgesGrid } from "@/components/gamification/BadgesGrid";
 import { GlobalTimeTracker } from "@/components/gamification/ModuleTimeTracker";
 import { CertificateGenerator } from "@/components/certificate/CertificateGenerator";
 import { CertificatePreview } from "@/components/certificate";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 export function ProfileContent() {
   const [state, setState] = useState<GamificationState | null>(null);
@@ -60,10 +61,10 @@ export function ProfileContent() {
   return (
     <div className="mt-8 space-y-8">
       {/* Level & XP Card */}
-      <div className="rounded-2xl border-2 border-brand-navy/15 bg-gradient-to-br from-brand-navy to-[#2d5a7c] p-6 text-white shadow-lg">
+      <div className="rounded-2xl border-2 border-brand-navy/15 bg-gradient-to-br from-brand-navy to-[var(--brand-navy-alt)] p-6 text-white shadow-lg">
         <div className="flex flex-wrap items-center gap-6">
           <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-white/10 text-4xl backdrop-blur">
-            {current.icon}
+            <EmojiIcon emoji={current.icon} className="h-8 w-8 text-white" />
           </div>
           <div className="flex-1">
             <p className="text-xs font-bold uppercase tracking-wider text-brand-gold">
@@ -73,7 +74,7 @@ export function ProfileContent() {
             <div className="mt-2 flex items-center gap-3">
               <div className="h-3 flex-1 overflow-hidden rounded-full bg-white/20">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[#f0e6c8] transition-all duration-700"
+                  className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[var(--brand-gold-pale)] transition-all duration-700"
                   style={{ width: `${progressToNext}%` }}
                 />
               </div>
@@ -83,7 +84,7 @@ export function ProfileContent() {
             </div>
             {next && (
               <p className="mt-1 text-xs text-white/80">
-                {next.xpRequired - state.xp} XP pour atteindre {next.icon} {next.title}
+                {next.xpRequired - state.xp} XP pour atteindre <EmojiIcon emoji={next.icon} className="inline h-3 w-3" /> {next.title}
               </p>
             )}
           </div>
@@ -113,9 +114,9 @@ export function ProfileContent() {
                     : "border-zinc-200 bg-zinc-50 text-zinc-400"
                 }`}
               >
-                <span className="text-base">{lvl.icon}</span>
+                <EmojiIcon emoji={lvl.icon} className="h-4 w-4" />
                 <span>{lvl.title}</span>
-                <span className="text-[10px] text-zinc-400">{lvl.xpRequired} XP</span>
+                <span className="text-2xs text-zinc-400">{lvl.xpRequired} XP</span>
               </div>
             );
           })}
@@ -151,7 +152,7 @@ export function ProfileContent() {
                     <span className={`text-sm font-bold ${passed ? "text-emerald-600" : "text-amber-600"}`}>
                       {result.score}/{result.total}
                     </span>
-                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                    <span className={`rounded-full px-2 py-0.5 text-2xs font-bold ${
                       passed ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"
                     }`}>
                       {passed ? "REUSSI" : "A REVOIR"}
@@ -195,9 +196,9 @@ export function ProfileContent() {
 function StatCard({ label, value, icon }: { label: string; value: string; icon: string }) {
   return (
     <div className="rounded-xl bg-white/10 px-3 py-2.5 text-center backdrop-blur">
-      <div className="text-lg">{icon}</div>
+      <div className="flex justify-center"><EmojiIcon emoji={icon} className="h-5 w-5 text-white/90" /></div>
       <div className="text-lg font-bold">{value}</div>
-      <div className="text-[10px] text-white/70">{label}</div>
+      <div className="text-2xs text-white/80">{label}</div>
     </div>
   );
 }

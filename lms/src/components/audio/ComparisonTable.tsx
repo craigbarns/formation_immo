@@ -47,7 +47,7 @@ export function ComparisonTable({ title, colAHeader, colBHeader, rows }: Props) 
                 <td
                   className={`px-4 py-3 text-xs ${
                     r.highlight === "b"
-                      ? "font-bold text-[#8a7318] bg-brand-gold/5"
+                      ? "font-bold text-brand-gold-dark bg-brand-gold/5"
                       : "text-zinc-600"
                   }`}
                 >

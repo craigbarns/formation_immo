@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { PenLine } from "lucide-react";
 
 type Props = {
   lessonKey: string;
@@ -189,15 +190,13 @@ export function LessonNotes({ lessonKey }: Props) {
         }}
         className="flex w-full items-center gap-3 bg-brand-navy px-4 py-3 text-left text-sm font-semibold text-white transition hover:bg-brand-navy-deep"
       >
-        <span className="text-base" aria-hidden>
-          📝
-        </span>
+        <PenLine className="h-4 w-4" aria-hidden="true" />
         <span className="flex-1">Mes notes personnelles</span>
         {!open && hasNotes && (
           <span className="h-2.5 w-2.5 rounded-full bg-brand-gold shadow-sm" />
         )}
         <svg
-          className={`h-4 w-4 shrink-0 text-white/70 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`h-4 w-4 shrink-0 text-white/80 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

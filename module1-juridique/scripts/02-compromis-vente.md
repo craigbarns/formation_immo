@@ -44,11 +44,11 @@ Aujourd'hui, nous allons transformer cette anxiété en confiance. [PAUSE 1s] Vo
 
 ### PROBLÉMATIQUE (1 minute)
 
-[B-ROLL : Infographie montrant les statistiques : 12% des compromis sont contestés, 34% contiennent une erreur mineure]
+[B-ROLL : Infographie montrant les risques d'un compromis mal rédigé]
 
 **NARRATION :**
 
-Les chiffres sont édifiants. [PAUSE 1s] Selon une étude de l'Ordre des Notaires de 2024, 12% des compromis de vente font l'objet d'une contestation avant l'acte authentique. [PAUSE 1s] Et 34% contiennent au moins une erreur ou un oubli, même minime.
+Les chiffres sont édifiants. [PAUSE 1s] Les compromis de vente font régulièrement l'objet de contestations avant l'acte authentique. [PAUSE 1s] Une erreur ou un oubli, même minime, peut avoir des conséquences graves.
 
 [B-ROLL : Images de tribunaux, dossiers judiciaires empilés]
 
@@ -56,7 +56,7 @@ Les conséquences ? [PAUSE 1s] Des retards de plusieurs mois, des frais juridiqu
 
 [B-ROLL : Gros plan sur un agent qui sourit en présentant un document parfaitement rédigé]
 
-Mais il y a une autre voie. [PAUSE 1s] Les agents qui maîtrisent parfaitement la rédaction des compromis gagnent en moyenne 15 jours sur le délai entre compromis et acte authentique. [PAUSE 1s] Leur taux de transactions annulées ? [PAUSE 1s] Proche de zéro. [PAUSE 2s]
+Mais il y a une autre voie. [PAUSE 1s] Les agents qui maîtrisent parfaitement la rédaction des compromis accélèrent le délai entre compromis et acte authentique. [PAUSE 1s] Leur taux de transactions annulées est nettement inférieur à la moyenne du marché. [PAUSE 2s]
 
 ---
 
@@ -198,7 +198,7 @@ Maintenant, voyons les erreurs qui peuvent coûter cher. [PAUSE 1s] Celles que j
 
 [B-ROLL : Comparaison entre description floue et description précise]
 
-**Erreur numéro 2 : oublier la mention du DPE.** [PAUSE 1s] Depuis 2025, c'est obligatoire. [PAUSE 1s] L'absence de mention expose à une amende de 1 500 euros.
+**Erreur numéro 2 : oublier la mention du DPE.** [PAUSE 1s] Depuis le 1er juillet 2021, le DPE est obligatoire pour tous les biens. [PAUSE 1s] L'absence de mention expose à une amende de 1 500 euros.
 
 [B-ROLL : DPE avec mention "OBLIGATOIRE" en rouge]
 
@@ -316,10 +316,9 @@ Dans la prochaine vidéo, nous explorerons les diagnostics immobiliers. [PAUSE 1
 ## 📚 RÉFÉRENCES JURIDIQUES CITÉES
 
 - Article 1589 du Code civil (promesse de vente)
-- Article 1184 du Code civil (conditions suspensives)
-- Loi n° 2025-127 du 23 février 2025 (mention DPE obligatoire)
-- Arrêté du 15 septembre 2025 (diagnostics obligatoires)
-- Ordre des Notaires - Étude 2024 sur les contentieux
+- Articles 1304 à 1304-7 du Code civil (conditions suspensives)
+- Article L. 126-6 du Code de la construction et de l'habitation (sanctions DPE)
+- Code de la construction et de l'habitation : articles R. 134-1 à R. 134-5 (diagnostics obligatoires)
 
 ---
 

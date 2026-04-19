@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { InteractiveTimeline, TimelineStep } from "@/data/timeline-data";
 
 function StepDetail({ step }: { step: TimelineStep }) {
@@ -44,8 +45,8 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
 
   return (
     <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
-      <div className="border-b border-brand-navy/10 bg-[#f8fafc] px-5 py-5 sm:px-8">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
+      <div className="border-b border-brand-navy/10 bg-slate-50 px-5 py-5 sm:px-8">
+        <p className="text-3xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
           Frise chronologique
         </p>
         <h2 className="mt-1 text-xl font-bold text-brand-navy sm:text-2xl">{t.title}</h2>
@@ -94,15 +95,15 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
                         : "border-zinc-200 bg-white hover:border-brand-navy/25"
                     }`}
                   >
-                    <span className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-brand-navy/30 bg-white text-lg sm:flex">
-                      {step.icon}
+                    <span className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-brand-navy/30 bg-white sm:flex">
+                      <EmojiIcon emoji={step.icon} className="h-5 w-5" />
                     </span>
                     <div className="flex-1 px-4 py-4">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-lg sm:hidden" aria-hidden>
-                          {step.icon}
+                        <span className="sm:hidden" aria-hidden>
+                          <EmojiIcon emoji={step.icon} className="h-5 w-5" />
                         </span>
-                        <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-[11px] font-semibold text-zinc-600">
+                        <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-3xs font-semibold text-zinc-600">
                           {step.duration}
                         </span>
                       </div>

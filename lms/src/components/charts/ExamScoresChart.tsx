@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { useEffect } from "react";
 import { Award, TrendingUp, TrendingDown, Minus } from "lucide-react";
 
 interface ExamScore {
@@ -25,7 +27,7 @@ export function ExamScoresChart({ scores }: ExamScoresChartProps) {
     );
   }
 
-  const maxScore = Math.max(...scores.map((s) => s.total));
+  // maxScore reserved for future scaling logic
 
   return (
     <div className="space-y-4">

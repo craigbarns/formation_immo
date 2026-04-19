@@ -45,11 +45,11 @@ Aujourd'hui, je vous révèle les techniques de closing que les top performers u
 
 [00:40-02:00] **PROBLÉMATIQUE - POURQUOI LES CLOSINGS ÉCHOUENT**
 
-[B-roll: Infographie montrant que 60% des transactions potentielles ne se concluent pas]
+[B-roll: Infographie montrant que de nombreuses transactions potentielles ne se concluent pas]
 
-Écoutez ce chiffre : 60% des transactions immobilières potentielles ne se concluent jamais. [PAUSE 2s] Pas parce que le bien n'était pas adapté. Pas parce que le prix était trop élevé. Mais parce que l'agent n'a pas su créer le momentum décisionnel au bon moment. [PAUSE 2s]
+Écoutez ce constat : de nombreuses transactions immobilières potentielles ne se concluent jamais. [PAUSE 2s] Pas parce que le bien n'était pas adapté. Pas parce que le prix était trop élevé. Mais parce que l'agent n'a pas su créer le momentum décisionnel au bon moment. [PAUSE 2s]
 
-[B-roll: Graphique montrant les raisons d'échec : manque d'urgence 35%, peur de l'engagement 28%, manque de confiance 22%, autres 15%]
+[B-roll: Graphique montrant les principales raisons d'échec : manque d'urgence, peur de l'engagement, manque de confiance]
 
 Les trois tueurs de closing sont toujours les mêmes. [PAUSE 1s] Premier : l'absence d'urgence. Le client pense avoir tout le temps. Il attend. Il compare. Il oublie. [PAUSE 1s] Deuxième : la peur de l'engagement. C'est le plus gros achat de sa vie. La peur paralyse. [PAUSE 1s] Troisième : le manque de confiance. Il n'est pas sûr de faire le bon choix. Il n'est pas sûr de vous faire confiance. [PAUSE 2s]
 

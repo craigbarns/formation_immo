@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import { MODULE_AVATARS } from "@/data/module-avatars";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Formateurs",
+  description: "Découvrez les 5 experts pédagogiques de Formation 42h, un spécialiste par module.",
+};
 
 export default function FormateursPage() {
   return (
@@ -38,7 +44,7 @@ export default function FormateursPage() {
             <div className="mt-4 space-y-1">
               <p className="font-bold text-brand-navy">{avatar.name}</p>
               <p
-                className="rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white inline-block"
+                className="rounded-full px-2.5 py-0.5 text-2xs font-bold uppercase tracking-wide text-white inline-block"
                 style={{ backgroundColor: avatar.accentColor }}
               >
                 {avatar.role}

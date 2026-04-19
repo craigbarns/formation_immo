@@ -25,9 +25,9 @@ Professional real estate agent in modern office, analyzing property documents an
 
 **NARRATION :**
 
-"Combien vaut vraiment ce trois-pièces avec vue sur le Rhône ? [PAUSE 2s] Cette question, vous l'entendez chaque jour. Et pourtant... soixante-douze pour cent des biens sont surévalués lors de la première estimation. [PAUSE 2s] Soixante-douze pour cent."
+"Combien vaut vraiment ce trois-pièces avec vue sur le Rhône ? [PAUSE 2s] Cette question, vous l'entendez chaque jour. Et pourtant... de nombreux biens sont surévalués lors de la première estimation. [PAUSE 2s] Une majorité."
 
-[B-ROLL : Graphique animé montrant le pourcentage 72% qui apparaît à l'écran]
+[B-ROLL : Graphique animé montrant un bien surévalué et ses conséquences]
 
 "Résultat ? Des mandats qui ne signent pas. Des propriétaires déçus. Des mois de travail pour... rien."
 
@@ -215,7 +215,7 @@ Professional real estate agent in modern office, analyzing property documents an
 
 ### 🎯 POINTS CLÉS À RETENIR
 
-1. **72% des biens sont surévalués** lors de la première estimation
+1. **De nombreux biens sont surévalués** lors de la première estimation
 2. **5 étapes** : Analyse → Marché → Ajustements → Fourchette → Argumentaire
 3. **Minimum 5 comparables** dans un rayon de 300m, 6 derniers mois
 4. **Fourchette de prix** avec prix cible, minimum et maximum

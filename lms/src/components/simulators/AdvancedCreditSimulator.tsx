@@ -30,10 +30,9 @@ export function AdvancedCreditSimulator() {
   const [revenus, setRevenus] = useState(4000);
   const [charges, setCharges] = useState(0);
   const [insuranceRate, setInsuranceRate] = useState(0.36);
-  const [tracked] = useState(() => {
-    if (typeof window !== 'undefined') recordSimulatorUsed("credit");
-    return true;
-  });
+  useEffect(() => {
+    recordSimulatorUsed("credit");
+  }, []);
 
 
   const result = useMemo<SimulationResult>(() => {
@@ -168,7 +167,7 @@ export function AdvancedCreditSimulator() {
         key={result.monthlyPayment}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
+        className="card-elevated p-6"
       >
         <div className="mb-4 flex justify-center">
           <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 ${

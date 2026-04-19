@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { BADGES, getGamificationState, type BadgeId } from "@/lib/gamification";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 const RARITY_BORDER = {
   common: "border-zinc-200",
@@ -54,12 +55,12 @@ export function BadgesGrid() {
                 : "border-zinc-200 bg-zinc-100/50 opacity-40 grayscale"
             }`}
           >
-            <div className="text-3xl">{badge.icon}</div>
+            <div className="flex justify-center"><EmojiIcon emoji={badge.icon} className="h-8 w-8" /></div>
             <p className="mt-1 text-xs font-bold text-brand-navy">{badge.name}</p>
-            <p className="mt-0.5 text-[10px] text-zinc-500">{badge.description}</p>
+            <p className="mt-0.5 text-2xs text-zinc-500">{badge.description}</p>
             {unlocked && (
-              <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[10px] text-white shadow">
-                ✓
+              <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-2xs text-white shadow">
+                <EmojiIcon emoji="✓" className="h-3 w-3 text-white" />
               </div>
             )}
           </div>

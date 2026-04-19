@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Sparkles, X, RotateCcw } from "lucide-react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { COACH_IDENTITY, WELCOME_MESSAGE, QUICK_RESPONSES, ENGLISH_TO_FRENCH } from "@/lib/coach/french-coach";
 
 interface Message {
@@ -19,26 +20,26 @@ function generateCoachResponse(userMessage: string): string {
   const hasEnglish = englishWords.some(word => lowerMsg.includes(word));
   
   if (hasEnglish) {
-    return "Je vois que tu as utilisé des termes anglais ! 🇫🇷 En France, on dit plutôt : " + 
+    return "Je vois que tu as utilisé des termes anglais ! En France, on dit plutôt : " +
       englishWords.filter(w => lowerMsg.includes(w))
         .map(w => `"${ENGLISH_TO_FRENCH[w]}" au lieu de "${w}"`)
         .join(", ");
   }
   
   if (lowerMsg.includes("mandat") || lowerMsg.includes("exclusif")) {
-    return "Excellent sujet ! Le mandat exclusif est une vraie force 💪 Il donne 3 avantages clés : une commission garantie, un accompagnement total du vendeur, et une vraie stratégie de vente ! Tu veux que je te détaille ?";
+    return "Excellent sujet ! Le mandat exclusif est une vraie force. Il donne 3 avantages clés : une commission garantie, un accompagnement total du vendeur, et une vraie stratégie de vente ! Tu veux que je te détaille ?";
   }
   
   if (lowerMsg.includes("alur") || lowerMsg.includes("loi")) {
-    return "La loi ALUR, c'est notre bible ! 📚 Elle encadre tout : les honoraires, les diagnostics, les mandats... L'essentiel à retenir : transparence totale et protection du consommateur. Tu as une question précise ?";
+    return "La loi ALUR, c'est notre bible ! Elle encadre tout : les honoraires, les diagnostics, les mandats... L'essentiel à retenir : transparence totale et protection du consommateur. Tu as une question précise ?";
   }
   
   if (lowerMsg.includes("négociation") || lowerMsg.includes("prix")) {
-    return "La négociation, c'est un art ! 🎯 Le secret : écouter avant de parler, comprendre les vraies motivations du vendeur, et apporter des arguments chiffrés. Jamais baisser les prix sans contrepartie !";
+    return "La négociation, c'est un art ! Le secret : écouter avant de parler, comprendre les vraies motivations du vendeur, et apporter des arguments chiffrés. Jamais baisser les prix sans contrepartie !";
   }
   
   if (lowerMsg.includes("visite") || lowerMsg.includes("acheteur")) {
-    return "Les visites, c'est là que tout se joue ! 🏠 Astuce d'or : préparer un parcours logique, mettre en valeur les points forts dès l'entrée, et créer une vraie connexion émotionnelle. Tu veux mes 5 étapes ?";
+    return "Les visites, c'est là que tout se joue ! Astuce d'or : préparer un parcours logique, mettre en valeur les points forts dès l'entrée, et créer une vraie connexion émotionnelle. Tu veux mes 5 étapes ?";
   }
   
   if (lowerMsg.includes("bonjour") || lowerMsg.includes("salut")) {
@@ -47,8 +48,8 @@ function generateCoachResponse(userMessage: string): string {
   }
   
   const encouragements = QUICK_RESPONSES.encouragement;
-  return encouragements[Math.floor(Math.random() * encouragements.length)] + 
-    "\n\nTu peux me demander des précisions sur : les mandats, la loi ALUR, la négociation, les visites, le financement... 🏠";
+  return encouragements[Math.floor(Math.random() * encouragements.length)] +
+    "\n\nTu peux me demander des précisions sur : les mandats, la loi ALUR, la négociation, les visites, le financement...";
 }
 
 export function FrenchCoach() {
@@ -103,7 +104,7 @@ export function FrenchCoach() {
           onClick={() => setIsOpen(true)}
           className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-full shadow-2xl bg-brand-gold"
         >
-          <span className="text-2xl">{COACH_IDENTITY.avatar}</span>
+          <EmojiIcon emoji={COACH_IDENTITY.avatar} className="h-8 w-8" />
           <span className="font-bold text-white">Parler avec Marie</span>
           <Sparkles className="w-5 h-5 text-white" />
         </motion.button>
@@ -120,8 +121,8 @@ export function FrenchCoach() {
             <div className="bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden">
               <div className="p-4 flex items-center justify-between bg-brand-gold">
                 <div className="flex items-center gap-3">
-                  <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }} className="text-3xl">
-                    {COACH_IDENTITY.avatar}
+                  <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }}>
+                    <EmojiIcon emoji={COACH_IDENTITY.avatar} className="h-8 w-8" />
                   </motion.div>
                   <div>
                     <h3 className="font-bold text-white">{COACH_IDENTITY.name}</h3>
@@ -129,10 +130,10 @@ export function FrenchCoach() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button onClick={handleReset} className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition">
+                  <button onClick={handleReset} className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition" aria-label="Réinitialiser la conversation">
                     <RotateCcw className="w-4 h-4 text-white" />
                   </button>
-                  <button onClick={() => setIsOpen(false)} className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition">
+                  <button onClick={() => setIsOpen(false)} className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition" aria-label="Fermer le chat">
                     <X className="w-4 h-4 text-white" />
                   </button>
                 </div>
@@ -187,7 +188,7 @@ export function FrenchCoach() {
                     <Send className="w-5 h-5" />
                   </button>
                 </div>
-                <p className="text-xs text-gray-400 mt-2 text-center">🇫🇷 Je réponds uniquement en français</p>
+                <p className="text-xs text-gray-400 mt-2 text-center">Je réponds uniquement en français</p>
               </div>
             </div>
           </motion.div>

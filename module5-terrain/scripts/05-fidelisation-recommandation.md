@@ -53,7 +53,7 @@ Aujourd'hui, nous allons construire votre machine à recommandations. [PAUSE 2s]
 
 Voici une scène trop courante : l'agent accompagne parfaitement le client jusqu'à la signature. Puis... disparition. [PAUSE 1s] Plus d'appels. Plus de nouvelles. Le client est livré à lui-même. [PAUSE 2s]
 
-[B-roll: Statistique : 78% des clients ne sont jamais recontactés après l'acte authentique]
+[B-roll: Agent immobilier qui ne recontacte pas son client après la vente]
 
 Résultat ? Le client oublie rapidement qui lui a vendu son bien. [PAUSE 1s] Quand on lui demande "Tu connais un bon agent ?", il ne pense pas à vous. [PAUSE 1s] Ou pire, il se souvient de votre absence. [PAUSE 2s]
 

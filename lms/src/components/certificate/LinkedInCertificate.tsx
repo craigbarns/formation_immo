@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Download, Share2, Award, ExternalLink } from "lucide-react";
+import { Download, Award, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
-import { getGamificationState, getLevelForXP, LEVELS, type GamificationState } from "@/lib/gamification";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
+import { getGamificationState, getLevelForXP, type GamificationState } from "@/lib/gamification";
 import { createClient } from "@/lib/supabase/client";
 
 interface LinkedInCertificateProps {
@@ -97,7 +98,7 @@ export function LinkedInCertificate({ userName = "Apprenant", completionDate }: 
       link.download = `certificat-formation-immobilier-${userName.replace(/\s+/g, "-")}.png`;
       link.href = dataUrl;
       link.click();
-    } catch (error) {
+    } catch {
       // Erreur de génération silencieusement ignorée
     } finally {
       setIsGenerating(false);
@@ -106,10 +107,10 @@ export function LinkedInCertificate({ userName = "Apprenant", completionDate }: 
 
   const handleLinkedInShare = () => {
     const text = encodeURIComponent(
-      `J'ai obtenu le niveau "${currentLevel.title}" en Formation Immobilière ! 🏆\n\n` +
-      `✅ ${gamification.xp} points d'expérience\n` +
-      `📚 ${Object.keys(gamification.examScores).length} modules complétés\n` +
-      `🔥 ${gamification.streak} jours de série\n\n` +
+      `J'ai obtenu le niveau "${currentLevel.title}" en Formation Immobilière !\n\n` +
+      `${gamification.xp} points d'expérience\n` +
+      `${Object.keys(gamification.examScores).length} modules complétés\n` +
+      `${gamification.streak} jours de série\n\n` +
       `#Formation #Immobilier #AgentImmobilier #Certification`
     );
     window.open(`https://www.linkedin.com/sharing/share-offsite/?summary=${text}`, "_blank");
@@ -118,10 +119,10 @@ export function LinkedInCertificate({ userName = "Apprenant", completionDate }: 
   return (
     <div className="space-y-6">
       {/* Certificate Preview */}
-      <div className="overflow-hidden rounded-2xl border border-brand-gold/30 bg-gradient-to-br from-brand-navy to-[#0f1f33] p-1">
+      <div className="overflow-hidden rounded-2xl border border-brand-gold/30 bg-gradient-to-br from-brand-navy to-[var(--surface-dark)] p-1">
         <div
           ref={certificateRef}
-          className="relative aspect-[1.4/1] overflow-hidden rounded-xl bg-gradient-to-br from-[#0f1f33] via-brand-navy to-[#0f1f33] p-8 text-center"
+          className="relative aspect-[1.4/1] overflow-hidden rounded-xl bg-gradient-to-br from-[var(--surface-dark)] via-brand-navy to-[var(--surface-dark)] p-8 text-center"
           style={{
             backgroundImage: `
               radial-gradient(circle at 20% 50%, rgba(212,175,55,0.1) 0%, transparent 50%),
@@ -141,8 +142,8 @@ export function LinkedInCertificate({ userName = "Apprenant", completionDate }: 
 
           {/* Content */}
           <div className="relative flex h-full flex-col items-center justify-center">
-            <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-[#f0c040] text-4xl shadow-lg shadow-brand-gold/30">
-              {currentLevel.icon}
+            <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-[var(--brand-gold-light)] text-4xl shadow-lg shadow-brand-gold/30">
+              <EmojiIcon emoji={currentLevel.icon} className="h-10 w-10 text-white" />
             </div>
 
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-gold">
@@ -153,7 +154,7 @@ export function LinkedInCertificate({ userName = "Apprenant", completionDate }: 
               {userName}
             </h2>
 
-            <p className="mt-2 text-sm text-white/70">
+            <p className="mt-2 text-sm text-white/80">
               a atteint le niveau
             </p>
 
@@ -164,24 +165,24 @@ export function LinkedInCertificate({ userName = "Apprenant", completionDate }: 
             <div className="mt-6 flex items-center gap-6 text-sm">
               <div className="text-center">
                 <p className="text-2xl font-bold text-white">{gamification.xp}</p>
-                <p className="text-xs text-white/70">XP</p>
+                <p className="text-xs text-white/80">XP</p>
               </div>
               <div className="h-10 w-px bg-white/20" />
               <div className="text-center">
                 <p className="text-2xl font-bold text-white">{gamification.earnedBadges.length}</p>
-                <p className="text-xs text-white/70">Badges</p>
+                <p className="text-xs text-white/80">Badges</p>
               </div>
               <div className="h-10 w-px bg-white/20" />
               <div className="text-center">
                 <p className="text-2xl font-bold text-white">{gamification.streak}</p>
-                <p className="text-xs text-white/70">Jours</p>
+                <p className="text-xs text-white/80">Jours</p>
               </div>
             </div>
 
             <p className="mt-6 text-xs text-on-dark-muted">
               Formation Agent Immobilier — 42h certifiantes
             </p>
-            <p className="text-xs text-white/50">
+            <p className="text-xs text-white/80">
               {date}
             </p>
           </div>
@@ -195,7 +196,7 @@ export function LinkedInCertificate({ userName = "Apprenant", completionDate }: 
           whileTap={{ scale: 0.98 }}
           onClick={handleDownload}
           disabled={isGenerating}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-brand-gold px-6 py-3 font-semibold text-brand-navy transition hover:bg-[#e0bf4d] disabled:opacity-50"
+          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-brand-gold px-6 py-3 font-semibold text-brand-navy transition hover:bg-[var(--brand-gold-hover)] disabled:opacity-50"
         >
           {isGenerating ? (
             <>

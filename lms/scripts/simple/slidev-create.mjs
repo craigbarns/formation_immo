@@ -27,6 +27,7 @@ if (!moduleName || !lessonName) {
 }
 
 // Templates de slides par type de contenu
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SLIDE_TEMPLATES = {
   title: (title, subtitle) => `
 ---

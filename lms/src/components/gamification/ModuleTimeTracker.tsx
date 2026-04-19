@@ -56,7 +56,7 @@ export function ModuleTimeTracker({ moduleSlug }: { moduleSlug: string }) {
       </div>
       <div className="mt-2 h-2 overflow-hidden rounded-full bg-zinc-100">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-brand-navy to-[#2d6a9c] transition-all duration-500"
+          className="h-full rounded-full bg-gradient-to-r from-brand-navy to-[var(--brand-navy-soft)] transition-all duration-500"
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -105,7 +105,7 @@ export function GlobalTimeTracker() {
       </div>
       <div className="mt-3 h-3 overflow-hidden rounded-full bg-zinc-100">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[#f0e6c8] transition-all duration-700"
+          className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[var(--brand-gold-pale)] transition-all duration-700"
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -151,7 +151,7 @@ function ModuleTimeMini({ moduleSlug }: { moduleSlug: string }) {
 
   return (
     <div className="text-center">
-      <div className="text-[10px] font-medium text-zinc-500">{labels[moduleSlug]}</div>
+      <div className="text-2xs font-medium text-zinc-500">{labels[moduleSlug]}</div>
       <div className="text-xs font-bold text-brand-navy">{formatTime(seconds)}</div>
     </div>
   );

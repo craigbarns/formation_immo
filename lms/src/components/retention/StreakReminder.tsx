@@ -179,7 +179,7 @@ export function StreakReminder({ onDismiss }: StreakReminderProps) {
                 </div>
               </div>
               
-              <p className="mt-1 text-sm text-white/70">
+              <p className="mt-1 text-sm text-white/80">
                 {variant === "evening" 
                   ? `Vous n'avez pas encore étudié aujourd'hui. Il ne vous reste que quelques heures pour maintenir votre série de ${streak} jours !`
                   : `Vous êtes sur une série de ${streak} jours ! Continuez comme ça pour débloquer le badge Marathonien (30 jours).`
@@ -199,7 +199,7 @@ export function StreakReminder({ onDismiss }: StreakReminderProps) {
                 </button>
                 <button
                   onClick={handleDismiss}
-                  className="rounded-xl bg-white/10 px-4 py-2 text-sm font-medium text-white/70 hover:bg-white/20"
+                  className="rounded-xl bg-white/10 px-4 py-2 text-sm font-medium text-white/80 hover:bg-white/20"
                 >
                   Plus tard
                 </button>

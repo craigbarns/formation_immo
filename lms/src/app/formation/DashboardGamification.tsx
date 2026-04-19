@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { GlobalTimeTracker } from "@/components/gamification/ModuleTimeTracker";
 import { motion } from "framer-motion";
 import { Medal, CheckCircle2, Flame } from "lucide-react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { AnimatedCounter } from "@/components/animations";
 
 export function DashboardGamification() {
@@ -64,7 +65,7 @@ export function DashboardGamification() {
       className="mb-6 space-y-4"
     >
       {/* Level progress card */}
-      <div className="rounded-2xl border border-zinc-200/50 bg-gradient-to-br from-brand-navy via-[#244b75] to-brand-navy p-6 text-white shadow-xl relative overflow-hidden">
+      <div className="rounded-2xl border border-zinc-200/50 bg-gradient-to-br from-brand-navy via-[var(--brand-navy-mid)] to-brand-navy p-6 text-white shadow-xl relative overflow-hidden">
         {/* Decorative glass highlight */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-[0.03] rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3 pointer-events-none" />
         
@@ -73,7 +74,7 @@ export function DashboardGamification() {
             whileHover={{ scale: 1.05 }}
             className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-4xl shadow-inner border border-white/20 backdrop-blur-sm"
           >
-            {current.icon}
+            <EmojiIcon emoji={current.icon} className="h-8 w-8 text-white" />
           </motion.div>
           <div className="flex-1 w-full">
             <div className="flex flex-wrap items-baseline gap-3">
@@ -94,14 +95,14 @@ export function DashboardGamification() {
                   initial={{ width: 0 }}
                   animate={{ width: `${progressToNext}%` }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
-                  className="h-full rounded-full bg-gradient-to-r from-brand-gold via-[#f9e596] to-brand-gold shadow-[0_0_10px_rgba(212,175,55,0.4)]"
+                  className="h-full rounded-full bg-gradient-to-r from-brand-gold via-[var(--brand-gold-light)] to-brand-gold shadow-[0_0_10px_rgba(212,175,55,0.4)]"
                 />
               </div>
               <AnimatedCounter value={xp} suffix=" XP" duration={1.5} className="text-sm font-bold tabular-nums tracking-wide text-amber-100" />
             </div>
             {next && (
-              <p className="mt-1.5 text-xs font-medium text-white/70 tracking-wide">
-                Encore <span className="text-white/80">{next.xpRequired - xp} XP</span> pour le statut {next.title} {next.icon}
+              <p className="mt-1.5 text-xs font-medium text-white/80 tracking-wide">
+                Encore <span className="text-white/80">{next.xpRequired - xp} XP</span> pour le statut {next.title} <EmojiIcon emoji={next.icon} className="inline h-3 w-3" />
               </p>
             )}
           </div>
@@ -128,7 +129,7 @@ function MiniStat({ icon, value, suffix, label }: { icon: React.ReactNode; value
     >
       <div className="mb-1.5 drop-shadow-md">{icon}</div>
       <AnimatedCounter value={value} suffix={suffix} duration={1.2} className="text-lg font-bold tracking-tight" />
-      <div className="text-[10px] font-medium uppercase tracking-wider text-white/70 mt-0.5">{label}</div>
+      <div className="text-2xs font-medium uppercase tracking-wider text-white/80 mt-0.5">{label}</div>
     </motion.div>
   );
 }

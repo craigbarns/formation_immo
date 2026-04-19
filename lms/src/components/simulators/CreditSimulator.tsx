@@ -9,10 +9,9 @@ export function CreditSimulator() {
   const [rate, setRate] = useState(3.5);
   const [duration, setDuration] = useState(20);
   const [insurance, setInsurance] = useState(0.34);
-  const [tracked] = useState(() => {
-    if (typeof window !== 'undefined') recordSimulatorUsed("credit");
-    return true;
-  });
+  useEffect(() => {
+    recordSimulatorUsed("credit");
+  }, []);
 
 
   const loanAmount = price - apport;
@@ -34,9 +33,9 @@ export function CreditSimulator() {
 
   return (
     <div className="rounded-2xl border-2 border-brand-navy/15 bg-white shadow-lg">
-      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[#2d5a7c] px-6 py-4 text-white rounded-t-2xl">
+      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[var(--brand-navy-alt)] px-6 py-4 text-white rounded-t-2xl">
         <h3 className="text-lg font-bold">Simulateur de Credit Immobilier</h3>
-        <p className="mt-1 text-xs text-white/70">Ajustez les parametres pour calculer vos mensualites</p>
+        <p className="mt-1 text-xs text-white/80">Ajustez les parametres pour calculer vos mensualites</p>
       </div>
 
       <div className="grid gap-6 p-6 md:grid-cols-2">

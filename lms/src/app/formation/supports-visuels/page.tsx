@@ -137,7 +137,7 @@ export default function SupportsVisuelsPage() {
       </Link>
 
       {/* Hero premium */}
-      <header className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-navy via-[#244b75] to-[#0f2540] px-6 py-10 text-white shadow-2xl md:px-10 md:py-12">
+      <header className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-navy via-[var(--brand-navy-mid)] to-[var(--brand-navy-hero)] px-6 py-10 text-white shadow-2xl md:px-10 md:py-12">
         {/* Pattern décoratif */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.07]"
@@ -156,7 +156,7 @@ export default function SupportsVisuelsPage() {
         />
 
         <div className="relative">
-          <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-gold/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gold">
+          <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-gold/10 px-3 py-1 text-3xs font-bold uppercase tracking-[0.2em] text-brand-gold">
             <Sparkles className="h-3.5 w-3.5" aria-hidden /> Ressources élèves
           </p>
           <h1 className="mt-4 text-3xl font-black leading-[1.1] tracking-tight md:text-4xl">
@@ -190,7 +190,7 @@ export default function SupportsVisuelsPage() {
               <Filter className="h-5 w-5 text-brand-navy" />
             </div>
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-gold">
+              <p className="text-3xs font-bold uppercase tracking-[0.18em] text-brand-gold">
                 Filtrer par thème
               </p>
               <h2 className="mt-0.5 text-lg font-bold text-brand-navy">
@@ -225,7 +225,7 @@ export default function SupportsVisuelsPage() {
               >
                 <Icon className={`h-4 w-4 ${isActive ? palette.text : "text-zinc-400"}`} />
                 {THEME_LABEL[group.theme]}
-                <span className={`ml-1 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+                <span className={`ml-1 rounded-full px-1.5 py-0.5 text-2xs font-bold ${
                   isActive ? "bg-white/60" : "bg-zinc-100 text-zinc-500"
                 }`}>
                   {group.sheets.length}
@@ -279,12 +279,12 @@ export default function SupportsVisuelsPage() {
                     {String(globalIndex + 1).padStart(2, "0")}
                   </span>
                   <span
-                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider ${palette.chip}`}
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-2xs font-bold uppercase tracking-wider ${palette.chip}`}
                   >
                     <Icon className="h-3.5 w-3.5" />
                     {THEME_LABEL[meta.theme]}
                   </span>
-                  <span className="text-[11px] text-zinc-400">
+                  <span className="text-3xs text-zinc-400">
                     Fiche {globalIndex + 1} sur {SUPPORTS_VISUELS.length}
                   </span>
                   <button className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-500 transition-all hover:border-zinc-300 hover:text-brand-navy hover:shadow-sm">
@@ -303,7 +303,7 @@ export default function SupportsVisuelsPage() {
       <section className="grid gap-4 md:grid-cols-3">
         <Link
           href="/formation/aide-memoire"
-          className="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md"
+          className="group flex items-start gap-4 card-elevated p-5 transition-all hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md"
         >
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-navy/10 text-brand-navy">
             <FileSpreadsheet className="h-5 w-5" />
@@ -321,7 +321,7 @@ export default function SupportsVisuelsPage() {
 
         <Link
           href="/formation/outils"
-          className="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md"
+          className="group flex items-start gap-4 card-elevated p-5 transition-all hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md"
         >
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold">
             <Wrench className="h-5 w-5" />
@@ -339,7 +339,7 @@ export default function SupportsVisuelsPage() {
 
         <Link
           href="/formation/flashcards/juridique"
-          className="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md"
+          className="group flex items-start gap-4 card-elevated p-5 transition-all hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md"
         >
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
             <Sparkles className="h-5 w-5" />
@@ -375,7 +375,7 @@ function StatCell({ value, label }: { value: string | number; label: string }) {
       <p className="text-2xl font-black leading-none tracking-tight text-white">
         {value}
       </p>
-      <p className="mt-1.5 text-[10px] font-medium uppercase tracking-wider text-white/65">
+      <p className="mt-1.5 text-2xs font-medium uppercase tracking-wider text-white/85">
         {label}
       </p>
     </div>

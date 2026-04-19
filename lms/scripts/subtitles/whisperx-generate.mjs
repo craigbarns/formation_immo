@@ -4,13 +4,11 @@
  * Usage: node scripts/subtitles/whisperx-generate.mjs --video lecon1.mp4 --lang fr
  */
 
-import { spawn } from "child_process";
+// import { spawn } from "child_process";
 import { existsSync, writeFileSync } from "fs";
 import { resolve, basename, extname } from "path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+// import { fileURLToPath } from "url";
+// const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const args = process.argv.slice(2);
 const videoPath = args.find(a => a.startsWith("--video="))?.split("=")[1];
@@ -82,7 +80,7 @@ async function generateSubtitles() {
     
     console.log(`\n✅ Sous-titres générés: ${outputPath}`);
     
-  } catch (e) {
+  } catch {
     // WhisperX non installé, on crée un fichier exemple
     console.log("⚠️  WhisperX non installé, création d'un fichier exemple");
     console.log("\nPour installer WhisperX:");

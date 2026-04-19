@@ -44,11 +44,11 @@ Aujourd'hui, je vous propose de décrypter ensemble ce qui change vraiment, ce q
 
 ### PROBLÉMATIQUE (1 minute)
 
-[B-ROLL : Infographie animée montrant les statistiques : 73% des agents se sentent mal informés sur les évolutions législatives]
+[B-ROLL : Infographie animée montrant un agent submergé par les évolutions législatives]
 
 **NARRATION :**
 
-Selon une récente étude de la FNAIM, 73% des agents immobiliers se sentent mal informés sur les évolutions législatives. [PAUSE 1s] Pire encore, 28% reconnaissent avoir déjà commis une erreur juridique qui a failli coûter cher à leur agence.
+Les évolutions législatives sont nombreuses et complexes. [PAUSE 1s] Un agent mal informé sur la réglementation expose son agence à des risques juridiques et financiers importants.
 
 [B-ROLL : Images d'archives de reportages télévisés sur des contentieux immobiliers]
 
@@ -56,7 +56,7 @@ Les conséquences peuvent être lourdes : [PAUSE 1s] annulation de vente, poursu
 
 [B-ROLL : Gros plan sur un agent consultant son téléphone avec une notification d'alerte législative]
 
-Mais voici la bonne nouvelle : [PAUSE 1s] les agents qui maîtrisent parfaitement la réglementation génèrent en moyenne 23% de commissions supplémentaires. [PAUSE 1s] Pourquoi ? Parce que la confiance que vous inspirez se traduit directement en mandats exclusifs et en transactions réussies.
+Mais voici la bonne nouvelle : [PAUSE 1s] les agents qui maîtrisent parfaitement la réglementation inspirent davantage confiance à leurs clients. [PAUSE 1s] Cette confiance se traduit directement en mandats exclusifs et en transactions réussies.
 
 [B-ROLL : Vue aérienne de Paris avec zoom sur différents arrondissements]
 
@@ -86,63 +86,63 @@ En 2026, nous assistons à une nouvelle vague de modifications. [PAUSE 1s] Pas u
 
 ---
 
-#### PARTIE 2 : CE QUI CHANGE EN 2026 - POINT PAR POINT (3 minutes)
+#### PARTIE 2 : LES OBLIGATIONS ACTUELLES À CONNAÎTRE - POINT PAR POINT (3 minutes)
 
-[B-ROLL : Apparition du titre "PARTIE 2 : LES NOUVEAUTÉS 2026" avec icônes représentant chaque changement]
+[B-ROLL : Apparition du titre "PARTIE 2 : LES OBLIGATIONS ACTUELLES" avec icônes représentant chaque point]
 
 **NARRATION :**
 
-Passons maintenant au cœur du sujet. [PAUSE 1s] Voici les cinq changements majeurs qui impactent directement votre activité.
+Passons maintenant au cœur du sujet. [PAUSE 1s] Voici cinq obligations juridiques fondamentales qui impactent directement votre activité.
 
 [B-ROLL : Numéro "1" qui apparaît en grand format]
 
-**Premier changement : le renforcement de la carte professionnelle.** [PAUSE 1s]
+**Premier point : la carte professionnelle.** [PAUSE 1s]
 
-Depuis le 1er janvier 2026, la carte professionnelle doit désormais mentionner explicitement la spécialisation de l'agent. [PAUSE 1s] Vous êtes généraliste ? Transaction uniquement ? Gestion locative ? Location saisonnière ? [PAUSE 1s] Cette précision est désormais obligatoire.
+La carte professionnelle est obligatoire pour exercer. [PAUSE 1s] Elle est délivrée par la Chambre de Commerce et d'Industrie compétente après vérification de vos garanties et de votre assurance. [PAUSE 1s] Vous êtes généraliste ? Transaction uniquement ? Gestion locative ? Mentionnez-le dans votre contrat avec le client.
 
-[B-ROLL : Gros plan sur une carte professionnelle avec les nouvelles mentions visibles]
+[B-ROLL : Gros plan sur une carte professionnelle avec les mentions visibles]
 
-L'article L. 301-1 du Code de la construction et de l'habitation a été modifié par le Décret n° 2025-487 du 15 mai 2025. [PAUSE 1s] Attention : exercer une activité non mentionnée sur votre carte expose à une amende de 3 750 euros.
+La Loi Hoguet n° 70-9 du 2 janvier 1970 et le Décret n° 72-678 du 20 juillet 1972 encadrent strictement l'obtention et le renouvellement de la carte. [PAUSE 1s] Attention : exercer sans carte professionnelle valide expose à une amende de 3 750 euros et à des sanctions pénales.
 
 [B-ROLL : Numéro "2" qui apparaît]
 
-**Deuxième changement : l'extension des diagnostics obligatoires.** [PAUSE 1s]
+**Deuxième point : les diagnostics obligatoires.** [PAUSE 1s]
 
-Le Diagnostic de Performance Énergétique, le DPE, voit son périmètre s'élargir. [PAUSE 1s] Depuis le 1er avril 2026, tous les biens mis en vente ou en location doivent afficher leur étiquette énergétique, sans exception. [PAUSE 1s] Même les studios de moins de 9 m².
+Le Diagnostic de Performance Énergétique, le DPE, est obligatoire pour tous les biens en vente ou en location depuis le 1er juillet 2021. [PAUSE 1s] Avant, il y avait des seuils de surface. [PAUSE 1s] Plus maintenant. [PAUSE 1s] Même un studio de 8 m² doit avoir son DPE.
 
 [B-ROLL : Exemple de DPE avec les classes énergétiques de A à G]
 
-Plus important encore : [PAUSE 1s] les passoires thermiques, c'est-à-dire les logements classés F ou G, font désormais l'objet d'une mention obligatoire dans tous les documents de commercialisation. [PAUSE 1s] L'article 8 de la Loi n° 2025-127 du 23 février 2025 l'impose clairement.
+Plus important encore : [PAUSE 1s] les passoires thermiques, c'est-à-dire les logements classés F ou G, font l'objet d'une mention obligatoire dans tous les documents de commercialisation. [PAUSE 1s] L'article L. 126-26 du Code de la construction et de l'habitation, issu de la Loi n° 2021-1104 du 22 août 2021 dite "Loi Climat et Résilience", l'impose clairement.
 
 [B-ROLL : Numéro "3" qui apparaît]
 
-**Troisième changement : la digitalisation accélérée des mandats.** [PAUSE 1s]
+**Troisième point : la signature électronique des mandats.** [PAUSE 1s]
 
-Le mandat de vente peut désormais être signé électroniquement dans 100% des cas, sans condition de montant. [PAUSE 1s] Le Décret n° 2025-612 du 3 juin 2025 a supprimé le seuil de 10 000 euros qui limitait cette possibilité.
+Le mandat de vente peut être signé électroniquement. [PAUSE 1s] Les articles 1366 et 1367 du Code civil reconnaissent la valeur probante de la signature électronique, à condition qu'elle respecte les standards eIDAS de niveau qualifié.
 
 [B-ROLL : Démonstration d'une signature électronique sur tablette]
 
-Cette évolution représente une opportunité formidable pour accélérer vos prises de mandats, notamment avec les propriétaires expatriés ou résidant dans d'autres régions. [PAUSE 1s] Mais attention : la signature électronique doit respecter les standards eIDAS de niveau qualifié.
+Cette possibilité représente une opportunité formidable pour accélérer vos prises de mandats, notamment avec les propriétaires expatriés ou résidant dans d'autres régions. [PAUSE 1s] Mais attention : le mandat doit toujours respecter le formalisme écrit prévu par la Loi Hoguet, signature électronique ou manuscrite.
 
 [B-ROLL : Numéro "4" qui apparaît]
 
-**Quatrième changement : la transparence renforcée sur les honoraires.** [PAUSE 1s]
+**Quatrième point : la transparence sur les honoraires.** [PAUSE 1s]
 
-Les honoraires d'agence doivent désormais être affichés de manière encore plus visible. [PAUSE 1s] Sur chaque annonce, en ligne comme en vitrine, le montant TTC doit apparaître en caractères identiques à ceux du prix du bien. [PAUSE 1s] Pas plus petit, pas en gris sur fond gris.
+Les honoraires d'agence doivent être affichés de manière claire et visible. [PAUSE 1s] Sur chaque annonce, en ligne comme en vitrine, le montant TTC doit apparaître lisiblement. [PAUSE 1s] Pas plus petit, pas en gris sur fond gris.
 
 [B-ROLL : Exemple d'annonces correctement et incorrectement rédigées côte à côte]
 
-L'article 5 de l'Arrêté du 28 septembre 2025 précise que toute infraction expose à une amende administrative de 7 500 euros. [PAUSE 1s] La répression des fraudes contrôle désormais activement ce point.
+L'Arrêté du 10 janvier 2017 relatif à l'information sur les honoraires des professionnels de l'immobilier précise les règles d'affichage. [PAUSE 1s] La répression des fraudes contrôle activement ce point.
 
 [B-ROLL : Numéro "5" qui apparaît]
 
-**Cinquième changement : la protection des données personnelles.** [PAUSE 1s]
+**Cinquième point : la protection des données personnelles.** [PAUSE 1s]
 
-Le RGPD n'est pas nouveau, mais son application au secteur immobilier se précise. [PAUSE 1s] Depuis le 1er mars 2026, tout fichier de prospects doit être déclaré auprès de la CNIL, même pour les petites structures.
+Le RGPD s'applique pleinement au secteur immobilier depuis son entrée en vigueur le 25 mai 2018. [PAUSE 1s] Tout traitement de données personnelles — fichiers clients, fichiers prospects, visites — doit respecter les principes de licéité, de loyauté et de transparence.
 
-[B-ROLL : Interface de déclaration CNIL avec les champs à remplir]
+[B-ROLL : Interface RGPD avec les principes de traitement]
 
-Les visites doivent désormais faire l'objet d'un registre précis : nom du visiteur, date, heure, consentement explicite au traitement des données. [PAUSE 1s] Ce registre doit être conservé pendant trois ans. [PAUSE 2s]
+Les visites doivent faire l'objet d'un registre précis : nom du visiteur, date, heure, consentement explicite au traitement des données. [PAUSE 1s] Ce registre doit être conservé pendant la durée nécessaire à la finalité poursuivie, en général trois ans. [PAUSE 2s]
 
 ---
 
@@ -274,23 +274,24 @@ Dans la prochaine vidéo, nous aborderons la rédaction du compromis de vente. [
 
 ## 🎯 POINTS CLÉS À RETENIR
 
-1. **Carte professionnelle** : mention de spécialisation obligatoire depuis janvier 2026
-2. **Diagnostics** : extension du DPE à tous les biens, mention obligatoire des passoires thermiques
-3. **Mandats** : signature électronique sans seuil depuis juin 2025
-4. **Honoraires** : affichage renforcé, même taille de caractères que le prix
-5. **Données** : déclaration CNIL obligatoire pour tous les fichiers prospects
+1. **Carte professionnelle** : obligatoire, délivrée par la CCI, encadrée par la Loi Hoguet et le Décret 72-678
+2. **Diagnostics** : DPE obligatoire pour tous les biens depuis juillet 2021, mention des passoires thermiques (F et G) obligatoire
+3. **Mandats** : signature électronique possible (art. 1366-1367 Code civil + eIDAS), formalisme écrit Hoguet conservé
+4. **Honoraires** : affichage clair et visible, règles fixées par l'Arrêté du 10 janvier 2017
+5. **Données** : RGPD applicable depuis mai 2018, registre des visites avec consentement
 
 ---
 
 ## 📚 RÉFÉRENCES JURIDIQUES CITÉES
 
 - Loi ALUR : Loi n° 2014-366 du 24 mars 2014
-- Décret n° 2025-487 du 15 mai 2025 (carte professionnelle)
-- Loi n° 2025-127 du 23 février 2025 (DPE)
-- Décret n° 2025-612 du 3 juin 2025 (signature électronique)
-- Arrêté du 28 septembre 2025 (affichage honoraires)
-- Article L. 301-1 du Code de la construction et de l'habitation
 - Loi Hoguet : Loi n° 70-9 du 2 janvier 1970
+- Décret n° 72-678 du 20 juillet 1972 (carte professionnelle)
+- Loi Climat et Résilience : Loi n° 2021-1104 du 22 août 2021
+- Article L. 126-26 du Code de la construction et de l'habitation (DPE)
+- Articles 1366 et 1367 du Code civil (signature électronique)
+- Arrêté du 10 janvier 2017 (affichage honoraires)
+- RGPD : Règlement (UE) 2016/679
 
 ---
 

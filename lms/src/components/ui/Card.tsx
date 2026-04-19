@@ -12,13 +12,13 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     const variants: Record<NonNullable<CardProps["variant"]>, string> = {
       default: "border border-zinc-200/80 bg-white",
       elevated:
-        "rounded-2xl border border-zinc-200/90 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04),0_16px_40px_rgba(26,58,92,0.07)]",
+        "rounded-2xl border border-zinc-200/90 bg-white shadow-md",
       flat: "border border-zinc-200/60 bg-zinc-50/50",
       warm: "border border-zinc-200/80 bg-brand-gold-soft",
     };
 
     const hover = hoverable
-      ? "transition duration-300 hover:border-brand-navy/15 hover:shadow-[0_8px_32px_rgba(26,58,92,0.12)]"
+      ? "transition duration-300 hover:border-brand-navy/15 hover:shadow-lg"
       : "";
 
     return (

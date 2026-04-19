@@ -42,7 +42,7 @@ export function DragDropExerciseBlock({ exercises }: Props) {
   if (exercises.length === 0) return null;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-[0_25px_50px_-12px_rgba(26,58,92,0.18)] ring-1 ring-black/5">
+    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-xl ring-1 ring-black/5">
       {/* En-tete */}
       <div className="relative border-b border-brand-navy/10 bg-brand-navy px-5 py-5 sm:px-8">
         <div
@@ -52,7 +52,7 @@ export function DragDropExerciseBlock({ exercises }: Props) {
           }}
         />
         <div className="relative">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
+          <p className="text-3xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
             Exercice interactif
           </p>
           <h2 className="mt-1.5 text-xl font-bold leading-snug tracking-tight text-white sm:text-2xl">
@@ -100,7 +100,7 @@ export function DragDropExerciseBlock({ exercises }: Props) {
    ───────────────────────────────────────────── */
 
 function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
-  const correctOrder = exercise.correctOrder ?? [];
+  const correctOrder = useMemo(() => exercise.correctOrder ?? [], [exercise.correctOrder]);
   const totalSlots = correctOrder.length;
 
   const shuffledItems = useMemo(() => {

@@ -9,7 +9,8 @@ import { getDataTables } from "../src/data/data-tables";
 import { getGuidedCalculations } from "../src/data/guided-calculations";
 import { getChatRoleplay } from "../src/data/chat-roleplay";
 
-const report: any[] = [];
+type ReportItem = { key: string; title: string; mod: string; score: number; visuals: number; quizzes: number; cases: number; dds: number; calls: number; tls: number; tables: number; calcs: number; chats: number; scenario: number };
+const report: ReportItem[] = [];
 for (const mod of COURSE) {
   for (const les of mod.lessons) {
     const key = `${mod.slug}/${les.slug}`;

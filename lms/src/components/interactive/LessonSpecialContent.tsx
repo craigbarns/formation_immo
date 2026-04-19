@@ -39,7 +39,7 @@ export function LessonSpecialContent({ moduleSlug, lessonSlug }: Props) {
           <p className="mb-4 text-sm text-zinc-600">
             Évolution nationale des prix (2020–2026) et comparatif des rendements locatifs par ville.
           </p>
-          <div className="card-elevated rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+          <div className="card-elevated p-5">
             <MarcheImmoChart />
           </div>
         </section>
@@ -58,7 +58,7 @@ export function LessonSpecialContent({ moduleSlug, lessonSlug }: Props) {
         <p className="mb-4 text-sm text-zinc-600">
           Comparez les rendements bruts et nets dans 18 grandes villes françaises pour affiner votre conseil en investissement.
         </p>
-        <div className="card-elevated rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+        <div className="card-elevated p-5">
           <MarcheImmoChart />
         </div>
       </section>

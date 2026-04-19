@@ -370,7 +370,7 @@ export function NegotiationSimulator() {
           </div>
         </div>
         <div className="flex flex-col items-end">
-          <span className="text-xs font-semibold uppercase tracking-wider text-white/70 mb-1">Score</span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-white/80 mb-1">Score</span>
           <div className="w-32 h-2.5 bg-white/20 rounded-full overflow-hidden">
             <motion.div
               className={`h-full ${score > 70 ? "bg-emerald-400" : score < 40 ? "bg-red-400" : "bg-brand-gold"}`}
@@ -379,14 +379,14 @@ export function NegotiationSimulator() {
               transition={{ duration: 0.5, ease: "easeOut" }}
             />
           </div>
-          <span className="mt-1 text-[10px] font-bold text-white/80">{score}/100</span>
+          <span className="mt-1 text-2xs font-bold text-white/80">{score}/100</span>
         </div>
       </div>
 
       {/* Chat Area */}
       <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-zinc-50 space-y-4">
         <AnimatePresence initial={false}>
-          {messages.map((msg, idx) => (
+          {messages.map((msg) => (
             <motion.div
               key={msg.id}
               initial={{ opacity: 0, y: 15 }}
@@ -442,7 +442,7 @@ export function NegotiationSimulator() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
-              className="mx-auto max-w-md rounded-2xl border border-zinc-200 bg-white p-6 shadow-lg"
+              className="mx-auto max-w-md card-elevated-lg p-6"
             >
               <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${feedback.bg}`}>
                 <TrendingUp className={`h-8 w-8 ${feedback.color}`} />

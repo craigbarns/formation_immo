@@ -1,6 +1,7 @@
 "use client";
 
 import type { TrainerCallout, CalloutType } from "@/data/trainer-callouts";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 const CONFIG: Record<CalloutType, {
   icon: string;
@@ -75,7 +76,7 @@ function CalloutCard({ c }: { c: TrainerCallout }) {
     >
       {/* Icon */}
       <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white/70 text-lg shadow-sm">
-        {cfg.icon}
+        <EmojiIcon emoji={cfg.icon} className="h-5 w-5" />
       </div>
 
       {/* Content */}
@@ -86,8 +87,8 @@ function CalloutCard({ c }: { c: TrainerCallout }) {
           </span>
           {c.avatarInitials && (
             <span
-              className="flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-bold text-white shadow-sm"
-              style={{ backgroundColor: c.avatarColor ?? "#1a3a5c" }}
+              className="flex h-5 w-5 items-center justify-center rounded-full text-2xs font-bold text-white shadow-sm"
+              style={{ backgroundColor: c.avatarColor ?? "var(--brand-navy)" }}
             >
               {c.avatarInitials}
             </span>

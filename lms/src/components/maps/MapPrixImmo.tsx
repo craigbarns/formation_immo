@@ -1,7 +1,9 @@
 "use client";
 
+import "leaflet/dist/leaflet.css";
 import { useEffect, useRef, useState } from "react";
 import { ZONES_PRIX, type ZonePrix } from "@/data/prix-immo";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 // Color by price range
 function getPriceColor(prix: number): string {
@@ -113,7 +115,22 @@ export function MapPrixImmo() {
                   : "border border-zinc-200 bg-white text-zinc-600 hover:border-brand-navy/30"
               }`}
             >
-              {t === "all" ? "Toutes" : t === "haute" ? "🔴 Forte tension" : t === "moyenne" ? "🟡 Moyenne" : "🟢 Détendue"}
+              {t === "all" ? "Toutes" : t === "haute" ? (
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-red-500" />
+                  Forte tension
+                </span>
+              ) : t === "moyenne" ? (
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-amber-400" />
+                  Moyenne
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                  Détendue
+                </span>
+              )}
             </button>
           ))}
         </div>
@@ -138,7 +155,7 @@ export function MapPrixImmo() {
           <div ref={mapRef} style={{ height: 420 }} />
           {/* Legend */}
           <div className="absolute bottom-4 left-4 z-[400] rounded-xl border border-white/80 bg-white/95 p-3 shadow-md backdrop-blur">
-            <p className="mb-2 text-[10px] font-bold uppercase tracking-wide text-zinc-500">Prix/m²</p>
+            <p className="mb-2 text-2xs font-bold uppercase tracking-wide text-zinc-500">Prix/m²</p>
             {[
               { label: "> 8000€", color: "#dc2626" },
               { label: "5000-8000€", color: "#ea580c" },
@@ -158,7 +175,7 @@ export function MapPrixImmo() {
         {/* Detail panel */}
         <div className="space-y-3">
           {selected ? (
-            <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+            <div className="card-elevated p-5">
               <div className="flex items-start justify-between">
                 <div>
                   <h4 className="text-xl font-bold text-brand-navy">{selected.ville}</h4>
@@ -184,7 +201,7 @@ export function MapPrixImmo() {
                   },
                 ].map(({ label, value, color }) => (
                   <div key={label} className="rounded-xl bg-zinc-50 p-3">
-                    <p className="text-[10px] font-bold uppercase tracking-wide text-zinc-400">{label}</p>
+                    <p className="text-2xs font-bold uppercase tracking-wide text-zinc-400">{label}</p>
                     <p className={`mt-0.5 text-base font-bold text-brand-navy ${color ?? ""}`}>{value}</p>
                   </div>
                 ))}
@@ -196,21 +213,34 @@ export function MapPrixImmo() {
                   selected.tension === "haute" ? "text-red-600" :
                   selected.tension === "moyenne" ? "text-amber-600" : "text-emerald-600"
                 }`}>
-                  {selected.tension === "haute" ? "🔴 Forte — forte demande" :
-                   selected.tension === "moyenne" ? "🟡 Modérée — marché équilibré" :
-                   "🟢 Faible — marché détendu"}
+                  {selected.tension === "haute" ? (
+                    <span className="inline-flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full bg-red-500" />
+                      Forte — forte demande
+                    </span>
+                  ) : selected.tension === "moyenne" ? (
+                    <span className="inline-flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full bg-amber-400" />
+                      Modérée — marché équilibré
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                      Faible — marché détendu
+                    </span>
+                  )}
                 </p>
               </div>
             </div>
           ) : (
             <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-300 bg-zinc-50/50 p-8 text-center">
-              <span className="text-4xl">🗺️</span>
+              <EmojiIcon emoji="🗺️" className="h-10 w-10 text-zinc-400" />
               <p className="mt-3 text-sm font-medium text-zinc-500">Cliquez sur une ville pour voir ses statistiques détaillées</p>
             </div>
           )}
 
           {/* Top 5 rendement */}
-          <div className="rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm">
+          <div className="card-elevated p-4">
             <p className="mb-3 text-xs font-bold uppercase tracking-wide text-zinc-400">Top rendement brut</p>
             {filtered.slice(0, 5).sort((a, b) => b.loyer / b.prixMoyen - a.loyer / a.prixMoyen).map((z) => (
               <button

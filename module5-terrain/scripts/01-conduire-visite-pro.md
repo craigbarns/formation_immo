@@ -41,9 +41,9 @@ Dans les 30 premières secondes, vos clients ont déjà formé une opinion sur v
 
 [00:30-01:30] **PROBLÉMATIQUE**
 
-[B-roll: Infographie montrant des statistiques : 70% des décisions se prennent dans les 10 premières minutes]
+[B-roll: Infographie montrant l'importance des premières minutes d'une visite immobilière]
 
-Savez-vous que 70% des décisions d'achat immobilier se prennent dans les dix premières minutes d'une visite ? Pourtant, la plupart des agents immobiliers consacrent 90% de leur énergie à préparer le bien... et seulement 10% à préparer la visite elle-même. [PAUSE 2s]
+Savez-vous que les décisions d'achat immobilier se prennent souvent très vite, dès les premières minutes d'une visite ? Pourtant, la plupart des agents immobiliers consacrent l'essentiel de leur énergie à préparer le bien... et négligent la préparation de la visite elle-même. [PAUSE 2s]
 
 [B-roll: Montage rapide d'agents mal préparés : arrivée en retard, clés qui ne fonctionnent pas, nez collé au téléphone]
 

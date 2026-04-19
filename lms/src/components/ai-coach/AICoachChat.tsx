@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Send, Bot, User, Sparkles, X, RotateCcw, Volume2, VolumeX, Mic, MicOff } from "lucide-react";
+import { Send, Bot, User, Sparkles, X, RotateCcw, Volume2, VolumeX, Mic, MicOff, CheckCircle2, Save } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getConversationHistory, getPersonalizedRecommendation } from "./ai-coach-service";
 import { addMessageToMemory, clearCoachMemory, type ChatMessage } from "./ai-coach-storage";
@@ -84,7 +84,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     } else {
       setMessages(history);
     }
-  }, [moduleSlug, lessonSlug]);
+  }, [moduleSlug, lessonSlug, mode]);
 
   const saveServerMessage = useCallback(async (role: "user" | "assistant", content: string) => {
     try {
@@ -365,7 +365,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
     } finally {
       setIsLoading(false);
     }
-  }, [input, isLoading, messages, moduleSlug, lessonSlug, lessonTitle, autoSpeak, enqueueTTS, ensureAudioContext, saveServerMessage]);
+  }, [input, isLoading, messages, moduleSlug, lessonSlug, lessonTitle, autoSpeak, enqueueTTS, ensureAudioContext, saveServerMessage, mode]);
 
   // Auto-send after voice input
   useEffect(() => {
@@ -406,33 +406,34 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-        className="relative flex h-[80vh] w-full max-w-md flex-col overflow-hidden rounded-2xl border border-brand-gold/30 bg-[#0f1f33] shadow-2xl"
+        className="relative flex h-[80vh] w-full max-w-md flex-col overflow-hidden rounded-2xl border border-brand-gold/30 bg-[var(--surface-dark)] shadow-2xl"
       >
-        <div className="flex items-center justify-between border-b border-white/10 bg-gradient-to-r from-brand-navy to-[#0f1f33] px-4 py-3">
+        <div className="flex items-center justify-between border-b border-white/10 bg-gradient-to-r from-brand-navy to-[var(--surface-dark)] px-4 py-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-[#f0c040] text-brand-navy">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-[var(--brand-gold-light)] text-brand-navy">
               <Bot className="h-5 w-5" />
             </div>
             <div>
               <h3 className="font-bold text-white">Marie, votre coach</h3>
-              <p className="text-[10px] text-white/70">Propulsée par IA • En ligne</p>
+              <p className="text-2xs text-white/80">Propulsée par IA • En ligne</p>
             </div>
           </div>
           <div className="flex items-center gap-1">
             <button
               onClick={() => setAutoSpeak(a => !a)}
               title={autoSpeak ? "Désactiver la voix auto" : "Activer la voix auto"}
+              aria-label={autoSpeak ? "Désactiver la voix auto" : "Activer la voix auto"}
               className={`rounded-full p-2 transition ${
-                autoSpeak ? "bg-brand-gold text-brand-navy" : "text-white/50 hover:bg-white/10 hover:text-white"
+                autoSpeak ? "bg-brand-gold text-brand-navy" : "text-white/80 hover:bg-white/10 hover:text-white"
               }`}
             >
               {autoSpeak ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
             </button>
-            <button onClick={handleClearChat} className="rounded-full p-2 text-white/50 hover:bg-white/10 hover:text-white transition" title="Effacer la conversation">
+            <button onClick={handleClearChat} className="rounded-full p-2 text-white/80 hover:bg-white/10 hover:text-white transition" title="Effacer la conversation" aria-label="Effacer la conversation">
               <RotateCcw className="h-4 w-4" />
             </button>
-            <button onClick={onClose} className="rounded-full p-2 text-white/50 hover:bg-white/10 hover:text-white transition">
-              <X className="h-5 w-5" />
+            <button onClick={onClose} className="rounded-full p-2 text-white/80 hover:bg-white/10 hover:text-white transition" aria-label="Fermer le chat">
+              <X className="h-5 w-5" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -441,7 +442,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
           <AnimatePresence>
             {messages.map((msg) => (
               <motion.div key={msg.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className={`flex gap-2 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
-                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${msg.role === "user" ? "bg-white/10 text-white" : "bg-gradient-to-br from-brand-gold to-[#f0c040] text-brand-navy"}`}>
+                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${msg.role === "user" ? "bg-white/10 text-white" : "bg-gradient-to-br from-brand-gold to-[var(--brand-gold-light)] text-brand-navy"}`}>
                   {msg.role === "user" ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
                 </div>
                 <div className="flex max-w-[80%] flex-col gap-1.5">
@@ -449,7 +450,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
                     {msg.content.split("\n").map((line, i) => <p key={i} className={i > 0 ? "mt-2" : ""}>{line}</p>)}
                   </div>
                   {msg.role === "assistant" && msg.content.length > 5 && (
-                    <button onClick={() => speak(msg.content, msg.id)} className={`self-start flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all ${playingIndex === msg.id ? "bg-brand-gold/20 text-brand-gold animate-pulse" : "text-white/40 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/10"}`}>
+                    <button onClick={() => speak(msg.content, msg.id)} className={`self-start flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all ${playingIndex === msg.id ? "bg-brand-gold/20 text-brand-gold animate-pulse" : "text-white/75 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/10"}`}>
                       <Volume2 className={`h-3.5 w-3.5 ${playingIndex === msg.id ? "animate-bounce" : ""}`} />
                       {playingIndex === msg.id ? "Lecture en cours..." : "Écouter Marie"}
                     </button>
@@ -461,12 +462,12 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
           {showRecommendation && messages.length <= 2 && (
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="rounded-xl border border-brand-gold/20 bg-brand-gold/5 p-3">
               <div className="flex items-center gap-2 text-brand-gold"><Sparkles className="h-4 w-4" /><span className="text-xs font-semibold">Suggestion personnalisée</span></div>
-              <p className="mt-1 text-xs text-white/70">{recommendation}</p>
+              <p className="mt-1 text-xs text-white/80">{recommendation}</p>
             </motion.div>
           )}
           {isLoading && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2 text-on-dark-muted">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-[#f0c040]"><Bot className="h-4 w-4 text-brand-navy" /></div>
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-[var(--brand-gold-light)]"><Bot className="h-4 w-4 text-brand-navy" /></div>
               <div className="flex gap-1"><span className="animate-bounce">.</span><span className="animate-bounce" style={{ animationDelay: "0.1s" }}>.</span><span className="animate-bounce" style={{ animationDelay: "0.2s" }}>.</span></div>
             </motion.div>
           )}
@@ -486,10 +487,10 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
                   }}
                   className="mt-2 inline-flex items-center gap-1.5 rounded-lg bg-brand-gold px-4 py-2 text-xs font-bold text-brand-navy transition hover:brightness-105"
                 >
-                  💾 Sauvegarder mon niveau
+                  <Save className="h-3.5 w-3.5" /> Sauvegarder mon niveau
                 </button>
               ) : (
-                <p className="mt-2 text-xs font-bold text-emerald-400">✅ Résultat sauvegardé !</p>
+                <p className="mt-2 flex items-center justify-center gap-1 text-xs font-bold text-emerald-400"><CheckCircle2 className="h-3.5 w-3.5" /> Résultat sauvegardé !</p>
               )}
             </motion.div>
           )}
@@ -499,14 +500,14 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
         <div className="border-t border-white/10 bg-white/5 p-4">
           <div className="flex gap-2">
             {speechSupported && (
-              <button onClick={isListening ? stopListening : startListening} title={isListening ? "Arrêter l'écoute" : "Parler à Marie (microphone)"} className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition ${isListening ? "bg-red-500 text-white animate-pulse" : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"}`}>
+              <button onClick={isListening ? stopListening : startListening} title={isListening ? "Arrêter l'écoute" : "Parler à Marie (microphone)"} aria-label={isListening ? "Arrêter l'écoute" : "Parler à Marie (microphone)"} className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition ${isListening ? "bg-red-500 text-white animate-pulse" : "bg-white/10 text-white/80 hover:bg-white/20 hover:text-white"}`}>
                 {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
               </button>
             )}
             <input ref={inputRef} type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder={isListening ? "Écoute en cours..." : "Posez votre question..."} disabled={isListening} className="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/30 focus:border-brand-gold/50 focus:outline-none focus:ring-1 focus:ring-brand-gold/30 disabled:opacity-50" />
-            <button onClick={handleSend} disabled={!input.trim() || isLoading || isListening} className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold text-brand-navy transition hover:bg-[#e0bf4d] disabled:opacity-50 disabled:cursor-not-allowed"><Send className="h-4 w-4" /></button>
+            <button onClick={handleSend} disabled={!input.trim() || isLoading || isListening} className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold text-brand-navy transition hover:bg-[var(--brand-gold-hover)] disabled:opacity-50 disabled:cursor-not-allowed" aria-label="Envoyer le message"><Send className="h-4 w-4" aria-hidden="true" /></button>
           </div>
-          <p className="mt-2 text-[10px] text-center text-white/50">{speechSupported ? "🎤 Cliquez sur le micro pour parler à Marie • Elle vous répondra à voix haute en temps réel" : "Marie est une IA expérimentale. Vérifiez les informations importantes."}</p>
+          <p className="mt-2 text-2xs text-center text-white/80">{speechSupported ? "Cliquez sur le micro pour parler à Marie • Elle vous répondra à voix haute en temps réel" : "Marie est une IA expérimentale. Vérifiez les informations importantes."}</p>
         </div>
       </motion.div>
     </div>

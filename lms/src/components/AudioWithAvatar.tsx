@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 const AVATAR_SRC = "/images/narration-avatar.svg";
 
@@ -139,7 +140,7 @@ export function AudioWithAvatar({ audioUrl, title, size = "md", className = "" }
       >
         <span className="sr-only">Avatar dont la bouche suit la narration</span>
         <div className="relative overflow-hidden rounded-full">
-          <img
+          <Image
             src={AVATAR_SRC}
             alt=""
             className={imgClass}

@@ -76,7 +76,7 @@ export function AudioPlayer({ src, title, avatar }: Props) {
   const pct = duration > 0 ? (current / duration) * 100 : 0;
 
   return (
-    <div className="rounded-2xl border-2 border-brand-navy/15 bg-gradient-to-br from-brand-navy to-[#0f2a42] p-5 shadow-xl">
+    <div className="rounded-2xl border-2 border-brand-navy/15 bg-gradient-to-br from-brand-navy to-[var(--brand-navy-deep)] p-5 shadow-xl">
       <audio ref={ref} src={src} preload="metadata" />
 
       {/* Header */}
@@ -101,7 +101,7 @@ export function AudioPlayer({ src, title, avatar }: Props) {
             <p className="text-xs text-white/80">{avatar.name} — {avatar.role}</p>
           )}
         </div>
-        <div className="flex items-center gap-1 text-[10px] text-white/70">
+        <div className="flex items-center gap-1 text-2xs text-white/80">
           {loaded && <span>{fmt(duration)}</span>}
         </div>
       </div>
@@ -139,7 +139,7 @@ export function AudioPlayer({ src, title, avatar }: Props) {
       </div>
 
       {/* Time display */}
-      <div className="mt-2 flex items-center justify-between text-[11px] text-white/70 tabular-nums px-1">
+      <div className="mt-2 flex items-center justify-between text-3xs text-white/80 tabular-nums px-1">
         <span>{fmt(current)}</span>
         <span>{loaded ? `-${fmt(Math.max(0, duration - current))}` : "--:--"}</span>
       </div>
@@ -148,7 +148,7 @@ export function AudioPlayer({ src, title, avatar }: Props) {
       <div className="mt-3 flex items-center justify-center gap-3">
         <button
           onClick={() => skip(-15)}
-          className="flex h-9 w-9 items-center justify-center rounded-full text-white/70 hover:bg-white/10 hover:text-white transition"
+          className="flex h-9 w-9 items-center justify-center rounded-full text-white/80 hover:bg-white/10 hover:text-white transition"
           title="Reculer 15s"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -159,7 +159,8 @@ export function AudioPlayer({ src, title, avatar }: Props) {
 
         <button
           onClick={toggle}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/30 hover:bg-[#e0bf4d] transition-all hover:scale-105 active:scale-95"
+          aria-label={playing ? "Pause" : "Lecture"}
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/30 hover:bg-[var(--brand-gold-hover)] transition-all hover:scale-105 active:scale-95"
         >
           {playing ? (
             <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -174,7 +175,7 @@ export function AudioPlayer({ src, title, avatar }: Props) {
 
         <button
           onClick={() => skip(15)}
-          className="flex h-9 w-9 items-center justify-center rounded-full text-white/70 hover:bg-white/10 hover:text-white transition"
+          className="flex h-9 w-9 items-center justify-center rounded-full text-white/80 hover:bg-white/10 hover:text-white transition"
           title="Avancer 15s"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -188,7 +189,7 @@ export function AudioPlayer({ src, title, avatar }: Props) {
       <div className="mt-3 flex justify-center">
         <button
           onClick={cycleSpeed}
-          className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[11px] font-bold text-white/80 hover:bg-white/10 transition tabular-nums"
+          className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-3xs font-bold text-white/80 hover:bg-white/10 transition tabular-nums"
         >
           {speed}x
         </button>

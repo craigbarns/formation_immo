@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, X } from "lucide-react";
-import { addNote, NOTE_COLORS, type Note } from "@/lib/user-content";
+import { addNote, NOTE_COLORS } from "@/lib/user-content";
 
 interface NoteCreatorProps {
   moduleSlug: string;

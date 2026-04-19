@@ -37,9 +37,9 @@ Modern real estate professional using CRM software on multiple screens, customer
 
 #### [SEGMENT 2 - PROBLÉMATIQUE] (0:50 - 1:50)
 
-[B-ROLL : Statistiques : 80% des agents n'utilisent pas leur CRM efficacement]
+[B-ROLL : Agent immobilier avec un CRM mal utilisé, champs vides, données incomplètes]
 
-"Quatre-vingts pour cent des agents immobiliers ont un CRM. Quatre-vingts pour cent ne l'utilisent pas efficacement. Ils y stockent des noms. Des numéros. Et c'est tout."
+"De nombreux agents immobiliers ont un CRM. Pourtant, beaucoup ne l'utilisent pas efficacement. Ils y stockent des noms. Des numéros. Et c'est tout."
 
 [B-ROLL : CRM mal utilisé, champs vides, données incomplètes]
 
@@ -261,7 +261,7 @@ Modern real estate professional using CRM software on multiple screens, customer
 
 ### 🎯 POINTS CLÉS À RETENIR
 
-1. **80% des agents** n'utilisent pas leur CRM efficacement
+1. **De nombreux agents** n'utilisent pas leur CRM efficacement
 2. **1 client satisfait** = 3 recommandations en 5 ans
 3. **5 piliers** : Données → Segmentation → Automatisation → Suivi → Recommandations
 4. **Rythmes de suivi** : 7j (acheteurs) / 14j (prospects chauds) / 30j (froids) / 90j (anciens clients)

@@ -23,7 +23,7 @@ export function TakeawaysCard({ items }: { items: string[] }) {
           <span className="text-lg">&#x1F4CB;</span>
           A retenir
         </h4>
-        <span className="text-[10px] font-bold text-emerald-600 tabular-nums">
+        <span className="text-2xs font-bold text-emerald-600 tabular-nums">
           {checked.size}/{items.length}
         </span>
       </div>

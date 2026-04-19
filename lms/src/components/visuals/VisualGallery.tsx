@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import type { VisualPrompt } from "@/data/module-visuals";
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -41,10 +42,12 @@ export function VisualGallery({ prompts }: { prompts: VisualPrompt[] }) {
           {/* Image placeholder or actual image */}
           <div className="relative aspect-video bg-gradient-to-br from-zinc-100 to-zinc-200">
             {p.imageUrl ? (
-              <img
+              <Image
                 src={p.imageUrl}
                 alt={p.title}
-                className="h-full w-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 33vw"
               />
             ) : (
               <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-zinc-400">
@@ -61,7 +64,7 @@ export function VisualGallery({ prompts }: { prompts: VisualPrompt[] }) {
             )}
             {/* Category badge */}
             <span
-              className={`absolute top-2 left-2 rounded-full px-2 py-0.5 text-[10px] font-bold ${
+              className={`absolute top-2 left-2 rounded-full px-2 py-0.5 text-2xs font-bold ${
                 CATEGORY_COLORS[p.category] ?? "bg-zinc-100 text-zinc-600"
               }`}
             >
@@ -69,7 +72,7 @@ export function VisualGallery({ prompts }: { prompts: VisualPrompt[] }) {
             </span>
             {/* Status badge */}
             <span
-              className={`absolute top-2 right-2 rounded-full px-2 py-0.5 text-[10px] font-bold ${
+              className={`absolute top-2 right-2 rounded-full px-2 py-0.5 text-2xs font-bold ${
                 p.imageUrl
                   ? "bg-green-100 text-green-700"
                   : "bg-orange-100 text-orange-700"
@@ -89,19 +92,19 @@ export function VisualGallery({ prompts }: { prompts: VisualPrompt[] }) {
               onClick={() =>
                 setExpandedId(expandedId === p.id ? null : p.id)
               }
-              className="mt-2 text-[11px] font-medium text-brand-gold hover:underline"
+              className="mt-2 text-3xs font-medium text-brand-gold hover:underline"
             >
               {expandedId === p.id ? "Masquer le prompt" : "Prompt Midjourney"}
             </button>
 
             {expandedId === p.id && (
               <div className="mt-2 rounded-lg bg-zinc-50 p-3">
-                <p className="text-[11px] leading-relaxed text-zinc-700 font-mono break-all">
+                <p className="text-3xs leading-relaxed text-zinc-700 font-mono break-all">
                   {p.prompt}
                 </p>
                 <button
                   onClick={() => copy(p.id, p.prompt)}
-                  className="mt-2 rounded bg-brand-navy px-3 py-1 text-[10px] font-bold text-white hover:bg-brand-navy-deep"
+                  className="mt-2 rounded bg-brand-navy px-3 py-1 text-2xs font-bold text-white hover:bg-brand-navy-deep"
                 >
                   {copiedId === p.id ? "Copie !" : "Copier"}
                 </button>

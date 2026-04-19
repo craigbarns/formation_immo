@@ -50,7 +50,7 @@ export function Slider({ label, value, onChange, min, max, step, format, id }: S
         />
         <div className="relative h-2 w-full overflow-hidden rounded-full bg-zinc-200">
           <div
-            className="h-full bg-gradient-to-r from-brand-gold to-[#f0c040] transition-all duration-75"
+            className="h-full bg-gradient-to-r from-brand-gold to-[var(--brand-gold-light)] transition-all duration-75"
             style={{ width: `${percentage}%` }}
           />
         </div>

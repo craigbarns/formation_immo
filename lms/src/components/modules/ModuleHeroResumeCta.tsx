@@ -81,7 +81,7 @@ export function ModuleHeroResumeCta({ moduleSlug, firstLessonHref, examenHref }:
       <div className="flex flex-wrap gap-3">
         <Link
           href={examenHref}
-          className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-[#0f172a] shadow-lg transition hover:bg-white/95 hover:shadow-xl"
+          className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-slate-900 shadow-lg transition hover:bg-white/95 hover:shadow-xl"
         >
           Module terminé — QCM
         </Link>
@@ -107,7 +107,7 @@ export function ModuleHeroResumeCta({ moduleSlug, firstLessonHref, examenHref }:
     <div className="flex flex-wrap gap-3">
       <Link
         href={resume.href}
-        className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-[#0f172a] shadow-lg transition hover:bg-white/95 hover:shadow-xl"
+        className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-slate-900 shadow-lg transition hover:bg-white/95 hover:shadow-xl"
       >
         {isFirst ? "Commencer ce module" : "Continuer la leçon"}
       </Link>

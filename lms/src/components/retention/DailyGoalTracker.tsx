@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Target, CheckCircle2 } from "lucide-react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { createClient } from "@/lib/supabase/client";
 
 const DAILY_GOAL_KEY = "formation-daily-goal";
@@ -161,7 +162,7 @@ export function DailyGoalTracker() {
   const { goal, progress, progressPercent, isGoalReached } = useDailyGoal();
 
   return (
-    <div className="rounded-2xl border border-brand-gold/20 bg-gradient-to-br from-brand-navy/50 to-[#0f1f33]/50 p-4">
+    <div className="rounded-2xl border border-brand-gold/20 bg-gradient-to-br from-brand-navy/50 to-[var(--surface-dark)]/50 p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className={`flex h-10 w-10 items-center justify-center rounded-full ${
@@ -173,7 +174,7 @@ export function DailyGoalTracker() {
           </div>
           <div>
             <h4 className="font-semibold text-white">Objectif du jour</h4>
-            <p className="text-xs text-white/70">
+            <p className="text-xs text-white/80">
               {progress.lessonsCompleted}/{goal.lessonsPerDay} leçons • {progress.minutesSpent}/{goal.minutesPerDay} min
             </p>
           </div>
@@ -195,7 +196,7 @@ export function DailyGoalTracker() {
           className={`h-full rounded-full ${
             isGoalReached 
               ? "bg-gradient-to-r from-emerald-500 to-teal-500" 
-              : "bg-gradient-to-r from-brand-gold to-[#f0c040]"
+              : "bg-gradient-to-r from-brand-gold to-[var(--brand-gold-light)]"
           }`}
         />
       </div>
@@ -206,7 +207,7 @@ export function DailyGoalTracker() {
           animate={{ opacity: 1, y: 0 }}
           className="mt-2 text-center text-sm font-medium text-emerald-400"
         >
-          🎉 Objectif atteint ! Continuez comme ça !
+          <EmojiIcon emoji="🎉" className="h-4 w-4 inline-block" /> Objectif atteint ! Continuez comme ça !
         </motion.p>
       )}
     </div>

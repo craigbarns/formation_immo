@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 type Section = { icon: string; title: string; duration: string };
 type KeyTerm = { term: string; definition: string };
@@ -52,9 +53,9 @@ export function PrintableRecap({
       {/* Trigger button */}
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-2 rounded-xl border border-brand-gold/40 bg-brand-gold/5 px-4 py-2.5 text-sm font-semibold text-[#7a6008] transition hover:bg-brand-gold/15 hover:shadow-sm"
+        className="flex items-center gap-2 rounded-xl border border-brand-gold/40 bg-brand-gold/5 px-4 py-2.5 text-sm font-semibold text-brand-gold-dark transition hover:bg-brand-gold/15 hover:shadow-sm"
       >
-        🖨️ Fiche récap imprimable
+        <EmojiIcon emoji="🖨️" className="h-4 w-4 inline-block" /> Fiche récap imprimable
       </button>
 
       {/* Modal backdrop */}
@@ -76,13 +77,13 @@ export function PrintableRecap({
                   onClick={() => window.print()}
                   className="flex items-center gap-2 rounded-xl bg-brand-navy px-4 py-2 text-sm font-bold text-white shadow-md transition hover:bg-brand-navy-deep"
                 >
-                  🖨️ Imprimer
+                  <EmojiIcon emoji="🖨️" className="h-4 w-4 inline-block" /> Imprimer
                 </button>
                 <button
                   onClick={() => setOpen(false)}
                   className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-200 text-zinc-500 transition hover:bg-zinc-100"
                 >
-                  ✕
+                  <EmojiIcon emoji="✕" className="h-4 w-4 inline-block" />
                 </button>
               </div>
             </div>
@@ -94,7 +95,7 @@ export function PrintableRecap({
                 className="rounded-xl px-5 py-4 text-white"
                 style={{ backgroundColor: accentColor }}
               >
-                <p className="text-[10px] font-bold uppercase tracking-widest opacity-70">
+                <p className="text-2xs font-bold uppercase tracking-widest opacity-70">
                   Formation Agent Immobilier — 42h
                 </p>
                 <p className="text-xs font-semibold opacity-80 mt-0.5">{moduleTitle}</p>
@@ -115,7 +116,7 @@ export function PrintableRecap({
               {objectives && objectives.length > 0 && (
                 <div>
                   <p
-                    className="mb-2 text-[10px] font-bold uppercase tracking-widest"
+                    className="mb-2 text-2xs font-bold uppercase tracking-widest"
                     style={{ color: accentColor }}
                   >
                     Objectifs de la leçon
@@ -124,7 +125,7 @@ export function PrintableRecap({
                     {objectives.map((obj, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm text-zinc-700">
                         <span
-                          className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
+                          className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-2xs font-bold text-white"
                           style={{ backgroundColor: accentColor }}
                         >
                           {i + 1}
@@ -140,7 +141,7 @@ export function PrintableRecap({
               {keyTerms && keyTerms.length > 0 && (
                 <div>
                   <p
-                    className="mb-2 text-[10px] font-bold uppercase tracking-widest"
+                    className="mb-2 text-2xs font-bold uppercase tracking-widest"
                     style={{ color: accentColor }}
                   >
                     Vocabulaire clé
@@ -160,7 +161,7 @@ export function PrintableRecap({
               {sections && sections.length > 0 && (
                 <div>
                   <p
-                    className="mb-2 text-[10px] font-bold uppercase tracking-widest"
+                    className="mb-2 text-2xs font-bold uppercase tracking-widest"
                     style={{ color: accentColor }}
                   >
                     Programme
@@ -171,12 +172,12 @@ export function PrintableRecap({
                         key={i}
                         className="flex items-center gap-3 rounded-xl border border-zinc-100 px-3 py-2"
                       >
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white" style={{ backgroundColor: accentColor }}>
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-3xs font-bold text-white" style={{ backgroundColor: accentColor }}>
                           {i + 1}
                         </span>
-                        <span>{s.icon}</span>
+                        <EmojiIcon emoji={s.icon} className="h-4 w-4" />
                         <span className="flex-1 text-sm text-zinc-800">{s.title}</span>
-                        <span className="text-[10px] font-semibold text-zinc-400">{s.duration}</span>
+                        <span className="text-2xs font-semibold text-zinc-400">{s.duration}</span>
                       </li>
                     ))}
                   </ol>
@@ -192,7 +193,7 @@ export function PrintableRecap({
                   <p className="text-sm italic leading-relaxed text-zinc-700">
                     &ldquo;{expertQuote.text}&rdquo;
                   </p>
-                  <footer className="mt-2 text-[11px] font-semibold text-zinc-500">
+                  <footer className="mt-2 text-3xs font-semibold text-zinc-500">
                     — {expertQuote.author}, {expertQuote.role}
                   </footer>
                 </blockquote>
@@ -201,7 +202,7 @@ export function PrintableRecap({
               {/* Notes box */}
               <div>
                 <p
-                  className="mb-2 text-[10px] font-bold uppercase tracking-widest"
+                  className="mb-2 text-2xs font-bold uppercase tracking-widest"
                   style={{ color: accentColor }}
                 >
                   Mes notes
@@ -210,7 +211,7 @@ export function PrintableRecap({
               </div>
 
               {/* Footer */}
-              <div className="border-t border-zinc-100 pt-3 text-center text-[10px] text-zinc-400">
+              <div className="border-t border-zinc-100 pt-3 text-center text-2xs text-zinc-400">
                 Formation Agent Immobilier — 42h · Tous droits réservés
               </div>
             </div>

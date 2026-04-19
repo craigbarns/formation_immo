@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Loader2, Lock, Mail, User, Sparkles, ArrowLeft } from "lucide-react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { signup } from "@/app/actions/auth";
 
 export default function RegisterForm() {
@@ -28,7 +29,7 @@ export default function RegisterForm() {
 
           <div className="mt-5 flex justify-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-navy text-3xl shadow-lg ring-1 ring-brand-navy/20">
-              🏛️
+              <EmojiIcon emoji="🏛️" className="h-9 w-9" />
             </div>
           </div>
 

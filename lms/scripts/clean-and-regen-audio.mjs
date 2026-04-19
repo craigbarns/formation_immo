@@ -10,7 +10,7 @@
  */
 
 import { readFileSync, writeFileSync, existsSync } from "fs";
-import { execSync, spawnSync } from "child_process";
+import { spawnSync } from "child_process";
 import { join, dirname, basename } from "path";
 import { fileURLToPath } from "url";
 
@@ -44,7 +44,7 @@ function cleanNarration(raw) {
   text = text.replace(/\[\d+\s+min[^\]]*\]/gi, " ");
 
   // 5. Supprimer les effets sonores *Son* ou *Sonnerie* (astérisques simples isolés)
-  text = text.replace(/\*[^*\n]{1,30}\*/g, (match) => {
+  text = text.replace(/\*[^*\n]{1,30}\*/g, () => {
     // Garder **bold** intacts → on les traite séparément
     return " ";
   });

@@ -103,11 +103,11 @@ export function CaseStudyBlock({ studies }: { studies: CaseStudy[] }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
       <div className="border-b border-brand-navy/10 bg-gradient-to-r from-brand-navy to-brand-navy-deep px-5 py-5 sm:px-8">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
+        <p className="text-3xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
           Étude de cas chiffrée
         </p>
         <h2 className="mt-1 text-xl font-bold text-white sm:text-2xl">{study.title}</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/75">{study.description}</p>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/85">{study.description}</p>
       </div>
 
       {studies.length > 1 && (
@@ -137,7 +137,7 @@ export function CaseStudyBlock({ studies }: { studies: CaseStudy[] }) {
               key={d.label}
               className="rounded-lg border border-zinc-100 bg-zinc-50/80 px-3 py-2 text-sm"
             >
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-zinc-400">
+              <p className="text-3xs font-semibold uppercase tracking-wide text-zinc-400">
                 {d.label}
               </p>
               <p className="mt-0.5 font-medium text-zinc-800">{d.value}</p>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Subtitles, Maximize, Settings, Volume2, VolumeX, Play, Pause } from "lucide-react";
+import { Subtitles, Maximize, Volume2, VolumeX, Play, Pause } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SubtitleCue {
@@ -20,6 +20,29 @@ interface VideoWithSubtitlesProps {
   className?: string;
   onProgress?: (currentTime: number, duration: number) => void;
   onEnded?: () => void;
+}
+
+function timeToSeconds(time: string): number {
+  const parts = time.replace(",", ".").split(":");
+  if (parts.length !== 3) return 0;
+  return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseFloat(parts[2]);
+}
+
+function parseSRT(srt: string): SubtitleCue[] {
+  const cues: SubtitleCue[] = [];
+  const blocks = srt.trim().split(/\n\s*\n/);
+  for (const block of blocks) {
+    const lines = block.trim().split("\n");
+    if (lines.length < 3) continue;
+    const id = parseInt(lines[0]);
+    const times = lines[1].split(" --> ");
+    if (times.length !== 2) continue;
+    const start = timeToSeconds(times[0].trim());
+    const end = timeToSeconds(times[1].trim());
+    const text = lines.slice(2).join("\n").replace(/<[^>]+>/g, "");
+    cues.push({ id, start, end, text });
+  }
+  return cues;
 }
 
 export function VideoWithSubtitles({
@@ -43,35 +66,6 @@ export function VideoWithSubtitles({
   const currentCue = cues.find(c => currentTime >= c.start && currentTime <= c.end) || null;
   const [showControls, setShowControls] = useState(true);
   const controlsTimeout = useRef<NodeJS.Timeout | null>(null);
-
-  // Parse SRT format
-  const parseSRT = (srt: string): SubtitleCue[] => {
-    const cues: SubtitleCue[] = [];
-    const blocks = srt.trim().split(/\n\s*\n/);
-    
-    for (const block of blocks) {
-      const lines = block.trim().split("\n");
-      if (lines.length < 3) continue;
-      
-      const id = parseInt(lines[0]);
-      const times = lines[1].split(" --> ");
-      if (times.length !== 2) continue;
-      
-      const start = timeToSeconds(times[0].trim());
-      const end = timeToSeconds(times[1].trim());
-      const text = lines.slice(2).join("\n").replace(/<[^>]+>/g, "");
-      
-      cues.push({ id, start, end, text });
-    }
-    
-    return cues;
-  };
-
-  const timeToSeconds = (time: string): number => {
-    const parts = time.replace(",", ".").split(":");
-    if (parts.length !== 3) return 0;
-    return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseFloat(parts[2]);
-  };
 
   // Load subtitles
   useEffect(() => {

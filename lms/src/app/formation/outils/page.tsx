@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
+
+export const metadata: Metadata = {
+  title: "Simulateurs & outils",
+  description: "Simulateurs de crédit, rentabilité locative, capacité d'emprunt, net vendeur et jeu de rôle négociation.",
+};
 import { AdvancedCreditSimulator, RentabilitySimulator, NetVendeurSimulator, CapaciteEmpruntSimulator } from "@/components/simulators";
 import { NegotiationSimulator } from "@/components/simulators/NegotiationSimulator";
 
@@ -14,7 +21,7 @@ export default function OutilsPage() {
   return (
     <div className="space-y-12">
       {/* Header */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-navy via-[#244b75] to-[#0f2540] px-6 py-10 text-white shadow-2xl md:px-10 md:py-12">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-navy via-[var(--brand-navy-mid)] to-[var(--brand-navy-hero)] px-6 py-10 text-white shadow-2xl md:px-10 md:py-12">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.07]"
           style={{
@@ -29,14 +36,14 @@ export default function OutilsPage() {
         </nav>
         <div className="flex items-start gap-5">
           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-3xl shadow-inner ring-1 ring-white/20">
-            🧮
+            <EmojiIcon emoji="🧮" className="h-8 w-8" />
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">Formation 42h</p>
             <h1 className="mt-1 text-3xl font-black leading-tight tracking-tight md:text-4xl">
               Outils interactifs
             </h1>
-            <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/75">
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/85">
               Simulateurs professionnels et entraînements pratiques — conçus pour maîtriser le
               financement, la rentabilité, la négociation et l&apos;argumentaire vendeur comme un expert.
             </p>
@@ -51,10 +58,10 @@ export default function OutilsPage() {
               href={`#${t.id}`}
               className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-sm transition hover:bg-white/20"
             >
-              <span className="text-2xl">{t.icon}</span>
+              <span className="text-2xl"><EmojiIcon emoji={t.icon} className="h-7 w-7" /></span>
               <div>
                 <p className="text-sm font-bold">{t.label}</p>
-                <p className="text-[11px] text-white/80">{t.tag}</p>
+                <p className="text-3xs text-white/80">{t.tag}</p>
               </div>
             </a>
           ))}
@@ -150,10 +157,10 @@ function ToolHeader({
   return (
     <div className="mb-5 flex items-center gap-4">
       <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border text-xl ${iconBg[tagColor]}`}>
-        {icon}
+        <EmojiIcon emoji={icon} className="h-6 w-6" />
       </div>
       <div>
-        <span className={`rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide ${colors[tagColor]}`}>
+        <span className={`rounded-full border px-2.5 py-0.5 text-2xs font-bold uppercase tracking-wide ${colors[tagColor]}`}>
           {tag}
         </span>
         <h2 className="mt-0.5 text-xl font-bold text-brand-navy">{title}</h2>

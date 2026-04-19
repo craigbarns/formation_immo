@@ -55,7 +55,7 @@ export function EmptyState({
         <p
           className={cn(
             "mt-1.5 max-w-xs text-xs leading-relaxed",
-            isDark ? "text-white/70" : "text-zinc-500"
+            isDark ? "text-white/80" : "text-zinc-500"
           )}
         >
           {description}

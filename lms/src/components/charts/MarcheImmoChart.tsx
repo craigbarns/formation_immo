@@ -175,8 +175,8 @@ export function MarcheImmoChart() {
       {/* Tabs */}
       <div className="flex gap-2 border-b border-zinc-200 pb-1">
         {([
-          { key: "evolution", label: "📈 Évolution des prix" },
-          { key: "rendement", label: "💰 Rendements par ville" },
+          { key: "evolution", label: "Évolution des prix" },
+          { key: "rendement", label: "Rendements par ville" },
         ] as const).map(({ key, label }) => (
           <button
             key={key}
@@ -206,7 +206,7 @@ export function MarcheImmoChart() {
               { label: "Écart Paris/Province", value: "×2.9", delta: "vs ×3.4 en 2022", up: true },
             ].map(({ label, value, delta, up }) => (
               <div key={label} className="rounded-xl border border-zinc-200 bg-white p-3 text-center">
-                <p className="text-[10px] font-bold uppercase tracking-wide text-zinc-400">{label}</p>
+                <p className="text-2xs font-bold uppercase tracking-wide text-zinc-400">{label}</p>
                 <p className="mt-1 text-lg font-bold text-brand-navy">{value}</p>
                 <p className={`text-xs font-semibold ${up ? "text-emerald-600" : "text-red-500"}`}>{delta}</p>
               </div>

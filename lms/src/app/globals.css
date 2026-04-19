@@ -7,27 +7,17 @@
   --brand-navy: #1a3a5c;
   --brand-navy-deep: #142d45;
   --brand-navy-soft: #2d5a87;
+  --brand-navy-mid: #244b75;
+  --brand-navy-hero: #0f2540;
+  --brand-navy-alt: #2d5a7c;
   --brand-gold: #d4af37;
   --brand-gold-dim: rgba(212, 175, 55, 0.35);
   --brand-gold-soft: #f7f3e8;
+  --brand-gold-pale: #f0e6c8;
+  --brand-gold-dark: #7a6008;
   --surface-elevated: #ffffff;
   --surface-warm: #f6f4ef;
   --muted-foreground: #71717a;
-}
-
-/* Dark mode — géré par ThemeProvider (classe .dark sur <html>) */
-.dark {
-  --background: #0f1117;
-  --foreground: #f1f5f9;
-  --brand-navy: #0f172a;
-  --brand-navy-deep: #020617;
-  --brand-navy-soft: #1e293b;
-  --brand-gold: #d4af37;
-  --brand-gold-dim: rgba(212, 175, 55, 0.25);
-  --brand-gold-soft: #1e1a12;
-  --surface-elevated: #1e2432;
-  --surface-warm: #161b27;
-  --muted-foreground: #94a3b8;
 }
 
 @theme inline {
@@ -36,10 +26,25 @@
   --color-brand-navy: var(--brand-navy);
   --color-brand-navy-deep: var(--brand-navy-deep);
   --color-brand-navy-soft: var(--brand-navy-soft);
+  --color-brand-navy-mid: var(--brand-navy-mid);
+  --color-brand-navy-hero: var(--brand-navy-hero);
+  --color-brand-navy-alt: var(--brand-navy-alt);
   --color-brand-gold: var(--brand-gold);
   --color-brand-gold-soft: var(--brand-gold-soft);
+  --color-brand-gold-pale: var(--brand-gold-pale);
+  --color-brand-gold-dark: var(--brand-gold-dark);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --text-2xs: 10px;
+  --text-2xs--line-height: 1.4;
+  --text-3xs: 11px;
+  --text-3xs--line-height: 1.4;
+  --text-4xs: 7px;
+  --text-4xs--line-height: 1.2;
+  --text-5xs: 8px;
+  --text-5xs--line-height: 1.2;
+  --text-6xs: 9px;
+  --text-6xs--line-height: 1.3;
 }
 
 body {
@@ -67,11 +72,15 @@ body {
 
 @layer utilities {
   .card-elevated {
-    @apply rounded-2xl border border-zinc-200/90 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04),0_16px_40px_rgba(26,58,92,0.07)];
+    @apply rounded-2xl border border-zinc-200/90 bg-white shadow-md;
   }
 
   .card-elevated-hover {
-    @apply transition duration-300 hover:border-brand-navy/15 hover:shadow-[0_8px_32px_rgba(26,58,92,0.12)];
+    @apply transition duration-300 hover:border-brand-navy/15 hover:shadow-lg;
+  }
+
+  .card-elevated-lg {
+    @apply rounded-2xl border border-zinc-200/90 bg-white shadow-lg;
   }
 
   .link-focus {
@@ -259,3 +268,16 @@ textarea:focus {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(26,58,92,0.2); border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(26,58,92,0.35); }
+
+/* ── Module accent colors ── */
+:root {
+  --module-juridique: #1a3a5c;
+  --module-transaction: #2d5a87;
+  --module-financement: #142d45;
+  --module-marketing: #d4af37;
+  --module-terrain: #3b6e8f;
+  --surface-dark: var(--surface-dark);
+  --brand-navy-light: var(--brand-navy-light);
+  --brand-gold-light: var(--brand-gold-light);
+  --brand-gold-hover: var(--brand-gold-hover);
+}

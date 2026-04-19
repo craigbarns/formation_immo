@@ -44,11 +44,11 @@ Mais il y a une autre façon de faire. [PAUSE 1s] Une approche qui transforme ch
 
 ### PROBLÉMATIQUE (1 minute)
 
-[B-ROLL : Infographie montrant les statistiques : 67% des agents privilégient le mandat simple, 23% le mandat exclusif, 10% le mandat semi-exclusif]
+[B-ROLL : Infographie montrant les différents types de mandats et leurs avantages]
 
 **NARRATION :**
 
-Selon les dernières études sectorielles, 67% des agents privilégient encore le mandat simple. [PAUSE 1s] Pourtant, les agences qui travaillent principalement en mandats exclusifs réalisent en moyenne 40% de chiffre d'affaires supplémentaire.
+Beaucoup d'agents privilégient encore le mandat simple. [PAUSE 1s] Pourtant, les agences qui travaillent principalement en mandats exclusifs réalisent généralement un chiffre d'affaires plus élevé et des délais de vente plus courts.
 
 [B-ROLL : Graphique comparatif chiffre d'affaires mandat simple vs exclusif]
 
@@ -164,7 +164,7 @@ Voici le cœur du sujet. [PAUSE 1s] Comment convaincre un propriétaire de signe
 
 **Étape 1 : l'argumentaire chiffré.** [PAUSE 1s]
 
-Préparez des statistiques locales. [PAUSE 1s] "Dans notre secteur, les biens en mandat exclusif se vendent en moyenne en 45 jours, contre 87 jours en mandat simple." [PAUSE 1s] "Le prix de vente réel est en moyenne 3,2% plus élevé en exclusif."
+Préparez des arguments chiffrés basés sur votre expérience locale. [PAUSE 1s] "Dans notre secteur, les biens en mandat exclusif se vendent généralement plus vite et à un prix meilleur qu'en mandat simple." [PAUSE 1s] "Les réseaux qui publient leurs statistiques rapportent des délais plus courts et des prix légèrement supérieurs en exclusif."
 
 [B-ROLL : Graphiques statistiques locaux montrant délais et prix]
 
@@ -364,7 +364,7 @@ Dans la prochaine vidéo, nous aborderons la copropriété et la location. [PAUS
 ## 📚 RÉFÉRENCES JURIDIQUES CITÉES
 
 - Loi Hoguet : Loi n° 70-9 du 2 janvier 1970 (articles 6 et suivants)
-- Décret n° 2025-487 du 15 mai 2025 (mentions obligatoires mandat)
+- Décret n° 72-678 du 20 juillet 1972 (carte professionnelle et mentions mandat)
 - Article L. 121-1 du Code de la consommation (délai de rétractation)
 - Code civil : articles 1984 et suivants (mandat)
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { MODULE_AVATARS } from "@/data/module-avatars";
 
 interface LessonPresenterPanelProps {
@@ -70,7 +70,7 @@ export function LessonPresenterPanel({
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2 mb-1">
             <span
-              className="rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
+              className="rounded-full px-2.5 py-0.5 text-2xs font-bold uppercase tracking-wide text-white"
               style={{ backgroundColor: avatar.accentColor }}
             >
               {avatar.role}
@@ -79,7 +79,7 @@ export function LessonPresenterPanel({
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="flex items-center gap-1 text-[11px] font-semibold text-emerald-600"
+                className="flex items-center gap-1 text-3xs font-semibold text-emerald-600"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />

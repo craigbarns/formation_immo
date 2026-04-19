@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useAnimationControls } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 type ModuleSlug = "juridique" | "transaction" | "financement" | "marketing" | "terrain";
@@ -358,7 +358,7 @@ export function AvatarIllustration({
               <circle cx="125" cy="30" r="12" fill="white" stroke={char.accentColor} strokeWidth="1.5" opacity="0.9" />
               <circle cx="137" cy="20" r="7" fill="white" stroke={char.accentColor} strokeWidth="1.5" opacity="0.9" />
               <circle cx="144" cy="12" r="4" fill="white" stroke={char.accentColor} strokeWidth="1.5" opacity="0.9" />
-              <text x="119" y="35" fontSize="12" textAnchor="middle">💭</text>
+              <text x="119" y="35" fontSize="12" textAnchor="middle">...</text>
             </g>
           )}
 
@@ -384,7 +384,7 @@ export function AvatarIllustration({
       {showName && (
         <div className="text-center">
           <p className="font-bold text-sm text-zinc-800">{char.name}</p>
-          <p className="text-[11px] text-zinc-500 uppercase tracking-wide">{char.role}</p>
+          <p className="text-3xs text-zinc-500 uppercase tracking-wide">{char.role}</p>
         </div>
       )}
     </div>

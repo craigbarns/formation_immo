@@ -88,7 +88,7 @@ export async function POST(request: Request) {
     });
 
     return result.toTextStreamResponse();
-  } catch (_err) {
+  } catch {
     return new Response(
       JSON.stringify({ error: "Erreur placement" }),
       { status: 500, headers: { "Content-Type": "application/json" } }

@@ -55,7 +55,7 @@ Professional real estate finance concept, modern banking office interior with gl
 
 "En tant qu'agent immobilier, vous êtes le premier interlocuteur de vos clients. [PAUSE 1s] Avant même qu'ils ne rencontrent un banquier, ils vous posent des questions. Beaucoup de questions."
 
-[B-ROLL : Infographie montrant les statistiques : "73% des acheteurs interrogent leur agent sur le financement avant de voir leur banquier"]
+[B-ROLL : Infographie montrant un acheteur posant des questions de financement à son agent immobilier]
 
 "Quel taux puis-je espérer ? Quelle durée pour mon crédit ? Faut-il emprunter à taux fixe ou variable ? Qu'est-ce que le taux d'usure ? [PAUSE 1s] Et si vous ne maîtrisez pas ces réponses, vous perdez en crédibilité. Pire, vous risquez de voir vos clients partir chez la concurrence."
 

@@ -9,6 +9,7 @@ import { getStoredProgress } from "@/components/LessonProgress";
 import { ModuleLessonAudioControls } from "@/components/ModuleLessonAudioControls";
 import { ModuleHeroResumeCta } from "@/components/modules/ModuleHeroResumeCta";
 import { ModuleLessonStatusBadge } from "@/components/modules/ModuleLessonStatusBadge";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 export type ModuleLandingProps = {
   moduleSlug: string;
@@ -116,7 +117,7 @@ export function ModuleLanding({
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <span className="text-3xl drop-shadow-sm">{showcase.badge}</span>
-              <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider backdrop-blur-sm">
+              <span className="rounded-full bg-white/15 px-3 py-1 text-3xs font-bold uppercase tracking-wider backdrop-blur-sm">
                 {moduleTitle.replace(/^Module \d+ — /, "")}
               </span>
             </div>
@@ -137,7 +138,7 @@ export function ModuleLanding({
 
             <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-white/20 pt-8 text-center sm:max-w-lg sm:text-left">
               <div>
-                <dt className="text-[10px] font-bold uppercase tracking-wider text-white/55">
+                <dt className="text-2xs font-bold uppercase tracking-wider text-white/55">
                   Durée
                 </dt>
                 <dd className="mt-1 text-lg font-bold tabular-nums">
@@ -145,13 +146,13 @@ export function ModuleLanding({
                 </dd>
               </div>
               <div>
-                <dt className="text-[10px] font-bold uppercase tracking-wider text-white/55">
+                <dt className="text-2xs font-bold uppercase tracking-wider text-white/55">
                   Leçons
                 </dt>
                 <dd className="mt-1 text-lg font-bold tabular-nums">{lessons.length}</dd>
               </div>
               <div>
-                <dt className="text-[10px] font-bold uppercase tracking-wider text-white/55">
+                <dt className="text-2xs font-bold uppercase tracking-wider text-white/55">
                   Interactifs
                 </dt>
                 <dd className="mt-1 text-lg font-bold tabular-nums">{interactiveCount}</dd>
@@ -194,7 +195,7 @@ export function ModuleLanding({
       </section>
 
       {/* Bénéfices */}
-      <section className="card-elevated rounded-3xl border border-zinc-200/80 p-6 md:p-8">
+      <section className="card-elevated rounded-3xl p-6 md:p-8">
         <h2 className="text-sm font-bold uppercase tracking-wide text-brand-navy">
           Ce que vous emportez
         </h2>
@@ -208,7 +209,7 @@ export function ModuleLanding({
                 className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white shadow-sm"
                 style={{ backgroundColor: accent }}
               >
-                ✓
+                <EmojiIcon emoji="✓" className="h-4 w-4" />
               </span>
               {o}
             </li>
@@ -220,9 +221,7 @@ export function ModuleLanding({
               key={line}
               className="text-center text-xs font-medium leading-relaxed text-zinc-600 sm:text-left"
             >
-              <span className="mr-1 text-brand-gold" aria-hidden>
-                ★
-              </span>
+              <EmojiIcon emoji="⭐" className="mr-1 inline-block h-3.5 w-3.5 text-brand-gold" />
               {line}
             </p>
           ))}
@@ -275,7 +274,7 @@ export function ModuleLanding({
             const durLabel = lesson.duration ? formatDur(lesson.duration) : null;
             return (
               <li key={lesson.slug}>
-                <div className="group card-elevated flex flex-col gap-4 rounded-2xl border border-zinc-200/90 p-5 transition hover:border-zinc-300 md:flex-row md:items-stretch md:justify-between">
+                <div className="group card-elevated flex flex-col gap-4 p-5 transition hover:border-zinc-300 md:flex-row md:items-stretch md:justify-between">
                   <Link
                     href={`/formation/${moduleSlug}/${lesson.slug}`}
                     className="flex min-w-0 flex-1 gap-4"
@@ -292,18 +291,19 @@ export function ModuleLanding({
                           {lesson.title}
                         </span>
                         {lesson.interactive && (
-                          <span className="rounded-md bg-brand-navy/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-navy">
+                          <span className="rounded-md bg-brand-navy/10 px-2 py-0.5 text-2xs font-bold uppercase tracking-wide text-brand-navy">
                             Interactif
                           </span>
                         )}
                         {lesson.difficulty === "avance" && (
-                          <span className="rounded-md bg-amber-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-700">
+                          <span className="rounded-md bg-amber-50 px-2 py-0.5 text-2xs font-bold uppercase tracking-wide text-amber-700">
                             Avancé
                           </span>
                         )}
                         {durLabel && (
-                          <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-500">
-                            ⏱ {durLabel}
+                          <span className="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-0.5 text-2xs font-medium text-zinc-500">
+                            <EmojiIcon emoji="⏰" className="h-3 w-3" />
+                            {durLabel}
                           </span>
                         )}
                       </div>
@@ -314,7 +314,7 @@ export function ModuleLanding({
                         <ul className="mt-2 space-y-0.5">
                           {lesson.objectives.slice(0, 2).map((obj, j) => (
                             <li key={j} className="flex items-start gap-1.5 text-xs text-zinc-500">
-                              <span className="text-brand-gold mt-0.5" aria-hidden>✓</span>
+                              <EmojiIcon emoji="✓" className="mt-0.5 inline-block h-3.5 w-3.5 text-brand-gold" />
                               {obj}
                             </li>
                           ))}
@@ -325,12 +325,12 @@ export function ModuleLanding({
 
                   {lesson.audioSrc ? (
                     <div className="flex shrink-0 flex-col justify-center border-t border-zinc-100 pt-4 md:w-72 md:border-l md:border-t-0 md:pl-6 md:pt-0">
-                      <span className="mb-2 text-[10px] font-bold uppercase tracking-wide text-zinc-400">
+                      <span className="mb-2 text-2xs font-bold uppercase tracking-wide text-zinc-400">
                         Aperçu audio
                       </span>
                       <ModuleLessonAudioControls url={lesson.audioSrc} title={lesson.title} />
                       {!lesson.audioFileOk ? (
-                        <p className="mt-2 text-[10px] leading-snug text-amber-800">
+                        <p className="mt-2 text-2xs leading-snug text-amber-800">
                           Fichier MP3 absent — voir la leçon pour le script complet.
                         </p>
                       ) : null}
@@ -351,9 +351,9 @@ export function ModuleLanding({
         {prevModule ? (
           <Link
             href={prevModule.href}
-            className="card-elevated rounded-2xl border border-zinc-200 p-5 transition hover:border-brand-navy/25"
+            className="card-elevated p-5 transition hover:border-brand-navy/25"
           >
-            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">
+            <p className="text-2xs font-bold uppercase tracking-wider text-zinc-400">
               Module précédent
             </p>
             <p className="mt-2 font-semibold text-brand-navy">{prevModule.title}</p>
@@ -364,9 +364,9 @@ export function ModuleLanding({
         {nextModule ? (
           <Link
             href={nextModule.href}
-            className="card-elevated rounded-2xl border border-zinc-200 bg-gradient-to-br from-brand-navy/[0.04] to-amber-50/30 p-5 transition hover:border-brand-gold/40"
+            className="card-elevated bg-gradient-to-br from-brand-navy/[0.04] to-amber-50/30 p-5 transition hover:border-brand-gold/40"
           >
-            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">
+            <p className="text-2xs font-bold uppercase tracking-wider text-zinc-400">
               Module suivant
             </p>
             <p className="mt-2 font-semibold text-brand-navy">{nextModule.title} →</p>

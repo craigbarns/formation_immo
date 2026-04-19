@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 interface AnimatedAvatarProps {
   name: string;
@@ -72,7 +73,10 @@ export function AnimatedAvatar({
           animate={blink ? { scaleY: 0.1 } : { scaleY: 1 }}
           transition={{ duration: 0.1 }}
         >
-          {emoji}
+          <EmojiIcon
+            emoji={emoji}
+            className={size === "sm" ? "h-6 w-6" : size === "md" ? "h-10 w-10" : "h-14 w-14"}
+          />
         </motion.div>
 
         {/* Speaking indicator */}
@@ -101,7 +105,7 @@ export function AnimatedAvatar({
             animate={{ scale: 1, opacity: 1, y: [-5, -10, -5] }}
             transition={{ duration: 1, repeat: Infinity }}
           >
-            💭
+            <EmojiIcon emoji="💭" className="h-6 w-6" />
           </motion.div>
         )}
 
@@ -112,9 +116,9 @@ export function AnimatedAvatar({
             animate={{ opacity: 1, y: -20 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="text-xl">✨</span>
-            <span className="text-xl">🌟</span>
-            <span className="text-xl">✨</span>
+            <EmojiIcon emoji="✨" className="h-5 w-5" />
+            <EmojiIcon emoji="🌟" className="h-5 w-5" />
+            <EmojiIcon emoji="✨" className="h-5 w-5" />
           </motion.div>
         )}
       </motion.div>

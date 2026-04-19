@@ -81,9 +81,9 @@ Pourquoi tant d'agents rédigent-ils encore des annonces qui s'endorment ? [PAUS
 
 **Erreur numéro 3** : l'amateurisme flagrant. Fautes d'orthographe, formulations maladroites, manque de structure. Dans un marché où la confiance est primordiale, ces détails tuent votre crédibilité.
 
-[B-ROLL : Graphique animé - "78% des acheteurs abandonnent une annonce mal rédigée en moins de 10 secondes"]
+[B-ROLL : Graphique animé montrant un acheteur quittant rapidement une annonce mal rédigée]
 
-Pourtant, une étude récente montre que 78% des acheteurs abandonnent une annonce mal rédigée en moins de dix secondes. [PAUSE 2s] Dix secondes pour tout perdre. Ou pour tout gagner.
+Pourtant, de nombreux acheteurs abandonnent une annonce mal rédigée en quelques secondes seulement. [PAUSE 2s] Dix secondes pour tout perdre. Ou pour tout gagner.
 
 ---
 
@@ -283,7 +283,7 @@ Prochaine étape : maîtriser les portails immobiliers SeLoger et Leboncoin pour
 
 1. **Formule A.I.D.E.** : Accrocher, Intéresser, Désirer, Engager
 2. **8 secondes** : temps moyen d'attention sur une annonce
-3. **78%** des acheteurs abandonnent une annonce mal rédigée
+3. **De nombreux acheteurs** abandonnent une annonce mal rédigée
 4. **Vendre l'expérience**, pas les m²
 5. **Créer l'urgence** dans la conclusion
 

@@ -59,7 +59,7 @@ export function TabsList({
 
 export function TabsTrigger({
   value,
-  className,
+  className: _className,
   children,
 }: {
   value: string;
@@ -78,7 +78,8 @@ export function TabsTrigger({
         "inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-150",
         isActive
           ? "bg-white text-brand-navy shadow-sm"
-          : "text-zinc-500 hover:text-zinc-700"
+          : "text-zinc-500 hover:text-zinc-700",
+        _className
       )}
       role="tab"
       aria-selected={isActive}

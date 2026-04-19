@@ -51,9 +51,9 @@ Et puis, trois annonces plus loin... [PAUSE 1s] BOOM ! Une photo qui vous donne 
 
 Mais voici ce que vous ne savez peut-être pas : [PAUSE 2s] ces deux biens sont identiques. Même pièce, même appartement, même moment de la journée. La seule différence ? [PAUSE 1s] Celui qui a pris la photo.
 
-[B-ROLL : Graphique animé - "92% des acheteurs commencent leur recherche en ligne"]
+[B-ROLL : Graphique animé montrant des acheteurs consultant des annonces en ligne sur leur téléphone]
 
-Aujourd'hui, 92% des acheteurs commencent leur recherche en ligne. Votre photo est votre première impression. [PAUSE 2s] Et vous n'aurez jamais de seconde chance pour faire une première impression.
+Aujourd'hui, la grande majorité des acheteurs commencent leur recherche en ligne. Votre photo est votre première impression. [PAUSE 2s] Et vous n'aurez jamais de seconde chance pour faire une première impression.
 
 [B-ROLL : Logo formation avec effet de transition]
 
@@ -75,9 +75,9 @@ Deuxièmement, le manque de temps. [B-ROLL : Agent immobilier stressé regardant
 
 Troisièmement, et c'est peut-être le plus grave : [PAUSE 2s] l'absence de formation. On vous a appris le droit immobilier, la négociation, le financement... [B-ROLL : Images de formation classique, salle de cours] mais jamais comment prendre une photo qui vend.
 
-[B-ROLL : Graphique animé - "Une annonce avec photos professionnelles reçoit 3,5x plus de contacts"]
+[B-ROLL : Graphique animé montrant la différence de contacts entre une annonce avec photos professionnelles et une annonce avec photos amateurs]
 
-Pourtant, une étude récente montre qu'une annonce avec des photos professionnelles reçoit trois fois et demie plus de contacts. [PAUSE 2s] Trois fois et demie. Faites le calcul sur votre chiffre d'affaires annuel.
+Pourtant, une annonce avec des photos professionnelles reçoit nettement plus de contacts qu'une annonce avec des photos amateurs. [PAUSE 2s] La différence peut être considérable. Faites le calcul sur votre chiffre d'affaires annuel.
 
 ---
 
@@ -266,8 +266,8 @@ Vous avez maintenant tous les outils. À vous de jouer. [PAUSE 2s] Prochaine ét
 
 ### 🎯 POINTS CLÉS À RETENIR
 
-1. **92%** des acheteurs commencent leur recherche en ligne
-2. **3,5x** plus de contacts avec des photos professionnelles
+1. **La grande majorité** des acheteurs commencent leur recherche en ligne
+2. **Nettement plus** de contacts avec des photos professionnelles
 3. **5 piliers** : Équipement, Préparation, Lumière, Composition, Post-traitement
 4. **Budget équipement** : ~1000€ pour un kit professionnel
 5. **ROI** : Incalculable sur le long terme

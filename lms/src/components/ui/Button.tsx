@@ -12,7 +12,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", loading, disabled, children, ...props }, ref) => {
     const base =
       "inline-flex items-center justify-center gap-2 font-semibold outline-none transition-all duration-200 rounded-xl " +
-      "focus-visible:ring-2 focus-visible:ring-brand-gold/70 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 " +
+      "focus-ring-brand disabled:pointer-events-none disabled:opacity-50 " +
       "active:scale-[0.98] select-none";
 
     const variants: Record<NonNullable<ButtonProps["variant"]>, string> = {

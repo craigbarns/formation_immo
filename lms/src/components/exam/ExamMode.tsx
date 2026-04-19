@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { FileText, Trophy, PartyPopper, BookOpen, CheckCircle2, XCircle } from "lucide-react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { ExamQuestion, ModuleExam } from "@/data/exam-questions";
 import { recordExamScore } from "@/lib/gamification";
 import { createClient } from "@/lib/supabase/client";
@@ -224,20 +226,20 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
     return (
       <div className="animate-scale-in rounded-2xl overflow-hidden border border-brand-navy/15 shadow-xl">
         {/* Header gradient */}
-        <div className="bg-gradient-to-br from-brand-navy via-[#1e4a73] to-brand-navy-soft px-8 py-8 text-white text-center">
+        <div className="bg-gradient-to-br from-brand-navy via-[var(--brand-navy-light)] to-brand-navy-soft px-8 py-8 text-white text-center">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 text-3xl shadow-lg ring-1 ring-white/25 mb-4">
-            📝
+            <FileText className="h-8 w-8 text-white" />
           </div>
           <h2 className="text-2xl font-bold tracking-tight">{exam.title}</h2>
-          <p className="mt-2 text-white/75 text-sm">Examen chronométré · Score enregistré</p>
+          <p className="mt-2 text-white/85 text-sm">Examen chronométré · Score enregistré</p>
 
           {prevScore && prevPct !== null && (
             <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm backdrop-blur-sm">
-              <span className="text-white/70">Dernier score :</span>
+              <span className="text-white/80">Dernier score :</span>
               <span className={`font-bold ${prevPct >= 80 ? "text-emerald-300" : "text-amber-300"}`}>
                 {prevScore.score}/{prevScore.total} ({prevPct}%)
               </span>
-              {prevPct >= 80 ? " ✓" : " — à améliorer"}
+              {prevPct >= 80 ? <EmojiIcon emoji="✓" className="h-4 w-4 text-emerald-300" /> : " — à améliorer"}
             </div>
           )}
         </div>
@@ -257,7 +259,9 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
           <div className="mt-6 flex justify-center gap-3">
             <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-3 text-center">
               <p className="text-lg font-black text-emerald-700">80%+</p>
-              <p className="text-xs text-emerald-600 font-medium">= Réussi ✓</p>
+              <p className="text-xs text-emerald-600 font-medium inline-flex items-center justify-center gap-1">
+                = Réussi <EmojiIcon emoji="✓" className="h-3.5 w-3.5" />
+              </p>
             </div>
             <div className="rounded-xl border border-amber-200 bg-amber-50 px-5 py-3 text-center">
               <p className="text-lg font-black text-amber-700">+300 XP</p>
@@ -310,7 +314,7 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
               ? "bg-gradient-to-br from-emerald-600 to-emerald-700"
               : "bg-gradient-to-br from-amber-600 to-orange-600"
         }`}>
-          <div className="text-5xl mb-3">{isPerfect ? "🏆" : passed ? "🎉" : "📚"}</div>
+          <div className="flex justify-center mb-3">{isPerfect ? <Trophy className="h-12 w-12 text-white" /> : passed ? <PartyPopper className="h-12 w-12 text-white" /> : <BookOpen className="h-12 w-12 text-white" />}</div>
           <h2 className="text-2xl font-bold">{resultMsg}</h2>
           <p className="mt-1 text-sm text-white/80">{resultSub}</p>
         </div>
@@ -354,17 +358,17 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
                 disabled={generatingCards}
                 className="rounded-xl border-2 border-emerald-600 px-6 py-2.5 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50 disabled:opacity-50"
               >
-                {generatingCards ? "Génération…" : "📚 Flashcards auto depuis erreurs"}
+                {generatingCards ? "Génération…" : <span className="inline-flex items-center gap-1.5"><BookOpen className="h-4 w-4" /> Flashcards auto depuis erreurs</span>}
               </button>
             )}
             {cardsGenerated && (
               <span className="rounded-xl bg-emerald-50 px-6 py-2.5 text-sm font-semibold text-emerald-700">
-                ✅ Flashcards créées !
+                <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" /> Flashcards créées !</span>
               </span>
             )}
             {cardsError && (
               <span className="rounded-xl bg-red-50 px-6 py-2.5 text-sm font-semibold text-red-700">
-                ❌ Erreur de génération — réessaie plus tard
+                <span className="inline-flex items-center gap-1.5"><XCircle className="h-4 w-4" /> Erreur de génération — réessaie plus tard</span>
               </span>
             )}
           </div>
@@ -410,7 +414,7 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
               Question{" "}
               <span className="font-bold text-brand-navy">{current + 1}</span>/{total}
             </span>
-            <span className="hidden sm:inline rounded-full bg-brand-navy/8 px-2 py-0.5 text-[10px] font-bold text-brand-navy">
+            <span className="hidden sm:inline rounded-full bg-brand-navy/8 px-2 py-0.5 text-2xs font-bold text-brand-navy">
               {answeredCount}/{total} répondues
             </span>
           </div>
@@ -524,7 +528,7 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
             disabled={isGrading}
             className="rounded-lg bg-brand-gold px-6 py-2 text-sm font-bold text-brand-navy shadow transition hover:brightness-[1.05] disabled:opacity-50"
           >
-            {isGrading ? "Notation IA en cours…" : "Terminer l'examen ✓"}
+            {isGrading ? "Notation IA en cours…" : <span className="inline-flex items-center gap-1.5">Terminer l&apos;examen <EmojiIcon emoji="✓" className="h-4 w-4" /></span>}
           </button>
         )}
       </div>
@@ -562,12 +566,12 @@ function ReviewQuestion({
         <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${
           unanswered ? "bg-zinc-400" : correct ? "bg-emerald-500" : "bg-red-500"
         }`}>
-          {unanswered ? "?" : correct ? "✓" : "✗"}
+          {unanswered ? "?" : correct ? <EmojiIcon emoji="✓" className="h-4 w-4" /> : <EmojiIcon emoji="❌" className="h-4 w-4" />}
         </span>
         <div className="flex-1">
           <p className="text-sm font-medium text-zinc-800">
             <span className="text-zinc-400">Q{index + 1}.</span> {question.question}
-            {isOpen && <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-700">OUVERTE</span>}
+            {isOpen && <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-2xs font-bold text-amber-700">OUVERTE</span>}
           </p>
           {isOpen ? (
             <div className="mt-2 space-y-2">
@@ -579,7 +583,7 @@ function ReviewQuestion({
                 <div className="rounded-lg border border-amber-200 bg-amber-50/60 p-3 text-xs space-y-1">
                   <p className="font-bold text-amber-800">Note IA : {grade.score}/100</p>
                   <p className="text-zinc-700">{grade.feedback}</p>
-                  {grade.strengths && <p className="text-emerald-700">✓ {grade.strengths}</p>}
+                  {grade.strengths && <p className="text-emerald-700 inline-flex items-center gap-1"><EmojiIcon emoji="✓" className="h-3 w-3" /> {grade.strengths}</p>}
                   {grade.improvements && <p className="text-red-600">→ {grade.improvements}</p>}
                 </div>
               )}
@@ -604,7 +608,7 @@ function ReviewQuestion({
                   }`}
                 >
                   {String.fromCharCode(65 + i)}. {opt}
-                  {i === question.correctIndex && " ✓"}
+                  {i === question.correctIndex && <EmojiIcon emoji="✓" className="ml-1 inline-block h-3.5 w-3.5" />}
                   {i === answer && i !== question.correctIndex && " (votre réponse)"}
                 </p>
               ))}

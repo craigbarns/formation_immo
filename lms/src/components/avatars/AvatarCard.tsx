@@ -34,7 +34,7 @@ export function AvatarCard({ avatar }: { avatar: ModuleAvatar }) {
 
       {/* Voice info */}
       <div className="mt-3 flex flex-wrap gap-2">
-        <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-[10px] font-medium text-zinc-600">
+        <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-2xs font-medium text-zinc-600">
           {avatar.mistralVoiceLabel}
         </span>
       </div>
@@ -51,7 +51,7 @@ export function AvatarCard({ avatar }: { avatar: ModuleAvatar }) {
           <p className="text-xs leading-relaxed text-zinc-700 font-mono">{avatar.portraitPrompt}</p>
           <button
             onClick={copyPrompt}
-            className="mt-2 rounded bg-brand-navy px-3 py-1 text-[10px] font-bold text-white hover:bg-brand-navy-deep"
+            className="mt-2 rounded bg-brand-navy px-3 py-1 text-2xs font-bold text-white hover:bg-brand-navy-deep"
           >
             {copied ? "Copie !" : "Copier le prompt"}
           </button>

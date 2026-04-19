@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Brain, RotateCw, CheckCircle2, XCircle, MoreHorizontal } from "lucide-react";
+import { Brain, RotateCw, CheckCircle2, XCircle, MoreHorizontal, Trophy, PartyPopper, BookOpen } from "lucide-react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { recordFlashcardReviewed } from "@/lib/gamification";
 import { createClient } from "@/lib/supabase/client";
 
@@ -225,7 +226,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
       <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-8 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-400" />
         <h3 className="mt-4 text-lg font-bold text-white">Toutes les cartes sont à jour !</h3>
-        <p className="mt-2 text-sm text-white/70">
+        <p className="mt-2 text-sm text-white/80">
           Revenez demain pour réviser les cartes programmées.
         </p>
       </div>
@@ -238,10 +239,10 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
     const isPerfect = sessionStats.again === 0 && total > 0;
 
     return (
-      <div className="rounded-2xl overflow-hidden border border-brand-gold/20 bg-gradient-to-br from-brand-navy/60 to-[#0f1f33]/70 shadow-xl">
+      <div className="rounded-2xl overflow-hidden border border-brand-gold/20 bg-gradient-to-br from-brand-navy/60 to-[var(--surface-dark)]/70 shadow-xl">
         {/* Header */}
         <div className="border-b border-white/10 px-6 py-6 text-center">
-          <div className="text-4xl mb-2">{isPerfect ? "🏆" : accuracy >= 70 ? "🎉" : "📚"}</div>
+          <div className="flex justify-center mb-2">{isPerfect ? <Trophy className="h-10 w-10 text-brand-gold" /> : accuracy >= 70 ? <PartyPopper className="h-10 w-10 text-brand-gold" /> : <BookOpen className="h-10 w-10 text-brand-gold" />}</div>
           <h3 className="text-xl font-bold text-white">
             {isPerfect ? "Session parfaite !" : "Session terminée !"}
           </h3>
@@ -269,7 +270,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
             </svg>
             <div className="text-center">
               <p className="text-2xl font-black text-white">{accuracy.toFixed(0)}%</p>
-              <p className="text-[10px] text-white/70">précision</p>
+              <p className="text-2xs text-white/80">précision</p>
             </div>
           </div>
 
@@ -277,15 +278,15 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
           <div className="grid grid-cols-3 gap-3">
             <div className="rounded-xl bg-red-500/10 border border-red-500/20 p-4 text-center">
               <p className="text-2xl font-bold text-red-400">{sessionStats.again}</p>
-              <p className="text-xs text-white/70 mt-1">À revoir</p>
+              <p className="text-xs text-white/80 mt-1">À revoir</p>
             </div>
             <div className="rounded-xl bg-blue-500/10 border border-blue-500/20 p-4 text-center">
               <p className="text-2xl font-bold text-blue-400">{sessionStats.good}</p>
-              <p className="text-xs text-white/70 mt-1">Bien</p>
+              <p className="text-xs text-white/80 mt-1">Bien</p>
             </div>
             <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-4 text-center">
               <p className="text-2xl font-bold text-emerald-400">{sessionStats.easy}</p>
-              <p className="text-xs text-white/70 mt-1">Facile</p>
+              <p className="text-xs text-white/80 mt-1">Facile</p>
             </div>
           </div>
 
@@ -295,7 +296,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
 
           <button
             onClick={restartSession}
-            className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-brand-gold py-3.5 font-bold text-brand-navy shadow-lg transition hover:bg-[#e0bf4d] hover:shadow-xl active:scale-[0.98]"
+            className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-brand-gold py-3.5 font-bold text-brand-navy shadow-lg transition hover:bg-[var(--brand-gold-hover)] hover:shadow-xl active:scale-[0.98]"
           >
             <RotateCw className="h-4 w-4" />
             Nouvelle session
@@ -308,25 +309,23 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
   const currentCard = dueCards[currentIndex];
   const progress = ((currentIndex) / dueCards.length) * 100;
 
-  // Feedback color after answering
-  const feedbackColor = !showBack
-    ? null
-    : null; // will be set after response
+  // Feedback color after answering (reserved for future animation)
+  // const feedbackColor = !showBack ? null : null;
 
   return (
     <div className="space-y-4">
       {/* Progress header */}
       <div className="flex items-center justify-between text-sm">
         <div className="flex items-center gap-2">
-          <span className="text-white/70 font-medium">Carte</span>
+          <span className="text-white/80 font-medium">Carte</span>
           <span className="rounded-lg bg-white/15 px-2 py-0.5 text-sm font-bold text-white tabular-nums">
             {currentIndex + 1}/{dueCards.length}
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-white/70">{Math.round(progress)}%</span>
-          <span className="text-brand-gold font-bold">
-            {sessionStats.easy + sessionStats.good} ✓
+          <span className="text-xs text-white/80">{Math.round(progress)}%</span>
+          <span className="inline-flex items-center gap-1 text-brand-gold font-bold">
+            {sessionStats.easy + sessionStats.good} <EmojiIcon emoji="✓" className="h-3.5 w-3.5" />
           </span>
         </div>
       </div>
@@ -359,8 +358,8 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
             transition={{ duration: 0.28, ease: "easeOut" }}
             className={`rounded-2xl border p-8 text-center shadow-lg ${
               showBack
-                ? "border-brand-gold/40 bg-gradient-to-br from-brand-navy via-[#1e4a73] to-[#0f1f33]"
-                : "border-brand-gold/20 bg-gradient-to-br from-brand-navy to-[#0f1f33]"
+                ? "border-brand-gold/40 bg-gradient-to-br from-brand-navy via-[var(--brand-navy-light)] to-[var(--surface-dark)]"
+                : "border-brand-gold/20 bg-gradient-to-br from-brand-navy to-[var(--surface-dark)]"
             }`}
           >
             <div className="mb-4 flex justify-center">
@@ -375,7 +374,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
             {!showBack && (
               <p className="mt-6 text-xs text-on-dark-muted flex items-center justify-center gap-1">
                 <span>Cliquez pour révéler</span>
-                <span aria-hidden>↩</span>
+                <EmojiIcon emoji="↩" className="h-3 w-3" />
               </p>
             )}
           </motion.div>
@@ -396,7 +395,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
           >
             <XCircle className="h-6 w-6" />
             <span className="text-sm font-bold">Encore</span>
-            <span className="text-[10px] text-on-dark-muted">&lt; 1 min</span>
+            <span className="text-2xs text-on-dark-muted">&lt; 1 min</span>
           </button>
           <button
             onClick={() => handleResponse(3)}
@@ -404,7 +403,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
           >
             <MoreHorizontal className="h-6 w-6" />
             <span className="text-sm font-bold">Bien</span>
-            <span className="text-[10px] text-on-dark-muted">1 jour</span>
+            <span className="text-2xs text-on-dark-muted">1 jour</span>
           </button>
           <button
             onClick={() => handleResponse(5)}
@@ -412,7 +411,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
           >
             <CheckCircle2 className="h-6 w-6" />
             <span className="text-sm font-bold">Facile</span>
-            <span className="text-[10px] text-on-dark-muted">4 jours</span>
+            <span className="text-2xs text-on-dark-muted">4 jours</span>
           </button>
         </motion.div>
       )}

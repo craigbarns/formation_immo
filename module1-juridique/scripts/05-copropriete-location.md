@@ -30,7 +30,7 @@ Modern Parisian apartment building facade, Haussmann architecture with ornate ba
 
 **NARRATION :**
 
-La copropriété. [PAUSE 2s] Ce mode de vie qui concerne plus de 10 millions de Français. [PAUSE 1s] Et la location. [PAUSE 1s] Ce secteur qui représente 40% du parc immobilier français.
+La copropriété. [PAUSE 2s] Ce mode de vie qui concerne plus de 10 millions de Français. [PAUSE 1s] Et la location. [PAUSE 1s] Ce secteur qui représente une part importante du parc immobilier français.
 
 [B-ROLL : Montage rapide : assemblée générale de copropriété, signature d'un bail, agent expliquant des documents à des clients]
 
@@ -44,15 +44,15 @@ Aujourd'hui, nous allons faire le tour complet de l'essentiel juridique. [PAUSE 
 
 ### PROBLÉMATIQUE (1 minute)
 
-[B-ROLL : Infographie montrant les statistiques : 3 millions de copropriétés en France, 15 millions de locataires, 40% des contentieux immobiliers concernent la location]
+[B-ROLL : Infographie montrant le paysage de la copropriété et de la location en France]
 
 **NARRATION :**
 
-Les chiffres parlent d'eux-mêmes. [PAUSE 1s] En France, on compte près de 3 millions de copropriétés, regroupant plus de 10 millions de logements. [PAUSE 1s] Le secteur locatif compte 15 millions de locataires, soit 40% des ménages.
+Les chiffres parlent d'eux-mêmes. [PAUSE 1s] En France, on compte plusieurs millions de copropriétés, regroupant plus de 10 millions de logements. [PAUSE 1s] Le secteur locatif concerne des millions de ménages et représente une part significative du parc immobilier français.
 
 [B-ROLL : Graphique montrant l'évolution des contentieux copropriété et location]
 
-Pourtant, 40% des contentieux immobiliers concernent la location. [PAUSE 1s] Et les problèmes de copropriété représentent 25% des difficultés rencontrées lors des transactions.
+Pourtant, les contentieux locatifs représentent une part significative des litiges immobiliers. [PAUSE 1s] Et les problèmes de copropriété comptent parmi les principales difficultés rencontrées lors des transactions.
 
 [B-ROLL : Images de réunions de copropriété tendues, de locataires et propriétaires en conflit]
 
@@ -422,7 +422,7 @@ Ce module juridique touche à sa fin. [PAUSE 1s] Vous avez maintenant les bases 
 - Loi n° 65-557 du 10 juillet 1965 (loi de 1965)
 - Décret n° 67-223 du 17 mars 1967
 - Loi ALUR 2014 (modernisation)
-- Article 8 Loi n° 2025-127 (dossier diagnostic technique)
+- Code de la construction et de l'habitation : articles L. 721-1 et suivants (dossier diagnostic technique de copropriété)
 
 ### Location :
 - Loi n° 89-462 du 6 juillet 1989 (loi Mermaz)

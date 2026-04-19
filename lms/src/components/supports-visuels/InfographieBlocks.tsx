@@ -3,11 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ExternalLink, CheckCircle2, AlertTriangle, Scale, Target, TrendingUp, ShieldCheck, HelpCircle, Check } from "lucide-react";
+import { CheckCircle2, Scale, TrendingUp, Check } from "lucide-react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { SupportVisuelMeta } from "@/data/supports-visuels";
 
-const navy = "#1a3a5c";
-const gold = "#c9a227";
+const navy = "var(--brand-navy)";
+const gold = "var(--brand-gold)";
 
 function LessonLink({ href, label }: { href: string; label: string }) {
   return (
@@ -20,7 +21,7 @@ function LessonLink({ href, label }: { href: string; label: string }) {
   );
 }
 
-export function InfographieBlocks({ id, meta, themeColor = "#1a3a5c" }: { id: string; meta: SupportVisuelMeta; themeColor?: string }) {
+export function InfographieBlocks({ id, meta, themeColor = "var(--brand-navy)" }: { id: string; meta: SupportVisuelMeta; themeColor?: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -42,7 +43,7 @@ export function InfographieBlocks({ id, meta, themeColor = "#1a3a5c" }: { id: st
               >
                 <Scale size={14} />
               </span>
-              <p className="text-xs font-black uppercase tracking-widest text-[#c9a227]">
+              <p className="text-xs font-black uppercase tracking-widest text-[var(--brand-gold)]">
                 {meta.moduleLabel}
               </p>
             </div>
@@ -167,7 +168,7 @@ function BlockChecklist() {
         ))}
       </div>
       <div>
-        <h3 className="text-center text-sm font-bold uppercase text-[#c9a227]">
+        <h3 className="text-center text-sm font-bold uppercase text-[var(--brand-gold)]">
           Questions clés à poser
         </h3>
         <div className="mt-4 grid gap-4 md:grid-cols-3">
@@ -237,7 +238,7 @@ function BlockMatrice() {
   return (
     <div className="grid gap-8 lg:grid-cols-3">
       <div className="lg:col-span-2">
-        <p className="mb-2 text-center text-[10px] font-bold uppercase tracking-wide text-zinc-500">
+        <p className="mb-2 text-center text-2xs font-bold uppercase tracking-wide text-zinc-500">
           Probabilité →
         </p>
         <div className="overflow-x-auto rounded-2xl shadow-sm border border-zinc-200">
@@ -260,7 +261,7 @@ function BlockMatrice() {
               {grid.map((row, ri) => (
                 <tr key={rowLabels[ri]}>
                   <th
-                    className="border border-zinc-200 bg-zinc-50/80 p-3 text-[10px] font-bold uppercase leading-tight text-zinc-600"
+                    className="border border-zinc-200 bg-zinc-50/80 p-3 text-2xs font-bold uppercase leading-tight text-zinc-600"
                     scope="row"
                   >
                     {rowLabels[ri]}
@@ -272,7 +273,7 @@ function BlockMatrice() {
                     >
                       <span className="font-medium">{cell.text}</span>
                       {cell.note && (
-                        <span className="mt-1 block text-[10px] opacity-80">{cell.note}</span>
+                        <span className="mt-1 block text-2xs opacity-80">{cell.note}</span>
                       )}
                     </td>
                   ))}
@@ -340,19 +341,19 @@ function BlockNegociation() {
         <div className="grid w-full max-w-md grid-cols-2 gap-4">
           <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-sky-400 bg-sky-50 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
             <p className="font-bold text-brand-navy text-sm">DÉLAIS</p>
-            <p className="mt-1.5 text-[11px] text-zinc-600">Flexibilité calendaire</p>
+            <p className="mt-1.5 text-3xs text-zinc-600">Flexibilité calendaire</p>
           </motion.div>
           <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-brand-navy bg-brand-navy/5 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
             <p className="font-bold text-brand-navy text-sm">PRIX</p>
-            <p className="mt-1.5 text-[11px] text-zinc-600">Analyser les comparables</p>
+            <p className="mt-1.5 text-3xs text-zinc-600">Analyser les comparables</p>
           </motion.div>
           <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-amber-500 bg-amber-50 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
             <p className="font-bold text-brand-navy text-sm">CONDITIONS</p>
-            <p className="mt-1.5 text-[11px] text-zinc-600">Clauses suspensives</p>
+            <p className="mt-1.5 text-3xs text-zinc-600">Clauses suspensives</p>
           </motion.div>
           <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-emerald-500 bg-emerald-50 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
             <p className="font-bold text-brand-navy text-sm">GARANTIES</p>
-            <p className="mt-1.5 text-[11px] text-zinc-600">Financement assuré</p>
+            <p className="mt-1.5 text-3xs text-zinc-600">Financement assuré</p>
           </motion.div>
         </div>
       </div>
@@ -501,10 +502,10 @@ function BlockTimeline() {
           <div className="absolute left-8 right-8 top-5 h-0.5 bg-brand-navy/30" aria-hidden />
           {steps.map((s) => (
             <div key={s.day} className="relative z-10 flex w-28 flex-col items-center text-center">
-              <span className="text-xs font-bold text-[#c9a227]">{s.day}</span>
-              <div className="mt-2 h-4 w-4 rounded-full border-4 border-[#c9a227] bg-white shadow" />
+              <span className="text-xs font-bold text-[var(--brand-gold)]">{s.day}</span>
+              <div className="mt-2 h-4 w-4 rounded-full border-4 border-[var(--brand-gold)] bg-white shadow" />
               <p className="mt-3 text-sm font-bold text-brand-navy">{s.title}</p>
-              <p className="mt-1 text-[11px] text-zinc-500">{s.sub}</p>
+              <p className="mt-1 text-3xs text-zinc-500">{s.sub}</p>
             </div>
           ))}
         </div>
@@ -556,7 +557,7 @@ function BlockFinancement() {
         </div>
         <div className="grid max-w-lg flex-1 gap-6 sm:grid-cols-2">
           <div>
-            <h3 className="text-xs font-bold uppercase text-[#c9a227]">Apport personnel</h3>
+            <h3 className="text-xs font-bold uppercase text-[var(--brand-gold)]">Apport personnel</h3>
             <ul className="mt-2 list-disc space-y-1 pl-4 text-sm text-zinc-700">
               <li>Épargne disponible</li>
               <li>Pas de taxation à l’apport</li>
@@ -585,7 +586,7 @@ function BlockFinancement() {
             { k: "Assurance emprunteur", v: "0,3–0,5 %", c: "bg-zinc-100 text-zinc-800" },
           ].map((x) => (
             <div key={x.k} className={`rounded-xl px-3 py-3 text-center ${x.c}`}>
-              <p className="text-[10px] font-semibold uppercase opacity-80">{x.k}</p>
+              <p className="text-2xs font-semibold uppercase opacity-80">{x.k}</p>
               <p className="mt-1 text-lg font-bold">{x.v}</p>
             </div>
           ))}
@@ -695,7 +696,7 @@ function BlockDiagnostics() {
               <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Diagnostic</th>
               <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Validité</th>
               <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Condition</th>
-              <th className="border border-zinc-200 p-3 text-center font-semibold text-brand-navy">⚠️</th>
+              <th className="border border-zinc-200 p-3 text-center font-semibold text-brand-navy"><EmojiIcon emoji="⚠️" className="h-4 w-4 inline" /></th>
             </tr>
           </thead>
           <tbody>
@@ -762,13 +763,13 @@ function BlockMandats() {
           >
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold text-brand-navy">{c.title}</h3>
-              <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase ${c.badge}`}>{c.success}</span>
+              <span className={`rounded-full px-2 py-0.5 text-2xs font-bold uppercase ${c.badge}`}>{c.success}</span>
             </div>
             <p className="mt-1 text-xs text-zinc-500">Délai moyen : {c.delay}</p>
             <ul className="mt-4 space-y-2 text-sm text-zinc-700">
               {c.points.map((p) => (
                 <li key={p} className="flex gap-2">
-                  <span className="text-[#c9a227]">★</span> {p}
+                  <span className="text-[var(--brand-gold)]">★</span> {p}
                 </li>
               ))}
             </ul>
@@ -872,7 +873,7 @@ function BlockNetVendeur() {
   return (
     <div className="space-y-6">
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="space-y-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+        <div className="space-y-4 card-elevated p-5">
           <h3 className="text-sm font-bold uppercase text-brand-navy">Paramètres</h3>
           <div className="space-y-3">
             <div>

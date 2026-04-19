@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { PresenterCard } from "./PresenterCard";
+
 import { AnimatedAvatar } from "./AnimatedAvatar";
 import { Play, Pause, SkipForward, RotateCcw } from "lucide-react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 interface LessonStep {
   id: string;
@@ -130,7 +131,7 @@ export function InteractiveLesson({ title, presenter, steps }: InteractiveLesson
                   className="mt-6 p-4 bg-amber-50 rounded-xl border border-amber-200"
                 >
                   <p className="text-sm text-amber-800">
-                    <span className="font-semibold">💡 Astuce :</span> {step.tip}
+                    <span className="font-semibold inline-flex items-center gap-1"><EmojiIcon emoji="💡" className="h-4 w-4" /> Astuce :</span> {step.tip}
                   </p>
                 </motion.div>
               )}
@@ -143,7 +144,7 @@ export function InteractiveLesson({ title, presenter, steps }: InteractiveLesson
                   className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-200"
                 >
                   <p className="text-sm text-blue-800">
-                    <span className="font-semibold">🎯 Action :</span> {step.action}
+                    <span className="font-semibold inline-flex items-center gap-1"><EmojiIcon emoji="🎯" className="h-4 w-4" /> Action :</span> {step.action}
                   </p>
                 </motion.div>
               )}

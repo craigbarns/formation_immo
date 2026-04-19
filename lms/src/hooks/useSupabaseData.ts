@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { GamificationState } from "@/lib/gamification";
-import type { BadgeId } from "@/lib/gamification";
 
 const supabase = createClient();
 
