@@ -11,7 +11,7 @@
 
 ## 📋 PRÉSENTATION
 
-Cette formation complète de **42 heures** de contenu pédagogique couvre l'ensemble des compétences nécessaires pour exercer la profession d'agent immobilier en conformité avec la législation 2026. Elle est structurée en **5 modules / 36 leçons** dans le LMS. Les **évaluations** (10 h au total) peuvent être proposées en option ou en parcours allongé — voir `AVATARS-CASTING-ET-PACKAGING-COMMERCIAL.md` pour le détail des volumes.
+Cette formation complète de **42 heures** couvre l'ensemble des compétences nécessaires pour exercer la profession d'agent immobilier en conformité avec la législation 2026. Elle est structurée en **5 modules / 36 leçons** dans le LMS (40h de contenu pédagogique + 2h de certification finale).
 
 ### 🎯 Objectifs
 - Maîtriser le cadre juridique ALUR et la conformité
@@ -288,13 +288,13 @@ Tous les contenus respectent :
 
 ## 📝 LICENCE ET UTILISATION
 
-Cette formation est prête à l'emploi pour :
+Cette formation est en phase de finalisation (MVP fonctionnel) pour :
 - Centres de formation immobiliers
 - Agences immobilières (formation interne)
 - Auto-entrepreneurs (reconversion)
 - Organismes de formation certifiants
 
-**Tous les contenus sont fournis en l'état, prêts à être utilisés ou adaptés.**
+**Contenus pédagogiques livrés (audio, scripts, QCM, cas pratiques). Industrialisation vidéo et certification finale en cours de finalisation — voir `SOURCE-DE-VERITE.md` pour le détail.**
 
 ---
 

@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "duration": 439.985,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.211,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 30.969,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 61.041,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 91.64,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 124.447,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 154.953,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 189.202,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 220.277,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 252.428,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 284.065,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 315.598,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 345.616,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 375.923,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 407.826,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 439.564,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "faites",
+      "start": 0.351,
+      "end": 0.672
+    },
+    {
+      "term": "appels,",
+      "start": 1.152,
+      "end": 1.893
+    },
+    {
+      "term": "rendez-vous",
+      "start": 2.794,
+      "end": 3.595
+    },
+    {
+      "term": "mandat.",
+      "start": 5.338,
+      "end": 6.059
+    },
+    {
+      "term": "parle",
+      "start": 6.419,
+      "end": 7.08
+    },
+    {
+      "term": "prospection",
+      "start": 7.26,
+      "end": 7.741
+    },
+    {
+      "term": "agents",
+      "start": 9.963,
+      "end": 10.164
+    },
+    {
+      "term": "aussi",
+      "start": 12.086,
+      "end": 12.286
+    },
+    {
+      "term": "fait",
+      "start": 14.689,
+      "end": 14.83
+    },
+    {
+      "term": "différence",
+      "start": 14.97,
+      "end": 15.49
+    }
+  ]
+}

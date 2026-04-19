@@ -1,0 +1,617 @@
+1
+00:00:00,391 --> 00:00:01,732
+Le compromis de vente.
+
+2
+00:00:01,752 --> 00:00:05,613
+Pour beaucoup d'agents, ces trois mots
+provoquent une montée d'adrénaline.
+
+3
+00:00:05,633 --> 00:00:07,833
+Pas l'excitation positive, non.
+
+4
+00:00:07,854 --> 00:00:10,855
+Cette angoisse de l'erreur qui pourrait
+tout faire capoter.
+
+5
+00:00:10,894 --> 00:00:12,615
+Et si j'ai oublié une clause ?
+
+6
+00:00:12,654 --> 00:00:15,096
+Et si la description du bien est inexacte
+?
+
+7
+00:00:15,135 --> 00:00:17,696
+Et si le délai de rétractation n'est pas
+respecté ?
+
+8
+00:00:17,736 --> 00:00:21,117
+Aujourd'hui, nous allons transformer cette
+anxiété en confiance.
+
+9
+00:00:21,158 --> 00:00:26,760
+Vous allez apprendre à rédiger un
+compromis de vente irréprochable, clause
+par clause, point par point.
+
+10
+00:00:26,780 --> 00:00:27,981
+Les chiffres sont édifiants.
+
+11
+00:00:28,521 --> 00:00:33,165
+les compromis de vente font régulièrement
+l'objet de contestations avant l'acte
+authentique.
+
+12
+00:00:33,185 --> 00:00:37,289
+Une erreur ou un oubli, même minime, peut
+avoir des conséquences graves.
+
+13
+00:00:37,310 --> 00:00:38,572
+Les conséquences ?
+
+14
+00:00:38,591 --> 00:00:48,140
+Des retards de plusieurs mois, des frais
+juridiques qui s'accumulent, des relations
+clientes dégradées, et dans les cas les
+plus graves, des annulations de vente qui
+laissent tout le monde sur le carreau.
+
+15
+00:00:48,161 --> 00:00:49,162
+Mais il y a une autre voie.
+
+16
+00:00:49,802 --> 00:00:56,228
+Les agents qui maîtrisent parfaitement la
+rédaction des compromis accélèrent le
+délai entre compromis et actes
+authentiques.
+
+17
+00:00:56,247 --> 00:01:00,572
+Leur taux de transaction annulé est
+nettement inférieur à la moyenne du
+marché.
+
+18
+00:01:00,612 --> 00:01:02,533
+Commençons par les bases essentielles.
+
+19
+00:01:02,552 --> 00:01:04,694
+Le compromis de vente, c'est quoi
+exactement ?
+
+20
+00:01:05,174 --> 00:01:11,197
+C'est un contrat synalagmatique par lequel
+le vendeur s'oblige à vendre et
+l'acquéreur s'oblige à acheter.
+
+21
+00:01:11,218 --> 00:01:14,478
+L'article 1589 du Code civil est clair.
+
+22
+00:01:14,498 --> 00:01:20,521
+La promesse de vente vaut vente lorsqu'il
+y a consentement réciproque des parties
+sur la chose et sur le prix.
+
+23
+00:01:20,540 --> 00:01:23,942
+Le compromis crée des obligations
+réciproques et irrévocables.
+
+24
+00:01:24,602 --> 00:01:27,885
+Attention, il ne s'agit pas d'une simple
+lettre d'intention.
+
+25
+00:01:27,924 --> 00:01:32,706
+Une fois signé, sauf clauses suspensives
+non réalisées, les parties sont engagées.
+
+26
+00:01:32,727 --> 00:01:36,188
+Le compromis se distingue de la promesse
+unilatérale de vente.
+
+27
+00:01:36,228 --> 00:01:39,131
+Dans ce dernier cas, seul le vendeur
+s'engage.
+
+28
+00:01:39,150 --> 00:01:41,152
+L'acquéreur conserve une option.
+
+29
+00:01:41,191 --> 00:01:43,453
+Aujourd'hui, nous nous concentrons sur le
+compromis
+
+30
+00:01:43,933 --> 00:01:46,174
+le plus courant en agence immobilière.
+
+31
+00:01:46,194 --> 00:01:47,734
+Passons au cœur du sujet.
+
+32
+00:01:47,754 --> 00:01:51,337
+Voici la liste exhaustive des mentions que
+doit contenir votre compromis.
+
+33
+00:01:51,376 --> 00:01:55,519
+Oubliez-en une seule et vous exposez votre
+agence à des problèmes.
+
+34
+00:01:55,539 --> 00:01:58,581
+Première catégorie, l'identification des
+parties.
+
+35
+00:01:58,600 --> 00:02:02,302
+Pour le vendeur, nom, prénom, date et lieu
+de naissance,
+
+36
+00:02:02,882 --> 00:02:06,185
+profession, nationalité, adresse complète.
+
+37
+00:02:06,224 --> 00:02:09,466
+Si c'est une SCI, les mentions du cubis,
+complet.
+
+38
+00:02:09,506 --> 00:02:13,026
+Si c'est une succession, l'identification
+de tous les héritiers.
+
+39
+00:02:13,046 --> 00:02:21,350
+Pour l'acquéreur, les mêmes informations,
+si achat en indivision, identification de
+chacun divisaire avec leur code-part
+respective.
+
+40
+00:02:21,371 --> 00:02:24,111
+Deuxième catégorie, la description du
+bien.
+
+41
+00:02:24,151 --> 00:02:28,054
+L'adresse complète, numéro, rue, code
+postal, ville.
+
+42
+00:02:28,753 --> 00:02:36,616
+Exemple concret, appartement situé aux 23
+rues de Turenne, 75003 Paris, au 3ème
+étage, porte gauche.
+
+43
+00:02:36,635 --> 00:02:40,757
+La superficie habitable en m², arrondie au
+décimètre près.
+
+44
+00:02:40,776 --> 00:02:43,598
+La superficie caresse pour les lots de
+copropriété.
+
+45
+00:02:43,638 --> 00:02:45,538
+Le nombre de pièces principales.
+
+46
+00:02:45,557 --> 00:02:46,877
+L'année de construction.
+
+47
+00:02:46,897 --> 00:02:53,280
+Pour un lot de copropriété, le numéro de
+lot, la quote-part des parties communes,
+le montant des charges d'annuel.
+
+48
+00:02:53,300 --> 00:02:56,159
+Troisième catégorie, le prix et les
+conditions.
+
+49
+00:02:56,180 --> 00:02:58,341
+Le prix de vente en toutes lettres ET en
+chiffres.
+
+50
+00:02:58,860 --> 00:03:04,022
+Exemple 685 000 €, 685 000 € Ryan
+Cochrane.
+
+51
+00:03:04,043 --> 00:03:08,645
+Le montant du dépôt de garantie,
+généralement 5 % ou 10 % du prix.
+
+52
+00:03:08,686 --> 00:03:14,467
+Sa destination, déduction du prix ou
+restitution en cas de non-réalisation des
+conditions suspensives.
+
+53
+00:03:14,487 --> 00:03:15,968
+Les modalités de paiement.
+
+54
+00:03:15,989 --> 00:03:20,191
+Date limite de signature de l'acte
+authentique, délai d'obtention du prêt
+pour l'acquéreur.
+
+55
+00:03:21,110 --> 00:03:24,032
+Quatrième catégorie, les clauses
+suspensives.
+
+56
+00:03:24,052 --> 00:03:28,974
+Ce sont les conditions qui, si elles ne se
+réalisent pas, entraînent la nullité du
+contrat.
+
+57
+00:03:29,015 --> 00:03:35,519
+Les plus courantes, l'obtention d'un prêt
+immobilier, la vente d'un bien précédent,
+l'obtention d'un permis de construire.
+
+58
+00:03:35,538 --> 00:03:40,322
+Chaque clause suspensive doit préciser le
+délai de réalisation, les conditions à
+remplir,
+
+59
+00:03:40,882 --> 00:03:42,163
+Les modalités de preuve.
+
+60
+00:03:42,203 --> 00:03:55,030
+Exemple, cette vente est suspendue à
+l'obtention d'un prêt immobilier d'un
+montant minimum de 500 000 euros sur une
+durée minimum de 15 ans dans un délai de
+45 jours à compter de la signature du
+présent compromis.
+
+61
+00:03:55,050 --> 00:03:57,551
+Cinquième catégorie, les diagnostics
+obligatoires.
+
+62
+00:03:58,192 --> 00:04:00,673
+La liste complète doit être annexée.
+
+63
+00:04:00,693 --> 00:04:13,995
+DPE, amiant avant 1997, plomb avant 1949,
+thermite dans les zones concernées,
+électricité si plus de 15 ans, gaz si plus
+de 15 ans, assainissement, état des
+risques et pollution.
+
+64
+00:04:14,034 --> 00:04:21,297
+Pour chaque diagnostic, la date de
+réalisation, le nom du diagnostiqueur, son
+numéro de certification, les conclusions.
+
+65
+00:04:21,317 --> 00:04:25,357
+Au-delà des mentions obligatoires,
+certaines clauses spéciales méritent votre
+attention.
+
+66
+00:04:25,396 --> 00:04:27,778
+Elles peuvent faire la différence dans une
+négociation complexe.
+
+67
+00:04:28,577 --> 00:04:30,038
+La clause de délaissement.
+
+68
+00:04:30,057 --> 00:04:36,459
+Elle permet à l'acquéreur de renoncer à la
+vente moyennant le versement d'une
+indemnité au vendeur, souvent égale aux
+dépôts de garantie.
+
+69
+00:04:36,478 --> 00:04:39,920
+Pratique quand l'acquéreur a un doute mais
+ne veut pas perdre le bien.
+
+70
+00:04:39,939 --> 00:04:41,459
+La clause d'indexation.
+
+71
+00:04:41,480 --> 00:04:46,300
+Elle prévoit une révision du prix si
+l'acte authentique est signé au-delà d'une
+certaine date.
+
+72
+00:04:46,341 --> 00:04:50,062
+Protection contre l'inflation, mais
+attention aux termes précis.
+
+73
+00:04:50,081 --> 00:04:51,922
+La clause de réduction de prix.
+
+74
+00:04:51,942 --> 00:04:56,882
+Si des travaux sont nécessaires et que
+leur montant excède un certain seuil, le
+prix est réduit en conséquence.
+
+75
+00:04:57,583 --> 00:04:59,925
+exige un devis détaillé et un plafond
+clair.
+
+76
+00:04:59,964 --> 00:05:01,846
+La clause de non-concurrence.
+
+77
+00:05:01,886 --> 00:05:08,389
+Dans le cas d'un fonds de commerce, elle
+empêche le vendeur de créer une entreprise
+concurrente dans un périmètre géographique
+défini.
+
+78
+00:05:08,408 --> 00:05:10,110
+La clause de solidarité.
+
+79
+00:05:10,129 --> 00:05:15,093
+Quand plusieurs acquéreurs achètent
+ensemble, chacun est tenu pour la totalité
+de l'obligation.
+
+80
+00:05:15,112 --> 00:05:18,235
+Si l'un fait défaut, les autres doivent
+payer sa part.
+
+81
+00:05:18,274 --> 00:05:23,858
+Maintenant, voyons les erreurs qui peuvent
+coûter cher, celles que je vois encore
+trop souvent dans la pratique.
+
+82
+00:05:23,918 --> 00:05:24,579
+Erreur numéro 1.
+
+83
+00:05:25,218 --> 00:05:27,560
+Une description imprécise du bien.
+
+84
+00:05:27,579 --> 00:05:29,740
+Bel appartement lumineux ne suffit pas.
+
+85
+00:05:29,800 --> 00:05:33,523
+Il faut des données objectives,
+mesurables, vérifiables.
+
+86
+00:05:33,583 --> 00:05:34,923
+Erreur numéro 2.
+
+87
+00:05:34,963 --> 00:05:36,704
+Oubliez la mention du DPE.
+
+88
+00:05:36,723 --> 00:05:40,706
+Depuis le 1er juillet 2021, le DPE est
+obligatoire pour tous les biens.
+
+89
+00:05:40,725 --> 00:05:43,668
+L'absence de mention expose à une amende
+de 1500 euros.
+
+90
+00:05:43,728 --> 00:05:44,867
+Erreur numéro 3.
+
+91
+00:05:44,887 --> 00:05:47,048
+Des clauses suspensives mal rédigées.
+
+92
+00:05:47,088 --> 00:05:50,930
+Un délai trop court, des conditions trop
+vagues, et vous créez une zone de conflit.
+
+93
+00:05:51,271 --> 00:05:52,632
+Erreur numéro 4.
+
+94
+00:05:52,672 --> 00:05:54,833
+Ne pas vérifier la capacité du vendeur.
+
+95
+00:05:54,872 --> 00:05:56,494
+Est-il seul propriétaire ?
+
+96
+00:05:56,514 --> 00:05:58,055
+Y a-t-il un usufrutier ?
+
+97
+00:05:58,074 --> 00:05:59,757
+Un ex-conjoint a-t-il des droits ?
+
+98
+00:05:59,797 --> 00:06:01,057
+Erreur numéro 5.
+
+99
+00:06:01,096 --> 00:06:02,497
+Oubliez les annexes.
+
+100
+00:06:02,517 --> 00:06:09,822
+Les diagnostics, le règlement de
+copropriété, les états descriptifs de
+division, chaque document mentionné doit
+être physiquement joint.
+
+101
+00:06:09,862 --> 00:06:11,564
+Imaginons une situation concrète.
+
+102
+00:06:11,603 --> 00:06:18,187
+Vous vendez un appartement de 62 m² aux 8
+rues des Francs-Bourgeois, 75004, Paris.
+
+103
+00:06:18,208 --> 00:06:20,810
+Le vendeur est M. Lefèvre, 58 ans,
+divorcé.
+
+104
+00:06:21,350 --> 00:06:26,595
+L'acquéreur est un couple, madame et
+monsieur Martin, 35 et 37 ans, primo
+accédant.
+
+105
+00:06:26,615 --> 00:06:29,276
+Prix de vente, 785 000 euros.
+
+106
+00:06:29,317 --> 00:06:34,802
+DPE classe D, copropriété de 45 lots,
+charge annuelle, 3 200 euros.
+
+107
+00:06:34,841 --> 00:06:36,202
+Vous rédigez un compromis parfait.
+
+108
+00:06:36,723 --> 00:06:43,028
+Identification complète des parties, y
+compris la mention du divorce et de la
+date de liquidation du régime matrimonial.
+
+109
+00:06:43,048 --> 00:06:52,877
+Descriptions précises, appartement de
+62,35 m² carèze, 68 m² au sol, 3 pièces,
+situé au deuxième étage avec ascenseur.
+
+110
+00:06:53,699 --> 00:06:59,144
+Clause suspensif pour le prêt, 600 000
+euros minimum, 20 ans, 45 jours.
+
+111
+00:06:59,163 --> 00:07:03,848
+Dépôt de garantie, 39 250 euros, soit 5%.
+
+112
+00:07:03,867 --> 00:07:08,853
+Date butoir pour l'acte authentique, 90
+jours après signature du compromis.
+
+113
+00:07:08,892 --> 00:07:19,862
+Résultat, le couple obtient son prêt en 3
+semaines, l'acte authentique est signé
+dans les délais, tout le monde est
+satisfait, votre commission de 23 550
+euros est encaissée sans discussion.
+
+114
+00:07:20,322 --> 00:07:24,987
+Voilà, vous avez maintenant toutes les
+clés pour rédiger des compromis
+irréprochables.
+
+115
+00:07:25,007 --> 00:07:30,415
+N'oubliez pas, la qualité de votre
+compromis reflète directement votre
+professionnalisme.
+
+116
+00:07:30,475 --> 00:07:32,076
+Votre mission cette semaine ?
+
+117
+00:07:32,096 --> 00:07:41,165
+Créez votre template de compromis avec
+toutes les mentions obligatoires,
+faites-le vérifier par un notaire
+partenaire, formez votre équipe à son
+utilisation systématique.
+
+118
+00:07:41,786 --> 00:07:45,740
+Dans la prochaine vidéo, nous explorerons
+les diagnostics immobiliers.
+
+119
+00:07:45,781 --> 00:07:46,865
+Quels sont-ils ?
+
+120
+00:07:46,884 --> 00:07:48,028
+Qui les réalise ?
+
+121
+00:07:48,048 --> 00:07:49,172
+Combien ça coûte ?
+
+122
+00:07:49,192 --> 00:07:51,038
+Et comment les interpréter ?
+
+123
+00:07:51,059 --> 00:07:51,560
+À très vite !

@@ -8,11 +8,11 @@
 | Catégorie | Quantité | Détails |
 |-----------|----------|---------|
 | **Fichiers totaux** | 92 | Markdown, Word, Excel |
-| **Modules complets** | 5 | 8h + 2h évaluation chacun |
+| **Modules complets** | 5 | 8h de formation pédagogique chacun |
 | **Scripts vidéo** | 25 | 8-10 minutes chacun (~4h de contenu) |
 | **Slides PowerPoint** | 60 | 12 slides × 5 modules |
 | **Templates pratiques** | 20 | Word/Excel prêts à l'emploi |
-| **QCM** | 50 | 10 par module avec explications |
+| **QCM** | 77 | En LMS, objectif 180 (10 par leçon évaluable) |
 | **Prompts Midjourney** | 25+ | Pour visuels 16:9 |
 | **Storyboards** | 25 | Détaillés avec B-roll |
 
@@ -182,7 +182,7 @@ guide-eleve/
 
 ## 🎯 CONTENU DÉTAILLÉ PAR MODULE
 
-### MODULE 1 : JURIDIQUE (8h + 2h)
+### MODULE 1 : JURIDIQUE (8h)
 **Thèmes couverts :**
 - Loi ALUR 2026 et évolutions récentes
 - Compromis de vente (rédaction, clauses, délai de rétractation)
@@ -195,7 +195,7 @@ guide-eleve/
 
 ---
 
-### MODULE 2 : TRANSACTION (8h + 2h)
+### MODULE 2 : TRANSACTION (8h)
 **Thèmes couverts :**
 - Estimation immobilière (méthode comparative, DVF, indices)
 - Prospection (scripts téléphonique, porte-à-porte, réseaux)
@@ -207,7 +207,7 @@ guide-eleve/
 
 ---
 
-### MODULE 3 : FINANCEMENT (8h + 2h)
+### MODULE 3 : FINANCEMENT (8h)
 **Thèmes couverts :**
 - Crédit immobilier 2026 (taux, capacité d'emprunt, apport)
 - Fiscalité immobilière (IFI, plus-value, revenus fonciers)
@@ -219,7 +219,7 @@ guide-eleve/
 
 ---
 
-### MODULE 4 : MARKETING DIGITAL (8h + 2h)
+### MODULE 4 : MARKETING DIGITAL (8h)
 **Thèmes couverts :**
 - Photos immobilières professionnelles (techniques, matériel)
 - Rédaction d'annonces optimisées SEO
@@ -231,7 +231,7 @@ guide-eleve/
 
 ---
 
-### MODULE 5 : TERRAIN (8h + 2h)
+### MODULE 5 : TERRAIN (8h)
 **Thèmes couverts :**
 - Préparation et conduite des visites (checklist 50 points)
 - Argumentaire de valeur (structure 30/40/30)
@@ -369,6 +369,6 @@ guide-eleve/
 
 ---
 
-**Formation complète prête à l'emploi - Conformité 2026** 🏠🎓
+**Formation complète en finalisation MVP - Conformité 2026** 🏠🎓
 
 *Générée le 3 avril 2026*

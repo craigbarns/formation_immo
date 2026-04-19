@@ -16,7 +16,7 @@ Méthode : inventaire fichiers + audit pédago + audit technique + audit contenu
 | **Supports interactifs** | 8/10 | 16 600 lignes data — riche (flashcards, quiz, scenarios) |
 | **Évaluation / QCM** | 5/10 | 77 questions seulement, 2,1/leçon — sous-dimensionné |
 | **Certification** | 3/10 | Modèle d'attestation seul, pas d'examen final ni jury |
-| **Vidéo** | 2/10 | Scripts uniquement, aucune vidéo produite |
+| **Vidéo** | 2/10 | Scripts prêts, 1 vidéo intro produite (loi-alur-intro.mp4), pipeline en cours |
 | **Marketing & vente** | 4/10 | 1 page de vente, pas de tunnel ni emails |
 | **Design / UX** | 6,5/10 | Voir DESIGN-ANALYSIS.md (12 pbs documentés) |
 | **Cohérence ensemble** | 7/10 | Doc plan ≫ app — gap entre planifié et implémenté |
@@ -140,7 +140,7 @@ Lecture / audio narré / flashcards / quiz / drag-drop / roleplay chat / scenari
 
 | Existant | Manque |
 |---|---|
-| Scripts MJ + storyboards par module | 0 vidéo générée |
+| Scripts MJ + storyboards par module | 1 vidéo intro générée, pipeline CinematicPlayer actif |
 | 1 demo SadTalker (mp3 seul) | 0 talking-head produit |
 | Script intro 42 h | 0 capture |
 

@@ -45,12 +45,12 @@
 
 | Module | Thème | Durée Formation | Durée Évaluation | Total | Modalités d'évaluation |
 |--------|-------|-----------------|------------------|-------|------------------------|
-| **M1** | Juridique & Conformité | 8h | 2h | 10h | QCM (40 min) + Cas pratique (1h20) |
-| **M2** | Transaction & Négociation | 8h | 2h | 10h | QCM (40 min) + Cas pratique (1h20) |
-| **M3** | Financement & Fiscalité | 8h | 2h | 10h | QCM (40 min) + Cas pratique (1h20) |
-| **M4** | Marketing Digital & Commercial | 8h | 2h | 10h | QCM (40 min) + Cas pratique (1h20) |
-| **M5** | Terrain & Promotion | 8h | 2h | 10h | QCM (40 min) + Cas pratique (1h20) |
-| **TOTAL** | | **40h** | **10h** | **50h** | Certification finale |
+| **M1** | Juridique & Conformité | 8h | — | 8h | QCM intégré + Cas pratique |
+| **M2** | Transaction & Négociation | 8h | — | 8h | QCM intégré + Cas pratique |
+| **M3** | Financement & Fiscalité | 8h | — | 8h | QCM intégré + Cas pratique |
+| **M4** | Marketing Digital & Commercial | 8h | — | 8h | QCM intégré + Cas pratique |
+| **M5** | Terrain & Promotion | 8h | — | 8h | QCM intégré + Cas pratique |
+| **TOTAL** | | **40h** | **2h** | **42h** | Certification finale |
 
 ## Progression des compétences
 

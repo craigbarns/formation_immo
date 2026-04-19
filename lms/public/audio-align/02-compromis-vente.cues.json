@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "duration": 471.56,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.391,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 33.186,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 65.175,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 96.229,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 129.506,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 160.777,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 194.488,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 235.05,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 265.397,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 297.583,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 329.801,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 361.097,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 394.842,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 428.893,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 461.787,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Cette",
+      "start": 7.854,
+      "end": 8.034
+    },
+    {
+      "term": "tout",
+      "start": 9.354,
+      "end": 9.474
+    },
+    {
+      "term": "faire",
+      "start": 9.514,
+      "end": 9.674
+    },
+    {
+      "term": "description",
+      "start": 13.096,
+      "end": 13.556
+    },
+    {
+      "term": "bien",
+      "start": 13.736,
+      "end": 13.876
+    },
+    {
+      "term": "délai",
+      "start": 15.576,
+      "end": 15.797
+    },
+    {
+      "term": "Aujourd'hui,",
+      "start": 17.737,
+      "end": 18.558
+    },
+    {
+      "term": "nous",
+      "start": 18.578,
+      "end": 18.698
+    },
+    {
+      "term": "Vous",
+      "start": 21.158,
+      "end": 21.258
+    },
+    {
+      "term": "rédiger",
+      "start": 21.959,
+      "end": 22.319
+    }
+  ]
+}
