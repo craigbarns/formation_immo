@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "duration": 496.802,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.171,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 32.602,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 64.162,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 94.387,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 124.791,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 155.88,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 188.99,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 219.901,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 250.593,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 281.498,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 314.789,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 345.977,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 376.843,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 407.097,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 444.237,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 475.232,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "avez",
+      "start": 0.331,
+      "end": 0.491
+    },
+    {
+      "term": "fait",
+      "start": 0.531,
+      "end": 0.651
+    },
+    {
+      "term": "l'estimation,",
+      "start": 0.671,
+      "end": 1.692
+    },
+    {
+      "term": "présenté",
+      "start": 2.112,
+      "end": 2.472
+    },
+    {
+      "term": "argumentaire,",
+      "start": 2.712,
+      "end": 3.832
+    },
+    {
+      "term": "d'accord",
+      "start": 5.873,
+      "end": 6.153
+    },
+    {
+      "term": "prix,",
+      "start": 6.433,
+      "end": 6.953
+    },
+    {
+      "term": "puis...",
+      "start": 7.153,
+      "end": 7.933
+    },
+    {
+      "term": "rien.",
+      "start": 7.953,
+      "end": 8.734
+    },
+    {
+      "term": "vais",
+      "start": 8.834,
+      "end": 8.974
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "duration": 521.835,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.271,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 30.812,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 60.82,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 94.335,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 128.419,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 160.086,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 192.262,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 223.184,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 254.656,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 286.806,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 321.661,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 351.671,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 386.198,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 419.424,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 455.291,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 485.994,
+      "source": "auto"
+    },
+    {
+      "index": 16,
+      "start": 519.368,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "document",
+      "start": 1.412,
+      "end": 1.772
+    },
+    {
+      "term": "entre",
+      "start": 2.993,
+      "end": 3.153
+    },
+    {
+      "term": "agent",
+      "start": 3.293,
+      "end": 3.513
+    },
+    {
+      "term": "jamais.",
+      "start": 12.678,
+      "end": 13.378
+    },
+    {
+      "term": "confie",
+      "start": 14.378,
+      "end": 14.639
+    },
+    {
+      "term": "trois",
+      "start": 15.139,
+      "end": 15.339
+    },
+    {
+      "term": "simultanément,",
+      "start": 15.739,
+      "end": 16.7
+    },
+    {
+      "term": "sans",
+      "start": 16.74,
+      "end": 16.86
+    },
+    {
+      "term": "Mais",
+      "start": 17.96,
+      "end": 18.08
+    },
+    {
+      "term": "autre",
+      "start": 18.481,
+      "end": 18.661
+    }
+  ]
+}

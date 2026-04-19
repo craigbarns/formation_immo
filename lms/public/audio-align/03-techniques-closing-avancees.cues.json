@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "duration": 380.338,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.471,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 33.134,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 63.532,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 94.529,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 126.611,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 158.192,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 188.737,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 222.166,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 252.447,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 283.684,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 314.821,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 346.827,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 379.836,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "êtes",
+      "start": 1.992,
+      "end": 2.112
+    },
+    {
+      "term": "rues",
+      "start": 3.473,
+      "end": 3.573
+    },
+    {
+      "term": "Boétie,",
+      "start": 3.753,
+      "end": 4.713
+    },
+    {
+      "term": "couple.",
+      "start": 6.434,
+      "end": 7.275
+    },
+    {
+      "term": "visité",
+      "start": 7.575,
+      "end": 7.975
+    },
+    {
+      "term": "trois",
+      "start": 7.995,
+      "end": 8.195
+    },
+    {
+      "term": "avec",
+      "start": 8.736,
+      "end": 8.896
+    },
+    {
+      "term": "plus",
+      "start": 13.538,
+      "end": 13.718
+    },
+    {
+      "term": "signature.",
+      "start": 13.958,
+      "end": 14.759
+    },
+    {
+      "term": "moment",
+      "start": 15.919,
+      "end": 16.219
+    }
+  ]
+}

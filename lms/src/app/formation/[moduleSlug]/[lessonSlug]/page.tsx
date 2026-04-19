@@ -45,6 +45,7 @@ import { LessonJourneyBadge } from "@/components/LessonJourneyBadge";
 import { AICoachButton } from "@/components/ai-coach";
 import { ReadingProgressBar } from "@/components/ReadingProgressBar";
 import { getResolvedAudioQuizSchedule, type ResolvedAudioQuizItem } from "@/data/audio-quiz-schedule";
+import { buildVisualsFromScript } from "@/lib/lesson-script-parser";
 
 /* ------------------------------------------------------------------ */
 /*  Fallbacks interactifs — rend le CinematicPlayer utile pour       */
@@ -52,6 +53,12 @@ import { getResolvedAudioQuizSchedule, type ResolvedAudioQuizItem } from "@/data
 /* ------------------------------------------------------------------ */
 
 function buildFallbackVisuals(lesson: Lesson): LessonVisuals {
+  // Essaie d'abord de parser le script markdown pour des visuals riches
+  const fromScript = lesson.scriptFile ? buildVisualsFromScript(lesson.scriptFile) : null;
+  if (fromScript && fromScript.keyConcepts.length >= 3) {
+    return fromScript;
+  }
+  // Fallback minimal avec les objectifs
   const icons = ["target", "zap", "shield", "star", "check-circle", "heart", "map-pin"];
   return {
     keyConcepts: lesson.objectives.slice(0, 5).map((obj, i) => ({
