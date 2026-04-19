@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "duration": 500.655,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.211,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 34.056,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 64.877,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 96.784,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 128.537,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 158.984,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 190.322,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 221.146,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 254.447,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 286.507,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 317.653,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 348.608,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 387.438,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 423.597,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 454.044,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 486.751,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "TikTok,",
+      "start": 1.452,
+      "end": 2.533
+    },
+    {
+      "term": "millions",
+      "start": 2.833,
+      "end": 3.093
+    },
+    {
+      "term": "Instagram,",
+      "start": 4.714,
+      "end": 5.835
+    },
+    {
+      "term": "Facebook,",
+      "start": 6.696,
+      "end": 7.776
+    },
+    {
+      "term": "sont,",
+      "start": 9.317,
+      "end": 9.798
+    },
+    {
+      "term": "aussi.",
+      "start": 10.478,
+      "end": 11.099
+    },
+    {
+      "term": "agents",
+      "start": 14.441,
+      "end": 14.721
+    },
+    {
+      "term": "génèrent",
+      "start": 14.761,
+      "end": 15.082
+    },
+    {
+      "term": "leads",
+      "start": 15.862,
+      "end": 16.062
+    },
+    {
+      "term": "qualifiés",
+      "start": 16.102,
+      "end": 16.523
+    }
+  ]
+}

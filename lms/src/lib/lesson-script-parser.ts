@@ -44,6 +44,10 @@ function cleanNarrationText(text: string): string {
     .trim();
 }
 
+const TECHNICAL_TERMS = /narration|tts|elevenlabs|midjourney|prompt|durée|nombre de mots|rythme|voix|recommandée|alternative|script vidéo|b-roll|informations techniques/i;
+
+const GENERIC_SECTIONS = /introduction|accroche|problématique|contenu structuré|script complet|conclusion|appel à l'action/i;
+
 function extractBoldPhrases(text: string): string[] {
   const phrases: string[] = [];
   const regex = /\*\*([^*]+)\*\*/g;
@@ -252,8 +256,8 @@ export function buildRecapFromScript(scriptFile: string): RecapData | null {
     }
   }
 
-  // Sections = headings niveau 3-4 nettoyés
-  const headings = extractHeadings(md).filter((h) => h.level >= 3);
+  // Sections = headings niveau 3-4 nettoyés, sans les sections génériques de template
+  const headings = extractHeadings(md).filter((h) => h.level >= 3 && !GENERIC_SECTIONS.test(h.title));
   const sections = headings.slice(0, 8).map((h) => ({
     icon: "📌",
     title: cleanHeadingTitle(h.title),
@@ -263,12 +267,12 @@ export function buildRecapFromScript(scriptFile: string): RecapData | null {
   // Key terms = phrases en gras qui contiennent un deux-points ou une parenthèse explicative
   const keyTerms: { term: string; definition: string }[] = [];
   const boldDefs = md.match(/\*\*([^*]+)\*\*\s*[:\-–]\s*([^\n]+)/g) || [];
-  for (const bd of boldDefs.slice(0, 6)) {
+  for (const bd of boldDefs.slice(0, 10)) {
     const m = bd.match(/\*\*([^*]+)\*\*\s*[:\-–]\s*(.+)/);
     if (m) {
       const term = m[1].trim().slice(0, 50);
-      const def = m[2].trim().replace(/[*_]/g, "").slice(0, 200);
-      if (term && def && !keyTerms.some((k) => k.term === term)) {
+      const def = cleanNarrationText(m[2].trim()).replace(/[*_]/g, "").slice(0, 200);
+      if (term && def && !TECHNICAL_TERMS.test(term + " " + def) && !keyTerms.some((k) => k.term === term)) {
         keyTerms.push({ term, definition: def });
       }
     }
@@ -277,12 +281,12 @@ export function buildRecapFromScript(scriptFile: string): RecapData | null {
   // Fallback key terms: bold phrases followed by explanation in parentheses
   if (keyTerms.length === 0) {
     const parens = md.match(/\*\*([^*]+)\*\*\s*\(([^)]+)\)/g) || [];
-    for (const p of parens.slice(0, 6)) {
+    for (const p of parens.slice(0, 10)) {
       const m = p.match(/\*\*([^*]+)\*\*\s*\(([^)]+)\)/);
       if (m) {
         const term = m[1].trim().slice(0, 50);
         const def = m[2].trim().slice(0, 200);
-        if (term && def && !keyTerms.some((k) => k.term === term)) {
+        if (term && def && !TECHNICAL_TERMS.test(term + " " + def) && !keyTerms.some((k) => k.term === term)) {
           keyTerms.push({ term, definition: def });
         }
       }
