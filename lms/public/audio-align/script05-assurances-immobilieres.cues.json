@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "duration": 440.267,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.211,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 33.527,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 63.776,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 96.551,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 129.231,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 163.339,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 197.617,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 230.083,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 267.792,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 301.627,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 335.286,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 368.274,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 402.371,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 435.783,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "incendie,",
+      "start": 0.371,
+      "end": 0.952
+    },
+    {
+      "term": "dégât",
+      "start": 2.052,
+      "end": 2.312
+    },
+    {
+      "term": "eaux,",
+      "start": 2.493,
+      "end": 2.753
+    },
+    {
+      "term": "pensez",
+      "start": 3.974,
+      "end": 4.194
+    },
+    {
+      "term": "France,",
+      "start": 6.475,
+      "end": 6.936
+    },
+    {
+      "term": "toutes",
+      "start": 8.176,
+      "end": 8.376
+    },
+    {
+      "term": "maison",
+      "start": 10.238,
+      "end": 10.618
+    },
+    {
+      "term": "Sans",
+      "start": 11.779,
+      "end": 11.979
+    },
+    {
+      "term": "assurances",
+      "start": 12.019,
+      "end": 12.519
+    },
+    {
+      "term": "adaptées,",
+      "start": 12.579,
+      "end": 13.14
+    }
+  ]
+}

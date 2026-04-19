@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "duration": 435.961,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.251,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 30.774,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 61.626,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 93.226,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 126.479,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 160.275,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 191.842,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 221.967,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 262.26,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 294.675,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 325.271,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 355.914,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 386.224,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 421.56,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "appel.",
+      "start": 2.813,
+      "end": 3.734
+    },
+    {
+      "term": "Bonjour,",
+      "start": 3.754,
+      "end": 4.474
+    },
+    {
+      "term": "c'est",
+      "start": 4.494,
+      "end": 4.635
+    },
+    {
+      "term": "Sophie.",
+      "start": 4.675,
+      "end": 5.375
+    },
+    {
+      "term": "nous",
+      "start": 5.555,
+      "end": 5.655
+    },
+    {
+      "term": "avez",
+      "start": 5.715,
+      "end": 5.876
+    },
+    {
+      "term": "vendu",
+      "start": 5.916,
+      "end": 6.156
+    },
+    {
+      "term": "veut",
+      "start": 12.201,
+      "end": 12.321
+    },
+    {
+      "term": "Cette",
+      "start": 13.321,
+      "end": 13.502
+    },
+    {
+      "term": "semaine",
+      "start": 13.542,
+      "end": 13.802
+    }
+  ]
+}

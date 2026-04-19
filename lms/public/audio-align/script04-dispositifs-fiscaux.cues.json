@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "duration": 573.425,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.171,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 32.678,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 62.852,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 100.465,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 132.224,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 171.474,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 203.852,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 234.459,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 267.299,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 302.709,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 333.272,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 365.001,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 398.975,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 434.779,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 466.802,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 497.694,
+      "source": "auto"
+    },
+    {
+      "index": 16,
+      "start": 531.573,
+      "source": "auto"
+    },
+    {
+      "index": 17,
+      "start": 562.326,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Normandie,",
+      "start": 0.651,
+      "end": 1.472
+    },
+    {
+      "term": "trois",
+      "start": 2.533,
+      "end": 2.713
+    },
+    {
+      "term": "investisseurs",
+      "start": 4.134,
+      "end": 4.615
+    },
+    {
+      "term": "surtout,",
+      "start": 8.177,
+      "end": 8.918
+    },
+    {
+      "term": "choisir",
+      "start": 9.298,
+      "end": 9.758
+    },
+    {
+      "term": "quel",
+      "start": 9.979,
+      "end": 10.179
+    },
+    {
+      "term": "profil",
+      "start": 10.219,
+      "end": 10.539
+    },
+    {
+      "term": "dispositif,",
+      "start": 12.4,
+      "end": 13.461
+    },
+    {
+      "term": "passer",
+      "start": 13.661,
+      "end": 13.922
+    },
+    {
+      "term": "retrouver",
+      "start": 17.404,
+      "end": 17.765
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "duration": 555.861,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.251,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 32.453,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 66.524,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 101.88,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 134.684,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 165.479,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 197.331,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 227.37,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 267.359,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 306.282,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 338.834,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 371.579,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 404.309,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 435.215,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 469.602,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 500.111,
+      "source": "auto"
+    },
+    {
+      "index": 16,
+      "start": 531.107,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "immobilière",
+      "start": 0.611,
+      "end": 1.172
+    },
+    {
+      "term": "Lyon,",
+      "start": 1.212,
+      "end": 2.033
+    },
+    {
+      "term": "appartements",
+      "start": 2.073,
+      "end": 2.653
+    },
+    {
+      "term": "vendre",
+      "start": 2.833,
+      "end": 3.173
+    },
+    {
+      "term": "Bordeaux,",
+      "start": 3.214,
+      "end": 4.054
+    },
+    {
+      "term": "immobilières",
+      "start": 4.795,
+      "end": 5.315
+    },
+    {
+      "term": "Nantes,",
+      "start": 5.355,
+      "end": 6.196
+    },
+    {
+      "term": "recherches",
+      "start": 6.957,
+      "end": 7.337
+    },
+    {
+      "term": "chaque",
+      "start": 8.398,
+      "end": 8.598
+    },
+    {
+      "term": "jour",
+      "start": 8.658,
+      "end": 9.058
+    }
+  ]
+}

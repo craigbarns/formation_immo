@@ -1,0 +1,472 @@
+1
+00:00:00,271 --> 00:00:03,632
+les impôts, ce mot qui fait frissonner la
+plupart des Français.
+
+2
+00:00:03,692 --> 00:00:07,852
+Et pourtant, la fiscalité immobilière
+n'est pas une fatalité.
+
+3
+00:00:07,873 --> 00:00:14,015
+Connaître les mécanismes fiscaux, c'est
+pouvoir conseiller vos clients pour qu'ils
+paient moins d'impôts, légalement.
+
+4
+00:00:14,054 --> 00:00:17,556
+Et ça, c'est un argument de vente qui fait
+toute la différence.
+
+5
+00:00:17,596 --> 00:00:23,658
+Aujourd'hui, nous allons décrypter
+ensemble la fiscalité immobilière 2026,
+les taxes à la vente,
+
+6
+00:00:24,138 --> 00:00:34,042
+les régimes d'imposition des revenus
+locatifs, les exonérations, les niches
+fiscales, tout ce que vous devez maîtriser
+pour devenir un véritable conseiller
+patrimonial pour vos clients.
+
+7
+00:00:34,082 --> 00:00:34,862
+Commençons.
+
+8
+00:00:34,881 --> 00:00:37,582
+La fiscalité immobilière, c'est complexe.
+
+9
+00:00:37,622 --> 00:00:44,585
+Entre la taxe foncière, les plus-values,
+l'imposition des loyers, les charges
+déductibles, même les professionnels s'y
+perdent parfois.
+
+10
+00:00:44,625 --> 00:00:45,646
+Et vos clients ?
+
+11
+00:00:45,686 --> 00:00:46,826
+Ils sont perdus.
+
+12
+00:00:46,866 --> 00:00:51,009
+Ils craignent l'imposition, hésitent à
+investir par peur du fisc, ou pire,
+
+13
+00:00:51,588 --> 00:00:54,689
+passe à côté d'économies substantielles
+par manque de conseils.
+
+14
+00:00:54,710 --> 00:00:56,451
+C'est là que VOU s'intervenait.
+
+15
+00:00:56,470 --> 00:01:02,414
+En maîtrisant la fiscalité immobilière,
+vous ne vendez plus seulement des biens,
+vous vendez des solutions patrimoniales.
+
+16
+00:01:02,454 --> 00:01:03,293
+Et ça change tout.
+
+17
+00:01:03,334 --> 00:01:04,575
+Commençons par le début.
+
+18
+00:01:04,594 --> 00:01:05,334
+L'acquisition.
+
+19
+00:01:05,355 --> 00:01:08,977
+Quand votre client achète un bien
+immobilier, il doit payer des frais de
+notaire.
+
+20
+00:01:09,456 --> 00:01:11,817
+Et ces frais comprennent principalement
+des taxes.
+
+21
+00:01:11,878 --> 00:01:17,799
+En 2026, pour l'achat d'un bien ancien,
+les frais de notaire représentent environ
+7 à 8 % du prix d'achat.
+
+22
+00:01:17,840 --> 00:01:24,763
+Ces frais se décomposent en trois parties,
+les taxes collectées pour l'Etat et les
+collectivités territoriales, les
+émoluments du notaire et les débours.
+
+23
+00:01:25,123 --> 00:01:27,103
+Mais attention, dans le neuf, c'est
+différent.
+
+24
+00:01:27,123 --> 00:01:33,406
+Pour un logement neuf, les frais de
+notaire sont réduits à environ 2 à 3 % du
+prix d'achat, car les taxes sont moins
+élevées.
+
+25
+00:01:33,426 --> 00:01:36,668
+C'est un argument majeur à mettre en avant
+pour vos clients hésitants.
+
+26
+00:01:36,707 --> 00:01:46,492
+Exemple concret, pour un achat à 300 000
+euros, vos clients paieront environ 24 000
+euros de frais en ancien, contre seulement
+7 500 euros dans le neuf.
+
+27
+00:01:47,272 --> 00:01:51,734
+Une différence de 16 500 euros, c'est à
+prendre en compte dans leur budget.
+
+28
+00:01:51,756 --> 00:01:54,457
+Passons maintenant à l'imposition des
+revenus locatifs.
+
+29
+00:01:54,498 --> 00:01:58,561
+Quand votre client devient propriétaire
+bailleur, il perçoit des loyers.
+
+30
+00:01:58,581 --> 00:02:00,481
+Et ces loyers sont imposables.
+
+31
+00:02:00,501 --> 00:02:01,822
+Mais sous quelles conditions ?
+
+32
+00:02:01,862 --> 00:02:06,746
+Il existe deux régimes d'imposition, le
+régime microfoncier et le régime réel.
+
+33
+00:02:07,387 --> 00:02:13,450
+Le choix entre les deux dépend du montant
+des loyers perçus et de la stratégie
+fiscale de votre client.
+
+34
+00:02:13,471 --> 00:02:19,835
+Le régime micro-foncier s'applique
+automatiquement si les loyers annuels sont
+inférieurs à 15 000 euros.
+
+35
+00:02:19,875 --> 00:02:22,597
+C'est simple, votre client déclare ses
+loyers bruts
+
+36
+00:02:23,016 --> 00:02:28,739
+et un abattement forfaitaire de 30% est
+appliqué automatiquement pour couvrir les
+charges.
+
+37
+00:02:28,758 --> 00:02:34,020
+Le résultat imposable est donc de 70% des
+loyers perçus.
+
+38
+00:02:34,039 --> 00:02:40,942
+Le régime réel, lui, est obligatoire
+au-delà de 15 000 euros de loyer annuel,
+ou sur option, en dessous.
+
+39
+00:02:41,502 --> 00:02:51,969
+Dans ce régime, votre client déduit les
+charges réelles, intérêts d'emprunt,
+travaux, taxes foncières, assurances,
+frais de gestion, l'avantage du régime
+réel.
+
+40
+00:02:51,990 --> 00:03:00,014
+Si les charges sont importantes, notamment
+avec un crédit immobilier, l'imposition
+peut être nulle, voire générer un déficit
+foncier déductible des autres revenus.
+
+41
+00:03:00,034 --> 00:03:03,016
+C'est souvent le cas les premières années
+d'un investissement locatif.
+
+42
+00:03:04,337 --> 00:03:06,739
+Troisième point crucial, la plus-value
+immobilière.
+
+43
+00:03:06,778 --> 00:03:11,479
+Quand votre client revend un bien à un
+prix supérieur à celui de l'achat, il
+réalise une plus-value.
+
+44
+00:03:11,520 --> 00:03:13,180
+Et cette plus-value est taxable.
+
+45
+00:03:13,199 --> 00:03:18,540
+Le calcul est simple, prix de vente moins
+prix d'achat, moins les frais
+d'acquisition et de vente, moins les
+travaux.
+
+46
+00:03:18,580 --> 00:03:24,342
+Le résultat constitue la plus-value
+imposable, soumise aux prélèvements
+sociaux et, dans certains cas, à l'impôt
+sur le revenu.
+
+47
+00:03:24,401 --> 00:03:26,742
+Mais il existe un abattement pour durée de
+détention.
+
+48
+00:03:27,223 --> 00:03:31,524
+Plus votre client conserve son bien
+longtemps, moins il paie d'impôts sur la
+plus-value.
+
+49
+00:03:31,544 --> 00:03:35,004
+Au bout de 22 ans, l'imposition sur le
+revenu est nulle.
+
+50
+00:03:35,025 --> 00:03:38,445
+Au bout de 30 ans, les prélèvements
+sociaux le sont également.
+
+51
+00:03:38,466 --> 00:03:40,387
+Voici les chiffres à retenir.
+
+52
+00:03:40,407 --> 00:03:44,048
+6% d'abattements par an à partir de la 6e
+année jusqu'à la 21e,
+
+53
+00:03:45,147 --> 00:03:48,429
+puis 4% la 22e année pour l'impôt sur le
+revenu.
+
+54
+00:03:48,449 --> 00:04:00,572
+Pour les prélèvements sociaux, c'est 1,65%
+par an de la 6e à la 21e année, 1,60% la
+22e, 9% de la 23e à la 30e.
+
+55
+00:04:00,651 --> 00:04:04,673
+Et attention, il existe des cas
+d'exonération totale.
+
+56
+00:04:04,693 --> 00:04:08,674
+La résidence principale est totalement
+exonérée de plus-value.
+
+57
+00:04:08,713 --> 00:04:14,254
+De même, la première vente d'une résidence
+secondaire peut être exonérée sous
+certaines conditions.
+
+58
+00:04:15,215 --> 00:04:17,355
+Ne négligeons pas la taxe foncière.
+
+59
+00:04:17,394 --> 00:04:26,257
+C'est un impôt local que paie chaque
+propriétaire, qu'il loue son bien ou non,
+et elle a tendance à augmenter
+significativement d'année en année.
+
+60
+00:04:26,317 --> 00:04:33,399
+En 2026, la taxe foncière représente en
+moyenne entre 2 et 3 mois de loyer pour un
+bien locatif.
+
+61
+00:04:33,439 --> 00:04:38,600
+Elle est déductible des revenus fonciers
+dans le régime réel, mais pas dans le
+régime micro-foncier.
+
+62
+00:04:39,319 --> 00:04:52,745
+Il existe aussi d'autres prélèvements, la
+taxe sur les logements vacants pour les
+biens inoccupés depuis plus d'un an dans
+certaines zones tendues, ou encore la
+contribution économique territoriale pour
+les locations meublées professionnelles.
+
+63
+00:04:52,764 --> 00:04:54,685
+Vos clients doivent être informés de tous
+ces coûts.
+
+64
+00:04:54,706 --> 00:04:55,446
+Ah !
+
+65
+00:04:55,485 --> 00:04:57,646
+Analysons maintenant le cas de M. Dubois,
+45 ans,
+
+66
+00:04:58,466 --> 00:05:01,226
+qui envisage d'acheter un studio de 120
+000 euros pour le louer.
+
+67
+00:05:01,247 --> 00:05:02,708
+Quelle sera sa fiscalité ?
+
+68
+00:05:02,728 --> 00:05:07,569
+Le studio est loué 550 euros par mois,
+soit 6 600 euros de loyer annuel.
+
+69
+00:05:07,588 --> 00:05:11,509
+Comme c'est inférieur à 15 000 euros, il
+relève du régime micro-foncier.
+
+70
+00:05:11,548 --> 00:05:14,230
+Un abattement de 30% s'applique
+automatiquement.
+
+71
+00:05:14,250 --> 00:05:19,730
+Résultat, 6 600 euros moins 30%, soit 4
+620 euros imposables.
+
+72
+00:05:19,771 --> 00:05:26,951
+Avec un taux marginal d'imposition de 30%
+et 17,2% de prélèvements sociaux, son
+impôt annuel sur ses revenus locatifs
+
+73
+00:05:27,732 --> 00:05:32,096
+s'élèvera à environ 2180 euros.
+
+74
+00:05:32,137 --> 00:05:39,144
+Mais si M. Dubois a des charges
+importantes, notamment des intérêts
+d'emprunt, le régime réel pourrait être
+plus avantageux.
+
+75
+00:05:39,184 --> 00:05:46,531
+C'est pourquoi il est essentiel de faire
+une simulation comparative avant de
+choisir son régime d'imposition.
+
+76
+00:05:46,571 --> 00:05:47,252
+Vous l'avez compris,
+
+77
+00:05:47,771 --> 00:05:51,814
+« La fiscalité immobilière est un levier
+puissant pour conseiller vos clients.
+
+78
+00:05:51,853 --> 00:05:53,593
+Retenez ces points essentiels.
+
+79
+00:05:53,613 --> 00:05:54,634
+» Prendre qu'une mine.
+
+80
+00:05:54,675 --> 00:05:57,915
+Premièrement, les frais de notaire sont
+réduits dans le neuf.
+
+81
+00:05:57,935 --> 00:06:02,257
+Deuxièmement, le choix du régime
+d'imposition locative est stratégique.
+
+82
+00:06:02,298 --> 00:06:06,538
+Troisièmement, la durée de détention
+réduit l'imposition sur la plus-value.
+
+83
+00:06:06,579 --> 00:06:10,000
+Et quatrièmement, la taxe foncière est un
+coût à anticiper.
+
+84
+00:06:10,480 --> 00:06:11,762
+Fin de cité-site.
+
+85
+00:06:11,781 --> 00:06:12,382
+Traite Norallo.
+
+86
+00:06:13,242 --> 00:06:16,326
+Intégrez ces connaissances dans votre
+argumentaire commercial.
+
+87
+00:06:16,367 --> 00:06:20,132
+Montrez à vos clients que vous maîtrisez
+l'aspect fiscal de leur investissement.
+
+88
+00:06:20,153 --> 00:06:21,956
+C'est ce qui fera la différence.
+
+89
+00:06:21,975 --> 00:06:28,045
+Dans la prochaine vidéo, nous verrons
+comment calculer précisément la
+rentabilité d'un investissement locatif.
+
+90
+00:06:28,065 --> 00:06:28,586
+À tout de suite !

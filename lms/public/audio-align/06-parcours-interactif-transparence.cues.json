@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "duration": 447.76,
+  "slides": [
+    {
+      "index": 0,
+      "start": 1.292,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 36.199,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 74.114,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 106.426,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 138.528,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 171.367,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 203.578,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 233.786,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 264.443,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 297.992,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 329.461,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 359.499,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 396.272,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 431.178,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "affiche",
+      "start": 3.754,
+      "end": 4.054
+    },
+    {
+      "term": "l'acheteur.",
+      "start": 7.978,
+      "end": 9.019
+    },
+    {
+      "term": "rien.",
+      "start": 9.919,
+      "end": 10.74
+    },
+    {
+      "term": "Cette",
+      "start": 10.8,
+      "end": 10.96
+    },
+    {
+      "term": "face",
+      "start": 14.563,
+      "end": 14.784
+    },
+    {
+      "term": "agent",
+      "start": 15.064,
+      "end": 15.304
+    },
+    {
+      "term": "euros",
+      "start": 20.168,
+      "end": 20.328
+    },
+    {
+      "term": "d'amende",
+      "start": 20.348,
+      "end": 21.069
+    },
+    {
+      "term": "deux",
+      "start": 21.289,
+      "end": 21.409
+    },
+    {
+      "term": "prison.",
+      "start": 21.729,
+      "end": 22.369
+    }
+  ]
+}

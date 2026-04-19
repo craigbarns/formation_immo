@@ -1,0 +1,383 @@
+1
+00:00:00,191 --> 00:00:04,253
+Chaque année, plusieurs milliards d'euros
+sont blanchis en France via l'immobilier.
+
+2
+00:00:04,293 --> 00:00:11,018
+Et contrairement à ce que beaucoup
+d'agents pensent, être complice d'une
+opération de blanchiment ne nécessite pas
+de le savoir.
+
+3
+00:00:11,038 --> 00:00:14,441
+L'ignorance n'est pas une défense
+recevable devant la justice.
+
+4
+00:00:14,480 --> 00:00:20,644
+Depuis 2015, les agents immobiliers sont
+soumis à des obligations strictes de
+vigilance anti-blanchiment.
+
+5
+00:00:20,664 --> 00:00:26,509
+Ne pas les respecter expose à des
+sanctions pénales pouvant aller jusqu'à 5
+ans d'emprisonnement et 375 000 euros
+d'amende.
+
+6
+00:00:28,570 --> 00:00:36,881
+Aujourd'hui, nous allons décrypter
+ensemble ce que TRACFIN attend de vous,
+comment identifier les signaux d'alerte et
+comment protéger votre agence.
+
+7
+00:00:36,901 --> 00:00:45,991
+TRACFIN, pour Traitement du renseignement
+et Action contre les circuits financiers
+clandestins, est un service de
+renseignement financier placé sous
+l'autorité du ministère de l'Économie.
+
+8
+00:00:46,912 --> 00:00:59,479
+Créée en 1990, renforcée par la Directive
+européenne du 20 mai 2015, TRACFIN
+centralise les déclarations de soupçons et
+les transmet aux autorités judiciaires
+lorsqu'ils détectent des activités
+illicites.
+
+9
+00:00:59,500 --> 00:01:10,045
+Son rôle est triple, recevoir les
+déclarations de soupçons des
+professionnels assujettis, analyser et
+enrichir ces informations, transmettre aux
+autorités compétentes quand les indices
+sont suffisants.
+
+10
+00:01:10,525 --> 00:01:20,656
+Les professionnels assujettis dans
+l'immobilier comprennent les agents
+immobiliers titulaires de la carte T, les
+administrateurs de biens, les syndics de
+copropriété et les marchands de biens.
+
+11
+00:01:20,677 --> 00:01:22,679
+Vous êtes donc directement concernés.
+
+12
+00:01:22,698 --> 00:01:29,566
+Le blanchiment d'argent consiste à
+dissimuler l'origine illicite de fonds en
+les faisant transiter par des circuits
+légaux, dont l'immobilier.
+
+13
+00:01:30,108 --> 00:01:33,968
+C'est l'article 324-1 du Code pénal qui le
+définit.
+
+14
+00:01:33,989 --> 00:01:36,228
+Le schéma classique comporte trois phases.
+
+15
+00:01:36,248 --> 00:01:37,209
+Le placement.
+
+16
+00:01:37,228 --> 00:01:42,409
+Les fonds illicites entrent dans le
+système financier, souvent en cash ou via
+des sociétés écrans.
+
+17
+00:01:42,430 --> 00:01:43,409
+L'empilement.
+
+18
+00:01:43,430 --> 00:01:47,930
+Les fonds circulent entre plusieurs
+comptes, entités ou pays pour brouiller
+les pistes.
+
+19
+00:01:47,950 --> 00:01:49,031
+L'intégration.
+
+20
+00:01:49,051 --> 00:01:52,492
+Les fonds réapparaissent sous une forme
+apparemment légitime.
+
+21
+00:01:52,531 --> 00:01:54,031
+Un appartement acheté.
+
+22
+00:01:54,072 --> 00:01:55,533
+Un immeuble rénové.
+
+23
+00:01:55,572 --> 00:01:57,572
+Une société civile immobilière créée.
+
+24
+00:01:58,373 --> 00:02:06,816
+L'immobilier est particulièrement prisé
+pour l'intégration, car les transactions
+sont longues, impliquent de nombreux
+intervenants, et les valeurs sont
+importantes.
+
+25
+00:02:06,856 --> 00:02:10,058
+Le financement du terrorisme est également
+visé par traque-fin.
+
+26
+00:02:10,079 --> 00:02:13,721
+Contrairement au blanchiment, les fonds
+peuvent être d'origine légale.
+
+27
+00:02:13,760 --> 00:02:17,082
+Ils sont utilisés pour financer des
+activités illégales.
+
+28
+00:02:17,103 --> 00:02:25,287
+La loi du 12 juillet 1990, modifiée par
+les ordonnances de 2016 et 2020, impose
+aux agents immobiliers trois grandes
+obligations.
+
+29
+00:02:26,007 --> 00:02:27,288
+Obligation 1.
+
+30
+00:02:27,328 --> 00:02:28,549
+La vigilance.
+
+31
+00:02:28,568 --> 00:02:33,532
+Vous devez identifier et vérifier
+l'identité de votre client avant toute
+relation d'affaires.
+
+32
+00:02:33,573 --> 00:02:48,765
+Cela implique la vérification de la pièce
+d'identité en cours de validité, la
+vérification de l'identité du bénéficiaire
+effectif, c'est-à-dire la personne qui
+contrôle réellement l'opération derrière
+une société, la compréhension de la nature
+et de l'objet de la relation d'affaires.
+
+33
+00:02:48,806 --> 00:02:50,026
+Obligation 2.
+
+34
+00:02:50,046 --> 00:02:52,028
+L'examen renforcé pour les situations à
+risque.
+
+35
+00:02:52,609 --> 00:02:55,592
+Certaines situations nécessitent une
+vigilance accrue.
+
+36
+00:02:55,611 --> 00:02:59,694
+Les transactions avec des pays tiers à
+risque élevé identifié par le GAFI.
+
+37
+00:02:59,715 --> 00:03:03,698
+Les personnes politiquement exposées, PPE,
+et leurs proches.
+
+38
+00:03:03,717 --> 00:03:08,842
+Les opérations atypiques par leur montant,
+leur complexité ou leur caractère
+inhabituel.
+
+39
+00:03:08,883 --> 00:03:11,745
+Obligation 3, la déclaration de soupçons.
+
+40
+00:03:11,764 --> 00:03:19,632
+Dès que vous avez connaissance d'une
+opération suspecte, vous devez effectuer
+une déclaration de soupçons auprès de
+Tracfins via la plateforme sécurisée
+Hermès.
+
+41
+00:03:20,151 --> 00:03:22,032
+Cette déclaration est confidentielle.
+
+42
+00:03:22,052 --> 00:03:25,533
+Vous ne devez en aucun cas informer votre
+client de cette déclaration.
+
+43
+00:03:25,554 --> 00:03:28,734
+C'est le délit de tipping off, sanctionné
+pénalement.
+
+44
+00:03:28,753 --> 00:03:37,356
+La déclaration doit contenir l'identité du
+déclarant, l'identité du client concerné,
+la description de l'opération suspecte et
+les motifs du soupçon.
+
+45
+00:03:37,377 --> 00:03:39,537
+Comment reconnaître une opération suspecte
+?
+
+46
+00:03:39,556 --> 00:03:41,858
+Voici les signaux d'alerte les plus
+fréquents dans l'immobilier.
+
+47
+00:03:42,437 --> 00:03:59,115
+un client qui propose de payer une partie
+du prix en espèces, un écart inexpliqué
+entre le profil économique du client et le
+prix du bien acquis, un client qui ne
+visite jamais le bien avant d'acheter, une
+multiplicité d'intermédiaires sans
+justification économique, des changements
+fréquents de donneurs d'ordre ou de
+bénéficiaires,
+
+48
+00:03:59,836 --> 00:04:03,299
+Une insistance pour conclure rapidement,
+sans justification.
+
+49
+00:04:03,318 --> 00:04:06,282
+Des fonds provenant de pays à législation
+opaque.
+
+50
+00:04:06,322 --> 00:04:09,925
+Un seul de ces signaux ne suffit pas
+forcément à déclencher une déclaration.
+
+51
+00:04:09,944 --> 00:04:14,008
+C'est leur accumulation et le contexte
+global qui déterminent le soupçon.
+
+52
+00:04:14,049 --> 00:04:15,030
+Cas pratique.
+
+53
+00:04:15,069 --> 00:04:21,096
+Monsieur X se présente à votre agence pour
+acheter un appartement de 450 000 euros
+dans le 16e arrondissement de Paris.
+
+54
+00:04:21,136 --> 00:04:23,418
+Il est gérant d'une SARL basée au
+Seychelles.
+
+55
+00:04:23,978 --> 00:04:27,459
+Il propose de verser 50 000 euros en
+espèces pour aller plus vite.
+
+56
+00:04:27,500 --> 00:04:29,821
+Il n'a pas visité le bien et souhaite
+signer sous 48 heures.
+
+57
+00:04:40,226 --> 00:04:45,430
+Absence de visite, plus délai anormalement
+court, point Quaker, signaux
+supplémentaires.
+
+58
+00:04:45,470 --> 00:04:51,673
+Conclusion, vous devez refuser l'opération
+et effectuer une déclaration de soupçon
+auprès de traque-fin.
+
+59
+00:04:51,692 --> 00:04:55,834
+Le non-respect des obligations traque-fin
+expose à des sanctions lourdes.
+
+60
+00:04:55,855 --> 00:05:05,459
+Sanctions administratives, l'ACPR et l'AMF
+peuvent infliger des avertissements, des
+interdictions temporaires d'exercer ou des
+amendes jusqu'à 5 millions d'euros.
+
+61
+00:05:05,500 --> 00:05:09,502
+Sanctions pénales, complicité de
+blanchiment, jusqu'à 5 ans
+d'emprisonnement
+
+62
+00:05:10,302 --> 00:05:12,264
+et 375 000 euros d'amende.
+
+63
+00:05:12,303 --> 00:05:16,925
+En bande organisée, les peines sont
+portées à 10 ans et 750 000 euros.
+
+64
+00:05:16,966 --> 00:05:30,595
+Pour vous protéger, mettez en place dans
+votre agence une procédure écrite
+d'identification des clients, un registre
+des opérations à risque, une formation
+régulière de vos collaborateurs, un
+référent traque-fin désigné au sein de
+votre structure.
+
+65
+00:05:31,074 --> 00:05:37,887
+La conformité traque fin n'est pas une
+contrainte supplémentaire, c'est votre
+protection et celle de votre agence.
+
+66
+00:05:37,927 --> 00:05:44,439
+Un agent qui connaît ses obligations est
+un agent qui inspire confiance et qui
+exerce en toute sérénité.
+
+67
+00:05:44,459 --> 00:05:52,173
+Dans le prochain module, nous verrons
+ensemble les règles de non-discrimination,
+un autre pilier incontournable de votre
+conformité professionnelle.

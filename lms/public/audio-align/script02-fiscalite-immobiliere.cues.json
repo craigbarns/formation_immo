@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "duration": 388.587,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.271,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 34.082,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 64.595,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 96.708,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 127.387,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 161.502,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 191.52,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 225.148,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 255.215,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 292.765,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 327.732,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 357.936,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 388.066,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "fait",
+      "start": 1.812,
+      "end": 1.992
+    },
+    {
+      "term": "fiscalité",
+      "start": 4.792,
+      "end": 5.413
+    },
+    {
+      "term": "immobilière",
+      "start": 5.473,
+      "end": 6.433
+    },
+    {
+      "term": "conseiller",
+      "start": 10.454,
+      "end": 10.894
+    },
+    {
+      "term": "clients",
+      "start": 11.114,
+      "end": 11.614
+    },
+    {
+      "term": "moins",
+      "start": 12.235,
+      "end": 12.415
+    },
+    {
+      "term": "d'impôts,",
+      "start": 12.435,
+      "end": 13.115
+    },
+    {
+      "term": "argument",
+      "start": 15.175,
+      "end": 15.536
+    },
+    {
+      "term": "vente",
+      "start": 15.716,
+      "end": 16.016
+    },
+    {
+      "term": "différence.",
+      "start": 16.756,
+      "end": 17.556
+    }
+  ]
+}

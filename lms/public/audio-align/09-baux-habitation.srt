@@ -1,0 +1,362 @@
+1
+00:00:00,231 --> 00:00:05,394
+La gestion locative représente plus de 40%
+de l'activité des agences immobilières en
+France.
+
+2
+00:00:05,455 --> 00:00:12,199
+Et pourtant, les litiges liés au beau
+d'habitation sont l'une des premières
+sources de contentieux entre
+professionnels et clients.
+
+3
+00:00:12,240 --> 00:00:21,646
+Un bail mal rédigé, une clause illégale,
+un délai de préavis mal calculé, et c'est
+toute la relation avec votre client
+propriétaire ou locataire qui peut se
+détériorer.
+
+4
+00:00:22,086 --> 00:00:38,415
+Dans ce module, nous allons maîtriser
+ensemble la loi du 6 juillet 1989, le
+texte fondateur du bail d'habitation en
+France, et tout ce que vous devez
+connaître pour gérer vos locataires.
+
+5
+00:00:38,655 --> 00:00:49,161
+Elle a été modifiée à de nombreuses
+reprises, notamment par la loi Allure en
+2014, la loi Elan en 2018, et les
+dispositions récentes encadrant les
+logements énergétiquement passoires.
+
+6
+00:00:49,921 --> 00:00:51,262
+Champs d'application.
+
+7
+00:00:51,283 --> 00:00:55,103
+La loi s'applique aux locations de locaux
+à usage d'habitation principale.
+
+8
+00:00:55,143 --> 00:01:10,069
+Elle couvre les locations vides à usage de
+résidence principale, les locations
+meublées à usage de résidence principale,
+les logements mixtes, résidence principale
+et exercice d'une activité
+professionnelle, ce que la loi ne couvre
+pas directement, les locations
+saisonnières.
+
+9
+00:01:10,590 --> 00:01:18,072
+les logements de fonction, les locations à
+usage exclusivement professionnels, les
+logements foyer, bail vide vs bail meublé.
+
+10
+00:01:18,112 --> 00:01:24,256
+Pour un bail vide, la durée est de 3 ans
+si le bailleur est une personne physique
+et 6 ans si c'est une personne morale.
+
+11
+00:01:24,275 --> 00:01:27,597
+Pour un bail meublé, la durée est d'un an
+ou 9 mois pour les étudiants.
+
+12
+00:01:28,237 --> 00:01:34,082
+Depuis la loi Allure, le bail doit
+obligatoirement être rédigé sur la base
+d'un contrat type défini par décret.
+
+13
+00:01:34,123 --> 00:01:38,786
+Ce contrat type s'impose à tous,
+propriétaires privés comme gestionnaires
+professionnels.
+
+14
+00:01:38,805 --> 00:01:57,421
+Les mentions obligatoires du bail
+comprennent le nom et l'adresse du
+bailleur ou du gestionnaire s'il y en a
+un, la désignation précise du logement et
+de ses accessoires, la surface habitable,
+les erreurs ICI engage la responsabilité
+de l'agent, la date de prise des faits et
+la durée du bail, le montant du loyer, ses
+modalités de paiement et les règles de
+révision.
+
+15
+00:01:58,260 --> 00:02:20,276
+le montant du dépôt de garantie, la liste
+des équipements d'accès aux technologies
+de l'information, les annexes obligatoires
+doivent être jointes au bail, le
+diagnostic de performance énergétique,
+DPE, le constat de risque d'exposition au
+plomb pour les immeubles construits avant
+1949, l'état des risques naturels, miniers
+et technologiques, le diagnostic
+électricité et gaz pour les installations
+de plus de 15 ans,
+
+16
+00:02:21,036 --> 00:02:24,039
+L'état des lieux d'entrée, établi
+contradictoirement.
+
+17
+00:02:24,080 --> 00:02:30,588
+Pour une copropriété, l'extrait du
+règlement de copropriété concernant les
+parties communes et la destination de
+l'immeuble.
+
+18
+00:02:30,628 --> 00:02:36,516
+L'absence d'une annexe obligatoire peut
+entraîner la nullité de certaines clauses
+du bail et expose l'agent à des dommages
+et intérêts.
+
+19
+00:02:37,117 --> 00:02:38,598
+La fixation du loyer.
+
+20
+00:02:38,617 --> 00:02:43,319
+En principe, le bailleur fixe librement le
+montant du loyer lors de la première mise
+en location.
+
+21
+00:02:43,340 --> 00:02:47,381
+Mais depuis la loi Elan, certaines
+communes peuvent instaurer un encadrement
+des loyers.
+
+22
+00:02:47,441 --> 00:02:56,823
+En 2026, l'encadrement est applicable dans
+plusieurs métropoles dont Paris, la
+Petite-Couronne, Lille, Lyon, Bordeaux et
+d'autres territoires en zone tendue.
+
+23
+00:02:56,842 --> 00:03:00,383
+Dans ces zones, le loyer ne peut excéder
+le loyer de référence majoré de 20%.
+
+24
+00:03:01,343 --> 00:03:05,425
+Le non-respect expose le bailleur à une
+amende pouvant aller jusqu'à 5 000 euros.
+
+25
+00:03:05,466 --> 00:03:07,306
+La révision annuelle du loyer.
+
+26
+00:03:07,326 --> 00:03:13,849
+Elle est encadrée par l'Indice de
+référence des loyesses, IRL, publié chaque
+trimestre par l'INSEE.
+
+27
+00:03:13,870 --> 00:03:18,431
+Le bailleur ne peut réviser le loyer
+qu'une fois par an, à la date anniversaire
+du bail.
+
+28
+00:03:18,451 --> 00:03:21,152
+La hausse est plafonnée à l'évolution de
+l'IRL.
+
+29
+00:03:21,173 --> 00:03:27,496
+Les logements classés F et G. Depuis août
+2022, les loyers des logements classés F
+et G sont gelés.
+
+30
+00:03:27,536 --> 00:03:29,657
+Ils ne peuvent plus faire l'objet d'une
+révision à la hausse.
+
+31
+00:03:30,197 --> 00:03:38,701
+Ces logements ne peuvent plus être mis en
+location à partir de 2025, classe G, et
+2028, classe F, selon le calendrier en
+vigueur.
+
+32
+00:03:38,722 --> 00:03:39,983
+Le dépôt de garantie.
+
+33
+00:03:40,002 --> 00:03:43,805
+Pour un logement vide, il est plafonné à
+un mois de loyer hors charge.
+
+34
+00:03:43,844 --> 00:03:46,747
+Pour un logement meublé, il est plafonné à
+deux mois.
+
+35
+00:03:46,787 --> 00:03:53,670
+Il doit être restitué dans un délai d'un
+mois si l'état des lieux de sortie est
+conforme, ou deux mois si des dégradations
+sont constatées.
+
+36
+00:03:54,610 --> 00:04:01,794
+La garantie des loyers impayés, GLI, c'est
+une assurance souscrite par le
+propriétaire qui couvre les impayés de
+loyers et charges.
+
+37
+00:04:01,834 --> 00:04:04,275
+Elle complète ou remplace le
+cautionnement.
+
+38
+00:04:04,294 --> 00:04:11,658
+Depuis la loi Allure, le bailleur ne peut
+pas cumuler GLI et cautionnement
+solidaire, sauf si le locataire est
+étudiant ou apprenti.
+
+39
+00:04:11,679 --> 00:04:16,321
+L'acte de cautionnement La caution
+s'engage à rembourser le bailleur en cas
+de défaillance du locataire.
+
+40
+00:04:17,475 --> 00:04:23,057
+La loi impose que la caution recopie de sa
+main un texte précis mentionnant l'étendue
+de ses engagements.
+
+41
+00:04:23,098 --> 00:04:25,139
+Le congé donné par le locataire.
+
+42
+00:04:25,160 --> 00:04:32,144
+Le locataire peut résilier son bail à tout
+moment avec un préavis de 3 mois pour un
+logement vide et 1 mois pour un logement
+meublé.
+
+43
+00:04:32,163 --> 00:04:35,826
+Le préavis est réduit à 1 mois dans
+certaines zones tendues pour les logements
+vides.
+
+44
+00:04:36,245 --> 00:04:37,687
+Le congé donné par le bailleur.
+
+45
+00:04:37,706 --> 00:04:44,071
+Le bailleur ne peut donner congé qu'à
+l'échéance du bail, avec un préavis de 6
+mois, et uniquement pour 3 motifs.
+
+46
+00:04:44,091 --> 00:04:47,334
+La reprise du logement pour y habiter
+lui-même ou un proche.
+
+47
+00:04:47,353 --> 00:04:48,613
+La vente du logement.
+
+48
+00:04:48,653 --> 00:04:53,096
+Un motif légitime et sérieux, comme des
+impayés répétés ou des troubles de
+voisinage.
+
+49
+00:04:53,137 --> 00:04:54,658
+Les locataires protégés.
+
+50
+00:04:54,678 --> 00:05:00,983
+Certains locataires bénéficient d'une
+protection renforcée contre le congé, les
+personnes de plus de 65 ans aux ressources
+modestes,
+
+51
+00:05:01,423 --> 00:05:03,043
+ou les locataires handicapés.
+
+52
+00:05:03,064 --> 00:05:06,365
+Dans ces cas, le bailleur doit leur
+proposer un logement adapté.
+
+53
+00:05:06,384 --> 00:05:11,226
+Cas pratique, vous gérez la location d'un
+appartement vide à Lyon, en zone tendue.
+
+54
+00:05:11,266 --> 00:05:14,427
+Le propriétaire souhaite fixer le loyer à
+1200€ pour 45m².
+
+55
+00:05:15,569 --> 00:05:18,230
+Le loyer de référence dans le secteur est
+de 14€ par m², soit 630€.
+
+56
+00:05:18,250 --> 00:05:20,790
+Le plafond légal est donc de 630, time
+1,20, égal à 756€.
+
+57
+00:05:26,293 --> 00:05:31,841
+Un loyer de 1200 euros serait illégal et
+expose le propriétaire à une amende de
+5000 euros.
+
+58
+00:05:31,862 --> 00:05:36,968
+Votre rôle d'agent est de l'en informer et
+de le conseiller pour fixer un loyer
+conforme.
+
+59
+00:05:36,988 --> 00:05:45,841
+Maîtriser la loi du 6 juillet 1989 et ses
+évolutions, c'est vous positionner comme
+un expert indispensable pour vos clients
+propriétaires et locataires.
+
+60
+00:05:45,862 --> 00:05:49,627
+C'est aussi la garantie d'éviter les
+litiges et de construire une réputation
+solide.

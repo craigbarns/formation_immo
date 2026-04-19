@@ -1,0 +1,660 @@
+1
+00:00:00,251 --> 00:00:03,734
+Le 23 juin 2026, vous recevez un appel.
+
+2
+00:00:03,754 --> 00:00:05,375
+Bonjour, c'est Sophie.
+
+3
+00:00:05,394 --> 00:00:08,577
+Vous nous avez vendu notre appartement rue
+de Rivoli l'année dernière.
+
+4
+00:00:08,598 --> 00:00:12,019
+Nous avons un ami qui cherche exactement
+ce que vous nous aviez trouvé.
+
+5
+00:00:12,080 --> 00:00:13,281
+Il veut vous rencontrer.
+
+6
+00:00:13,320 --> 00:00:14,862
+Cette semaine si possible.
+
+7
+00:00:14,882 --> 00:00:17,605
+Cet appel, c'est le Graal de l'agent
+immobilier.
+
+8
+00:00:17,644 --> 00:00:20,007
+Un client satisfait qui devient
+ambassadeur.
+
+9
+00:00:20,626 --> 00:00:23,629
+qui recommande, qui génère du business
+gratuitement.
+
+10
+00:00:23,649 --> 00:00:28,771
+Savez-vous qu'un client acquis par
+recommandation coûte jusqu'à 10 fois moins
+cher qu'un prospect froid ?
+
+11
+00:00:28,792 --> 00:00:30,754
+Qu'il convertit 2 fois plus vite ?
+
+12
+00:00:30,774 --> 00:00:33,395
+Qu'il génère lui-même de nouvelles
+recommandations ?
+
+13
+00:00:33,414 --> 00:00:36,917
+Aujourd'hui, nous allons construire votre
+machine à recommandation.
+
+14
+00:00:36,957 --> 00:00:38,579
+Voici une scène trop courante.
+
+15
+00:00:38,598 --> 00:00:41,441
+L'agent accompagne parfaitement le client
+jusqu'à la signature.
+
+16
+00:00:42,060 --> 00:00:43,860
+Puis, disparition.
+
+17
+00:00:43,881 --> 00:00:45,701
+Plus d'appels, plus de nouvelles.
+
+18
+00:00:45,722 --> 00:00:47,362
+Le client est livré à lui-même.
+
+19
+00:00:47,381 --> 00:00:50,783
+Résultat, le client oublie rapidement qui
+lui a vendu son bien.
+
+20
+00:00:50,802 --> 00:00:53,103
+Quand on lui demande « Tu connais un bon
+agent ?
+
+21
+00:00:53,124 --> 00:00:54,344
+», il ne pense pas à vous.
+
+22
+00:00:54,384 --> 00:00:56,844
+Ou pire, il se souvient de votre absence.
+
+23
+00:00:56,865 --> 00:01:01,606
+Pourtant, la fidélisation et la
+recommandation sont le moteur des
+meilleures agences.
+
+24
+00:01:01,625 --> 00:01:04,686
+Celles qui croissent sans dépenser des
+fortunes en publicité.
+
+25
+00:01:04,706 --> 00:01:06,587
+Celles qui ont des files d'attente de
+clients.
+
+26
+00:01:06,606 --> 00:01:08,587
+Celles où les agents gagnent le plus.
+
+27
+00:01:08,606 --> 00:01:10,808
+La bonne nouvelle, ce n'est pas de la
+magie.
+
+28
+00:01:10,828 --> 00:01:11,367
+C'est une méthode.
+
+29
+00:01:11,888 --> 00:01:14,310
+applicable par tous, dès aujourd'hui.
+
+30
+00:01:14,370 --> 00:01:18,713
+La signature de l'acte authentique n'est
+pas la fin, c'est le début de la relation.
+
+31
+00:01:18,733 --> 00:01:20,936
+Votre calendrier de suivi obligatoire.
+
+32
+00:01:20,956 --> 00:01:22,837
+J plus 7, premier appel.
+
+33
+00:01:22,878 --> 00:01:24,399
+Comment se passe l'emménagement ?
+
+34
+00:01:24,418 --> 00:01:26,060
+Besoin d'aide pour quoi que ce soit ?
+
+35
+00:01:26,099 --> 00:01:27,981
+J plus 30, deuxième appel.
+
+36
+00:01:28,022 --> 00:01:29,143
+Vous vous sentez chez vous ?
+
+37
+00:01:29,162 --> 00:01:30,884
+Tout va bien avec la copropriété ?
+
+38
+00:01:30,903 --> 00:01:33,186
+J plus 90, troisième appel.
+
+39
+00:01:33,225 --> 00:01:34,266
+Comment ça se passe ?
+
+40
+00:01:34,287 --> 00:01:36,429
+Des questions sur le voisinage, les
+commerces ?
+
+41
+00:01:36,448 --> 00:01:36,828
+J plus 180,
+
+42
+00:01:37,750 --> 00:01:38,969
+Appel semi-annuel.
+
+43
+00:01:38,989 --> 00:01:40,191
+Point sur votre bien.
+
+44
+00:01:40,210 --> 00:01:41,350
+Le marché a évolué.
+
+45
+00:01:41,370 --> 00:01:42,850
+Votre patrimoine aussi.
+
+46
+00:01:42,911 --> 00:01:44,611
+J plus 365.
+
+47
+00:01:44,652 --> 00:01:46,171
+Anniversaire d'achat.
+
+48
+00:01:46,231 --> 00:01:48,072
+Il y a un an, vous deveniez propriétaire.
+
+49
+00:01:48,111 --> 00:01:49,192
+Félicitations.
+
+50
+00:01:49,212 --> 00:01:50,293
+Cas pratique.
+
+51
+00:01:50,313 --> 00:01:53,552
+Vos clients du 12 rue du Bac ont emménagé
+il y a deux semaines.
+
+52
+00:01:53,572 --> 00:01:55,073
+Bonjour, c'est Marc.
+
+53
+00:01:55,093 --> 00:01:56,614
+Je voulais prendre de vos nouvelles.
+
+54
+00:01:56,634 --> 00:01:58,134
+L'emménagement s'est bien passé ?
+
+55
+00:01:58,153 --> 00:01:59,534
+Vous avez pu tout installer ?
+
+56
+00:01:59,555 --> 00:02:00,515
+Les voisins sont accueillants ?
+
+57
+00:02:00,915 --> 00:02:06,438
+Parfait, écoutez, je passe dans le
+quartier jeudi, je peux m'arrêter 5
+minutes pour voir comment vous vous êtes
+installés ?
+
+58
+00:02:06,478 --> 00:02:15,264
+5 minutes, un café, une vraie connexion
+humaine, vous n'êtes plus un agent, vous
+êtes leur conseiller, leur référent,
+quelqu'un qui s'intéresse vraiment à eux.
+
+59
+00:02:15,283 --> 00:02:19,986
+La fidélisation ne se construit pas
+uniquement sur les appels, elle se
+construit sur les surprises.
+
+60
+00:02:20,606 --> 00:02:26,288
+Ces petits gestes qui dépassent l'attendu,
+qui créent l'enchantement, qui restent
+gravés dans la mémoire.
+
+61
+00:02:26,348 --> 00:02:33,572
+Idée de surprise post-signature, idée 1,
+la bouteille de champagne à l'acte
+authentique, classique mais efficace.
+
+62
+00:02:33,632 --> 00:02:40,235
+Idée 2, le panier de bienvenue avec les
+meilleures adresses du quartier,
+boulangerie, restaurant, marchand de vin.
+
+63
+00:02:40,275 --> 00:02:44,417
+Idée 3, la carte d'anniversaire d'achat
+avec un petit mot personnalisé.
+
+64
+00:02:45,076 --> 00:02:47,737
+idée 4, l'invitation à un événement.
+
+65
+00:02:47,777 --> 00:02:50,538
+Vernissage, dégustation, soirée client.
+
+66
+00:02:50,578 --> 00:02:53,479
+Idée 5, le service gratuit de mise en
+relation.
+
+67
+00:02:53,519 --> 00:02:57,439
+Plombier, électricien, architecte, vos
+meilleurs contacts.
+
+68
+00:02:57,460 --> 00:03:01,139
+Cas pratique, vos clients du 12 rue du Bac
+ont emménagé.
+
+69
+00:03:01,159 --> 00:03:11,822
+J'ai préparé quelque chose pour vous, un
+panier avec mes adresses préférées du
+quartier, la boulangerie où je vais le
+dimanche matin, le restaurant italien pour
+les soirs de flemme, le caviste qui
+conseille parfaitement.
+
+70
+00:03:11,842 --> 00:03:14,723
+Dites-leur que vous venez de ma part, ils
+vous traiteront comme des rois.
+
+71
+00:03:15,263 --> 00:03:17,185
+Coût du panier, 30 euros.
+
+72
+00:03:17,224 --> 00:03:19,467
+Valeur perçue, inestimable.
+
+73
+00:03:19,507 --> 00:03:22,189
+Impact sur la fidélité, maximal.
+
+74
+00:03:22,229 --> 00:03:24,532
+Demander une recommandation, c'est un art.
+
+75
+00:03:24,572 --> 00:03:26,514
+Trop tôt et le client n'est pas prêt.
+
+76
+00:03:26,533 --> 00:03:28,635
+Trop tard et il a oublié l'émotion.
+
+77
+00:03:28,656 --> 00:03:30,978
+Mal demandé et il se sent utilisé.
+
+78
+00:03:30,997 --> 00:03:32,218
+Les erreurs à éviter.
+
+79
+00:03:32,239 --> 00:03:34,300
+Vous ne connaissez pas quelqu'un qui veut
+acheter ?
+
+80
+00:03:34,320 --> 00:03:35,723
+Trop vague, trop de pression.
+
+81
+00:03:36,163 --> 00:03:38,504
+Si vous avez des amis intéressés, je suis
+là.
+
+82
+00:03:38,544 --> 00:03:39,485
+Trop passif.
+
+83
+00:03:39,506 --> 00:03:40,485
+Pas d'engagement.
+
+84
+00:03:40,506 --> 00:03:41,947
+Passez le mot autour de vous.
+
+85
+00:03:41,967 --> 00:03:43,008
+Trop générique.
+
+86
+00:03:43,048 --> 00:03:44,329
+Pas de valeur échangée.
+
+87
+00:03:44,368 --> 00:03:45,830
+La bonne façon de demander.
+
+88
+00:03:45,849 --> 00:03:48,211
+Sophie, je voulais vous parler de quelque
+chose.
+
+89
+00:03:48,231 --> 00:03:50,152
+Travailler avec vous a été un vrai
+plaisir.
+
+90
+00:03:50,173 --> 00:03:51,913
+Vous avez été des clients exemplaires.
+
+91
+00:03:51,933 --> 00:03:52,655
+Je me demandais...
+
+92
+00:03:53,155 --> 00:04:00,056
+Connaissez-vous des personnes dans votre
+entourage qui seraient dans la même
+situation que vous il y a 6 mois, qui
+cherchent à acheter ou vendre ?
+
+93
+00:04:00,075 --> 00:04:02,676
+Je serais ravie de les aider comme je vous
+ai aidé.
+
+94
+00:04:02,697 --> 00:04:21,680
+Les éléments clés, le timing, quand le
+client est satisfait, pas avant, le
+compliment sincère, valoriser la relation,
+pas seulement la transaction, la question
+précise des personnes dans votre entourage
+plutôt que quelqu'un, la valeur promise,
+les aider comme je vous ai aidé, pour
+systématiser les recommandations, créer un
+programme structuré,
+
+95
+00:04:22,259 --> 00:04:26,221
+Offrez une valeur en échange, rendez-le
+simple, rendez-le attractif.
+
+96
+00:04:26,242 --> 00:04:28,083
+Modèle de programme de recommandation.
+
+97
+00:04:28,122 --> 00:04:30,142
+Modèle 1, le chèque cadeau.
+
+98
+00:04:30,163 --> 00:04:35,125
+Pour chaque recommandation qui aboutit à
+une transaction, je vous offre un chèque
+cadeau de 500 euros.
+
+99
+00:04:35,165 --> 00:04:37,846
+Simple, direct, compris immédiatement.
+
+100
+00:04:37,887 --> 00:04:40,247
+Modèle 2, le service gratuit.
+
+101
+00:04:40,267 --> 00:04:45,048
+Pour chaque recommandation, je vous offre
+une estimation gratuite de votre bien
+chaque année.
+
+102
+00:04:45,069 --> 00:04:48,331
+Crée de la valeur continue, maintient le
+contact.
+
+103
+00:04:48,370 --> 00:04:50,732
+Modèle 3, l'expérience exclusive.
+
+104
+00:04:51,331 --> 00:04:54,634
+Mes clients recommandateurs sont invités à
+ma soirée annuelle.
+
+105
+00:04:54,675 --> 00:04:57,437
+Dégustation, rencontre, surprise.
+
+106
+00:04:57,456 --> 00:05:00,218
+Crée du lien social, de l'appartenance.
+
+107
+00:05:00,259 --> 00:05:02,740
+Modèle 4, le don caritatif.
+
+108
+00:05:02,781 --> 00:05:07,444
+Pour chaque recommandation, je fais un don
+de 300 euros à l'association de votre
+choix.
+
+109
+00:05:07,463 --> 00:05:08,125
+Touche les valeurs.
+
+110
+00:05:08,605 --> 00:05:12,447
+crée du sens, cas pratique, votre
+programme personnel.
+
+111
+00:05:12,466 --> 00:05:15,047
+Je voulais vous parler de mon programme de
+recommandation.
+
+112
+00:05:15,067 --> 00:05:21,050
+Quand vous me recommandez à quelqu'un de
+votre entourage et que cela aboutit à une
+transaction, je vous offre deux choses.
+
+113
+00:05:21,069 --> 00:05:25,250
+Premièrement, un dîner dans le restaurant
+de votre choix, à mes frais.
+
+114
+00:05:25,271 --> 00:05:31,514
+Deuxièmement, une estimation annuelle
+gratuite de votre bien, pour suivre
+l'évolution de votre patrimoine.
+
+115
+00:05:31,553 --> 00:05:37,555
+Ce n'est pas obligatoire, c'est juste ma
+façon de vous remercier et de vous donner
+envie de parler de moi autour de vous.
+
+116
+00:05:38,076 --> 00:05:41,139
+Si vous pensez à quelqu'un, n'hésitez pas,
+je suis là.
+
+117
+00:05:41,178 --> 00:05:46,245
+La fidélisation et la recommandation ne
+sont pas des options, ce sont des
+impératifs.
+
+118
+00:05:46,264 --> 00:05:50,889
+Pour votre rentabilité, pour votre
+sérénité, pour votre croissance.
+
+119
+00:05:50,928 --> 00:05:52,350
+Retenez ces 4 principes.
+
+120
+00:05:52,370 --> 00:05:55,894
+Principe 1, le suivi post-signature,
+restez présent.
+
+121
+00:05:55,913 --> 00:05:59,017
+Principe 2, la surprise et l'enchantement,
+dépassez l'attendu.
+
+122
+00:05:59,598 --> 00:06:03,298
+Principe 3, la demande de recommandation,
+l'art de demander.
+
+123
+00:06:03,338 --> 00:06:08,420
+Principe 4, le programme structuré,
+systématisé, votre plan d'action immédiat.
+
+124
+00:06:08,459 --> 00:06:10,980
+Premièrement, listez vos 5 derniers
+clients.
+
+125
+00:06:11,000 --> 00:06:16,420
+Deuxièmement, appelez-les cette semaine,
+sans vendre quoi que ce soit, juste pour
+prendre de leurs nouvelles.
+
+126
+00:06:16,440 --> 00:06:21,742
+Troisièmement, choisissez une idée de
+surprise, préparez-la, offrez-la à votre
+prochain client.
+
+127
+00:06:21,762 --> 00:06:24,283
+Quatrièmement, créez votre programme de
+recommandation.
+
+128
+00:06:24,923 --> 00:06:25,603
+Simple.
+
+129
+00:06:25,644 --> 00:06:26,184
+Clair.
+
+130
+00:06:26,223 --> 00:06:27,485
+Attractif.
+
+131
+00:06:27,504 --> 00:06:31,848
+Cinquièmement, demandez une recommandation
+à chaque client satisfait.
+
+132
+00:06:31,867 --> 00:06:41,915
+Les meilleurs agents ne chassent pas les
+clients, ils les attirent par la qualité
+de leur service, par la force de leur
+réputation, par le pouvoir de la
+recommandation.
+
+133
+00:06:41,956 --> 00:06:46,480
+Vous avez maintenant toutes les clés pour
+construire votre machine à recommandation.
+
+134
+00:06:46,519 --> 00:06:47,000
+A vous de jouer !
+
+135
+00:06:47,439 --> 00:06:49,463
+Ce module terrain touche à sa fin.
+
+136
+00:06:49,483 --> 00:07:01,540
+Vous avez appris à conduire des visites
+comme un pro, à construire des
+argumentaires qui convertissent, à
+maîtriser le closing, à accompagner vos
+clients jusqu'à l'acte authentique et à
+créer des ambassadeurs.
+
+137
+00:07:01,560 --> 00:07:11,714
+Vous êtes maintenant armés pour exceller
+sur le terrain, pour transformer chaque
+rencontre en opportunité, pour créer des
+relations durables, pour construire une
+carrière exceptionnelle.
+
+138
+00:07:11,754 --> 00:07:15,961
+Je vous félicite d'être arrivé jusqu'ici
+et je vous dis à très bientôt pour de
+nouvelles aventures.

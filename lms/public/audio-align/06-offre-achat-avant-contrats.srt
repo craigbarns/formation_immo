@@ -1,0 +1,379 @@
+1
+00:00:00,211 --> 00:00:02,793
+L'offre d'achat, puis le compromis de
+vente.
+
+2
+00:00:02,833 --> 00:00:08,317
+Ces deux étapes représentent les moments
+les plus critiques et les plus risqués de
+la transaction immobilière.
+
+3
+00:00:08,356 --> 00:00:13,660
+Un mot mal choisi dans une clause, un
+délai oublié, et c'est la vente entière
+qui peut s'effondrer.
+
+4
+00:00:13,680 --> 00:00:19,324
+Chaque année, des milliers de transactions
+échouent faute d'avoir correctement rédigé
+ces documents précontractuels.
+
+5
+00:00:19,364 --> 00:00:22,567
+Et c'est souvent l'agent immobilier qui
+emporte la responsabilité.
+
+6
+00:00:22,586 --> 00:00:29,111
+Dans ce module, nous allons maîtriser
+ensemble l'offre d'achat, la promesse
+unilatérale et la promesse synalagmatique.
+
+7
+00:00:29,692 --> 00:00:33,213
+leurs différences, leurs obligations et
+les pièges à éviter.
+
+8
+00:00:33,232 --> 00:00:34,654
+Qu'est-ce qu'une offre d'achat ?
+
+9
+00:00:34,673 --> 00:00:42,356
+L'offre d'achat est un document par lequel
+un acquéreur potentiel manifeste son
+intention d'acheter un bien immobilier à
+un prix déterminé.
+
+10
+00:00:42,396 --> 00:00:46,037
+Elle est régie par les articles 1113 et
+suivant du Code civil.
+
+11
+00:00:46,957 --> 00:00:52,262
+Lorsque le vendeur accepte l'offre, le
+contrat est formé et les deux parties sont
+en principe liées.
+
+12
+00:00:52,281 --> 00:01:03,529
+Les éléments essentiels de l'offre
+d'achat, l'identité de l'acquéreur, la
+désignation précise du bien, le prix
+proposé, les conditions suspensives
+éventuelles, notamment l'obtention d'un
+prêt.
+
+13
+00:01:03,569 --> 00:01:07,251
+La durée de validité de l'offre,
+généralement 5 à 10 jours.
+
+14
+00:01:07,292 --> 00:01:09,572
+La durée de validité est essentielle.
+
+15
+00:01:09,612 --> 00:01:10,453
+Une offre sans délai,
+
+16
+00:01:10,894 --> 00:01:14,617
+qu'en théorie être rétracté à tout moment
+avant acceptation.
+
+17
+00:01:14,656 --> 00:01:18,399
+Il est donc indispensable de fixer une
+durée précise.
+
+18
+00:01:18,438 --> 00:01:20,700
+L'analyse financière de l'acquéreur.
+
+19
+00:01:20,740 --> 00:01:26,805
+Avant d'accepter une offre d'achat, un
+agent professionnel vérifie
+systématiquement la capacité financière de
+l'acquéreur.
+
+20
+00:01:26,844 --> 00:01:34,129
+Cela implique de demander les trois
+derniers bulletins de salaire, les deux
+derniers avis d'imposition, un accord de
+principe de la banque ou du courtier.
+
+21
+00:01:34,590 --> 00:01:40,575
+Cette vérification protège le vendeur et
+évite de bloquer le bien inutilement face
+à un acquéreur non solvable.
+
+22
+00:01:40,596 --> 00:01:42,037
+La caducité de l'offre.
+
+23
+00:01:42,076 --> 00:01:51,045
+Une offre devient caduque si elle n'est
+pas acceptée dans le délai imparti, si
+l'acquéreur la rétracte avant son
+acceptation ou si l'une des parties décède
+avant l'acceptation.
+
+24
+00:01:51,064 --> 00:01:53,688
+L'incessibilité et l'intransmissibilité.
+
+25
+00:01:53,707 --> 00:01:55,810
+L'offre d'achat est personnelle.
+
+26
+00:01:55,829 --> 00:01:59,132
+L'acquéreur ne peut pas céder son droit à
+un tiers sans l'accord du vendeur.
+
+27
+00:01:59,733 --> 00:02:11,338
+La promesse unilatérale de vente est un
+contrat par lequel le promettant, le
+vendeur, s'engage à vendre son bien à un
+bénéficiaire, l'acquéreur, à des
+conditions précises, pendant une durée
+déterminée.
+
+28
+00:02:11,359 --> 00:02:14,800
+La caractéristique essentielle, le vendeur
+est immobilisé.
+
+29
+00:02:14,840 --> 00:02:18,042
+Pendant la durée de la promesse, il ne
+peut pas vendre le bien à quelqu'un
+d'autre.
+
+30
+00:02:18,602 --> 00:02:21,483
+L'acquéreur, en revanche, n'est pas obligé
+d'acheter.
+
+31
+00:02:21,543 --> 00:02:23,644
+Il a une option qu'il peut lever ou non.
+
+32
+00:02:23,704 --> 00:02:32,486
+En contrepartie de cette immobilisation,
+le bénéficiaire verse généralement une
+indemnité d'immobilisation, souvent de 5 à
+10 % du prix de vente.
+
+33
+00:02:32,526 --> 00:02:35,848
+Si le bénéficiaire n'exerce pas son
+option, il perd cette somme.
+
+34
+00:02:36,587 --> 00:02:48,194
+Depuis la réforme du droit des contrats de
+2016, l'article 1124 du Code civil prévoit
+que la révocation de la promesse par le
+premier temps pendant le délai d'option
+n'empêche pas la formation du contrat.
+
+35
+00:02:48,235 --> 00:02:53,578
+En d'autres termes, même si le vendeur
+essaie de se rétracter, l'acquéreur peut
+forcer la vente.
+
+36
+00:02:53,617 --> 00:02:55,179
+Enregistrement fiscal.
+
+37
+00:02:55,218 --> 00:03:02,883
+La promesse unilatérale de vente doit être
+enregistrée auprès du service des impôts
+dans un délai de 10 jours à compter de sa
+signature.
+
+38
+00:03:02,924 --> 00:03:05,445
+A défaut, la promesse peut être nulle.
+
+39
+00:03:06,126 --> 00:03:15,753
+La promesse synalagmatique de vente,
+communément appelée compromis de vente,
+est le contrat le plus utilisé en France
+pour les transactions immobilières.
+
+40
+00:03:15,794 --> 00:03:24,600
+Contrairement à la promesse unilatérale,
+ici, les deux parties s'engagent, le
+vendeur à vendre et l'acquéreur à acheter,
+au prix et aux conditions convenues.
+
+41
+00:03:25,200 --> 00:03:29,205
+L'article 1589 du Code civil pose le
+principe.
+
+42
+00:03:29,246 --> 00:03:34,330
+La promesse de vente vaut vente lorsqu'il
+y a accord sur la chose et sur le prix.
+
+43
+00:03:34,350 --> 00:03:43,782
+Les mentions obligatoires du compromis,
+l'identité complète des parties, la
+désignation précise, du bien, adresse,
+surface, description cadastrale.
+
+44
+00:03:44,323 --> 00:03:58,423
+le prix de vente, les modalités de
+paiement, les conditions suspensives,
+notamment l'obtention d'un prêt
+immobilier, la date prévisionnelle de
+signature de l'acte authentique, les
+diagnostics techniques annexés, la taxe
+foncière pour accord sur la répartition
+prorata temporis.
+
+45
+00:03:59,084 --> 00:04:00,665
+Le délai de rétractation.
+
+46
+00:04:00,686 --> 00:04:06,691
+L'acquéreur non professionnel dispose d'un
+délai de rétractation de 10 jours francs,
+à compter de la notification du compromis.
+
+47
+00:04:06,730 --> 00:04:10,794
+Pendant ce délai, il peut se rétracter
+sans justification ni pénalité.
+
+48
+00:04:10,814 --> 00:04:14,258
+Le vendeur, lui, ne bénéficie d'aucun
+délai de rétractation.
+
+49
+00:04:14,277 --> 00:04:15,878
+Les conditions suspensives.
+
+50
+00:04:15,899 --> 00:04:18,502
+La plus courante est l'obtention du prêt
+immobilier.
+
+51
+00:04:18,541 --> 00:04:23,887
+Le délai légal minimum pour l'obtention du
+prêt est de 30 jours, mais la pratique est
+généralement de 45 à 60 jours.
+
+52
+00:04:25,307 --> 00:04:31,396
+Si la banque refuse le financement, la
+vente est annulée et l'acquéreur récupère
+intégralement son dépôt de garantie.
+
+53
+00:04:31,415 --> 00:04:33,257
+Quand utiliser l'un ou l'autre ?
+
+54
+00:04:33,278 --> 00:04:42,728
+La promesse unilatérale est adaptée
+lorsque l'acquéreur a besoin de temps pour
+confirmer son projet, par exemple pour
+finaliser un financement complexe ou
+obtenir un permis de construire.
+
+55
+00:04:43,370 --> 00:04:51,612
+La promesse synalagmatique est la plus
+adaptée dans les transactions courantes,
+car elle engage les deux parties de façon
+symétrique et est plus facile à gérer.
+
+56
+00:04:51,651 --> 00:05:01,095
+Votre rôle d'agent est de conseiller les
+parties sur le choix le plus adapté à leur
+situation, et de vous assurer que tous les
+délais, conditions et annexes sont
+correctement renseignés.
+
+57
+00:05:03,208 --> 00:05:07,649
+Vous venez de faire signer un compromis
+pour un appartement de 320 000 euros à
+Lyon.
+
+58
+00:05:07,668 --> 00:05:11,449
+L'acquéreur doit financer 270 000 euros
+par prêt.
+
+59
+00:05:11,470 --> 00:05:14,850
+La condition suspensive prévoit un délai
+de 45 jours.
+
+60
+00:05:14,870 --> 00:05:17,350
+Au 42e jour, la banque refuse.
+
+61
+00:05:17,391 --> 00:05:18,651
+Que se passe-t-il ?
+
+62
+00:05:18,670 --> 00:05:20,990
+La condition suspensive n'est pas
+réalisée.
+
+63
+00:05:21,011 --> 00:05:22,591
+Le compromis est caduque.
+
+64
+00:05:22,612 --> 00:05:25,812
+L'acquéreur récupère son dépôt de garantie
+de 32 000 euros.
+
+65
+00:05:25,851 --> 00:05:27,773
+Le vendeur remet son bien en vente.
+
+66
+00:05:27,812 --> 00:05:29,353
+Votre commission n'est pas due.
+
+67
+00:05:30,012 --> 00:05:35,610
+L'offre d'achat et les avant-contrats sont
+vos outils quotidiens de sécurisation des
+transactions.
+
+68
+00:05:35,649 --> 00:05:41,387
+Les maîtriser, c'est protéger vos clients,
+sécuriser vos commissions et asseoir votre
+réputation d'expert.

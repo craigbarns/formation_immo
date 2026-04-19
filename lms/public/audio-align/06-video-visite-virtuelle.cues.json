@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "duration": 317.936,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.211,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 32.862,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 63.715,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 94.615,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 125.796,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 158.959,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 195.849,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 236.818,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 271.363,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 303.212,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "annonces",
+      "start": 0.351,
+      "end": 0.612
+    },
+    {
+      "term": "beaucoup",
+      "start": 3.054,
+      "end": 3.395
+    },
+    {
+      "term": "plus",
+      "start": 3.435,
+      "end": 3.655
+    },
+    {
+      "term": "biens",
+      "start": 16.35,
+      "end": 16.53
+    },
+    {
+      "term": "distance.",
+      "start": 19.914,
+      "end": 20.274
+    },
+    {
+      "term": "virtuelle",
+      "start": 22.256,
+      "end": 23.036
+    },
+    {
+      "term": "sont",
+      "start": 23.216,
+      "end": 23.396
+    },
+    {
+      "term": "standard",
+      "start": 25.398,
+      "end": 25.758
+    },
+    {
+      "term": "budget",
+      "start": 29.08,
+      "end": 29.38
+    },
+    {
+      "term": "créer",
+      "start": 30.441,
+      "end": 30.661
+    }
+  ]
+}

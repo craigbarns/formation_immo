@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "duration": 547.319,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.211,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 30.424,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 61.682,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 110.411,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 148.104,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 179.474,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 214.092,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 245.409,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 275.951,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 308.352,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 341.38,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 374.331,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 406.192,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 436.891,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 477.591,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 509.597,
+      "source": "auto"
+    },
+    {
+      "index": 16,
+      "start": 542.651,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "concerne",
+      "start": 2.314,
+      "end": 2.695
+    },
+    {
+      "term": "plus",
+      "start": 2.735,
+      "end": 2.895
+    },
+    {
+      "term": "millions",
+      "start": 3.296,
+      "end": 3.556
+    },
+    {
+      "term": "Français,",
+      "start": 3.676,
+      "end": 4.598
+    },
+    {
+      "term": "secteur",
+      "start": 5.92,
+      "end": 6.26
+    },
+    {
+      "term": "représente",
+      "start": 6.44,
+      "end": 6.801
+    },
+    {
+      "term": "part",
+      "start": 6.981,
+      "end": 7.222
+    },
+    {
+      "term": "parc",
+      "start": 7.923,
+      "end": 8.123
+    },
+    {
+      "term": "immobilier",
+      "start": 8.143,
+      "end": 8.543
+    },
+    {
+      "term": "Deux",
+      "start": 9.545,
+      "end": 9.685
+    }
+  ]
+}

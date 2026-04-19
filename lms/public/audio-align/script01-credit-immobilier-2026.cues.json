@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "duration": 362.644,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.211,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 30.813,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 62.718,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 94.116,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 124.882,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 158.82,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 191.279,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 221.47,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 251.527,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 281.601,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 313.297,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 344.807,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "immobilier",
+      "start": 1.432,
+      "end": 1.852
+    },
+    {
+      "term": "complètement",
+      "start": 5.135,
+      "end": 5.595
+    },
+    {
+      "term": "changé.",
+      "start": 5.636,
+      "end": 6.136
+    },
+    {
+      "term": "remontent,",
+      "start": 6.616,
+      "end": 7.117
+    },
+    {
+      "term": "Conseil",
+      "start": 8.238,
+      "end": 8.558
+    },
+    {
+      "term": "assurances",
+      "start": 10.68,
+      "end": 11.1
+    },
+    {
+      "term": "tout",
+      "start": 11.841,
+      "end": 12.001
+    },
+    {
+      "term": "pour",
+      "start": 14.583,
+      "end": 14.743
+    },
+    {
+      "term": "dans",
+      "start": 15.183,
+      "end": 15.303
+    },
+    {
+      "term": "cette",
+      "start": 17.105,
+      "end": 17.265
+    }
+  ]
+}

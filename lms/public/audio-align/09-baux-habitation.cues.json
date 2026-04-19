@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "duration": 349.628,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.231,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 38.656,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 70.59,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 118.261,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 150.629,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 181.344,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 218.722,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 251.679,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 284.091,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 315.569,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 345.862,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "plus",
+      "start": 1.732,
+      "end": 1.852
+    },
+    {
+      "term": "France.",
+      "start": 4.574,
+      "end": 5.395
+    },
+    {
+      "term": "litiges",
+      "start": 6.496,
+      "end": 6.936
+    },
+    {
+      "term": "d'habitation",
+      "start": 7.476,
+      "end": 8.357
+    },
+    {
+      "term": "sont",
+      "start": 8.397,
+      "end": 8.537
+    },
+    {
+      "term": "professionnels",
+      "start": 10.719,
+      "end": 11.299
+    },
+    {
+      "term": "clients.",
+      "start": 11.439,
+      "end": 12.2
+    },
+    {
+      "term": "rédigé,",
+      "start": 12.76,
+      "end": 13.581
+    },
+    {
+      "term": "délai",
+      "start": 15.042,
+      "end": 15.262
+    },
+    {
+      "term": "préavis",
+      "start": 15.402,
+      "end": 15.843
+    }
+  ]
+}

@@ -1,0 +1,509 @@
+1
+00:00:00,371 --> 00:00:08,436
+Rentabilité brute, rentabilité nette,
+rentabilité net net, cash flow positif…
+Vous entendez ces termes partout.
+
+2
+00:00:08,457 --> 00:00:10,659
+Mais savez-vous vraiment les calculer ?
+
+3
+00:00:10,679 --> 00:00:16,242
+Le problème, c'est que beaucoup d'agents
+immobiliers et d'investisseurs se
+contentent de calculs approximatifs.
+
+4
+00:00:16,263 --> 00:00:21,166
+Résultat, ils pensent faire une bonne
+affaire alors qu'ils achètent un gouffre
+financier.
+
+5
+00:00:21,205 --> 00:00:26,570
+Aujourd'hui, nous allons apprendre à
+calculer précisément la rentabilité d'un
+investissement locatif.
+
+6
+00:00:27,150 --> 00:00:31,315
+les bonnes formules, les charges à
+intégrer, les pièges à éviter.
+
+7
+00:00:31,335 --> 00:00:36,981
+À la fin de cette vidéo, vous serez
+capable d'évaluer n'importe quel
+investissement en quelques minutes.
+
+8
+00:00:37,021 --> 00:00:37,883
+C'est parti !
+
+9
+00:00:37,902 --> 00:00:43,390
+Combien de fois avez-vous vu des annonces
+promettant des rendements de 10, 12, voire
+15% ?
+
+10
+00:00:43,429 --> 00:00:44,771
+Ces chiffres sont souvent trompeurs.
+
+11
+00:00:45,271 --> 00:00:48,154
+ils ne prennent pas en compte tous les
+coûts réels de l'investissement.
+
+12
+00:00:48,173 --> 00:00:57,781
+Les travaux, les vacances locatives, les
+impayés, la taxe foncière en augmentation,
+les charges de copropriété imprévues… Tous
+ces éléments grignotent la rentabilité
+réelle.
+
+13
+00:00:57,822 --> 00:01:02,185
+Et si vous ne les anticipez pas, votre
+investissement devient un désastre
+financier.
+
+14
+00:01:02,225 --> 00:01:03,185
+Votre rôle ?
+
+15
+00:01:03,206 --> 00:01:07,730
+Apprendre à calculer la vraie rentabilité,
+celle qui intègre tous les paramètres.
+
+16
+00:01:07,750 --> 00:01:11,912
+C'est ce qui vous distinguera des agents
+amateurs et rassurera vos clients
+investisseurs.
+
+17
+00:01:12,173 --> 00:01:15,834
+Commençons par le calcul le plus simple,
+la rentabilité brute.
+
+18
+00:01:15,853 --> 00:01:21,715
+C'est le premier indicateur que tout
+investisseur calcule, même s'il ne refait
+pas la réalité complète.
+
+19
+00:01:21,736 --> 00:01:27,218
+La formule est simple, loyer annuel divisé
+par le prix d'achat, le tout multiplié par
+100.
+
+20
+00:01:27,257 --> 00:01:36,081
+Par exemple, pour un bien acheté 200 000
+euros et loué 800 euros par mois, soit 9
+600 euros par an, la rentabilité brute est
+de 4,8%.
+
+21
+00:01:37,102 --> 00:01:41,343
+Attention, dans le prix d'achat, certains
+incluent les frais de notaire, d'autres
+non.
+
+22
+00:01:41,882 --> 00:01:46,286
+Pour être précis, je vous recommande de
+toujours inclure les frais de notaire dans
+le calcul.
+
+23
+00:01:46,305 --> 00:01:49,028
+Ça donne une vision plus réaliste du
+rendement.
+
+24
+00:01:49,048 --> 00:01:55,091
+Dans notre exemple, avec 16 000 euros de
+frais de notaire, le prix total d'achat
+est de 216 000 euros.
+
+25
+00:01:55,111 --> 00:01:59,093
+La rentabilité brute réelle devient alors
+4,4%.
+
+26
+00:01:59,134 --> 00:02:01,335
+C'est moins flatteur, mais c'est la
+vérité.
+
+27
+00:02:01,355 --> 00:02:07,540
+La rentabilité brute, c'est bien, mais la
+rentabilité nette, c'est mieux, parce
+qu'elle intègre les charges réelles de
+l'investissement.
+
+28
+00:02:08,120 --> 00:02:09,721
+La formule est la suivante.
+
+29
+00:02:09,781 --> 00:02:14,604
+Loyer annuel moins les charges, divisé par
+le prix d'achat, multiplié par 100.
+
+30
+00:02:14,644 --> 00:02:18,265
+Et quand je dis « charges », je parle de
+taux UT les charges.
+
+31
+00:02:18,306 --> 00:02:19,286
+Énumérons-les.
+
+32
+00:02:19,306 --> 00:02:30,893
+La taxe foncière, les charges de
+copropriété, l'assurance propriétaire non
+occupant, les frais de gestion locative si
+vous passez par une agence, les frais de
+comptabilité, les travaux d'entretien
+annuels et les vacances locatives.
+
+33
+00:02:31,493 --> 00:02:33,917
+Oubliez-en une seule, et votre calcul est
+faux.
+
+34
+00:02:33,937 --> 00:02:35,699
+Prenons notre exemple précédent.
+
+35
+00:02:46,497 --> 00:02:53,265
+Frais gestion 960€, travaux 500€, vacances
+locatives 5%, soit 480€, total des charges
+5240€, loyer net 9600-5 240, soit 4360€,
+
+36
+00:03:03,860 --> 00:03:11,301
+Rentabilité nette, 4360 divisé par 216
+000, multiplié par 100, égale 2%.
+
+37
+00:03:11,322 --> 00:03:14,862
+C'est bien différent des 4,8% annoncés
+initialement, n'est-ce pas ?
+
+38
+00:03:14,883 --> 00:03:19,743
+Mais attendez, ce n'est pas fini, parce
+qu'il reste un élément majeur à intégrer,
+l'impôt.
+
+39
+00:03:19,783 --> 00:03:32,826
+Et là, on parle de rentabilité nette,
+nette, la rentabilité nette, c'est la
+rentabilité nette, APRS impôts, c'est le
+rendement réel qui atterrit dans la poche
+de l'investisseur, et c'est celui qu'il
+faut regarder pour prendre une décision
+éclairée.
+
+40
+00:03:33,507 --> 00:03:35,007
+Revenons à notre exemple.
+
+41
+00:03:35,026 --> 00:03:37,747
+Les loyers nets sont de 4 360 euros.
+
+42
+00:03:37,788 --> 00:03:45,149
+Imaginons que l'investisseur soit imposé à
+30% au titre de l'impôt sur le revenu,
+plus 17,2% de prélèvements sociaux.
+
+43
+00:03:45,188 --> 00:03:48,590
+Son taux global d'imposition est de 47,2%.
+
+44
+00:03:48,650 --> 00:03:51,531
+Impôts sur les loyers nets, 4 360 x 47,2%,
+soit environ 2 058 euros.
+
+45
+00:03:51,550 --> 00:03:53,770
+Loyers nets après impôts, 4 360 moins 2
+058, soit 2 302 euros.
+
+46
+00:03:53,790 --> 00:03:54,251
+Rentabilité net net.
+
+47
+00:04:03,312 --> 00:04:10,400
+2302 divisé par 216 000 multiplié par 100
+égale 1,06%.
+
+48
+00:04:10,439 --> 00:04:17,867
+De 4,8% de rentabilité brute, nous sommes
+passés à 1,06% de rentabilité net-net.
+
+49
+00:04:17,887 --> 00:04:23,894
+C'est une différence énorme et c'est
+pourquoi il est crucial de toujours
+calculer la rentabilité net-net avant
+d'investir.
+
+50
+00:04:24,314 --> 00:04:26,937
+Un autre indicateur essentiel, le cash
+flow.
+
+51
+00:04:26,956 --> 00:04:31,903
+Contrairement à la rentabilité qui est un
+pourcentage, le cash flow est un montant
+en euros.
+
+52
+00:04:31,942 --> 00:04:35,947
+Il représente ce qui reste réellement dans
+le portefeuille de l'investisseur chaque
+mois.
+
+53
+00:04:35,968 --> 00:04:37,370
+Le calcul est simple.
+
+54
+00:04:37,410 --> 00:04:43,076
+Loyer perçu moinsse les charges, moinsse
+l'impôt, moinsse la mensualité de crédit.
+
+55
+00:04:43,937 --> 00:04:48,538
+Si le résultat est positif,
+l'investissement génère du cash flow
+positif.
+
+56
+00:04:48,559 --> 00:04:53,439
+Si le résultat est négatif, l'investisseur
+doit mettre la main au porte-monnaie
+chaque mois.
+
+57
+00:04:53,459 --> 00:04:55,141
+Prenons un exemple concret.
+
+58
+00:04:55,180 --> 00:04:57,461
+Un studio loué 600 euros par mois.
+
+59
+00:04:57,500 --> 00:04:58,742
+Charge mensuelle 300 euros.
+
+60
+00:04:59,982 --> 00:05:02,584
+Impôts mensuels estimés, 100 euros.
+
+61
+00:05:02,625 --> 00:05:05,127
+Mensualité de crédit, 400 euros.
+
+62
+00:05:05,146 --> 00:05:12,653
+Cash flow, 600 moins 300 moins 100 moins
+400 égale moins 200 euros.
+
+63
+00:05:12,673 --> 00:05:15,495
+Cash flow négatif de 200 euros par mois.
+
+64
+00:05:15,516 --> 00:05:20,360
+L'investisseur doit sortir 200 euros de sa
+poche chaque mois pour soutenir son
+investissement.
+
+65
+00:05:20,420 --> 00:05:25,144
+Ce n'est pas forcément un mauvais
+investissement, mais il faut que
+l'investisseur soit en capacité de le
+faire.
+
+66
+00:05:25,904 --> 00:05:31,971
+Enfin, pour les investisseurs les plus
+avancés, il existe le TRI, le taux de
+rentabilité interne.
+
+67
+00:05:31,990 --> 00:05:38,137
+C'est un indicateur qui intègre non
+seulement les loyers et les charges, mais
+aussi la plus-value potentielle à la
+revente.
+
+68
+00:05:38,156 --> 00:05:43,802
+Le TRI est plus complexe à calculer car il
+nécessite de projeter la valeur de revente
+du bien dans le futur.
+
+69
+00:05:43,822 --> 00:05:48,067
+Mais c'est l'indicateur le plus complet
+pour évaluer un investissement sur le long
+terme.
+
+70
+00:05:48,107 --> 00:05:49,247
+Pour calculer le TRI,
+
+71
+00:05:49,668 --> 00:05:53,369
+Je vous recommande d'utiliser Excel et sa
+fonction Venn ou TRI.
+
+72
+00:05:53,389 --> 00:05:58,790
+Vous intégrez tous les flux de trésorerie,
+année par année, plus le prix de revente
+estimé en fin de période.
+
+73
+00:05:58,831 --> 00:06:03,473
+Excel calcule alors le taux de rentabilité
+interne automatiquement, entre guillemets.
+
+74
+00:06:03,492 --> 00:06:05,814
+Mettons tout ça en pratique avec un cas
+concret.
+
+75
+00:06:05,834 --> 00:06:15,076
+Un appartement T3, haché 250 000 euros,
+frais de notaire inclus, données du bien,
+loyer mensuel 1 100 euros, soit 13 200
+euros annuels.
+
+76
+00:06:15,617 --> 00:06:30,447
+charges annuelles, taxes foncières, 2500
+euros, charges copropriétés, 2400 euros,
+assurances, 400 euros, frais gestion, 1320
+euros, travaux, 800 euros, vacances
+locatives, 5%, soit 660 euros,
+
+77
+00:06:31,528 --> 00:06:34,910
+Total charge 8 080 euros.
+
+78
+00:06:34,970 --> 00:06:38,612
+Rentabilité brute 13 200 divisé par 250
+000 fois 100 égale 5,28%.
+
+79
+00:06:38,632 --> 00:06:40,552
+Rentabilité nette 13 200 moins 8 080 soit
+
+80
+00:06:49,137 --> 00:06:51,321
+Rentabilité nette nette avec imposition à
+47,2%.
+
+81
+00:07:04,778 --> 00:07:06,899
+5120 moins 47,2%, soit 2703 euros net.
+
+82
+00:07:06,918 --> 00:07:10,141
+2703 divisé par 250 000 fois 100 égale
+1,08%.
+
+83
+00:07:21,427 --> 00:07:35,975
+Ce bien affiche 5,28% de rentabilité
+brute, 2,05% de rentabilité nette nette,
+c'est faible, mais si l'investisseur
+anticipe une plus-value à la revente et un
+effort d'épargne, l'investissement peut
+quand même être pertinent.
+
+84
+00:07:37,237 --> 00:07:39,879
+Vous maîtrisez maintenant les calculs de
+rentabilité.
+
+85
+00:07:39,920 --> 00:07:41,081
+Retenez ces points clés.
+
+86
+00:07:41,101 --> 00:07:42,262
+Finirt en délicères.
+
+87
+00:07:42,283 --> 00:07:47,048
+Premièrement, la rentabilité brute est un
+premier indicateur, mais il est
+insuffisant.
+
+88
+00:07:47,069 --> 00:07:50,632
+Deuxièmement, la rentabilité nette intègre
+les charges réelles.
+
+89
+00:07:50,653 --> 00:07:54,757
+Troisièmement, la rentabilité nette nette
+est le vrai rendement après impôt.
+
+90
+00:07:55,778 --> 00:08:00,084
+Quatrièmement, le cash flow vous dit si
+l'investissement est autofinancé.
+
+91
+00:08:00,124 --> 00:08:04,269
+Utilisez ces outils pour chaque bien que
+vous présentez à vos clients
+investisseurs.
+
+92
+00:08:04,288 --> 00:08:07,752
+Montrez-leur les chiffres réels, pas les
+promesses marketing.
+
+93
+00:08:07,773 --> 00:08:10,636
+C'est ce qui fera de vous un conseiller de
+confiance.
+
+94
+00:08:10,656 --> 00:08:19,927
+Dans la prochaine vidéo, nous explorerons
+les dispositifs fiscaux Pinel, Denormandie
+et LMNP pour optimiser la fiscalité de vos
+clients.
+
+95
+00:08:19,966 --> 00:08:20,507
+À tout de suite !

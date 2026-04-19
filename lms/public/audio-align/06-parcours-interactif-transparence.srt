@@ -1,0 +1,578 @@
+1
+00:00:01,292 --> 00:00:03,494
+« Écoutez, on fait autrement.
+
+2
+00:00:03,613 --> 00:00:09,019
+On affiche un prix net vendeur et vos
+honoraires, vous les prendrez en cash à
+l'acheteur.
+
+3
+00:00:09,058 --> 00:00:10,740
+Personne n'en saura rien.
+
+4
+00:00:10,759 --> 00:00:16,265
+» Cette phrase, un vendeur sur cinq l'a
+déjà prononcée face à un agent en France.
+
+5
+00:00:16,324 --> 00:00:18,527
+Et si vous dites oui, vous ne gagnez pas
+un mandat.
+
+6
+00:00:19,086 --> 00:00:22,368
+Vous risquez 300 000 euros d'amende et
+deux ans de prison.
+
+7
+00:00:22,408 --> 00:00:29,414
+Bienvenue dans la leçon la plus importante
+de ce module, la transparence des
+honoraires et l'information loyale du
+consommateur.
+
+8
+00:00:29,454 --> 00:00:36,179
+Chaque année, la DGCCRF, la répression des
+fraudes, mène des contrôles ciblés sur les
+agences immobilières.
+
+9
+00:00:36,198 --> 00:00:39,720
+Les non-conformités sur l'affichage des
+honoraires restent fréquentes.
+
+10
+00:00:39,740 --> 00:00:43,804
+La transparence n'est donc pas
+optionnelle, c'est une obligation légale.
+
+11
+00:00:43,823 --> 00:00:45,005
+Les sanctions sont lourdes.
+
+12
+00:00:45,625 --> 00:00:54,887
+L'article L132-2 du Code de la
+consommation prévoit jusqu'à 300 000 euros
+d'amende et deux ans de prison pour une
+pratique commerciale trompeuse.
+
+13
+00:00:54,927 --> 00:00:56,968
+Ce n'est pas une menace théorique.
+
+14
+00:00:57,128 --> 00:01:00,389
+En 2024, plusieurs dirigeants d'agence ont
+été condamnés.
+
+15
+00:01:00,429 --> 00:01:01,889
+Pourquoi tant de manquements ?
+
+16
+00:01:01,908 --> 00:01:03,770
+Parce que trois confusions reviennent sans
+cesse.
+
+17
+00:01:04,370 --> 00:01:14,054
+la confusion entre mandat vendeur et
+mandat acheteur, la confusion entre prix
+net vendeur et prix d'affichage, et l'idée
+fausse qu'on peut arranger les honoraires
+en cours de route.
+
+18
+00:01:14,114 --> 00:01:15,993
+Aujourd'hui, on remet de l'ordre.
+
+19
+00:01:16,013 --> 00:01:20,896
+Cadre légal, règle du mandat, interdit
+absolu, réflexe pro.
+
+20
+00:01:20,915 --> 00:01:24,718
+À la fin de cette leçon, vous saurez
+exactement ce que la loi exige de vous en
+2026.
+
+21
+00:01:26,257 --> 00:01:31,079
+La transparence des honoraires repose sur
+quatre textes que vous devez connaître par
+cœur.
+
+22
+00:01:31,099 --> 00:01:35,501
+Premier texte, la loi Auguet, numéro 79 du
+2 janvier 1970.
+
+23
+00:01:35,522 --> 00:01:39,102
+C'est le texte fondateur de la profession.
+
+24
+00:01:39,162 --> 00:01:46,406
+Il impose le mandat écrit préalable, fixe
+les règles de la commission et interdit
+toute perception d'honoraire sans mandat
+signé.
+
+25
+00:01:46,426 --> 00:01:49,927
+Deuxième texte, la loi Allure, numéro
+2014-366 du 24 mars 2014.
+
+26
+00:01:53,128 --> 00:01:56,730
+Elle a considérablement renforcé les
+obligations de transparence.
+
+27
+00:01:56,751 --> 00:02:03,718
+Affichage obligatoire des honoraires dans
+toute annonce, mention de la partie qui
+les paie, interdiction de pratiques
+trompeuses.
+
+28
+00:02:03,757 --> 00:02:04,959
+Troisième texte.
+
+29
+00:02:04,978 --> 00:02:06,260
+L'arrêté du 10 janvier 2017.
+
+30
+00:02:06,319 --> 00:02:09,302
+Il précise les modalités concrètes
+d'affichage.
+
+31
+00:02:09,962 --> 00:02:18,508
+en vitrine, en ligne, dans les petites
+annonces, le montant TTC, le pourcentage
+et la partie qui paie doivent apparaître
+clairement.
+
+32
+00:02:18,527 --> 00:02:19,709
+Quatrième texte.
+
+33
+00:02:19,748 --> 00:02:21,449
+Le Code de la consommation.
+
+34
+00:02:21,469 --> 00:02:32,076
+L'article L111-1 impose à tout
+professionnel d'informer le consommateur
+de manière lisible et compréhensible sur
+les caractéristiques essentielles du
+service et son prix.
+
+35
+00:02:32,097 --> 00:02:38,580
+L'article L121-1 sanctionne toute pratique
+commerciale trompeuse qui altère le
+comportement économique du consommateur.
+
+36
+00:02:39,260 --> 00:02:43,242
+La question qui revient le plus souvent en
+formation, qui paie les honoraires ?
+
+37
+00:02:43,263 --> 00:02:48,125
+La réponse tient en une seule règle, celui
+qui signe le mandat paie les honoraires.
+
+38
+00:02:48,145 --> 00:02:51,326
+Cas numéro 1, le mandat est signé par le
+vendeur.
+
+39
+00:02:51,366 --> 00:02:54,508
+On parle alors de « mandat vendeur » ou «
+mandat de vente ».
+
+40
+00:02:54,527 --> 00:02:56,528
+C'est le vendeur qui paie les honoraires.
+
+41
+00:02:56,549 --> 00:03:02,171
+L'annonce doit mentionner « honoraire à la
+charge du vendeur » et le prix affiché et
+le prix TTC honoraire inclus.
+
+42
+00:03:02,771 --> 00:03:05,693
+Cas numéro 2, le mandat est signé par
+l'acheteur.
+
+43
+00:03:05,752 --> 00:03:08,734
+On parle de mandat de recherche ou mandat
+acheteur.
+
+44
+00:03:08,753 --> 00:03:10,274
+C'est l'acheteur qui paie.
+
+45
+00:03:10,294 --> 00:03:16,036
+L'annonce doit alors faire apparaître le
+prix net vendeur et, séparément, les
+honoraires à la charge de l'acquéreur.
+
+46
+00:03:16,056 --> 00:03:21,296
+Concrètement, l'arrêté du 10 janvier 2017
+exige trois informations sur chaque
+annonce.
+
+47
+00:03:21,317 --> 00:03:23,557
+Le prix total TTC honoraire inclus.
+
+48
+00:03:23,578 --> 00:03:26,179
+Le montant des honoraires en pourcentage
+du prix net vendeur.
+
+49
+00:03:26,838 --> 00:03:28,879
+et la partie qui en supporte la charge.
+
+50
+00:03:28,919 --> 00:03:32,760
+Retenez bien, on ne choisit pas qui paie,
+c'est le mandat qui le détermine.
+
+51
+00:03:32,800 --> 00:03:35,820
+Et il ne peut y avoir qu'un seul mandat
+facturé par transaction.
+
+52
+00:03:35,842 --> 00:03:38,421
+Passons aux quatre pratiques strictement
+interdites.
+
+53
+00:03:38,461 --> 00:03:40,842
+Celles qui mènent directement au procès
+verbal.
+
+54
+00:03:40,902 --> 00:03:42,543
+Interdit numéro 1.
+
+55
+00:03:42,582 --> 00:03:45,343
+L'annonce avec prix net vendeur trompeur.
+
+56
+00:03:45,383 --> 00:03:50,705
+Afficher un prix sans indiquer les
+honoraires, c'est tromper le consommateur
+sur le coût réel d'acquisition.
+
+57
+00:03:50,746 --> 00:03:53,765
+Pratique commerciale trompeuse au sens de
+l'article L121-1.
+
+58
+00:03:56,312 --> 00:03:59,133
+jusqu'à 300 000 euros et deux ans de
+prison.
+
+59
+00:03:59,193 --> 00:04:02,395
+Interdit numéro 2, le refus d'afficher les
+honoraires.
+
+60
+00:04:02,436 --> 00:04:09,778
+Vitrines, sites internet, portails
+d'annonces, flyers, partout où le bien est
+présenté, les honoraires doivent
+apparaître.
+
+61
+00:04:09,799 --> 00:04:12,919
+L'arrêté du 10 janvier 2017 ne tolère
+aucune exception.
+
+62
+00:04:13,680 --> 00:04:16,500
+Interdit numéro 3, le double mandat caché.
+
+63
+00:04:16,540 --> 00:04:22,322
+Faire signer un mandat vendeur et
+encaisser en plus une rémunération de
+l'acheteur sans mandat de recherche signé.
+
+64
+00:04:22,341 --> 00:04:24,403
+C'est la fraude la plus lourdement
+sanctionnée.
+
+65
+00:04:24,442 --> 00:04:27,923
+Elle constitue une perception indue
+d'honoraire au sens de la loi Auger.
+
+66
+00:04:27,963 --> 00:04:31,264
+Interdit numéro 4, la surfacturation par
+rapport au mandat.
+
+67
+00:04:31,283 --> 00:04:33,165
+Vous avez signé un mandat à 3% ?
+
+68
+00:04:33,185 --> 00:04:34,245
+Vous ne pouvez pas facturer 5%.
+
+69
+00:04:35,185 --> 00:04:41,047
+Toute modification doit faire l'objet d'un
+avenant signé par les deux parties, daté,
+avec un nouveau délai de rétractation.
+
+70
+00:04:41,067 --> 00:04:44,767
+Maintenant, les quatre réflexes qui vous
+protègent et vous professionnalisent.
+
+71
+00:04:44,807 --> 00:04:46,149
+Réflexe numéro 1.
+
+72
+00:04:46,189 --> 00:04:47,769
+Un mandat clair et complet.
+
+73
+00:04:47,809 --> 00:04:57,951
+Identité des parties, description du bien,
+prix net vendeur, montant et pourcentage
+des honoraires, parties qui les paient,
+durée du mandat, conditions de
+rétractation.
+
+74
+00:04:57,992 --> 00:04:59,093
+Rien ne doit être implicite.
+
+75
+00:05:00,192 --> 00:05:01,535
+Réflexe numéro 2.
+
+76
+00:05:01,574 --> 00:05:03,918
+Une annonce conforme dès la première
+publication.
+
+77
+00:05:03,939 --> 00:05:08,466
+Prix TTC honoraires inclus, pourcentage,
+parties qui paient.
+
+78
+00:05:08,485 --> 00:05:12,211
+Ces trois informations sur chaque support,
+sans exception.
+
+79
+00:05:12,250 --> 00:05:15,415
+Utilisez un modèle validé et vérifiez
+avant chaque mise en ligne.
+
+80
+00:05:16,317 --> 00:05:17,797
+Réflexe numéro 3.
+
+81
+00:05:17,838 --> 00:05:19,677
+Un discours client structuré.
+
+82
+00:05:19,737 --> 00:05:24,660
+Expliquez d'emblée votre grille
+d'honoraires, ce qu'elle finance, pourquoi
+elle est ce qu'elle est.
+
+83
+00:05:24,680 --> 00:05:29,440
+Les clients qui comprennent votre valeur
+ne négocient pas votre commission, ils la
+respectent.
+
+84
+00:05:29,461 --> 00:05:30,920
+Réflexe numéro 4.
+
+85
+00:05:30,940 --> 00:05:32,562
+La traçabilité de tous les échanges.
+
+86
+00:05:33,182 --> 00:05:38,464
+Mail, SMS, compte rendu de visite, accord
+verbaux confirmé par écrit.
+
+87
+00:05:38,485 --> 00:05:43,528
+En cas de litige ou de contrôle DGCCRF,
+c'est votre dossier qui parle pour vous.
+
+88
+00:05:43,567 --> 00:05:45,569
+Voici une situation que vous rencontrerez.
+
+89
+00:05:45,589 --> 00:05:53,654
+Vous avez signé un mandat exclusif avec
+Mme Lemoyne pour un appartement à 420 000
+euros, avec 18 000 euros d'honoraires à la
+charge du vendeur, soit un peu plus de 4%.
+
+90
+00:05:54,714 --> 00:05:56,576
+L'annonce est en ligne depuis trois
+semaines.
+
+91
+00:05:56,637 --> 00:05:59,478
+Une offre arrive à 395 000 euros.
+
+92
+00:05:59,499 --> 00:06:01,019
+Madame Lemoyne vous appelle.
+
+93
+00:06:01,040 --> 00:06:03,240
+J'accepte, mais à une condition.
+
+94
+00:06:03,261 --> 00:06:06,043
+Vous me faites une remise de 10 000 euros
+sur vos honoraires.
+
+95
+00:06:06,062 --> 00:06:09,384
+Sinon, je refuse et je relance un autre
+agent.
+
+96
+00:06:09,404 --> 00:06:10,665
+Le piège est partout.
+
+97
+00:06:10,706 --> 00:06:17,610
+Si vous acceptez de réduire oralement sans
+avenant, vous créez une incohérence entre
+le mandat, l'annonce et la facture finale.
+
+98
+00:06:17,630 --> 00:06:18,451
+Le notaire le verra.
+
+99
+00:06:19,451 --> 00:06:22,875
+la DGCCRF aussi, en cas de contrôle.
+
+100
+00:06:22,915 --> 00:06:24,999
+La solution professionnelle est simple.
+
+101
+00:06:25,019 --> 00:06:26,841
+Vous refusez l'arrangement oral.
+
+102
+00:06:26,860 --> 00:06:35,791
+Vous expliquez à Mme Lemoyne que toute
+modification des honoraires doit faire
+l'objet d'un avenant écrit, signé par les
+deux parties, daté et annexé au mandat.
+
+103
+00:06:36,271 --> 00:06:42,935
+Vous lui proposez cet avenant avec un
+nouveau montant d'honoraires réduit à 12
+000 euros si cela permet de finaliser la
+vente.
+
+104
+00:06:42,976 --> 00:06:48,160
+Vous mettez ensuite à jour l'annonce pour
+refléter le nouveau montant tant que le
+bien reste affiché.
+
+105
+00:06:48,180 --> 00:06:51,161
+Vous conservez trace écrite de toute la
+négociation.
+
+106
+00:06:51,201 --> 00:06:58,425
+Résultat, vous êtes irréprochable, votre
+dossier tient face à tout contrôle et
+votre cliente comprend que vous travaillez
+dans la règle.
+
+107
+00:06:58,466 --> 00:07:00,887
+La transparence des honoraires n'est pas
+une option.
+
+108
+00:07:00,908 --> 00:07:03,829
+C'est le socle de votre légitimité
+professionnelle.
+
+109
+00:07:03,870 --> 00:07:04,990
+Votre mission cette semaine.
+
+110
+00:07:05,690 --> 00:07:11,158
+Premièrement, auditez vos dix dernières
+annonces en ligne et vérifiez la
+conformité des mentions honoraires.
+
+111
+00:07:11,177 --> 00:07:16,865
+Deuxièmement, relisez votre modèle de
+mandat et assurez-vous que chaque clause
+honoraire est explicite.
+
+112
+00:07:16,886 --> 00:07:22,533
+Troisièmement, créez un modèle d'avenant
+honoraire prêt à l'emploi pour toute
+renégociation future.
+
+113
+00:07:22,552 --> 00:07:27,259
+Dans la prochaine leçon, nous aborderons
+le mandat exclusif et ses clauses
+sensibles.
+
+114
+00:07:27,298 --> 00:07:27,759
+À très vite !

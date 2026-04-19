@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "duration": 436.107,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.271,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 32.944,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 66.539,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 108.401,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 144.043,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 174.913,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 210.782,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 249.596,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 291.404,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 324.581,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 356.036,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 386.971,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 419.866,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "immobilière.",
+      "start": 1.371,
+      "end": 2.672
+    },
+    {
+      "term": "investisseurs",
+      "start": 4.512,
+      "end": 5.653
+    },
+    {
+      "term": "peuvent",
+      "start": 5.973,
+      "end": 6.153
+    },
+    {
+      "term": "entre",
+      "start": 7.053,
+      "end": 7.213
+    },
+    {
+      "term": "vente",
+      "start": 7.373,
+      "end": 7.593
+    },
+    {
+      "term": "acquéreur",
+      "start": 9.754,
+      "end": 10.154
+    },
+    {
+      "term": "investissement",
+      "start": 11.174,
+      "end": 11.775
+    },
+    {
+      "term": "immobilier",
+      "start": 11.835,
+      "end": 12.375
+    },
+    {
+      "term": "peut",
+      "start": 12.395,
+      "end": 12.535
+    },
+    {
+      "term": "revenu",
+      "start": 15.276,
+      "end": 15.996
+    }
+  ]
+}

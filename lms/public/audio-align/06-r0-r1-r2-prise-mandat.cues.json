@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "duration": 318.933,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.171,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 31.57,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 61.842,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 94.584,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 127.621,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 160.071,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 190.758,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 224.554,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 256.087,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 287.386,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "avez",
+      "start": 0.331,
+      "end": 0.651
+    },
+    {
+      "term": "estimation.",
+      "start": 1.452,
+      "end": 2.453
+    },
+    {
+      "term": "C'est",
+      "start": 2.473,
+      "end": 2.593
+    },
+    {
+      "term": "moment",
+      "start": 2.953,
+      "end": 3.173
+    },
+    {
+      "term": "plus",
+      "start": 3.313,
+      "end": 3.493
+    },
+    {
+      "term": "Parce",
+      "start": 5.134,
+      "end": 5.274
+    },
+    {
+      "term": "tout",
+      "start": 5.915,
+      "end": 6.035
+    },
+    {
+      "term": "premier",
+      "start": 9.297,
+      "end": 9.577
+    },
+    {
+      "term": "contact",
+      "start": 9.617,
+      "end": 9.897
+    },
+    {
+      "term": "propriétaire.",
+      "start": 10.278,
+      "end": 11.398
+    }
+  ]
+}

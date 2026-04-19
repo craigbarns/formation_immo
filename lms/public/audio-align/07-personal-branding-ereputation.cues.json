@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "duration": 294.51,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.191,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 32.563,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 63.92,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 97.813,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 135.163,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 167.075,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 199.246,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 229.266,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 261.637,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Quand",
+      "start": 0.191,
+      "end": 0.371
+    },
+    {
+      "term": "agent",
+      "start": 1.531,
+      "end": 1.712
+    },
+    {
+      "term": "immobilier,",
+      "start": 1.772,
+      "end": 2.232
+    },
+    {
+      "term": "fait",
+      "start": 2.432,
+      "end": 2.552
+    },
+    {
+      "term": "quartier",
+      "start": 3.712,
+      "end": 4.012
+    },
+    {
+      "term": "Google,",
+      "start": 4.232,
+      "end": 4.973
+    },
+    {
+      "term": "profil",
+      "start": 7.133,
+      "end": 7.393
+    },
+    {
+      "term": "Instagram,",
+      "start": 7.433,
+      "end": 8.354
+    },
+    {
+      "term": "site.",
+      "start": 9.254,
+      "end": 9.974
+    },
+    {
+      "term": "avant",
+      "start": 12.995,
+      "end": 13.275
+    }
+  ]
+}

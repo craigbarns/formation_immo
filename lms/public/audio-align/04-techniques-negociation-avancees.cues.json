@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "duration": 595.407,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.231,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 31.373,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 61.608,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 119.54,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 149.662,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 180.199,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 211.102,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 243.4,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 274.473,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 311.827,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 342.138,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 373.807,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 405.828,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 437.213,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 472.215,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 502.515,
+      "source": "auto"
+    },
+    {
+      "index": 16,
+      "start": 540.164,
+      "source": "auto"
+    },
+    {
+      "index": 17,
+      "start": 571.815,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "L'acheteur",
+      "start": 0.231,
+      "end": 0.591
+    },
+    {
+      "term": "trop",
+      "start": 1.412,
+      "end": 1.572
+    },
+    {
+      "term": "cher,",
+      "start": 1.612,
+      "end": 2.152
+    },
+    {
+      "term": "vendeur",
+      "start": 4.094,
+      "end": 4.374
+    },
+    {
+      "term": "ridicule,",
+      "start": 5.035,
+      "end": 5.835
+    },
+    {
+      "term": "bien",
+      "start": 6.015,
+      "end": 6.135
+    },
+    {
+      "term": "vaut",
+      "start": 6.175,
+      "end": 6.275
+    },
+    {
+      "term": "moins",
+      "start": 6.395,
+      "end": 6.516
+    },
+    {
+      "term": "comment",
+      "start": 9.037,
+      "end": 9.278
+    },
+    {
+      "term": "pour",
+      "start": 9.598,
+      "end": 9.718
+    }
+  ]
+}

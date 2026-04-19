@@ -1,0 +1,1021 @@
+1
+00:00:00,171 --> 00:00:02,896
+Vous avez vendu un appartement à M. Martin
+il y a 6 mois.
+
+2
+00:00:02,916 --> 00:00:04,339
+Aujourd'hui, il vous appelle.
+
+3
+00:00:04,360 --> 00:00:04,921
+Vous décrochez.
+
+4
+00:00:05,448 --> 00:00:07,349
+« Allô, oui, euh...
+
+5
+00:00:07,368 --> 00:00:10,250
+C'est bien, monsieur, euh... » Il
+raccroche.
+
+6
+00:00:10,271 --> 00:00:12,073
+Vous venez de perdre un client à vie.
+
+7
+00:00:12,112 --> 00:00:14,474
+Ou pire, vous avez un acheteur qualifié.
+
+8
+00:00:14,513 --> 00:00:15,875
+Parfait pour ce nouveau mandat.
+
+9
+00:00:15,894 --> 00:00:17,696
+Mais vous ne vous souvenez plus de ces
+critères.
+
+10
+00:00:17,716 --> 00:00:18,998
+Vous perdez une vente.
+
+11
+00:00:19,018 --> 00:00:20,399
+Et un vendeur mécontent.
+
+12
+00:00:20,419 --> 00:00:22,559
+Le problème, ce n'est pas votre mémoire.
+
+13
+00:00:22,579 --> 00:00:23,940
+C'est votre système.
+
+14
+00:00:23,981 --> 00:00:28,824
+Aujourd'hui, je vous montre comment un CRM
+bien utilisé transforme votre relation
+client.
+
+15
+00:00:28,844 --> 00:00:30,686
+Comment il génère des recommandations.
+
+16
+00:00:30,705 --> 00:00:32,927
+Comment il fait de vous un agent
+contournable.
+
+17
+00:00:33,728 --> 00:00:36,069
+De nombreux agents immobiliers ont un CRM.
+
+18
+00:00:36,109 --> 00:00:38,789
+Pourtant, beaucoup ne l'utilisent pas
+efficacement.
+
+19
+00:00:38,848 --> 00:00:41,609
+Ils y stockent des noms, des numéros, et
+c'est tout.
+
+20
+00:00:41,630 --> 00:00:48,890
+Résultat, ils oublient leurs clients, ils
+ratent des opportunités, ils passent à
+côté de ventes faciles, et surtout, ils ne
+génèrent pas de recommandations.
+
+21
+00:00:48,930 --> 00:00:54,773
+Pourtant, un client satisfait génère en
+moyenne 3 recommandations dans les 5
+années suivant la transaction.
+
+22
+00:00:54,872 --> 00:00:55,652
+3 recommandations.
+
+23
+00:00:56,052 --> 00:00:59,018
+Imaginez si vous aviez 100 clients
+satisfaits dans votre CRM.
+
+24
+00:00:59,037 --> 00:01:00,881
+Ce serait 300 opportunités.
+
+25
+00:01:00,901 --> 00:01:02,823
+Le CRM, ce n'est pas une corvée.
+
+26
+00:01:02,844 --> 00:01:06,530
+C'est votre banque de données, votre
+mémoire, votre assistant personnel.
+
+27
+00:01:06,549 --> 00:01:07,971
+Celui qui ne dort jamais.
+
+28
+00:01:07,992 --> 00:01:10,236
+Celui qui ne vous fait jamais passer pour
+un idiot au téléphone.
+
+29
+00:01:11,117 --> 00:01:14,338
+Voici les 5 piliers d'un CRM qui génèrent
+des recommandations.
+
+30
+00:01:14,399 --> 00:01:16,900
+Ignorez-en un et vous laissez de l'argent
+sur la table.
+
+31
+00:01:16,939 --> 00:01:17,941
+Piliers 1.
+
+32
+00:01:17,980 --> 00:01:19,662
+La richesse des données.
+
+33
+00:01:19,701 --> 00:01:21,763
+1,50, maille 2,55.
+
+34
+00:01:21,783 --> 00:01:23,903
+Premier pilier, la richesse des données.
+
+35
+00:01:23,944 --> 00:01:27,665
+Votre CRM doit contenir baie ou coupe,
+plus qu'un nom et un numéro.
+
+36
+00:01:27,706 --> 00:01:35,850
+Coordonnées complètes, adresse, téléphone,
+e-mail, réseaux sociaux, situation
+familiale, mariée, enfant, âge,
+
+37
+00:01:36,350 --> 00:01:44,356
+Situation professionnelle, métier, revenu,
+stabilité, projet immobilier, achat,
+vente, investissement, délai.
+
+38
+00:01:44,397 --> 00:01:48,640
+Critères de recherche, budget, surface,
+secteur impératif.
+
+39
+00:01:48,680 --> 00:01:51,403
+Historique des contacts, date, sujet,
+conclusion.
+
+40
+00:01:52,143 --> 00:01:59,245
+préférence, communication, horaire, style,
+note personnelle, anniversaire, passion,
+détails marquants.
+
+41
+00:01:59,265 --> 00:02:09,627
+Quand vous appelez M. Martin, vous savez
+qu'il a deux enfants de 8 et 10 ans, que
+son anniversaire est le 15 mars, qu'il
+adore le golf, que son projet est de
+vendre dans deux ans pour agrandir.
+
+42
+00:02:09,667 --> 00:02:13,167
+Vous dites « Bonjour M. Martin, c'est
+Julie de l'agence.
+
+43
+00:02:13,206 --> 00:02:14,768
+J'espère que les enfants vont bien ?
+
+44
+00:02:14,788 --> 00:02:16,187
+La rentrée s'est bien passée ?
+
+45
+00:02:16,207 --> 00:02:18,188
+Et votre partie de golf de dimanche ?
+
+46
+00:02:18,209 --> 00:02:19,508
+M. Martin est bluffé.
+
+47
+00:02:19,549 --> 00:02:20,308
+Vous vous souvenez de lui ?
+
+48
+00:02:20,688 --> 00:02:22,289
+Vous vous intéressez à lui ?
+
+49
+00:02:22,310 --> 00:02:23,151
+Pilière 2.
+
+50
+00:02:23,191 --> 00:02:24,372
+La segmentation.
+
+51
+00:02:24,391 --> 00:02:26,514
+Domaine 55, Mayuplier.
+
+52
+00:02:26,554 --> 00:02:27,614
+Deuxième pilier.
+
+53
+00:02:27,633 --> 00:02:28,955
+La segmentation.
+
+54
+00:02:28,996 --> 00:02:30,616
+Tous vos contacts ne sont pas égaux.
+
+55
+00:02:30,637 --> 00:02:32,979
+Vous devez les segmenter pour les traiter
+différemment.
+
+56
+00:02:33,019 --> 00:02:34,118
+Segment A.
+
+57
+00:02:34,159 --> 00:02:35,300
+Acheteurs actifs.
+
+58
+00:02:35,340 --> 00:02:36,401
+Ils cherchent maintenant.
+
+59
+00:02:36,420 --> 00:02:37,741
+Ils sont prêts à visiter.
+
+60
+00:02:37,782 --> 00:02:39,062
+Ils ont le financement.
+
+61
+00:02:39,103 --> 00:02:41,224
+Segment B. Vendeurs potentiels.
+
+62
+00:02:41,264 --> 00:02:42,765
+Ils vont vendre dans les 6 mois.
+
+63
+00:02:42,806 --> 00:02:44,187
+Ils préparent leurs projets.
+
+64
+00:02:44,206 --> 00:02:45,108
+Segment C.
+
+65
+00:02:45,168 --> 00:02:46,169
+Anciens clients.
+
+66
+00:02:46,209 --> 00:02:47,889
+Ils ont déjà transacté avec vous.
+
+67
+00:02:47,930 --> 00:02:48,770
+Ils peuvent recommander.
+
+68
+00:02:49,251 --> 00:02:53,436
+Segment D, Prospects froids, intérêts
+vagues, pas de délai défini.
+
+69
+00:02:53,455 --> 00:02:55,617
+Chaque segment mérite une stratégie
+différente.
+
+70
+00:02:55,638 --> 00:02:59,823
+Les acheteurs actifs, contacts
+hebdomadaires, nouveautés immédiates.
+
+71
+00:02:59,842 --> 00:03:03,347
+Les vendeurs potentiels, suivis mensuels,
+informations marché.
+
+72
+00:03:03,366 --> 00:03:07,091
+Les anciens clients, contacts
+trimestriels, demandes de recommandations.
+
+73
+00:03:07,110 --> 00:03:10,454
+Les prospects froids, newsletters
+mensuels, réchauffement progressif.
+
+74
+00:03:11,074 --> 00:03:12,056
+Pilière 3.
+
+75
+00:03:12,096 --> 00:03:13,475
+L'automatisation.
+
+76
+00:03:13,496 --> 00:03:15,377
+400 mais du 515.
+
+77
+00:03:15,417 --> 00:03:17,679
+Troisième pilier, l'automatisation.
+
+78
+00:03:17,699 --> 00:03:19,699
+Vous n'avez pas le temps de tout faire
+manuellement.
+
+79
+00:03:19,740 --> 00:03:23,322
+Heureusement, le CRM peut automatiser une
+grande partie du travail.
+
+80
+00:03:23,361 --> 00:03:24,521
+Anniversaire client.
+
+81
+00:03:24,562 --> 00:03:26,963
+Email automatique avec une petite
+attention.
+
+82
+00:03:26,984 --> 00:03:28,985
+Nouveaux biens correspondant aux critères.
+
+83
+00:03:29,004 --> 00:03:30,985
+Alerte automatique par SMS.
+
+84
+00:03:31,086 --> 00:03:34,448
+3 mois après la vente, email de
+satisfaction automatique.
+
+85
+00:03:34,508 --> 00:03:35,927
+1 an après la vente.
+
+86
+00:03:36,008 --> 00:03:38,210
+Email avec estimation de valeur
+actualisée.
+
+87
+00:03:39,129 --> 00:03:41,112
+Configurez ces automatismes une fois.
+
+88
+00:03:41,152 --> 00:03:42,974
+Ils travaillent pour vous 24h sur 24.
+
+89
+00:03:43,735 --> 00:03:48,481
+Vos clients reçoivent des messages
+personnalisés sans que vous ayez à lever
+le petit doigt.
+
+90
+00:03:48,521 --> 00:03:52,146
+Exemple, « Bonjour M. Martin, joyeux
+anniversaire !
+
+91
+00:03:52,167 --> 00:03:56,731
+Pour vous remercier de votre confiance, je
+vous offre une bouteille de champagne à
+récupérer à l'agence.
+
+92
+00:03:57,432 --> 00:03:58,693
+A bientôt Julie.
+
+93
+00:03:58,713 --> 00:04:02,996
+Simple, efficace, gratuit en termes de
+temps et sacré du lien.
+
+94
+00:04:03,015 --> 00:04:06,336
+Pilier 4, le suivi systématique.
+
+95
+00:04:06,377 --> 00:04:08,157
+5.15.6.
+
+96
+00:04:08,198 --> 00:04:11,079
+Quatrième pilier, le suivi systématique.
+
+97
+00:04:11,118 --> 00:04:14,020
+Un contact sans suivi est un contact mort.
+
+98
+00:04:14,040 --> 00:04:16,182
+Vous devez avoir un rythme, une
+discipline.
+
+99
+00:04:16,742 --> 00:04:19,103
+Acheteur actif, contact tous les 7 jours.
+
+100
+00:04:19,142 --> 00:04:21,303
+Vendeur en mandat, point toutes les
+semaines.
+
+101
+00:04:21,363 --> 00:04:23,904
+Ancien client, contact tous les 90 jours.
+
+102
+00:04:23,925 --> 00:04:26,305
+Prospect chaud, contact tous les 14 jours.
+
+103
+00:04:26,346 --> 00:04:28,687
+Prospect froid, contact tous les 30 jours.
+
+104
+00:04:28,706 --> 00:04:30,666
+Programmez ces rappels dans votre CRM.
+
+105
+00:04:30,687 --> 00:04:33,348
+Quand la date arrive, vous recevez une
+notification.
+
+106
+00:04:33,367 --> 00:04:34,608
+Vous n'oubliez personne.
+
+107
+00:04:34,629 --> 00:04:36,709
+Vous ne laissez aucun contact s'endormir.
+
+108
+00:04:36,750 --> 00:04:37,569
+Exemple.
+
+109
+00:04:37,589 --> 00:04:38,350
+Rappel.
+
+110
+00:04:38,370 --> 00:04:39,790
+Contactez M. Martin.
+
+111
+00:04:39,810 --> 00:04:41,850
+Dernier contact il y a 90 jours.
+
+112
+00:04:41,891 --> 00:04:42,651
+Vous appelez.
+
+113
+00:04:42,692 --> 00:04:43,612
+Vous discutez.
+
+114
+00:04:43,632 --> 00:04:45,872
+Vous demandez s'il connaît quelqu'un qui
+cherche à acheter ou vendre.
+
+115
+00:04:46,273 --> 00:04:49,456
+Pilier 5, la DEMANDÉE RECOMMANDATION.
+
+116
+00:04:49,475 --> 00:04:52,077
+6 06 mais 6 30.
+
+117
+00:04:52,117 --> 00:04:54,819
+Cinquième pilier, la DEMANDE DE
+RECOMMANDATION.
+
+118
+00:04:54,839 --> 00:04:56,701
+Vos clients satisfaits veulent vous aider.
+
+119
+00:04:56,742 --> 00:04:57,923
+Ils ne savent pas comment.
+
+120
+00:04:57,963 --> 00:04:59,483
+Vous devez leur demander.
+
+121
+00:04:59,504 --> 00:05:01,605
+Moment 1, juste après la signature.
+
+122
+00:05:01,625 --> 00:05:04,708
+Monsieur Martin, je suis ravi qu'on ait
+trouvé votre appartement.
+
+123
+00:05:04,728 --> 00:05:08,531
+Si vous connaissez quelqu'un qui cherche à
+acheter ou vendre, je serai ravi de
+l'aider aussi.
+
+124
+00:05:09,151 --> 00:05:11,334
+Moment 2, à l'acte authentique.
+
+125
+00:05:11,353 --> 00:05:12,975
+Merci pour votre confiance.
+
+126
+00:05:12,995 --> 00:05:17,660
+N'oubliez pas, si vous avez des amis qui
+se lancent dans un projet immobilier,
+pensez à moi.
+
+127
+00:05:17,680 --> 00:05:19,961
+Moment 3, lors des suivis réguliers.
+
+128
+00:05:19,982 --> 00:05:21,502
+Tout va bien avec l'appartement ?
+
+129
+00:05:21,523 --> 00:05:25,007
+Au fait, vous ne connaissez pas quelqu'un
+qui chercherait à acheter dans le quartier
+?
+
+130
+00:05:25,026 --> 00:05:27,569
+Moment 4, après un service particulier.
+
+131
+00:05:27,588 --> 00:05:30,471
+Je suis content d'avoir pu vous aider pour
+ce problème de copropriété.
+
+132
+00:05:30,971 --> 00:05:37,956
+Si vous connaissez quelqu'un dans la même
+situation, demandez systématiquement,
+demandez différemment, demandez
+régulièrement.
+
+133
+00:05:37,976 --> 00:05:40,959
+Les recommandations sont le carburant de
+votre croissance.
+
+134
+00:05:40,978 --> 00:05:42,420
+Passons aux cas pratiques.
+
+135
+00:05:42,439 --> 00:05:45,802
+Comment j'ai transformé un simple CRM en
+machine à recommandations ?
+
+136
+00:05:45,822 --> 00:05:46,783
+Monsieur et Madame Bernard.
+
+137
+00:05:47,343 --> 00:05:49,444
+Acheter un appartement chez moi il y a
+deux ans.
+
+138
+00:05:49,605 --> 00:05:52,127
+45 rue de 16, Lyon 6e.
+
+139
+00:05:52,187 --> 00:05:53,750
+65 mètres carrés.
+
+140
+00:05:53,790 --> 00:05:54,730
+380 000 euros.
+
+141
+00:05:54,750 --> 00:05:56,612
+Dans mon CRM, j'ai tout noté.
+
+142
+00:05:56,632 --> 00:05:57,494
+Leurs enfants.
+
+143
+00:05:57,514 --> 00:05:58,495
+Lucie, 12 ans.
+
+144
+00:05:58,514 --> 00:05:59,536
+Thomas, 9 ans.
+
+145
+00:05:59,555 --> 00:06:00,416
+Leurs chiens.
+
+146
+00:06:00,437 --> 00:06:01,877
+Max, un labrador.
+
+147
+00:06:01,898 --> 00:06:03,300
+Leurs projets futurs.
+
+148
+00:06:03,339 --> 00:06:05,141
+Agrandir dans 3-4 ans.
+
+149
+00:06:05,182 --> 00:06:06,142
+Leurs passions.
+
+150
+00:06:06,163 --> 00:06:07,564
+Vélo, cuisine.
+
+151
+00:06:07,584 --> 00:06:08,704
+Leur anniversaire de mariage.
+
+152
+00:06:10,586 --> 00:06:12,247
+Automatisation numéro 1.
+
+153
+00:06:12,307 --> 00:06:14,327
+Email d'anniversaire de mariage.
+
+154
+00:06:14,367 --> 00:06:16,228
+Bonjour monsieur et madame Bernard.
+
+155
+00:06:16,249 --> 00:06:18,149
+Joyeux anniversaire de mariage.
+
+156
+00:06:18,170 --> 00:06:19,389
+14 ans déjà.
+
+157
+00:06:19,410 --> 00:06:23,091
+Pour fêter ça, je vous offre un dîner au
+restaurant Le Gourmet à Lyon.
+
+158
+00:06:23,110 --> 00:06:25,692
+Réservation faite au nom de Bernard pour
+ce soir.
+
+159
+00:06:25,732 --> 00:06:26,771
+Profitez bien.
+
+160
+00:06:26,791 --> 00:06:27,593
+Julie.
+
+161
+00:06:27,632 --> 00:06:30,052
+Résultat, un email de remerciement.
+
+162
+00:06:30,072 --> 00:06:31,713
+Vous êtes incroyable Julie.
+
+163
+00:06:31,733 --> 00:06:34,675
+Personne ne s'est jamais souvenu de notre
+anniversaire de mariage.
+
+164
+00:06:34,694 --> 00:06:35,535
+Merci.
+
+165
+00:06:35,634 --> 00:06:37,536
+3 mois plus tard, rappel automatique.
+
+166
+00:06:38,055 --> 00:06:39,398
+Contactez les Bernard.
+
+167
+00:06:39,437 --> 00:06:41,639
+Dernier contact il y a 90 jours.
+
+168
+00:06:41,680 --> 00:06:42,641
+J'appelle.
+
+169
+00:06:42,680 --> 00:06:43,341
+Moi.
+
+170
+00:06:43,362 --> 00:06:44,704
+Bonjour Madame Bernard.
+
+171
+00:06:44,723 --> 00:06:45,564
+C'est Julie.
+
+172
+00:06:45,584 --> 00:06:46,605
+Comment allez-vous ?
+
+173
+00:06:46,646 --> 00:06:47,726
+Et les enfants ?
+
+174
+00:06:47,747 --> 00:06:49,389
+Lucie a dû rentrer au collège, non ?
+
+175
+00:06:49,428 --> 00:06:50,149
+Et Max ?
+
+176
+00:06:50,189 --> 00:06:51,750
+Il a toujours autant d'énergie ?
+
+177
+00:06:51,771 --> 00:06:52,812
+Madame Bernard.
+
+178
+00:06:52,831 --> 00:06:53,153
+Julie !
+
+179
+00:06:53,492 --> 00:06:54,694
+Quelle surprise !
+
+180
+00:06:54,713 --> 00:06:56,016
+Oui, tout va bien.
+
+181
+00:06:56,036 --> 00:06:57,576
+Lucie adore le collège.
+
+182
+00:06:57,596 --> 00:06:59,098
+Max va bien, merci.
+
+183
+00:06:59,139 --> 00:06:59,838
+Et vous ?
+
+184
+00:06:59,879 --> 00:07:02,281
+Moi, je voulais juste prendre de vos
+nouvelles.
+
+185
+00:07:02,322 --> 00:07:06,425
+Au fait, vous ne connaissez pas quelqu'un
+qui chercherait à acheter ou vendre dans
+le quartier ?
+
+186
+00:07:06,466 --> 00:07:08,408
+On a quelques biens sympas en ce moment.
+
+187
+00:07:08,447 --> 00:07:09,548
+Madame Bernard ?
+
+188
+00:07:09,569 --> 00:07:13,452
+Justement, ma sœur cherche un appartement
+pour sa fille qui rentre à la fac à Lyon.
+
+189
+00:07:13,473 --> 00:07:14,334
+Je lui donne votre numéro ?
+
+190
+00:07:14,913 --> 00:07:16,415
+Moi, avec plaisir !
+
+191
+00:07:16,435 --> 00:07:19,495
+Passez-lui mon numéro, ou je peux
+l'appeler directement si vous voulez.
+
+192
+00:07:19,536 --> 00:07:21,817
+Madame Bernard, je lui dis de vous
+appeler.
+
+193
+00:07:21,836 --> 00:07:23,918
+Merci Julie, vous êtes au top !
+
+194
+00:07:23,937 --> 00:07:25,278
+J'ai créé une nouvelle fiche.
+
+195
+00:07:25,298 --> 00:07:32,860
+Mademoiselle Durand, sœur de Madame
+Bernard, cherche studio Lyon 3e ou 6e,
+budget 150 000 euros, rentrée
+universitaire.
+
+196
+00:07:32,880 --> 00:07:34,682
+J'ai appelé Mademoiselle Durand le
+lendemain.
+
+197
+00:07:34,721 --> 00:07:39,223
+Visite de 3 studios, offre sur le 2e,
+compromis signé 3 semaines plus tard.
+
+198
+00:07:39,244 --> 00:07:39,584
+145 000 euros.
+
+199
+00:07:39,603 --> 00:07:40,163
+Honoraire, 7250 euros.
+
+200
+00:07:43,004 --> 00:07:44,286
+Coup de l'opération ?
+
+201
+00:07:44,346 --> 00:07:47,226
+Un e-mail automatique, un appel de 10
+minutes.
+
+202
+00:07:47,267 --> 00:07:53,670
+Résultat, 7250 euros d'honoraire et une
+nouvelle cliente satisfaite qui
+recommandera à son tour.
+
+203
+00:07:53,690 --> 00:07:55,692
+Le CRM, ce n'est pas une contrainte.
+
+204
+00:07:55,711 --> 00:08:00,095
+C'est un super pouvoir, celui de ne jamais
+oublier, celui de toujours être pertinent.
+
+205
+00:08:00,535 --> 00:08:02,836
+celui de générer des opportunités en
+dormant.
+
+206
+00:08:02,857 --> 00:08:03,898
+Les cinq piliers.
+
+207
+00:08:03,939 --> 00:08:05,180
+Enrichissez vos données.
+
+208
+00:08:05,199 --> 00:08:06,581
+Segmentez vos contacts.
+
+209
+00:08:06,620 --> 00:08:08,043
+Automatisez vos suivis.
+
+210
+00:08:08,062 --> 00:08:09,483
+Soyez systématique.
+
+211
+00:08:09,524 --> 00:08:11,086
+Demandez des recommandations.
+
+212
+00:08:11,105 --> 00:08:12,507
+Votre mission cette semaine ?
+
+213
+00:08:12,526 --> 00:08:13,708
+Prenez une heure.
+
+214
+00:08:13,767 --> 00:08:14,749
+Une heure seulement.
+
+215
+00:08:14,769 --> 00:08:17,031
+Passez en revue vos contacts les plus
+importants.
+
+216
+00:08:17,052 --> 00:08:18,312
+Complétez leurs fiches.
+
+217
+00:08:18,353 --> 00:08:19,593
+Programmez vos rappels.
+
+218
+00:08:19,634 --> 00:08:21,055
+Configurez trois automatismes.
+
+219
+00:08:21,716 --> 00:08:24,577
+Dans 6 mois, vous ne reconnaîtrez plus
+votre activité.
+
+220
+00:08:24,598 --> 00:08:26,399
+Les recommandations vont affluer.
+
+221
+00:08:26,420 --> 00:08:28,000
+Vos clients vont vous adorer.
+
+222
+00:08:28,021 --> 00:08:32,144
+Vous allez passer moins de temps à
+chercher des clients et plus de temps à
+les servir.
+
+223
+00:08:32,163 --> 00:08:35,706
+Parce qu'à la fin, ce ne sont pas les
+annonces qui font les meilleurs agents.
+
+224
+00:08:35,726 --> 00:08:38,889
+Ce sont les relations, les liens, la
+confiance.
+
+225
+00:08:38,950 --> 00:08:41,412
+Et ça, ça ne se construit pas en un jour.
+
+226
+00:08:41,432 --> 00:08:45,595
+Ça se construit jour après jour, contact
+après contact.
+
+227
+00:08:45,615 --> 00:08:48,177
+Merci d'avoir suivi ce module sur la
+transaction.
+
+228
+00:08:48,216 --> 00:08:50,438
+Vous avez maintenant toutes les clés pour
+estimer comme un pro,
+
+229
+00:08:50,980 --> 00:08:55,816
+prospecté comme une machine, négocié comme
+un expert et fidélisé comme un champion.
+
+230
+00:08:55,855 --> 00:08:57,059
+A vous de jouer !
+
+231
+00:08:57,120 --> 00:08:58,926
+On se retrouve dans le prochain module.

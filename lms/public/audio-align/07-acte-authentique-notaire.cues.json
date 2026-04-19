@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "duration": 344.083,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.231,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 30.522,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 62.855,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 95.754,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 129.638,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 163.955,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 195.007,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 228.053,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 259.707,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 290.482,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 326.219,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "réitération",
+      "start": 0.291,
+      "end": 1.071
+    },
+    {
+      "term": "authentique,",
+      "start": 1.572,
+      "end": 2.572
+    },
+    {
+      "term": "c'est",
+      "start": 2.592,
+      "end": 2.752
+    },
+    {
+      "term": "moment",
+      "start": 2.892,
+      "end": 3.152
+    },
+    {
+      "term": "tout",
+      "start": 3.352,
+      "end": 3.472
+    },
+    {
+      "term": "jour",
+      "start": 4.373,
+      "end": 4.513
+    },
+    {
+      "term": "propriété",
+      "start": 4.793,
+      "end": 5.293
+    },
+    {
+      "term": "entre",
+      "start": 7.474,
+      "end": 7.614
+    },
+    {
+      "term": "compromis",
+      "start": 8.374,
+      "end": 9.014
+    },
+    {
+      "term": "peut",
+      "start": 10.855,
+      "end": 11.035
+    }
+  ]
+}

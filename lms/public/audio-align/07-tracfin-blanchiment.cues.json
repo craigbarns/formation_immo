@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "duration": 352.173,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.191,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 36.901,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 70.525,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 102.43,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 133.761,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 168.806,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 200.152,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 239.836,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 280.227,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 310.302,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 344.459,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "plusieurs",
+      "start": 0.892,
+      "end": 1.252
+    },
+    {
+      "term": "d'euros",
+      "start": 1.692,
+      "end": 1.932
+    },
+    {
+      "term": "sont",
+      "start": 1.992,
+      "end": 2.152
+    },
+    {
+      "term": "l'immobilier.",
+      "start": 3.233,
+      "end": 4.254
+    },
+    {
+      "term": "contrairement",
+      "start": 4.474,
+      "end": 4.934
+    },
+    {
+      "term": "être",
+      "start": 6.615,
+      "end": 6.876
+    },
+    {
+      "term": "d'une",
+      "start": 7.356,
+      "end": 7.496
+    },
+    {
+      "term": "opération",
+      "start": 7.536,
+      "end": 7.976
+    },
+    {
+      "term": "blanchiment",
+      "start": 8.156,
+      "end": 8.997
+    },
+    {
+      "term": "n'est",
+      "start": 11.599,
+      "end": 11.759
+    }
+  ]
+}

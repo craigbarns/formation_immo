@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "duration": 538.926,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.171,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 30.706,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 60.901,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 96.351,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 129.667,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 161.265,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 192.096,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 223.736,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 254.041,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 286.273,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 317.68,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 349.606,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 383.111,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 413.493,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 443.938,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 475.712,
+      "source": "auto"
+    },
+    {
+      "index": 16,
+      "start": 506.42,
+      "source": "auto"
+    },
+    {
+      "index": 17,
+      "start": 537.12,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "avez",
+      "start": 0.312,
+      "end": 0.452
+    },
+    {
+      "term": "appartement",
+      "start": 0.853,
+      "end": 1.274
+    },
+    {
+      "term": "Martin",
+      "start": 1.674,
+      "end": 1.955
+    },
+    {
+      "term": "mois.",
+      "start": 2.396,
+      "end": 2.897
+    },
+    {
+      "term": "Aujourd'hui,",
+      "start": 2.917,
+      "end": 3.318
+    },
+    {
+      "term": "C'est",
+      "start": 7.369,
+      "end": 7.529
+    },
+    {
+      "term": "bien,",
+      "start": 7.549,
+      "end": 7.73
+    },
+    {
+      "term": "monsieur,",
+      "start": 7.75,
+      "end": 8.07
+    },
+    {
+      "term": "client",
+      "start": 11.072,
+      "end": 11.312
+    },
+    {
+      "term": "acheteur",
+      "start": 13.334,
+      "end": 13.614
+    }
+  ]
+}

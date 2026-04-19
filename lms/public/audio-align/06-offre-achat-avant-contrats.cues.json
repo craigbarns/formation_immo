@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "duration": 341.387,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.211,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 33.233,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 63.569,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 94.59,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 131.359,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 168.235,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 205.201,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 239.084,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 271.416,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 303.208,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 335.65,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "d'achat,",
+      "start": 0.511,
+      "end": 1.072
+    },
+    {
+      "term": "compromis",
+      "start": 1.572,
+      "end": 1.932
+    },
+    {
+      "term": "deux",
+      "start": 2.993,
+      "end": 3.133
+    },
+    {
+      "term": "plus",
+      "start": 4.454,
+      "end": 4.614
+    },
+    {
+      "term": "dans",
+      "start": 9.158,
+      "end": 9.278
+    },
+    {
+      "term": "c'est",
+      "start": 11.439,
+      "end": 11.579
+    },
+    {
+      "term": "peut",
+      "start": 12.68,
+      "end": 12.8
+    },
+    {
+      "term": "transactions",
+      "start": 14.902,
+      "end": 15.462
+    },
+    {
+      "term": "correctement",
+      "start": 16.603,
+      "end": 17.083
+    },
+    {
+      "term": "souvent",
+      "start": 19.705,
+      "end": 20.005
+    }
+  ]
+}

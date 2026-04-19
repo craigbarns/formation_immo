@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "duration": 500.508,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.371,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 31.336,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 62.225,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 97.102,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 128.12,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 166.497,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 199.784,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 231.551,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 264.314,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 295.181,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 325.905,
+      "source": "auto"
+    },
+    {
+      "index": 11,
+      "start": 358.831,
+      "source": "auto"
+    },
+    {
+      "index": 12,
+      "start": 391.528,
+      "source": "auto"
+    },
+    {
+      "index": 13,
+      "start": 424.778,
+      "source": "auto"
+    },
+    {
+      "index": 14,
+      "start": 457.237,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 487.773,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "cash",
+      "start": 4.834,
+      "end": 5.115
+    },
+    {
+      "term": "flow",
+      "start": 5.155,
+      "end": 5.415
+    },
+    {
+      "term": "positif…",
+      "start": 5.455,
+      "end": 6.656
+    },
+    {
+      "term": "calculer",
+      "start": 9.538,
+      "end": 9.938
+    },
+    {
+      "term": "calculs",
+      "start": 14.421,
+      "end": 14.842
+    },
+    {
+      "term": "Résultat,",
+      "start": 16.263,
+      "end": 17.123
+    },
+    {
+      "term": "faire",
+      "start": 17.584,
+      "end": 17.764
+    },
+    {
+      "term": "alors",
+      "start": 18.904,
+      "end": 19.085
+    },
+    {
+      "term": "financier.",
+      "start": 20.165,
+      "end": 21.166
+    },
+    {
+      "term": "nous",
+      "start": 22.047,
+      "end": 22.167
+    }
+  ]
+}

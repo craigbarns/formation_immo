@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "duration": 257.187,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.171,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 34.679,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 64.788,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 96.268,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 127.802,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 164.719,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 195.966,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 227.602,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "visiter",
+      "start": 0.632,
+      "end": 1.032
+    },
+    {
+      "term": "biens",
+      "start": 1.332,
+      "end": 1.592
+    },
+    {
+      "term": "couple",
+      "start": 1.873,
+      "end": 2.173
+    },
+    {
+      "term": "mois.",
+      "start": 2.553,
+      "end": 3.054
+    },
+    {
+      "term": "offre.",
+      "start": 3.474,
+      "end": 4.155
+    },
+    {
+      "term": "c'est",
+      "start": 5.256,
+      "end": 5.476
+    },
+    {
+      "term": "qu'est-ce",
+      "start": 6.657,
+      "end": 6.877
+    },
+    {
+      "term": "qu'ils",
+      "start": 6.917,
+      "end": 7.037
+    },
+    {
+      "term": "cherchent,",
+      "start": 7.077,
+      "end": 7.317
+    },
+    {
+      "term": "problème",
+      "start": 8.539,
+      "end": 8.799
+    }
+  ]
+}

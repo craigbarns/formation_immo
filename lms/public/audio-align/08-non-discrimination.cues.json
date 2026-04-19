@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "duration": 350.503,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.231,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 32.437,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 70.888,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 104.975,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 137.017,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 172.175,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 204.324,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 234.621,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 264.893,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 295.047,
+      "source": "auto"
+    },
+    {
+      "index": 10,
+      "start": 325.707,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "discriminer",
+      "start": 1.132,
+      "end": 1.692
+    },
+    {
+      "term": "candidat",
+      "start": 1.852,
+      "end": 2.232
+    },
+    {
+      "term": "raison",
+      "start": 4.054,
+      "end": 4.274
+    },
+    {
+      "term": "origine,",
+      "start": 4.614,
+      "end": 5.355
+    },
+    {
+      "term": "religion,",
+      "start": 5.555,
+      "end": 6.315
+    },
+    {
+      "term": "sexe",
+      "start": 6.555,
+      "end": 7.116
+    },
+    {
+      "term": "tout",
+      "start": 7.336,
+      "end": 7.516
+    },
+    {
+      "term": "critère",
+      "start": 7.856,
+      "end": 8.276
+    },
+    {
+      "term": "interdit",
+      "start": 8.337,
+      "end": 9.037
+    },
+    {
+      "term": "délit",
+      "start": 9.377,
+      "end": 9.597
+    }
+  ]
+}
