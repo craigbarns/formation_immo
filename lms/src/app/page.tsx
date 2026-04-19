@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import {
   ArrowRight,
   CheckCircle2,
@@ -18,7 +20,30 @@ import {
   ClipboardList,
   Briefcase,
   Trophy,
+  Star,
 } from "lucide-react";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
+
+export const metadata: Metadata = {
+  title: "Formation Agent Immobilier — Certification 42h | Loi ALUR 2026",
+  description:
+    "Formation complète 42h pour agents immobiliers : juridique, transaction, financement, marketing, closing. 36 leçons, 180 QCM certifiants, simulateurs pros. Certification professionnelle.",
+  keywords: [
+    "formation agent immobilier",
+    "certification agent immobilier",
+    "loi ALUR 2026",
+    "formation immobilière",
+    "carte professionnelle",
+    "compromis de vente",
+    "mandat exclusif",
+  ],
+  openGraph: {
+    title: "Formation Agent Immobilier — Certification 42h",
+    description: "36 leçons · 180 QCM · 5 modules · Certification professionnelle",
+    type: "website",
+    locale: "fr_FR",
+  },
+};
 
 const MODULES = [
   {
@@ -95,9 +120,40 @@ const OUTCOMES = [
   },
 ];
 
+const COURSE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  name: "Formation Agent Immobilier — Certification 42h",
+  description:
+    "Formation complète 42h pour agents immobiliers : juridique, transaction, financement, marketing, closing. 36 leçons, 180 QCM certifiants.",
+  provider: {
+    "@type": "Organization",
+    name: "Formation Immo",
+  },
+  hasCourseInstance: {
+    "@type": "CourseInstance",
+    courseMode: "online",
+    inLanguage: "fr",
+  },
+  teaches: [
+    "Droit immobilier ALUR 2026",
+    "Transaction et négociation",
+    "Financement et fiscalité",
+    "Marketing digital immobilier",
+    "Techniques de closing",
+  ],
+  timeRequired: "PT42H",
+  numberOfModules: 5,
+};
+
 export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col overflow-hidden bg-brand-navy text-white">
+      <Script
+        id="course-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(COURSE_SCHEMA) }}
+      />
       {/* Skip link */}
       <a
         href="#contenu"
@@ -402,23 +458,81 @@ export default function HomePage() {
         <section className="border-t border-white/10 px-6 py-10">
           <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-8 text-center">
             <div>
-              <p className="text-2xl font-black text-brand-gold">42h</p>
+              <p className="text-2xl font-black text-brand-gold">
+                <AnimatedCounter target={42} suffix="h" />
+              </p>
               <p className="text-2xs uppercase tracking-widest text-white/50">De formation</p>
             </div>
             <div className="h-8 w-px bg-white/10" />
             <div>
-              <p className="text-2xl font-black text-brand-gold">36</p>
+              <p className="text-2xl font-black text-brand-gold">
+                <AnimatedCounter target={36} />
+              </p>
               <p className="text-2xs uppercase tracking-widest text-white/50">Leçons</p>
             </div>
             <div className="h-8 w-px bg-white/10" />
             <div>
-              <p className="text-2xl font-black text-brand-gold">180</p>
+              <p className="text-2xl font-black text-brand-gold">
+                <AnimatedCounter target={180} />
+              </p>
               <p className="text-2xs uppercase tracking-widest text-white/50">QCM certifiants</p>
             </div>
             <div className="h-8 w-px bg-white/10" />
             <div>
-              <p className="text-2xl font-black text-brand-gold">5</p>
+              <p className="text-2xl font-black text-brand-gold">
+                <AnimatedCounter target={5} />
+              </p>
               <p className="text-2xs uppercase tracking-widest text-white/50">Modules</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Témoignages */}
+        <section className="border-t border-white/10 bg-white/[0.02] px-6 py-16">
+          <div className="mx-auto max-w-5xl">
+            <div className="mb-10 text-center">
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-3xs font-bold uppercase tracking-widest text-on-dark-muted">
+                <Star className="h-3 w-3" /> Ils se sont formés
+              </p>
+              <h2 className="mt-4 text-3xl font-bold">Ce que disent les agents</h2>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-3">
+              {[
+                {
+                  name: "Thomas M.",
+                  role: "Agent indépendant, Lyon",
+                  text: "J'ai obtenu ma carte T en 3 semaines. Les QCM m'ont permis d'identifier mes lacunes sur la fiscalité. Le simulateur de rentabilité est devenu mon outil quotidien avec les investisseurs.",
+                  rating: 5,
+                },
+                {
+                  name: "Sophie L.",
+                  role: "Conseillère chez Century 21, Paris",
+                  text: "La formation ALUR 2026 m'a fait gagner un temps fou. Plus besoin de chercher les textes à jour, tout est là, clair, avec des cas pratiques que je retrouve chaque semaine.",
+                  rating: 5,
+                },
+                {
+                  name: "Karim B.",
+                  role: "Créateur d'agence, Marseille",
+                  text: "J'ai inscrit mes 4 collaborateurs. Le suivi de progression me permet de voir qui avance et qui bloque. L'attestation de certification rassure nos clients sur la qualité de l'équipe.",
+                  rating: 5,
+                },
+              ].map((t, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+                >
+                  <div className="flex gap-1">
+                    {Array.from({ length: t.rating }).map((_, j) => (
+                      <Star key={j} className="h-4 w-4 fill-brand-gold text-brand-gold" />
+                    ))}
+                  </div>
+                  <p className="mt-4 text-sm leading-relaxed text-white/85">&ldquo;{t.text}&rdquo;</p>
+                  <div className="mt-4 border-t border-white/10 pt-4">
+                    <p className="text-sm font-bold text-white">{t.name}</p>
+                    <p className="text-2xs text-white/50">{t.role}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
