@@ -11,6 +11,7 @@ import { KaraokeOverlay } from "./KaraokeOverlay";
 import { KineticFlash } from "./KineticFlash";
 import { SubtitleOverlay } from "./SubtitleOverlay";
 import { ProgressPreview } from "./ProgressPreview";
+import { WaveformBars } from "./WaveformBars";
 import { compactAlignment, type LessonAlignment } from "@/lib/audio-alignment";
 import { loadLessonCues, findActiveSlideFromCues, type LessonCues } from "@/lib/lesson-cues";
 import { getModuleTheme } from "@/data/module-themes";
@@ -1269,6 +1270,11 @@ export function CinematicPlayer({
             style={{ left: `${pct}%` }}
           />
         </div>
+
+        {/* Waveform visualization */}
+        {loaded && (
+          <WaveformBars isPlaying={playing} currentTime={current} duration={duration} />
+        )}
 
         {/* Controls row */}
         <div className="flex items-center justify-between gap-3">
