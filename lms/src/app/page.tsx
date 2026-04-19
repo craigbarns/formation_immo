@@ -537,6 +537,44 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Pricing */}
+        <section className="border-t border-white/10 px-6 py-16">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-gold/10 px-3 py-1 text-3xs font-bold uppercase tracking-widest text-brand-gold">
+              <Sparkles className="h-3 w-3" /> Accès complet
+            </p>
+            <h2 className="mt-4 text-3xl font-bold">Une formation, un accès illimité</h2>
+            <div className="mt-8 rounded-3xl border border-brand-gold/30 bg-gradient-to-b from-brand-gold/10 to-transparent p-8 sm:p-10">
+              <p className="text-5xl font-black text-brand-gold">299 €</p>
+              <p className="mt-2 text-sm text-white/60">Paiement unique — pas d&apos;abonnement</p>
+              <ul className="mt-6 space-y-3 text-left text-sm text-white/85">
+                {[
+                  "42h de formation vidéo + audio",
+                  "36 leçons avec supports téléchargeables",
+                  "180 QCM certifiants + examens par module",
+                  "8 simulateurs pros (crédit, rentabilité, net vendeur…)",
+                  "Attestation de certification avec QR code",
+                  "Mises à jour 2026 incluses à vie",
+                  "Support pédagogique par email",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/register"
+                className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-gold px-10 py-4 text-base font-bold text-brand-navy shadow-2xl shadow-black/30 transition hover:bg-yellow-300 active:scale-[0.98]"
+              >
+                Commencer maintenant
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <p className="mt-3 text-2xs text-white/40">Garantie 14 jours satisfait ou remboursé</p>
+            </div>
+          </div>
+        </section>
+
         {/* Final CTA */}
         <section className="border-t border-white/10 px-6 py-16 text-center">
           <div className="mx-auto max-w-2xl">
@@ -556,8 +594,22 @@ export default function HomePage() {
         </section>
       </main>
 
-      <footer className="border-t border-white/10 py-8 text-center text-xs text-on-dark-muted">
-        <p>Formation agent immobilier — 42 h · ATC Education · NDA 75331582333</p>
+      <footer className="border-t border-white/10 px-6 py-10">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 sm:flex-row">
+          <div className="text-center sm:text-left">
+            <p className="text-sm font-bold text-white">Formation Agent Immobilier</p>
+            <p className="mt-1 text-xs text-white/50">
+              42h · Certification professionnelle · Loi ALUR 2026
+            </p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 text-xs text-white/50">
+            <Link href="/formation" className="transition hover:text-white">Parcours</Link>
+            <Link href="/login" className="transition hover:text-white">Connexion</Link>
+            <Link href="/register" className="transition hover:text-white">Inscription</Link>
+            <Link href="/mentions-legales" className="transition hover:text-white">Mentions légales</Link>
+          </div>
+          <p className="text-xs text-white/30">© 2026 — Tous droits réservés</p>
+        </div>
       </footer>
     </div>
   );
