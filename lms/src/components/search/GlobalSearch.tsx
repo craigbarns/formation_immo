@@ -1,300 +1,170 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Search, X, FileText, Bookmark, StickyNote, ArrowRight } from "lucide-react";
+import { useState, useMemo, useRef, useEffect, createContext, useContext } from "react";
+import Link from "next/link";
+import { Search, X, BookOpen, FileText } from "lucide-react";
 import { COURSE } from "@/data/course";
-import { getAllBookmarks } from "@/lib/user-content";
-import { searchNotes } from "@/lib/user-content";
-import { useRouter } from "next/navigation";
 
-interface SearchResult {
-  id: string;
-  type: "lesson" | "bookmark" | "note";
+type SearchItem = {
+  type: "leçon" | "module";
   title: string;
-  subtitle: string;
-  href: string;
-  icon: React.ReactNode;
-  moduleSlug?: string;
+  moduleTitle: string;
+  moduleSlug: string;
+  lessonSlug: string;
+  keywords: string;
+};
+
+const ALL_ITEMS: SearchItem[] = [
+  ...COURSE.flatMap((mod) =>
+    mod.lessons.map((lesson) => ({
+      type: "leçon" as const,
+      title: lesson.title,
+      moduleTitle: mod.title,
+      moduleSlug: mod.slug,
+      lessonSlug: lesson.slug,
+      keywords: lesson.objectives.join(" ").toLowerCase(),
+    }))
+  ),
+  ...COURSE.map((mod) => ({
+    type: "module" as const,
+    title: mod.title,
+    moduleTitle: mod.title,
+    moduleSlug: mod.slug,
+    lessonSlug: "",
+    keywords: mod.summary.toLowerCase() + " " + mod.description.toLowerCase(),
+  })),
+];
+
+/* ------------------------------------------------------------------ */
+/*  Hook global (optionnel)                                             */
+/* ------------------------------------------------------------------ */
+
+const SearchCtx = createContext<{
+  open: boolean;
+  setOpen: (v: boolean) => void;
+}>({ open: false, setOpen: () => {} });
+
+export function useGlobalSearch() {
+  return useContext(SearchCtx);
 }
 
-interface GlobalSearchProps {
-  isOpen: boolean;
-  onClose: () => void;
+/* ------------------------------------------------------------------ */
+/*  Component                                                           */
+/* ------------------------------------------------------------------ */
+
+interface Props {
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
-export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
+export function GlobalSearch({ isOpen: controlledOpen, onClose }: Props) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = (v: boolean) => {
+    if (controlledOpen === undefined) setInternalOpen(v);
+    if (!v) onClose?.();
+  };
+
   const [query, setQuery] = useState("");
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const router = useRouter();
-
-  // Build search index
-  const searchIndex = useMemo(() => {
-    const index: SearchResult[] = [];
-
-    // Add all lessons
-    COURSE.forEach((module) => {
-      module.lessons.forEach((lesson) => {
-        index.push({
-          id: `lesson-${lesson.slug}`,
-          type: "lesson",
-          title: lesson.title,
-          subtitle: module.title,
-          href: `/formation/${module.slug}/${lesson.slug}`,
-          icon: <FileText className="w-4 h-4" />,
-          moduleSlug: module.slug,
-        });
-      });
-    });
-
-    // Add bookmarks
-    const bookmarks = getAllBookmarks();
-    bookmarks.forEach((bookmark) => {
-      index.push({
-        id: `bookmark-${bookmark.id}`,
-        type: "bookmark",
-        title: bookmark.lessonTitle,
-        subtitle: `${bookmark.moduleTitle} — Favori`,
-        href: `/formation/${bookmark.moduleSlug}/${bookmark.lessonSlug}`,
-        icon: <Bookmark className="w-4 h-4 text-brand-gold" />,
-        moduleSlug: bookmark.moduleSlug,
-      });
-    });
-
-    return index;
-  }, []);
-
-  // Compute results
-  const results = useMemo<SearchResult[]>(() => {
-    if (!query.trim()) {
-      const bookmarks = getAllBookmarks().slice(0, 3);
-      return bookmarks.map((b) => ({
-        id: `recent-${b.id}`,
-        type: "bookmark",
-        title: b.lessonTitle,
-        subtitle: "Favori récent",
-        href: `/formation/${b.moduleSlug}/${b.lessonSlug}`,
-        icon: <Bookmark className="w-4 h-4 text-brand-gold" />,
-      }));
-    }
-
-    const lowerQuery = query.toLowerCase();
-    const filtered = searchIndex.filter(
-      (item) =>
-        item.title.toLowerCase().includes(lowerQuery) ||
-        item.subtitle.toLowerCase().includes(lowerQuery)
-    );
-
-    const notes = searchNotes(query);
-    const noteResults: SearchResult[] = notes.slice(0, 3).map((note) => ({
-      id: `note-${note.id}`,
-      type: "note",
-      title: `Note: ${note.content.slice(0, 40)}...`,
-      subtitle: "Ma note personnelle",
-      href: `/formation/${note.moduleSlug}/${note.lessonSlug}`,
-      icon: <StickyNote className="w-4 h-4 text-blue-500" />,
-      moduleSlug: note.moduleSlug,
-    }));
-
-    return [...filtered.slice(0, 6), ...noteResults];
-  }, [query, searchIndex]);
-
-  const clampedSelectedIndex = results.length > 0 ? Math.max(0, Math.min(selectedIndex, results.length - 1)) : 0;
-
-  // Keyboard navigation
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (!isOpen) return;
-
-      switch (e.key) {
-        case "ArrowDown":
-          e.preventDefault();
-          setSelectedIndex((prev) => (prev + 1) % results.length);
-          break;
-        case "ArrowUp":
-          e.preventDefault();
-          setSelectedIndex((prev) => (prev - 1 + results.length) % results.length);
-          break;
-        case "Enter":
-          e.preventDefault();
-          if (results[clampedSelectedIndex]) {
-            router.push(results[clampedSelectedIndex].href);
-            onClose();
-          }
-          break;
-        case "Escape":
-          onClose();
-          break;
-      }
-    },
-    [isOpen, results, clampedSelectedIndex, router, onClose]
-  );
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleKeyDown]);
-
-  // Reset on open
-  useEffect(() => {
-    if (isOpen) {
-      requestAnimationFrame(() => {
-        setQuery("");
-        setSelectedIndex(0);
-      });
-    }
-  }, [isOpen]);
-
-  // Cmd+K shortcut
-  useEffect(() => {
-    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+    function onKey(e: KeyboardEvent) {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
-        if (!isOpen) {
-          // Open search - parent should handle this
-        }
+        setOpen(!open);
       }
-    };
-    window.addEventListener("keydown", handleGlobalKeyDown);
-    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
-  }, [isOpen]);
+      if (e.key === "Escape") setOpen(false);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (open) inputRef.current?.focus();
+  }, [open]);
+
+  const results = useMemo(() => {
+    if (!query.trim() || query.length < 2) return [];
+    const q = query.toLowerCase();
+    return ALL_ITEMS.filter(
+      (item) =>
+        item.title.toLowerCase().includes(q) ||
+        item.keywords.includes(q) ||
+        item.moduleTitle.toLowerCase().includes(q)
+    ).slice(0, 8);
+  }, [query]);
+
+  if (!open) {
+    return (
+      <button
+        onClick={() => setOpen(true)}
+        className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm text-white/60 transition hover:bg-white/10 hover:text-white"
+        title="Rechercher (Cmd+K)"
+      >
+        <Search className="h-3.5 w-3.5" />
+        <span className="hidden sm:inline">Rechercher…</span>
+        <kbd className="ml-1 hidden rounded border border-white/20 px-1 text-2xs font-mono text-white/40 lg:inline">
+          ⌘K
+        </kbd>
+      </button>
+    );
+  }
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={onClose}
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center pt-[20vh]"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: -20, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -20, scale: 0.95 }}
-          onClick={(e) => e.stopPropagation()}
-          className="w-full max-w-2xl mx-4 bg-white rounded-2xl shadow-2xl overflow-hidden"
-        >
-          {/* Search input */}
-          <div className="flex items-center gap-4 px-6 py-4 border-b border-gray-100">
-            <Search className="w-5 h-5 text-gray-400" />
+    <SearchCtx.Provider value={{ open, setOpen }}>
+      <div className="fixed inset-0 z-[100] flex items-start justify-center bg-black/60 p-4 pt-[15vh] backdrop-blur-sm">
+        <div className="w-full max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-[var(--surface-dark)] shadow-2xl">
+          <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
+            <Search className="h-4 w-4 text-white/40" />
             <input
-              type="text"
+              ref={inputRef}
               value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                setSelectedIndex(0);
-              }}
-              placeholder="Rechercher une leçon, un favori, une note..."
-              className="flex-1 text-lg outline-none placeholder:text-gray-400"
-              autoFocus
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Chercher une leçon, un concept…"
+              className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/30"
             />
-            <div className="flex items-center gap-2">
-              <kbd className="px-2 py-1 text-xs font-mono bg-gray-100 rounded">ESC</kbd>
-              <button
-                onClick={onClose}
-                className="p-1 text-gray-400 hover:text-gray-600"
-                aria-label="Fermer la recherche"
-              >
-                <X className="w-5 h-5" aria-hidden="true" />
-              </button>
-            </div>
+            <button
+              onClick={() => setOpen(false)}
+              className="rounded p-1 text-white/40 hover:bg-white/10"
+            >
+              <X className="h-4 w-4" />
+            </button>
           </div>
 
-          {/* Results */}
-          <div className="max-h-[60vh] overflow-y-auto">
-            {results.length === 0 ? (
-              <div className="p-8 text-center text-gray-500">
-                <p>Aucun résultat pour &ldquo;{query}&rdquo;</p>
-              </div>
-            ) : (
-              <div className="p-2">
-                {!query && (
-                  <div className="px-4 py-2 text-xs font-medium text-gray-400 uppercase tracking-wider">
-                    Favoris récents
-                  </div>
-                )}
-                {results.map((result, index) => (
-                  <motion.button
-                    key={result.id}
-                    onClick={() => {
-                      router.push(result.href);
-                      onClose();
-                    }}
-                    className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl text-left transition-colors ${
-                      index === clampedSelectedIndex
-                        ? "bg-brand-navy text-white"
-                        : "hover:bg-gray-50 text-gray-700"
-                    }`}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.03 }}
-                  >
-                    <div
-                      className={`p-2 rounded-lg ${
-                        index === clampedSelectedIndex ? "bg-white/20" : "bg-gray-100"
-                      }`}
-                    >
-                      {result.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium truncate">{result.title}</p>
-                      <p
-                        className={`text-sm truncate ${
-                          index === clampedSelectedIndex ? "text-white/80" : "text-gray-500"
-                        }`}
-                      >
-                        {result.subtitle}
-                      </p>
-                    </div>
-                    <ArrowRight
-                      className={`w-4 h-4 ${
-                        index === clampedSelectedIndex ? "opacity-100" : "opacity-0"
-                      }`}
-                    />
-                  </motion.button>
-                ))}
-              </div>
+          <div className="max-h-[60vh] overflow-y-auto p-2">
+            {results.length === 0 && query.length >= 2 && (
+              <p className="px-4 py-6 text-center text-sm text-white/40">Aucun résultat</p>
             )}
+            {results.map((item, i) => (
+              <Link
+                key={i}
+                href={
+                  item.type === "module"
+                    ? `/formation/${item.moduleSlug}`
+                    : `/formation/${item.moduleSlug}/${item.lessonSlug}`
+                }
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition hover:bg-white/5"
+              >
+                {item.type === "module" ? (
+                  <BookOpen className="h-4 w-4 shrink-0 text-brand-gold" />
+                ) : (
+                  <FileText className="h-4 w-4 shrink-0 text-white/40" />
+                )}
+                <div className="min-w-0">
+                  <p className="truncate font-medium text-white">{item.title}</p>
+                  <p className="truncate text-2xs text-white/40">{item.moduleTitle}</p>
+                </div>
+              </Link>
+            ))}
           </div>
 
-          {/* Footer */}
-          <div className="flex items-center justify-between px-6 py-3 bg-gray-50 text-xs text-gray-500">
-            <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 bg-white border rounded">↑</kbd>
-                <kbd className="px-1.5 py-0.5 bg-white border rounded">↓</kbd>
-                <span>naviguer</span>
-              </span>
-              <span className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 bg-white border rounded">↵</kbd>
-                <span>ouvrir</span>
-              </span>
-            </div>
-            <span>{results.length} résultat(s)</span>
+          <div className="border-t border-white/10 px-4 py-2 text-2xs text-white/30">
+            {results.length} résultat{results.length > 1 ? "s" : ""}
           </div>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+        </div>
+      </div>
+    </SearchCtx.Provider>
   );
-}
-
-// Hook to use global search
-export function useGlobalSearch() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setIsOpen(true);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
-  return { isOpen, setIsOpen };
 }

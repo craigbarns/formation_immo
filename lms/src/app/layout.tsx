@@ -6,6 +6,7 @@ import { FocusModeProvider } from "@/components/focus-mode";
 import { AICoachButton } from "@/components/ai-coach";
 import { StreakReminder } from "@/components/retention";
 import { ProactiveCoachBanner } from "@/components/ai-coach/ProactiveCoachBanner";
+import { PwaRegister } from "@/components/PwaRegister";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,6 +60,7 @@ export default function RootLayout({
             <StreakReminder />
             <ProactiveCoachBanner />
             <AICoachButton />
+            <PwaRegister />
           </ToastProvider>
         </FocusModeProvider>
       </body>

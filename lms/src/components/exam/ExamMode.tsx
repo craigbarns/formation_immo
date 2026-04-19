@@ -8,6 +8,7 @@ import { recordExamScore } from "@/lib/gamification";
 import { createClient } from "@/lib/supabase/client";
 import { saveUserAnswers } from "@/app/actions/user-answers";
 import { generateFlashcardsFromMistakes } from "@/app/actions/flashcards-auto";
+import { submitExamResult } from "@/app/actions/certification";
 
 type ExamState = "intro" | "running" | "review";
 
@@ -182,6 +183,24 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
   useEffect(() => {
     if (state === "review") {
       recordExamScore(exam.moduleSlug, score, total);
+
+      // Persist to certification backend
+      const durationSeconds = exam.duration * 60 - timeLeft;
+      const pct = Math.round((score / total) * 100);
+      const formattedAnswers = exam.questions.map((q) => ({
+        questionId: q.id,
+        selected: answers[q.id] as number ?? -1,
+        correct: q.type === "open"
+          ? (openGrades[q.id]?.score ?? 0) >= 60
+          : answers[q.id] === q.correctIndex,
+      }));
+      submitExamResult({
+        moduleSlug: exam.moduleSlug,
+        score: pct,
+        passed: pct >= 60,
+        answers: formattedAnswers,
+        durationSeconds,
+      }).catch(() => {});
 
       const timeSpent = exam.duration * 60 - timeLeft;
       const perQuestion = Math.round(timeSpent / exam.questions.length);
