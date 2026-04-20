@@ -1274,28 +1274,6 @@ export function CinematicPlayer({
           />
         </div>
 
-        {/* Premium module signature */}
-        {(moduleTitle || theme.voiceSignature) && (
-          <div className="pointer-events-none absolute bottom-3 left-3 z-20 hidden max-w-[62%] items-center gap-2 rounded-full border border-white/10 bg-black/35 px-3 py-1.5 shadow-lg backdrop-blur-md sm:flex">
-            <span
-              className="h-1.5 w-1.5 rounded-full"
-              style={{ background: visualSkin.accent, boxShadow: `0 0 14px ${visualSkin.accent}` }}
-            />
-            {moduleTitle && (
-              <span className="truncate text-3xs font-bold uppercase tracking-[0.18em] text-white/85">
-                {moduleTitle}
-              </span>
-            )}
-            {moduleTitle && <span className="text-white/25">•</span>}
-            <span
-              className="truncate text-3xs font-semibold"
-              style={{ color: theme.voiceSignatureColor }}
-            >
-              {theme.voiceSignature.replace("Voix : ", "")}
-            </span>
-          </div>
-        )}
-
         {/* Slide content avec transition */}
         <div className="relative flex h-full w-full items-center justify-center p-5 sm:p-8 lg:p-10">
           <div
