@@ -767,6 +767,17 @@ export function CinematicPlayer({
   }, [audioQuizSchedule, slides.length, cues]);
 
   useEffect(() => {
+    const el = audioRef.current;
+    if (el) {
+      // Empêche qu'un flux audio continue lors d'un changement de page/leçon.
+      el.pause();
+      el.currentTime = 0;
+    }
+    setPlaying(false);
+    setCurrent(0);
+    setDuration(0);
+    setLoaded(false);
+
     setClearedQuizCount(0);
     setQuizOverlay(null);
     setQuizFeedback("idle");
@@ -784,6 +795,15 @@ export function CinematicPlayer({
     // Charge les bookmarks
     setBookmarks(loadBookmarks(audioUrl));
   }, [audioUrl]);
+
+  useEffect(() => {
+    const audioEl = audioRef.current;
+    return () => {
+      if (!audioEl) return;
+      audioEl.pause();
+      audioEl.currentTime = 0;
+    };
+  }, []);
 
   /* ---------- Load alignment + cues JSON ---------- */
   useEffect(() => {
