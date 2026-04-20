@@ -364,31 +364,107 @@ const MODULE_EXTRA_VISUALS: Record<string, { terms: string[]; focus: string[]; c
   },
 };
 
-const MODULE_PREMIUM_DIRECTION: Record<string, { tagline: string; vibe: string; emblem: string }> = {
+type ModulePremiumDirection = {
+  tagline: string;
+  vibe: string;
+  emblem: string;
+  scene: string;
+  texture: string;
+  markers: string[];
+};
+
+type ModuleVisualSkin = {
+  primary: string;
+  secondary: string;
+  accent: string;
+  tertiary: string;
+  surface: string;
+  glow: string;
+};
+
+const MODULE_PREMIUM_DIRECTION: Record<string, ModulePremiumDirection> = {
   juridique: {
     tagline: "Rigueur légale & maîtrise terrain",
     vibe: "Edition Signature",
     emblem: "⚖️",
+    scene: "Office notarial",
+    texture: "Documents, clauses, conformité",
+    markers: ["ALUR", "Mandats", "Diagnostics"],
   },
   transaction: {
     tagline: "Négociation, cadence, conversion",
     vibe: "Performance Playbook",
     emblem: "🤝",
+    scene: "War room commerciale",
+    texture: "Pipeline, relances, objections",
+    markers: ["Mandat", "Prix", "Closing"],
   },
   financement: {
     tagline: "Vision chiffres & stratégie patrimoniale",
     vibe: "Analyst Mode",
     emblem: "📈",
+    scene: "Bureau d'analyse",
+    texture: "Taux, cashflow, fiscalité",
+    markers: ["Crédit", "ROI", "Fiscalité"],
   },
   marketing: {
     tagline: "Visibilité, désir, passage à l'action",
     vibe: "Growth Studio",
     emblem: "📱",
+    scene: "Studio acquisition",
+    texture: "Photos, annonces, SEO",
+    markers: ["Photo", "CTR", "Réseaux"],
   },
   terrain: {
     tagline: "Visite, closing, fidélisation durable",
     vibe: "Field Mastery",
     emblem: "🏠",
+    scene: "Parcours visite",
+    texture: "Terrain, preuve, relation",
+    markers: ["Visite", "Objection", "Suivi"],
+  },
+};
+
+const MODULE_VISUAL_SKINS: Record<string, ModuleVisualSkin> = {
+  juridique: {
+    primary: "#102a43",
+    secondary: "#3b82f6",
+    accent: "#d4af37",
+    tertiary: "#f8fafc",
+    surface: "#07111f",
+    glow: "rgba(96,165,250,0.32)",
+  },
+  transaction: {
+    primary: "#172554",
+    secondary: "#8b5cf6",
+    accent: "#38bdf8",
+    tertiary: "#fbbf24",
+    surface: "#070b1d",
+    glow: "rgba(139,92,246,0.34)",
+  },
+  financement: {
+    primary: "#064e3b",
+    secondary: "#22c55e",
+    accent: "#67e8f9",
+    tertiary: "#facc15",
+    surface: "#031711",
+    glow: "rgba(34,197,94,0.32)",
+  },
+  marketing: {
+    primary: "#4c1d95",
+    secondary: "#f59e0b",
+    accent: "#f472b6",
+    tertiary: "#2dd4bf",
+    surface: "#160b2e",
+    glow: "rgba(244,114,182,0.3)",
+  },
+  terrain: {
+    primary: "#7f1d1d",
+    secondary: "#f97316",
+    accent: "#fde68a",
+    tertiary: "#86efac",
+    surface: "#1a0909",
+    glow: "rgba(249,115,22,0.32)",
   },
 };
 
@@ -562,6 +638,7 @@ export function CinematicPlayer({
   audioQuizSchedule = [],
 }: Props) {
   const theme = getModuleTheme(moduleSlug ?? "");
+  const visualSkin = getModuleVisualSkin(moduleSlug);
   const audioRef = useRef<HTMLAudioElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const playingRef = useRef(false);
@@ -1146,7 +1223,7 @@ export function CinematicPlayer({
           isFullscreen ? "flex-1" : "aspect-video"
         }`}
         style={{
-          background: `linear-gradient(140deg, color-mix(in srgb, ${theme.primary} 88%, #030712) 0%, #05070b 48%, color-mix(in srgb, ${theme.secondary} 72%, #030712) 100%)`,
+          background: `linear-gradient(140deg, color-mix(in srgb, ${visualSkin.primary} 86%, #030712) 0%, ${visualSkin.surface} 48%, color-mix(in srgb, ${visualSkin.secondary} 64%, #030712) 100%)`,
         }}
       >
         {/* Module watermark */}
@@ -1156,6 +1233,8 @@ export function CinematicPlayer({
         >
           <span className="text-[20rem] leading-none">{theme.watermark}</span>
         </div>
+
+        <ModuleStageTexture moduleSlug={moduleSlug} />
 
         {/* Slide-specific background patterns */}
         <SlideBackground kind={slide.kind} moduleSlug={moduleSlug} />
@@ -1200,7 +1279,7 @@ export function CinematicPlayer({
           <div className="pointer-events-none absolute bottom-3 left-3 z-20 hidden max-w-[62%] items-center gap-2 rounded-full border border-white/10 bg-black/35 px-3 py-1.5 shadow-lg backdrop-blur-md sm:flex">
             <span
               className="h-1.5 w-1.5 rounded-full"
-              style={{ background: theme.secondary, boxShadow: `0 0 14px ${theme.secondary}` }}
+              style={{ background: visualSkin.accent, boxShadow: `0 0 14px ${visualSkin.accent}` }}
             />
             {moduleTitle && (
               <span className="truncate text-3xs font-bold uppercase tracking-[0.18em] text-white/85">
@@ -1843,6 +1922,155 @@ function ChapterThumbnails({
 /*  Slide Background Patterns                                          */
 /* ------------------------------------------------------------------ */
 
+function ModuleStageTexture({ moduleSlug }: { moduleSlug?: string }) {
+  const skin = getModuleVisualSkin(moduleSlug);
+  const sharedOverlay = (
+    <>
+      <div
+        className="absolute inset-0 opacity-[0.22]"
+        style={{
+          background: `radial-gradient(ellipse 70% 48% at 50% 35%, ${skin.glow}, transparent 68%)`,
+        }}
+      />
+      <div
+        className="absolute inset-x-0 top-0 h-px"
+        style={{ background: `linear-gradient(90deg, transparent, ${skin.accent}99, transparent)` }}
+      />
+    </>
+  );
+
+  if (moduleSlug === "transaction") {
+    return (
+      <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+        {sharedOverlay}
+        <div
+          className="absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage:
+              `linear-gradient(125deg, transparent 0 44%, ${skin.accent} 44.2%, transparent 44.8% 100%), linear-gradient(125deg, transparent 0 58%, ${skin.secondary} 58.2%, transparent 58.7% 100%)`,
+            backgroundSize: "260px 100%, 340px 100%",
+          }}
+        />
+        <div className="absolute bottom-8 left-8 right-8 flex items-center gap-3 opacity-25">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <div key={i} className="flex flex-1 items-center gap-3">
+              <span
+                className="h-2.5 w-2.5 rounded-full"
+                style={{ background: i < 3 ? skin.accent : "rgba(255,255,255,0.45)" }}
+              />
+              {i < 4 && <span className="h-px flex-1 bg-white/50" />}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (moduleSlug === "financement") {
+    return (
+      <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+        {sharedOverlay}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.95) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.95) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+          }}
+        />
+        <div className="absolute bottom-10 right-10 flex h-32 items-end gap-2 opacity-25">
+          {[42, 68, 54, 86, 72, 94].map((height, i) => (
+            <span
+              key={i}
+              className="w-5 rounded-t-md"
+              style={{
+                height: `${height}%`,
+                background: `linear-gradient(180deg, ${i % 2 ? skin.accent : skin.secondary}, transparent)`,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (moduleSlug === "marketing") {
+    return (
+      <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+        {sharedOverlay}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              `linear-gradient(90deg, ${skin.accent} 1px, transparent 1px), linear-gradient(${skin.tertiary} 1px, transparent 1px)`,
+            backgroundSize: "96px 54px",
+          }}
+        />
+        <div className="absolute left-8 top-8 grid w-36 grid-cols-2 gap-2 opacity-20">
+          {[0, 1, 2, 3].map((i) => (
+            <span
+              key={i}
+              className="aspect-video rounded-lg border"
+              style={{ borderColor: i % 2 ? skin.tertiary : skin.accent }}
+            />
+          ))}
+        </div>
+        <div
+          className="absolute bottom-8 right-10 h-28 w-28 rounded-full border opacity-20"
+          style={{ borderColor: skin.accent, boxShadow: `inset 0 0 0 18px color-mix(in srgb, ${skin.accent} 12%, transparent)` }}
+        />
+      </div>
+    );
+  }
+
+  if (moduleSlug === "terrain") {
+    return (
+      <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+        {sharedOverlay}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              `linear-gradient(90deg, ${skin.accent} 1px, transparent 1px), linear-gradient(${skin.accent} 1px, transparent 1px)`,
+            backgroundSize: "120px 80px",
+          }}
+        />
+        <div className="absolute left-10 top-10 h-36 w-48 opacity-20">
+          <div className="absolute inset-0 rounded-sm border" style={{ borderColor: skin.accent }} />
+          <div className="absolute left-1/2 top-0 h-full w-px" style={{ background: skin.accent }} />
+          <div className="absolute left-0 top-1/2 h-px w-full" style={{ background: skin.accent }} />
+          <div className="absolute bottom-0 right-8 h-10 w-14 border-l border-t" style={{ borderColor: skin.tertiary }} />
+        </div>
+        <div
+          className="absolute bottom-12 right-16 h-20 w-20 rounded-full border opacity-25"
+          style={{ borderColor: skin.tertiary }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+      {sharedOverlay}
+      <div
+        className="absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage:
+            `linear-gradient(90deg, ${skin.secondary} 1px, transparent 1px), linear-gradient(${skin.secondary} 1px, transparent 1px)`,
+          backgroundSize: "72px 72px",
+        }}
+      />
+      <div className="absolute right-12 top-10 h-44 w-32 rotate-3 rounded-sm border opacity-20" style={{ borderColor: skin.accent }}>
+        <span className="absolute left-4 right-4 top-6 h-px" style={{ background: skin.accent }} />
+        <span className="absolute left-4 right-10 top-12 h-px bg-white/70" />
+        <span className="absolute left-4 right-7 h-px bg-white/50" style={{ top: "4.5rem" }} />
+        <span className="absolute bottom-6 right-5 h-9 w-9 rounded-full border" style={{ borderColor: skin.accent }} />
+      </div>
+      <div className="absolute left-10 bottom-10 h-28 w-28 rounded-full border opacity-20" style={{ borderColor: skin.secondary }} />
+    </div>
+  );
+}
+
 function SlideBackground({ kind, moduleSlug }: { kind: Slide["kind"]; moduleSlug?: string }) {
   const skin = getModuleVisualSkin(moduleSlug);
   switch (kind) {
@@ -1851,15 +2079,15 @@ function SlideBackground({ kind, moduleSlug }: { kind: Slide["kind"]; moduleSlug
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* Deep radial gradient */}
           <div className="absolute inset-0" style={{
-            background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(26,58,92,0.6) 0%, transparent 70%)",
+            background: `radial-gradient(ellipse 70% 60% at 50% 50%, color-mix(in srgb, ${skin.primary} 62%, transparent) 0%, transparent 70%)`,
           }} />
           {/* Geometric cross pattern */}
           <div className="absolute inset-0 opacity-[0.04]" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }} />
           {/* Gold accent rings */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full border border-brand-gold/6" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[350px] w-[350px] rounded-full border border-brand-gold/8" />
+          <div className="absolute top-1/2 left-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full border" style={{ borderColor: `color-mix(in srgb, ${skin.accent} 10%, transparent)` }} />
+          <div className="absolute top-1/2 left-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border" style={{ borderColor: `color-mix(in srgb, ${skin.tertiary} 9%, transparent)` }} />
         </div>
       );
 
@@ -1891,7 +2119,7 @@ function SlideBackground({ kind, moduleSlug }: { kind: Slide["kind"]; moduleSlug
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* Grid pattern */}
           <div className="absolute inset-0 opacity-[0.035]" style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+            backgroundImage: `linear-gradient(${skin.accent} 1px, transparent 1px), linear-gradient(90deg, ${skin.secondary} 1px, transparent 1px)`,
             backgroundSize: "40px 40px",
           }} />
           <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[var(--surface-dark)]/60 to-transparent" />
@@ -1902,10 +2130,10 @@ function SlideBackground({ kind, moduleSlug }: { kind: Slide["kind"]; moduleSlug
       return (
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 opacity-[0.03]" style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px)",
+            backgroundImage: `linear-gradient(${skin.accent} 1px, transparent 1px)`,
             backgroundSize: "100% 25%",
           }} />
-          <div className="absolute top-0 right-0 h-full w-1/3 bg-gradient-to-l from-brand-gold/5 to-transparent" />
+          <div className="absolute top-0 right-0 h-full w-1/3" style={{ background: `linear-gradient(270deg, color-mix(in srgb, ${skin.accent} 10%, transparent), transparent)` }} />
         </div>
       );
 
@@ -1914,7 +2142,7 @@ function SlideBackground({ kind, moduleSlug }: { kind: Slide["kind"]; moduleSlug
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* Diagonal stripes */}
           <div className="absolute inset-0 opacity-[0.03]" style={{
-            backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,1) 0px, rgba(255,255,255,1) 1px, transparent 1px, transparent 20px)",
+            backgroundImage: `repeating-linear-gradient(45deg, ${skin.tertiary} 0px, ${skin.tertiary} 1px, transparent 1px, transparent 20px)`,
           }} />
           <div className="absolute top-0 bottom-0 left-1/2 w-px bg-white/5" />
         </div>
@@ -1926,10 +2154,10 @@ function SlideBackground({ kind, moduleSlug }: { kind: Slide["kind"]; moduleSlug
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* Radial light beams from center */}
           <div className="absolute inset-0" style={{
-            background: "conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(212,175,55,0.03) 30deg, transparent 60deg, transparent 90deg, rgba(212,175,55,0.02) 120deg, transparent 150deg, transparent 180deg, rgba(212,175,55,0.03) 210deg, transparent 240deg, transparent 270deg, rgba(212,175,55,0.02) 300deg, transparent 330deg, transparent 360deg)",
+            background: `conic-gradient(from 0deg at 50% 50%, transparent 0deg, color-mix(in srgb, ${skin.accent} 6%, transparent) 30deg, transparent 60deg, transparent 90deg, color-mix(in srgb, ${skin.tertiary} 4%, transparent) 120deg, transparent 150deg, transparent 180deg, color-mix(in srgb, ${skin.accent} 6%, transparent) 210deg, transparent 240deg, transparent 270deg, color-mix(in srgb, ${skin.tertiary} 4%, transparent) 300deg, transparent 330deg, transparent 360deg)`,
           }} />
           <div className="absolute inset-0" style={{
-            background: "radial-gradient(ellipse 50% 40% at 50% 50%, rgba(212,175,55,0.06) 0%, transparent 60%)",
+            background: `radial-gradient(ellipse 50% 40% at 50% 50%, color-mix(in srgb, ${skin.accent} 10%, transparent) 0%, transparent 60%)`,
           }} />
         </div>
       );
@@ -1938,9 +2166,9 @@ function SlideBackground({ kind, moduleSlug }: { kind: Slide["kind"]; moduleSlug
       return (
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute inset-0" style={{
-            background: "radial-gradient(ellipse 80% 60% at 30% 50%, rgba(212,175,55,0.08) 0%, transparent 60%)",
+            background: `radial-gradient(ellipse 80% 60% at 30% 50%, color-mix(in srgb, ${skin.accent} 12%, transparent) 0%, transparent 60%)`,
           }} />
-          <div className="absolute top-0 left-0 h-full w-2 bg-gradient-to-b from-brand-gold/20 via-brand-gold/40 to-brand-gold/20" />
+          <div className="absolute top-0 left-0 h-full w-2" style={{ background: `linear-gradient(180deg, color-mix(in srgb, ${skin.accent} 22%, transparent), color-mix(in srgb, ${skin.accent} 42%, transparent), color-mix(in srgb, ${skin.accent} 22%, transparent))` }} />
         </div>
       );
 
@@ -2069,20 +2297,51 @@ function TitleSlide({
       </div>
       <p className="text-3xs font-bold uppercase tracking-[0.3em] text-brand-gold">{subtitle}</p>
       {direction && (
-        <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
-          <span
-            className="rounded-full border px-3 py-1 text-3xs font-bold uppercase tracking-[0.18em]"
-            style={{
-              borderColor: `color-mix(in srgb, ${skin.accent} 45%, transparent)`,
-              background: `color-mix(in srgb, ${skin.primary} 28%, transparent)`,
-              color: "rgba(255,255,255,0.88)",
-            }}
+        <div className="mt-3 flex flex-col items-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <span
+              className="rounded-full border px-3 py-1 text-3xs font-bold uppercase tracking-[0.18em]"
+              style={{
+                borderColor: `color-mix(in srgb, ${skin.accent} 48%, transparent)`,
+                background: `linear-gradient(135deg, color-mix(in srgb, ${skin.primary} 38%, transparent), color-mix(in srgb, ${skin.secondary} 18%, transparent))`,
+                color: "rgba(255,255,255,0.9)",
+              }}
+            >
+              {direction.vibe}
+            </span>
+            <span
+              className="rounded-full border px-3 py-1 text-2xs font-semibold text-white/85"
+              style={{
+                borderColor: "rgba(255,255,255,0.1)",
+                background: `color-mix(in srgb, ${skin.surface} 70%, transparent)`,
+              }}
+            >
+              {direction.emblem} {direction.tagline}
+            </span>
+          </div>
+          <div className="flex max-w-lg flex-wrap items-center justify-center gap-1.5">
+            <span
+              className="rounded-full px-2.5 py-1 text-3xs font-bold uppercase tracking-[0.16em]"
+              style={{ background: `color-mix(in srgb, ${skin.accent} 18%, transparent)`, color: skin.accent }}
+            >
+              {direction.scene}
+            </span>
+            {direction.markers.map((marker) => (
+              <span
+                key={marker}
+                className="rounded-full border px-2.5 py-1 text-3xs font-semibold text-white/70"
+                style={{ borderColor: `color-mix(in srgb, ${skin.tertiary} 26%, transparent)` }}
+              >
+                {marker}
+              </span>
+            ))}
+          </div>
+          <p
+            className="text-3xs font-medium uppercase tracking-[0.18em]"
+            style={{ color: `color-mix(in srgb, ${skin.tertiary} 70%, white)` }}
           >
-            {direction.vibe}
-          </span>
-          <span className="rounded-full bg-white/10 px-3 py-1 text-2xs font-semibold text-white/85">
-            {direction.emblem} {direction.tagline}
-          </span>
+            {direction.texture}
+          </p>
         </div>
       )}
       <h2 className="mt-4 text-2xl font-black text-white sm:text-4xl leading-tight drop-shadow-lg">
@@ -2448,10 +2707,11 @@ function ProcessSlide({ steps }: { steps: string[] }) {
 
 function getModuleVisualSkin(moduleSlug?: string) {
   const t = getModuleTheme(moduleSlug ?? "");
+  const skin = MODULE_VISUAL_SKINS[t.slug] ?? MODULE_VISUAL_SKINS.juridique;
   return {
-    primary: t.primary,
-    secondary: t.secondary,
-    accent: "#d4af37",
+    ...skin,
+    primary: skin.primary ?? t.primary,
+    secondary: skin.secondary ?? t.secondary,
   };
 }
 
