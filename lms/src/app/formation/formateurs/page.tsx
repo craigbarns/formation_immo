@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { MODULE_AVATARS } from "@/data/module-avatars";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Formateurs",
@@ -33,12 +34,24 @@ export default function FormateursPage() {
               style={{ background: `linear-gradient(90deg, ${avatar.accentColor}, ${avatar.accentColor}88)` }}
             />
 
-            {/* Avatar initiales */}
+            {/* Avatar photo (fallback initials) */}
             <div
-              className="flex h-20 w-20 items-center justify-center rounded-full text-2xl font-bold text-white shadow-md transition group-hover:scale-105"
+              className="relative h-20 w-20 overflow-hidden rounded-full shadow-md transition group-hover:scale-105"
               style={{ backgroundColor: avatar.accentColor }}
             >
-              {avatar.initials}
+              {avatar.photoUrl ? (
+                <Image
+                  src={avatar.photoUrl}
+                  alt={avatar.name}
+                  fill
+                  className="object-cover"
+                  sizes="80px"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center text-2xl font-bold text-white">
+                  {avatar.initials}
+                </div>
+              )}
             </div>
 
             <div className="mt-4 space-y-1">
