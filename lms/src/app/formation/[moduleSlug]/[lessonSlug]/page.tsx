@@ -280,11 +280,11 @@ export default async function LessonPage({ params }: Props) {
         {interactive ? (
           <ScrollReveal>
           <section id="section-scenario">
-            <h2 className="lesson-block-title lesson-block-title--navy">
-              <span className="lesson-block-title-line bg-brand-navy/25" aria-hidden />
+            <h2 className="lesson-block-title lesson-block-title--navy text-white">
+              <span className="lesson-block-title-line bg-brand-gold/30" aria-hidden />
               Parcours interactif
             </h2>
-            <p className="mb-4 max-w-2xl text-sm leading-relaxed text-zinc-600">
+            <p className="mb-6 max-w-2xl text-base leading-relaxed text-white/50">
               {interactive.description}
             </p>
             <InteractiveScenario scenario={interactive} />
@@ -295,8 +295,8 @@ export default async function LessonPage({ params }: Props) {
         {lesson.videoUrl ? (
           <ScrollReveal>
           <section id="section-video">
-            <h2 className="lesson-block-title lesson-block-title--muted">
-              <span className="lesson-block-title-line bg-zinc-300" aria-hidden />
+            <h2 className="lesson-block-title lesson-block-title--muted text-white">
+              <span className="lesson-block-title-line bg-white/20" aria-hidden />
               Vidéo
             </h2>
             <VideoEmbed url={lesson.videoUrl} title={lesson.title} />
@@ -307,8 +307,8 @@ export default async function LessonPage({ params }: Props) {
         {audioSrc ? (
           <ScrollReveal>
           <section id="section-audio">
-            <h2 className="lesson-block-title lesson-block-title--gold">
-              <span className="lesson-block-title-line bg-brand-gold/70" aria-hidden />
+            <h2 className="lesson-block-title lesson-block-title--gold text-white">
+              <span className="lesson-block-title-line bg-brand-gold/50" aria-hidden />
               Vidéo de formation
             </h2>
             <CinematicPlayer
@@ -329,8 +329,8 @@ export default async function LessonPage({ params }: Props) {
         {trainerCallouts.length > 0 && (
           <ScrollReveal>
           <section id="section-callouts">
-            <h2 className="lesson-block-title lesson-block-title--gold">
-              <span className="lesson-block-title-line bg-brand-gold/70" aria-hidden />
+            <h2 className="lesson-block-title lesson-block-title--gold text-white">
+              <span className="lesson-block-title-line bg-brand-gold/50" aria-hidden />
               Notes du formateur
             </h2>
             <TrainerCalloutBlock callouts={trainerCallouts} />
@@ -341,8 +341,8 @@ export default async function LessonPage({ params }: Props) {
         {dataTables.length > 0 && (
           <ScrollReveal>
           <section id="section-table">
-            <h2 className="lesson-block-title lesson-block-title--navy">
-              <span className="lesson-block-title-line bg-brand-navy/25" aria-hidden />
+            <h2 className="lesson-block-title lesson-block-title--navy text-white">
+              <span className="lesson-block-title-line bg-white/20" aria-hidden />
               Tableaux de référence
             </h2>
             <DataTableBlock tables={dataTables} />
@@ -353,8 +353,8 @@ export default async function LessonPage({ params }: Props) {
         {guidedCalculations.length > 0 && (
           <ScrollReveal>
           <section id="section-calc">
-            <h2 className="lesson-block-title lesson-block-title--navy">
-              <span className="lesson-block-title-line bg-brand-navy/25" aria-hidden />
+            <h2 className="lesson-block-title lesson-block-title--navy text-white">
+              <span className="lesson-block-title-line bg-white/20" aria-hidden />
               Calcul guidé
             </h2>
             <GuidedCalculationBlock calculations={guidedCalculations} />
@@ -365,11 +365,11 @@ export default async function LessonPage({ params }: Props) {
         {hasInteractiveWorkshop ? (
           <ScrollReveal>
           <section id="section-exercises" className="space-y-10">
-            <h2 className="lesson-block-title lesson-block-title--navy mb-2">
-              <span className="lesson-block-title-line bg-brand-navy/30" aria-hidden />
+            <h2 className="lesson-block-title lesson-block-title--navy mb-2 text-white">
+              <span className="lesson-block-title-line bg-brand-gold/30" aria-hidden />
               Ateliers interactifs
             </h2>
-            <p className="max-w-2xl text-sm text-zinc-600">
+            <p className="max-w-2xl text-base text-white/50">
               Exercices pratiques : glisser-déposer, cas chiffrés, frises, checklists et mises en
               situation — complémentaires à la narration audio.
             </p>
@@ -386,7 +386,7 @@ export default async function LessonPage({ params }: Props) {
 
         {quizCheckpoints.length > 0 && (
           <ScrollReveal>
-          <section id="section-quiz" className="card-elevated rounded-2xl border-brand-navy/8 bg-gradient-to-br from-white to-zinc-50/80 p-6 md:p-8">
+          <section id="section-quiz" className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-12 shadow-2xl backdrop-blur-md">
             <QuizCheckpointsSection checkpoints={quizCheckpoints} moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
           </section>
           </ScrollReveal>
@@ -402,34 +402,46 @@ export default async function LessonPage({ params }: Props) {
       </div>
 
       {/* Progress & module time */}
-      <div className="mt-6 flex flex-wrap items-start gap-4">
-        <LessonProgress lessonKey={key} />
-        <div className="flex-1 min-w-[200px]">
+      <div className="mt-12 flex flex-wrap items-start gap-6">
+        <div className="flex-1 min-w-[280px]">
+          <LessonProgress lessonKey={key} />
+        </div>
+        <div className="flex-1 min-w-[280px]">
           <ModuleTimeTracker moduleSlug={moduleSlug} />
         </div>
       </div>
 
       {/* Navigation */}
       <nav
-        className="mt-12 flex flex-wrap justify-between gap-4 border-t border-zinc-200/90 bg-gradient-to-b from-transparent to-brand-gold-soft/30 pt-10"
+        className="mt-16 flex flex-wrap justify-between gap-6 border-t border-white/10 pt-12"
         aria-label="Leçon précédente ou suivante"
       >
         {nav?.prev ? (
-          <Link href={nav.prev.href} className="group lesson-nav-prev link-focus">
-            <span className="text-zinc-400 transition group-hover:-translate-x-0.5">←</span>
-            {nav.prev.label.replace(/^←\s*/, "")}
+          <Link href={nav.prev.href} className="group flex flex-col items-start gap-2">
+            <span className="text-[10px] font-black uppercase tracking-widest text-white/40 group-hover:text-brand-gold transition-colors">Précédent</span>
+            <div className="flex items-center gap-3 text-lg font-bold text-white group-hover:text-brand-gold transition-all">
+              <span className="transition-transform group-hover:-translate-x-1">←</span>
+              {nav.prev.label.replace(/^←\s*/, "")}
+            </div>
           </Link>
         ) : (
           <span />
         )}
         {nav?.next ? (
-          <Link href={nav.next.href} className="group lesson-nav-next link-focus">
-            {nav.next.label.replace(/\s*→$/, "")}
-            <span className="transition group-hover:translate-x-0.5">→</span>
+          <Link href={nav.next.href} className="group flex flex-col items-end gap-2">
+            <span className="text-[10px] font-black uppercase tracking-widest text-white/40 group-hover:text-brand-gold transition-colors">Suivant</span>
+            <div className="flex items-center gap-3 text-lg font-bold text-white group-hover:text-brand-gold transition-all">
+              {nav.next.label.replace(/\s*→$/, "")}
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </div>
           </Link>
         ) : (
-          <Link href="/formation" className="lesson-nav-finish link-focus">
-            Parcours terminé — Retour au sommaire
+          <Link href="/formation" className="group flex flex-col items-end gap-2">
+            <span className="text-[10px] font-black uppercase tracking-widest text-white/40 group-hover:text-brand-gold transition-colors">Finalisé</span>
+            <div className="flex items-center gap-3 text-lg font-bold text-white group-hover:text-brand-gold transition-all">
+              Retour au parcours
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </div>
           </Link>
         )}
       </nav>

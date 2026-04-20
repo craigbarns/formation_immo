@@ -2,22 +2,25 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #fafafa;
-  --foreground: #18181b;
+  --background: #020617;
+  --foreground: #f8fafc;
   --brand-navy: #1a3a5c;
-  --brand-navy-deep: #142d45;
-  --brand-navy-soft: #2d5a87;
+  --brand-navy-deep: #020617;
+  --brand-navy-soft: #1e293b;
   --brand-navy-mid: #244b75;
   --brand-navy-hero: #0f2540;
   --brand-navy-alt: #2d5a7c;
+  --brand-navy-light: #2d5a87;
   --brand-gold: #d4af37;
-  --brand-gold-dim: rgba(212, 175, 55, 0.35);
-  --brand-gold-soft: #f7f3e8;
-  --brand-gold-pale: #f0e6c8;
-  --brand-gold-dark: #7a6008;
-  --surface-elevated: #ffffff;
-  --surface-warm: #f6f4ef;
-  --muted-foreground: #71717a;
+  --brand-gold-dim: rgba(212, 175, 55, 0.2);
+  --brand-gold-soft: rgba(212, 175, 55, 0.05);
+  --brand-gold-pale: #fde68a;
+  --brand-gold-dark: #b45309;
+  --brand-gold-hover: #e5c158;
+  --surface-elevated: #0f172a;
+  --surface-warm: #020617;
+  --surface-dark: #0f172a;
+  --muted-foreground: #94a3b8;
 }
 
 @theme inline {
@@ -53,189 +56,158 @@ body {
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   font-feature-settings: "kern" 1, "liga" 1;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--brand-gold) 35%, transparent);
-  color: var(--brand-navy);
+  background: var(--brand-gold);
+  color: var(--brand-navy-deep);
 }
 
-/* Zone formation : fond chaud, profondeur douce, lisibilité maximale */
+/* Zone formation : Experience Cinematique */
 .formation-canvas {
-  background-color: var(--surface-warm);
+  background-color: var(--background);
   background-image:
-    radial-gradient(ellipse 100% 60% at 50% -15%, rgba(26, 58, 92, 0.09), transparent 55%),
-    radial-gradient(ellipse 70% 45% at 100% 0%, rgba(212, 175, 55, 0.06), transparent 50%),
-    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(26, 58, 92, 0.04), transparent 45%);
+    radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.15), transparent 70%),
+    radial-gradient(circle at 100% 0%, rgba(37, 99, 235, 0.05), transparent 40%),
+    radial-gradient(circle at 0% 100%, rgba(37, 99, 235, 0.05), transparent 40%);
   min-height: 100vh;
 }
 
 @layer utilities {
+  .glass-card {
+    @apply rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl;
+  }
+
+  .glass-card-hover {
+    @apply transition-all duration-500 hover:border-brand-gold/30 hover:bg-white/10 hover:shadow-brand-gold/5;
+  }
+
   .card-elevated {
-    @apply rounded-2xl border border-zinc-200/90 bg-white shadow-md;
+    @apply rounded-3xl border border-white/10 bg-white/5 shadow-xl backdrop-blur-md;
   }
 
   .card-elevated-hover {
-    @apply transition duration-300 hover:border-brand-navy/15 hover:shadow-lg;
-  }
-
-  .card-elevated-lg {
-    @apply rounded-2xl border border-zinc-200/90 bg-white shadow-lg;
+    @apply transition duration-500 hover:border-brand-gold/20 hover:bg-white/10;
   }
 
   .link-focus {
-    @apply outline-none ring-2 ring-brand-navy/20 ring-offset-2 transition focus-visible:ring-brand-gold/50;
+    @apply outline-none ring-2 ring-brand-gold/20 ring-offset-2 ring-offset-[#020617] transition focus-visible:ring-brand-gold/50;
   }
 
-  .text-gradient-brand {
-    @apply bg-gradient-to-r from-brand-navy to-brand-navy-soft bg-clip-text text-transparent;
+  .focus-ring-brand {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+  }
+
+  .focus-ring-brand-dark {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020617];
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-br from-white via-white to-brand-gold bg-clip-text text-transparent;
   }
 
   /* Titres de section — repères visuels clairs pour l’apprenant */
   .section-heading {
-    @apply flex items-center gap-3 text-xs font-bold uppercase tracking-[0.12em] text-zinc-500;
+    @apply flex items-center gap-4 text-xs font-black uppercase tracking-[0.25em] text-brand-gold/80;
   }
 
   .section-heading::after {
     content: "";
-    @apply h-px flex-1 bg-gradient-to-r from-zinc-300/80 to-transparent;
+    @apply h-px flex-1 bg-gradient-to-r from-brand-gold/30 to-transparent;
   }
 
   .btn-primary-solid {
-    @apply rounded-xl bg-brand-navy px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-navy/20 outline-none transition hover:bg-brand-navy-deep hover:shadow-lg focus-visible:ring-2 focus-visible:ring-brand-gold/70 focus-visible:ring-offset-2 active:scale-[0.98];
+    @apply rounded-2xl bg-brand-gold px-6 py-3.5 text-sm font-black text-brand-navy shadow-xl shadow-brand-gold/20 outline-none transition hover:bg-white hover:scale-105 active:scale-[0.98];
   }
 
   .btn-secondary-outline {
-    @apply rounded-xl border-2 border-white/35 bg-white/5 px-5 py-3 text-sm font-semibold text-white outline-none backdrop-blur-sm transition hover:border-white/50 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-brand-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy active:scale-[0.98];
+    @apply rounded-2xl border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-bold text-white outline-none backdrop-blur-md transition hover:border-white/40 hover:bg-white/10 active:scale-[0.98];
+  }
+
+  /* Titres de bloc dans une leçon (cohérence) */
+  .lesson-block-title {
+    @apply mb-4 flex items-center gap-3 text-sm font-black uppercase tracking-[0.2em];
+  }
+
+  .lesson-block-title-line {
+    @apply h-px w-8 shrink-0;
+  }
+
+  /* Navigation leçon préc./suiv. */
+  .lesson-nav-prev {
+    @apply flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-sm font-bold text-white/70 shadow-lg transition hover:border-white/20 hover:bg-white/10 hover:text-white;
+  }
+
+  .lesson-nav-next {
+    @apply flex items-center gap-3 rounded-2xl bg-white px-6 py-4 text-sm font-black text-brand-navy shadow-xl transition hover:bg-brand-gold hover:scale-105;
+  }
+
+  /* Bloc interactif — premium glass */
+  .interactive-block {
+    @apply overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl backdrop-blur-md transition-all duration-500 hover:border-brand-gold/20;
+  }
+
+  .surface-card {
+    @apply rounded-[1.5rem] border border-white/10 bg-white/5 shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-white/10;
+  }
+
+  /* Padding standardisé */
+  .p-card-sm { @apply px-5 py-4; }
+  .p-card    { @apply px-6 py-6 sm:px-8 sm:py-8; }
+  .p-card-lg { @apply px-8 py-8 sm:px-12 sm:py-12; }
+
+  /* Badge de type d'exercice */
+  .activity-badge {
+    @apply inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[10px] font-black uppercase tracking-wider;
+  }
+
+  .text-on-dark-muted {
+    @apply text-white/80;
+  }
+
+  .text-on-dark-soft {
+    @apply text-white/90;
   }
 
   .animate-enter {
     animation: fadeIn 0.55s ease-out forwards;
   }
 
-  .animate-enter-delay-1 {
-    animation: fadeIn 0.55s ease-out 0.08s forwards;
-    opacity: 0;
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
   }
 
-  .animate-enter-delay-2 {
-    animation: fadeIn 0.55s ease-out 0.16s forwards;
-    opacity: 0;
+  .animate-slide-right {
+    animation: slideRight 0.3s ease-out forwards;
   }
 
-  .trust-badge {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-brand-gold/25 bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-brand-navy/90 shadow-sm;
-  }
-
-  /* Leçon : fil d’Ariane lisible sur fond clair */
-  .breadcrumb-pill {
-    @apply inline-flex items-center rounded-full bg-white px-3 py-1.5 text-[13px] font-semibold text-brand-navy shadow-sm ring-1 ring-zinc-200/90 transition hover:bg-brand-gold-soft hover:ring-brand-navy/15;
-  }
-
-  .breadcrumb-sep {
-    @apply text-zinc-300;
-  }
-
-  /* Titres de bloc dans une leçon (cohérence) */
-  .lesson-block-title {
-    @apply mb-3 flex items-center gap-2 text-sm font-bold uppercase tracking-[0.06em];
-  }
-
-  .lesson-block-title--gold {
-    @apply text-brand-gold;
-  }
-
-  .lesson-block-title--navy {
-    @apply text-brand-navy;
-  }
-
-  .lesson-block-title--muted {
-    @apply text-zinc-500;
-  }
-
-  .lesson-block-title-line {
-    @apply h-px w-6 shrink-0;
-  }
-
-  /* Navigation leçon préc./suiv. */
-  .lesson-nav-prev {
-    @apply flex items-center gap-2 rounded-2xl border border-zinc-200/90 bg-white px-5 py-3.5 text-sm font-semibold text-zinc-700 shadow-sm transition hover:border-brand-navy/20 hover:bg-brand-gold-soft/40 hover:shadow-md;
-  }
-
-  .lesson-nav-next {
-    @apply flex items-center gap-2 rounded-2xl bg-brand-navy px-5 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand-navy/25 transition hover:bg-brand-navy-deep hover:shadow-lg;
-  }
-
-  .lesson-nav-finish {
-    @apply rounded-2xl bg-gradient-to-r from-brand-gold to-amber-500 px-6 py-3.5 text-sm font-bold text-brand-navy shadow-md transition hover:brightness-[1.03];
-  }
-
-  /* Bloc interactif — hover lift */
-  .interactive-block {
-    @apply overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04),0_16px_40px_rgba(26,58,92,0.07)] transition-shadow duration-300 hover:shadow-[0_8px_32px_rgba(26,58,92,0.12)];
-  }
-
-  /* Surface unifiée pour cartes de contenu (alternative légère à .interactive-block) */
-  .surface-card {
-    @apply rounded-2xl border border-zinc-200/80 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md;
-  }
-
-  .surface-card-soft {
-    @apply rounded-2xl border border-brand-navy/10 bg-gradient-to-br from-white to-brand-gold-soft/30 shadow-sm;
-  }
-
-  /* Padding standardisé pour cartes (S / M / L) */
-  .p-card-sm { @apply px-4 py-3 sm:px-5 sm:py-4; }
-  .p-card    { @apply px-5 py-4 sm:px-6 sm:py-5; }
-  .p-card-lg { @apply px-6 py-5 sm:px-8 sm:py-7; }
-
-  /* Anneau de focus standardisé pour boutons / liens (contraste WCAG AA) */
-  .focus-ring-brand {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
-  }
-
-  .focus-ring-brand-dark {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy;
-  }
-
-  /* Texte secondaire lisible (WCAG AA) sur fond sombre — remplace text-white/60 */
-  .text-on-dark-muted { @apply text-white/80; }
-  .text-on-dark-soft  { @apply text-white/90; }
-
-  /* Badge de type d'exercice */
-  .activity-badge {
-    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold;
-  }
-
-  .animate-float { animation: float 4s ease-in-out infinite; }
   .animate-shimmer {
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
     background-size: 200% 100%;
     animation: shimmer 2s infinite;
   }
-  .animate-scale-in { animation: scaleIn 0.3s ease-out forwards; }
-  .animate-slide-right { animation: slideRight 0.3s ease-out forwards; }
 }
 
-/* Animations globales */
+/* Scrollbar premium gold */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #020617; }
+::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.2); border-radius: 99px; border: 2px solid #020617; }
+::-webkit-scrollbar-thumb:hover { background: var(--brand-gold); }
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideDown {
-  from { opacity: 0; max-height: 0; }
-  to   { opacity: 1; max-height: 2000px; }
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-@keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
-  50%       { box-shadow: 0 0 0 8px rgba(212,175,55,0); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+@keyframes slideRight {
+  from { transform: translateX(-8px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes shimmer {
@@ -243,14 +215,9 @@ body {
   100% { background-position: 200% 0; }
 }
 
-@keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.92); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes slideRight {
-  from { transform: translateX(-8px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); }
 }
 
 /* Inputs & focus ring cohérent */
@@ -260,24 +227,5 @@ input[type="range"]:focus,
 textarea:focus {
   outline: none;
   border-color: var(--brand-gold);
-  box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
-}
-
-/* Scrollbar discrète */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(26,58,92,0.2); border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(26,58,92,0.35); }
-
-/* ── Module accent colors ── */
-:root {
-  --module-juridique: #1a3a5c;
-  --module-transaction: #2d5a87;
-  --module-financement: #142d45;
-  --module-marketing: #d4af37;
-  --module-terrain: #3b6e8f;
-  --surface-dark: #0f172a;
-  --brand-navy-light: #2d5a87;
-  --brand-gold-light: #f0e6c8;
-  --brand-gold-hover: #e5c158;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
 }

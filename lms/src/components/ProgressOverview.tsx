@@ -65,7 +65,7 @@ export function ProgressOverview() {
 
   if (!stats) {
     return (
-      <div className="mt-6 h-14 animate-pulse rounded-xl bg-zinc-100/80" aria-hidden />
+      <div className="mt-8 h-24 animate-pulse rounded-3xl bg-white/5 border border-white/10" aria-hidden />
     );
   }
 
@@ -73,44 +73,52 @@ export function ProgressOverview() {
   const remaining = stats.total - stats.done;
 
   return (
-    <div className="mt-8 rounded-2xl border border-brand-gold/25 bg-gradient-to-br from-white via-brand-gold-soft/50 to-white p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-brand-navy/75">
-            Où vous en êtes
+    <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-brand-gold/20 group">
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.03] to-transparent pointer-events-none" />
+      <div className="relative z-10 flex flex-wrap items-end justify-between gap-6">
+        <div className="space-y-2">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 group-hover:text-brand-gold/60 transition-colors">
+            VOTRE AVANCEMENT
           </p>
-          <p className="mt-1 text-2xl font-bold tabular-nums text-brand-navy">
-            <AnimatedCounter value={stats.done} duration={1} />{" "}
-            <span className="text-lg font-semibold text-zinc-400">/ {stats.total}</span>
-            <span className="ml-2 text-base font-medium text-zinc-600">leçons vues</span>
-          </p>
+          <div className="flex items-baseline gap-2">
+            <span className="text-4xl font-black tabular-nums text-white tracking-tighter">
+              <AnimatedCounter value={stats.done} duration={1.5} />
+            </span>
+            <span className="text-xl font-bold text-white/20">/ {stats.total}</span>
+            <span className="ml-2 text-xs font-black uppercase tracking-widest text-white/40">leçons maîtrisées</span>
+          </div>
         </div>
-        <div className="text-right">
-          <AnimatedCounter value={pct} suffix="%" duration={1.2} className="text-3xl font-black tabular-nums text-brand-gold" />
-          <p className="text-xs text-zinc-600">
-            {remaining > 0 ? (
-              <>
-                Encore {remaining} leçon{remaining > 1 ? "s" : ""} pour boucler les {stats.total}{" "}
-                étapes — chaque clic sur « J&apos;ai terminé » met à jour ce compteur.
-              </>
-            ) : (
-              <>Parcours complet — temps de consolider avec les QCM et le profil.</>
-            )}
-          </p>
+        <div className="text-right space-y-1">
+          <div className="flex items-center justify-end gap-3">
+            <span className="text-xs font-black uppercase tracking-widest text-white/40">COMPLÉTÉ</span>
+            <AnimatedCounter value={pct} suffix="%" duration={2} className="text-5xl font-black tabular-nums text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-brand-gold drop-shadow-lg" />
+          </div>
         </div>
       </div>
-      <div className="mt-4 h-3 overflow-hidden rounded-full bg-zinc-200/90 shadow-inner ring-1 ring-white/60">
+      
+      <div className="relative mt-8 h-3.5 overflow-hidden rounded-full bg-white/5 shadow-inner ring-1 ring-white/10">
         <motion.div
-          className="h-full rounded-full bg-gradient-to-r from-brand-navy via-brand-navy-soft to-brand-gold"
+          className="relative h-full rounded-full bg-gradient-to-r from-brand-gold via-white to-brand-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-        />
+          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] animate-shimmer" />
+        </motion.div>
       </div>
-      <p className="mt-3 text-xs leading-relaxed text-zinc-500">
-        La progression est enregistrée dans votre navigateur (bouton « J&apos;ai terminé cette leçon »
-        en bas de page). Changez d&apos;ordinateur ? Reprenez manuellement là où vous étiez.
-      </p>
+
+      <div className="mt-6 flex items-start gap-3">
+        <div className="mt-1 h-1.5 w-1.5 rounded-full bg-brand-gold/40 animate-pulse" />
+        <p className="text-xs leading-relaxed text-white/40 font-medium italic">
+          {remaining > 0 ? (
+            <>
+              Encore {remaining} étape{remaining > 1 ? "s" : ""} stratégique{remaining > 1 ? "s" : ""} pour valider l&apos;intégralité du cursus. Chaque validation renforce votre expertise terrain.
+            </>
+          ) : (
+            <>Parcours complet — Excellence atteinte. Passez maintenant à la certification finale pour sceller votre statut d&apos;Expert.</>
+          )}
+        </p>
+      </div>
     </div>
   );
 }

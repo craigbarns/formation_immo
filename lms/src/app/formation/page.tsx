@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Parcours de formation",
   description: "Accédez aux 5 modules de formation immobilière : juridique, transaction, financement, marketing et terrain.",
 };
-import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award, Trophy, CheckCircle2 } from "lucide-react";
+import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award, Trophy, CheckCircle2, GraduationCap, type LucideIcon } from "lucide-react";
 import { COURSE, getTotalCourseDurationMin, formatDuration } from "@/data/course";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getModuleShowcase } from "@/data/module-showcase";
@@ -28,167 +28,141 @@ export default function FormationHomePage() {
   return (
     <div className="space-y-12">
       {/* Hero */}
-      <section className="card-elevated relative overflow-hidden rounded-3xl border-brand-navy/10">
+      <section className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#070d18] shadow-2xl">
         <div
-          className="absolute inset-0 bg-gradient-to-br from-white via-brand-gold-soft/40 to-white"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.12),transparent_50%),radial-gradient(circle_at_70%_80%,rgba(37,99,235,0.08),transparent_50%)]"
           aria-hidden
         />
         <div
-          className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand-navy/[0.06] blur-3xl"
+          className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-brand-gold/5 blur-[120px]"
           aria-hidden
         />
         <div
-          className="absolute inset-0 opacity-[0.06]"
+          className="absolute inset-0 opacity-[0.03] mix-blend-overlay"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a3a5c' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
           aria-hidden
         />
-        <div className="relative px-6 py-9 md:px-10 md:py-11">
-          <p className="flex items-center gap-2 text-sm font-medium text-brand-navy/80">
-            <Sparkles className="h-4 w-4 text-brand-gold" aria-hidden />
-            <Greeting /> — tout est inclus, avancez leçon par leçon.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <span className="trust-badge border-brand-navy/10 bg-brand-navy text-white">
+        <div className="relative px-6 py-12 md:px-12 md:py-16">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-gold/90">
+            <Sparkles className="h-4 w-4 animate-pulse" aria-hidden />
+            <Greeting /> — EXPÉRIENCE CERTIFIANTE
+          </div>
+          <div className="mt-6 flex flex-wrap gap-2.5">
+            <span className="rounded-full border border-brand-gold/30 bg-brand-gold/10 px-3.5 py-1 text-2xs font-bold uppercase tracking-wider text-brand-gold backdrop-blur-md">
               Parcours certifiant
             </span>
-            <span className="trust-badge border-brand-gold/40 bg-brand-gold-soft text-brand-navy">
+            <span className="rounded-full border border-white/10 bg-white/5 px-3.5 py-1 text-2xs font-bold uppercase tracking-wider text-white/80 backdrop-blur-md">
               Contenu pro · {totalDuration}
             </span>
-            <span className="trust-badge border-emerald-300/50 bg-emerald-50 text-emerald-800">
+            <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-2xs font-bold uppercase tracking-wider text-emerald-400 backdrop-blur-md">
               Loi ALUR 2026
             </span>
-            <span className="trust-badge border-blue-300/50 bg-blue-50 text-blue-800">
-              RGPD conforme
-            </span>
           </div>
-          <h1 className="mt-5 max-w-3xl text-3xl font-bold leading-[1.15] tracking-tight text-brand-navy md:text-[2.35rem]">
+          <h1 className="mt-7 max-w-3xl text-4xl font-black leading-[1.1] tracking-tight text-white md:text-[3.25rem]">
             Une formation claire, concrète,{" "}
-            <span className="text-gradient-brand">prête pour le terrain</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-white to-brand-gold">prête pour le terrain</span>
           </h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-600 md:text-lg">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl">
             {totalModules} modules et {totalLessons} leçons : juridique, transaction, financement,
             marketing et closing. Scripts détaillés, QCM, fiches et outils — tout ce qui vous sert au
             quotidien avec vos clients.
           </p>
 
-          <dl className="mt-9 grid gap-3 sm:grid-cols-4">
-            <div className="flex items-center gap-3 rounded-2xl border border-zinc-200/80 bg-white/90 px-4 py-3 shadow-sm">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-navy/[0.08] text-brand-navy">
-                <Layers className="h-5 w-5" aria-hidden />
-              </span>
-              <div>
-                <dt className="text-2xs font-bold uppercase tracking-wide text-zinc-500">
-                  Modules
-                </dt>
-                <dd className="text-xl font-bold tabular-nums text-brand-navy">{totalModules}</dd>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 rounded-2xl border border-zinc-200/80 bg-white/90 px-4 py-3 shadow-sm">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-navy/[0.08] text-brand-navy">
-                <BookOpen className="h-5 w-5" aria-hidden />
-              </span>
-              <div>
-                <dt className="text-2xs font-bold uppercase tracking-wide text-zinc-500">
-                  Leçons
-                </dt>
-                <dd className="text-xl font-bold tabular-nums text-brand-navy">{totalLessons}</dd>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 rounded-2xl border border-zinc-200/80 bg-white/90 px-4 py-3 shadow-sm">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold/[0.15] text-brand-navy">
-                <Clock className="h-5 w-5" aria-hidden />
-              </span>
-              <div>
-                <dt className="text-2xs font-bold uppercase tracking-wide text-zinc-500">
-                  Volume
-                </dt>
-                <dd className="text-xl font-bold tabular-nums text-brand-navy">{totalDuration}</dd>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 rounded-2xl border border-emerald-200/80 bg-emerald-50/80 px-4 py-3 shadow-sm">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
-                <Award className="h-5 w-5" aria-hidden />
-              </span>
-              <div>
-                <dt className="text-2xs font-bold uppercase tracking-wide text-emerald-600">
-                  Certifié
-                </dt>
-                <dd className="text-xs font-bold text-emerald-800">ALUR conforme</dd>
-              </div>
-            </div>
+          <dl className="mt-12 grid gap-4 sm:grid-cols-4">
+            <StatCard icon={Layers} label="Modules" value={totalModules} color="gold" />
+            <StatCard icon={BookOpen} label="Leçons" value={totalLessons} color="white" />
+            <StatCard icon={Clock} label="Volume" value={totalDuration} color="gold" />
+            <StatCard icon={Award} label="Certifié" value="ALUR conforme" color="emerald" isText />
           </dl>
 
-          <ProgressOverview />
-          <ContinueFormationCta />
+          <div className="mt-12 rounded-3xl border border-white/5 bg-white/[0.02] p-6 backdrop-blur-md">
+            <ProgressOverview />
+          </div>
+          <div className="mt-6">
+            <ContinueFormationCta />
+          </div>
         </div>
       </section>
 
       {/* Daily Goal & Learning Path */}
       <ScrollReveal>
-      <section className="grid gap-6 md:grid-cols-2">
-        <div className="space-y-4">
-          <h2 className="flex items-center gap-2 text-lg font-bold text-brand-navy">
-            <Target className="h-5 w-5 text-brand-gold" />
+      <section className="grid gap-8 md:grid-cols-2">
+        <div className="space-y-5">
+          <h2 className="flex items-center gap-3 text-xl font-black uppercase tracking-wider text-white">
+            <Target className="h-6 w-6 text-brand-gold" />
             Objectif quotidien
           </h2>
-          <DailyGoalTracker />
+          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-1 shadow-xl">
+            <DailyGoalTracker />
+          </div>
         </div>
-        <div className="space-y-4">
-          <h2 className="flex items-center gap-2 text-lg font-bold text-brand-navy">
-            <Brain className="h-5 w-5 text-brand-gold" />
+        <div className="space-y-5">
+          <h2 className="flex items-center gap-3 text-xl font-black uppercase tracking-wider text-white">
+            <Brain className="h-6 w-6 text-brand-gold" />
             Parcours recommandé
           </h2>
-          <AdaptiveLearningPath />
+          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-1 shadow-xl">
+            <AdaptiveLearningPath />
+          </div>
         </div>
       </section>
       </ScrollReveal>
 
       <ScrollReveal delay={0.1}>
-      <DashboardAnalytics />
-
-      <DashboardGamification />
+      <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.02] p-2">
+        <DashboardAnalytics />
+        <div className="mt-2 border-t border-white/5 pt-2">
+          <DashboardGamification />
+        </div>
+      </div>
       </ScrollReveal>
 
       {/* Certification Final CTA */}
       <ScrollReveal delay={0.15}>
-      <section className="relative overflow-hidden rounded-3xl bg-brand-navy p-8 md:p-12 text-white shadow-2xl">
-        <div className="absolute top-0 right-0 p-8 opacity-20 pointer-events-none">
-            <Trophy className="w-48 h-48 text-brand-gold -rotate-12 translate-x-12 -translate-y-12" />
+      <section className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#0a1224] to-[#040813] p-10 md:p-16 text-white shadow-2xl border border-brand-gold/20">
+        <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+            <Trophy className="w-64 h-64 text-brand-gold -rotate-12 translate-x-12 -translate-y-12" />
         </div>
         <div className="relative z-10 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-gold/20 text-brand-gold text-xs font-bold uppercase tracking-wider mb-6 border border-brand-gold/30">
-                <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-gold/15 text-brand-gold text-xs font-black uppercase tracking-[0.2em] mb-8 border border-brand-gold/30 backdrop-blur-md">
+                <Sparkles className="w-4 h-4 animate-pulse" />
                 Étape Ultime
             </div>
-            <h2 className="text-3xl md:text-4xl font-black mb-4">
-                Décrochez votre <span className="text-brand-gold italic">Certification MasterClass</span>
+            <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
+                Décrochez votre <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-white">Certification MasterClass</span>
             </h2>
-            <p className="text-white/70 text-lg mb-8 leading-relaxed">
+            <p className="text-white/60 text-lg md:text-xl mb-10 leading-relaxed">
                 Prêt pour le grand saut ? L&apos;examen final synthétise l&apos;intégralité du cursus.
-                Réussissez-le avec plus de 70% pour obtenir votre diplôme d&apos;Expert Immobilier (42h - Loi ALUR).
+                Réussissez-le pour obtenir votre diplôme d&apos;Expert Immobilier certifié.
             </p>
             <Link 
                 href="/formation/certification" 
-                className="inline-flex items-center gap-3 rounded-2xl bg-brand-gold px-8 py-4 text-brand-navy font-black shadow-lg shadow-brand-gold/20 transition hover:bg-[var(--brand-gold-hover)] hover:scale-105 active:scale-95"
+                className="group inline-flex items-center gap-4 rounded-2xl bg-brand-gold px-10 py-5 text-brand-navy font-black shadow-[0_20px_50px_rgba(212,175,55,0.25)] transition hover:bg-white hover:scale-105 active:scale-95"
             >
                 Passer l&apos;Examen de Certification
-                <Award className="w-5 h-5" />
+                <Award className="w-6 h-6 transition-transform group-hover:rotate-12" />
             </Link>
         </div>
-        <div className="mt-10 pt-10 border-t border-white/10 flex flex-wrap gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-            <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-brand-gold" />
-                <span className="text-sm font-bold uppercase tracking-tight">ALUR Conforme 2026</span>
+        <div className="mt-12 pt-12 border-t border-white/10 flex flex-wrap gap-10">
+            <div className="flex items-center gap-3 group">
+                <div className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-brand-gold/50 transition-colors">
+                  <CheckCircle2 className="w-4 h-4 text-brand-gold" />
+                </div>
+                <span className="text-xs font-black uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors">ALUR 2026</span>
             </div>
-            <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-brand-gold" />
-                <span className="text-sm font-bold uppercase tracking-tight">Vérification Blockchain</span>
+            <div className="flex items-center gap-3 group">
+                <div className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-brand-gold/50 transition-colors">
+                  <CheckCircle2 className="w-4 h-4 text-brand-gold" />
+                </div>
+                <span className="text-xs font-black uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors">Blockchain</span>
             </div>
-            <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-brand-gold" />
-                <span className="text-sm font-bold uppercase tracking-tight">Partageable LinkedIn</span>
+            <div className="flex items-center gap-3 group">
+                <div className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-brand-gold/50 transition-colors">
+                  <CheckCircle2 className="w-4 h-4 text-brand-gold" />
+                </div>
+                <span className="text-xs font-black uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors">LinkedIn</span>
             </div>
         </div>
       </section>
@@ -197,13 +171,14 @@ export default function FormationHomePage() {
       {/* Raccourcis */}
       <ScrollReveal>
       <section className="scroll-mt-8">
-        <h2 className="section-heading">
-          <span className="shrink-0">Accès rapide</span>
+        <h2 className="flex items-center gap-3 text-2xl font-black uppercase tracking-wider text-white">
+          <Layers className="h-6 w-6 text-brand-gold" />
+          Accès rapide
         </h2>
-        <p className="mt-2 text-sm text-zinc-600">
-          Les outils les plus utiles — un clic pour approfondir ou vous entraîner.
+        <p className="mt-3 text-base text-white/50 font-medium">
+          Les outils professionnels indispensables — un clic pour approfondir.
         </p>
-        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-7">
+        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-7">
           <QuickLink
             href="/formation/outils"
             icon="🧮"
@@ -236,26 +211,32 @@ export default function FormationHomePage() {
       {/* Examens rapides par module */}
       <ScrollReveal delay={0.05}>
       <section className="scroll-mt-8">
-        <h2 className="section-heading"><span className="shrink-0">Accès aux examens</span></h2>
-        <p className="mt-2 text-sm text-zinc-600">Testez vos connaissances module par module avec les QCM d&apos;évaluation.</p>
-        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <h2 className="flex items-center gap-3 text-2xl font-black uppercase tracking-wider text-white">
+          <Award className="h-6 w-6 text-brand-gold" />
+          Évaluations
+        </h2>
+        <p className="mt-3 text-base text-white/50 font-medium">Testez vos connaissances module par module avec les QCM certifiants.</p>
+        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {COURSE.map((mod, i) => {
             const avatar = getAvatarForModule(mod.slug);
-            const accent = avatar?.accentColor ?? "#1a3a5c";
+            const accent = avatar?.accentColor ?? "#d4af37";
             return (
               <Link
                 key={mod.slug}
                 href={`/formation/examen/${mod.slug}`}
-                className="group flex flex-col gap-2 rounded-2xl border border-zinc-200/80 bg-white p-4 shadow-sm transition hover:border-brand-navy/20 hover:shadow-md"
+                className="group relative flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:border-brand-gold/30 hover:bg-white/10 hover:-translate-y-1 shadow-lg"
               >
+                <div className="absolute top-2 right-2 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <GraduationCap className="h-12 w-12" style={{ color: accent }} />
+                </div>
                 <span
-                  className="flex h-9 w-9 items-center justify-center rounded-xl text-sm font-black text-white shadow"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black text-white shadow-xl ring-2 ring-white/10"
                   style={{ backgroundColor: accent }}
                 >
                   {i + 1}
                 </span>
-                <span className="text-xs font-bold leading-snug text-brand-navy line-clamp-2">{mod.title.replace("Module 1 — ", "").replace("Module 2 — ", "").replace("Module 3 — ", "").replace("Module 4 — ", "").replace("Module 5 — ", "")}</span>
-                <span className="text-2xs text-zinc-500 font-medium">{mod.lessons.length} leçons</span>
+                <span className="text-sm font-black leading-snug text-white group-hover:text-brand-gold transition-colors line-clamp-2 uppercase tracking-wide">{mod.title.replace(/Module \d — /, "")}</span>
+                <span className="text-[10px] text-white/40 font-black uppercase tracking-widest">{mod.lessons.length} leçons</span>
               </Link>
             );
           })}
@@ -265,101 +246,106 @@ export default function FormationHomePage() {
 
       {/* Modules */}
       <section id="parcours" className="scroll-mt-24">
-        <h2 className="section-heading">
-          <span className="shrink-0">Votre parcours</span>
+        <h2 className="flex items-center gap-3 text-3xl font-black uppercase tracking-widest text-white">
+          <BookOpen className="h-8 w-8 text-brand-gold" />
+          VOTRE PARCOURS
         </h2>
-        <p className="mt-2 text-sm text-zinc-600">
-          Ouvrez un module pour voir les leçons dans l&apos;ordre — idéal pour progresser sans vous
-          perdre.
+        <p className="mt-4 text-lg text-white/50 font-medium">
+          Maîtrisez chaque étape du métier — progressez leçon par leçon vers l&apos;excellence.
         </p>
-        <StaggerContainer className="mt-6 space-y-5">
+        <StaggerContainer className="mt-10 space-y-8">
           {COURSE.map((mod, i) => {
             const avatar = getAvatarForModule(mod.slug);
             const showcase = getModuleShowcase(mod.slug);
-            const accent = avatar?.accentColor ?? "#1a3a5c";
+            const accent = avatar?.accentColor ?? "#d4af37";
             return (
               <StaggerItem
                 key={mod.slug}
-                className="group card-elevated card-elevated-hover overflow-hidden"
+                className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#070d18] shadow-2xl transition-all duration-500 hover:border-brand-gold/20"
               >
                 <div
-                  className="h-1.5 w-full"
-                  style={{ background: `linear-gradient(90deg, ${accent}, ${accent}88)` }}
+                  className="h-1.5 w-full transition-opacity group-hover:opacity-80"
+                  style={{ background: `linear-gradient(90deg, ${accent}, ${accent}44, transparent)` }}
                   aria-hidden
                 />
-                <div className="p-6 md:p-7">
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div className="flex gap-4">
-                      <span
-                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-lg font-bold text-white shadow-md"
+                <div className="p-8 md:p-10">
+                  <div className="flex flex-wrap items-start justify-between gap-6">
+                    <div className="flex gap-6 max-w-3xl">
+                      <div
+                        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.25rem] text-2xl font-black text-white shadow-2xl ring-4 ring-white/5"
                         style={{ backgroundColor: accent }}
                       >
                         {i + 1}
-                      </span>
-                      <div>
-                        <div className="flex items-center gap-3 flex-wrap">
-                          <h3 className="text-xl font-bold text-brand-navy">{mod.title}</h3>
-                          <span className="rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-0.5 text-3xs font-semibold text-zinc-500">
+                      </div>
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-4 flex-wrap">
+                          <h3 className="text-2xl font-black text-white tracking-tight uppercase">{mod.title}</h3>
+                          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-2xs font-bold text-white/60">
                             {formatDuration(mod.lessons.reduce((a, l) => a + l.duration, 0))}
                           </span>
                         </div>
                         {avatar && (
-                          <p className="mt-1 text-xs text-zinc-500">
-                            Avec <span className="font-medium text-zinc-700">{avatar.name}</span> —{" "}
-                            {avatar.role}
-                          </p>
+                          <div className="flex items-center gap-3">
+                            <div className="h-6 w-6 rounded-full border border-white/20 flex items-center justify-center text-[10px] font-black" style={{ background: accent }}>{avatar.initials}</div>
+                            <p className="text-xs font-bold text-white/70">
+                              Expert : <span className="text-white">{avatar.name}</span> —{" "}
+                              {avatar.role}
+                            </p>
+                          </div>
                         )}
                         {showcase && (
-                          <p className="mt-3 text-sm font-medium leading-snug text-zinc-700">
+                          <p className="text-base font-bold leading-snug text-white/90">
                             {showcase.headline}
                           </p>
                         )}
-                        <ModuleRowProgress moduleSlug={mod.slug} />
+                        <div className="pt-2">
+                          <ModuleRowProgress moduleSlug={mod.slug} />
+                        </div>
                       </div>
                     </div>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-3">
                       <Link
                         href={`/formation/flashcards/${mod.slug}`}
-                        className="rounded-xl border border-brand-navy/20 bg-brand-navy/5 px-3 py-2 text-xs font-bold text-brand-navy transition hover:bg-brand-navy/10"
+                        className="rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-xs font-black uppercase tracking-wider text-white/80 transition hover:bg-white/15 hover:text-white"
                       >
                         Flashcards
                       </Link>
                       <Link
                         href={`/formation/examen/${mod.slug}`}
-                        className="rounded-xl border border-brand-gold/35 bg-amber-50 px-3 py-2 text-xs font-bold text-amber-900 transition hover:bg-amber-100"
+                        className="rounded-xl border border-brand-gold/30 bg-brand-gold/10 px-5 py-2.5 text-xs font-black uppercase tracking-wider text-brand-gold transition hover:bg-brand-gold/20"
                       >
                         Examen
                       </Link>
-                      <Link href={`/formation/${mod.slug}`} className="btn-primary-solid text-xs">
+                      <Link href={`/formation/${mod.slug}`} className="rounded-xl bg-white px-6 py-2.5 text-xs font-black uppercase tracking-wider text-brand-navy shadow-xl transition hover:bg-brand-gold hover:scale-105 active:scale-95">
                         Ouvrir →
                       </Link>
                     </div>
                   </div>
-                  <p className="mt-4 text-sm leading-relaxed text-zinc-600">{mod.summary}</p>
-                  <StaggerContainer className="mt-5 space-y-1 border-t border-zinc-100 pt-5" staggerDelay={0.04}>
+                  <p className="mt-8 text-base leading-relaxed text-white/60">{mod.summary}</p>
+                  
+                  {/* Quick Lesson List */}
+                  <StaggerContainer className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-2 border-t border-white/5 pt-8" staggerDelay={0.03}>
                     {mod.lessons.map((lesson) => (
                       <StaggerItem key={lesson.slug}>
                         <Link
                           href={`/formation/${mod.slug}/${lesson.slug}`}
-                          className="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition hover:bg-zinc-50 hover:translate-x-1"
+                          className="flex items-center justify-between gap-4 rounded-xl px-4 py-3 transition hover:bg-white/5 hover:translate-x-1 group/item border border-transparent hover:border-white/5"
                         >
-                          <span className="flex items-center gap-2 flex-wrap text-sm text-zinc-800">
-                            {lesson.interactiveScenarioId && (
-                              <span className="rounded-md bg-brand-navy/10 px-2 py-0.5 text-2xs font-bold uppercase text-brand-navy">
-                                Interactif
-                              </span>
-                            )}
-                            {lesson.difficulty === "avance" && (
-                              <span className="rounded-md bg-amber-50 px-2 py-0.5 text-2xs font-bold uppercase text-amber-700">
-                                Avancé
-                              </span>
-                            )}
+                          <span className="flex items-center gap-3 text-sm font-bold text-white/70 group-hover/item:text-white transition-colors">
+                            <span className="h-1.5 w-1.5 rounded-full bg-brand-gold opacity-40 group-hover/item:opacity-100 transition-opacity" />
                             {lesson.title}
                           </span>
-                          <span className="shrink-0 text-xs tabular-nums text-zinc-400 flex items-center gap-2">
-                            <Clock className="h-3 w-3" aria-hidden />
-                            {formatDuration(lesson.duration)}
-                          </span>
+                          <div className="flex items-center gap-3">
+                            {lesson.interactiveScenarioId && (
+                                <span className="rounded-md bg-brand-gold/20 px-2 py-0.5 text-[9px] font-black uppercase text-brand-gold border border-brand-gold/20">
+                                  Interactif
+                                </span>
+                              )}
+                            <span className="shrink-0 text-[10px] font-black uppercase tracking-widest text-white/30 flex items-center gap-1.5">
+                              <Clock className="h-3 w-3" aria-hidden />
+                              {formatDuration(lesson.duration)}
+                            </span>
+                          </div>
                         </Link>
                       </StaggerItem>
                     ))}
@@ -370,6 +356,42 @@ export default function FormationHomePage() {
           })}
         </StaggerContainer>
       </section>
+    </div>
+  );
+}
+
+function StatCard({
+  icon: Icon,
+  label,
+  value,
+  color,
+  isText,
+}: {
+  icon: LucideIcon;
+  label: string;
+  value: string | number;
+  color: "gold" | "white" | "emerald";
+  isText?: boolean;
+}) {
+  const colorClasses = {
+    gold: "bg-brand-gold/15 text-brand-gold ring-brand-gold/20 border-brand-gold/20",
+    white: "bg-white/10 text-white ring-white/10 border-white/10",
+    emerald: "bg-emerald-500/15 text-emerald-400 ring-emerald-500/20 border-emerald-500/20",
+  };
+  
+  return (
+    <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-md shadow-lg transition hover:bg-white/10">
+      <div className={`flex h-12 w-12 items-center justify-center rounded-xl border ${colorClasses[color]} shadow-2xl`}>
+        <Icon className="h-6 w-6" aria-hidden />
+      </div>
+      <div>
+        <dt className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">
+          {label}
+        </dt>
+        <dd className={`font-black tracking-tight ${isText ? "text-xs uppercase" : "text-xl tabular-nums"} text-white`}>
+          {value}
+        </dd>
+      </div>
     </div>
   );
 }
@@ -390,17 +412,20 @@ function QuickLink({
   return (
     <Link
       href={href}
-      className={`link-focus group rounded-2xl border p-4 text-center shadow-sm transition ${
+      className={`group relative overflow-hidden rounded-2xl border p-5 text-center transition-all duration-300 ${
         highlight
-          ? "border-brand-navy/20 bg-gradient-to-b from-white to-brand-gold-soft/50 hover:border-brand-gold/45 hover:shadow-lg"
-          : "border-zinc-200/90 bg-white hover:border-brand-navy/20 hover:shadow-md"
+          ? "border-brand-gold/30 bg-gradient-to-b from-brand-gold/10 to-transparent hover:border-brand-gold hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] hover:-translate-y-1"
+          : "border-white/10 bg-white/5 hover:border-white/30 hover:bg-white/10 hover:-translate-y-1 shadow-lg"
       }`}
     >
-      <div className="transition duration-300 group-hover:scale-110">
-        <EmojiIcon emoji={icon} className="h-7 w-7" />
+      <div className="relative z-10 transition duration-500 group-hover:scale-110">
+        <EmojiIcon emoji={icon} className="h-9 w-9" />
       </div>
-      <p className="mt-2 text-sm font-bold text-brand-navy">{label}</p>
-      <p className="text-2xs leading-snug text-zinc-500">{desc}</p>
+      <p className="relative z-10 mt-3 text-sm font-black uppercase tracking-wider text-white group-hover:text-brand-gold transition-colors">{label}</p>
+      <p className="relative z-10 mt-1 text-[10px] font-bold uppercase tracking-tight text-white/40">{desc}</p>
+      {highlight && (
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+      )}
     </Link>
   );
 }

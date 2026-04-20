@@ -148,7 +148,7 @@ const COURSE_SCHEMA = {
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col overflow-hidden bg-brand-navy text-white">
+    <div className="flex min-h-screen flex-col overflow-hidden bg-[#020617] text-white">
       <Script
         id="course-schema"
         type="application/ld+json"
@@ -164,20 +164,22 @@ export default function HomePage() {
 
       {/* Radial glow */}
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_-10%,rgba(212,175,55,0.22),transparent)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-20%,rgba(212,175,55,0.18),transparent_70%)]"
         aria-hidden
       />
 
       {/* Header */}
-      <header className="relative z-20 border-b border-white/10 bg-brand-navy/40 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-gold text-brand-navy text-sm font-black">42</span>
-            <span className="text-sm font-bold tracking-tight text-white">Formation Agent Immobilier</span>
+      <header className="relative z-20 border-b border-white/10 bg-[#020617]/60 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-gold to-yellow-600 text-brand-navy shadow-lg shadow-brand-gold/20">
+              <span className="text-base font-black">42</span>
+            </div>
+            <span className="text-sm font-black uppercase tracking-[0.2em] text-white">FORMATION IMMO</span>
           </div>
           <Link
             href="/login"
-            className="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/8 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/15"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-2.5 text-sm font-bold text-white transition hover:bg-white/10 hover:border-white/20"
           >
             Accéder →
           </Link>
@@ -186,36 +188,36 @@ export default function HomePage() {
 
       <main id="contenu" className="relative flex-1">
         {/* Hero */}
-        <section className="relative mx-auto max-w-6xl px-6 py-16 md:py-24 text-center">
-          <p className="inline-block rounded-full border border-brand-gold/40 bg-brand-gold/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-brand-gold">
-            Formation professionnelle certifiante
-          </p>
-          <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight md:text-5xl lg:text-[3.5rem]">
+        <section className="relative mx-auto max-w-6xl px-6 py-20 md:py-32 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-5 py-2 text-xs font-black uppercase tracking-[0.3em] text-brand-gold backdrop-blur-md">
+            <Sparkles className="h-4 w-4 animate-pulse" />
+            ÉDITION 2026 CERTIFIANTE
+          </div>
+          <h1 className="mt-10 text-5xl font-black leading-[1.05] tracking-tight md:text-7xl lg:text-[5.5rem]">
             Le guide complet de{" "}
-            <span className="bg-gradient-to-r from-brand-gold via-yellow-300 to-brand-gold bg-clip-text text-transparent">
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-white to-brand-gold drop-shadow-[0_0_30px_rgba(212,175,55,0.3)]">
               l&apos;agent immobilier
             </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/85">
-            <span className="font-semibold text-white">42 heures structurées en 5 modules</span> — du cadre légal 2026 au closing terrain.
-            36 leçons vidéo, 65 QCM, 8 simulateurs, 360 flashcards et 35+ cas pratiques pour devenir l&apos;agent que les clients recommandent.
+          <p className="mx-auto mt-10 max-w-3xl text-xl leading-relaxed text-white/60 md:text-2xl">
+            <span className="font-black text-white italic">42 heures de MasterClass</span> — du cadre légal ALUR au closing terrain. Devenez l&apos;expert que les clients s&apos;arrachent.
           </p>
 
           {/* Stats row */}
-          <div className="mx-auto mt-10 flex flex-wrap justify-center gap-3">
+          <div className="mx-auto mt-16 flex flex-wrap justify-center gap-4">
             {[
-              ["42h", "de formation"],
-              ["36", "leçons"],
-              ["65", "questions QCM"],
-              ["35+", "cas pratiques"],
-              ["360+", "flashcards"],
+              ["42h", "Contenu HD"],
+              ["36", "Leçons Vidéo"],
+              ["180", "QCM Certifiants"],
+              ["360+", "Flashcards"],
             ].map(([val, label]) => (
               <div
                 key={label}
-                className="flex flex-col items-center rounded-2xl border border-white/12 bg-white/6 px-6 py-3 backdrop-blur-sm"
+                className="flex flex-col items-center rounded-[2rem] border border-white/10 bg-white/5 px-8 py-5 backdrop-blur-xl shadow-2xl transition hover:border-brand-gold/30"
               >
-                <span className="text-2xl font-black text-brand-gold">{val}</span>
-                <span className="mt-0.5 text-3xs font-semibold uppercase tracking-wider text-white/80">{label}</span>
+                <span className="text-3xl font-black text-brand-gold">{val}</span>
+                <span className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-white/40">{label}</span>
               </div>
             ))}
           </div>
@@ -254,59 +256,64 @@ export default function HomePage() {
         {/* Programme */}
         <section
           id="programme"
-          className="border-t border-white/10 bg-white/[0.03] px-6 py-16"
+          className="border-t border-white/10 bg-white/[0.02] px-6 py-24"
         >
           <div className="mx-auto max-w-6xl">
-            <div className="mb-10 text-center">
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-gold">5 modules complets</p>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight">Le programme</h2>
-              <p className="mt-3 text-white/85 text-sm max-w-xl mx-auto">
-                Chaque module couvre une dimension clé du métier — du cadre légal au terrain, en passant par le financement.
+            <div className="mb-16 text-center">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-brand-gold">CURRICULUM D&apos;EXCELLENCE</p>
+              <h2 className="mt-5 text-4xl font-black tracking-tight md:text-5xl">Le programme</h2>
+              <p className="mt-6 text-white/50 text-lg max-w-2xl mx-auto leading-relaxed">
+                5 modules stratégiques couvrant l&apos;intégralité du cycle de vente immobilier — de la conformité juridique au closing émotionnel.
               </p>
             </div>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {MODULES.map((mod) => {
                 const Icon = mod.icon;
                 return (
                   <div
                     key={mod.num}
-                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:border-white/20 hover:bg-white/8"
+                    className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-all duration-500 hover:border-brand-gold/30 hover:-translate-y-1 shadow-2xl"
                   >
                     <div
-                      className="absolute top-0 left-0 h-0.5 w-full"
+                      className="absolute top-0 left-0 h-1 w-full opacity-40 group-hover:opacity-100 transition-opacity"
                       style={{ background: `linear-gradient(90deg, ${mod.color}, transparent)` }}
                       aria-hidden
                     />
-                    <div className="flex items-start gap-4">
+                    <div className="flex items-start gap-5">
                       <div
-                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white text-sm font-black"
-                        style={{ backgroundColor: mod.color + "33", color: mod.color === "var(--brand-navy)" ? "#93c5fd" : mod.color }}
+                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-white shadow-2xl ring-1 ring-white/10"
+                        style={{ backgroundColor: mod.color + "44", color: "#fff" }}
                       >
-                        <Icon className="h-5 w-5" />
+                        <Icon className="h-6 w-6" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-2xs font-bold uppercase tracking-wider text-on-dark-muted">Module {mod.num}</p>
-                        <h3 className="mt-0.5 text-base font-bold text-white leading-snug">{mod.title}</h3>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">Module {mod.num}</p>
+                        <h3 className="mt-1 text-xl font-black text-white leading-tight uppercase">{mod.title}</h3>
                       </div>
                     </div>
-                    <p className="mt-3 text-sm leading-relaxed text-white/85">{mod.desc}</p>
-                    <p className="mt-3 text-3xs font-semibold text-on-dark-muted">{mod.lessons} leçons</p>
+                    <p className="mt-5 text-sm leading-relaxed text-white/60">{mod.desc}</p>
+                    <div className="mt-6 flex items-center justify-between border-t border-white/5 pt-6">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-brand-gold">{mod.lessons} leçons vidéo</p>
+                      <div className="h-1.5 w-1.5 rounded-full bg-brand-gold/40 animate-pulse" />
+                    </div>
                   </div>
                 );
               })}
 
               {/* CTA card */}
-              <div className="flex flex-col items-center justify-center rounded-2xl border border-brand-gold/30 bg-gradient-to-br from-brand-gold/15 to-yellow-500/5 p-6 text-center">
-                <GraduationCap className="h-10 w-10 text-brand-gold" />
-                <h3 className="mt-4 text-lg font-bold text-white">Certification incluse</h3>
-                <p className="mt-2 text-sm text-white/85">
-                  Attestation de formation délivrée à l&apos;issue du parcours. Financements éligibles selon votre situation.
+              <div className="flex flex-col items-center justify-center rounded-3xl border border-brand-gold/20 bg-gradient-to-br from-brand-gold/10 to-transparent p-10 text-center shadow-2xl">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-gold/20 border border-brand-gold/30 mb-6">
+                  <GraduationCap className="h-8 w-8 text-brand-gold" />
+                </div>
+                <h3 className="text-2xl font-black text-white uppercase tracking-tight">Certification</h3>
+                <p className="mt-4 text-sm text-white/60 leading-relaxed">
+                  Attestation officielle délivrée à l&apos;issue du parcours. Validez vos compétences 2026.
                 </p>
                 <Link
                   href="/login"
-                  className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-brand-gold px-5 py-2.5 text-sm font-bold text-brand-navy transition hover:bg-yellow-300"
+                  className="mt-8 inline-flex items-center gap-2 rounded-xl bg-brand-gold px-8 py-3 text-sm font-black text-brand-navy transition hover:bg-white hover:scale-105"
                 >
-                  Démarrer <ArrowRight className="h-3.5 w-3.5" />
+                  S&apos;INSCRIRE <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>
@@ -314,33 +321,33 @@ export default function HomePage() {
         </section>
 
         {/* Outcomes — ce que vous saurez faire */}
-        <section className="border-t border-white/10 px-6 py-16">
+        <section className="border-t border-white/10 px-6 py-24">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-12 text-center">
-              <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-gold/10 px-3 py-1 text-3xs font-bold uppercase tracking-widest text-brand-gold">
-                <Target className="h-3 w-3" /> Résultats concrets
-              </p>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">
-                Ce que vous saurez faire à la fin
+            <div className="mb-16 text-center">
+              <div className="inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-brand-gold mb-6">
+                <Target className="h-3.5 w-3.5" /> RÉSULTATS GARANTIS
+              </div>
+              <h2 className="text-4xl font-black tracking-tight md:text-5xl">
+                Votre nouvelle expertise
               </h2>
-              <p className="mx-auto mt-3 max-w-xl text-sm text-white/80">
-                4 compétences transformatrices, mesurables et activables dès le lendemain.
+              <p className="mx-auto mt-6 max-w-2xl text-lg text-white/50 leading-relaxed">
+                4 piliers de compétences transformatrices, mesurables et immédiatement activables sur le terrain.
               </p>
             </div>
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-2">
               {OUTCOMES.map((o) => {
                 const Icon = o.icon;
                 return (
                   <div
                     key={o.title}
-                    className="group flex gap-5 rounded-2xl border border-white/12 bg-gradient-to-br from-white/8 to-white/3 p-6 transition hover:border-brand-gold/40 hover:from-white/10"
+                    className="group flex gap-6 rounded-3xl border border-white/10 bg-white/5 p-8 transition-all duration-500 hover:border-brand-gold/30 hover:bg-white/10 shadow-2xl"
                   >
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold">
-                      <Icon className="h-6 w-6" />
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-gold/10 text-brand-gold border border-brand-gold/20 shadow-xl group-hover:scale-110 transition-transform">
+                      <Icon className="h-7 w-7" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="text-base font-bold text-white">{o.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-white/80">{o.desc}</p>
+                      <h3 className="text-xl font-black text-white uppercase tracking-tight">{o.title}</h3>
+                      <p className="mt-3 text-base leading-relaxed text-white/60">{o.desc}</p>
                     </div>
                   </div>
                 );
@@ -350,34 +357,34 @@ export default function HomePage() {
         </section>
 
         {/* Atouts */}
-        <section className="border-t border-white/10 bg-white/[0.02] px-6 py-16">
+        <section className="border-t border-white/10 bg-white/[0.01] px-6 py-24">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-10 text-center">
-              <p className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-3xs font-bold uppercase tracking-widest text-on-dark-muted">
-                <Sparkles className="h-3 w-3" /> Méthode pédagogique
-              </p>
-              <h2 className="mt-4 text-3xl font-bold">Concret, actionnable, complet</h2>
+            <div className="mb-16 text-center">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-6">
+                <Sparkles className="h-3.5 w-3.5" /> MÉTHODE PÉDAGOGIQUE
+              </div>
+              <h2 className="text-4xl font-black uppercase tracking-tight">L&apos;arsenal de l&apos;expert</h2>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                { Icon: Headphones, title: "Audio & vidéo", desc: "Chaque leçon disponible en lecture audio pour apprendre en mobilité." },
-                { Icon: CheckCircle, title: "65 QCM expliqués", desc: "Questions chronométrées avec explications détaillées et références juridiques." },
-                { Icon: Calculator, title: "8 simulateurs", desc: "Crédit, capacité d'emprunt, rentabilité, net vendeur — cas réels chiffrés." },
-                { Icon: ClipboardList, title: "36 checklists pro", desc: "Une grille de conformité par leçon : mandats, visites, R0/R1/R2, closing." },
-                { Icon: Layers, title: "360 flashcards", desc: "Système SM-2 (espacement intelligent) — 10 cartes par leçon pour la mémorisation longue." },
-                { Icon: Briefcase, title: "35+ cas pratiques", desc: "Études de cas avec questions débriefées : ALUR, Tracfin, négociation, fiscalité." },
-                { Icon: Target, title: "Test de positionnement", desc: "Évaluation initiale + parcours personnalisé selon vos modules faibles / forts." },
-                { Icon: Trophy, title: "Certification", desc: "Examen final 5×15 min + attestation LinkedIn téléchargeable." },
+                { Icon: Headphones, title: "Audio & Vidéo", desc: "Chaque leçon est une expérience immersive disponible en mobilité totale." },
+                { Icon: CheckCircle, title: "180 QCM Certifiants", desc: "Questions chronométrées avec feedbacks détaillés et références juridiques 2026." },
+                { Icon: Calculator, title: "Outils Décisifs", desc: "8 simulateurs experts (Crédit, Rentabilité, LMNP) pour convaincre vos clients." },
+                { Icon: ClipboardList, title: "36 Checklists Pro", desc: "Vos grilles de conformité terrain pour sécuriser chaque mandat et chaque visite." },
+                { Icon: Layers, title: "360 Flashcards", desc: "Mémorisation active SM-2 pour ancrer les connaissances sur le long terme." },
+                { Icon: Briefcase, title: "Études de Cas", desc: "35+ scénarios réels débriefés pour affronter toutes les situations terrain." },
+                { Icon: Target, title: "Coaching IA", desc: "Assistant intelligent disponible 24/7 pour répondre à vos questions complexes." },
+                { Icon: Trophy, title: "Certification", desc: "Validation officielle partageable sur LinkedIn pour asseoir votre autorité." },
               ].map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/20 hover:bg-white/8"
+                  className="rounded-3xl border border-white/5 bg-white/[0.03] p-8 transition-all duration-300 hover:border-white/20 hover:bg-white/5 shadow-xl group"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold/20 text-brand-gold">
-                    <item.Icon className="h-5 w-5" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 text-brand-gold border border-white/10 mb-6 group-hover:border-brand-gold/40 transition-colors">
+                    <item.Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mt-4 font-bold text-white">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/85">{item.desc}</p>
+                  <h3 className="font-black text-white uppercase tracking-tight text-base mb-3">{item.title}</h3>
+                  <p className="text-sm leading-relaxed text-white/50">{item.desc}</p>
                 </div>
               ))}
             </div>
