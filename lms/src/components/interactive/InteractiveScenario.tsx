@@ -130,7 +130,7 @@ function StepBody({
 }) {
   switch (step.type) {
     case "video":
-      return <StepVideo step={step} onNavigate={onNavigate} />;
+      return <StepVideo key={step.id} step={step} onNavigate={onNavigate} />;
     case "info":
       return <StepInfo step={step} onNavigate={onNavigate} />;
     case "choice":
@@ -153,6 +153,9 @@ function StepVideo({
   step: Extract<ScenarioStep, { type: "video" }>;
   onNavigate: (id: string) => void;
 }) {
+  const FALLBACK_COVER = "/scenarios/alur-mandat.png";
+  const [coverSrc, setCoverSrc] = useState<string | null>(step.coverImageUrl ?? null);
+
   return (
     <div>
       {step.badge ? (
@@ -171,20 +174,37 @@ function StepVideo({
         </div>
       ) : null}
 
-      {step.coverImageUrl ? (
+      {coverSrc ? (
         <div className="relative mt-6 overflow-hidden rounded-xl border border-zinc-200/80 shadow-md">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={step.coverImageUrl}
+            src={coverSrc}
             alt={step.title}
             className="aspect-[21/9] w-full object-cover sm:aspect-[2.4/1]"
+            onError={() => {
+              if (coverSrc !== FALLBACK_COVER) {
+                setCoverSrc(FALLBACK_COVER);
+              } else {
+                setCoverSrc(null);
+              }
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/50 to-transparent" />
           <p className="absolute bottom-3 left-4 right-4 text-xs font-medium text-white/95 drop-shadow-sm">
             Formation immobilier — illustration de contexte
           </p>
         </div>
-      ) : null}
+      ) : (
+        <div className="relative mt-6 overflow-hidden rounded-xl border border-zinc-200/80 bg-gradient-to-br from-slate-100 to-slate-200/80 p-6 shadow-md">
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/10 to-transparent" />
+          <p className="relative text-sm font-semibold text-brand-navy">
+            Illustration temporairement indisponible
+          </p>
+          <p className="relative mt-1 text-xs text-zinc-600">
+            Le contenu de la simulation reste accessible.
+          </p>
+        </div>
+      )}
 
       {step.videoUrl ? (
         <div className="mt-6">
