@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 import { MODULE_AVATARS } from "@/data/module-avatars";
 
 interface LessonPresenterPanelProps {
@@ -57,13 +58,24 @@ export function LessonPresenterPanel({
     >
       <div className="flex items-center gap-5 p-4 md:p-5">
         {/* Avatar */}
-        <div className="shrink-0">
-          <div
-            className="flex h-14 w-14 items-center justify-center rounded-full text-base font-bold text-white shadow-md"
-            style={{ backgroundColor: avatar.accentColor }}
-          >
-            {avatar.initials}
-          </div>
+        <div className="shrink-0 relative">
+          {avatar.photoUrl ? (
+            <div
+              className="relative h-16 w-16 overflow-hidden rounded-full shadow-lg ring-2 ring-white"
+              style={{ padding: "2px", background: `linear-gradient(135deg, ${avatar.accentColor}, #d4af37)` }}
+            >
+              <div className="relative h-full w-full overflow-hidden rounded-full bg-white">
+                <Image src={avatar.photoUrl} alt={avatar.name} fill className="object-cover" sizes="64px" />
+              </div>
+            </div>
+          ) : (
+            <div
+              className="flex h-14 w-14 items-center justify-center rounded-full text-base font-bold text-white shadow-md ring-2 ring-white"
+              style={{ backgroundColor: avatar.accentColor }}
+            >
+              {avatar.initials}
+            </div>
+          )}
         </div>
 
         {/* Info */}

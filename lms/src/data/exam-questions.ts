@@ -913,6 +913,28 @@ export const MODULE_EXAMS: ModuleExam[] = [
   },
 ];
 
+export const FINAL_EXAM_ID = "certification-finale";
+
 export function getModuleExam(moduleSlug: string): ModuleExam | undefined {
+  if (moduleSlug === FINAL_EXAM_ID) {
+    return getFinalExam();
+  }
   return MODULE_EXAMS.find((e) => e.moduleSlug === moduleSlug);
+}
+
+export function getFinalExam(): ModuleExam {
+  // Take 6 random questions from each module to make a 30-question final exam
+  const allFinalQuestions: ExamQuestion[] = [];
+  
+  MODULE_EXAMS.forEach(module => {
+    const shuffled = [...module.questions].sort(() => 0.5 - Math.random());
+    allFinalQuestions.push(...shuffled.slice(0, 6));
+  });
+
+  return {
+    moduleSlug: FINAL_EXAM_ID,
+    title: "Certification Professionnelle — Agent Immobilier (42h)",
+    duration: 45, // 45 minutes for 30 questions
+    questions: allFinalQuestions.sort(() => 0.5 - Math.random()), // Shuffle final set
+  };
 }

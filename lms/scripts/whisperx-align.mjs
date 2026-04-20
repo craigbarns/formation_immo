@@ -88,7 +88,6 @@ for (const f of mp3Files) {
     continue;
   }
 
-  const tmpJson = path.join(alignDir, `${f.base}.tmp.json`);
   const cmd = `"${whisperxBin}" "${f.mp3}" \
     --model large-v2 \
     --language fr \

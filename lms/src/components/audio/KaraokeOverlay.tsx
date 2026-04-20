@@ -49,7 +49,6 @@ export function KaraokeOverlay({ alignment, currentTime, visible }: KaraokeOverl
           {words.map((w, i) => {
             const isPast = i < activeIndex;
             const isCurrent = i === activeIndex;
-            const isFuture = i > activeIndex;
 
             return (
               <span

@@ -227,8 +227,7 @@ export const INTERACTIVE_SCENARIOS: Record<string, InteractiveScenario> = {
         title: "Nouveau mandat exclusif en zone tendue",
         lead:
           "Un proprietaire veut publier vite. Il minimise les contraintes de transparence sur les honoraires et pense que certains diagnostics peuvent attendre. Votre mission: securiser la commercialisation sans perdre le mandat.",
-        coverImageUrl:
-          "https://images.unsplash.com/photo-1554995207-c18c203602cb?w=1400&q=80&auto=format&fit=crop",
+        coverImageUrl: "/scenarios/alur-mandat.png",
         next: "choice-1",
       }),
       "choice-1": s({

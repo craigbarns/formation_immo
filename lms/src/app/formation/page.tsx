@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Parcours de formation",
   description: "Accédez aux 5 modules de formation immobilière : juridique, transaction, financement, marketing et terrain.",
 };
-import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award } from "lucide-react";
+import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award, Trophy, CheckCircle2 } from "lucide-react";
 import { COURSE, getTotalCourseDurationMin, formatDuration } from "@/data/course";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getModuleShowcase } from "@/data/module-showcase";
@@ -151,6 +151,49 @@ export default function FormationHomePage() {
       <DashboardGamification />
       </ScrollReveal>
 
+      {/* Certification Final CTA */}
+      <ScrollReveal delay={0.15}>
+      <section className="relative overflow-hidden rounded-3xl bg-brand-navy p-8 md:p-12 text-white shadow-2xl">
+        <div className="absolute top-0 right-0 p-8 opacity-20 pointer-events-none">
+            <Trophy className="w-48 h-48 text-brand-gold -rotate-12 translate-x-12 -translate-y-12" />
+        </div>
+        <div className="relative z-10 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-gold/20 text-brand-gold text-xs font-bold uppercase tracking-wider mb-6 border border-brand-gold/30">
+                <Sparkles className="w-3.5 h-3.5" />
+                Étape Ultime
+            </div>
+            <h2 className="text-3xl md:text-4xl font-black mb-4">
+                Décrochez votre <span className="text-brand-gold italic">Certification MasterClass</span>
+            </h2>
+            <p className="text-white/70 text-lg mb-8 leading-relaxed">
+                Prêt pour le grand saut ? L&apos;examen final synthétise l&apos;intégralité du cursus.
+                Réussissez-le avec plus de 70% pour obtenir votre diplôme d&apos;Expert Immobilier (42h - Loi ALUR).
+            </p>
+            <Link 
+                href="/formation/certification" 
+                className="inline-flex items-center gap-3 rounded-2xl bg-brand-gold px-8 py-4 text-brand-navy font-black shadow-lg shadow-brand-gold/20 transition hover:bg-[var(--brand-gold-hover)] hover:scale-105 active:scale-95"
+            >
+                Passer l&apos;Examen de Certification
+                <Award className="w-5 h-5" />
+            </Link>
+        </div>
+        <div className="mt-10 pt-10 border-t border-white/10 flex flex-wrap gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-brand-gold" />
+                <span className="text-sm font-bold uppercase tracking-tight">ALUR Conforme 2026</span>
+            </div>
+            <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-brand-gold" />
+                <span className="text-sm font-bold uppercase tracking-tight">Vérification Blockchain</span>
+            </div>
+            <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-brand-gold" />
+                <span className="text-sm font-bold uppercase tracking-tight">Partageable LinkedIn</span>
+            </div>
+        </div>
+      </section>
+      </ScrollReveal>
+
       {/* Raccourcis */}
       <ScrollReveal>
       <section className="scroll-mt-8">
@@ -185,7 +228,7 @@ export default function FormationHomePage() {
           <QuickLink href="/formation/examen/juridique" icon="✅" label="Examens QCM" desc="Par module" />
           <QuickLink href="/formation/flashcards/juridique" icon="🃏" label="Flashcards" desc="Révision rapide" />
           <QuickLink href="/formation/profil" icon="🏅" label="Badges" desc="Progression" />
-          <QuickLink href="/formation/profil" icon="🎓" label="Certificat" desc="Attestation" />
+          <QuickLink href="/formation/certification" icon="🎓" label="Certification" desc="Examen final" highlight />
         </div>
       </section>
       </ScrollReveal>

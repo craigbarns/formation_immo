@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { parseSrt, findActiveSubtitle, type SrtEntry } from "@/lib/srt-parser";
+import { parseSrt, findActiveSubtitle } from "@/lib/srt-parser";
 
 interface SubtitleOverlayProps {
   srtContent: string | null;

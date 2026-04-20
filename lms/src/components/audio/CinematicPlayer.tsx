@@ -20,10 +20,6 @@ import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { addBookmark, loadBookmarks, removeBookmark, type AudioBookmark } from "@/lib/audio-bookmarks";
 import { createAudioStats, updateStatsOnPlay, updateStatsOnPause, updateStatsOnSeek, finalizeStats, type AudioStats } from "@/lib/audio-stats";
 import { generateClipLink, copyToClipboard, parseClipTimeFromUrl } from "@/lib/shareable-clip";
-            <div className="flex justify-between py-2 border-b border-white/10">
-              <span className="text-white/80">Partager le moment</span>
-              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-brand-gold">S</kbd>
-            </div>
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                               */
@@ -93,7 +89,7 @@ function buildChapterLabels(slides: Slide[]): ChapterLabel[] {
   // startSlide intentionally unused (reserved for future chapter logic)
 
   slides.forEach((s, i) => {
-    const ch = SLIDE_KIND_TO_CHAPTER[s.kind] ?? "Concepts cles";
+    const ch = SLIDE_KIND_TO_CHAPTER[s.kind] ?? "Concepts clés";
     if (ch !== lastChapter) {
       if (lastChapter) {
         chapters[chapters.length - 1].endSlide = i - 1;
@@ -116,6 +112,40 @@ function getChapterForSlide(chapters: ChapterLabel[], slideIndex: number): Chapt
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
+
+function getSlideWeight(slide: Slide): number {
+  switch (slide.kind) {
+    case "title": return 10;
+    case "end": return 5;
+    case "highlight": return 12;
+    case "trainer-tip": return 20;
+    case "concept": return 25 + (slide.concept.description.length > 50 ? 15 : 0);
+    case "stats": return 20;
+    case "chart": return 20;
+    case "comparison": return 30;
+    case "takeaways": return 25;
+    case "process": return 20;
+    default: return 15;
+  }
+}
+
+function getWeightedFallbackSlide(slides: Slide[], current: number, duration: number): number {
+  if (duration === 0 || slides.length === 0) return 0;
+  
+  const weights = slides.map(getSlideWeight);
+  const totalWeight = weights.reduce((a, b) => a + b, 0);
+  
+  const targetWeight = (current / duration) * totalWeight;
+  let accumulated = 0;
+  
+  for (let i = 0; i < slides.length; i++) {
+    accumulated += weights[i];
+    if (targetWeight <= accumulated) {
+      return i;
+    }
+  }
+  return slides.length - 1;
+}
 
 function fmt(s: number): string {
   const m = Math.floor(s / 60);
@@ -309,7 +339,6 @@ export function CinematicPlayer({
   const [duration, setDuration] = useState(0);
   const [speed, setSpeed] = useState(() => {
     if (typeof window === "undefined") return 1;
-    if (typeof window === 'undefined') return 1;
     const saved = localStorage.getItem("cinematic-player-speed");
     return saved ? parseFloat(saved) : 1;
   });
@@ -354,13 +383,12 @@ export function CinematicPlayer({
   const activeSlide = useMemo(() => {
     if (manualSlide !== null) return manualSlide;
     if (!loaded || duration === 0) return 0;
-    if (cues) {
+    if (cues && cues.slides.length > 0) {
       return Math.min(slides.length - 1, findActiveSlideFromCues(cues, current));
     }
-    // Fallback linéaire si pas de cues
-    const perSlide = duration / slides.length;
-    return Math.min(slides.length - 1, Math.floor(current / perSlide));
-  }, [current, duration, slides.length, loaded, manualSlide, cues]);
+    // Fallback sémantique pondéré selon la densité du contenu de la slide au lieu d'une découpe linéaire stricte
+    return Math.min(slides.length - 1, getWeightedFallbackSlide(slides, current, duration));
+  }, [current, duration, slides, loaded, manualSlide, cues]);
 
   const slide = slides[activeSlide];
   const currentChapter = getChapterForSlide(chapters, activeSlide);
@@ -695,7 +723,7 @@ export function CinematicPlayer({
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [toggle, navigateSlide, cycleSpeed, toggleFullscreen, skip, audioUrl, moduleSlug]);
+  }, [toggle, navigateSlide, cycleSpeed, toggleFullscreen, skip, audioUrl, moduleSlug, lessonSlug]);
 
   /* ---------- Pause on blur (auto-pause when switching tabs) ---------- */
   useEffect(() => {
@@ -883,14 +911,14 @@ export function CinematicPlayer({
           className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 text-3xs font-medium tracking-wider uppercase pointer-events-none"
           style={{ color: theme.voiceSignatureColor }}
         >
-          {theme.voiceSignature}
+          {moduleTitle ? `${moduleTitle} · ${theme.voiceSignature}` : theme.voiceSignature}
         </div>
 
         {/* Slide-specific background patterns */}
         <SlideBackground kind={slide.kind} />
 
         {/* Slide content avec transition */}
-        <div className="relative flex h-full w-full items-center justify-center p-6 sm:p-10">
+        <div className="relative flex h-full w-full items-center justify-center p-3 sm:p-6">
           <div
             key={activeSlide}
             className="h-full w-full"
@@ -1693,14 +1721,14 @@ function TitleSlide({ title, subtitle, avatar, reducedMotion }: { title: string;
 function ConceptSlide({ concept, index, total }: { concept: KeyConcept; index: number; total: number }) {
   const colors = TYPE_COLORS[concept.type] ?? TYPE_COLORS.rule;
   return (
-    <div className="w-full max-w-lg">
+    <div className="w-full max-w-md mx-auto">
       <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-4"
         style={{ animation: "fadeInUp 0.4s 0.1s both cubic-bezier(0.16,1,0.3,1)" }}>
         Concept {index + 1} / {total}
       </p>
 
       <div
-        className={`rounded-2xl border ${colors.border} p-8 relative overflow-hidden`}
+        className={`rounded-2xl border ${colors.border} p-5 sm:p-8 relative overflow-hidden`}
         style={{
           background: "rgba(0,0,0,0.4)",
           backdropFilter: "blur(20px) saturate(1.3)",
@@ -1819,17 +1847,17 @@ function StatsSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
 
   return (
     <div
-      className="w-full max-w-2xl"
+      className="w-full max-w-xl mx-auto"
       style={{ animation: "fadeIn 0.5s ease-out both" }}
     >
       <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-6">
         Chiffres cles
       </p>
-      <div className={`grid gap-4 ${stats.length <= 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"}`}>
+      <div className={`grid gap-3 ${stats.length <= 2 ? "grid-cols-2" : stats.length === 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"}`}>
         {stats.map((s, i) => (
           <div
             key={i}
-            className="rounded-xl border border-white/10 bg-white/5 p-5 text-center backdrop-blur-sm"
+            className="rounded-xl border border-white/10 bg-white/5 p-3 sm:p-5 text-center backdrop-blur-sm"
             style={{ animation: `fadeIn 0.5s ease-out ${i * 0.1}s both` }}
           >
             <p className={`text-3xl font-black tabular-nums ${STAT_COLORS[s.color] ?? "text-white"}`}>
@@ -1870,7 +1898,7 @@ function ChartSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
 
   return (
     <div
-      className="w-full max-w-xl"
+      className="w-full max-w-lg mx-auto"
       style={{ animation: "fadeIn 0.5s ease-out both" }}
     >
       <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-6">
@@ -1908,7 +1936,7 @@ function ChartSlide({ stats, isActive }: { stats: StatCard[]; isActive: boolean 
 function ComparisonSlide({ title, colA, colB, rows }: { title: string; colA: string; colB: string; rows: ComparisonRow[] }) {
   return (
     <div
-      className="w-full max-w-2xl"
+      className="w-full max-w-xl mx-auto"
       style={{ animation: "fadeIn 0.5s ease-out both" }}
     >
       <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-3">
@@ -1916,12 +1944,12 @@ function ComparisonSlide({ title, colA, colB, rows }: { title: string; colA: str
       </p>
       <h3 className="text-center text-base font-bold text-white mb-4 sm:text-lg">{title}</h3>
       <div className="overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm">
-        <table className="w-full text-sm">
+        <table className="w-full text-xs">
           <thead>
             <tr className="border-b border-white/10">
-              <th className="px-3 py-2.5 text-left text-2xs font-bold uppercase text-white/35 w-1/4">Critere</th>
-              <th className="px-3 py-2.5 text-left text-2xs font-bold uppercase text-white/80 w-[37.5%]">{colA}</th>
-              <th className="px-3 py-2.5 text-left text-2xs font-bold uppercase text-brand-gold w-[37.5%]">{colB}</th>
+              <th className="px-2 py-2 text-left text-2xs font-bold uppercase text-white/35 w-1/4">Critère</th>
+              <th className="px-2 py-2 text-left text-2xs font-bold uppercase text-white/80 w-[37.5%]">{colA}</th>
+              <th className="px-2 py-2 text-left text-2xs font-bold uppercase text-brand-gold w-[37.5%]">{colB}</th>
             </tr>
           </thead>
           <tbody>
@@ -1931,11 +1959,11 @@ function ComparisonSlide({ title, colA, colB, rows }: { title: string; colA: str
                 className="border-b border-white/5 last:border-0"
                 style={{ animation: `fadeIn 0.4s ease-out ${i * 0.07}s both` }}
               >
-                <td className="px-3 py-2.5 text-xs font-semibold text-white/80">{r.label}</td>
-                <td className={`px-3 py-2.5 text-xs ${r.highlight === "a" ? "font-bold text-white bg-white/5" : "text-white/45"}`}>
+                <td className="px-2 py-2 text-xs font-semibold text-white/80 truncate">{r.label}</td>
+                <td className={`px-2 py-2 text-xs ${r.highlight === "a" ? "font-bold text-white bg-white/5" : "text-white/45"}`}>
                   {r.highlight === "a" && <span className="mr-1 text-emerald-400">&#x2714;</span>}{r.colA}
                 </td>
-                <td className={`px-3 py-2.5 text-xs ${r.highlight === "b" ? "font-bold text-brand-gold bg-brand-gold/5" : "text-white/45"}`}>
+                <td className={`px-2 py-2 text-xs ${r.highlight === "b" ? "font-bold text-brand-gold bg-brand-gold/5" : "text-white/45"}`}>
                   {r.highlight === "b" && <span className="mr-1 text-emerald-400">&#x2714;</span>}{r.colB}
                 </td>
               </tr>
@@ -1950,7 +1978,7 @@ function ComparisonSlide({ title, colA, colB, rows }: { title: string; colA: str
 /* ── TAKEAWAYS SLIDE ─── */
 function TakeawaysSlide({ items }: { items: string[] }) {
   return (
-    <div className="w-full max-w-lg">
+    <div className="w-full max-w-md mx-auto">
       <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-5">
         A retenir
       </p>
@@ -1982,7 +2010,7 @@ function TakeawaysSlide({ items }: { items: string[] }) {
 function ProcessSlide({ steps }: { steps: string[] }) {
   const isVertical = steps.length > 3;
   return (
-    <div className="w-full max-w-lg">
+    <div className="w-full max-w-md mx-auto">
       <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-6">
         Processus
       </p>

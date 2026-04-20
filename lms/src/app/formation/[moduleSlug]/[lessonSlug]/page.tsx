@@ -154,102 +154,111 @@ export default async function LessonPage({ params }: Props) {
     <div>
       <ReadingProgressBar />
       <ScrollProgress />
-      {/* Avatar banner */}
+      {/* Avatar banner - now part of the premium flow */}
       {avatar && (
-        <LessonPresenterPanel
-          moduleSlug={moduleSlug}
-          lessonTitle={lesson.title}
-          isAudioPlaying={false}
-        />
+        <div className="mb-4">
+          <LessonPresenterPanel
+            moduleSlug={moduleSlug}
+            lessonTitle={lesson.title}
+            isAudioPlaying={false}
+          />
+        </div>
       )}
 
-      <div className="card-elevated mb-8 overflow-hidden">
-        {/* Breadcrumb + Timer */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-100 bg-gradient-to-r from-white via-brand-gold-soft/25 to-white px-5 py-4 md:px-7">
-          <nav className="flex flex-wrap items-center gap-2 text-sm" aria-label="Fil d'Ariane">
-            <Link href="/formation" className="breadcrumb-pill link-focus">
-              Parcours
-            </Link>
-            <span className="breadcrumb-sep" aria-hidden>
-              /
-            </span>
-            <Link href={`/formation/${mod.slug}`} className="breadcrumb-pill link-focus">
-              {mod.title.replace(/^Module (\d+) — /, "M$1 · ")}
-            </Link>
-          </nav>
-          <LessonTimer lessonKey={key} moduleSlug={moduleSlug} />
-        </div>
+      {/* Hero Section Masterclass - Refonte Incroyable */}
+      <div className="relative mb-12 overflow-hidden rounded-3xl bg-brand-navy shadow-2xl ring-1 ring-brand-gold/20">
+        {/* Gradients pour la profondeur */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a1a2b] via-brand-navy to-brand-navy-deep opacity-90" aria-hidden="true" />
+        <div className="absolute right-0 top-0 -mr-32 -mt-32 h-96 w-96 rounded-full bg-brand-gold/15 blur-[120px] pointer-events-none" aria-hidden="true" />
+        <div className="absolute left-0 bottom-0 -ml-32 -mb-32 h-80 w-80 rounded-full bg-blue-500/10 blur-[100px] pointer-events-none" aria-hidden="true" />
+        
+        <div className="relative flex flex-col lg:flex-row lg:items-stretch justify-between">
+          <div className="flex-1 p-6 md:p-10 lg:p-12 flex flex-col justify-between">
+            <div>
+              {/* Breadcrumb premium */}
+              <nav className="mb-6 flex items-center gap-2 text-[11px] font-bold tracking-[0.15em] text-white/50 uppercase" aria-label="Fil d'Ariane">
+                <Link href="/formation" className="transition hover:text-brand-gold">Parcours</Link>
+                <span>/</span>
+                <Link href={`/formation/${mod.slug}`} className="transition hover:text-brand-gold">{mod.title.replace(/^Module (\d+) — /, "M$1 · ")}</Link>
+              </nav>
 
-        <header className="px-5 py-5 md:px-8 md:py-6">
-          <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-gold">{mod.title}</p>
-          <h1 className="mt-1 text-2xl font-bold leading-tight tracking-tight text-brand-navy md:text-[1.75rem]">
-            {lesson.title}
-          </h1>
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-brand-gold drop-shadow-sm">{mod.title}</p>
+              <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tight text-white md:text-4xl lg:text-5xl lg:leading-[1.1]">
+                {lesson.title}
+              </h1>
 
-          {/* Meta row: timer + duration + difficulty + journey */}
-          <div className="mt-3 flex flex-wrap items-center gap-2">
-            <LessonTimer lessonKey={key} moduleSlug={moduleSlug} />
-            {lesson.duration && (
-              <span className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-0.5 text-3xs font-semibold text-zinc-500">
-                <Clock className="h-3 w-3" /> {Math.floor(lesson.duration / 60) > 0 ? `${Math.floor(lesson.duration / 60)}h` : ""}{lesson.duration % 60 > 0 ? `${lesson.duration % 60}min` : ""}
-              </span>
-            )}
-            {lesson.difficulty && (
-              <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-3xs font-bold ${
-                lesson.difficulty === "avance" ? "bg-amber-50 text-amber-700" :
-                lesson.difficulty === "intermediaire" ? "bg-blue-50 text-blue-700" :
-                "bg-emerald-50 text-emerald-700"
-              }`}>
-                {lesson.difficulty === "avance" ? "Avancé" : lesson.difficulty === "intermediaire" ? "Intermédiaire" : "Débutant"}
-              </span>
-            )}
-            <LessonJourneyBadge moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
+              {/* Badges fusionnés (Gamification & Data) */}
+              <div className="flex flex-wrap items-center gap-3 text-sm text-white/90">
+                {/* Timer lié à Supabase */}
+                <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-md font-medium ring-1 ring-white/5">
+                  <LessonTimer lessonKey={key} moduleSlug={moduleSlug} />
+                </div>
+                {lesson.duration && (
+                  <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-md font-medium ring-1 ring-white/5">
+                    <Clock className="w-4 h-4 text-brand-gold" />
+                    <span>{Math.floor(lesson.duration / 60) > 0 ? `${Math.floor(lesson.duration / 60)}h ` : ""}{lesson.duration % 60 > 0 ? `${lesson.duration % 60}min` : ""}</span>
+                  </div>
+                )}
+                {lesson.difficulty && (
+                  <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-md flex items-center gap-2 ring-1 ring-white/5">
+                    <span className="flex h-2 w-2 rounded-full bg-brand-gold shadow-[0_0_8px_rgba(212,175,55,0.8)]"></span>
+                    <span className="font-semibold">{lesson.difficulty === "avance" ? "Avancé" : lesson.difficulty === "intermediaire" ? "Intermédiaire" : "Débutant"}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Actions toolbar (Boutons revus) */}
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              <BookmarkButton
+                moduleSlug={moduleSlug}
+                lessonSlug={lessonSlug}
+                lessonTitle={lesson.title}
+                moduleTitle={mod.title}
+                variant="button"
+              />
+              <NotesPanelButton moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
+              <PrintableRecap
+                moduleTitle={mod.title}
+                lessonTitle={lesson.title}
+                avatarName={avatar?.name}
+                objectives={lesson.objectives}
+                introduction={recapData?.introduction}
+                sections={recapData?.sections}
+                keyTerms={recapData?.keyTerms}
+              />
+              <div className="ml-auto lg:ml-4">
+                <AICoachButton 
+                  moduleSlug={moduleSlug}
+                  lessonSlug={lessonSlug}
+                  lessonTitle={lesson.title}
+                  variant="inline"
+                />
+              </div>
+            </div>
           </div>
 
-          {/* Objectifs pédagogiques — compact */}
+          {/* Objectifs card inside hero (right side) */}
           {lesson.objectives && lesson.objectives.length > 0 && (
-            <div className="mt-4 rounded-xl border border-brand-gold/20 bg-brand-gold-soft/40 p-3">
-              <p className="mb-1.5 text-2xs font-bold uppercase tracking-wide text-brand-gold">
-                Objectifs
+            <div className="w-full lg:max-w-sm p-6 md:p-10 bg-black/20 backdrop-blur-xl border-t lg:border-t-0 lg:border-l border-white/10 flex flex-col justify-center">
+              <p className="mb-5 text-xs font-bold uppercase tracking-[0.1em] text-brand-gold/90">
+                Dans cette leçon, maîtrisez :
               </p>
-              <ul className="space-y-1">
+              <ul className="space-y-4">
                 {lesson.objectives.map((obj, i) => (
-                  <li key={i} className="flex items-start gap-1.5 text-sm text-zinc-700">
-                    <span className="mt-0.5 text-brand-gold" aria-hidden>✓</span>
-                    {obj}
+                  <li key={i} className="flex items-start gap-3 text-sm text-white/90">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gold/20 text-[10px] text-brand-gold ring-1 ring-brand-gold/40 mt-0.5">✓</span>
+                    <span className="leading-snug">{obj}</span>
                   </li>
                 ))}
               </ul>
+              
+              <div className="mt-8 pt-6 border-t border-white/10">
+                <LessonJourneyBadge moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
+              </div>
             </div>
           )}
-
-          {/* Actions toolbar */}
-          <div className="flex flex-wrap items-center gap-2 mt-4">
-            <BookmarkButton
-              moduleSlug={moduleSlug}
-              lessonSlug={lessonSlug}
-              lessonTitle={lesson.title}
-              moduleTitle={mod.title}
-              variant="button"
-            />
-            <NotesPanelButton moduleSlug={moduleSlug} lessonSlug={lessonSlug} />
-            <PrintableRecap
-              moduleTitle={mod.title}
-              lessonTitle={lesson.title}
-              avatarName={avatar?.name}
-              objectives={lesson.objectives}
-              introduction={recapData?.introduction}
-              sections={recapData?.sections}
-              keyTerms={recapData?.keyTerms}
-            />
-            <AICoachButton 
-              moduleSlug={moduleSlug}
-              lessonSlug={lessonSlug}
-              lessonTitle={lesson.title}
-              variant="inline"
-            />
-          </div>
-        </header>
+        </div>
       </div>
 
       {/* Lesson navigation map */}

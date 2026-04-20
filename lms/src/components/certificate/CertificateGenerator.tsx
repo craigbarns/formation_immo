@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Building2, Lock } from "lucide-react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
-import { getGamificationState, getLevelForXP, BADGES, type GamificationState } from "@/lib/gamification";
+import { getGamificationState, type GamificationState } from "@/lib/gamification";
 import { COURSE } from "@/data/course";
 import { FORMATION_PROGRESS_STORAGE_KEY } from "@/constants/formation-storage";
 import { createClient } from "@/lib/supabase/client";
@@ -97,178 +97,202 @@ export function CertificateGenerator() {
   function generateCertificate() {
     if (!canvasRef.current || !name.trim()) return;
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d")!;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
     const w = 1200;
     const h = 850;
     canvas.width = w;
     canvas.height = h;
 
-    // Background gradient
+    // Background gradient for a soft paper/parchment feel
     const bgGrad = ctx.createLinearGradient(0, 0, w, h);
-    bgGrad.addColorStop(0, "#fffef9");
-    bgGrad.addColorStop(1, "#f9f7f0");
+    bgGrad.addColorStop(0, "#ffffff");
+    bgGrad.addColorStop(0.5, "#fffcf0");
+    bgGrad.addColorStop(1, "#fdfbf7");
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, w, h);
 
-    // Outer border — navy
+    // Subtle background pattern (geometric)
+    ctx.globalAlpha = 0.03;
     ctx.strokeStyle = "#1a3a5c";
-    ctx.lineWidth = 5;
+    ctx.lineWidth = 1;
+    for (let i = 0; i < w; i += 40) {
+      ctx.beginPath();
+      ctx.moveTo(i, 0);
+      ctx.lineTo(i, h);
+      ctx.stroke();
+    }
+    for (let i = 0; i < h; i += 40) {
+      ctx.beginPath();
+      ctx.moveTo(0, i);
+      ctx.lineTo(w, i);
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+
+    // --- Main Borders ---
+    // Outer border (Sleek Navy)
+    ctx.strokeStyle = "#1a3a5c";
+    ctx.lineWidth = 40;
     ctx.strokeRect(20, 20, w - 40, h - 40);
 
-    // Inner border — gold
-    ctx.strokeStyle = "#d4af37";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(32, 32, w - 64, h - 64);
+    // Inner Gold line
+    const goldGrad = ctx.createLinearGradient(0, 0, w, 0);
+    goldGrad.addColorStop(0, "#d4af37");
+    goldGrad.addColorStop(0.5, "#f9e5a2");
+    goldGrad.addColorStop(1, "#d4af37");
+    
+    ctx.strokeStyle = goldGrad;
+    ctx.lineWidth = 4;
+    ctx.strokeRect(50, 50, w - 100, h - 100);
 
-    // Thin gold line inside
+    // Double delicate gold line
     ctx.strokeStyle = "rgba(212,175,55,0.4)";
     ctx.lineWidth = 1;
-    ctx.strokeRect(42, 42, w - 84, h - 84);
+    ctx.strokeRect(60, 60, w - 120, h - 120);
 
-    // Gold corner ornaments
-    const cs = 40;
-    ctx.fillStyle = "#d4af37";
-    const corners = [[42, 42], [w - 42 - cs, 42], [42, h - 42 - cs], [w - 42 - cs, h - 42 - cs]] as [number,number][];
-    corners.forEach(([x, y]) => {
-      ctx.fillRect(x, y, cs, 3);
-      ctx.fillRect(x, y, 3, cs);
-    });
-
-    // Logo / icon placeholder (text-based)
-    ctx.font = "42px serif";
+    // --- Header ---
     ctx.textAlign = "center";
-    ctx.fillText("🏛", w / 2, 115);
+    
+    // Icon badge (Seal circle)
+    const sealX = w / 2;
+    const sealY = 120;
+    const sealRadius = 45;
+    
+    // Outer seal glow
+    ctx.shadowBlur = 20;
+    ctx.shadowColor = "rgba(212,175,55,0.4)";
+    ctx.beginPath();
+    ctx.arc(sealX, sealY, sealRadius + 5, 0, Math.PI * 2);
+    ctx.fillStyle = goldGrad;
+    ctx.fill();
+    ctx.shadowBlur = 0;
 
-    // Institution line
-    ctx.fillStyle = "#d4af37";
-    ctx.font = "bold 13px Arial";
-    ctx.letterSpacing = "3px";
-    ctx.fillText("FORMATION PROFESSIONNELLE IMMOBILIÈRE", w / 2, 155);
+    // Inner seal
+    ctx.beginPath();
+    ctx.arc(sealX, sealY, sealRadius, 0, Math.PI * 2);
+    ctx.fillStyle = "#1a3a5c";
+    ctx.fill();
+
+    // Seal icon
+    ctx.font = "40px serif";
+    ctx.fillText("🏆", sealX, sealY + 15);
+
+    // Institution Name
+    ctx.fillStyle = "#1a3a5c";
+    ctx.font = "800 14px Montserrat, Arial, sans-serif";
+    ctx.letterSpacing = "6px";
+    ctx.fillText("IMMOBILIER HAUTE PERFORMANCE", w / 2, 210);
     ctx.letterSpacing = "0px";
 
-    // Separator line
-    ctx.strokeStyle = "#d4af37";
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.moveTo(w / 2 - 260, 168);
-    ctx.lineTo(w / 2 + 260, 168);
-    ctx.stroke();
+    // Subtitle
+    ctx.fillStyle = "#d4af37";
+    ctx.font = "italic 400 12px Georgia, serif";
+    ctx.fillText("L'excellence opérationnelle au service de la transaction", w / 2, 235);
 
-    // Title
+    // --- Title ---
     ctx.fillStyle = "#1a3a5c";
-    ctx.font = "bold 46px Georgia";
-    ctx.fillText("CERTIFICAT DE RÉUSSITE", w / 2, 230);
+    ctx.font = "900 64px Playfair Display, Georgia, serif";
+    ctx.fillText("CERTIFICAT", w / 2, 330);
+    ctx.font = "400 32px Playfair Display, Georgia, serif";
+    ctx.fillText("DE RÉUSSITE", w / 2, 375);
 
-    // Subtitle separator
-    ctx.strokeStyle = "#d4af37";
-    ctx.lineWidth = 2;
+    // Decorative separator
     ctx.beginPath();
-    ctx.moveTo(w / 2 - 220, 252);
-    ctx.lineTo(w / 2 + 220, 252);
+    ctx.moveTo(w / 2 - 150, 400);
+    ctx.lineTo(w / 2 + 150, 400);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(26,58,92,0.2)";
     ctx.stroke();
 
     // Body text
     ctx.fillStyle = "#555555";
-    ctx.font = "italic 18px Georgia";
-    ctx.fillText("Ce certificat atteste que", w / 2, 300);
+    ctx.font = "400 18px Georgia, serif";
+    ctx.fillText("Ce diplôme est fièrement décerné à", w / 2, 440);
 
-    // Name
-    ctx.fillStyle = "#1a3a5c";
-    ctx.font = "bold 40px Georgia";
-    ctx.fillText(name.trim(), w / 2, 360);
+    // Participant Name (Big & Bold)
+    const nameGrad = ctx.createLinearGradient(w / 2 - 200, 0, w / 2 + 200, 0);
+    nameGrad.addColorStop(0, "#1a3a5c");
+    nameGrad.addColorStop(0.5, "#2c527a");
+    nameGrad.addColorStop(1, "#1a3a5c");
+    ctx.fillStyle = nameGrad;
+    ctx.font = "bold 52px Playfair Display, Georgia, serif";
+    ctx.fillText(name.trim().toUpperCase(), w / 2, 510);
 
-    // Underline name
+    // Border line under name
+    ctx.beginPath();
+    ctx.moveTo(w / 2 - 300, 530);
+    ctx.lineTo(w / 2 + 300, 530);
+    ctx.lineWidth = 2;
     ctx.strokeStyle = "#d4af37";
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.moveTo(w / 2 - 280, 378);
-    ctx.lineTo(w / 2 + 280, 378);
     ctx.stroke();
 
-    // Description
+    // Context
     ctx.fillStyle = "#555555";
-    ctx.font = "italic 17px Georgia";
-    ctx.fillText("a suivi et validé avec succès la formation complète", w / 2, 420);
+    ctx.font = "400 16px Georgia, serif";
+    ctx.fillText("pour la validation complète du cursus de formation", w / 2, 570);
 
     ctx.fillStyle = "#1a3a5c";
-    ctx.font = "bold 26px Georgia";
-    ctx.fillText("Agent Immobilier — Formation Complète 42 Heures", w / 2, 462);
+    ctx.font = "bold 24px Georgia, serif";
+    ctx.fillText("AGENT IMMOBILIER EXPERT — 42 HEURES", w / 2, 605);
 
-    // Modules list
-    ctx.font = "13px Arial";
-    ctx.fillStyle = "#666666";
-    const modules = [
-      "Module 1 : Juridique & conformité  ·  Module 2 : Transaction & négociation",
-      "Module 3 : Financement & fiscalité  ·  Module 4 : Marketing digital",
-      "Module 5 : Visite, closing & fidélisation",
-    ];
-    modules.forEach((mod, i) => {
-      ctx.fillText(mod, w / 2, 505 + i * 22);
-    });
-
-    // Gold separator
-    ctx.strokeStyle = "rgba(212,175,55,0.35)";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(w / 2 - 350, 570);
-    ctx.lineTo(w / 2 + 350, 570);
-    ctx.stroke();
-
-    // Stats
-    const level = gameState ? getLevelForXP(gameState.xp) : null;
-    ctx.font = "bold 13px Arial";
-    ctx.fillStyle = "#1a3a5c";
-    ctx.fillText(
-      `Niveau : ${level?.current.title || "N/A"}  ·  XP : ${gameState?.xp || 0}  ·  Examens réussis : ${examsPassed}/5`,
-      w / 2,
-      600,
-    );
-
-    // Badges earned
-    if (gameState && gameState.earnedBadges.length > 0) {
-      ctx.font = "11px Arial";
-      ctx.fillStyle = "#999999";
-      const badgeNames = gameState.earnedBadges
-        .map((id) => BADGES.find((b) => b.id === id)?.name)
-        .filter(Boolean)
-        .slice(0, 8)
-        .join("  ·  ");
-      ctx.fillText(`Badges obtenus : ${badgeNames}`, w / 2, 628);
-    }
+    // Bottom Stats
+    const statsY = 680;
+    ctx.fillStyle = "#777777";
+    ctx.font = "bold 12px Montserrat, Arial, sans-serif";
+    ctx.letterSpacing = "1px";
+    
+    const statsText = [
+      `XP ACQUISE : ${gameState?.xp || 0}`,
+      `MODULES VALIDÉS : 5/5`,
+      `CRÉDITS FORMATION : 42H (LOI ALUR)`
+    ].join("   •   ");
+    
+    ctx.fillText(statsText, w / 2, statsY);
+    ctx.letterSpacing = "0px";
 
     // Date
-    ctx.font = "13px Arial";
-    ctx.fillStyle = "#888888";
     const dateStr = new Date().toLocaleDateString("fr-FR", {
       day: "numeric",
       month: "long",
-      year: "numeric",
+      year: "numeric"
     });
-    ctx.fillText(`Délivré le ${dateStr}`, w / 2, 670);
+    ctx.fillStyle = "#999999";
+    ctx.font = "italic 13px Georgia, serif";
+    ctx.fillText(`Délivré le ${dateStr}`, w / 2, statsY + 35);
 
-    // Signature lines
-    const sigY = 750;
-    // Left
-    ctx.strokeStyle = "#cccccc";
+    // Signatures
+    const sigBaseY = 760;
+    
+    // Director Signature (Simulated)
+    ctx.font = "italic 28px sript, 'Brush Script MT', cursive";
+    ctx.fillStyle = "#1a3a5c";
+    ctx.fillText("Sarah Benali", 340, sigBaseY - 20);
+    
+    ctx.strokeStyle = "#d4af37";
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(200, sigY);
-    ctx.lineTo(480, sigY);
+    ctx.moveTo(220, sigBaseY);
+    ctx.lineTo(460, sigBaseY);
     ctx.stroke();
+    ctx.font = "bold 10px Montserrat, Arial, sans-serif";
     ctx.fillStyle = "#999999";
-    ctx.font = "11px Arial";
-    ctx.fillText("Organisme de formation", 340, sigY + 18);
-    // Right
-    ctx.beginPath();
-    ctx.moveTo(w - 480, sigY);
-    ctx.lineTo(w - 200, sigY);
-    ctx.stroke();
-    ctx.fillText("Le/La stagiaire", w - 340, sigY + 18);
+    ctx.fillText("DIRECTION PÉDAGOGIQUE", 340, sigBaseY + 15);
 
-    // ALUR compliance badge at bottom
-    ctx.font = "bold 10px Arial";
+    // Student Signature
+    ctx.strokeStyle = "#d4af37";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(w - 460, sigBaseY);
+    ctx.lineTo(w - 220, sigBaseY);
+    ctx.stroke();
+    ctx.fillText("STAGIAIRE RÉCIPIENDAIRE", w - 340, sigBaseY + 15);
+
+    // Final ALUR badge
+    ctx.font = "italic 700 11px Georgia, serif";
     ctx.fillStyle = "#d4af37";
-    ctx.fillText("CONFORME LOI ALUR — RGPD", w / 2, h - 50);
+    ctx.fillText("CERTIFICATION CONFORME DÉCRET N° 2016-173 (LOI ALUR)", w / 2, h - 60);
 
     setGenerated(true);
   }
@@ -276,8 +300,8 @@ export function CertificateGenerator() {
   function downloadPDF() {
     if (!canvasRef.current) return;
     const link = document.createElement("a");
-    link.download = `certificat-formation-immobiliere-${name.replace(/\s+/g, "-").toLowerCase()}.png`;
-    link.href = canvasRef.current.toDataURL("image/png");
+    link.download = `CERTIFICAT_ALUR_EXPERT_${name.replace(/\s+/g, "_").toUpperCase()}.png`;
+    link.href = canvasRef.current.toDataURL("image/png", 1.0);
     link.click();
   }
 

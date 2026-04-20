@@ -19,6 +19,8 @@ export type ModuleAvatar = {
   accentColor: string;
   /** Initiales pour le placeholder */
   initials: string;
+  /** URL de l'image photo générée */
+  photoUrl?: string;
 };
 
 const v = formateurVoices;
@@ -36,6 +38,7 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
       "Professional headshot, French female lawyer 48 years old, elegant dark suit, pearl earrings, warm authoritative smile, law office with legal books background, soft studio lighting, photorealistic --ar 1:1 --style raw --s 250 --q 2",
     accentColor: "#1a3a5c",
     initials: "AV",
+    photoUrl: "/avatars/juridique.png",
   },
   {
     moduleSlug: "transaction",
@@ -49,6 +52,7 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
       "Professional headshot, French-Algerian woman 38 years old, stylish business attire navy blazer, confident welcoming expression, modern real estate agency background, natural light, photorealistic --ar 1:1 --style raw --s 250 --q 2",
     accentColor: "#2563eb",
     initials: "SB",
+    photoUrl: "/avatars/transaction.png",
   },
   {
     moduleSlug: "financement",
@@ -62,6 +66,7 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
       "Professional headshot, French woman 40 years old, sharp analytical expression, tailored charcoal blazer, confident professional smile, financial office with charts on screens background, warm lighting, photorealistic --ar 1:1 --style raw --s 250 --q 2",
     accentColor: "#059669",
     initials: "SM",
+    photoUrl: "/avatars/financement.png",
   },
   {
     moduleSlug: "marketing",
@@ -75,6 +80,7 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
       "Professional headshot, French woman 34 years old, modern creative look, teal blazer over white top, bright energetic smile, contemporary marketing agency with screens and mood boards, natural light, photorealistic --ar 1:1 --style raw --s 250 --q 2",
     accentColor: "#7c3aed",
     initials: "LF",
+    photoUrl: "/avatars/marketing.png",
   },
   {
     moduleSlug: "terrain",
@@ -88,6 +94,7 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
       "Professional headshot, French woman 50 years old, distinguished silver highlights in dark hair, premium navy coat, commanding warm smile, upscale property entrance background, golden hour light, photorealistic --ar 1:1 --style raw --s 250 --q 2",
     accentColor: "#dc2626",
     initials: "NA",
+    photoUrl: "/avatars/terrain.png",
   },
 ];
 

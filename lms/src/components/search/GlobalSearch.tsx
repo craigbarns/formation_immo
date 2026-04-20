@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect, createContext, useContext } from "react";
+import { useState, useMemo, useRef, useEffect, createContext, useContext, useCallback } from "react";
 import Link from "next/link";
 import { Search, X, BookOpen, FileText } from "lucide-react";
 import { COURSE } from "@/data/course";
@@ -60,10 +60,10 @@ interface Props {
 export function GlobalSearch({ isOpen: controlledOpen, onClose }: Props) {
   const [internalOpen, setInternalOpen] = useState(false);
   const open = controlledOpen ?? internalOpen;
-  const setOpen = (v: boolean) => {
+  const setOpen = useCallback((v: boolean) => {
     if (controlledOpen === undefined) setInternalOpen(v);
     if (!v) onClose?.();
-  };
+  }, [controlledOpen, onClose]);
 
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -78,7 +78,7 @@ export function GlobalSearch({ isOpen: controlledOpen, onClose }: Props) {
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
+  }, [open, setOpen]);
 
   useEffect(() => {
     if (open) inputRef.current?.focus();

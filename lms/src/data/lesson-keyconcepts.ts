@@ -485,8 +485,317 @@ export const LESSON_VISUALS: Record<string, LessonVisuals> = {
       "Structurer un suivi acquéreur sur 30 jours pour convertir sans forcer",
     ],
   },
+
+  // ─── M1 : leçons manquantes complémentaires ───────────────────────
+  "juridique/copropriete": {
+    keyConcepts: [
+      { icon: "users", title: "Syndicat de copropriété", description: "Entité juridique obligatoire dès 2 lots, représentée par le syndic", type: "definition" },
+      { icon: "file-text", title: "Règlement de copropriété", description: "Document fondateur fixant les droits, charges et parties communes", type: "rule" },
+      { icon: "alert-triangle", title: "Charges courantes vs travaux", description: "Charges = entretien courant. Travaux votés en AG = provisions exigibles", type: "warning" },
+      { icon: "calendar", title: "État daté", description: "Document obligatoire du syndic lors d'une vente — à obtenir sous 10 jours max", type: "rule" },
+    ],
+    stats: [
+      { label: "Lots en copropriété", value: "9M", unit: "France", color: "navy" },
+      { label: "Fonds travaux obligatoire", value: "5", unit: "% charges/an", color: "gold" },
+      { label: "Délai état daté", value: "10", unit: "jours", color: "blue" },
+    ],
+    comparison: {
+      title: "Parties communes vs Parties privatives",
+      colAHeader: "Communes",
+      colBHeader: "Privatives",
+      rows: [
+        { label: "Accès", colA: "Tous copropriétaires", colB: "Propriétaire seul", highlight: "b" },
+        { label: "Charges", colA: "Réparties par tantièmes", colB: "À la charge du propriétaire", highlight: "a" },
+        { label: "Travaux", colA: "Vote en AG", colB: "Libre sauf règlement", highlight: "a" },
+        { label: "Exemple", colA: "Hall, ascenseur, toiture", colB: "Appartement, cave", highlight: "b" },
+      ],
+    },
+    takeaways: [
+      "Lire le règlement de copropriété avant toute transaction",
+      "Vérifier l'état financier du syndicat (dettes, provisions, fonds travaux)",
+      "Obtenir l'état daté auprès du syndic dès la promesse",
+      "Expliquer les charges et les travaux votés à l'acquéreur",
+    ],
+  },
+
+  "juridique/parcours-interactif": {
+    keyConcepts: [
+      { icon: "eye", title: "Affichage obligatoire", description: "Prix TTC + honoraires TTC en vitrine ET sur chaque annonce sans exception", type: "rule" },
+      { icon: "file-signature", title: "Traçabilité", description: "Conserver une preuve de validation de chaque annonce (email, CRM)", type: "tip" },
+      { icon: "alert-triangle", title: "Sanctions encourues", description: "Amende administrative jusqu'à 15 000 € pour une agence non conforme", type: "warning" },
+    ],
+    stats: [
+      { label: "Amende max agence", value: "15 000", unit: "EUR", color: "red" },
+      { label: "Délai de mise aux normes", value: "Immédiat", unit: "", color: "gold" },
+      { label: "Affichage en vitrine", value: "100", unit: "% obligatoire", color: "navy" },
+    ],
+    takeaways: [
+      "Afficher prix et honoraires sur chaque support sans exception",
+      "Valider chaque annonce par écrit avant diffusion",
+      "Consulter un référent juridique en cas de doute",
+      "Ne jamais différer la mise en conformité pour conserver un mandat",
+    ],
+  },
+
+  // ─── M2 : leçons manquantes ───────────────────────
+  "transaction/prospection": {
+    keyConcepts: [
+      { icon: "map-pin", title: "Farming géo", description: "Zone de prospection de 300 boîtes aux lettres exploitée sur 2 ans minimum", type: "definition" },
+      { icon: "target", title: "Script entrant", description: "Répondre à un appel acheteur et le convertir en rendez-vous vendeur", type: "tip" },
+      { icon: "repeat", title: "Fréquence de contact", description: "7 touches en moyenne avant qu'un prospect accepte un rendez-vous", type: "warning" },
+      { icon: "star", title: "Prospection digitale", description: "Alertes prix, Facebook Marketplace, LinkedIN et Google Business Profile", type: "tip" },
+    ],
+    stats: [
+      { label: "Touches avant RDV", value: "7", unit: "contacts", color: "gold" },
+      { label: "Zone farming idéale", value: "300", unit: "boîtes", color: "navy" },
+      { label: "Taux conversion flyer", value: "0.3-1", unit: "%", color: "blue" },
+      { label: "Coût lead digital", value: "15-50", unit: "EUR", color: "green" },
+    ],
+    takeaways: [
+      "Choisir et défendre une zone farming de 300 boîtes sur 24 mois minimum",
+      "Rédiger un script téléphonique qui obtient des RDV en moins de 90 secondes",
+      "Automatiser la prospection digitale (alertes, farming, pub locale)",
+      "Bâtir un plan de prospection hebdomadaire et le tenir coûte que coûte",
+    ],
+  },
+
+  "transaction/negociation-avancee": {
+    keyConcepts: [
+      { icon: "shield", title: "BATNA", description: "Best Alternative To Negotiated Agreement — votre valeur de repli avant d'entrer en négociation", type: "definition" },
+      { icon: "anchor", title: "Effet d'ancrage", description: "Toujours formuler la première offre : elle oriente psychologiquement l'ensemble de la négociation", type: "warning" },
+      { icon: "sliders", title: "Technique du Vise Haute", description: "Commencer haut pour laisser de la marge de concession visible et valorisée", type: "tip" },
+      { icon: "thumbs-up", title: "ZOPA", description: "Zone Of Possible Agreement — l'espace commun où l'accord est mutuellement acceptable", type: "definition" },
+    ],
+    stats: [
+      { label: "Gain moyen supra-BATNA", value: "+8", unit: "%", color: "green" },
+      { label: "Temps de silence max", value: "7", unit: "secondes", color: "gold" },
+      { label: "Contre-offres moyennes", value: "2-3", unit: "rounds", color: "navy" },
+    ],
+    comparison: {
+      title: "Négociation distributive vs Intégrative",
+      colAHeader: "Distributive",
+      colBHeader: "Intégrative",
+      rows: [
+        { label: "Logique", colA: "Gagnant-perdant", colB: "Gagnant-gagnant", highlight: "b" },
+        { label: "Usage", colA: "Transaction unique", colB: "Relation durable", highlight: "b" },
+        { label: "Levier", colA: "Prix uniquement", colB: "Modalités, délais, garanties", highlight: "b" },
+        { label: "Résultat", colA: "Accord rapide", colB: "Accord plus solide", highlight: "b" },
+      ],
+    },
+    takeaways: [
+      "Calculer son BATNA avant chaque négociation",
+      "Ancrer en premier avec une offre audacieuse mais justifiée",
+      "Utiliser le silence comme outil de pression positive",
+      "Transformer un désaccord de prix en accord sur les modalités",
+    ],
+  },
+
+  // ─── M3 : leçons manquantes ───────────────────────
+  "financement/dispositifs": {
+    keyConcepts: [
+      { icon: "target", title: "Denormandie", description: "Réduction 12-21% pour rénovation dans 245 villes — conditions ressources locataire", type: "tip" },
+      { icon: "home", title: "Malraux", description: "22-30% de réduction pour restauration de biens en secteur sauvegardé", type: "definition" },
+      { icon: "star", title: "Monuments Historiques", description: "Déduction du revenu global sans plafond pour biens classés ou inscrits", type: "tip" },
+      { icon: "alert-triangle", title: "Fin du Pinel", description: "Dispositif Pinel terminé le 31/12/2024 — orienter vers Denormandie et Loc'Avantages", type: "warning" },
+    ],
+    stats: [
+      { label: "Réduction Denormandie", value: "21", unit: "% max", color: "green" },
+      { label: "Réduction Malraux", value: "30", unit: "% max", color: "gold" },
+      { label: "MH : déduction", value: "Sans", unit: "plafond", color: "navy" },
+      { label: "Villes Denormandie", value: "245", unit: "communes", color: "blue" },
+    ],
+    comparison: {
+      title: "Denormandie vs Malraux vs MH",
+      colAHeader: "Denormandie",
+      colBHeader: "Malraux / MH",
+      rows: [
+        { label: "Type de bien", colA: "Ancien à rénover", colB: "Patrimoine classé", highlight: "a" },
+        { label: "Avantage fiscal", colA: "Réduction d'impôt 21%", colB: "Réduction 30% / Sans plafond", highlight: "b" },
+        { label: "Plafond loyer", colA: "Oui (zone)", colB: "Non", highlight: "b" },
+        { label: "Accessibilité", colA: "Large public", colB: "Investisseurs patrimoniaux", highlight: "a" },
+      ],
+    },
+    takeaways: [
+      "Maîtriser les 3 dispositifs actifs 2026 : Denormandie, Malraux, Monuments Historiques",
+      "Expliquer clairement la fin du Pinel à vos clients investisseurs",
+      "Qualifier chaque client investisseur avant de recommander un dispositif",
+      "Orienter vers un CGP pour les profils Malraux et Monuments Historiques",
+    ],
+  },
+
+  "financement/assurances": {
+    keyConcepts: [
+      { icon: "shield", title: "Assurance emprunteur", description: "Décès, PTIA, ITT — délégation d'assurance possible depuis la loi Lemoine 2022", type: "rule" },
+      { icon: "home", title: "PNO — Propriétaire Non Occupant", description: "Obligatoire en copropriété, couvre responsabilité civile et sinistres en vacance", type: "rule" },
+      { icon: "file-text", title: "GLI — Garantie Loyers Impayés", description: "Couvre 12 à 36 mois de loyers impayés + frais de procédure", type: "tip" },
+      { icon: "alert-triangle", title: "Loi Lemoine 2022", description: "Résiliation à tout moment de l'assurance emprunteur — économie moyenne 10 000 €/life", type: "tip" },
+    ],
+    stats: [
+      { label: "Économie délégation", value: "10 000", unit: "EUR/emprunt", color: "green" },
+      { label: "GLI couvre", value: "12-36", unit: "mois loyers", color: "gold" },
+      { label: "PNO/an en copro", value: "80-200", unit: "EUR", color: "navy" },
+      { label: "Loyers impayés France", value: "2-3", unit: "% locataires", color: "red" },
+    ],
+    comparison: {
+      title: "GLI vs Caution vs Visale",
+      colAHeader: "GLI",
+      colBHeader: "Caution / Visale",
+      rows: [
+        { label: "Coût", colA: "2-4% du loyer annuel", colB: "Gratuit (Visale) / Caution", highlight: "b" },
+        { label: "Plafond couverture", colA: "12-36 mois", colB: "Variable", highlight: "a" },
+        { label: "Frais juridiques", colA: "Inclus", colB: "Non inclus", highlight: "a" },
+        { label: "Profil locataire", colA: "CDI exigé souvent", colB: "Tous profils (Visale)", highlight: "b" },
+      ],
+    },
+    takeaways: [
+      "Expliquer la délégation d'assurance emprunteur (loi Lemoine) pour faire économiser vos clients",
+      "Recommander la PNO dès qu'un client loue sans habiter le bien",
+      "Présenter la GLI comme outil de sécurisation du rendement locatif",
+      "Comparer systématiquement GLI, caution et Visale selon le profil locataire",
+    ],
+  },
+
+  // ─── M4 : leçons manquantes ───────────────────────
+  "marketing/portails": {
+    keyConcepts: [
+      { icon: "trending-up", title: "Boost d'annonce", description: "Publication aux heures de pointe (12h-14h, 19h-22h) pour maximiser la visibilité", type: "tip" },
+      { icon: "bar-chart", title: "Taux de contact", description: "Objectif : +2.5% de taux de contact par rapport à la moyenne du portail", type: "stat" },
+      { icon: "camera", title: "Photo de couverture", description: "La 1ère photo génère 90% des clics — investir dans la meilleure prise de vue", type: "warning" },
+      { icon: "star", title: "Profil agence optimisé", description: "Logo HD, description SEO, avis clients, coordonnées complètes", type: "rule" },
+    ],
+    stats: [
+      { label: "Part de marché SeLoger", value: "35", unit: "%", color: "navy" },
+      { label: "Visites Leboncoin/mois", value: "28M", unit: "visiteurs", color: "gold" },
+      { label: "Impact 1ère photo", value: "90", unit: "% des clics", color: "green" },
+      { label: "Boost taux contact", value: "+40", unit: "% avec vidéo", color: "blue" },
+    ],
+    takeaways: [
+      "Optimiser son profil agence SeLoger Pro avec photos HD et avis",
+      "Publier les nouvelles annonces aux heures de pointe du portail",
+      "Choisir le bon abonnement Leboncoin selon le volume de portefeuille",
+      "Analyser les statistiques de visibilité hebdomadaires pour ajuster",
+    ],
+  },
+
+  "marketing/reseaux": {
+    keyConcepts: [
+      { icon: "calendar", title: "Calendrier éditorial", description: "3 à 5 posts/semaine — alterner bien du mois, conseils, coulisses, témoignages", type: "rule" },
+      { icon: "camera", title: "Reels immobiliers", description: "Format vertical 9:16, 30-60 secondes, musique tendance + sous-titres", type: "tip" },
+      { icon: "target", title: "Facebook Ads Local", description: "CPL immobilier : 8-25 EUR selon la zone — cibler rayon 15 km autour de l'agence", type: "tip" },
+      { icon: "trending-up", title: "Instagram vs LinkedIn", description: "Instagram = notoriété locale. LinkedIn = mandants et investisseurs", type: "definition" },
+    ],
+    stats: [
+      { label: "Portée organique IG", value: "5-10", unit: "%", color: "blue" },
+      { label: "CPL Facebook Immo", value: "8-25", unit: "EUR", color: "gold" },
+      { label: "Reels : portée x", value: "3x", unit: "vs photo", color: "green" },
+      { label: "Posts/semaine idéal", value: "3-5", unit: "", color: "navy" },
+    ],
+    comparison: {
+      title: "Instagram vs LinkedIn pour l'immobilier",
+      colAHeader: "Instagram",
+      colBHeader: "LinkedIn",
+      rows: [
+        { label: "Audience cible", colA: "Acheteurs / Locataires", colB: "Investisseurs / Mandants", highlight: "b" },
+        { label: "Format roi", colA: "Reels 30-60s", colB: "Articles + carrousels", highlight: "a" },
+        { label: "Budget pub", colA: "Accessible (5-15€/j)", colB: "Plus élevé", highlight: "a" },
+        { label: "Effet notoriété", colA: "Local fort", colB: "Professionnel", highlight: "b" },
+      ],
+    },
+    takeaways: [
+      "Bâtir un calendrier éditorial de 30 jours avec 3-5 posts/semaine",
+      "Filmer des Reels immobiliers avec iPhone + gimbal pour un max de portée",
+      "Utiliser Facebook Ads avec ciblage géo pour générer des leads acheteurs",
+      "Distinguer la stratégie Instagram (notoriété locale) de LinkedIn (B2B mandants)",
+    ],
+  },
+
+  "marketing/seo": {
+    keyConcepts: [
+      { icon: "search", title: "Google Business Profile", description: "Fiche gratuite indispensable — photos, horaires, avis, Q&A doivent être à jour", type: "rule" },
+      { icon: "map-pin", title: "SEO local", description: "Apparaître dans le 'Local Pack' Google pour des requêtes comme 'agence immobilière Bordeaux'", type: "tip" },
+      { icon: "align-left", title: "Contenu evergreen", description: "1 article/mois ciblant une requête locale longue traîne (ex : 'prix m2 Lyon 3e 2026')", type: "tip" },
+      { icon: "star", title: "Avis Google", description: "+50 avis 4.5★ = 3x plus de clics sur votre profil vs un concurrent sans avis", type: "stat" },
+    ],
+    stats: [
+      { label: "Clics sur résultat #1", value: "28", unit: "%", color: "green" },
+      { label: "Recherches mobiles immo", value: "65", unit: "%", color: "navy" },
+      { label: "Impact 50 avis Google", value: "3x", unit: "plus de clics", color: "gold" },
+      { label: "Délai SEO efficace", value: "3-6", unit: "mois", color: "blue" },
+    ],
+    takeaways: [
+      "Optimiser et mettre à jour sa fiche Google Business Profile chaque semaine",
+      "Publier 1 article SEO/mois ciblant une requête locale à fort volume",
+      "Solliciter des avis Google après chaque transaction conclue",
+      "Dominer les requêtes 'agence immobilière + ville' en 6 mois de travail régulier",
+    ],
+  },
+
+  // ─── M5 : leçons manquantes ───────────────────────
+  "terrain/argumentaire": {
+    keyConcepts: [
+      { icon: "target", title: "Méthode CAB", description: "Caractéristique → Avantage → Bénéfice : toujours finir sur ce que ça apporte au client", type: "definition" },
+      { icon: "heart", title: "Bénéfices émotionnels", description: "Les clients achètent sur l'émotion et justifient par la raison — cibler d'abord le ressenti", type: "tip" },
+      { icon: "check-circle", title: "Pitch 90 secondes", description: "Présentation de l'agence : qui vous êtes, votre spécialité locale, 1 chiffre preuves sociales", type: "rule" },
+      { icon: "shield", title: "Réfutation d'objections", description: "Écouter complètement → reformuler → valider → répondre (méthode ELEVE)", type: "tip" },
+    ],
+    stats: [
+      { label: "Objections avant achat", value: "5-7", unit: "en moyenne", color: "gold" },
+      { label: "Décision émotionnelle", value: "95", unit: "% du temps", color: "blue" },
+      { label: "Durée pitch idéal", value: "90", unit: "secondes", color: "navy" },
+    ],
+    comparison: {
+      title: "Argumentation Caractéristique vs Bénéfice",
+      colAHeader: "Caractéristique (mauvais)",
+      colBHeader: "Bénéfice (bon)",
+      rows: [
+        { label: "Exemple surface", colA: "\"80 m² au sol\"", colB: "\"Assez grand pour un bureau à domicile\"", highlight: "b" },
+        { label: "Exemple orientation", colA: "\"Plein Sud\"", colB: "\"Salon lumineux toute la journée\"", highlight: "b" },
+        { label: "Exemple quartier", colA: "\"Proche école\"", colB: "\"Vos enfants iront à l'école à pied\"", highlight: "b" },
+        { label: "Effet client", colA: "Neutre", colB: "Projection émotionnelle", highlight: "b" },
+      ],
+    },
+    takeaways: [
+      "Construire votre pitch agence en 90 secondes percutants",
+      "Transformer chaque caractéristique en bénéfice concret (méthode CAB)",
+      "Répondre aux 10 objections fréquentes sans jamais écraser le client",
+      "Closer sur l'émotion — pas sur les données techniques du bien",
+    ],
+  },
+
+  "terrain/promesse": {
+    keyConcepts: [
+      { icon: "file-signature", title: "Promesse unilatérale de vente", description: "Le vendeur s'engage seul, l'acquéreur dispose d'une option d'achat pendant un délai fixé", type: "definition" },
+      { icon: "shield", title: "Conditions suspensives", description: "Crédit, permis, servitudes — rédigées précisément pour éviter tout litige", type: "rule" },
+      { icon: "clock", title: "Délai de rétractation SRU", description: "10 jours francs pour l'acquéreur particulier après notification de la promesse", type: "warning" },
+      { icon: "check-square", title: "Séquestre", description: "5 à 10% du prix consigné chez le notaire ou l'agence — conditions de restitution à anticiper", type: "tip" },
+    ],
+    stats: [
+      { label: "Rétractation SRU", value: "10", unit: "jours francs", color: "red" },
+      { label: "Séquestre standard", value: "5-10", unit: "% du prix", color: "gold" },
+      { label: "Délai réalisation", value: "3-4", unit: "mois", color: "navy" },
+      { label: "Enregistrement PUV", value: "10", unit: "jours obligatoire", color: "blue" },
+    ],
+    comparison: {
+      title: "Promesse unilatérale vs Compromis",
+      colAHeader: "PUV",
+      colBHeader: "Compromis",
+      rows: [
+        { label: "Engagement vendeur", colA: "Oui (option donnée)", colB: "Oui", highlight: "a" },
+        { label: "Engagement acheteur", colA: "Non (option d'achat)", colB: "Oui (bilatéral)", highlight: "b" },
+        { label: "Enregistrement", colA: "Obligatoire sous 10j", colB: "Non obligatoire", highlight: "b" },
+        { label: "Usage courant", colA: "Cas spécifiques", colB: "Majoritaire en France", highlight: "b" },
+      ],
+    },
+    takeaways: [
+      "Rédiger une promesse unilatérale avec toutes les conditions suspensives",
+      "Gérer correctement le délai de rétractation de 10 jours francs",
+      "Sécuriser le séquestre et ses conditions de restitution",
+      "Préparer le dossier notaire sans accroc dès la promesse signée",
+    ],
+  },
 };
 
 export function getVisuals(moduleSlug: string, lessonSlug: string): LessonVisuals | null {
   return LESSON_VISUALS[`${moduleSlug}/${lessonSlug}`] ?? null;
 }
+
