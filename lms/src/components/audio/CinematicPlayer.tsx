@@ -2342,7 +2342,13 @@ function TitleSlide({
           </p>
         </div>
       )}
-      <h2 className="mt-4 text-2xl font-black text-white sm:text-4xl leading-tight drop-shadow-lg">
+      <h2
+        className="mt-4 text-3xl font-black text-white sm:text-transparent sm:bg-clip-text bg-gradient-to-br from-white via-white/92 to-white/72 sm:text-5xl leading-tight"
+        style={{
+          filter: "drop-shadow(0 0 14px rgba(255,255,255,0.18))",
+          textShadow: "0 2px 10px rgba(0,0,0,0.45)",
+        }}
+      >
         {title}
       </h2>
       {avatar && (
@@ -2417,24 +2423,30 @@ function ConceptSlide({ concept, index, total, moduleSlug }: { concept: KeyConce
         </div>
 
         <div className="relative text-center">
-          <div
-            className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl"
-            style={{
-              animation: "scaleIn 0.5s 0.25s both cubic-bezier(0.16,1,0.3,1)",
-              filter: `drop-shadow(0 0 16px color-mix(in srgb, ${skin.accent} 35%, transparent))`,
-              background: `color-mix(in srgb, ${skin.secondary} 30%, transparent)`,
-              border: `1px solid color-mix(in srgb, ${skin.accent} 35%, transparent)`,
-            }}
-          >
-            <EmojiIcon emoji={CONCEPT_ICONS[concept.icon] ?? "📌"} className="h-9 w-9" />
+          <div className="relative mx-auto mb-6 flex h-20 w-20 items-center justify-center"
+               style={{ animation: "scaleIn 0.5s 0.25s both cubic-bezier(0.16,1,0.3,1)" }}>
+            <div
+              className="absolute inset-0 rounded-2xl motion-safe:animate-pulse motion-reduce:animate-none"
+              style={{ background: skin.accent, filter: "blur(18px)", opacity: 0.34 }}
+            />
+            <div
+              className="relative flex h-16 w-16 items-center justify-center rounded-2xl backdrop-blur-xl"
+              style={{
+                background: `linear-gradient(135deg, color-mix(in srgb, ${skin.secondary} 40%, transparent), color-mix(in srgb, ${skin.primary} 40%, transparent))`,
+                border: `1px solid color-mix(in srgb, ${skin.accent} 60%, transparent)`,
+                boxShadow: `inset 0 0 20px color-mix(in srgb, ${skin.accent} 20%, transparent), 0 10px 30px rgba(0,0,0,0.5)`,
+              }}
+            >
+              <EmojiIcon emoji={CONCEPT_ICONS[concept.icon] ?? "📌"} className="h-10 w-10 drop-shadow-md" />
+            </div>
           </div>
 
-          <h3 className="text-2xl font-black text-white sm:text-3xl leading-tight"
+          <h3 className="text-3xl font-black text-white sm:text-transparent sm:bg-clip-text bg-gradient-to-b from-white to-white/76 sm:text-4xl leading-tight drop-shadow-sm"
             style={{ animation: "fadeInUp 0.5s 0.3s both cubic-bezier(0.16,1,0.3,1)" }}>
             {concept.title}
           </h3>
 
-          <p className="mt-4 text-base leading-relaxed text-white/90 max-w-md mx-auto"
+          <p className="mt-4 text-lg leading-relaxed text-white/90 max-w-md mx-auto drop-shadow-md"
             style={{ animation: "fadeInUp 0.5s 0.4s both cubic-bezier(0.16,1,0.3,1)" }}>
             {concept.description}
           </p>
@@ -2727,20 +2739,25 @@ function HighlightSlide({ statement, moduleSlug }: { statement: string; moduleSl
           animation: "fadeIn 0.6s ease-out both",
         }}>
         {/* Glow behind */}
-        <div className="absolute inset-0 rounded-2xl opacity-30 pointer-events-none"
-          style={{ background: `radial-gradient(ellipse 50% 40% at 50% 50%, color-mix(in srgb, ${skin.accent} 25%, transparent), transparent 70%)` }} />
+        <div
+          className="absolute inset-0 rounded-2xl opacity-40 pointer-events-none motion-safe:animate-pulse motion-reduce:animate-none"
+          style={{ background: `radial-gradient(ellipse 50% 40% at 50% 50%, color-mix(in srgb, ${skin.accent} 30%, transparent), transparent 70%)` }}
+        />
 
         {/* Corner ornaments */}
-        <div className="absolute top-0 left-0 h-10 w-10 border-l-2 border-t-2 border-brand-gold/60 rounded-tl-xl" />
-        <div className="absolute top-0 right-0 h-10 w-10 border-r-2 border-t-2 border-brand-gold/60 rounded-tr-xl" />
-        <div className="absolute bottom-0 left-0 h-10 w-10 border-l-2 border-b-2 border-brand-gold/60 rounded-bl-xl" />
-        <div className="absolute bottom-0 right-0 h-10 w-10 border-r-2 border-b-2 border-brand-gold/60 rounded-br-xl" />
+        <div className="absolute top-0 left-0 h-10 w-10 border-l-2 border-t-2 border-brand-gold/60 rounded-tl-xl shadow-[0_0_10px_rgba(212,175,55,0.3)]" />
+        <div className="absolute top-0 right-0 h-10 w-10 border-r-2 border-t-2 border-brand-gold/60 rounded-tr-xl shadow-[0_0_10px_rgba(212,175,55,0.3)]" />
+        <div className="absolute bottom-0 left-0 h-10 w-10 border-l-2 border-b-2 border-brand-gold/60 rounded-bl-xl shadow-[0_0_10px_rgba(212,175,55,0.3)]" />
+        <div className="absolute bottom-0 right-0 h-10 w-10 border-r-2 border-b-2 border-brand-gold/60 rounded-br-xl shadow-[0_0_10px_rgba(212,175,55,0.3)]" />
 
-        <p className="text-2xs font-bold uppercase tracking-[0.3em] text-brand-gold mb-6">
+        <div className="absolute top-1/2 left-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-24 blur-[56px] pointer-events-none"
+             style={{ background: skin.accent }} />
+
+        <p className="relative text-2xs font-bold uppercase tracking-[0.3em] text-brand-gold mb-6 drop-shadow-md">
           Point cle
         </p>
-        <blockquote className="relative text-xl font-black text-white leading-tight sm:text-3xl"
-          style={{ textShadow: `0 0 30px color-mix(in srgb, ${skin.accent} 35%, transparent), 0 2px 10px rgba(0,0,0,0.5)` }}>
+        <blockquote className="relative text-2xl font-black text-white sm:text-transparent sm:bg-clip-text bg-gradient-to-br from-white via-white to-white/72 leading-tight sm:text-4xl"
+          style={{ filter: `drop-shadow(0 0 18px color-mix(in srgb, ${skin.accent} 30%, transparent))` }}>
           &ldquo;{statement}&rdquo;
         </blockquote>
 
@@ -2769,11 +2786,15 @@ function TermSlide({ term, context, moduleSlug }: { term: string; context: strin
         }}
       >
         <div
-          className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl"
-          style={{ background: `color-mix(in srgb, ${skin.accent} 30%, transparent)` }}
+          className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full blur-[46px]"
+          style={{ background: `color-mix(in srgb, ${skin.accent} 35%, transparent)` }}
         />
-        <h3 className="text-3xl sm:text-4xl font-black text-white leading-tight">{term}</h3>
-        <p className="mt-4 text-sm text-white/80">{context}</p>
+        <div
+          className="pointer-events-none absolute -left-16 -bottom-16 h-56 w-56 rounded-full blur-[46px]"
+          style={{ background: `color-mix(in srgb, ${skin.secondary} 24%, transparent)` }}
+        />
+        <h3 className="relative text-4xl sm:text-6xl font-black text-white sm:text-transparent sm:bg-clip-text bg-gradient-to-b from-white to-white/76 leading-tight drop-shadow-xl">{term}</h3>
+        <p className="relative mt-6 text-base sm:text-lg font-medium text-white/90 drop-shadow-md">{context}</p>
       </div>
     </div>
   );
@@ -2792,20 +2813,24 @@ function FocusSlide({ title, body, icon, moduleSlug }: { title: string; body: st
           background: `linear-gradient(160deg, color-mix(in srgb, ${skin.primary} 45%, black), rgba(255,255,255,0.04))`,
         }}
       >
-        <div className="flex items-start gap-4">
-          <div
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
-            style={{
-              background: `color-mix(in srgb, ${skin.accent} 22%, transparent)`,
-              boxShadow: `0 0 20px color-mix(in srgb, ${skin.accent} 28%, transparent)`,
-              border: `1px solid color-mix(in srgb, ${skin.accent} 50%, transparent)`,
-            }}
-          >
-            <EmojiIcon emoji={icon ? (CONCEPT_ICONS[icon] ?? "💡") : "💡"} className="h-6 w-6" />
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 text-center sm:text-left">
+          <div className="relative group">
+            <div className="absolute inset-0 rounded-2xl blur-xl opacity-50 group-hover:opacity-80 transition-opacity duration-500"
+                 style={{ background: skin.accent }} />
+            <div
+              className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl backdrop-blur-xl"
+              style={{
+                background: `linear-gradient(135deg, color-mix(in srgb, ${skin.secondary} 40%, transparent), color-mix(in srgb, ${skin.primary} 40%, transparent))`,
+                boxShadow: `inset 0 0 20px color-mix(in srgb, ${skin.accent} 30%, transparent)`,
+                border: `1px solid color-mix(in srgb, ${skin.accent} 60%, transparent)`,
+              }}
+            >
+              <EmojiIcon emoji={icon ? (CONCEPT_ICONS[icon] ?? "💡") : "💡"} className="h-8 w-8 drop-shadow-lg" />
+            </div>
           </div>
-          <div>
-            <h3 className="text-2xl font-black text-white leading-tight">{title}</h3>
-            <p className="mt-3 text-base leading-relaxed text-white/85">{body}</p>
+          <div className="flex-1">
+            <h3 className="text-3xl font-black text-white sm:text-transparent sm:bg-clip-text bg-gradient-to-br from-white to-white/84 leading-tight pb-1 drop-shadow-md">{title}</h3>
+            <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/90">{body}</p>
           </div>
         </div>
       </div>
@@ -2890,11 +2915,16 @@ function TrainerTipSlide({ concept, avatar, moduleSlug }: { concept: KeyConcept;
         <p className="text-2xs font-bold uppercase tracking-widest text-brand-gold mb-3">
           Conseil formateur :
         </p>
-        <div className="flex items-start gap-3">
-          <EmojiIcon emoji={CONCEPT_ICONS[concept.icon] ?? "💡"} className="h-8 w-8 shrink-0" />
-          <div>
-            <h3 className="text-base font-black text-white mb-1">{concept.title}</h3>
-            <p className="text-sm leading-relaxed text-white/80">{concept.description}</p>
+        <div className="flex flex-col sm:flex-row items-start gap-4">
+          <div className="relative">
+            <div className="absolute inset-0 rounded-full blur-lg opacity-34 motion-safe:animate-pulse motion-reduce:animate-none" style={{ background: skin.accent }} />
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm shadow-xl">
+              <EmojiIcon emoji={CONCEPT_ICONS[concept.icon] ?? "💡"} className="h-6 w-6" />
+            </div>
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl font-black text-white sm:text-transparent sm:bg-clip-text bg-gradient-to-r from-white to-white/84 mb-2 drop-shadow-sm">{concept.title}</h3>
+            <p className="text-base leading-relaxed text-white/90 drop-shadow-sm">{concept.description}</p>
           </div>
         </div>
       </div>
