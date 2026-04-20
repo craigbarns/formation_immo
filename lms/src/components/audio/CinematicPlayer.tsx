@@ -89,6 +89,15 @@ const CHAPTER_INFO: Record<string, { icon: string; color: string; bg: string; gr
 
 const CHAPTER_ORDER = ["Introduction", "Concepts clés", "Données", "Comparatif", "À retenir", "Fin"];
 
+const CHAPTER_TOPBAR_LABELS: Record<string, string> = {
+  "Introduction": "INTRO",
+  "Concepts clés": "CONCEPTS",
+  "Données": "DATA",
+  "Comparatif": "COMPARATIF",
+  "À retenir": "CHECKPOINT",
+  "Fin": "FIN",
+};
+
 function buildChapterLabels(slides: Slide[]): ChapterLabel[] {
   const chapters: ChapterLabel[] = [];
   let lastChapter = "";
@@ -113,6 +122,26 @@ function buildChapterLabels(slides: Slide[]): ChapterLabel[] {
 
 function getChapterForSlide(chapters: ChapterLabel[], slideIndex: number): ChapterLabel | null {
   return chapters.find((c) => slideIndex >= c.startSlide && slideIndex <= c.endSlide) ?? null;
+}
+
+/**
+ * Barre de chapitres "executive": un seul onglet par chapitre, sans répétitions,
+ * même si les types de slides reviennent plus tard dans la timeline.
+ */
+function buildUniqueChapterLabels(slides: Slide[]): ChapterLabel[] {
+  const raw = buildChapterLabels(slides);
+  const seen = new Set<string>();
+  const unique: ChapterLabel[] = [];
+
+  for (const name of CHAPTER_ORDER) {
+    const first = raw.find((c) => c.name === name);
+    if (first && !seen.has(name)) {
+      seen.add(name);
+      unique.push({ ...first });
+    }
+  }
+
+  return unique;
 }
 
 /* ------------------------------------------------------------------ */
@@ -157,6 +186,37 @@ function fmt(s: number): string {
   const m = Math.floor(s / 60);
   const sec = Math.floor(s % 60);
   return `${m}:${sec.toString().padStart(2, "0")}`;
+}
+
+function getSlideDisplayTitle(slide: Slide): string {
+  switch (slide.kind) {
+    case "title":
+      return "Introduction";
+    case "concept":
+      return slide.concept.title;
+    case "stats":
+      return "Chiffres clés";
+    case "chart":
+      return "Visualisation";
+    case "comparison":
+      return slide.title;
+    case "takeaways":
+      return "À retenir";
+    case "process":
+      return "Processus";
+    case "highlight":
+      return "Point clé";
+    case "term":
+      return slide.term;
+    case "focus":
+      return slide.title;
+    case "checkpoint":
+      return slide.title;
+    case "trainer-tip":
+      return "Conseil formateur";
+    case "end":
+      return "Synthèse";
+  }
 }
 
 const SPEEDS = [0.75, 1, 1.25, 1.5, 2] as const;
@@ -544,6 +604,7 @@ export function CinematicPlayer({
     [baseSlides, cues, visuals, moduleSlug]
   );
   const chapters = useMemo(() => buildChapterLabels(slides), [slides]);
+  const topBarChapters = useMemo(() => buildUniqueChapterLabels(slides), [slides]);
 
   clearedQuizRef.current = clearedQuizCount;
   playingRef.current = playing;
@@ -594,7 +655,7 @@ export function CinematicPlayer({
       setManualSlide((prev) => {
         if (prev === null || !el.duration) return prev;
         const perSlide = el.duration / slides.length;
-        const boundary = (prev + 1) * perSlide;
+        const boundary = cues?.slides[prev + 1]?.start ?? (prev + 1) * perSlide;
         if (t >= boundary - 0.05) return null;
         return prev;
       });
@@ -626,7 +687,7 @@ export function CinematicPlayer({
       el.removeEventListener("timeupdate", onTime);
       el.removeEventListener("ended", onEnd);
     };
-  }, [audioQuizSchedule, slides.length]);
+  }, [audioQuizSchedule, slides.length, cues]);
 
   useEffect(() => {
     setClearedQuizCount(0);
@@ -734,18 +795,20 @@ export function CinematicPlayer({
   const goToSlide = useCallback((i: number) => {
     const el = audioRef.current;
     if (!el || !loaded) return;
+    const cueStart = cues?.slides[i]?.start;
     const perSlide = duration / slides.length;
     const cap = maxSeekTime();
-    const targetTime = Math.min(i * perSlide, cap);
+    const targetTime = Math.min(cueStart ?? i * perSlide, cap);
     el.currentTime = targetTime;
     setManualSlide(i);
-  }, [loaded, duration, slides.length, maxSeekTime]);
+    setCurrent(targetTime);
+  }, [loaded, duration, slides.length, cues, maxSeekTime]);
 
   const navigateSlide = useCallback((dir: -1 | 1) => {
-    const current = manualSlide ?? 0;
-    const next = Math.max(0, Math.min(slides.length - 1, current + dir));
+    const currentSlide = manualSlide ?? activeSlide;
+    const next = Math.max(0, Math.min(slides.length - 1, currentSlide + dir));
     goToSlide(next);
-  }, [manualSlide, slides.length, goToSlide]);
+  }, [manualSlide, activeSlide, slides.length, goToSlide]);
 
   const handleQuizAnswer = useCallback((isCorrect: boolean) => {
     if (!isCorrect) { setQuizFeedback("wrong"); return; }
@@ -1026,15 +1089,15 @@ export function CinematicPlayer({
     
     <div
       ref={containerRef}
-      className={`overflow-hidden rounded-2xl border-2 border-brand-navy/20 shadow-2xl ${
+      className={`overflow-hidden rounded-2xl border border-white/10 bg-[#05070b] shadow-[0_28px_80px_rgba(2,6,23,0.28)] ${
         isFullscreen ? "fixed inset-0 z-50 rounded-none border-0 flex flex-col" : ""
       }`}
     >
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
 
       {/* ── CHAPTER PROGRESS BAR ───────────────────────── */}
-      <div className="flex bg-[var(--surface-dark)] border-b border-white/5">
-        {chapters.map((ch) => {
+      <div className="flex gap-px border-b border-white/[0.08] bg-[#060b13] p-1">
+        {topBarChapters.map((ch) => {
           const info = CHAPTER_INFO[ch.name];
           const isActive = currentChapter?.name === ch.name;
           const isPast = currentChapter
@@ -1045,21 +1108,32 @@ export function CinematicPlayer({
               key={ch.name}
               type="button"
               onClick={() => goToSlide(ch.startSlide)}
-              className="flex-1 flex flex-col items-center gap-0.5 py-1.5 transition-all duration-300 hover:bg-white/5"
+              className="group relative flex h-10 flex-1 flex-col items-center justify-center gap-0.5 overflow-hidden rounded-lg transition-all duration-300 hover:bg-white/[0.08]"
               title={ch.name}
+              style={{
+                background: isActive
+                  ? `linear-gradient(135deg, ${info?.color ?? "var(--brand-gold)"}24, rgba(255,255,255,0.055))`
+                  : isPast
+                  ? "rgba(255,255,255,0.035)"
+                  : "transparent",
+                boxShadow: isActive ? `inset 0 0 0 1px ${info?.color ?? "var(--brand-gold)"}33` : "none",
+              }}
             >
-              <span className="flex h-4 w-4 items-center justify-center" style={{ filter: isActive || isPast ? "none" : "grayscale(1) opacity(0.3)" }}>
+              <span
+                className="flex h-4 w-4 items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                style={{ filter: isActive || isPast ? "none" : "grayscale(1) opacity(0.35)" }}
+              >
                 <EmojiIcon emoji={info?.icon ?? "●"} className="h-3.5 w-3.5" />
               </span>
               <span
-                className="text-3xs font-bold uppercase tracking-wide leading-none transition-colors duration-300 hidden sm:block"
+                className="hidden text-3xs font-bold uppercase leading-none tracking-wide transition-colors duration-300 sm:block"
                 style={{ color: isActive ? (info?.color ?? "var(--brand-gold)") : isPast ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.25)" }}
               >
-                {ch.name}
+                {CHAPTER_TOPBAR_LABELS[ch.name] ?? ch.name}
               </span>
               <div
-                className="mt-0.5 h-0.5 w-full rounded-full transition-all duration-500"
-                style={{ background: isActive ? (info?.color ?? "var(--brand-gold)") : isPast ? "rgba(255,255,255,0.15)" : "transparent" }}
+                className="absolute inset-x-2 bottom-1 h-0.5 rounded-full transition-all duration-500"
+                style={{ background: isActive ? (info?.color ?? "var(--brand-gold)") : isPast ? "rgba(255,255,255,0.18)" : "transparent" }}
               />
             </button>
           );
@@ -1072,7 +1146,7 @@ export function CinematicPlayer({
           isFullscreen ? "flex-1" : "aspect-video"
         }`}
         style={{
-          background: `linear-gradient(135deg, ${theme.primary} 0%, ${theme.secondary} 50%, ${theme.primary} 100%)`,
+          background: `linear-gradient(140deg, color-mix(in srgb, ${theme.primary} 88%, #030712) 0%, #05070b 48%, color-mix(in srgb, ${theme.secondary} 72%, #030712) 100%)`,
         }}
       >
         {/* Module watermark */}
@@ -1083,19 +1157,27 @@ export function CinematicPlayer({
           <span className="text-[20rem] leading-none">{theme.watermark}</span>
         </div>
 
-        {/* Voice signature */}
-        <div
-          className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 text-3xs font-medium tracking-wider uppercase pointer-events-none"
-          style={{ color: theme.voiceSignatureColor }}
-        >
-          {moduleTitle ? `${moduleTitle} · ${theme.voiceSignature}` : theme.voiceSignature}
-        </div>
-
         {/* Slide-specific background patterns */}
         <SlideBackground kind={slide.kind} moduleSlug={moduleSlug} />
 
         {/* Cinematic vignette + subtle film grain */}
         <div className="pointer-events-none absolute inset-0 z-[1]">
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 18%, transparent 78%, rgba(0,0,0,0.34) 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-0 opacity-[0.055]"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(180deg, rgba(255,255,255,0.45) 1px, transparent 1px)",
+              backgroundSize: "72px 72px",
+              maskImage: "linear-gradient(to bottom, transparent, black 16%, black 84%, transparent)",
+            }}
+          />
           <div
             className="absolute inset-0"
             style={{
@@ -1113,8 +1195,30 @@ export function CinematicPlayer({
           />
         </div>
 
+        {/* Premium module signature */}
+        {(moduleTitle || theme.voiceSignature) && (
+          <div className="pointer-events-none absolute bottom-3 left-3 z-20 hidden max-w-[62%] items-center gap-2 rounded-full border border-white/10 bg-black/35 px-3 py-1.5 shadow-lg backdrop-blur-md sm:flex">
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ background: theme.secondary, boxShadow: `0 0 14px ${theme.secondary}` }}
+            />
+            {moduleTitle && (
+              <span className="truncate text-3xs font-bold uppercase tracking-[0.18em] text-white/85">
+                {moduleTitle}
+              </span>
+            )}
+            {moduleTitle && <span className="text-white/25">•</span>}
+            <span
+              className="truncate text-3xs font-semibold"
+              style={{ color: theme.voiceSignatureColor }}
+            >
+              {theme.voiceSignature.replace("Voix : ", "")}
+            </span>
+          </div>
+        )}
+
         {/* Slide content avec transition */}
-        <div className="relative flex h-full w-full items-center justify-center p-6 sm:p-10">
+        <div className="relative flex h-full w-full items-center justify-center p-5 sm:p-8 lg:p-10">
           <div
             key={activeSlide}
             className="relative z-[2] h-full w-full"
@@ -1324,20 +1428,23 @@ export function CinematicPlayer({
         )}
 
         {/* Chapter label + slide counter */}
-        <div className="absolute top-3 right-3 flex items-center gap-2">
+        <div className="absolute top-3 right-3 z-20 flex max-w-[62%] items-center gap-2">
+          <span className="hidden truncate rounded-full border border-white/10 bg-black/45 px-2.5 py-1 text-2xs font-semibold text-white/80 shadow-lg backdrop-blur-md md:inline">
+            {getSlideDisplayTitle(slide)}
+          </span>
           {currentChapter && (
-            <span className="rounded-full bg-black/40 px-2.5 py-1 text-2xs font-bold uppercase tracking-wider text-brand-gold/80 backdrop-blur-sm">
+            <span className="rounded-full border border-brand-gold/20 bg-black/45 px-2.5 py-1 text-2xs font-bold uppercase tracking-wider text-brand-gold/85 shadow-lg backdrop-blur-md">
               {currentChapter.name}
             </span>
           )}
-          <span className="rounded-full bg-black/40 px-2.5 py-1 text-2xs font-bold text-white/80 backdrop-blur-sm tabular-nums">
+          <span className="rounded-full border border-white/10 bg-black/45 px-2.5 py-1 text-2xs font-bold text-white/80 shadow-lg backdrop-blur-md tabular-nums">
             {activeSlide + 1} / {slides.length}
           </span>
         </div>
 
         {/* Avatar badge */}
         {avatar && (
-          <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full bg-black/40 px-3 py-1.5 backdrop-blur-sm">
+          <div className="absolute top-3 left-3 z-20 flex items-center gap-2 rounded-full border border-white/10 bg-black/45 px-3 py-1.5 shadow-lg backdrop-blur-md">
             <div
               className="flex h-6 w-6 items-center justify-center rounded-full text-2xs font-bold text-white shadow-md"
               style={{ backgroundColor: avatar.accentColor }}
@@ -1441,7 +1548,7 @@ export function CinematicPlayer({
       </div>
 
       {/* ── CONTROLS BAR ───────────────────────────────── */}
-      <div className="bg-[var(--surface-dark)] px-4 py-3 space-y-2">
+      <div className="space-y-2 border-t border-white/[0.08] bg-[linear-gradient(180deg,#0b1220_0%,#070d18_100%)] px-4 py-3">
         {/* Progress bar with preview */}
         <ProgressPreview
           slides={slides}
@@ -1457,7 +1564,7 @@ export function CinematicPlayer({
         />
         <div
           onClick={quizOverlay ? undefined : seekBar}
-          className={`relative h-2 rounded-full bg-white/10 group ${
+          className={`group relative h-2 rounded-full bg-white/[0.09] shadow-inner ${
             quizOverlay ? "cursor-not-allowed opacity-70" : "cursor-pointer"
           }`}
         >
@@ -1760,10 +1867,22 @@ function SlideBackground({ kind, moduleSlug }: { kind: Slide["kind"]; moduleSlug
     case "highlight":
       return (
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          {/* Floating abstract blobs via box-shadows trick */}
-          <div className="absolute top-[-40px] right-[-40px] h-48 w-48 rounded-full blur-2xl" style={{ background: `color-mix(in srgb, ${skin.secondary} 22%, transparent)` }} />
-          <div className="absolute bottom-[-60px] left-[-20px] h-56 w-56 rounded-full blur-3xl" style={{ background: `color-mix(in srgb, ${skin.primary} 35%, transparent)` }} />
-          <div className="absolute top-1/2 left-1/4 h-32 w-32 rounded-full blur-2xl" style={{ background: `color-mix(in srgb, ${skin.accent} 18%, transparent)` }} />
+          <div
+            className="absolute inset-0 opacity-[0.08]"
+            style={{
+              backgroundImage:
+                "linear-gradient(115deg, transparent 0 18%, rgba(255,255,255,0.85) 18.2%, transparent 18.6% 100%), linear-gradient(65deg, transparent 0 70%, rgba(255,255,255,0.55) 70.2%, transparent 70.6% 100%)",
+              backgroundSize: "220px 100%, 280px 100%",
+            }}
+          />
+          <div
+            className="absolute inset-y-0 right-0 w-1/3"
+            style={{ background: `linear-gradient(90deg, transparent, color-mix(in srgb, ${skin.secondary} 16%, transparent))` }}
+          />
+          <div
+            className="absolute inset-x-0 bottom-0 h-28"
+            style={{ background: `linear-gradient(0deg, color-mix(in srgb, ${skin.primary} 30%, transparent), transparent)` }}
+          />
         </div>
       );
 
@@ -1835,8 +1954,14 @@ function SlideBackground({ kind, moduleSlug }: { kind: Slide["kind"]; moduleSlug
               "radial-gradient(circle at 20% 25%, rgba(255,255,255,0.45) 0px, transparent 3px), radial-gradient(circle at 80% 65%, rgba(212,175,55,0.5) 0px, transparent 4px), radial-gradient(circle at 55% 35%, rgba(255,255,255,0.35) 0px, transparent 2px)",
             backgroundSize: "220px 220px, 260px 260px, 180px 180px",
           }} />
-          <div className="absolute -left-20 top-1/3 h-64 w-64 rounded-full blur-3xl" style={{ background: `color-mix(in srgb, ${skin.accent} 18%, transparent)` }} />
-          <div className="absolute -right-20 bottom-1/3 h-72 w-72 rounded-full blur-3xl" style={{ background: `color-mix(in srgb, ${skin.secondary} 20%, transparent)` }} />
+          <div
+            className="absolute inset-y-0 left-0 w-px"
+            style={{ background: `linear-gradient(180deg, transparent, ${skin.accent}, transparent)` }}
+          />
+          <div
+            className="absolute inset-y-0 right-0 w-1/4"
+            style={{ background: `linear-gradient(90deg, transparent, color-mix(in srgb, ${skin.secondary} 18%, transparent))` }}
+          />
         </div>
       );
 
@@ -2036,7 +2161,7 @@ function ConceptSlide({ concept, index, total, moduleSlug }: { concept: KeyConce
 
         <div className="relative text-center">
           <div
-            className="mx-auto mb-4 h-14 w-14 rounded-2xl p-2"
+            className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl"
             style={{
               animation: "scaleIn 0.5s 0.25s both cubic-bezier(0.16,1,0.3,1)",
               filter: `drop-shadow(0 0 16px color-mix(in srgb, ${skin.accent} 35%, transparent))`,
@@ -2044,7 +2169,7 @@ function ConceptSlide({ concept, index, total, moduleSlug }: { concept: KeyConce
               border: `1px solid color-mix(in srgb, ${skin.accent} 35%, transparent)`,
             }}
           >
-            <EmojiIcon emoji={CONCEPT_ICONS[concept.icon] ?? "📌"} className="h-14 w-14" />
+            <EmojiIcon emoji={CONCEPT_ICONS[concept.icon] ?? "📌"} className="h-9 w-9" />
           </div>
 
           <h3 className="text-2xl font-black text-white sm:text-3xl leading-tight"

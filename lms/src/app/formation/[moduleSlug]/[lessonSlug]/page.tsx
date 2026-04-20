@@ -317,6 +317,7 @@ export default async function LessonPage({ params }: Props) {
               title={lesson.title}
               avatar={avatar}
               visuals={visualsForPlayer}
+              moduleTitle={mod.title}
               moduleSlug={moduleSlug}
               lessonSlug={lessonSlug}
               audioQuizSchedule={audioQuizSchedule}
