@@ -35,17 +35,18 @@ export function KaraokeOverlay({ alignment, currentTime, visible }: KaraokeOverl
   const words = seg.t.split(/\s+/).filter(Boolean);
 
   return (
-    <div className="absolute bottom-24 left-0 right-0 z-30 flex justify-center pointer-events-none">
+    <div className="absolute bottom-24 left-0 right-0 z-30 flex justify-center pointer-events-none px-6">
       <div
-        className="max-w-[90%] px-8 py-5 rounded-2xl text-center"
+        className="max-w-3xl px-10 py-6 rounded-[2rem] text-center shadow-2xl"
         style={{
-          background: "rgba(0,0,0,0.55)",
-          backdropFilter: "blur(16px) saturate(1.4)",
-          WebkitBackdropFilter: "blur(16px) saturate(1.4)",
-          border: "1px solid rgba(255,255,255,0.08)",
+          background: "linear-gradient(180deg, rgba(15,23,42,0.85) 0%, rgba(2,6,23,0.92) 100%)",
+          backdropFilter: "blur(24px) saturate(1.6)",
+          WebkitBackdropFilter: "blur(24px) saturate(1.6)",
+          border: "1px solid rgba(255,255,255,0.12)",
+          boxShadow: "0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.05)",
         }}
       >
-        <p className="flex flex-wrap justify-center gap-x-[0.35em] gap-y-1 leading-relaxed">
+        <p className="flex flex-wrap justify-center gap-x-[0.4em] gap-y-2 leading-tight">
           {words.map((w, i) => {
             const isPast = i < activeIndex;
             const isCurrent = i === activeIndex;
@@ -53,20 +54,23 @@ export function KaraokeOverlay({ alignment, currentTime, visible }: KaraokeOverl
             return (
               <span
                 key={`${i}-${w}`}
-                className="transition-all duration-150 ease-out inline-block"
+                className="transition-all duration-200 ease-out inline-block"
                 style={{
-                  fontSize: isCurrent ? "1.35em" : "1em",
-                  fontWeight: isCurrent ? 700 : 500,
+                  fontSize: isCurrent ? "1.85rem" : "1.45rem",
+                  fontWeight: isCurrent ? 900 : 700,
+                  letterSpacing: isCurrent ? "-0.01em" : "0",
                   color: isCurrent
-                    ? "#d4af37"
+                    ? "#fff"
                     : isPast
-                    ? "rgba(255,255,255,0.85)"
-                    : "rgba(255,255,255,0.35)",
+                    ? "rgba(255,255,255,0.92)"
+                    : "rgba(255,255,255,0.24)",
                   textShadow: isCurrent
-                    ? "0 0 20px rgba(212,175,55,0.4), 0 0 40px rgba(212,175,55,0.15)"
-                    : undefined,
-                  transform: isCurrent ? "scale(1.05)" : "scale(1)",
-                  transformOrigin: "center bottom",
+                    ? "0 0 30px rgba(255,255,255,0.4), 0 0 60px rgba(212,175,55,0.2)"
+                    : isPast 
+                    ? "0 2px 4px rgba(0,0,0,0.3)"
+                    : "none",
+                  transform: isCurrent ? "scale(1.1) translateY(-2px)" : "scale(1)",
+                  filter: isCurrent ? "none" : isPast ? "none" : "blur(0.5px)",
                 }}
               >
                 {w}

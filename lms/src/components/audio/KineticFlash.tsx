@@ -99,23 +99,27 @@ export function KineticFlash({ alignment, visuals, currentTime, visible }: Kinet
   if (!active.length) return null;
 
   return (
-    <div className="absolute top-16 right-4 z-30 flex flex-col items-end gap-2 pointer-events-none">
+    <div className="absolute top-20 right-8 z-40 flex flex-col items-end gap-3 pointer-events-none">
       {active.map((cue, i) => {
         const isNew = currentTime <= cue.end;
         return (
           <div
             key={`${cue.term}-${cue.start}`}
-            className="rounded-xl px-4 py-2 text-sm font-bold shadow-lg transition-all duration-300"
+            className="rounded-2xl px-6 py-3 text-lg font-black shadow-2xl transition-all duration-300 uppercase tracking-wider"
             style={{
               background: isNew
-                ? "linear-gradient(135deg, rgba(212,175,55,0.9), rgba(212,175,55,0.7))"
-                : "rgba(212,175,55,0.4)",
-              color: "#0a1628",
-              backdropFilter: "blur(8px)",
-              transform: isNew ? "scale(1.05) translateX(0)" : "scale(1) translateX(0)",
-              animation: isNew ? "flashIn 0.3s cubic-bezier(0.16,1,0.3,1)" : "flashOut 0.5s ease forwards",
-              animationDelay: `${i * 0.05}s`,
-              opacity: isNew ? 1 : 0.6,
+                ? "linear-gradient(135deg, #d4af37, #fde68a)"
+                : "rgba(212,175,55,0.25)",
+              color: "#030712",
+              backdropFilter: "blur(20px)",
+              border: "1px solid rgba(255,255,255,0.2)",
+              boxShadow: isNew 
+                ? "0 15px 40px rgba(212,175,55,0.4), 0 0 20px rgba(212,175,55,0.2)" 
+                : "0 5px 15px rgba(0,0,0,0.3)",
+              transform: isNew ? "scale(1.1) rotate(-1deg)" : "scale(0.95) rotate(0deg)",
+              animation: isNew ? "flashIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)" : "flashOut 0.6s ease forwards",
+              animationDelay: `${i * 0.08}s`,
+              opacity: isNew ? 1 : 0,
             }}
           >
             {cue.term}
@@ -124,12 +128,12 @@ export function KineticFlash({ alignment, visuals, currentTime, visible }: Kinet
       })}
       <style>{`
         @keyframes flashIn {
-          from { opacity: 0; transform: scale(0.8) translateX(20px); }
-          to   { opacity: 1; transform: scale(1.05) translateX(0); }
+          from { opacity: 0; transform: scale(0.5) rotate(5deg) translateX(40px); filter: blur(10px); }
+          to   { opacity: 1; transform: scale(1.1) rotate(-1deg) translateX(0); filter: blur(0); }
         }
         @keyframes flashOut {
-          from { opacity: 0.6; }
-          to   { opacity: 0; }
+          from { opacity: 0.6; transform: scale(0.95); }
+          to   { opacity: 0; transform: scale(0.8); }
         }
       `}</style>
     </div>

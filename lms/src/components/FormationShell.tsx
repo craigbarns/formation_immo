@@ -19,7 +19,7 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
         className="sticky top-0 z-50 border-b border-white/10 bg-[#030712]/80 backdrop-blur-xl shadow-2xl"
       >
         <div className="mx-auto max-w-6xl px-4 py-2 border-b border-white/[0.05]">
-          <p className="text-center text-xs font-medium leading-snug text-white/50 sm:text-left">
+          <p className="text-center text-xs font-medium leading-snug text-white/70 sm:text-left">
             <span className="hidden sm:inline">
               FORMATION PREMIUM · ACCÈS ILLIMITÉ · EXPÉRIENCE CINÉMATIQUE
             </span>
@@ -91,7 +91,7 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
               <span className="h-2 w-2 rounded-full bg-brand-gold animate-pulse" />
               <p className="text-sm font-black uppercase tracking-widest text-white">FORMATION 42 H</p>
             </div>
-            <p className="text-sm leading-relaxed text-white/50">
+            <p className="text-sm leading-relaxed text-white/70">
               Contenu structuré, mises à jour législatives 2026 et ressources professionnelles téléchargeables pour vous accompagner du premier mandat jusqu&apos;au closing final.
             </p>
           </div>
@@ -116,14 +116,14 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
                 Certificat
               </Link>
             </div>
-            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-white/30 sm:justify-end">
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-white/60 sm:justify-end">
               <span>Formation certifiante ALUR 2026</span>
               <span aria-hidden>·</span>
-              <Link href="/mentions-legales" className="hover:text-white/60 transition">Mentions légales</Link>
+              <Link href="/mentions-legales" className="hover:text-white/80 transition">Mentions légales</Link>
               <span aria-hidden>·</span>
-              <Link href="/cgv" className="hover:text-white/60 transition">CGV</Link>
+              <Link href="/cgv" className="hover:text-white/80 transition">CGV</Link>
               <span aria-hidden>·</span>
-              <a href="mailto:contact@formation42h.fr" className="hover:text-white/60 transition">Contact</a>
+              <a href="mailto:contact@formation42h.fr" className="hover:text-white/80 transition">Contact</a>
             </div>
           </div>
         </div>

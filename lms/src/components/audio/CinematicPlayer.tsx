@@ -1224,7 +1224,7 @@ export function CinematicPlayer({
               </span>
               <span
                 className="hidden text-3xs font-bold uppercase leading-none tracking-wide transition-colors duration-300 sm:block"
-                style={{ color: isActive ? (info?.color ?? "var(--brand-gold)") : isPast ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.25)" }}
+                style={{ color: isActive ? (info?.color ?? "var(--brand-gold)") : isPast ? "rgba(255,255,255,0.7)" : "rgba(255,255,255,0.45)" }}
               >
                 {CHAPTER_TOPBAR_LABELS[ch.name] ?? ch.name}
               </span>
@@ -1246,6 +1246,9 @@ export function CinematicPlayer({
           background: `linear-gradient(140deg, color-mix(in srgb, ${visualSkin.primary} 86%, #030712) 0%, ${visualSkin.surface} 48%, color-mix(in srgb, ${visualSkin.secondary} 64%, #030712) 100%)`,
         }}
       >
+        <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-40 mix-blend-screen">
+          <div className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] animate-float-slow bg-mesh opacity-30" />
+        </div>
         {/* Module watermark */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
@@ -1296,11 +1299,19 @@ export function CinematicPlayer({
 
         {/* Slide content avec transition */}
         <div className="relative flex h-full w-full items-center justify-center p-5 sm:p-8 lg:p-10">
+          <div 
+            key={`pulse-${activeSlide}`}
+            className="absolute inset-0 pointer-events-none z-[1] opacity-0"
+            style={{ 
+              background: `radial-gradient(circle at 50% 50%, ${visualSkin.accent}33 0%, transparent 70%)`,
+              animation: reducedMotion ? undefined : "syncPulse 0.8s ease-out forwards" 
+            }} 
+          />
           <div
             key={activeSlide}
             className="relative z-[2] h-full w-full"
             style={{
-              animation: reducedMotion ? undefined : "slideEnter 0.5s cubic-bezier(0.16,1,0.3,1) both",
+              animation: reducedMotion ? undefined : "slideEnter 0.6s cubic-bezier(0.16,1,0.3,1) both",
             }}
           >
             <SlideRenderer
@@ -1315,8 +1326,12 @@ export function CinematicPlayer({
           {!reducedMotion && (
             <style>{`
               @keyframes slideEnter {
-                from { opacity: 0; transform: translateY(12px) scale(0.98); }
-                to   { opacity: 1; transform: translateY(0) scale(1); }
+                from { opacity: 0; transform: translateY(20px) scale(0.97); filter: blur(5px); }
+                to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+              }
+              @keyframes syncPulse {
+                0% { opacity: 0.5; transform: scale(0.9); }
+                100% { opacity: 0; transform: scale(1.1); }
               }
             `}</style>
           )}
@@ -2441,12 +2456,12 @@ function ConceptSlide({ concept, index, total, moduleSlug }: { concept: KeyConce
             </div>
           </div>
 
-          <h3 className="text-3xl font-black text-white sm:text-transparent sm:bg-clip-text bg-gradient-to-b from-white to-white/76 sm:text-4xl leading-tight drop-shadow-sm"
+          <h3 className="text-3xl font-black text-white sm:text-transparent sm:bg-clip-text bg-gradient-to-b from-white via-white to-white/80 sm:text-5xl leading-[1.1] drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] mb-4"
             style={{ animation: "fadeInUp 0.5s 0.3s both cubic-bezier(0.16,1,0.3,1)" }}>
             {concept.title}
           </h3>
 
-          <p className="mt-4 text-lg leading-relaxed text-white/90 max-w-md mx-auto drop-shadow-md"
+          <p className="mt-6 text-xl leading-relaxed text-white font-medium max-w-lg mx-auto drop-shadow-xl"
             style={{ animation: "fadeInUp 0.5s 0.4s both cubic-bezier(0.16,1,0.3,1)" }}>
             {concept.description}
           </p>
@@ -2753,11 +2768,11 @@ function HighlightSlide({ statement, moduleSlug }: { statement: string; moduleSl
         <div className="absolute top-1/2 left-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-24 blur-[56px] pointer-events-none"
              style={{ background: skin.accent }} />
 
-        <p className="relative text-2xs font-bold uppercase tracking-[0.3em] text-brand-gold mb-6 drop-shadow-md">
-          Point cle
+        <p className="relative text-[10px] font-black uppercase tracking-[0.4em] text-brand-gold mb-8 drop-shadow-md">
+          Point cle stratégique
         </p>
-        <blockquote className="relative text-2xl font-black text-white sm:text-transparent sm:bg-clip-text bg-gradient-to-br from-white via-white to-white/72 leading-tight sm:text-4xl"
-          style={{ filter: `drop-shadow(0 0 18px color-mix(in srgb, ${skin.accent} 30%, transparent))` }}>
+        <blockquote className="relative text-3xl font-black text-white sm:text-transparent sm:bg-clip-text bg-gradient-to-br from-white via-white to-white/80 leading-[1.2] sm:text-5xl"
+          style={{ filter: `drop-shadow(0 0 20px color-mix(in srgb, ${skin.accent} 40%, transparent))` }}>
           &ldquo;{statement}&rdquo;
         </blockquote>
 
