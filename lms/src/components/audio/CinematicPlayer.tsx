@@ -33,6 +33,9 @@ type Slide =
   | { kind: "takeaways"; items: string[] }
   | { kind: "process"; steps: string[] }
   | { kind: "highlight"; statement: string }
+  | { kind: "term"; term: string; context: string }
+  | { kind: "focus"; title: string; body: string; icon?: string }
+  | { kind: "checkpoint"; title: string; bullets: string[] }
   | { kind: "trainer-tip"; concept: KeyConcept }
   | { kind: "chart"; stats: StatCard[] }
   | { kind: "end"; title: string };
@@ -68,6 +71,9 @@ const SLIDE_KIND_TO_CHAPTER: Record<string, string> = {
   takeaways: "À retenir",
   process: "À retenir",
   highlight: "Concepts clés",
+  term: "Concepts clés",
+  focus: "Concepts clés",
+  checkpoint: "À retenir",
   "trainer-tip": "Concepts clés",
   end: "Fin",
 };
@@ -230,6 +236,102 @@ const STAT_BAR_COLORS: Record<string, string> = {
   blue: "bg-blue-400",
 };
 
+const MODULE_EXTRA_VISUALS: Record<string, { terms: string[]; focus: string[]; checkpoints: string[] }> = {
+  juridique: {
+    terms: ["Conformite", "Transparence", "Mandat", "SRU", "TRACFIN", "Diagnostics"],
+    focus: [
+      "Verifier les obligations legales avant chaque mise en commercialisation.",
+      "Documenter les preuves de conformite dans votre process agence.",
+      "Prioriser la securisation juridique pour limiter les risques de contentieux.",
+    ],
+    checkpoints: [
+      "Valider les mentions obligatoires avant diffusion.",
+      "Controler les pieces juridiques critiques du dossier.",
+      "Tracer les decisions sensibles dans le CRM.",
+    ],
+  },
+  transaction: {
+    terms: ["Prospection", "Mandat", "Estimation", "Objection", "Closing", "Relance"],
+    focus: [
+      "Transformer chaque interaction en etape concrete vers le mandat.",
+      "Defendre vos recommandations avec donnees marche + scenario client.",
+      "Utiliser un script vivant et personnalise selon le profil vendeur.",
+    ],
+    checkpoints: [
+      "Qualifier le lead avant proposition de valeur.",
+      "Structurer la relance en sequence claire.",
+      "Conclure avec une prochaine action datee.",
+    ],
+  },
+  financement: {
+    terms: ["Capacite", "Fiscalite", "Cashflow", "Rentabilite", "Denormandie", "Assurance"],
+    focus: [
+      "Relier chaque recommandation a l'objectif patrimonial du client.",
+      "Comparer les scenarios avec hypotheses explicites.",
+      "Securiser la viabilite financiere avant la projection fiscale.",
+    ],
+    checkpoints: [
+      "Verifier capacite et taux d'effort.",
+      "Comparer brut, net et net-net.",
+      "Valider le cadre fiscal adapte au profil.",
+    ],
+  },
+  marketing: {
+    terms: ["Annonce", "Visibilite", "CTR", "SEO", "Reels", "Portails"],
+    focus: [
+      "Optimiser la premiere impression: visuel, titre et promesse claire.",
+      "Piloter le contenu avec des indicateurs simples et actionnables.",
+      "Adapter le message selon le canal et l'intention utilisateur.",
+    ],
+    checkpoints: [
+      "Aligner photo, titre et argument central.",
+      "Publier aux bons horaires selon canal.",
+      "Mesurer puis iterer chaque semaine.",
+    ],
+  },
+  terrain: {
+    terms: ["Visite", "Argumentaire", "Promesse", "Objection", "Fidelisation", "Recommandation"],
+    focus: [
+      "Faire vivre l'experience visite avec un fil conducteur clair.",
+      "Convertir les objections en clarifications decisives.",
+      "Consolider la relation apres signature pour declencher les recommandations.",
+    ],
+    checkpoints: [
+      "Preparer la visite avec priorites client.",
+      "Formaliser la suite immediatement apres rendez-vous.",
+      "Activer le suivi post-vente de maniere systematique.",
+    ],
+  },
+};
+
+const MODULE_PREMIUM_DIRECTION: Record<string, { tagline: string; vibe: string; emblem: string }> = {
+  juridique: {
+    tagline: "Rigueur légale & maîtrise terrain",
+    vibe: "Edition Signature",
+    emblem: "⚖️",
+  },
+  transaction: {
+    tagline: "Négociation, cadence, conversion",
+    vibe: "Performance Playbook",
+    emblem: "🤝",
+  },
+  financement: {
+    tagline: "Vision chiffres & stratégie patrimoniale",
+    vibe: "Analyst Mode",
+    emblem: "📈",
+  },
+  marketing: {
+    tagline: "Visibilité, désir, passage à l'action",
+    vibe: "Growth Studio",
+    emblem: "📱",
+  },
+  terrain: {
+    tagline: "Visite, closing, fidélisation durable",
+    vibe: "Field Mastery",
+    emblem: "🏠",
+  },
+};
+
 /* ------------------------------------------------------------------ */
 /*  Build slides from lesson visuals                                   */
 /* ------------------------------------------------------------------ */
@@ -300,6 +402,77 @@ function buildSlides(title: string, visuals: LessonVisuals | null): Slide[] {
   return slides;
 }
 
+/**
+ * Étend les slides avec des "highlights" synchronisés quand l'audio contient
+ * davantage de points de passage (cues.slides) que de slides éditoriales.
+ * Cela évite de figer la dernière slide alors que la narration continue.
+ */
+function extendSlidesToMatchCues(
+  baseSlides: Slide[],
+  cues: LessonCues | null,
+  visuals: LessonVisuals | null,
+  moduleSlug?: string
+): Slide[] {
+  if (!cues || cues.slides.length <= baseSlides.length) return baseSlides;
+
+  const extraCount = cues.slides.length - baseSlides.length;
+  if (extraCount <= 0) return baseSlides;
+
+  const moduleExtra = moduleSlug ? MODULE_EXTRA_VISUALS[moduleSlug] : undefined;
+
+  const keyTermPool = Array.from(
+    new Set(
+      cues.keyTerms
+        .map((k) => k.term?.trim())
+        .filter((t): t is string => Boolean(t) && t.length >= 5)
+    )
+  );
+  const takeawayPool = [...(visuals?.takeaways ?? []), ...(moduleExtra?.checkpoints ?? [])];
+  const conceptPool = visuals?.keyConcepts.map((c) => c.title) ?? [];
+  const focusPool = moduleExtra?.focus ?? [];
+  const termPool = [...keyTermPool, ...(moduleExtra?.terms ?? [])];
+  const textPool = [...termPool, ...takeawayPool, ...conceptPool, ...focusPool];
+
+  const endSlide = baseSlides.at(-1)?.kind === "end" ? baseSlides.at(-1) : null;
+  const bodySlides = endSlide ? baseSlides.slice(0, -1) : [...baseSlides];
+
+  const generated: Slide[] = Array.from({ length: extraCount }, (_, i) => {
+    const fallbackLabel = `Point clé ${i + 1}`;
+    const term = termPool[i % Math.max(1, termPool.length)] ?? fallbackLabel;
+    const concept = visuals?.keyConcepts[i % Math.max(1, visuals?.keyConcepts.length ?? 1)];
+    const takeawayChunk = takeawayPool.slice((i * 2) % Math.max(1, takeawayPool.length), ((i * 2) % Math.max(1, takeawayPool.length)) + 2);
+    const mode = i % 3;
+
+    if (mode === 0) {
+      return {
+        kind: "term",
+        term,
+        context: concept?.title ?? "Repère clé de la narration",
+      };
+    }
+
+    if (mode === 1) {
+      return {
+        kind: "focus",
+        title: concept?.title ?? term,
+        body: concept?.description ?? focusPool[i % Math.max(1, focusPool.length)] ?? textPool[i % Math.max(1, textPool.length)] ?? fallbackLabel,
+        icon: concept?.icon,
+      };
+    }
+
+    return {
+      kind: "checkpoint",
+      title: "Checkpoint",
+      bullets:
+        takeawayChunk.length > 0
+          ? takeawayChunk
+          : [textPool[i % Math.max(1, textPool.length)] ?? fallbackLabel, "Continuez la narration pour consolider."],
+    };
+  });
+
+  return endSlide ? [...bodySlides, ...generated, endSlide] : [...bodySlides, ...generated];
+}
+
 /* ------------------------------------------------------------------ */
 /*  Quiz helper                                                        */
 /* ------------------------------------------------------------------ */
@@ -365,7 +538,11 @@ export function CinematicPlayer({
   const [audioStats, setAudioStats] = useState<AudioStats>(createAudioStats);
   const reducedMotion = useReducedMotion();
 
-  const slides = useMemo(() => buildSlides(title, visuals), [title, visuals]);
+  const baseSlides = useMemo(() => buildSlides(title, visuals), [title, visuals]);
+  const slides = useMemo(
+    () => extendSlidesToMatchCues(baseSlides, cues, visuals, moduleSlug),
+    [baseSlides, cues, visuals, moduleSlug]
+  );
   const chapters = useMemo(() => buildChapterLabels(slides), [slides]);
 
   clearedQuizRef.current = clearedQuizCount;
@@ -875,8 +1052,8 @@ export function CinematicPlayer({
                 <EmojiIcon emoji={info?.icon ?? "●"} className="h-3.5 w-3.5" />
               </span>
               <span
-                className="text-4xs font-bold uppercase tracking-wide leading-none transition-colors duration-300 hidden sm:block"
-                style={{ color: isActive ? (info?.color ?? "var(--brand-gold)") : isPast ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.15)" }}
+                className="text-3xs font-bold uppercase tracking-wide leading-none transition-colors duration-300 hidden sm:block"
+                style={{ color: isActive ? (info?.color ?? "var(--brand-gold)") : isPast ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.25)" }}
               >
                 {ch.name}
               </span>
@@ -915,18 +1092,44 @@ export function CinematicPlayer({
         </div>
 
         {/* Slide-specific background patterns */}
-        <SlideBackground kind={slide.kind} />
+        <SlideBackground kind={slide.kind} moduleSlug={moduleSlug} />
+
+        {/* Cinematic vignette + subtle film grain */}
+        <div className="pointer-events-none absolute inset-0 z-[1]">
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 80% 70% at 50% 45%, transparent 35%, rgba(0,0,0,0.22) 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-0 opacity-[0.035] mix-blend-soft-light"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 15% 20%, rgba(255,255,255,0.8) 0.4px, transparent 0.8px), radial-gradient(circle at 75% 70%, rgba(255,255,255,0.7) 0.4px, transparent 0.8px)",
+              backgroundSize: "3px 3px, 4px 4px",
+            }}
+          />
+        </div>
 
         {/* Slide content avec transition */}
-        <div className="relative flex h-full w-full items-center justify-center p-3 sm:p-6">
+        <div className="relative flex h-full w-full items-center justify-center p-6 sm:p-10">
           <div
             key={activeSlide}
-            className="h-full w-full"
+            className="relative z-[2] h-full w-full"
             style={{
               animation: reducedMotion ? undefined : "slideEnter 0.5s cubic-bezier(0.16,1,0.3,1) both",
             }}
           >
-            <SlideRenderer slide={slide} avatar={avatar} isActive={true} reducedMotion={reducedMotion} audioStats={audioStats} />
+            <SlideRenderer
+              slide={slide}
+              avatar={avatar}
+              isActive={true}
+              reducedMotion={reducedMotion}
+              audioStats={audioStats}
+              moduleSlug={moduleSlug}
+            />
           </div>
           {!reducedMotion && (
             <style>{`
@@ -1533,7 +1736,8 @@ function ChapterThumbnails({
 /*  Slide Background Patterns                                          */
 /* ------------------------------------------------------------------ */
 
-function SlideBackground({ kind }: { kind: Slide["kind"] }) {
+function SlideBackground({ kind, moduleSlug }: { kind: Slide["kind"]; moduleSlug?: string }) {
+  const skin = getModuleVisualSkin(moduleSlug);
   switch (kind) {
     case "title":
       return (
@@ -1557,9 +1761,9 @@ function SlideBackground({ kind }: { kind: Slide["kind"] }) {
       return (
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* Floating abstract blobs via box-shadows trick */}
-          <div className="absolute top-[-40px] right-[-40px] h-48 w-48 rounded-full bg-blue-600/10 blur-2xl" />
-          <div className="absolute bottom-[-60px] left-[-20px] h-56 w-56 rounded-full bg-brand-navy/40 blur-3xl" />
-          <div className="absolute top-1/2 left-1/4 h-32 w-32 rounded-full bg-brand-gold/5 blur-2xl" />
+          <div className="absolute top-[-40px] right-[-40px] h-48 w-48 rounded-full blur-2xl" style={{ background: `color-mix(in srgb, ${skin.secondary} 22%, transparent)` }} />
+          <div className="absolute bottom-[-60px] left-[-20px] h-56 w-56 rounded-full blur-3xl" style={{ background: `color-mix(in srgb, ${skin.primary} 35%, transparent)` }} />
+          <div className="absolute top-1/2 left-1/4 h-32 w-32 rounded-full blur-2xl" style={{ background: `color-mix(in srgb, ${skin.accent} 18%, transparent)` }} />
         </div>
       );
 
@@ -1621,6 +1825,21 @@ function SlideBackground({ kind }: { kind: Slide["kind"] }) {
         </div>
       );
 
+    case "term":
+    case "focus":
+    case "checkpoint":
+      return (
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.05]" style={{
+            backgroundImage:
+              "radial-gradient(circle at 20% 25%, rgba(255,255,255,0.45) 0px, transparent 3px), radial-gradient(circle at 80% 65%, rgba(212,175,55,0.5) 0px, transparent 4px), radial-gradient(circle at 55% 35%, rgba(255,255,255,0.35) 0px, transparent 2px)",
+            backgroundSize: "220px 220px, 260px 260px, 180px 180px",
+          }} />
+          <div className="absolute -left-20 top-1/3 h-64 w-64 rounded-full blur-3xl" style={{ background: `color-mix(in srgb, ${skin.accent} 18%, transparent)` }} />
+          <div className="absolute -right-20 bottom-1/3 h-72 w-72 rounded-full blur-3xl" style={{ background: `color-mix(in srgb, ${skin.secondary} 20%, transparent)` }} />
+        </div>
+      );
+
     case "end":
       return (
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -1639,12 +1858,26 @@ function SlideBackground({ kind }: { kind: Slide["kind"] }) {
 /*  Slide Renderer                                                      */
 /* ------------------------------------------------------------------ */
 
-function SlideRenderer({ slide, avatar, isActive, reducedMotion, audioStats }: { slide: Slide; avatar?: ModuleAvatar; isActive: boolean; reducedMotion?: boolean; audioStats?: AudioStats }) {
+function SlideRenderer({
+  slide,
+  avatar,
+  isActive,
+  reducedMotion,
+  audioStats,
+  moduleSlug,
+}: {
+  slide: Slide;
+  avatar?: ModuleAvatar;
+  isActive: boolean;
+  reducedMotion?: boolean;
+  audioStats?: AudioStats;
+  moduleSlug?: string;
+}) {
   switch (slide.kind) {
     case "title":
-      return <TitleSlide title={slide.title} subtitle={slide.subtitle} avatar={avatar} reducedMotion={reducedMotion} />;
+      return <TitleSlide title={slide.title} subtitle={slide.subtitle} avatar={avatar} reducedMotion={reducedMotion} moduleSlug={moduleSlug} />;
     case "concept":
-      return <ConceptSlide concept={slide.concept} index={slide.index} total={slide.total} />;
+      return <ConceptSlide concept={slide.concept} index={slide.index} total={slide.total} moduleSlug={moduleSlug} />;
     case "stats":
       return <StatsSlide stats={slide.stats} isActive={isActive} />;
     case "chart":
@@ -1656,9 +1889,15 @@ function SlideRenderer({ slide, avatar, isActive, reducedMotion, audioStats }: {
     case "process":
       return <ProcessSlide steps={slide.steps} />;
     case "highlight":
-      return <HighlightSlide statement={slide.statement} />;
+      return <HighlightSlide statement={slide.statement} moduleSlug={moduleSlug} />;
+    case "term":
+      return <TermSlide term={slide.term} context={slide.context} moduleSlug={moduleSlug} />;
+    case "focus":
+      return <FocusSlide title={slide.title} body={slide.body} icon={slide.icon} moduleSlug={moduleSlug} />;
+    case "checkpoint":
+      return <CheckpointSlide title={slide.title} bullets={slide.bullets} moduleSlug={moduleSlug} />;
     case "trainer-tip":
-      return <TrainerTipSlide concept={slide.concept} avatar={avatar} />;
+      return <TrainerTipSlide concept={slide.concept} avatar={avatar} moduleSlug={moduleSlug} />;
     case "end":
       return <EndSlide title={slide.title} stats={audioStats} />;
   }
@@ -1669,7 +1908,21 @@ function SlideRenderer({ slide, avatar, isActive, reducedMotion, audioStats }: {
 /* ------------------------------------------------------------------ */
 
 /* ── TITLE SLIDE ─── */
-function TitleSlide({ title, subtitle, avatar, reducedMotion }: { title: string; subtitle: string; avatar?: ModuleAvatar; reducedMotion?: boolean }) {
+function TitleSlide({
+  title,
+  subtitle,
+  avatar,
+  reducedMotion,
+  moduleSlug,
+}: {
+  title: string;
+  subtitle: string;
+  avatar?: ModuleAvatar;
+  reducedMotion?: boolean;
+  moduleSlug?: string;
+}) {
+  const skin = getModuleVisualSkin(moduleSlug);
+  const direction = moduleSlug ? MODULE_PREMIUM_DIRECTION[moduleSlug] : undefined;
   return (
     <div
       className="text-center w-full max-w-xl"
@@ -1690,6 +1943,23 @@ function TitleSlide({ title, subtitle, avatar, reducedMotion }: { title: string;
         <div className="h-px flex-1 bg-gradient-to-l from-transparent to-brand-gold/50" />
       </div>
       <p className="text-3xs font-bold uppercase tracking-[0.3em] text-brand-gold">{subtitle}</p>
+      {direction && (
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+          <span
+            className="rounded-full border px-3 py-1 text-3xs font-bold uppercase tracking-[0.18em]"
+            style={{
+              borderColor: `color-mix(in srgb, ${skin.accent} 45%, transparent)`,
+              background: `color-mix(in srgb, ${skin.primary} 28%, transparent)`,
+              color: "rgba(255,255,255,0.88)",
+            }}
+          >
+            {direction.vibe}
+          </span>
+          <span className="rounded-full bg-white/10 px-3 py-1 text-2xs font-semibold text-white/85">
+            {direction.emblem} {direction.tagline}
+          </span>
+        </div>
+      )}
       <h2 className="mt-4 text-2xl font-black text-white sm:text-4xl leading-tight drop-shadow-lg">
         {title}
       </h2>
@@ -1718,19 +1988,20 @@ function TitleSlide({ title, subtitle, avatar, reducedMotion }: { title: string;
 }
 
 /* ── CONCEPT SLIDE ─── */
-function ConceptSlide({ concept, index, total }: { concept: KeyConcept; index: number; total: number }) {
+function ConceptSlide({ concept, index, total, moduleSlug }: { concept: KeyConcept; index: number; total: number; moduleSlug?: string }) {
   const colors = TYPE_COLORS[concept.type] ?? TYPE_COLORS.rule;
+  const skin = getModuleVisualSkin(moduleSlug);
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-xl mx-auto">
       <p className="text-center text-2xs font-bold uppercase tracking-widest text-brand-gold mb-4"
         style={{ animation: "fadeInUp 0.4s 0.1s both cubic-bezier(0.16,1,0.3,1)" }}>
         Concept {index + 1} / {total}
       </p>
 
       <div
-        className={`rounded-2xl border ${colors.border} p-5 sm:p-8 relative overflow-hidden`}
+        className={`rounded-2xl border ${colors.border} p-6 sm:p-9 relative overflow-hidden`}
         style={{
-          background: "rgba(0,0,0,0.4)",
+          background: `linear-gradient(145deg, color-mix(in srgb, ${skin.primary} 55%, black), color-mix(in srgb, ${skin.secondary} 35%, black))`,
           backdropFilter: "blur(20px) saturate(1.3)",
           WebkitBackdropFilter: "blur(20px) saturate(1.3)",
           animation: "fadeInUp 0.5s 0.15s both cubic-bezier(0.16,1,0.3,1)",
@@ -1742,11 +2013,11 @@ function ConceptSlide({ concept, index, total }: { concept: KeyConcept; index: n
         </div>
 
         {/* Floating type badge */}
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+        <div className="absolute top-3 left-1/2 -translate-x-1/2">
           <span
             className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-2xs font-bold uppercase ${colors.text} border ${colors.border} shadow-lg`}
             style={{
-              background: "rgba(0,0,0,0.6)",
+              background: `color-mix(in srgb, ${skin.primary} 60%, black)`,
               backdropFilter: "blur(8px)",
               animation: "fadeInDown 0.4s 0.3s both cubic-bezier(0.16,1,0.3,1)",
             }}
@@ -1764,17 +2035,24 @@ function ConceptSlide({ concept, index, total }: { concept: KeyConcept; index: n
         </div>
 
         <div className="relative text-center">
-          <div className="mx-auto mb-4 h-14 w-14"
-            style={{ animation: "scaleIn 0.5s 0.25s both cubic-bezier(0.16,1,0.3,1)", filter: "drop-shadow(0 0 12px rgba(212,175,55,0.2))" }}>
+          <div
+            className="mx-auto mb-4 h-14 w-14 rounded-2xl p-2"
+            style={{
+              animation: "scaleIn 0.5s 0.25s both cubic-bezier(0.16,1,0.3,1)",
+              filter: `drop-shadow(0 0 16px color-mix(in srgb, ${skin.accent} 35%, transparent))`,
+              background: `color-mix(in srgb, ${skin.secondary} 30%, transparent)`,
+              border: `1px solid color-mix(in srgb, ${skin.accent} 35%, transparent)`,
+            }}
+          >
             <EmojiIcon emoji={CONCEPT_ICONS[concept.icon] ?? "📌"} className="h-14 w-14" />
           </div>
 
-          <h3 className="text-xl font-black text-white sm:text-2xl leading-tight"
+          <h3 className="text-2xl font-black text-white sm:text-3xl leading-tight"
             style={{ animation: "fadeInUp 0.5s 0.3s both cubic-bezier(0.16,1,0.3,1)" }}>
             {concept.title}
           </h3>
 
-          <p className="mt-3 text-sm leading-relaxed text-white/75 max-w-sm mx-auto"
+          <p className="mt-4 text-base leading-relaxed text-white/90 max-w-md mx-auto"
             style={{ animation: "fadeInUp 0.5s 0.4s both cubic-bezier(0.16,1,0.3,1)" }}>
             {concept.description}
           </p>
@@ -2043,21 +2321,31 @@ function ProcessSlide({ steps }: { steps: string[] }) {
   );
 }
 
+function getModuleVisualSkin(moduleSlug?: string) {
+  const t = getModuleTheme(moduleSlug ?? "");
+  return {
+    primary: t.primary,
+    secondary: t.secondary,
+    accent: "#d4af37",
+  };
+}
+
 /* ── HIGHLIGHT SLIDE ─── */
-function HighlightSlide({ statement }: { statement: string }) {
+function HighlightSlide({ statement, moduleSlug }: { statement: string; moduleSlug?: string }) {
+  const skin = getModuleVisualSkin(moduleSlug);
   return (
     <div className="w-full max-w-xl text-center">
       <div className="relative px-8 py-10"
         style={{
-          background: "rgba(0,0,0,0.35)",
+          background: `linear-gradient(135deg, color-mix(in srgb, ${skin.primary} 48%, black), color-mix(in srgb, ${skin.secondary} 38%, black))`,
           backdropFilter: "blur(16px)",
           borderRadius: "1rem",
-          border: "1px solid rgba(212,175,55,0.15)",
+          border: `1px solid color-mix(in srgb, ${skin.accent} 38%, transparent)`,
           animation: "fadeIn 0.6s ease-out both",
         }}>
         {/* Glow behind */}
         <div className="absolute inset-0 rounded-2xl opacity-30 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 50% 40% at 50% 50%, rgba(212,175,55,0.15), transparent 70%)" }} />
+          style={{ background: `radial-gradient(ellipse 50% 40% at 50% 50%, color-mix(in srgb, ${skin.accent} 25%, transparent), transparent 70%)` }} />
 
         {/* Corner ornaments */}
         <div className="absolute top-0 left-0 h-10 w-10 border-l-2 border-t-2 border-brand-gold/60 rounded-tl-xl" />
@@ -2069,7 +2357,7 @@ function HighlightSlide({ statement }: { statement: string }) {
           Point cle
         </p>
         <blockquote className="relative text-xl font-black text-white leading-tight sm:text-3xl"
-          style={{ textShadow: "0 0 30px rgba(212,175,55,0.2), 0 2px 10px rgba(0,0,0,0.5)" }}>
+          style={{ textShadow: `0 0 30px color-mix(in srgb, ${skin.accent} 35%, transparent), 0 2px 10px rgba(0,0,0,0.5)` }}>
           &ldquo;{statement}&rdquo;
         </blockquote>
 
@@ -2084,8 +2372,98 @@ function HighlightSlide({ statement }: { statement: string }) {
   );
 }
 
+/* ── TERM SLIDE ─── */
+function TermSlide({ term, context, moduleSlug }: { term: string; context: string; moduleSlug?: string }) {
+  const skin = getModuleVisualSkin(moduleSlug);
+  return (
+    <div className="w-full max-w-lg text-center">
+      <p className="text-2xs font-bold uppercase tracking-[0.25em] text-brand-gold mb-4">Terme clé</p>
+      <div
+        className="relative overflow-hidden rounded-2xl px-6 py-8 backdrop-blur-md"
+        style={{
+          border: `1px solid color-mix(in srgb, ${skin.accent} 45%, transparent)`,
+          background: `linear-gradient(140deg, color-mix(in srgb, ${skin.primary} 55%, black) 0%, color-mix(in srgb, ${skin.secondary} 40%, black) 100%)`,
+        }}
+      >
+        <div
+          className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl"
+          style={{ background: `color-mix(in srgb, ${skin.accent} 30%, transparent)` }}
+        />
+        <h3 className="text-3xl sm:text-4xl font-black text-white leading-tight">{term}</h3>
+        <p className="mt-4 text-sm text-white/80">{context}</p>
+      </div>
+    </div>
+  );
+}
+
+/* ── FOCUS SLIDE ─── */
+function FocusSlide({ title, body, icon, moduleSlug }: { title: string; body: string; icon?: string; moduleSlug?: string }) {
+  const skin = getModuleVisualSkin(moduleSlug);
+  return (
+    <div className="w-full max-w-xl mx-auto">
+      <p className="text-center text-2xs font-bold uppercase tracking-[0.2em] text-brand-gold mb-4">Focus</p>
+      <div
+        className="rounded-2xl p-6 sm:p-8 backdrop-blur-md"
+        style={{
+          border: `1px solid color-mix(in srgb, ${skin.accent} 30%, rgba(255,255,255,0.2))`,
+          background: `linear-gradient(160deg, color-mix(in srgb, ${skin.primary} 45%, black), rgba(255,255,255,0.04))`,
+        }}
+      >
+        <div className="flex items-start gap-4">
+          <div
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
+            style={{
+              background: `color-mix(in srgb, ${skin.accent} 22%, transparent)`,
+              boxShadow: `0 0 20px color-mix(in srgb, ${skin.accent} 28%, transparent)`,
+              border: `1px solid color-mix(in srgb, ${skin.accent} 50%, transparent)`,
+            }}
+          >
+            <EmojiIcon emoji={icon ? (CONCEPT_ICONS[icon] ?? "💡") : "💡"} className="h-6 w-6" />
+          </div>
+          <div>
+            <h3 className="text-2xl font-black text-white leading-tight">{title}</h3>
+            <p className="mt-3 text-base leading-relaxed text-white/85">{body}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── CHECKPOINT SLIDE ─── */
+function CheckpointSlide({ title, bullets, moduleSlug }: { title: string; bullets: string[]; moduleSlug?: string }) {
+  const skin = getModuleVisualSkin(moduleSlug);
+  return (
+    <div className="w-full max-w-xl mx-auto">
+      <p className="text-center text-2xs font-bold uppercase tracking-[0.2em] text-brand-gold mb-4">{title}</p>
+      <div
+        className="rounded-2xl p-5 sm:p-7 backdrop-blur-sm"
+        style={{
+          border: `1px solid color-mix(in srgb, ${skin.secondary} 40%, transparent)`,
+          background: `linear-gradient(135deg, color-mix(in srgb, ${skin.secondary} 24%, transparent), color-mix(in srgb, ${skin.primary} 28%, transparent))`,
+        }}
+      >
+        <ul className="space-y-3">
+          {bullets.slice(0, 3).map((b, i) => (
+            <li key={`${b}-${i}`} className="flex items-start gap-3 text-sm sm:text-base text-white/90">
+              <span
+                className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
+                style={{ background: skin.secondary }}
+              >
+                {i + 1}
+              </span>
+              <span className="leading-snug">{b}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 /* ── TRAINER TIP SLIDE ─── */
-function TrainerTipSlide({ concept, avatar }: { concept: KeyConcept; avatar?: ModuleAvatar }) {
+function TrainerTipSlide({ concept, avatar, moduleSlug }: { concept: KeyConcept; avatar?: ModuleAvatar; moduleSlug?: string }) {
+  const skin = getModuleVisualSkin(moduleSlug);
   return (
     <div
       className="w-full max-w-lg"
@@ -2108,7 +2486,13 @@ function TrainerTipSlide({ concept, avatar }: { concept: KeyConcept; avatar?: Mo
       )}
 
       {/* Speech bubble */}
-      <div className="relative rounded-2xl border-2 border-brand-gold/35 bg-brand-gold/8 px-6 py-5 backdrop-blur-sm">
+      <div
+        className="relative rounded-2xl px-6 py-5 backdrop-blur-sm"
+        style={{
+          border: `2px solid color-mix(in srgb, ${skin.accent} 45%, transparent)`,
+          background: `linear-gradient(140deg, color-mix(in srgb, ${skin.primary} 35%, transparent), color-mix(in srgb, ${skin.secondary} 28%, transparent))`,
+        }}
+      >
         {/* Speech bubble triangle */}
         {avatar && (
           <div
