@@ -17,7 +17,13 @@ import {
   Zap
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
-import { motion, AnimatePresence } from "framer-motion";
+
+interface SupabaseLearner {
+  id: string;
+  full_name: string | null;
+  gamification_state: { xp: number; streak: number; last_login_date: string }[];
+  lesson_progress: { count: number }[];
+}
 
 interface LearnerStats {
   id: string;
@@ -40,10 +46,6 @@ export default function AdminPage() {
     async function fetchLearners() {
       const supabase = createClient();
       
-      // Fetch profiles joined with gamification_state
-      // Note: This requires RLS policy to allow reading all profiles for 'admin' role
-      // or being logged in with a service role (not possible on client).
-      // For this prototype, we assume the trainer has access.
       const { data, error } = await supabase
         .from("profiles")
         .select(`
@@ -65,7 +67,7 @@ export default function AdminPage() {
         return;
       }
 
-      const formatted = (data || []).map((p: any) => ({
+      const formatted = ((data as unknown as SupabaseLearner[]) || []).map((p) => ({
         id: p.id,
         full_name: p.full_name || "Apprenant anonyme",
         xp: p.gamification_state?.[0]?.xp || 0,
