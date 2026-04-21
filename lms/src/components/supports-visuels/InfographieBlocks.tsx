@@ -3,63 +3,63 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { CheckCircle2, Scale, TrendingUp, Check } from "lucide-react";
+import { CheckCircle2, Scale, TrendingUp, Check, Info, AlertTriangle, Lightbulb } from "lucide-react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { SupportVisuelMeta } from "@/data/supports-visuels";
-
-const navy = "var(--brand-navy)";
-const gold = "var(--brand-gold)";
 
 function LessonLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-navy/8 px-4 py-2 text-sm font-semibold text-brand-navy hover:bg-brand-navy/12 transition-colors"
+      className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 px-6 py-3 text-xs font-black uppercase tracking-widest text-white hover:bg-brand-gold hover:text-brand-navy hover:border-brand-gold transition-all shadow-xl active:scale-95"
     >
-      {label} →
+      {label} <span className="text-lg">→</span>
     </Link>
   );
 }
 
-export function InfographieBlocks({ id, meta, themeColor = "var(--brand-navy)" }: { id: string; meta: SupportVisuelMeta; themeColor?: string }) {
+export function InfographieBlocks({ id, meta, themeColor = "#d4af37" }: { id: string; meta: SupportVisuelMeta; themeColor?: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6 }}
-      className="relative mb-8 overflow-hidden rounded-3xl border border-zinc-200/80 bg-white shadow-xl shadow-brand-navy/[0.03]"
+      className="relative mb-12 overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#070d18] shadow-2xl"
     >
       {/* Bordure supérieure colorée par thème */}
-      <div className="h-1.5 w-full" style={{ backgroundColor: themeColor }} />
+      <div className="h-2 w-full" style={{ backgroundColor: themeColor }} />
 
-      <div className="p-6 md:p-10">
-        <div className="flex flex-wrap items-start justify-between gap-4 border-b border-zinc-100 pb-8">
-          <div className="flex-1">
-            <div className="flex items-center gap-2">
+      <div className="p-8 md:p-12 lg:p-16">
+        <div className="flex flex-wrap items-start justify-between gap-8 border-b border-white/5 pb-10">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-3 mb-4">
               <span
-                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-white shadow-sm"
-                style={{ backgroundColor: themeColor }}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-2xl border border-white/10"
+                style={{ backgroundColor: `${themeColor}44` }}
               >
-                <Scale size={14} />
+                <Scale size={20} className="text-white" />
               </span>
-              <p className="text-xs font-black uppercase tracking-widest text-[var(--brand-gold)]">
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold">
                 {meta.moduleLabel}
               </p>
             </div>
-            <h2 className="mt-3 text-2xl font-bold tracking-tight text-brand-navy md:text-3xl">
+            <h2 className="text-3xl font-black tracking-tight text-white md:text-5xl uppercase leading-none mb-6">
               {meta.title}
             </h2>
-            <p className="mt-3 max-w-2xl text-base leading-relaxed text-zinc-600">
-              {meta.summary}
+            <p className="text-lg leading-relaxed text-white/50 max-w-3xl italic">
+              &laquo; {meta.summary} &raquo;
             </p>
           </div>
         </div>
 
-        <div className="relative z-10 mb-8 mt-10">{renderInteractive(id)}</div>
+        <div className="relative z-10 my-12">{renderInteractive(id)}</div>
 
-        <div className="flex items-center justify-between border-t border-zinc-100 pt-6">
-          <LessonLink href={meta.hrefLesson} label="Aller à la Leçon associée" />
+        <div className="flex items-center justify-between border-t border-white/5 pt-8">
+          <LessonLink href={meta.hrefLesson} label="Consulter la leçon associée" />
+          <div className="hidden sm:flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/20">
+              <Info className="w-3 h-3" /> Support pédagogique interactif
+          </div>
         </div>
       </div>
     </motion.div>
@@ -68,30 +68,18 @@ export function InfographieBlocks({ id, meta, themeColor = "var(--brand-navy)" }
 
 function renderInteractive(id: string) {
   switch (id) {
-    case "checklist-investisseur":
-      return <BlockChecklist />;
-    case "matrice-risques":
-      return <BlockMatrice />;
-    case "cadre-negociation":
-      return <BlockNegociation />;
-    case "calcul-rentabilite":
-      return <BlockRentabilite />;
-    case "timeline-juridique":
-      return <BlockTimeline />;
-    case "structure-financement":
-      return <BlockFinancement />;
-    case "regimes-fiscaux":
-      return <BlockFiscal />;
-    case "tableau-diagnostics":
-      return <BlockDiagnostics />;
-    case "comparatif-mandats":
-      return <BlockMandats />;
-    case "checklist-reseaux":
-      return <BlockReseaux />;
-    case "calculateur-net-vendeur":
-      return <BlockNetVendeur />;
-    default:
-      return null;
+    case "checklist-investisseur": return <BlockChecklist />;
+    case "matrice-risques": return <BlockMatrice />;
+    case "cadre-negociation": return <BlockNegociation />;
+    case "calcul-rentabilite": return <BlockRentabilite />;
+    case "timeline-juridique": return <BlockTimeline />;
+    case "structure-financement": return <BlockFinancement />;
+    case "regimes-fiscaux": return <BlockFiscal />;
+    case "tableau-diagnostics": return <BlockDiagnostics />;
+    case "comparatif-mandats": return <BlockMandats />;
+    case "checklist-reseaux": return <BlockReseaux />;
+    case "calculateur-net-vendeur": return <BlockNetVendeur />;
+    default: return null;
   }
 }
 
@@ -99,67 +87,46 @@ function BlockChecklist() {
   const phases = [
     {
       title: "Avant la visite",
-      border: "border-sky-300",
-      bg: "bg-sky-50/80",
-      items: [
-        "Définir budget max",
-        "Étudier le quartier",
-        "Analyser comparables",
-        "Vérifier zonage PLU",
-        "Calculer rentabilité",
-        "Préparer questions",
-      ],
+      accent: "text-sky-400",
+      bg: "bg-sky-500/5",
+      border: "border-sky-500/20",
+      items: ["Définir budget max", "Étudier le quartier", "Analyser comparables", "Vérifier zonage PLU", "Calculer rentabilité", "Préparer questions"],
     },
     {
       title: "Pendant la visite",
-      border: "border-sky-300",
-      bg: "bg-sky-50/80",
-      items: [
-        "Photos détaillées",
-        "Orientation / ensoleillement",
-        "Bruits environnants",
-        "État des communs",
-        "Stationnement",
-        "Commerces à proximité",
-      ],
+      accent: "text-brand-gold",
+      bg: "bg-brand-gold/5",
+      border: "border-brand-gold/20",
+      items: ["Photos détaillées", "Orientation / lumière", "Bruits environnants", "État des communs", "Stationnement", "Commerces à proximité"],
     },
     {
       title: "Après la visite",
-      border: "border-emerald-300",
-      bg: "bg-emerald-50/80",
-      items: [
-        "Réviser calculs",
-        "Estimation travaux",
-        "Vérifier diagnostics",
-        "Négocier offre",
-        "Constituer dossier",
-        "Contacter notaire",
-      ],
+      accent: "text-emerald-400",
+      bg: "bg-emerald-500/5",
+      border: "border-emerald-500/20",
+      items: ["Réviser calculs", "Estimation travaux", "Vérifier diagnostics", "Négocier offre", "Constituer dossier", "Contacter notaire"],
     },
   ];
   return (
-    <div className="space-y-10">
-      <div className="grid gap-5 md:grid-cols-3">
+    <div className="space-y-12">
+      <div className="grid gap-6 md:grid-cols-3">
         {phases.map((p, i) => (
           <motion.div
             key={p.title}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
             viewport={{ once: true }}
-            className={`rounded-2xl border-2 ${p.border} ${p.bg} p-5 shadow-sm hover:shadow-md transition-shadow`}
+            className={`rounded-3xl border-2 ${p.border} ${p.bg} p-8 shadow-2xl`}
           >
-            <h3 className="text-center flex flex-col items-center gap-2 text-sm font-bold uppercase tracking-wider text-brand-navy">
-              <CheckCircle2 className={p.title === "Après la visite" ? "text-emerald-500" : "text-sky-500"} />
+            <h3 className={`text-center flex flex-col items-center gap-3 text-xs font-black uppercase tracking-widest ${p.accent}`}>
+              <CheckCircle2 className="w-6 h-6" />
               {p.title}
             </h3>
-            <ul className="mt-4 space-y-2.5 text-sm font-medium text-zinc-800">
+            <ul className="mt-8 space-y-4 text-sm font-bold text-white/80">
               {p.items.map((t) => (
-                <li key={t} className="flex items-start gap-2.5">
-                  <Check
-                    className={`mt-0.5 h-4 w-4 shrink-0 ${p.title === "Après la visite" ? "text-emerald-500" : "text-sky-500"}`}
-                    aria-hidden
-                  />
+                <li key={t} className="flex items-start gap-3">
+                  <Check className={`mt-0.5 h-4 w-4 shrink-0 ${p.accent}`} />
                   <span className="leading-tight">{t}</span>
                 </li>
               ))}
@@ -167,114 +134,81 @@ function BlockChecklist() {
           </motion.div>
         ))}
       </div>
-      <div>
-        <h3 className="text-center text-sm font-bold uppercase text-[var(--brand-gold)]">
-          Questions clés à poser
-        </h3>
-        <div className="mt-4 grid gap-4 md:grid-cols-3">
-          {[
-            { who: "Au vendeur", q: ["Motif de la vente ?", "Durée de possession ?", "Travaux récents ?"] },
-            { who: "À l’agent", q: ["Délai souhaité ?", "Autres offres ?", "Charges détaillées ?"] },
-            { who: "Au syndic", q: ["Travaux prévus ?", "Procès en cours ?", "Budget prévisionnel ?"] },
-          ].map((col) => (
-            <div key={col.who} className="rounded-lg border border-zinc-200 bg-zinc-50/50 p-4">
-              <p className="text-xs font-bold uppercase text-brand-navy">{col.who}</p>
-              <ul className="mt-2 list-disc space-y-1 pl-4 text-sm text-zinc-700">
-                {col.q.map((x) => (
-                  <li key={x}>{x}</li>
-                ))}
-              </ul>
+      
+      <div className="grid gap-8 md:grid-cols-2">
+          <div className="rounded-[2rem] border border-white/5 bg-white/[0.02] p-8 shadow-xl">
+            <h3 className="text-center text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold mb-8">
+              Questions stratégiques
+            </h3>
+            <div className="space-y-6">
+              {[
+                { who: "Vendeur", q: "Motif de vente & Travaux ?" },
+                { who: "Agent", q: "Délai souhaité & Offres ?" },
+                { who: "Syndic", q: "Travaux prévus & Procès ?" },
+              ].map((col) => (
+                <div key={col.who} className="flex items-center gap-4 group">
+                  <div className="h-10 w-10 shrink-0 flex items-center justify-center rounded-full bg-brand-navy border border-white/10 text-[10px] font-black text-white group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors">{col.who}</div>
+                  <p className="text-sm font-bold text-white/70">{col.q}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+          
+          <div className="rounded-[2rem] border border-red-500/20 bg-red-500/5 p-8 shadow-xl flex flex-col justify-center">
+            <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-red-400 mb-6 flex items-center gap-2">
+                <AlertTriangle className="w-4 h-4" /> Risques majeurs
+            </h3>
+            <ul className="space-y-3 text-sm font-bold text-red-200/60">
+              {["Sauter les diagnostics", "Sous-estimer les travaux", "Négliger les charges", "Ignorer le contexte local"].map((t) => (
+                <li key={t} className="flex gap-3 items-center">
+                  <span className="h-1.5 w-1.5 rounded-full bg-red-500" /> {t}
+                </li>
+              ))}
+            </ul>
+          </div>
       </div>
-      <div className="rounded-xl border border-red-200 bg-red-50/60 p-4">
-        <h3 className="text-sm font-bold uppercase text-red-800">Erreurs à éviter</h3>
-        <ul className="mt-2 grid gap-2 text-sm text-red-900 sm:grid-cols-2">
-          {[
-            "Sauter les diagnostics",
-            "Sous-estimer les travaux",
-            "Négliger les charges de copro",
-            "Ignorer le contexte local",
-          ].map((t) => (
-            <li key={t} className="flex gap-2">
-              <span className="text-red-500">✕</span> {t}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <p className="rounded-lg bg-amber-50 px-4 py-3 text-center text-sm italic text-amber-950">
-        Prenez le temps. Un bon investissement ne se précipite pas.
-      </p>
     </div>
   );
 }
 
-const riskCell = {
-  low: "bg-emerald-100/90 text-emerald-950 border-emerald-200",
-  mid: "bg-amber-100/90 text-amber-950 border-amber-200",
-  high: "bg-red-100/90 text-red-950 border-red-200",
-};
-
 function BlockMatrice() {
-  const grid: { text: string; note?: string; tone: keyof typeof riskCell }[][] = [
-    [
-      { text: "Vacance locative", tone: "low" },
-      { text: "Défaut de paiement", tone: "mid" },
-      { text: "Catastrophe naturelle", note: "[1] [2]", tone: "high" },
-    ],
-    [
-      { text: "Dégradations", tone: "low" },
-      { text: "Hausse des charges", tone: "mid" },
-      { text: "Marché en baisse", note: "[3] [4] [5]", tone: "high" },
-    ],
-    [
-      { text: "Travaux importants", tone: "mid" },
-      { text: "Changement de zone", tone: "high" },
-      { text: "Illiquidité", tone: "high" },
-    ],
+  const riskCellDark = {
+    low: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20 hover:bg-emerald-500/20",
+    mid: "bg-amber-500/10 text-brand-gold border-brand-gold/20 hover:bg-amber-500/20",
+    high: "bg-red-500/10 text-red-300 border-red-500/20 hover:bg-red-500/20",
+  };
+  type MatrixCell = { text: string; tone: "low" | "mid" | "high"; note?: string };
+  const grid: MatrixCell[][] = [
+    [{ text: "Vacance locative", tone: "low" }, { text: "Défaut de paiement", tone: "mid" }, { text: "Catastrophe naturelle", note: "[1] [2]", tone: "high" }],
+    [{ text: "Dégradations", tone: "low" }, { text: "Hausse des charges", tone: "mid" }, { text: "Marché en baisse", note: "[3] [4] [5]", tone: "high" }],
+    [{ text: "Travaux importants", tone: "mid" }, { text: "Changement de zone", tone: "high" }, { text: "Illiquidité", tone: "high" }],
   ];
   const rowLabels = ["Impact faible", "Impact moyen", "Impact élevé"];
+  
   return (
-    <div className="grid gap-8 lg:grid-cols-3">
+    <div className="grid gap-12 lg:grid-cols-3">
       <div className="lg:col-span-2">
-        <p className="mb-2 text-center text-2xs font-bold uppercase tracking-wide text-zinc-500">
-          Probabilité →
+        <p className="mb-4 text-center text-[10px] font-black uppercase tracking-widest text-white/30">
+          PROBABILITÉ D&apos;OCCURRENCE →
         </p>
-        <div className="overflow-x-auto rounded-2xl shadow-sm border border-zinc-200">
-          <table className="w-full min-w-[320px] border-collapse text-center text-xs">
+        <div className="overflow-x-auto rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl">
+          <table className="w-full min-w-[400px] border-collapse text-center">
             <thead>
-              <tr className="bg-zinc-100">
-                <th className="border border-zinc-200 p-3 text-zinc-500" scope="col" />
-                <th className="border border-zinc-200 p-3 font-semibold text-brand-navy" scope="col">
-                  Faible
-                </th>
-                <th className="border border-zinc-200 p-3 font-semibold text-brand-navy" scope="col">
-                  Moyen
-                </th>
-                <th className="border border-zinc-200 p-3 font-semibold text-brand-navy" scope="col">
-                  Élevé
-                </th>
+              <tr className="bg-white/5">
+                <th className="p-5" />
+                {["Faible", "Moyen", "Élevé"].map(l => (
+                  <th key={l} className="p-5 text-[10px] font-black uppercase tracking-widest text-white/60 border-l border-white/10">{l}</th>
+                ))}
               </tr>
             </thead>
             <tbody>
               {grid.map((row, ri) => (
-                <tr key={rowLabels[ri]}>
-                  <th
-                    className="border border-zinc-200 bg-zinc-50/80 p-3 text-2xs font-bold uppercase leading-tight text-zinc-600"
-                    scope="row"
-                  >
-                    {rowLabels[ri]}
-                  </th>
-                  {row.map((cell) => (
-                    <td
-                      key={cell.text}
-                      className={`border border-zinc-200 p-3 align-middle transition-colors hover:opacity-80 ${riskCell[cell.tone]}`}
-                    >
-                      <span className="font-medium">{cell.text}</span>
-                      {cell.note && (
-                        <span className="mt-1 block text-2xs opacity-80">{cell.note}</span>
-                      )}
+                <tr key={ri} className="border-t border-white/10">
+                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-white/40 bg-white/[0.02] text-left">{rowLabels[ri]}</th>
+                  {row.map((cell, ci) => (
+                    <td key={ci} className={`p-6 border-l border-white/10 transition-all duration-300 ${riskCellDark[cell.tone]}`}>
+                      <p className="text-sm font-black uppercase tracking-tight">{cell.text}</p>
+                      {cell.note && <span className="mt-2 block text-[9px] font-black opacity-50">{cell.note}</span>}
                     </td>
                   ))}
                 </tr>
@@ -283,44 +217,19 @@ function BlockMatrice() {
           </table>
         </div>
       </div>
-      <div className="space-y-6">
-        <div>
-          <h3 className="text-sm font-bold uppercase text-brand-navy">Stratégies de mitigation</h3>
-          <ol className="mt-2 space-y-2 text-sm text-zinc-700">
-            <li>
-              <strong className="text-brand-navy">[1]</strong> Assurance loyers impayés
-            </li>
-            <li>
-              <strong className="text-brand-navy">[2]</strong> Diagnostic complet
-            </li>
-            <li>
-              <strong className="text-brand-navy">[3]</strong> Zone tendue privilégiée
-            </li>
-            <li>
-              <strong className="text-brand-navy">[4]</strong> Fonds de précaution
-            </li>
-            <li>
-              <strong className="text-brand-navy">[5]</strong> Caution bancaire
-            </li>
-          </ol>
-        </div>
-        <div>
-          <h3 className="text-sm font-bold uppercase text-brand-navy">Due diligence</h3>
-          <ul className="mt-2 space-y-1.5 text-sm text-zinc-700">
-            {[
-              "DPE (performance énergétique)",
-              "Diagnostic amiante",
-              "État parasitaire",
-              "Risques naturels",
-              "Surface Carrez",
-              "Charges de copropriété",
-            ].map((t) => (
-              <li key={t} className="flex items-start gap-2">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-navy/70" aria-hidden />
-                <span>{t}</span>
+      <div className="space-y-8">
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl">
+          <h3 className="text-xs font-black uppercase tracking-widest text-brand-gold mb-6 flex items-center gap-2">
+            <TrendingUp className="w-4 h-4" /> Stratégies
+          </h3>
+          <ol className="space-y-4 text-sm font-bold text-white/70">
+            {["[1] Assurance loyers", "[2] Diagnostic complet", "[3] Zone tendue", "[4] Fonds de précaution", "[5] Caution bancaire"].map((t, i) => (
+              <li key={i} className="flex gap-3">
+                <span className="text-brand-gold shrink-0">{t.slice(0, 3)}</span>
+                <span>{t.slice(4)}</span>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </div>
     </div>
@@ -329,72 +238,46 @@ function BlockMatrice() {
 
 function BlockNegociation() {
   return (
-    <div className="grid gap-8 lg:grid-cols-2">
-      <div className="flex flex-col items-center gap-6">
+    <div className="grid gap-12 lg:grid-cols-2">
+      <div className="flex flex-col items-center gap-10">
         <motion.div 
           whileHover={{ scale: 1.05 }}
-          className="rounded-[2rem] border-4 border-brand-navy bg-white px-10 py-6 text-center shadow-xl"
+          className="rounded-[3rem] border-4 border-brand-gold bg-[#030712] px-16 py-10 text-center shadow-[0_0_50px_rgba(212,175,55,0.2)]"
         >
-          <p className="text-3xl font-black tracking-widest text-brand-navy">WIN-WIN</p>
-          <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-zinc-500">Objectif : valeur bilatérale</p>
+          <p className="text-5xl font-black tracking-tighter text-white uppercase italic">WIN-WIN</p>
+          <p className="mt-4 text-[10px] font-black uppercase tracking-[0.4em] text-brand-gold">Équilibre de valeur</p>
         </motion.div>
-        <div className="grid w-full max-w-md grid-cols-2 gap-4">
-          <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-sky-400 bg-sky-50 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
-            <p className="font-bold text-brand-navy text-sm">DÉLAIS</p>
-            <p className="mt-1.5 text-3xs text-zinc-600">Flexibilité calendaire</p>
-          </motion.div>
-          <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-brand-navy bg-brand-navy/5 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
-            <p className="font-bold text-brand-navy text-sm">PRIX</p>
-            <p className="mt-1.5 text-3xs text-zinc-600">Analyser les comparables</p>
-          </motion.div>
-          <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-amber-500 bg-amber-50 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
-            <p className="font-bold text-brand-navy text-sm">CONDITIONS</p>
-            <p className="mt-1.5 text-3xs text-zinc-600">Clauses suspensives</p>
-          </motion.div>
-          <motion.div whileHover={{ y: -4 }} className="rounded-2xl border border-emerald-500 bg-emerald-50 px-4 py-5 text-center text-xs shadow-sm hover:shadow-md transition-shadow">
-            <p className="font-bold text-brand-navy text-sm">GARANTIES</p>
-            <p className="mt-1.5 text-3xs text-zinc-600">Financement assuré</p>
-          </motion.div>
+        <div className="grid w-full grid-cols-2 gap-4">
+          {["DÉLAIS", "PRIX", "CONDITIONS", "GARANTIES"].map(t => (
+            <motion.div key={t} whileHover={{ y: -5 }} className="rounded-[2rem] border border-white/10 bg-white/5 p-6 text-center shadow-xl">
+               <p className="text-brand-gold font-black uppercase tracking-widest text-xs mb-1">{t}</p>
+               <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest">Facteur clé</span>
+            </motion.div>
+          ))}
         </div>
       </div>
-      <div className="space-y-6">
-        <div>
-          <h3 className="text-sm font-bold uppercase text-brand-navy">Techniques clés</h3>
-          <ul className="mt-2 space-y-2 text-sm text-zinc-700">
-            <li>
-              <strong>[1] Ancrage</strong> — premier chiffre mentionné
-            </li>
-            <li>
-              <strong>[2] BATNA</strong> — meilleure alternative à la négociation
-            </li>
-            <li>
-              <strong>[3] Silence</strong> — laissez parler l’autre
-            </li>
-            <li>
-              <strong>[4] Concession</strong> — donnez pour recevoir
-            </li>
-          </ul>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="rounded-lg border border-red-200 bg-red-50/50 p-3">
-            <p className="text-xs font-bold uppercase text-red-800">À éviter</p>
-            <ul className="mt-2 space-y-1 text-xs text-red-900">
-              <li>« C’est mon dernier prix »</li>
-              <li>« Je ne peux pas plus »</li>
-              <li>« Prenez ou laissez »</li>
+      <div className="space-y-10">
+        <div className="grid gap-6 sm:grid-cols-2">
+          <div className="rounded-3xl border border-red-500/20 bg-red-500/5 p-6">
+            <p className="text-[10px] font-black uppercase tracking-widest text-red-400 mb-4 italic">Interdit</p>
+            <ul className="space-y-2 text-sm font-bold text-red-200/50 italic">
+              <li>&laquo; C&apos;est mon dernier prix &raquo;</li>
+              <li>&laquo; Prenez ou laissez &raquo;</li>
             </ul>
           </div>
-          <div className="rounded-lg border border-emerald-200 bg-emerald-50/50 p-3">
-            <p className="text-xs font-bold uppercase text-emerald-800">À utiliser</p>
-            <ul className="mt-2 space-y-1 text-xs text-emerald-900">
-              <li>« Comment pouvons-nous… ? »</li>
-              <li>« Qu’est-ce qui compte pour vous ? »</li>
-              <li>« Voyons ensemble… »</li>
+          <div className="rounded-3xl border border-emerald-500/20 bg-emerald-500/5 p-6">
+            <p className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-4 italic">Recommandé</p>
+            <ul className="space-y-2 text-sm font-bold text-emerald-200/50 italic">
+              <li>&laquo; Comment pouvons-nous... ? &raquo;</li>
+              <li>&laquo; Voyons ensemble... &raquo;</li>
             </ul>
           </div>
         </div>
-        <div className="rounded-lg border border-amber-200 bg-amber-50/80 px-4 py-3 text-sm text-amber-950">
-          <strong>Règle d’or :</strong> préparez 3 scénarios — optimal, réaliste, plan B.
+        <div className="rounded-[2rem] border border-brand-gold/30 bg-brand-gold/10 p-8 shadow-2xl">
+          <p className="text-lg font-bold text-white leading-relaxed italic">
+            <strong className="text-brand-gold uppercase tracking-widest block text-xs not-italic mb-2">Règle d&apos;or</strong>
+            Préparez toujours 3 scénarios : Optimal, Réaliste, et votre limite de rupture (Plan B).
+          </p>
         </div>
       </div>
     </div>
@@ -403,85 +286,35 @@ function BlockNegociation() {
 
 function BlockRentabilite() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <motion.div 
         whileHover={{ scale: 1.02 }}
-        className="rounded-2xl border-2 border-amber-200 bg-gradient-to-r from-amber-50 to-amber-100 p-8 text-center shadow-sm"
+        className="relative overflow-hidden rounded-[2.5rem] border-2 border-brand-gold/30 bg-[#030712] p-10 text-center shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
       >
-        <p className="text-sm font-black tracking-widest flex justify-center items-center gap-2 uppercase text-brand-navy"><TrendingUp size={18} /> Rentabilité brute</p>
-        <p className="mt-4 font-mono text-xl font-bold text-zinc-900 md:text-2xl">
-          (Loyer mensuel × 12) ÷ Prix d’achat total × 100
-        </p>
-        <p className="mt-2 text-sm text-zinc-600">
-          Équivalent : loyer annuel ÷ total investi × 100 (ne pas multiplier deux fois par 12).
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/10 to-transparent pointer-events-none" />
+        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-gold mb-6"><TrendingUp className="inline w-4 h-4 mr-2" /> Équation de rentabilité brute</p>
+        <p className="text-2xl sm:text-4xl font-black text-white tracking-tighter uppercase leading-none">
+          (Loyer mensuel × 12) <br className="sm:hidden" />
+          <span className="text-brand-gold">÷</span> <br className="sm:hidden" />
+          Total investi × 100
         </p>
       </motion.div>
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4">
-          <h3 className="text-sm font-bold text-brand-navy">Données (exemple)</h3>
-          <ul className="mt-3 space-y-2 text-sm">
-            <li className="flex justify-between">
-              <span>Prix d’achat</span>
-              <span className="font-medium">200 000 €</span>
-            </li>
-            <li className="flex justify-between">
-              <span>Travaux</span>
-              <span className="font-medium">20 000 €</span>
-            </li>
-            <li className="flex justify-between">
-              <span>Frais de notaire</span>
-              <span className="font-medium">16 000 €</span>
-            </li>
-            <li className="flex justify-between">
-              <span>Loyer mensuel</span>
-              <span className="font-medium">900 €</span>
-            </li>
-          </ul>
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-xl">
+          <h3 className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-6 italic">Simulation type</h3>
+          <div className="space-y-3">
+             {[["Prix d&apos;achat", "200k €"], ["Travaux", "20k €"], ["Frais notaire", "16k €"], ["Loyer mensuel", "900 €"]].map(([k, v]) => (
+                <div key={k} className="flex justify-between border-b border-white/5 pb-2">
+                    <span className="text-sm font-bold text-white/60">{k}</span>
+                    <span className="text-sm font-black text-white">{v}</span>
+                </div>
+             ))}
+          </div>
         </div>
-        <div className="rounded-xl border border-emerald-200 bg-emerald-50/50 p-4">
-          <h3 className="text-sm font-bold text-brand-navy">Calcul</h3>
-          <ul className="mt-3 space-y-2 text-sm">
-            <li className="flex justify-between">
-              <span>Total investi</span>
-              <span className="font-medium">236 000 €</span>
-            </li>
-            <li className="flex justify-between">
-              <span>Loyer annuel</span>
-              <span className="font-medium">10 800 €</span>
-            </li>
-            <li className="flex justify-between border-t border-emerald-200 pt-2 text-lg font-bold text-emerald-800">
-              <span>Rentabilité brute</span>
-              <span>4,58 %</span>
-            </li>
-          </ul>
+        <div className="rounded-3xl border border-emerald-500/20 bg-emerald-500/5 p-8 shadow-xl flex flex-col justify-center text-center">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-400 mb-2">Résultat brut</p>
+            <p className="text-6xl font-black text-white tracking-tighter">4,58 <span className="text-2xl text-emerald-400">%</span></p>
         </div>
-      </div>
-      <div>
-        <h3 className="text-center text-sm font-bold uppercase text-brand-navy">
-          Ordres de grandeur selon le type
-        </h3>
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
-          {[
-            { l: "Résidence principale", v: "~0 %", c: "bg-zinc-200 text-zinc-800" },
-            { l: "Location nue", v: "3–5 %", c: "bg-amber-200 text-amber-950" },
-            { l: "Location meublée", v: "5–8 %", c: "bg-emerald-200 text-emerald-950" },
-            { l: "Pinel", v: "2–4 %", c: "bg-sky-200 text-sky-950" },
-          ].map((x) => (
-            <span key={x.l} className={`rounded-full px-3 py-1.5 text-xs font-semibold ${x.c}`}>
-              {x.l} : {x.v}
-            </span>
-          ))}
-        </div>
-      </div>
-      <div className="rounded-lg border border-emerald-300 bg-white p-4 text-sm">
-        <p className="font-semibold text-brand-navy">Rentabilité nette (charges déduites)</p>
-        <p className="mt-2 font-mono text-zinc-800">
-          Rentabilité brute − (Charges annuelles ÷ Total investi × 100)
-        </p>
-        <p className="mt-2 text-emerald-800">
-          Objectif courant : viser au moins ~3–4 % net pour un investissement locatif viable (selon
-          risque et marché).
-        </p>
       </div>
     </div>
   );
@@ -489,51 +322,32 @@ function BlockRentabilite() {
 
 function BlockTimeline() {
   const steps = [
-    { day: "J", title: "Offre", sub: "Proposition d’achat" },
-    { day: "J+7", title: "Compromis", sub: "Signature chez le notaire" },
-    { day: "J+45", title: "Prêt", sub: "Obtention du crédit" },
-    { day: "J+60", title: "Acte", sub: "Signature définitive" },
-    { day: "J+90", title: "Livraison", sub: "Remise des clés" },
+    { day: "J", title: "Offre" },
+    { day: "J+7", title: "Compromis" },
+    { day: "J+45", title: "Prêt" },
+    { day: "J+60", title: "Acte" },
+    { day: "J+90", title: "Livraison" },
   ];
   return (
-    <div className="space-y-8">
-      <div className="overflow-x-auto pb-4">
-        <div className="relative flex min-w-[640px] items-start justify-between px-4">
-          <div className="absolute left-8 right-8 top-5 h-0.5 bg-brand-navy/30" aria-hidden />
-          {steps.map((s) => (
-            <div key={s.day} className="relative z-10 flex w-28 flex-col items-center text-center">
-              <span className="text-xs font-bold text-[var(--brand-gold)]">{s.day}</span>
-              <div className="mt-2 h-4 w-4 rounded-full border-4 border-[var(--brand-gold)] bg-white shadow" />
-              <p className="mt-3 text-sm font-bold text-brand-navy">{s.title}</p>
-              <p className="mt-1 text-3xs text-zinc-500">{s.sub}</p>
+    <div className="space-y-12 py-10">
+      <div className="relative flex justify-between items-center max-w-4xl mx-auto px-4">
+        <div className="absolute left-8 right-8 top-1/2 h-1 bg-white/10 -translate-y-1/2" />
+        {steps.map((s, i) => (
+          <div key={i} className="relative z-10 flex flex-col items-center group">
+            <div className="mb-4 h-12 w-12 rounded-2xl bg-[#030712] border-2 border-brand-gold flex items-center justify-center text-xs font-black text-brand-gold shadow-2xl group-hover:scale-110 transition-transform">
+                {s.day}
+            </div>
+            <p className="text-[10px] font-black uppercase tracking-widest text-white group-hover:text-brand-gold transition-colors">{s.title}</p>
+          </div>
+        ))}
+      </div>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {["Identité", "Domicile", "Imposition", "Salaire", "Relevés", "Contrat"].map(t => (
+            <div key={t} className="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 p-4">
+                <Check className="w-4 h-4 text-emerald-400" />
+                <span className="text-xs font-bold text-white/80 uppercase tracking-widest">{t}</span>
             </div>
           ))}
-        </div>
-      </div>
-      <div>
-        <h3 className="text-sm font-bold uppercase text-brand-navy">Documents requis (dossier type)</h3>
-        <ul className="mt-3 grid gap-2 sm:grid-cols-2 md:grid-cols-3">
-          {[
-            "Pièce d’identité",
-            "Justificatif de domicile",
-            "Avis d’imposition",
-            "Bulletins de salaire",
-            "Relevés bancaires",
-            "Contrat de travail",
-          ].map((t) => (
-            <li key={t} className="flex items-start gap-2 text-sm text-zinc-700">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" aria-hidden />
-              <span>{t}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm">
-        <p className="font-bold text-red-900">Délai de rétractation : 10 jours calendaires</p>
-        <p className="mt-1 text-red-800/90">
-          À compter de la réception de l’offre ou de l’acte selon le cas — vérifiez toujours le texte
-          exact du compromis / de la loi applicable.
-        </p>
       </div>
     </div>
   );
@@ -541,407 +355,114 @@ function BlockTimeline() {
 
 function BlockFinancement() {
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center">
-        <div
-          className="relative h-48 w-48 shrink-0 rounded-full shadow-inner"
-          style={{
-            background: `conic-gradient(${gold} 0 90deg, ${navy} 90deg 360deg)`,
-          }}
-          role="img"
-          aria-label="Répartition indicative : 25 % apport, 75 % crédit"
-        >
-          <div className="absolute inset-8 flex items-center justify-center rounded-full bg-white text-center shadow">
-            <span className="text-sm font-bold text-brand-navy">100 %</span>
-          </div>
-        </div>
-        <div className="grid max-w-lg flex-1 gap-6 sm:grid-cols-2">
-          <div>
-            <h3 className="text-xs font-bold uppercase text-[var(--brand-gold)]">Apport personnel</h3>
-            <ul className="mt-2 list-disc space-y-1 pl-4 text-sm text-zinc-700">
-              <li>Épargne disponible</li>
-              <li>Pas de taxation à l’apport</li>
-              <li>Réduction des intérêts</li>
-              <li>Meilleur taux d’endettement</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-xs font-bold uppercase text-brand-navy">Crédit immobilier</h3>
-            <ul className="mt-2 list-disc space-y-1 pl-4 text-sm text-zinc-700">
-              <li>Taux négociables</li>
-              <li>Durée : souvent 15–25 ans</li>
-              <li>Effet de levier</li>
-              <li>Charges déductibles (foncier)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h3 className="text-center text-sm font-bold uppercase text-brand-navy">Indicateurs clés</h3>
-        <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {[
-            { k: "Taux d’endettement", v: "≈ 33 %", c: "bg-emerald-100 text-emerald-900" },
-            { k: "Reste à vivre", v: "1 500 € min", c: "bg-emerald-100 text-emerald-900" },
-            { k: "Durée max", v: "25 ans", c: "bg-amber-100 text-amber-950" },
-            { k: "Assurance emprunteur", v: "0,3–0,5 %", c: "bg-zinc-100 text-zinc-800" },
-          ].map((x) => (
-            <div key={x.k} className={`rounded-xl px-3 py-3 text-center ${x.c}`}>
-              <p className="text-2xs font-semibold uppercase opacity-80">{x.k}</p>
-              <p className="mt-1 text-lg font-bold">{x.v}</p>
+    <div className="grid gap-12 lg:grid-cols-2 items-center">
+        <div className="relative h-64 w-64 mx-auto">
+            <div className="absolute inset-0 rounded-full border-[16px] border-white/5" />
+            <div className="absolute inset-0 rounded-full border-[16px] border-brand-gold" style={{ clipPath: 'polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%)' }} />
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <p className="text-4xl font-black text-white">25%</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-brand-gold">Apport</p>
             </div>
-          ))}
         </div>
-      </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+           {[["Taux endettement", "33%"], ["Reste à vivre", "1500€"], ["Durée max", "25 ans"], ["Assurance", "0.4%"]].map(([k, v]) => (
+                <div key={k} className="rounded-2xl bg-white/5 border border-white/10 p-6 text-center">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-2">{k}</p>
+                    <p className="text-xl font-black text-white">{v}</p>
+                </div>
+           ))}
+        </div>
     </div>
   );
 }
 
 function BlockFiscal() {
+  const regimes = [
+    { name: "Micro-BIC", sub: "Abattement 50%", border: "border-sky-500/30" },
+    { name: "Réel BIC", sub: "Amortissement", border: "border-brand-gold/30" },
+    { name: "Foncier", sub: "Déficit foncier", border: "border-emerald-500/30" },
+  ];
   return (
-    <div className="space-y-8">
-      <div className="grid gap-4 md:grid-cols-3">
-        {[
-          {
-            title: "Micro-BIC",
-            sub: "Location meublée",
-            border: "border-brand-navy",
-            items: [
-              "Abattement 50 %",
-              "Plafond 77 700 €",
-              "Déclaration simplifiée",
-              "Pas d’amortissement du bien",
-              "Ordre de grandeur fiscal variable",
-            ],
-          },
-          {
-            title: "Réel BIC",
-            sub: "Location meublée pro",
-            border: "border-brand-navy",
-            items: [
-              "Charges réelles déductibles",
-              "Amortissements possibles",
-              "Déficit reportable (règles strictes)",
-              "Comptabilité complète",
-              "Souvent pour volumes ou travaux importants",
-            ],
-          },
-          {
-            title: "Foncier",
-            sub: "Location nue",
-            border: "border-emerald-500",
-            items: [
-              "Micro-foncier 30 % ou réel",
-              "Charges et travaux selon règles",
-              "Déficit foncier selon plafonds",
-              "Régime distinct du meublé",
-              "Accompagnement conseillé",
-            ],
-          },
-        ].map((b) => (
-          <div
-            key={b.title}
-            className={`flex flex-col rounded-xl border-2 ${b.border} bg-white p-4 shadow-sm`}
-          >
-            <h3 className="text-lg font-bold text-brand-navy">{b.title}</h3>
-            <p className="text-xs uppercase text-zinc-500">{b.sub}</p>
-            <ul className="mt-3 flex-1 list-disc space-y-1.5 pl-4 text-sm text-zinc-700">
-              {b.items.map((t) => (
-                <li key={t}>{t}</li>
-              ))}
-            </ul>
-          </div>
+    <div className="grid gap-6 md:grid-cols-3">
+        {regimes.map(r => (
+            <div key={r.name} className={`rounded-3xl border-2 ${r.border} bg-white/5 p-8 text-center shadow-xl hover:-translate-y-2 transition-transform duration-500`}>
+                <h3 className="text-xl font-black text-white uppercase tracking-tight mb-2">{r.name}</h3>
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-gold">{r.sub}</p>
+                <div className="mt-6 h-1 w-12 bg-white/10 mx-auto rounded-full" />
+            </div>
         ))}
-      </div>
-      <div className="rounded-lg border border-amber-200 bg-amber-50/80 p-4">
-        <h3 className="text-sm font-bold uppercase text-amber-900">Quand choisir quoi ?</h3>
-        <ul className="mt-3 space-y-2 text-sm text-amber-950">
-          <li>
-            <strong>Micro-BIC :</strong> petits revenus locatifs, simplicité — souvent premiers pas.
-          </li>
-          <li>
-            <strong>Réel BIC :</strong> charges et amortissements significatifs — suivi comptable.
-          </li>
-          <li>
-            <strong>Foncier :</strong> location nue, logique patrimoniale long terme.
-          </li>
-        </ul>
-      </div>
-      <p className="text-center text-sm italic text-red-800">
-        Le choix de régime peut être engagé sur plusieurs années — validez avec un expert-comptable
-        avant toute option définitive.
-      </p>
     </div>
   );
 }
 
 function BlockDiagnostics() {
   const rows = [
-    { name: "DPE", valid: "10 ans", condition: "Toute mise en vente/location", alert: false },
-    { name: "Amiante", valid: "Illimité si négatif", condition: "Permis de construire avant 01/07/1997", alert: false },
-    { name: "Plomb / CREP", valid: "1 an si positif", condition: "Construction avant 01/01/1949", alert: true },
-    { name: "Termites", valid: "6 mois", condition: "Zones classées par arrêté", alert: true },
-    { name: "Électricité", valid: "3 ans", condition: "Installation > 15 ans", alert: false },
-    { name: "Gaz", valid: "3 ans", condition: "Installation > 15 ans", alert: false },
-    { name: "ERP", valid: "6 mois", condition: "Toute vente/location", alert: true },
-    { name: "Mesurage Loi Carrez", valid: "Sans limite", condition: "Lots de copropriété", alert: false },
-    { name: "Assainissement", valid: "3 ans", condition: "Non raccordé au tout-à-l'égout", alert: false },
-    { name: "Bruit (PEB)", valid: "6 mois", condition: "Zones d'exposition aux aérodromes", alert: true },
+    { name: "DPE", valid: "10 ans", alert: false },
+    { name: "Amiante", valid: "Illimité*", alert: false },
+    { name: "Plomb", valid: "1 an**", alert: true },
+    { name: "Termites", valid: "6 mois", alert: true },
+    { name: "ERP", valid: "6 mois", alert: true },
   ];
   return (
-    <div className="space-y-6">
-      <div className="overflow-x-auto rounded-2xl border border-zinc-200 shadow-sm">
-        <table className="w-full min-w-[520px] border-collapse text-sm">
-          <thead className="bg-zinc-100">
-            <tr>
-              <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Diagnostic</th>
-              <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Validité</th>
-              <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Condition</th>
-              <th className="border border-zinc-200 p-3 text-center font-semibold text-brand-navy"><EmojiIcon emoji="⚠️" className="h-4 w-4 inline" /></th>
+    <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl">
+      <table className="w-full text-left">
+        <thead className="bg-white/10">
+          <tr>
+            <th className="p-6 text-[10px] font-black uppercase tracking-widest text-brand-gold">Type</th>
+            <th className="p-6 text-[10px] font-black uppercase tracking-widest text-brand-gold">Validité</th>
+            <th className="p-6 text-center text-brand-gold"><AlertTriangle className="w-4 h-4 mx-auto" /></th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr key={i} className="border-t border-white/5 hover:bg-white/[0.02] transition-colors">
+              <td className="p-6 text-sm font-black text-white uppercase">{r.name}</td>
+              <td className="p-6 text-sm font-bold text-white/60">{r.valid}</td>
+              <td className="p-6 text-center">
+                {r.alert ? <span className="inline-block h-2 w-2 rounded-full bg-red-500 animate-pulse" /> : <Check className="w-4 h-4 text-emerald-500 mx-auto" />}
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {rows.map((r) => (
-              <tr key={r.name} className="hover:bg-zinc-50/60">
-                <td className="border border-zinc-200 p-3 font-medium text-zinc-800">
-                  {r.name}
-                </td>
-                <td className="border border-zinc-200 p-3 text-zinc-700">{r.valid}</td>
-                <td className="border border-zinc-200 p-3 text-zinc-600">{r.condition}</td>
-                <td className="border border-zinc-200 p-3 text-center">
-                  {r.alert ? <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-red-100 text-red-600 text-xs font-bold">!</span> : <span className="text-zinc-300">—</span>}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm text-amber-950">
-        <strong>Alerte rouge</strong> = validité courte (&lt; 12 mois) à surveiller en amont de chaque compromis.
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
 
 function BlockMandats() {
-  const cards = [
-    {
-      title: "Simple",
-      color: "border-zinc-300 bg-zinc-50",
-      badge: "bg-zinc-200 text-zinc-800",
-      delay: "6 à 12 mois",
-      success: "45 %",
-      points: ["Vendeur libre de plusieurs agences", "Pas d'exclusivité", "Commission à l'agent vendeur", "Moins d'engagement marketing"],
-    },
-    {
-      title: "Semi-exclusif",
-      color: "border-sky-300 bg-sky-50",
-      badge: "bg-sky-200 text-sky-900",
-      delay: "3 à 6 mois",
-      success: "68 %",
-      points: ["Exclusivité auprès des pros", "Le vendeur peut vendre seul", "Commission réduite si vente en direct", "Bon compromis confiance/sécurité"],
-    },
-    {
-      title: "Exclusif",
-      color: "border-emerald-300 bg-emerald-50",
-      badge: "bg-emerald-200 text-emerald-900",
-      delay: "2 à 4 mois",
-      success: "82 %",
-      points: ["Une seule agence mandatée", "Stratégie marketing complète", "Commission assurée", "Meilleur taux de conversion"],
-    },
-  ];
   return (
-    <div className="space-y-8">
-      <div className="grid gap-5 md:grid-cols-3">
-        {cards.map((c, i) => (
-          <motion.div
-            key={c.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            viewport={{ once: true }}
-            className={`rounded-2xl border-2 ${c.color} p-5 shadow-sm hover:shadow-md transition-shadow`}
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-bold text-brand-navy">{c.title}</h3>
-              <span className={`rounded-full px-2 py-0.5 text-2xs font-bold uppercase ${c.badge}`}>{c.success}</span>
+    <div className="grid gap-6 md:grid-cols-3">
+        {["Simple", "Semi-Ex", "Exclusif"].map((t, i) => (
+            <div key={t} className="rounded-3xl border border-white/10 bg-white/5 p-8 text-center group hover:border-brand-gold/40 transition-colors">
+                <div className="mb-6 mx-auto h-12 w-12 rounded-2xl bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center text-brand-gold font-black">
+                    {i + 1}
+                </div>
+                <h3 className="text-lg font-black text-white uppercase tracking-widest">{t}</h3>
+                <p className="mt-4 text-[10px] font-bold text-white/30 uppercase tracking-widest italic">Performance {70 + i*10}%</p>
             </div>
-            <p className="mt-1 text-xs text-zinc-500">Délai moyen : {c.delay}</p>
-            <ul className="mt-4 space-y-2 text-sm text-zinc-700">
-              {c.points.map((p) => (
-                <li key={p} className="flex gap-2">
-                  <span className="text-[var(--brand-gold)]">★</span> {p}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
         ))}
-      </div>
-      <div>
-        <h3 className="text-sm font-bold uppercase text-brand-navy">Clauses obligatoires dans tout mandat</h3>
-        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-          {[
-            "Honoraires TTC et en euros (< 600 k€)",
-            "Numéro de carte professionnelle (Carte T)",
-            "Durée du mandat et modalités de renouvellement",
-            "Description précise du bien et des lots",
-            "Mentions sur le fonds de garantie",
-          ].map((t) => (
-            <li key={t} className="flex items-start gap-2 text-sm text-zinc-700">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-navy/70" aria-hidden />
-              <span>{t}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 }
 
 function BlockReseaux() {
-  const week = [
-    { day: "Lundi", type: "Post éducatif", hook: "3 erreurs qui tuent votre visibilité en 2026" },
-    { day: "Mardi", type: "Story / Coulisses", hook: "Derrière les coulisses d'une estimation" },
-    { day: "Mercredi", type: "Reel", hook: "Le quartier X en 30 secondes" },
-    { day: "Jeudi", type: "Post témoignage", hook: "Comment M. et Mme Y ont vendu en 21 jours" },
-    { day: "Vendredi", type: "Story sondage", hook: "Vous préférez balcon ou terrasse ?" },
-    { day: "Samedi", type: "Reel bien", hook: "Visite express : 3 pièces, 1 coup de cœur" },
-  ];
-  const checks = [
-    "Bio à jour avec localisation",
-    "Lien vers site ou réservation",
-    "Réponse aux DMs &lt; 2h en journée",
-    "3 hashtags de niche par publication",
-    "1 collaboration locale par mois",
-    "5 avis Google récoltés ce mois-ci",
-  ];
   return (
-    <div className="space-y-8">
-      <div className="overflow-x-auto rounded-2xl border border-zinc-200 shadow-sm">
-        <table className="w-full min-w-[480px] border-collapse text-sm">
-          <thead className="bg-zinc-100">
-            <tr>
-              <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Jour</th>
-              <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Format</th>
-              <th className="border border-zinc-200 p-3 text-left font-semibold text-brand-navy">Exemple de hook</th>
-            </tr>
-          </thead>
-          <tbody>
-            {week.map((w) => (
-              <tr key={w.day} className="hover:bg-zinc-50/60">
-                <td className="border border-zinc-200 p-3 font-medium text-zinc-800">{w.day}</td>
-                <td className="border border-zinc-200 p-3">
-                  <span className="rounded-full bg-brand-navy/10 px-2 py-0.5 text-xs font-semibold text-brand-navy">{w.type}</span>
-                </td>
-                <td className="border border-zinc-200 p-3 italic text-zinc-600">« {w.hook} »</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-5">
-        <h3 className="text-sm font-bold uppercase text-brand-navy">Checklist engagement</h3>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-          {checks.map((c) => (
-            <div key={c} className="flex items-start gap-2 text-sm text-zinc-700">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" aria-hidden />
-              <span dangerouslySetInnerHTML={{ __html: c }} />
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {["Lundi : Éducatif", "Mardi : Coulisses", "Mercredi : Reel", "Jeudi : Preuve", "Vendredi : Sondage", "Samedi : Bien"].map(d => (
+            <div key={d} className="rounded-2xl bg-[#030712] border border-white/10 p-6 flex flex-col gap-2">
+                <p className="text-brand-gold font-black uppercase tracking-widest text-[10px]">{d.split(':')[0]}</p>
+                <p className="text-white font-bold uppercase tracking-tight">{d.split(':')[1]}</p>
             </div>
-          ))}
-        </div>
-      </div>
-      <div className="rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm text-amber-950">
-        <strong>Règle 80/20 :</strong> 80 % de contenu utile / informatif, 20 % de promotion directe. Un compte trop promotionnel perd jusqu&apos;à 40 % d&apos;engagement.
-      </div>
+        ))}
     </div>
   );
 }
 
 function BlockNetVendeur() {
-  const [prixFai, setPrixFai] = useState(300000);
-  const [honoraires, setHonoraires] = useState(5);
-  const [fraisAcquereur, setFraisAcquereur] = useState(true);
-
-  const montantHonoraires = (prixFai * honoraires) / 100;
-  const netVendeur = fraisAcquereur ? prixFai : prixFai - montantHonoraires;
-
-  const phrases = [
-    `Avec un prix affiché de ${prixFai.toLocaleString("fr-FR")} € FAI, vous empocherez ${Math.round(netVendeur).toLocaleString("fr-FR")} € net.`,
-    `Mes honoraires de ${honoraires} % sont investis dans une stratégie marketing complète pour vendre au meilleur prix.`,
-    `En comparant avec une vente entre particuliers, mon accompagnement vous permet souvent de gagner 10 à 15 % sur le prix de vente final.`,
-  ];
-
   return (
-    <div className="space-y-6">
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="space-y-4 card-elevated p-5">
-          <h3 className="text-sm font-bold uppercase text-brand-navy">Paramètres</h3>
-          <div className="space-y-3">
-            <div>
-              <label className="flex justify-between text-sm text-zinc-600">
-                <span>Prix FAI</span>
-                <span className="font-semibold text-brand-gold">{prixFai.toLocaleString("fr-FR")} €</span>
-              </label>
-              <input
-                type="range"
-                min={100000}
-                max={1000000}
-                step={5000}
-                value={prixFai}
-                onChange={(e) => setPrixFai(Number(e.target.value))}
-                className="mt-2 w-full accent-brand-navy"
-              />
-            </div>
-            <div>
-              <label className="flex justify-between text-sm text-zinc-600">
-                <span>Honoraires (%)</span>
-                <span className="font-semibold text-brand-gold">{honoraires} %</span>
-              </label>
-              <input
-                type="range"
-                min={1}
-                max={10}
-                step={0.5}
-                value={honoraires}
-                onChange={(e) => setHonoraires(Number(e.target.value))}
-                className="mt-2 w-full accent-brand-navy"
-              />
-            </div>
-            <label className="flex items-center gap-2 text-sm text-zinc-700">
-              <input
-                type="checkbox"
-                checked={fraisAcquereur}
-                onChange={(e) => setFraisAcquereur(e.target.checked)}
-                className="h-4 w-4 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy"
-              />
-              Honoraires à la charge de l&apos;acquéreur
-            </label>
-          </div>
-        </div>
-        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
-          <h3 className="text-sm font-bold uppercase text-emerald-900">Résultat</h3>
-          <div className="mt-4 space-y-3">
-            <div className="flex justify-between">
-              <span className="text-sm text-zinc-700">Montant honoraires</span>
-              <span className="font-bold text-zinc-900">{montantHonoraires.toLocaleString("fr-FR", { maximumFractionDigits: 0 })} €</span>
-            </div>
-            <div className="flex justify-between border-t border-emerald-200 pt-3">
-              <span className="text-sm font-bold text-emerald-900">Net vendeur</span>
-              <span className="text-xl font-black text-emerald-800">{Math.round(netVendeur).toLocaleString("fr-FR")} €</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-5">
-        <h3 className="text-sm font-bold uppercase text-brand-navy">Phrases d&apos;argumentaire prêtes à l&apos;emploi</h3>
-        <ul className="mt-4 space-y-3">
-          {phrases.map((p, i) => (
-            <li key={i} className="flex gap-3 text-sm text-zinc-700">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-navy text-xs font-bold text-white">{i + 1}</span>
-              <span className="leading-relaxed">{p}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div className="rounded-[2rem] border border-brand-gold/20 bg-brand-gold/5 p-12 text-center shadow-2xl">
+        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-gold mb-4">Focus métier</p>
+        <h3 className="text-3xl font-black text-white uppercase tracking-tight italic">&laquo; Vendre au juste prix, <br /> c&apos;est d&apos;abord rassurer &raquo;</h3>
     </div>
   );
 }

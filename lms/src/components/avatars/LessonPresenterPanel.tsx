@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
 import { MODULE_AVATARS } from "@/data/module-avatars";
+import { ChevronDown, MessageSquare } from "lucide-react";
 
 interface LessonPresenterPanelProps {
   moduleSlug: string;
@@ -50,39 +51,40 @@ export function LessonPresenterPanel({
     <motion.div
       initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mb-8 overflow-hidden rounded-2xl border shadow-lg"
-      style={{
-        borderColor: `${avatar.accentColor}30`,
-        background: `linear-gradient(135deg, ${avatar.accentColor}0e 0%, white 60%, ${avatar.accentColor}06 100%)`,
-      }}
+      className="mb-10 overflow-hidden rounded-[2rem] border border-white/10 bg-[#070d18] shadow-2xl"
     >
-      <div className="flex items-center gap-5 p-4 md:p-5">
+      <div className="flex items-center gap-6 p-5 md:p-6 lg:p-8">
         {/* Avatar */}
-        <div className="shrink-0 relative">
+        <div className="shrink-0 relative group">
           {avatar.photoUrl ? (
             <div
-              className="relative h-16 w-16 overflow-hidden rounded-full shadow-lg ring-2 ring-white"
-              style={{ padding: "2px", background: `linear-gradient(135deg, ${avatar.accentColor}, #d4af37)` }}
+              className="relative h-20 w-20 overflow-hidden rounded-full shadow-2xl ring-4 ring-white/5 transition-transform duration-500 group-hover:scale-105"
+              style={{ padding: "3px", background: `linear-gradient(135deg, ${avatar.accentColor}, #d4af37)` }}
             >
-              <div className="relative h-full w-full overflow-hidden rounded-full bg-white">
-                <Image src={avatar.photoUrl} alt={avatar.name} fill className="object-cover" sizes="64px" />
+              <div className="relative h-full w-full overflow-hidden rounded-full bg-[#030712]">
+                <Image src={avatar.photoUrl} alt={avatar.name} fill className="object-cover" sizes="80px" />
               </div>
             </div>
           ) : (
             <div
-              className="flex h-14 w-14 items-center justify-center rounded-full text-base font-bold text-white shadow-md ring-2 ring-white"
+              className="flex h-16 w-16 items-center justify-center rounded-full text-xl font-black text-white shadow-2xl ring-4 ring-white/5"
               style={{ backgroundColor: avatar.accentColor }}
             >
               {avatar.initials}
             </div>
           )}
+          {isAudioPlaying && (
+              <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 shadow-lg border-2 border-[#070d18]">
+                   <span className="h-2 w-2 animate-pulse rounded-full bg-white" />
+              </div>
+          )}
         </div>
 
         {/* Info */}
         <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-2 mb-1">
+          <div className="flex flex-wrap items-center gap-3 mb-2">
             <span
-              className="rounded-full px-2.5 py-0.5 text-2xs font-bold uppercase tracking-wide text-white"
+              className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white shadow-lg"
               style={{ backgroundColor: avatar.accentColor }}
             >
               {avatar.role}
@@ -91,29 +93,26 @@ export function LessonPresenterPanel({
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="flex items-center gap-1 text-3xs font-semibold text-emerald-600"
+                className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-emerald-400"
               >
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                </span>
-                En direct
+                Audio actif
               </motion.span>
             )}
           </div>
-          <p className="font-bold text-zinc-800">{avatar.name}</p>
-          <p className="text-xs text-zinc-500 mt-0.5 line-clamp-1">
-            Votre formatrice pour : <span className="font-medium text-zinc-700">{lessonTitle}</span>
+          <p className="text-xl font-black text-white tracking-tight uppercase">{avatar.name}</p>
+          <p className="text-sm text-white/50 mt-1 line-clamp-1">
+            Votre experte référente pour : <span className="text-brand-gold font-bold italic">{lessonTitle}</span>
           </p>
         </div>
 
         {/* Toggle speech */}
         <button
           onClick={() => setExpanded((v) => !v)}
-          className="shrink-0 rounded-xl border px-3 py-1.5 text-xs font-semibold transition hover:opacity-80"
-          style={{ borderColor: `${avatar.accentColor}40`, color: avatar.accentColor }}
+          className="group shrink-0 flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-[10px] font-black uppercase tracking-widest text-white transition hover:bg-white/10 hover:border-white/20 active:scale-95"
         >
-          {expanded ? "Fermer" : "Message"}
+          <MessageSquare className="w-4 h-4 text-brand-gold" />
+          <span className="hidden sm:inline">{expanded ? "Masquer" : "Message"}</span>
+          <ChevronDown className={`w-4 h-4 transition-transform duration-500 ${expanded ? "rotate-180" : ""}`} />
         </button>
       </div>
 
@@ -124,31 +123,30 @@ export function LessonPresenterPanel({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden"
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden bg-[#030712]/50"
           >
-            <div className="border-t px-5 py-4" style={{ borderColor: `${avatar.accentColor}20` }}>
+            <div className="border-t border-white/5 px-8 py-8 md:px-12">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={msgIndex}
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  className="text-sm leading-relaxed text-zinc-700 italic"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="text-lg leading-relaxed text-white/80 italic font-medium"
                 >
                   &laquo; {messages[msgIndex]} &raquo;
                 </motion.p>
               </AnimatePresence>
               {messages.length > 1 && (
-                <div className="mt-3 flex items-center gap-3">
+                <div className="mt-8 flex items-center justify-between">
                   <button
                     onClick={() => setMsgIndex((i) => (i + 1) % messages.length)}
-                    className="text-xs font-semibold underline-offset-2 hover:underline"
-                    style={{ color: avatar.accentColor }}
+                    className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-brand-gold hover:text-white transition-colors"
                   >
-                    Message suivant &rarr;
+                    Lire la suite <span className="text-lg">→</span>
                   </button>
-                  <span className="text-xs text-zinc-400">{msgIndex + 1}/{messages.length}</span>
+                  <span className="text-[10px] font-black text-white/20 tracking-widest">{msgIndex + 1} / {messages.length}</span>
                 </div>
               )}
             </div>

@@ -17,17 +17,15 @@ interface ModuleProgressBarsProps {
 
 export function ModuleProgressBars({ progress }: ModuleProgressBarsProps) {
   return (
-    <div className="space-y-4">
-      <h3 className="font-bold text-gray-900">Progression par module</h3>
-      
-      <div className="space-y-4">
+    <div className="space-y-6">
+      <div className="space-y-6">
         {COURSE.map((module, index) => {
           const moduleProgress = progress.find((p) => p.slug === module.slug);
           const completed = moduleProgress?.completed || 0;
           const total = moduleProgress?.total || module.lessons.length;
           const percentage = total > 0 ? (completed / total) * 100 : 0;
           const avatar = getAvatarForModule(module.slug);
-          const accentColor = avatar?.accentColor || "#1a3a5c";
+          const accentColor = avatar?.accentColor || "#d4af37";
 
           return (
             <motion.div
@@ -38,36 +36,37 @@ export function ModuleProgressBars({ progress }: ModuleProgressBarsProps) {
               className="group"
             >
               <Link href={`/formation/${module.slug}`} className="block">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-3">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-4">
                     <span
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold"
+                      className="w-10 h-10 rounded-xl flex items-center justify-center text-white text-base font-black shadow-lg border border-white/10"
                       style={{ backgroundColor: accentColor }}
                     >
                       {index + 1}
                     </span>
                     <div>
-                      <p className="font-semibold text-gray-900 text-sm">
-                        {module.title.replace(/^Module (\d+) — /, "M$1 · ")}
+                      <p className="font-black text-white text-sm uppercase tracking-tight">
+                        {module.title.replace(/^Module (\d+) — /, "")}
                       </p>
-                      <p className="text-xs text-gray-500">
-                        {completed}/{total} leçons
+                      <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] mt-1">
+                        {completed} / {total} ÉTAPES
                       </p>
                     </div>
                   </div>
-                  <span className="text-sm font-bold" style={{ color: accentColor }}>
-                    {Math.round(percentage)}%
+                  <span className="text-sm font-black tabular-nums text-white/80">
+                    {Math.round(percentage)}<span className="text-[10px] opacity-40 ml-0.5">%</span>
                   </span>
                 </div>
                 
-                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div className="h-1.5 bg-white/5 rounded-full overflow-hidden ring-1 ring-white/5 shadow-inner">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${percentage}%` }}
-                    transition={{ duration: 1, delay: 0.2 + index * 0.1 }}
+                    transition={{ duration: 1.2, delay: 0.3 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="h-full rounded-full"
                     style={{
-                      background: `linear-gradient(90deg, ${accentColor}, ${accentColor}88)`,
+                      background: `linear-gradient(90deg, ${accentColor}, ${accentColor}cc)`,
+                      boxShadow: `0 0 10px ${accentColor}44`,
                     }}
                   />
                 </div>

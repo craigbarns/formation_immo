@@ -12,9 +12,6 @@ interface HeatmapCalendarProps {
   data?: ActivityData[] | Record<string, number>;
 }
 
-// const DAYS = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
-// const MONTHS = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"];
-
 export function HeatmapCalendar({ data }: HeatmapCalendarProps) {
   const [mounted, setMounted] = useState(false);
 
@@ -22,7 +19,6 @@ export function HeatmapCalendar({ data }: HeatmapCalendarProps) {
     requestAnimationFrame(() => setMounted(true));
   }, []);
 
-  // Generate last 16 weeks of empty data when no real data is provided
   const generateEmptyData = (): ActivityData[] => {
     const result: ActivityData[] = [];
     const today = new Date();
@@ -40,23 +36,21 @@ export function HeatmapCalendar({ data }: HeatmapCalendarProps) {
   const normalizeData = (input: HeatmapCalendarProps["data"]): ActivityData[] => {
     if (!input) return generateEmptyData();
     if (Array.isArray(input)) return input;
-    // Record<string, number>
     return Object.entries(input).map(([date, count]) => ({ date, count }));
   };
 
   const activityData = normalizeData(data);
 
   const getColor = (count: number) => {
-    if (count === 0) return "bg-gray-100";
-    if (count === 1) return "bg-emerald-200";
-    if (count === 2) return "bg-emerald-300";
-    if (count === 3) return "bg-emerald-400";
+    if (count === 0) return "bg-white/5";
+    if (count === 1) return "bg-emerald-500/20";
+    if (count === 2) return "bg-emerald-500/40";
+    if (count === 3) return "bg-emerald-500/60";
     return "bg-emerald-500";
   };
 
   if (!mounted) return null;
 
-  // Group by weeks
   const weeks: ActivityData[][] = [];
   for (let i = 0; i < activityData.length; i += 7) {
     weeks.push(activityData.slice(i, i + 7));
@@ -66,38 +60,35 @@ export function HeatmapCalendar({ data }: HeatmapCalendarProps) {
   const totalDays = activityData.length;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-bold text-gray-900">Activité</h3>
-          <p className="text-sm text-gray-500">
-            {totalActive} jours actifs sur {totalDays}
+          <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">Impact apprentissage</p>
+          <p className="text-lg font-black text-white">
+            {totalActive} <span className="text-white/20 text-xs font-bold uppercase ml-1">Jours actifs</span>
           </p>
         </div>
-        <div className="flex items-center gap-2 text-xs text-gray-500">
+        <div className="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-white/20">
           <span>Moins</span>
           <div className="flex gap-1">
-            <div className="w-3 h-3 bg-gray-100 rounded-sm" />
-            <div className="w-3 h-3 bg-emerald-200 rounded-sm" />
-            <div className="w-3 h-3 bg-emerald-300 rounded-sm" />
-            <div className="w-3 h-3 bg-emerald-400 rounded-sm" />
-            <div className="w-3 h-3 bg-emerald-500 rounded-sm" />
+            {[0, 1, 2, 3, 4].map(v => (
+                <div key={v} className={`w-3 h-3 rounded-sm ${getColor(v)}`} />
+            ))}
           </div>
           <span>Plus</span>
         </div>
       </div>
 
-      {/* Heatmap grid */}
-      <div className="flex gap-1 overflow-x-auto pb-2">
+      <div className="flex gap-1.5 overflow-x-auto pb-4 scrollbar-hide">
         {weeks.map((week, weekIndex) => (
-          <div key={weekIndex} className="flex flex-col gap-1">
+          <div key={weekIndex} className="flex flex-col gap-1.5 shrink-0">
             {week.map((day, dayIndex) => (
               <motion.div
                 key={`${weekIndex}-${dayIndex}`}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: (weekIndex * 7 + dayIndex) * 0.002 }}
-                className={`w-3 h-3 rounded-sm ${getColor(day.count)}`}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: (weekIndex * 7 + dayIndex) * 0.001, ease: "easeOut" }}
+                className={`w-3 h-3 rounded-sm ${getColor(day.count)} transition-colors duration-500 hover:ring-2 hover:ring-white/20`}
                 title={`${day.date}: ${day.count} activité(s)`}
               />
             ))}

@@ -16,8 +16,8 @@ export function CircularProgress({
   value,
   max,
   size = 120,
-  strokeWidth = 8,
-  color = "#1a3a5c",
+  strokeWidth = 10,
+  color = "#d4af37",
   label,
   sublabel,
 }: CircularProgressProps) {
@@ -40,7 +40,7 @@ export function CircularProgress({
             cy={size / 2}
             r={radius}
             fill="none"
-            stroke="#e5e7eb"
+            stroke="rgba(255,255,255,0.05)"
             strokeWidth={strokeWidth}
           />
           <motion.circle
@@ -54,18 +54,18 @@ export function CircularProgress({
             strokeDasharray={circumference}
             initial={{ strokeDashoffset: circumference }}
             animate={{ strokeDashoffset: dashoffset }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           />
         </svg>
         {/* Center text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-2xl font-bold text-gray-900">
-            {Math.round(progress * 100)}%
+          <span className="text-3xl font-black text-white tabular-nums tracking-tighter">
+            {Math.round(progress * 100)}<span className="text-xs text-white/40 ml-0.5">%</span>
           </span>
         </div>
       </div>
-      <p className="mt-3 font-semibold text-gray-900 text-center">{label}</p>
-      {sublabel && <p className="text-xs text-gray-500">{sublabel}</p>}
+      <p className="mt-4 text-[10px] font-black uppercase tracking-[0.2em] text-white/60 text-center">{label}</p>
+      {sublabel && <p className="text-[9px] font-bold text-white/20 uppercase tracking-widest mt-1">{sublabel}</p>}
     </div>
   );
 }

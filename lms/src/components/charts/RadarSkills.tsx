@@ -18,7 +18,6 @@ export function RadarSkills({ skills, size = 250 }: RadarSkillsProps) {
   const radius = (size / 2) * 0.7;
   const angleStep = (2 * Math.PI) / skills.length;
 
-  // Calculate points for the radar
   const getPoint = (index: number, value: number, max: number) => {
     const angle = index * angleStep - Math.PI / 2;
     const r = (value / max) * radius;
@@ -28,7 +27,6 @@ export function RadarSkills({ skills, size = 250 }: RadarSkillsProps) {
     };
   };
 
-  // Generate polygon points
   const polygonPoints = skills
     .map((skill, i) => {
       const point = getPoint(i, skill.value, skill.max);
@@ -36,13 +34,12 @@ export function RadarSkills({ skills, size = 250 }: RadarSkillsProps) {
     })
     .join(" ");
 
-  // Generate grid circles
   const gridLevels = [0.2, 0.4, 0.6, 0.8, 1];
 
   return (
     <div className="flex flex-col items-center">
       <svg width={size} height={size} className="overflow-visible">
-        {/* Grid circles */}
+        {/* Grid levels */}
         {gridLevels.map((level) => (
           <polygon
             key={level}
@@ -53,7 +50,7 @@ export function RadarSkills({ skills, size = 250 }: RadarSkillsProps) {
               })
               .join(" ")}
             fill="none"
-            stroke="#e5e7eb"
+            stroke="rgba(255,255,255,0.05)"
             strokeWidth={1}
           />
         ))}
@@ -68,7 +65,7 @@ export function RadarSkills({ skills, size = 250 }: RadarSkillsProps) {
               y1={center}
               x2={point.x}
               y2={point.y}
-              stroke="#e5e7eb"
+              stroke="rgba(255,255,255,0.05)"
               strokeWidth={1}
             />
           );
@@ -77,12 +74,12 @@ export function RadarSkills({ skills, size = 250 }: RadarSkillsProps) {
         {/* Data polygon */}
         <motion.polygon
           points={polygonPoints}
-          fill="rgba(26, 58, 92, 0.2)"
-          stroke="#1a3a5c"
+          fill="rgba(212, 175, 55, 0.15)"
+          stroke="#d4af37"
           strokeWidth={2}
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         />
 
         {/* Data points */}
@@ -93,18 +90,18 @@ export function RadarSkills({ skills, size = 250 }: RadarSkillsProps) {
               key={i}
               cx={point.x}
               cy={point.y}
-              r={4}
-              fill="#1a3a5c"
+              r={3}
+              fill="#fff"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ delay: 0.5 + i * 0.1 }}
+              transition={{ delay: 0.8 + i * 0.1 }}
             />
           );
         })}
 
         {/* Labels */}
         {skills.map((skill, i) => {
-          const point = getPoint(i, 120, 100);
+          const point = getPoint(i, 125, 100);
           return (
             <text
               key={`label-${i}`}
@@ -112,7 +109,7 @@ export function RadarSkills({ skills, size = 250 }: RadarSkillsProps) {
               y={point.y}
               textAnchor="middle"
               dominantBaseline="middle"
-              className="text-xs fill-gray-600 font-medium"
+              className="text-[9px] font-black fill-white/40 uppercase tracking-widest"
             >
               {skill.name}
             </text>

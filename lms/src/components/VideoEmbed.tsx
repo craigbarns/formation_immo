@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HelpCircle, CheckCircle } from "lucide-react";
+import { HelpCircle, CheckCircle, Play, Film } from "lucide-react";
 
 type Props = {
   url: string | null;
@@ -45,14 +45,19 @@ export function VideoEmbed({ url, title }: Props) {
 
   if (!url) {
     return (
-      <div className="flex aspect-video w-full items-center justify-center rounded-lg border border-dashed border-zinc-300 bg-zinc-100 text-center text-sm text-zinc-500">
-        <div>
-          <p className="font-medium text-zinc-700">Vidéo à produire</p>
-          <p className="mt-1 max-w-md">
-            Ajoutez l’URL dans <code className="rounded bg-white px-1">src/data/course.ts</code>{" "}
-            (champ <code className="rounded bg-white px-1">videoUrl</code>) — ou déposez un fichier
-            dans <code className="rounded bg-white px-1">public/videos/</code>.
-          </p>
+      <div className="relative aspect-video w-full flex items-center justify-center rounded-[2rem] border border-white/5 bg-[#030712] text-center overflow-hidden shadow-2xl group">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
+        <div className="relative z-10 flex flex-col items-center gap-6">
+            <div className="relative">
+                <div className="absolute inset-0 rounded-full blur-2xl bg-brand-gold/10 animate-pulse" />
+                <div className="relative h-16 w-16 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 group-hover:border-brand-gold/40 transition-colors">
+                    <Film className="w-8 h-8 text-white/20 group-hover:text-brand-gold transition-colors" />
+                </div>
+            </div>
+            <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Visualisation</p>
+                <h3 className="mt-2 text-lg font-black text-white/60 uppercase tracking-widest italic">Contenu vidéo en production</h3>
+            </div>
         </div>
       </div>
     );
@@ -60,7 +65,7 @@ export function VideoEmbed({ url, title }: Props) {
 
   if (isDirectMp4(url) || url.startsWith("/videos/")) {
     return (
-      <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black shadow-xl border border-zinc-200">
+      <div className="relative aspect-video w-full overflow-hidden rounded-[2rem] bg-[#030712] shadow-2xl border border-white/10">
         <video
           ref={videoRef}
           className="h-full w-full object-contain"
@@ -78,20 +83,20 @@ export function VideoEmbed({ url, title }: Props) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm p-6"
+              className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#030712]/90 backdrop-blur-xl p-8"
             >
               <motion.div 
                 initial={{ scale: 0.9, y: 20 }}
                 animate={{ scale: 1, y: 0 }}
-                className="bg-white rounded-2xl p-6 sm:p-8 max-w-lg w-full shadow-2xl text-center space-y-6"
+                className="bg-[#070d18] border border-white/10 rounded-[2.5rem] p-8 md:p-10 max-w-lg w-full shadow-2xl text-center space-y-8"
               >
-                <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mx-auto text-brand-gold">
-                  <HelpCircle size={24} />
+                <div className="w-16 h-16 rounded-2xl bg-brand-gold/10 flex items-center justify-center mx-auto text-brand-gold border border-brand-gold/20 shadow-lg">
+                  <HelpCircle size={32} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-brand-navy">Question interactive</h3>
-                  <p className="text-zinc-600 mt-2 text-sm leading-relaxed">
-                    Avant de continuer, vérifions votre compréhension : quel est le délai légal de rétractation après la signature d&apos;un compromis selon la loi SRU ?
+                  <h3 className="text-2xl font-black text-white uppercase tracking-tight">Question Interactive</h3>
+                  <p className="text-white/60 mt-4 text-base leading-relaxed italic">
+                    &laquo; Quel est le délai légal de rétractation après la signature d&apos;un compromis ? &raquo;
                   </p>
                 </div>
                 
@@ -105,16 +110,16 @@ export function VideoEmbed({ url, title }: Props) {
                       key={i}
                       onClick={() => {
                         if(opt.isCorrect) handleContinue();
-                        else alert("Pas tout à fait. Réessayez !"); // In a real app we'd show nice UI feedback
+                        else alert("Pas tout à fait. Réessayez !");
                       }}
-                      className="w-full relative flex items-center justify-between px-4 py-3 border border-zinc-200 rounded-xl hover:border-brand-navy hover:bg-slate-50 transition-colors group"
+                      className="w-full group relative flex items-center justify-between px-6 py-4 bg-white/5 border border-white/10 rounded-2xl hover:border-brand-gold transition-all"
                     >
-                      <span className="font-semibold text-zinc-700 group-hover:text-brand-navy">{opt.label}</span>
-                      {opt.isCorrect && interactiveAnswered ? <CheckCircle size={18} className="text-green-500" /> : <div className="w-4 h-4 rounded-full border border-zinc-300 group-hover:border-brand-navy"></div>}
+                      <span className="font-bold text-white/80 group-hover:text-white">{opt.label}</span>
+                      {opt.isCorrect && interactiveAnswered ? <CheckCircle size={20} className="text-emerald-400" /> : <div className="w-5 h-5 rounded-full border border-white/20 group-hover:border-brand-gold"></div>}
                     </button>
                   ))}
                 </div>
-                <p className="text-xs text-zinc-400 italic">Trouvez la bonne réponse pour reprendre la vidéo.</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/20">Validation requise pour débloquer la suite</p>
               </motion.div>
             </motion.div>
           )}
@@ -136,11 +141,11 @@ export function VideoEmbed({ url, title }: Props) {
   }
 
   return (
-    <div className="aspect-video w-full overflow-hidden rounded-lg shadow-lg">
+    <div className="aspect-video w-full overflow-hidden rounded-[2rem] bg-black shadow-2xl border border-white/10">
       <iframe
         title={title}
         src={embed}
-        className="h-full w-full"
+        className="h-full w-full opacity-90 transition-opacity hover:opacity-100"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       />
