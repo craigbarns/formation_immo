@@ -1,195 +1,82 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { recordSimulatorUsed } from "@/lib/gamification";
+import { useState, useMemo } from "react";
+import { motion } from "framer-motion";
+import { Calculator, Euro, TrendingUp, Info } from "lucide-react";
+import { Slider } from "@/components/ui/Slider";
 
 export function CreditSimulator() {
-  const [price, setPrice] = useState(250000);
-  const [apport, setApport] = useState(50000);
-  const [rate, setRate] = useState(3.5);
-  const [duration, setDuration] = useState(20);
-  const [insurance, setInsurance] = useState(0.34);
-  useEffect(() => {
-    recordSimulatorUsed("credit");
-  }, []);
+  const [montant, setMontant] = useState(200000);
+  const [taux, setTaux] = useState(3.5);
+  const [duree, setDuree] = useState(20);
 
+  const formatCurrency = (amount: number) =>
+    new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(amount);
 
-  const loanAmount = price - apport;
-  const monthlyRate = rate / 100 / 12;
-  const totalMonths = duration * 12;
-
-  // Mensualite hors assurance
-  const monthlyPayment =
-    monthlyRate > 0
-      ? (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -totalMonths))
-      : loanAmount / totalMonths;
-
-  // Assurance mensuelle
-  const monthlyInsurance = (loanAmount * (insurance / 100)) / 12;
-  const totalMonthly = monthlyPayment + monthlyInsurance;
-  const totalCost = totalMonthly * totalMonths;
-  const totalInterest = totalCost - loanAmount;
-  const tauxEndettement = totalMonthly > 0 ? (totalMonthly / 4000) * 100 : 0; // salaire fictif 4000
+  const result = useMemo(() => {
+    const monthlyRate = taux / 100 / 12;
+    const numPayments = duree * 12;
+    const monthlyPayment =
+      (montant * (monthlyRate * Math.pow(1 + monthlyRate, numPayments))) /
+      (Math.pow(1 + monthlyRate, numPayments) - 1);
+    
+    const totalCost = monthlyPayment * numPayments;
+    const totalInterest = totalCost - montant;
+    
+    return {
+      monthlyPayment,
+      totalCost,
+      totalInterest,
+    };
+  }, [montant, taux, duree]);
 
   return (
-    <div className="rounded-2xl border-2 border-brand-navy/15 bg-white shadow-lg">
-      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[var(--brand-navy-alt)] px-6 py-4 text-white rounded-t-2xl">
-        <h3 className="text-lg font-bold">Simulateur de Credit Immobilier</h3>
-        <p className="mt-1 text-xs text-white/80">Ajustez les parametres pour calculer vos mensualites</p>
-      </div>
-
-      <div className="grid gap-6 p-6 md:grid-cols-2">
-        {/* Inputs */}
-        <div className="space-y-5">
-          <SliderInput
-            label="Prix du bien"
-            value={price}
-            onChange={setPrice}
-            min={50000}
-            max={1000000}
-            step={5000}
-            format={(v) => `${v.toLocaleString("fr-FR")} EUR`}
-          />
-          <SliderInput
-            label="Apport personnel"
-            value={apport}
-            onChange={setApport}
-            min={0}
-            max={price}
-            step={5000}
-            format={(v) => `${v.toLocaleString("fr-FR")} EUR`}
-          />
-          <SliderInput
-            label="Taux d'interet"
-            value={rate}
-            onChange={setRate}
-            min={0.5}
-            max={7}
-            step={0.1}
-            format={(v) => `${v.toFixed(1)}%`}
-          />
-          <SliderInput
-            label="Duree (annees)"
-            value={duration}
-            onChange={setDuration}
-            min={5}
-            max={30}
-            step={1}
-            format={(v) => `${v} ans`}
-          />
-          <SliderInput
-            label="Assurance (% du capital)"
-            value={insurance}
-            onChange={setInsurance}
-            min={0}
-            max={1}
-            step={0.01}
-            format={(v) => `${v.toFixed(2)}%`}
-          />
+    <div className="space-y-10">
+      <div className="grid gap-10 lg:grid-cols-2">
+        <div className="space-y-8 rounded-[2rem] border border-white/5 bg-white/[0.02] p-8 shadow-inner">
+            <h4 className="text-xs font-black uppercase tracking-widest text-brand-gold flex items-center gap-3">
+                <Calculator className="h-4 w-4" />
+                Configuration du prêt
+            </h4>
+            <Slider label="Montant emprunté" value={montant} onChange={setMontant} min={10000} max={1000000} step={10000} format={(v) => formatCurrency(v)} />
+            <Slider label="Taux d'intérêt" value={taux} onChange={setTaux} min={0.5} max={8} step={0.1} format={(v) => `${v}%`} />
+            <Slider label="Durée (années)" value={duree} onChange={setDuree} min={5} max={30} step={1} format={(v) => `${v} ans`} />
         </div>
 
-        {/* Results */}
-        <div className="space-y-4">
-          <ResultCard
-            label="Montant emprunte"
-            value={`${loanAmount.toLocaleString("fr-FR")} EUR`}
-            color="blue"
-          />
-          <ResultCard
-            label="Mensualite totale"
-            value={`${Math.round(totalMonthly).toLocaleString("fr-FR")} EUR/mois`}
-            color="gold"
-            large
-          />
-          <ResultCard
-            label="Dont assurance"
-            value={`${Math.round(monthlyInsurance).toLocaleString("fr-FR")} EUR/mois`}
-            color="gray"
-          />
-          <ResultCard
-            label="Cout total du credit"
-            value={`${Math.round(totalCost).toLocaleString("fr-FR")} EUR`}
-            color="blue"
-          />
-          <ResultCard
-            label="Total des interets"
-            value={`${Math.round(totalInterest).toLocaleString("fr-FR")} EUR`}
-            color="red"
-          />
+        <motion.div
+            key={result.monthlyPayment}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#030712] p-8 shadow-2xl"
+        >
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.03] to-transparent pointer-events-none" />
+            
+            <div className="text-center mb-10">
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-gold mb-3">MENSUALITÉ ESTIMÉE (HORS ASS.)</p>
+                <h3 className="text-4xl md:text-5xl font-black text-white tabular-nums tracking-tighter">
+                    {formatCurrency(result.monthlyPayment)}
+                </h3>
+            </div>
 
-          <div className={`rounded-xl p-3 text-center ${tauxEndettement > 35 ? "bg-red-50 border border-red-200" : "bg-emerald-50 border border-emerald-200"}`}>
-            <p className="text-xs text-zinc-600">Taux d&apos;endettement (salaire 4 000 EUR)</p>
-            <p className={`text-xl font-bold ${tauxEndettement > 35 ? "text-red-600" : "text-emerald-600"}`}>
-              {tauxEndettement.toFixed(1)}%
-            </p>
-            <p className={`text-xs font-medium ${tauxEndettement > 35 ? "text-red-500" : "text-emerald-500"}`}>
-              {tauxEndettement > 35 ? "Depasse le seuil HCSF de 35%" : "Conforme au seuil HCSF"}
-            </p>
-          </div>
-        </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/5 text-center">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-1">Coût total crédit</p>
+                    <p className="text-xl font-black text-brand-gold tabular-nums">{formatCurrency(result.totalInterest)}</p>
+                </div>
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/5 text-center">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-1">Montant total remboursé</p>
+                    <p className="text-xl font-black text-white tabular-nums">{formatCurrency(result.totalCost)}</p>
+                </div>
+            </div>
+
+            <div className="mt-8 p-4 rounded-xl bg-black/40 border border-white/5 flex gap-3 items-start shadow-inner">
+                <Info className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
+                <p className="text-[10px] text-white/30 leading-relaxed font-medium">
+                    Attention : Ce calcul ne comprend pas l&apos;assurance emprunteur ni les frais de dossier. Utilisez le simulateur avancé pour une analyse complète.
+                </p>
+            </div>
+        </motion.div>
       </div>
-    </div>
-  );
-}
-
-function SliderInput({
-  label,
-  value,
-  onChange,
-  min,
-  max,
-  step,
-  format,
-}: {
-  label: string;
-  value: number;
-  onChange: (v: number) => void;
-  min: number;
-  max: number;
-  step: number;
-  format: (v: number) => string;
-}) {
-  return (
-    <div>
-      <div className="flex items-baseline justify-between">
-        <label className="text-sm font-medium text-zinc-700">{label}</label>
-        <span className="text-sm font-bold text-brand-navy">{format(value)}</span>
-      </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="mt-1.5 w-full accent-brand-navy"
-      />
-    </div>
-  );
-}
-
-function ResultCard({
-  label,
-  value,
-  color,
-  large,
-}: {
-  label: string;
-  value: string;
-  color: "blue" | "gold" | "gray" | "red";
-  large?: boolean;
-}) {
-  const bg = {
-    blue: "bg-brand-navy/5 border-brand-navy/15",
-    gold: "bg-brand-gold/10 border-brand-gold/30",
-    gray: "bg-zinc-50 border-zinc-200",
-    red: "bg-red-50 border-red-200",
-  }[color];
-
-  return (
-    <div className={`rounded-xl border p-3 ${bg}`}>
-      <p className="text-xs text-zinc-500">{label}</p>
-      <p className={`font-bold text-brand-navy ${large ? "text-2xl" : "text-lg"}`}>{value}</p>
     </div>
   );
 }

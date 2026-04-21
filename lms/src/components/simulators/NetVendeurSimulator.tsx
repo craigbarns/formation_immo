@@ -1,171 +1,105 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calculator, Copy, CheckCircle2, RefreshCcw, Info } from "lucide-react";
+import { Calculator, Euro, TrendingUp, Info, HandCoins, CheckCircle2, MessageSquare, Quote } from "lucide-react";
+import { Slider } from "@/components/ui/Slider";
 import { recordSimulatorUsed } from "@/lib/gamification";
 
 export function NetVendeurSimulator() {
-  const [prixFai, setPrixFai] = useState(350000);
-  const [honoraires, setHonoraires] = useState(5);
-  const [chargeAcquereur, setChargeAcquereur] = useState(true);
-  const [copied, setCopied] = useState<number | null>(null);
+  const [prixFAI, setPrixFAI] = useState(350000);
+  const [tauxHonoraires, setTauxHonoraires] = useState(5);
+
   useEffect(() => {
     recordSimulatorUsed("net-vendeur");
   }, []);
 
+  const formatCurrency = (amount: number) =>
+    new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(amount);
 
-  const montantHonoraires = (prixFai * honoraires) / 100;
-  const netVendeur = chargeAcquereur ? prixFai : prixFai - montantHonoraires;
+  const result = useMemo(() => {
+    const honoraires = (prixFAI * tauxHonoraires) / 100;
+    const netVendeur = prixFAI - honoraires;
+    
+    return {
+      honoraires,
+      netVendeur,
+    };
+  }, [prixFAI, tauxHonoraires]);
 
-  const phrases = [
-    `Avec un prix affiché de ${Math.round(prixFai).toLocaleString("fr-FR")} € FAI, vous empocherez ${Math.round(netVendeur).toLocaleString("fr-FR")} € net vendeur.`,
-    `Mes honoraires de ${honoraires} % incluent la stratégie marketing, la négociation et l'accompagnement jusqu'à l'acte authentique.`,
-    `Études de marché 2025 : les biens vendus par agence se négocient en moyenne 10 à 15 % plus cher que les ventes entre particuliers.`,
-    chargeAcquereur
-      ? `L'acquéreur prend en charge les honoraires : vous touchez l'intégralité des ${Math.round(netVendeur).toLocaleString("fr-FR")} €.`
-      : `Vos honoraires sont de ${Math.round(montantHonoraires).toLocaleString("fr-FR")} €, ce qui reste largement amorti par le prix de vente optimisé.`,
-  ];
-
-  const handleCopy = (text: string, idx: number) => {
-    navigator.clipboard.writeText(text);
-    setCopied(idx);
-    setTimeout(() => setCopied(null), 1500);
-  };
-
-  const presets = [
-    { label: "Studio 150k", prix: 150000, taux: 6 },
-    { label: "T3 350k", prix: 350000, taux: 5 },
-    { label: "Maison 650k", prix: 650000, taux: 4 },
+  const argumentaires = [
+    `Le prix net pour vous est de ${formatCurrency(result.netVendeur)}, nous prenons en charge toute la commercialisation pour ${formatCurrency(result.honoraires)}.`,
+    `Afin de garantir votre net vendeur à ${formatCurrency(result.netVendeur)}, nous positionnons le bien à ${formatCurrency(prixFAI)} sur le marché.`,
+    `Nos honoraires de ${tauxHonoraires}% incluent le reportage photo pro, la diffusion premium et le filtrage des acquéreurs.`,
   ];
 
   return (
-    <div className="space-y-6">
-      {/* Presets */}
-      <div className="flex flex-wrap gap-2">
-        {presets.map((p) => (
-          <button
-            key={p.label}
-            onClick={() => { setPrixFai(p.prix); setHonoraires(p.taux); }}
-            className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-700 transition hover:border-brand-navy/40 hover:bg-brand-navy/5"
-          >
-            {p.label}
-          </button>
-        ))}
-        <button
-          onClick={() => { setPrixFai(350000); setHonoraires(5); setChargeAcquereur(true); }}
-          className="ml-auto inline-flex items-center gap-1 rounded-lg border border-zinc-200 px-3 py-1.5 text-xs font-semibold text-zinc-500 transition hover:bg-zinc-50"
-        >
-          <RefreshCcw size={12} /> Réinitialiser
-        </button>
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Inputs */}
-        <div className="space-y-5 card-elevated p-5">
-          <h4 className="flex items-center gap-2 text-sm font-bold text-brand-navy">
-            <Calculator size={16} className="text-brand-gold" /> Paramètres
-          </h4>
-
-          <div className="space-y-4">
-            <div>
-              <div className="flex justify-between text-sm font-medium text-zinc-700">
-                <label>Prix de vente FAI</label>
-                <span className="font-bold text-brand-gold">{prixFai.toLocaleString("fr-FR")} €</span>
-              </div>
-              <input
-                type="range"
-                min={50000}
-                max={2000000}
-                step={5000}
-                value={prixFai}
-                onChange={(e) => setPrixFai(Number(e.target.value))}
-                className="mt-2 h-2 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 accent-brand-navy"
-              />
-            </div>
-
-            <div>
-              <div className="flex justify-between text-sm font-medium text-zinc-700">
-                <label>Taux d&apos;honoraires</label>
-                <span className="font-bold text-brand-gold">{honoraires} %</span>
-              </div>
-              <input
-                type="range"
-                min={1}
-                max={10}
-                step={0.5}
-                value={honoraires}
-                onChange={(e) => setHonoraires(Number(e.target.value))}
-                className="mt-2 h-2 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 accent-brand-navy"
-              />
-            </div>
-
-            <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-zinc-100 bg-zinc-50 p-3 transition hover:border-zinc-200">
-              <input
-                type="checkbox"
-                checked={chargeAcquereur}
-                onChange={(e) => setChargeAcquereur(e.target.checked)}
-                className="h-5 w-5 rounded border-zinc-300 text-brand-navy focus:ring-brand-navy"
-              />
-              <div>
-                <p className="text-sm font-semibold text-zinc-800">Honoraires à charge de l&apos;acquéreur</p>
-                <p className="text-xs text-zinc-500">Le vendeur touche le prix FAI intégralement.</p>
-              </div>
-            </label>
-          </div>
+    <div className="space-y-10">
+      <div className="grid gap-10 lg:grid-cols-2">
+        <div className="space-y-8 rounded-[2rem] border border-white/5 bg-white/[0.02] p-8 shadow-inner">
+            <h4 className="text-xs font-black uppercase tracking-widest text-brand-gold flex items-center gap-3">
+                <HandCoins className="h-4 w-4" />
+                Valorisation Marché
+            </h4>
+            <Slider label="Prix de vente FAI" value={prixFAI} onChange={setPrixFAI} min={50000} max={1500000} step={5000} format={(v) => formatCurrency(v)} />
+            <Slider label="Taux d'honoraires" value={tauxHonoraires} onChange={setTauxHonoraires} min={1} max={10} step={0.1} format={(v) => `${v}%`} />
         </div>
 
-        {/* Results */}
         <motion.div
-          key={netVendeur + montantHonoraires}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5"
+            key={result.netVendeur}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#030712] p-8 shadow-2xl"
         >
-          <h4 className="text-sm font-bold uppercase text-emerald-900">Résultat</h4>
-          <div className="mt-4 space-y-3">
-            <div className="flex justify-between">
-              <span className="text-sm text-zinc-700">Prix FAI</span>
-              <span className="font-semibold text-zinc-900">{prixFai.toLocaleString("fr-FR")} €</span>
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.03] to-transparent pointer-events-none" />
+            
+            <div className="text-center mb-10">
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-gold mb-3">NET VENDEUR ESTIMÉ</p>
+                <h3 className="text-4xl md:text-5xl font-black text-white tabular-nums tracking-tighter">
+                    {formatCurrency(result.netVendeur)}
+                </h3>
             </div>
-            <div className="flex justify-between">
-              <span className="text-sm text-zinc-700">Honoraires ({honoraires} %)</span>
-              <span className="font-semibold text-zinc-900">{Math.round(montantHonoraires).toLocaleString("fr-FR")} €</span>
-            </div>
-            <div className="flex justify-between border-t border-emerald-200 pt-3">
-              <span className="text-sm font-bold text-emerald-900">Net vendeur</span>
-              <span className="text-2xl font-black text-emerald-800">{Math.round(netVendeur).toLocaleString("fr-FR")} €</span>
-            </div>
-          </div>
 
-          <div className="mt-5 rounded-xl bg-white/70 p-3 text-xs text-emerald-900">
-            {chargeAcquereur ? (
-              <p className="inline-flex items-center gap-1"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> L&apos;acquéreur paie les honoraires. Le vendeur reçoit le prix FAI en intégralité.</p>
-            ) : (
-              <p className="inline-flex items-center gap-1"><Info className="h-4 w-4 text-blue-500" /> Les honoraires sont déduits du prix FAI. Net vendeur = {Math.round(netVendeur).toLocaleString("fr-FR")} €.</p>
-            )}
-          </div>
+            <div className="grid grid-cols-2 gap-4">
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/5 text-center">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-1">Honoraires agence</p>
+                    <p className="text-xl font-black text-brand-gold tabular-nums">{formatCurrency(result.honoraires)}</p>
+                </div>
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/5 text-center">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-1">Part honoraires</p>
+                    <p className="text-xl font-black text-white tabular-nums">{tauxHonoraires}%</p>
+                </div>
+            </div>
+
+            <div className="mt-8 flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest text-emerald-400">
+                <CheckCircle2 size={12} /> Calcul conforme barème
+            </div>
         </motion.div>
       </div>
 
-      {/* Phrases */}
-      <div className="card-elevated p-5">
-        <h4 className="text-sm font-bold text-brand-navy">Phrases d&apos;argumentaire prêtes à l&apos;emploi</h4>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {phrases.map((p, i) => (
-            <motion.button
-              key={i}
-              whileHover={{ scale: 1.01 }}
-              onClick={() => handleCopy(p, i)}
-              className="relative text-left rounded-xl border border-zinc-200 bg-zinc-50 p-4 transition hover:border-brand-gold/50 hover:shadow-sm"
-            >
-              <span className="absolute right-3 top-3 text-zinc-400">
-                {copied === i ? <CheckCircle2 size={14} className="text-emerald-500" /> : <Copy size={14} />}
-              </span>
-              <p className="pr-6 text-sm leading-relaxed text-zinc-700">{p}</p>
-            </motion.button>
-          ))}
-        </div>
+      {/* Argumentaire */}
+      <section className="space-y-6">
+          <div className="flex items-center gap-4">
+            <MessageSquare className="w-5 h-5 text-brand-gold" />
+            <h3 className="text-xs font-black uppercase tracking-[0.3em] text-white/40">Éléments de langage stratégiques</h3>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {argumentaires.map((arg, i) => (
+                <div key={i} className="relative group overflow-hidden rounded-[1.5rem] border border-white/5 bg-[#070d18] p-6 shadow-2xl transition-all hover:border-brand-gold/20 hover:bg-white/[0.02]">
+                    <Quote className="absolute -right-1 -top-1 w-12 h-12 text-white/5 opacity-50" />
+                    <p className="relative z-10 text-sm leading-relaxed text-white/70 italic font-medium">
+                        &laquo; {arg} &raquo;
+                    </p>
+                </div>
+            ))}
+          </div>
+      </section>
+
+      <div className="p-6 rounded-2xl bg-black/40 border border-white/5 flex gap-4 items-start shadow-inner">
+          <Info className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
+          <p className="text-xs text-white/30 leading-relaxed font-medium">
+              Note : Assurez-vous que vos honoraires respectent le barème affiché en agence et que le mandat précise clairement qui supporte la charge des honoraires (acquéreur ou vendeur).
+          </p>
       </div>
     </div>
   );
