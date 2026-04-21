@@ -3,30 +3,42 @@
 import { useState } from "react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { InteractiveTimeline, TimelineStep } from "@/data/timeline-data";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, FileText, Lightbulb, Clock } from "lucide-react";
 
 function StepDetail({ step }: { step: TimelineStep }) {
   return (
-    <div className="space-y-4 text-sm leading-relaxed text-zinc-700">
-      <p>{step.description}</p>
+    <div className="space-y-6 text-base leading-relaxed text-white/70 font-medium">
+      <p className="italic">&laquo; {step.description} &raquo;</p>
+      
       {step.keyDocuments && step.keyDocuments.length > 0 && (
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-brand-navy">Documents</p>
-          <ul className="mt-2 list-inside list-disc space-y-1 text-zinc-600">
+        <div className="rounded-2xl bg-white/5 border border-white/10 p-5 shadow-inner">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-4 flex items-center gap-2">
+            <FileText size={12} /> Dossier documentaire
+          </p>
+          <ul className="grid gap-2 sm:grid-cols-2">
             {step.keyDocuments.map((d) => (
-              <li key={d}>{d}</li>
+              <li key={d} className="flex items-center gap-2 text-xs text-white/60">
+                <span className="h-1 w-1 rounded-full bg-brand-gold/40" />
+                {d}
+              </li>
             ))}
           </ul>
         </div>
       )}
+
       {step.tips && step.tips.length > 0 && (
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-brand-gold">Conseils pro</p>
-          <ul className="mt-2 space-y-2">
+        <div className="rounded-2xl bg-brand-gold/5 border border-brand-gold/20 p-5 shadow-inner">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-gold mb-4 flex items-center gap-2">
+            <Lightbulb size={12} /> Recommandations terrain
+          </p>
+          <ul className="space-y-3">
             {step.tips.map((t) => (
               <li
                 key={t}
-                className="rounded-lg border border-brand-gold/20 bg-brand-gold/5 px-3 py-2 text-zinc-700"
+                className="text-sm font-bold text-white/80 leading-snug flex items-start gap-3"
               >
+                <span className="mt-1 text-brand-gold">→</span>
                 {t}
               </li>
             ))}
@@ -44,17 +56,20 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
   if (!t) return null;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
-      <div className="border-b border-brand-navy/10 bg-slate-50 px-5 py-5 sm:px-8">
-        <p className="text-3xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
-          Frise chronologique
-        </p>
-        <h2 className="mt-1 text-xl font-bold text-brand-navy sm:text-2xl">{t.title}</h2>
-        <p className="mt-2 max-w-3xl text-sm text-zinc-600">{t.description}</p>
+    <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#070d18] shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-brand-gold/20">
+      <div className="relative border-b border-white/10 bg-[#030712] px-8 py-8 sm:px-12 md:py-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.03] to-transparent pointer-events-none" />
+        <div className="relative">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold">
+            PROCESSUS CHRONOLOGIQUE
+            </p>
+            <h2 className="mt-2 text-3xl font-black text-white uppercase tracking-tight leading-none">{t.title}</h2>
+            <p className="mt-4 max-w-3xl text-lg text-white/50 leading-relaxed italic">&laquo; {t.description} &raquo;</p>
+        </div>
       </div>
 
       {timelines.length > 1 && (
-        <div className="flex flex-wrap gap-1 border-b border-zinc-100 bg-white px-5 sm:px-8">
+        <div className="flex gap-2 overflow-x-auto border-b border-white/5 bg-black/20 px-6 py-4 scrollbar-hide">
           {timelines.map((line, i) => (
             <button
               key={line.id}
@@ -63,10 +78,10 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
                 setTi(i);
                 setOpenId(null);
               }}
-              className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition ${
+              className={`flex shrink-0 items-center gap-2.5 rounded-xl px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
                 i === ti
-                  ? "bg-brand-navy text-white"
-                  : "text-zinc-500 hover:bg-zinc-50 hover:text-zinc-800"
+                  ? "bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20"
+                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
               {line.title}
@@ -75,52 +90,76 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
         </div>
       )}
 
-      <div className="px-5 py-6 sm:px-8 sm:py-8">
+      <div className="p-8 sm:p-10 lg:p-12">
         <div className="relative">
+          {/* Main vertical line */}
           <div
-            className="absolute left-[19px] top-0 hidden h-full w-px bg-brand-navy/20 sm:block"
+            className="absolute left-[23px] top-0 hidden h-full w-0.5 bg-gradient-to-b from-brand-gold/40 via-white/5 to-white/5 sm:block"
             aria-hidden
           />
-          <ul className="space-y-3">
-            {t.steps.map((step) => {
+          <ul className="space-y-6">
+            {t.steps.map((step, idx) => {
               const expanded = openId === step.id;
               return (
-                <li key={step.id} className="relative sm:pl-12">
+                <li key={step.id} className="relative sm:pl-16">
                   <button
                     type="button"
                     onClick={() => setOpenId(expanded ? null : step.id)}
-                    className={`flex w-full flex-col rounded-xl border text-left transition sm:flex-row sm:items-start sm:gap-4 ${
+                    className={`group w-full rounded-[2rem] border-2 text-left transition-all duration-500 overflow-hidden ${
                       expanded
-                        ? "border-brand-navy/40 bg-brand-navy/5 shadow-md"
-                        : "border-zinc-200 bg-white hover:border-brand-navy/25"
+                        ? "border-brand-gold/30 bg-[#030712] shadow-2xl"
+                        : "border-white/5 bg-white/[0.02] hover:border-brand-gold/20 hover:bg-white/[0.05]"
                     }`}
                   >
-                    <span className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-brand-navy/30 bg-white sm:flex">
-                      <EmojiIcon emoji={step.icon} className="h-5 w-5" />
-                    </span>
-                    <div className="flex-1 px-4 py-4">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="sm:hidden" aria-hidden>
-                          <EmojiIcon emoji={step.icon} className="h-5 w-5" />
-                        </span>
-                        <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-3xs font-semibold text-zinc-600">
-                          {step.duration}
-                        </span>
-                      </div>
-                      <h3 className="mt-2 text-base font-bold text-brand-navy">{step.title}</h3>
-                      {!expanded && (
-                        <p className="mt-1 line-clamp-2 text-sm text-zinc-500">{step.description}</p>
-                      )}
-                      <p className="mt-2 text-xs font-medium text-brand-gold">
-                        {expanded ? "Masquer le détail" : "Voir le détail"}
-                      </p>
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6 p-6 md:p-8">
+                        {/* Step Icon */}
+                        <div className={`hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-[1.25rem] border-2 transition-all duration-500 shadow-xl ${
+                            expanded ? "bg-brand-gold border-brand-gold text-brand-navy scale-110" : "bg-black/40 border-white/10 text-white/40 group-hover:border-brand-gold/40"
+                        }`}>
+                            <EmojiIcon emoji={step.icon} className="h-6 w-6" />
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                            <div className="flex flex-wrap items-center gap-3 mb-2">
+                                <span className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-[9px] font-black uppercase tracking-widest ${
+                                    expanded ? "bg-brand-gold/20 text-brand-gold" : "bg-white/5 text-white/30"
+                                }`}>
+                                    <Clock size={10} /> {step.duration}
+                                </span>
+                                <span className="text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">Étape {idx + 1}</span>
+                            </div>
+                            <h3 className={`text-xl font-black uppercase tracking-tight transition-colors duration-500 ${
+                                expanded ? "text-white" : "text-white/70 group-hover:text-white"
+                            }`}>{step.title}</h3>
+                            
+                            {!expanded && (
+                                <p className="mt-2 line-clamp-1 text-base text-white/40 font-medium italic">&laquo; {step.description} &raquo;</p>
+                            )}
+                        </div>
+
+                        <div className={`shrink-0 flex items-center justify-center w-10 h-10 rounded-full transition-all duration-500 ${
+                            expanded ? "bg-brand-gold text-brand-navy rotate-180" : "bg-white/5 text-white/20 group-hover:bg-white/10"
+                        }`}>
+                            <ChevronDown size={20} />
+                        </div>
                     </div>
+
+                    <AnimatePresence>
+                        {expanded && (
+                            <motion.div 
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                className="bg-[#070d18]/50 border-t border-white/5"
+                            >
+                                <div className="p-8 md:p-10">
+                                    <StepDetail step={step} />
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                   </button>
-                  {expanded && (
-                    <div className="mt-2 rounded-xl border border-zinc-100 bg-zinc-50/80 px-4 py-4 sm:ml-[3.25rem]">
-                      <StepDetail step={step} />
-                    </div>
-                  )}
                 </li>
               );
             })}

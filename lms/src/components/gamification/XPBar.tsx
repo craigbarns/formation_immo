@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { getLevelForXP, updateStreak } from "@/lib/gamification";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
+import { Flame, ShieldCheck, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function XPBar() {
   const [mounted, setMounted] = useState(false);
@@ -47,31 +49,40 @@ export function XPBar() {
   const { current, progressToNext } = getLevelForXP(xp);
 
   return (
-    <div className="flex min-w-0 flex-shrink-0 items-center gap-2 sm:gap-3">
+    <div className="flex min-w-0 flex-shrink-0 items-center gap-3 sm:gap-6">
       {/* Streak */}
       {streak > 0 && (
-        <div className="flex items-center gap-1 rounded-full border border-orange-300/50 bg-orange-50 px-2.5 py-1 text-xs font-bold text-orange-700">
-          <EmojiIcon emoji="🔥" className="h-4 w-4 text-orange-500" />
-          {streak}j
+        <div className="group flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 text-xs font-black text-orange-400 shadow-lg shadow-orange-500/5">
+          <Flame className="h-4 w-4 text-orange-500 fill-orange-500 group-hover:animate-bounce transition-transform" />
+          <span className="tabular-nums uppercase tracking-widest">{streak} Jours</span>
         </div>
       )}
 
       {/* Level & XP */}
-      <div className="flex items-center gap-2">
-        <EmojiIcon emoji={current.icon} className="h-4 w-4" />
+      <div className="flex items-center gap-4 group">
+        <div className="relative">
+            <div className="absolute inset-0 rounded-full bg-brand-gold/20 blur-lg animate-pulse" />
+            <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-brand-gold shadow-2xl transition-transform group-hover:scale-110">
+                <ShieldCheck size={20} />
+            </div>
+        </div>
         <div className="hidden sm:block">
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-xs font-bold text-white">Niv. {current.level}</span>
-            <span className="text-2xs text-white/80">{current.title}</span>
+          <div className="flex items-center gap-3">
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white">Niveau {current.level}</span>
+            <span className="text-[9px] font-black uppercase tracking-widest text-brand-gold/60">{current.title}</span>
           </div>
-          <div className="mt-0.5 flex items-center gap-2">
-            <div className="h-1.5 w-20 overflow-hidden rounded-full bg-white/20">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[var(--brand-gold-pale)] transition-all duration-700"
-                style={{ width: `${progressToNext}%` }}
+          <div className="mt-1.5 flex items-center gap-3">
+            <div className="h-1.5 w-24 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10 shadow-inner">
+              <motion.div
+                className="h-full rounded-full bg-gradient-to-r from-brand-gold via-white to-brand-gold shadow-[0_0_10px_rgba(212,175,55,0.4)]"
+                initial={{ width: 0 }}
+                animate={{ width: `${progressToNext}%` }}
+                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               />
             </div>
-            <span className="text-2xs tabular-nums text-white/80">{xp} XP</span>
+            <div className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest text-white/30 tabular-nums">
+                <Zap size={8} className="text-brand-gold" /> {xp} XP
+            </div>
           </div>
         </div>
       </div>

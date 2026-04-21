@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { getGamificationState } from "@/lib/gamification";
+import { Clock, Activity, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 
 const MODULE_TARGET_HOURS: Record<string, number> = {
   juridique: 8,
@@ -47,17 +49,24 @@ export function ModuleTimeTracker({ moduleSlug }: { moduleSlug: string }) {
   const pct = Math.min(100, (seconds / targetSeconds) * 100);
 
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-3 shadow-sm">
-      <div className="flex items-center justify-between text-xs">
-        <span className="font-medium text-zinc-600">Temps investi</span>
-        <span className="font-bold text-brand-navy">
-          {formatTime(seconds)} / {targetHours}h
+    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 shadow-2xl backdrop-blur-md">
+      <div className="flex items-center justify-between gap-4 mb-4">
+        <div className="flex items-center gap-3">
+            <div className="h-8 w-8 rounded-lg bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center text-brand-gold shadow-lg">
+                <Clock size={16} />
+            </div>
+            <p className="text-[10px] font-black uppercase tracking-widest text-white/40">Engagement</p>
+        </div>
+        <span className="text-sm font-black text-white tabular-nums">
+          {formatTime(seconds)} <span className="text-white/20 ml-1">/ {targetHours}h</span>
         </span>
       </div>
-      <div className="mt-2 h-2 overflow-hidden rounded-full bg-zinc-100">
-        <div
-          className="h-full rounded-full bg-gradient-to-r from-brand-navy to-[var(--brand-navy-soft)] transition-all duration-500"
-          style={{ width: `${pct}%` }}
+      <div className="h-1.5 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10 shadow-inner">
+        <motion.div
+          className="h-full rounded-full bg-gradient-to-r from-brand-gold via-white to-brand-gold shadow-[0_0_10px_rgba(212,175,55,0.4)]"
+          initial={{ width: 0 }}
+          animate={{ width: `${pct}%` }}
+          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
         />
       </div>
     </div>
@@ -93,23 +102,34 @@ export function GlobalTimeTracker() {
   const pct = Math.min(100, (totalSeconds / targetSeconds) * 100);
 
   return (
-    <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <svg className="h-5 w-5 text-brand-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span className="text-sm font-semibold text-brand-navy">Temps total de formation</span>
+    <div className="rounded-[2rem] border border-white/10 bg-[#070d18] p-8 shadow-2xl backdrop-blur-xl">
+      <div className="flex flex-wrap items-center justify-between gap-6 mb-8">
+        <div className="flex items-center gap-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-gold/10 border border-brand-gold/20 text-brand-gold shadow-lg">
+            <Activity size={24} />
+          </div>
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold">CAPACITÉ OPÉRATIONNELLE</p>
+            <h3 className="text-xl font-black text-white uppercase tracking-tight">Investissement total</h3>
+          </div>
         </div>
-        <span className="text-lg font-bold text-brand-gold">{formatTime(totalSeconds)} / 42h</span>
+        <div className="text-right">
+            <p className="text-3xl font-black text-white tabular-nums tracking-tighter">
+                {formatTime(totalSeconds)} <span className="text-sm text-white/20">/ 42h</span>
+            </p>
+        </div>
       </div>
-      <div className="mt-3 h-3 overflow-hidden rounded-full bg-zinc-100">
-        <div
-          className="h-full rounded-full bg-gradient-to-r from-brand-gold to-[var(--brand-gold-pale)] transition-all duration-700"
-          style={{ width: `${pct}%` }}
+
+      <div className="h-3 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10 shadow-inner">
+        <motion.div
+          className="h-full rounded-full bg-gradient-to-r from-brand-gold via-white to-brand-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+          initial={{ width: 0 }}
+          animate={{ width: `${pct}%` }}
+          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
         />
       </div>
-      <div className="mt-2 grid grid-cols-5 gap-1">
+
+      <div className="mt-10 grid grid-cols-5 gap-3 border-t border-white/5 pt-8">
         {["juridique", "transaction", "financement", "marketing", "terrain"].map((mod) => (
           <ModuleTimeMini key={mod} moduleSlug={mod} />
         ))}
@@ -142,17 +162,17 @@ function ModuleTimeMini({ moduleSlug }: { moduleSlug: string }) {
   }, [moduleSlug]);
 
   const labels: Record<string, string> = {
-    juridique: "Juri.",
-    transaction: "Trans.",
-    financement: "Fin.",
-    marketing: "Mkt.",
-    terrain: "Terr.",
+    juridique: "JURI.",
+    transaction: "TRANS.",
+    financement: "FIN.",
+    marketing: "MKT.",
+    terrain: "TERR.",
   };
 
   return (
-    <div className="text-center">
-      <div className="text-2xs font-medium text-zinc-500">{labels[moduleSlug]}</div>
-      <div className="text-xs font-bold text-brand-navy">{formatTime(seconds)}</div>
+    <div className="text-center group">
+      <div className="text-[9px] font-black text-white/20 uppercase tracking-widest group-hover:text-brand-gold/60 transition-colors mb-1">{labels[moduleSlug]}</div>
+      <div className="text-xs font-black text-white/60 tabular-nums uppercase">{formatTime(seconds)}</div>
     </div>
   );
 }

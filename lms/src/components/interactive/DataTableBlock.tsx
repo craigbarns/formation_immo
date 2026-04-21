@@ -1,30 +1,30 @@
 "use client";
 
 import { useCallback, useMemo, useState } from "react";
-import { ArrowUp, ArrowDown, ArrowUpDown, Download } from "lucide-react";
+import { ArrowUp, ArrowDown, ArrowUpDown, Download, Table, Search } from "lucide-react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { DataTable, TableCell } from "@/data/data-tables";
 
 const BADGE_COLORS: Record<string, string> = {
-  green: "bg-emerald-100 text-emerald-700 border border-emerald-200",
-  red: "bg-red-100 text-red-700 border border-red-200",
-  blue: "bg-blue-100 text-blue-700 border border-blue-200",
-  gold: "bg-amber-100 text-amber-700 border border-amber-200",
-  navy: "bg-brand-navy/10 text-brand-navy border border-brand-navy/20",
+  green: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20",
+  red: "bg-red-500/10 text-red-400 border border-red-500/20",
+  blue: "bg-blue-500/10 text-blue-400 border border-blue-500/20",
+  gold: "bg-brand-gold/15 text-brand-gold border border-brand-gold/30",
+  navy: "bg-brand-navy/20 text-blue-300 border border-brand-navy/30",
 };
 
 function Cell({ cell }: { cell: TableCell }) {
   return (
     <td
-      className={`px-3 py-2.5 text-sm ${
-        cell.highlight ? "bg-brand-gold/10 font-semibold text-brand-gold-dark" : "text-zinc-700"
+      className={`px-5 py-4 text-sm transition-colors duration-300 ${
+        cell.highlight ? "bg-brand-gold/5 font-black text-brand-gold" : "text-white/70 group-hover:text-white"
       }`}
     >
-      <div className="flex flex-wrap items-center gap-1.5">
+      <div className="flex flex-wrap items-center gap-2">
         <span>{cell.value}</span>
         {cell.badge && (
           <span
-            className={`rounded-full px-2 py-0.5 text-2xs font-bold ${
+            className={`rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest ${
               BADGE_COLORS[cell.badgeColor ?? "navy"]
             }`}
           >
@@ -81,47 +81,55 @@ function TableView({ table }: { table: DataTable }) {
   return (
     <div>
       {/* Controls */}
-      <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2 text-sm text-zinc-500">
-          <EmojiIcon emoji={table.icon} className="h-5 w-5" />
-          <span className="font-medium text-zinc-700">{rows.length} ligne{rows.length !== 1 ? "s" : ""}</span>
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-white/40">
+                <Table size={18} />
+            </div>
+            <div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/40">ANALYSE</p>
+                <p className="text-sm font-bold text-white/70 uppercase tracking-tight">{rows.length} enregistrements</p>
+            </div>
         </div>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            placeholder="Filtrer..."
-            className="rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-sm text-zinc-800 outline-none placeholder:text-zinc-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20"
-          />
+        <div className="flex gap-3">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/20" />
+            <input
+                type="text"
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                placeholder="Filtrer..."
+                className="w-48 rounded-xl border border-white/10 bg-white/5 pl-9 pr-4 py-2 text-sm text-white outline-none placeholder:text-white/20 focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10 transition-all"
+            />
+          </div>
           <button
             onClick={() => downloadCSV(table)}
-            className="flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:border-brand-navy/30 hover:text-brand-navy"
-            title="Télécharger CSV"
+            className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-white/60 transition hover:bg-white/10 hover:text-white"
+            title="Exporter en CSV"
           >
-            <Download className="inline h-3.5 w-3.5" /> CSV
+            <Download className="h-3.5 w-3.5" /> EXPORT
           </button>
         </div>
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-xl border border-zinc-200 shadow-sm">
+      <div className="overflow-x-auto rounded-[1.5rem] border border-white/10 bg-[#030712] shadow-2xl">
         <table className="w-full border-collapse text-left">
           <thead>
-            <tr className="bg-brand-navy">
+            <tr className="bg-white/5">
               {table.headers.map((h, i) => (
                 <th
                   key={i}
                   onClick={() => toggleSort(i)}
-                  className={`px-3 py-3 text-xs font-bold uppercase tracking-wide text-white/90 first:rounded-tl-xl last:rounded-tr-xl ${
-                    table.sortable ? "cursor-pointer select-none hover:bg-white/10" : ""
+                  className={`px-5 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-brand-gold border-b border-white/10 ${
+                    table.sortable ? "cursor-pointer select-none hover:bg-white/5 transition-colors" : ""
                   }`}
                 >
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-2">
                     {h}
                     {table.sortable && (
-                      <span className="text-on-dark-muted">
-                        {sortCol === i ? (sortAsc ? <ArrowUp className="inline h-3 w-3" /> : <ArrowDown className="inline h-3 w-3" />) : <ArrowUpDown className="inline h-3 w-3" />}
+                      <span className="text-white/20">
+                        {sortCol === i ? (sortAsc ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />) : <ArrowUpDown className="h-3 w-3" />}
                       </span>
                     )}
                   </div>
@@ -129,13 +137,11 @@ function TableView({ table }: { table: DataTable }) {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-white/5">
             {rows.map((row, ri) => (
               <tr
                 key={ri}
-                className={`border-t border-zinc-100 transition hover:bg-brand-gold/5 ${
-                  ri % 2 === 0 ? "bg-white" : "bg-zinc-50/60"
-                }`}
+                className="group transition-colors hover:bg-white/[0.02]"
               >
                 {row.map((cell, ci) => (
                   <Cell key={ci} cell={cell} />
@@ -144,8 +150,9 @@ function TableView({ table }: { table: DataTable }) {
             ))}
             {rows.length === 0 && (
               <tr>
-                <td colSpan={table.headers.length} className="px-4 py-6 text-center text-sm text-zinc-400">
-                  Aucun résultat pour &laquo; {filter} &raquo;
+                <td colSpan={table.headers.length} className="px-6 py-20 text-center">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-2 italic">Aucun résultat trouvé</p>
+                  <p className="text-white/40 text-sm italic">&laquo; {filter} &raquo;</p>
                 </td>
               </tr>
             )}
@@ -154,9 +161,10 @@ function TableView({ table }: { table: DataTable }) {
       </div>
 
       {table.notes && (
-        <p className="mt-2 text-xs leading-relaxed text-zinc-400">
-          * {table.notes}
-        </p>
+        <div className="mt-6 flex items-start gap-3 px-2 text-xs leading-relaxed text-white/30 italic font-medium">
+          <span className="h-1.5 w-1.5 rounded-full bg-white/10 shrink-0 mt-1.5" />
+          <p>{table.notes}</p>
+        </div>
       )}
     </div>
   );
@@ -167,31 +175,36 @@ export function DataTableBlock({ tables }: { tables: DataTable[] }) {
   if (tables.length === 0) return null;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
+    <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#070d18] shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-brand-gold/20">
       {/* Header */}
-      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[var(--brand-navy-mid)] px-5 py-4 sm:px-7">
-        <p className="text-3xs font-bold uppercase tracking-widest text-brand-gold">
-          Tableaux de référence
-        </p>
-        <p className="mt-0.5 text-sm font-semibold text-white/90">
-          {tables[active].title}
-        </p>
-        {tables[active].description && (
-          <p className="mt-1 text-xs text-white/80">{tables[active].description}</p>
-        )}
+      <div className="relative border-b border-white/10 bg-[#030712] px-8 py-8 sm:px-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.03] to-transparent pointer-events-none" />
+        <div className="relative">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold">
+            RESSOURCES ANALYTIQUES
+            </p>
+            <h2 className="mt-2 text-2xl font-black text-white uppercase tracking-tight">
+            {tables[active].title}
+            </h2>
+            {tables[active].description && (
+            <p className="mt-4 text-base leading-relaxed text-white/50 max-w-2xl italic">
+                &laquo; {tables[active].description} &raquo;
+            </p>
+            )}
+        </div>
       </div>
 
       {/* Tabs */}
       {tables.length > 1 && (
-        <div className="flex gap-1 overflow-x-auto border-b border-zinc-100 bg-zinc-50 px-4 py-2">
+        <div className="flex gap-2 overflow-x-auto border-b border-white/5 bg-black/20 px-6 py-4 scrollbar-hide">
           {tables.map((t, i) => (
             <button
               key={t.id}
               onClick={() => setActive(i)}
-              className={`flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+              className={`flex shrink-0 items-center gap-2.5 rounded-xl px-5 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
                 i === active
-                  ? "bg-brand-navy text-white"
-                  : "text-zinc-600 hover:bg-zinc-200"
+                  ? "bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20"
+                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
               <EmojiIcon emoji={t.icon} className="h-4 w-4" />
@@ -202,7 +215,7 @@ export function DataTableBlock({ tables }: { tables: DataTable[] }) {
       )}
 
       {/* Content */}
-      <div className="p-5 sm:p-7">
+      <div className="p-8 sm:p-10 lg:p-12">
         <TableView table={tables[active]} />
       </div>
     </div>

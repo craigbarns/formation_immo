@@ -12,9 +12,10 @@ function getGreetingText() {
 export function Greeting() {
   const [text] = useState(getGreetingText);
   return (
-    <span className="inline-flex items-center gap-1.5">
+    <span className="inline-flex items-center gap-2">
       {text}
-      <EmojiIcon emoji="👋" className="h-4 w-4" />
+      <span className="text-white/40">Agent</span>
+      <EmojiIcon emoji="👋" className="h-4 w-4 animate-float-slow" />
     </span>
   );
 }

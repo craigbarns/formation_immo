@@ -57,21 +57,21 @@ export function ModuleRowProgress({ moduleSlug }: { moduleSlug: string }) {
   }, [refresh]);
 
   if (pct === null) {
-    return <span className="inline-block h-4 w-24 animate-pulse rounded bg-zinc-100" aria-hidden />;
+    return <span className="inline-block h-3 w-32 animate-pulse rounded-full bg-white/5" aria-hidden />;
   }
 
   return (
-    <div className="mt-3 max-w-xs">
-      <div className="flex items-center justify-between gap-2 text-2xs font-semibold uppercase tracking-wide text-zinc-500">
-        <span>Module</span>
-        <span className="tabular-nums text-brand-navy">{label}</span>
+    <div className="mt-4 max-w-xs">
+      <div className="flex items-center justify-between gap-3 mb-2">
+        <span className="text-[10px] font-black uppercase tracking-widest text-white/30">MAÎTRISE MODULE</span>
+        <span className="text-[10px] font-black text-brand-gold tabular-nums uppercase tracking-widest">{label}</span>
       </div>
-      <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-zinc-100 ring-1 ring-zinc-200/80">
+      <div className="h-1.5 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10 shadow-inner">
         <motion.div
-          className="h-full rounded-full bg-gradient-to-r from-brand-navy to-brand-gold"
+          className="h-full rounded-full bg-gradient-to-r from-brand-gold via-white to-brand-gold shadow-[0_0_10px_rgba(212,175,55,0.4)]"
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
         />
       </div>
     </div>

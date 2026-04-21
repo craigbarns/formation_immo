@@ -5,6 +5,8 @@ import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { ProChecklist } from "@/data/pro-checklists";
 import { recordChecklistComplete } from "@/lib/gamification";
 import { createClient } from "@/lib/supabase/client";
+import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle2, Download, Printer, ClipboardList, Sparkles } from "lucide-react";
 
 function storageKey(clId: string) {
   return `pro-checklist-${clId}`;
@@ -181,94 +183,122 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
   if (checklists.length === 0 || !cl) return null;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
-      <div className="flex flex-col gap-4 border-b border-brand-navy/10 bg-gradient-to-br from-brand-navy to-[var(--brand-navy-deep)] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-        <div>
-          <p className="text-3xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
-            Checklist pro
+    <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#070d18] shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-brand-gold/20">
+      <div className="relative flex flex-col gap-6 border-b border-white/10 bg-[#030712] px-8 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-12 md:py-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.03] to-transparent pointer-events-none" />
+        <div className="relative">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold mb-4">
+            MAÎTRISE OPÉRATIONNELLE
           </p>
-          <h2 className="mt-1 flex items-center gap-2 text-xl font-bold text-white sm:text-2xl">
-            <EmojiIcon emoji={cl.icon} className="h-6 w-6" />
+          <h2 className="flex items-center gap-3 text-3xl font-black text-white uppercase tracking-tight leading-none">
+            <EmojiIcon emoji={cl.icon} className="h-8 w-8" />
             {cl.title}
           </h2>
-          <p className="mt-2 max-w-2xl text-sm text-white/85">{cl.description}</p>
+          <p className="mt-4 max-w-2xl text-lg text-white/50 leading-relaxed italic">&laquo; {cl.description} &raquo;</p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="relative flex flex-wrap gap-3">
           <button
             type="button"
             onClick={printChecklist}
-            className="rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20"
+            className="group flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white/70 transition hover:bg-white/10 hover:text-white"
           >
-            Imprimer
+            <Printer size={14} className="transition-transform group-hover:scale-110" />
+            IMPRIMER
           </button>
           <button
             type="button"
             onClick={downloadTxt}
-            className="rounded-lg border border-brand-gold/50 bg-brand-gold px-4 py-2 text-sm font-bold text-brand-navy transition hover:brightness-105"
+            className="group flex items-center gap-2 rounded-xl bg-brand-gold px-6 py-3 text-[10px] font-black uppercase tracking-widest text-brand-navy shadow-lg shadow-brand-gold/20 transition hover:bg-white hover:scale-105 active:scale-95"
           >
-            Télécharger (.txt)
+            <Download size={14} className="transition-transform group-hover:translate-y-0.5" />
+            TEXTE (.TXT)
           </button>
         </div>
       </div>
 
       {checklists.length > 1 && (
-        <div className="flex flex-wrap gap-1 border-b border-zinc-100 bg-zinc-50 px-5 sm:px-8">
+        <div className="flex gap-2 overflow-x-auto border-b border-white/5 bg-black/20 px-6 py-4 scrollbar-hide">
           {checklists.map((c, i) => (
             <button
               key={c.id}
               type="button"
               onClick={() => setTab(i)}
-              className={`relative px-4 py-3 text-sm font-medium transition ${
-                i === tab ? "text-brand-navy" : "text-zinc-400 hover:text-zinc-600"
+              className={`flex shrink-0 items-center gap-2.5 rounded-xl px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
+                i === tab
+                  ? "bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20"
+                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
-              {c.title}
-              {i === tab && (
-                <span className="absolute inset-x-2 bottom-0 h-0.5 rounded-full bg-brand-gold" />
-              )}
+              <EmojiIcon emoji={c.icon} className="h-4 w-4" />
+              <span>{c.title}</span>
             </button>
           ))}
         </div>
       )}
 
-      <div className="px-5 py-6 sm:px-8">
-        <div className="mb-6 flex items-center justify-between gap-3">
-          <p className="text-sm text-zinc-600">
-            Progression :{" "}
-            <span className="font-bold tabular-nums text-brand-navy">
-              {done}/{total}
-            </span>
-          </p>
-          <div className="h-2 flex-1 max-w-xs overflow-hidden rounded-full bg-zinc-100">
-            <div
-              className="h-full rounded-full bg-brand-gold transition-[width]"
-              style={{ width: total ? `${(done / total) * 100}%` : "0%" }}
+      <div className="p-8 sm:p-10 lg:p-12">
+        <div className="mb-10 flex items-center justify-between gap-6 px-2">
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">CONFORMITÉ DU DOSSIER</p>
+            <p className="text-xl font-black text-white tabular-nums">
+              {done} <span className="text-sm text-white/20">/ {total}</span>
+            </p>
+          </div>
+          <div className="h-2 flex-1 max-w-md overflow-hidden rounded-full bg-white/5 ring-1 ring-white/5 shadow-inner">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: total ? `${(done / total) * 100}%` : "0%" }}
+              className="h-full rounded-full bg-gradient-to-r from-brand-gold via-white to-brand-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all duration-700"
             />
           </div>
+          {done === total && total > 0 && (
+              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="flex items-center gap-2 text-brand-gold">
+                  <Sparkles size={16} className="animate-pulse" />
+                  <span className="text-[10px] font-black uppercase tracking-widest">Validé</span>
+              </motion.div>
+          )}
         </div>
 
-        <div className="space-y-8">
-          {byCategory.map(({ category, items }) =>
+        <div className="space-y-12">
+          {byCategory.map(({ category, items }, catIdx) =>
             items.length === 0 ? null : (
-              <div key={category}>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-brand-navy">
-                  {category}
-                </h3>
-                <ul className="mt-3 space-y-2">
+              <div key={category} className="space-y-6">
+                <div className="flex items-center gap-4">
+                    <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                    <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 text-center">
+                    {category}
+                    </h3>
+                    <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                </div>
+                <ul className="grid gap-3">
                   {items.map((it) => (
                     <li key={it.id}>
-                      <label className="flex cursor-pointer gap-3 rounded-xl border border-zinc-100 bg-zinc-50/50 px-4 py-3 transition hover:border-brand-navy/20">
-                        <input
-                          type="checkbox"
-                          checked={checked.has(it.id)}
-                          onChange={() => toggle(it.id)}
-                          className="mt-1 h-4 w-4 shrink-0 rounded border-zinc-300 text-brand-navy focus:ring-brand-gold"
-                        />
-                        <span className="flex-1 text-sm text-zinc-800">{it.text}</span>
-                      </label>
-                      {it.tip && (
-                        <p className="ml-9 mt-1 text-xs text-zinc-500">{it.tip}</p>
-                      )}
+                      <button
+                        onClick={() => toggle(it.id)}
+                        className={`group w-full flex items-start gap-4 rounded-[1.5rem] border-2 p-5 text-left transition-all duration-300 ${
+                            checked.has(it.id)
+                            ? "border-brand-gold/30 bg-brand-gold/5 shadow-inner"
+                            : "border-white/5 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04]"
+                        }`}
+                      >
+                        <div className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border-2 transition-all ${
+                            checked.has(it.id)
+                            ? "bg-brand-gold border-brand-gold text-brand-navy"
+                            : "bg-black/20 border-white/10 text-transparent"
+                        }`}>
+                          <CheckCircle2 size={14} className={checked.has(it.id) ? "opacity-100" : "opacity-0"} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <span className={`text-base font-bold transition-colors ${
+                                checked.has(it.id) ? "text-white" : "text-white/70 group-hover:text-white"
+                            }`}>{it.text}</span>
+                            {it.tip && (
+                                <p className={`mt-2 text-sm italic font-medium transition-all ${
+                                    checked.has(it.id) ? "text-white/40" : "text-white/20"
+                                }`}>&laquo; {it.tip} &raquo;</p>
+                            )}
+                        </div>
+                      </button>
                     </li>
                   ))}
                 </ul>

@@ -3,6 +3,8 @@
 import { useCallback, useState } from "react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { GuidedCalculation, CalcStep } from "@/data/guided-calculations";
+import { motion, AnimatePresence } from "framer-motion";
+import { Lock, CheckCircle2, RotateCcw, Calculator, Sparkles, AlertCircle } from "lucide-react";
 
 type StepStatus = "locked" | "active" | "correct" | "wrong";
 
@@ -37,101 +39,129 @@ function StepCard({
 
   return (
     <div
-      className={`relative overflow-hidden rounded-2xl border transition-all duration-300 ${
+      className={`relative overflow-hidden rounded-[2rem] border-2 transition-all duration-500 ${
         isLocked
-          ? "border-zinc-200 bg-zinc-50 opacity-60"
+          ? "border-white/5 bg-white/[0.02] opacity-40 grayscale"
           : isCorrect
-            ? "border-emerald-300 bg-emerald-50 shadow-md"
+            ? "border-emerald-500/30 bg-emerald-500/5 shadow-emerald-500/5"
             : isWrong
-              ? "border-red-300 bg-red-50"
-              : "border-brand-gold/40 bg-white shadow-lg ring-1 ring-brand-gold/20"
+              ? "border-red-500/30 bg-red-500/5 shadow-red-500/5"
+              : "border-brand-gold/30 bg-[#070d18] shadow-2xl"
       }`}
     >
       {/* Step number + title */}
-      <div className="flex items-start gap-4 p-5">
+      <div className="flex items-start gap-5 p-6 md:p-8">
         <div
-          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-black ${
+          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-sm font-black shadow-xl ring-1 transition-colors ${
             isLocked
-              ? "bg-zinc-200 text-zinc-400"
+              ? "bg-white/5 text-white/20 ring-white/10"
               : isCorrect
-                ? "bg-emerald-500 text-white"
-                : "bg-brand-navy text-white"
+                ? "bg-emerald-500 text-brand-navy ring-emerald-400/50"
+                : "bg-brand-gold text-brand-navy ring-brand-gold/50"
           }`}
         >
-          {isLocked ? <EmojiIcon emoji="🔒" className="h-4 w-4" /> : isCorrect ? <EmojiIcon emoji="✓" className="h-4 w-4" /> : step.stepNumber}
+          {isLocked ? <Lock size={18} /> : isCorrect ? <CheckCircle2 size={18} /> : step.stepNumber}
         </div>
-        <div className="flex-1">
-          <p className="font-bold text-brand-navy">{step.title}</p>
+        <div className="flex-1 pt-1">
+          <p className={`font-black uppercase tracking-tight ${isLocked ? "text-white/20" : "text-white"}`}>
+            {step.title}
+          </p>
           {!isLocked && (
-            <p className="mt-1 text-sm leading-relaxed text-zinc-600">{step.instruction}</p>
+            <p className="mt-2 text-sm leading-relaxed text-white/50 font-medium italic">
+                &laquo; {step.instruction} &raquo;
+            </p>
           )}
         </div>
       </div>
 
       {!isLocked && (
-        <div className="border-t border-zinc-100 px-5 pb-5 pt-4 space-y-4">
+        <div className="border-t border-white/5 p-6 md:p-8 space-y-6 bg-white/[0.01]">
           {/* Formula */}
           {step.formula && (
-            <div className="rounded-xl bg-[var(--surface-dark)] px-4 py-3 font-mono text-sm text-brand-gold">
-              {step.formula}
+            <div className="relative group overflow-hidden rounded-2xl bg-black/40 border border-white/5 p-5">
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-gold/[0.05] to-transparent pointer-events-none" />
+              <p className="text-[10px] font-black uppercase tracking-widest text-brand-gold mb-2 opacity-60">Modèle de calcul</p>
+              <code className="relative z-10 block font-mono text-base text-white/90 tracking-tight">
+                {step.formula}
+              </code>
             </div>
           )}
 
           {/* Input row */}
           {!isCorrect && (
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex flex-1 items-center overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm focus-within:border-brand-gold focus-within:ring-2 focus-within:ring-brand-gold/20">
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-1 items-center overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl focus-within:border-brand-gold/50 focus-within:ring-4 focus-within:ring-brand-gold/10 transition-all">
                 <input
                   type="text"
                   inputMode="decimal"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && validate()}
-                  placeholder="Votre réponse..."
-                  className="flex-1 bg-transparent px-4 py-2.5 text-sm outline-none"
+                  placeholder="Saisir le résultat..."
+                  className="flex-1 bg-transparent px-5 py-4 text-base font-black text-white outline-none placeholder:text-white/20"
                 />
-                <span className="shrink-0 border-l border-zinc-100 bg-zinc-50 px-3 py-2.5 text-xs font-semibold text-zinc-500">
+                <span className="shrink-0 border-l border-white/10 bg-white/5 px-5 py-4 text-[10px] font-black uppercase tracking-widest text-white/40">
                   {step.inputUnit}
                 </span>
               </div>
               <button
                 onClick={validate}
-                className="rounded-xl bg-brand-navy px-5 py-2.5 text-sm font-bold text-white shadow-md transition hover:bg-brand-navy-deep"
+                className="rounded-2xl bg-brand-gold px-8 py-4 text-xs font-black uppercase tracking-widest text-brand-navy shadow-xl shadow-brand-gold/20 transition hover:bg-white hover:scale-105 active:scale-95"
               >
                 Vérifier
               </button>
               {step.hint && (
                 <button
                   onClick={() => setShowHint((v) => !v)}
-                  className="rounded-xl border border-brand-gold/40 px-4 py-2.5 text-sm font-semibold text-brand-gold-dark transition hover:bg-brand-gold/10"
+                  className={`rounded-2xl border px-6 py-4 text-[10px] font-black uppercase tracking-widest transition-all ${
+                    showHint 
+                    ? "bg-brand-gold/20 border-brand-gold text-brand-gold" 
+                    : "bg-white/5 border-white/10 text-white/40 hover:bg-white/10 hover:text-white"
+                  }`}
                 >
-                  {showHint ? "Masquer l'indice" : <span className="inline-flex items-center gap-1"><EmojiIcon emoji="💡" className="h-4 w-4" /> Indice</span>}
+                  {showHint ? "Cacher l'indice" : "Indice"}
                 </button>
               )}
             </div>
           )}
 
-          {/* Hint */}
-          {showHint && step.hint && !isCorrect && (
-            <div className="rounded-xl border border-brand-gold/30 bg-brand-gold/5 px-4 py-3 text-sm text-brand-gold-dark">
-              <span className="font-semibold">Indice : </span>{step.hint}
-            </div>
-          )}
+          <AnimatePresence>
+            {/* Hint */}
+            {showHint && step.hint && !isCorrect && (
+                <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="rounded-2xl border border-brand-gold/20 bg-brand-gold/5 p-5 text-sm text-white/70 italic leading-relaxed"
+                >
+                <span className="font-black uppercase tracking-widest text-[9px] text-brand-gold block mb-1">Aide stratégique</span>
+                {step.hint}
+                </motion.div>
+            )}
 
-          {/* Wrong feedback */}
-          {tried && isWrong && (
-            <div className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
-              <EmojiIcon emoji="❌" className="h-4 w-4 text-red-500 shrink-0" />
-              <span>Pas tout à fait — réessayez ou utilisez l&apos;indice pour vous guider.</span>
-            </div>
-          )}
+            {/* Wrong feedback */}
+            {tried && isWrong && (
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="flex items-start gap-4 rounded-2xl border border-red-500/20 bg-red-500/5 p-5 text-sm text-red-300"
+                >
+                <AlertCircle className="h-5 w-5 shrink-0" />
+                <span className="font-medium italic leading-relaxed">Résultat inexact. Vérifiez vos variables ou utilisez l&apos;indice pédagogique.</span>
+                </motion.div>
+            )}
 
-          {/* Correct explanation */}
-          {isCorrect && (
-            <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm leading-relaxed text-emerald-800">
-              <span className="font-semibold">✓ Correct ! </span>{step.explanation}
-            </div>
-          )}
+            {/* Correct explanation */}
+            {isCorrect && (
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-6 text-base leading-relaxed text-emerald-100 font-medium italic"
+                >
+                <span className="font-black uppercase tracking-widest text-[9px] text-emerald-400 block mb-2 not-italic">Validation acquise</span>
+                &laquo; {step.explanation} &raquo;
+                </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       )}
     </div>
@@ -172,38 +202,49 @@ function CalcView({ calc }: { calc: GuidedCalculation }) {
   const pct = Math.round((doneCount / calc.steps.length) * 100);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-10">
       {/* Scenario */}
-      <div className="rounded-2xl border border-brand-navy/15 bg-gradient-to-br from-brand-navy/[0.04] to-white p-5">
-        <p className="text-xs font-bold uppercase tracking-widest text-brand-gold">Situation</p>
-        <p className="mt-2 text-sm leading-relaxed text-zinc-700">{calc.scenario}</p>
-        <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-          {calc.propertyContext.map((ctx) => (
-            <div key={ctx.label} className="rounded-xl border border-zinc-200 bg-white p-3 text-center shadow-sm">
-              <div><EmojiIcon emoji={ctx.icon} className="h-6 w-6" /></div>
-              <p className="mt-1 text-xs font-bold text-zinc-500">{ctx.label}</p>
-              <p className="mt-0.5 text-sm font-bold text-brand-navy">{ctx.value}</p>
+      <section className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#030712] p-8 md:p-10 shadow-inner">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.05] to-transparent pointer-events-none" />
+        <div className="relative z-10">
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-gold mb-6 flex items-center gap-2">
+                <Calculator size={14} /> SITUATION D&apos;EXCELLENCE
+            </p>
+            <p className="text-lg leading-relaxed text-white/70 italic font-medium max-w-3xl">
+                &laquo; {calc.scenario} &raquo;
+            </p>
+            <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {calc.propertyContext.map((ctx) => (
+                <div key={ctx.label} className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 text-center shadow-2xl transition-all hover:bg-white/5 group">
+                    <div className="flex justify-center mb-3"><EmojiIcon emoji={ctx.icon} className="h-8 w-8 group-hover:scale-110 transition-transform" /></div>
+                    <p className="text-[9px] font-black text-white/30 uppercase tracking-widest">{ctx.label}</p>
+                    <p className="mt-1 text-base font-black text-white uppercase tracking-tight">{ctx.value}</p>
+                </div>
+            ))}
             </div>
-          ))}
         </div>
-      </div>
+      </section>
 
       {/* Progress */}
-      <div>
-        <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-500">
-          <span>{doneCount} / {calc.steps.length} étapes</span>
-          <span>{pct}%</span>
+      <div className="px-2">
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">ÉTAPES :</span>
+              <span className="text-sm font-black text-white tabular-nums">{doneCount} / {calc.steps.length}</span>
+          </div>
+          <span className="text-sm font-black text-brand-gold tabular-nums">{pct}%</span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-zinc-100">
-          <div
-            className="h-full rounded-full bg-gradient-to-r from-brand-navy to-brand-gold transition-all duration-500"
-            style={{ width: `${pct}%` }}
+        <div className="h-2 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/5 shadow-inner">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: `${pct}%` }}
+            className="h-full rounded-full bg-gradient-to-r from-brand-gold via-white to-brand-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all duration-700"
           />
         </div>
       </div>
 
       {/* Steps */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         {calc.steps.map((step, i) => (
           <StepCard
             key={step.id}
@@ -215,20 +256,34 @@ function CalcView({ calc }: { calc: GuidedCalculation }) {
       </div>
 
       {/* Final summary */}
-      {complete && (
-        <div className="rounded-2xl border-2 border-brand-gold/40 bg-gradient-to-br from-brand-gold/10 to-amber-50 p-6">
-          <p className="text-sm font-bold uppercase tracking-widest text-brand-gold">
-            <span className="inline-flex items-center gap-1.5"><EmojiIcon emoji="🎓" className="h-4 w-4" /> Bilan de l&apos;analyse</span>
-          </p>
-          <p className="mt-3 text-sm leading-relaxed text-zinc-700">{calc.finalSummary}</p>
-          <button
-            onClick={reset}
-            className="mt-4 rounded-xl border border-zinc-200 bg-white px-4 py-2 text-xs font-semibold text-zinc-600 transition hover:border-zinc-300 hover:shadow-sm"
-          >
-            Recommencer l&apos;exercice
-          </button>
-        </div>
-      )}
+      <AnimatePresence>
+        {complete && (
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="relative overflow-hidden rounded-[2.5rem] border-2 border-brand-gold/40 bg-gradient-to-br from-brand-gold/10 to-[#030712] p-10 shadow-2xl"
+            >
+            <div className="relative z-10 text-center">
+                <div className="flex justify-center mb-8">
+                    <div className="h-16 w-16 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/30 shadow-xl">
+                        <Trophy size={32} className="text-brand-gold animate-bounce" />
+                    </div>
+                </div>
+                <h3 className="text-2xl font-black uppercase tracking-tight text-white mb-6">Bilan de l&apos;Analyse</h3>
+                <p className="text-lg leading-relaxed text-white/70 italic max-w-2xl mx-auto mb-10">
+                    &laquo; {calc.finalSummary} &raquo;
+                </p>
+                <button
+                    onClick={reset}
+                    className="group inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-10 py-5 text-xs font-black uppercase tracking-widest text-white transition hover:bg-white hover:text-brand-navy shadow-xl active:scale-95"
+                >
+                    <RotateCcw className="w-4 h-4 transition-transform group-hover:rotate-180 duration-500" />
+                    Recommencer l&apos;exercice
+                </button>
+            </div>
+            </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -242,37 +297,67 @@ export function GuidedCalculationBlock({
   if (calculations.length === 0) return null;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
+    <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#070d18] shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-brand-gold/20">
       {/* Header */}
-      <div className="border-b border-zinc-100 bg-gradient-to-r from-brand-navy to-[var(--brand-navy-mid)] px-5 py-4 sm:px-7">
-        <p className="text-3xs font-bold uppercase tracking-widest text-brand-gold">
-          Calcul guidé
-        </p>
-        <p className="mt-0.5 text-sm font-semibold text-white/90">
-          {calculations[active].title}
-        </p>
+      <div className="relative border-b border-white/10 bg-[#030712] px-8 py-8 md:px-12 md:py-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.03] to-transparent pointer-events-none" />
+        <div className="relative">
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-gold">
+            SIMULATION FINANCIÈRE
+            </p>
+            <h2 className="mt-2 text-3xl font-black text-white uppercase tracking-tight leading-none">
+            {calculations[active].title}
+            </h2>
+        </div>
       </div>
 
       {/* Tabs */}
       {calculations.length > 1 && (
-        <div className="flex gap-1 overflow-x-auto border-b border-zinc-100 bg-zinc-50 px-4 py-2">
+        <div className="flex gap-2 overflow-x-auto border-b border-white/5 bg-black/20 px-6 py-4 scrollbar-hide">
           {calculations.map((c, i) => (
             <button
               key={c.id}
               onClick={() => setActive(i)}
-              className={`shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
-                i === active ? "bg-brand-navy text-white" : "text-zinc-600 hover:bg-zinc-200"
+              className={`flex shrink-0 items-center gap-2.5 rounded-xl px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
+                i === active
+                  ? "bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20"
+                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
-              {c.title}
+              <Calculator size={14} />
+              <span>{c.title}</span>
             </button>
           ))}
         </div>
       )}
 
-      <div className="p-5 sm:p-7">
+      <div className="p-8 md:p-12 lg:p-16">
         <CalcView calc={calculations[active]} />
       </div>
     </div>
   );
 }
+
+function Trophy(props: any) {
+    return (
+      <svg
+        {...props}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+        <path d="M4 22h16" />
+        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+      </svg>
+    )
+  }

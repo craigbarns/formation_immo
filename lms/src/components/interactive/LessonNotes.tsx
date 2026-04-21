@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { PenLine } from "lucide-react";
+import { PenLine, ChevronDown, CheckCircle2, Trash2, X, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
   lessonKey: string;
@@ -180,7 +181,7 @@ export function LessonNotes({ lessonKey }: Props) {
   }, [confirmClear, lessonKey, flashSaved, saveToSupabase]);
 
   return (
-    <div className="mt-8 overflow-hidden rounded-xl border border-brand-navy/15 shadow-sm">
+    <div className="mt-12 overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#070d18] shadow-2xl transition-all duration-500 hover:border-brand-gold/20">
       {/* Header bar */}
       <button
         type="button"
@@ -188,84 +189,108 @@ export function LessonNotes({ lessonKey }: Props) {
           setOpen((prev) => !prev);
           setConfirmClear(false);
         }}
-        className="flex w-full items-center gap-3 bg-brand-navy px-4 py-3 text-left text-sm font-semibold text-white transition hover:bg-brand-navy-deep"
+        className={`flex w-full items-center justify-between px-6 py-5 text-left transition-all duration-300 ${
+            open ? "bg-[#030712] border-b border-white/5" : "hover:bg-white/[0.02]"
+        }`}
       >
-        <PenLine className="h-4 w-4" aria-hidden="true" />
-        <span className="flex-1">Mes notes personnelles</span>
-        {!open && hasNotes && (
-          <span className="h-2.5 w-2.5 rounded-full bg-brand-gold shadow-sm" />
-        )}
-        <svg
-          className={`h-4 w-4 shrink-0 text-white/80 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2.5}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        <div className="flex items-center gap-3">
+          <div className={`flex h-8 w-8 items-center justify-center rounded-lg border transition-colors ${
+              open ? "bg-brand-gold border-brand-gold text-brand-navy" : "bg-white/5 border-white/10 text-white/40"
+          }`}>
+            <PenLine className="h-4 w-4" />
+          </div>
+          <span className="text-sm font-black uppercase tracking-widest text-white">Journal d&apos;apprentissage</span>
+          {!open && hasNotes && (
+             <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="h-1.5 w-1.5 rounded-full bg-brand-gold shadow-[0_0_10px_rgba(212,175,55,0.8)]" />
+          )}
+        </div>
+        <ChevronDown className={`w-4 h-4 text-white/20 transition-transform duration-500 ${open ? "rotate-180" : ""}`} />
       </button>
 
       {/* Collapsible content */}
-      <div
-        className="transition-[max-height] duration-300 ease-in-out"
-        style={{ maxHeight: open ? "600px" : "0px", overflow: "hidden" }}
-      >
-        <div className="bg-white p-4">
-          <textarea
-            value={notes}
-            onChange={handleChange}
-            placeholder="Prenez vos notes ici... Elles sont sauvegardees automatiquement."
-            className="w-full resize-y rounded-xl border border-zinc-200 bg-zinc-50/50 px-4 py-3 text-sm leading-relaxed text-zinc-800 placeholder:text-zinc-400 focus:border-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/40"
-            style={{ minHeight: "150px" }}
-          />
+      <AnimatePresence>
+        {open && (
+            <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="overflow-hidden"
+            >
+                <div className="p-6 md:p-8 space-y-6">
+                    <textarea
+                        value={notes}
+                        onChange={handleChange}
+                        placeholder="Consignez ici vos réflexions stratégiques, points d'attention ou questions pour votre coach... Sauvegarde automatique active."
+                        className="w-full resize-y rounded-2xl border border-white/10 bg-black/40 px-6 py-5 text-base leading-relaxed text-white font-medium placeholder:text-white/10 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all shadow-inner"
+                        style={{ minHeight: "200px" }}
+                    />
 
-          {/* Footer row */}
-          <div className="mt-2 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              {hasNotes && (
-                <button
-                  type="button"
-                  onClick={handleClear}
-                  className={`text-xs font-medium transition ${
-                    confirmClear
-                      ? "text-red-600 hover:text-red-700"
-                      : "text-zinc-400 hover:text-zinc-600"
-                  }`}
-                >
-                  {confirmClear
-                    ? "Confirmer la suppression ?"
-                    : "Effacer"}
-                </button>
-              )}
-              {confirmClear && (
-                <button
-                  type="button"
-                  onClick={() => setConfirmClear(false)}
-                  className="text-xs font-medium text-zinc-400 hover:text-zinc-600"
-                >
-                  Annuler
-                </button>
-              )}
-            </div>
+                    {/* Footer row */}
+                    <div className="flex flex-wrap items-center justify-between gap-4">
+                        <div className="flex items-center gap-4">
+                            <AnimatePresence mode="wait">
+                                {hasNotes && !confirmClear && (
+                                    <motion.button
+                                        key="clear"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        type="button"
+                                        onClick={handleClear}
+                                        className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/20 hover:text-red-400 transition-colors"
+                                    >
+                                        <Trash2 size={12} /> EFFACER
+                                    </motion.button>
+                                )}
+                                {confirmClear && (
+                                    <motion.div 
+                                        key="confirm"
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className="flex items-center gap-4"
+                                    >
+                                        <button
+                                            type="button"
+                                            onClick={handleClear}
+                                            className="text-[10px] font-black uppercase tracking-widest text-red-500 hover:text-red-400"
+                                        >
+                                            CONFIRMER ?
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => setConfirmClear(false)}
+                                            className="flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white"
+                                        >
+                                            <X size={10} /> ANNULER
+                                        </button>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
 
-            <div className="flex items-center gap-3">
-              <span
-                className={`text-xs font-medium text-emerald-600 transition-opacity duration-300 ${showSaved ? "opacity-100" : "opacity-0"}`}
-              >
-                Sauvegarde ✓
-              </span>
-              <span className="text-xs tabular-nums text-zinc-400">
-                {notes.length} caractere{notes.length !== 1 ? "s" : ""}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+                        <div className="flex items-center gap-6">
+                            <AnimatePresence>
+                                {showSaved && (
+                                    <motion.div 
+                                        initial={{ opacity: 0, x: 10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0 }}
+                                        className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-emerald-400"
+                                    >
+                                        <Sparkles size={12} /> SYNCHRONISÉ
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-white/20 tabular-nums">
+                                {notes.length} CARACTÈRES
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

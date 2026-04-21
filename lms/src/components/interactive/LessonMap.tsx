@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
+import { ChevronDown, Sparkles, BookOpen, Target, Quote } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export type LessonSection = {
   id: string;
@@ -58,7 +60,7 @@ export function LessonMap({
     { id: "quiz", icon: "✅", label: "Quiz", anchor: "#section-quiz", available: hasQuiz },
     { id: "calc", icon: "🧮", label: "Calcul guidé", anchor: "#section-calc", available: !!hasCalculation },
     { id: "table", icon: "📊", label: "Tableaux", anchor: "#section-table", available: !!hasTable },
-    { id: "exercises", icon: "🧩", label: "Exercices", anchor: "#section-exercises", available: hasExercises },
+    { id: "exercises", icon: "🧩", label: "Ateliers", anchor: "#section-exercises", available: hasExercises },
     { id: "timeline", icon: "📅", label: "Timeline", anchor: "#section-timeline", available: hasTimeline },
     { id: "checklist", icon: "📋", label: "Checklist", anchor: "#section-checklist", available: hasChecklist },
     { id: "roleplay", icon: "💬", label: "Roleplay", anchor: "#section-roleplay", available: hasRoleplay },
@@ -71,17 +73,17 @@ export function LessonMap({
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-sm">
+    <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#070d18] shadow-2xl transition-all duration-500 hover:border-brand-gold/20">
       {/* Feature pills */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-zinc-100 bg-gradient-to-r from-white to-zinc-50/80 px-4 py-3">
-        <span className="text-2xs font-bold uppercase tracking-widest text-zinc-400 mr-1">
-          Contenu :
+      <div className="flex flex-wrap items-center gap-2 border-b border-white/5 bg-black/40 px-6 py-4">
+        <span className="text-[10px] font-black uppercase tracking-widest text-white/20 mr-2">
+          ACCÈS RAPIDE :
         </span>
         {features.map((f) => (
           <button
             key={f.id}
             onClick={() => scrollTo(f.anchor)}
-            className="flex items-center gap-1.5 rounded-full border border-brand-navy/15 bg-white px-3 py-1 text-3xs font-semibold text-brand-navy shadow-sm transition hover:border-brand-gold/50 hover:bg-brand-gold/5 hover:shadow-md"
+            className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-white/60 transition hover:bg-brand-gold hover:text-brand-navy hover:border-brand-gold shadow-lg"
           >
             <EmojiIcon emoji={f.icon} className="h-3.5 w-3.5" />
             <span>{f.label}</span>
@@ -94,89 +96,94 @@ export function LessonMap({
         <>
           <button
             onClick={() => setOpen((v) => !v)}
-            className="flex w-full items-center justify-between px-5 py-3 text-left transition hover:bg-zinc-50"
+            className="flex w-full items-center justify-between px-6 py-4 text-left transition hover:bg-white/[0.02]"
           >
-            <div className="flex items-center gap-2">
-              <EmojiIcon emoji="📚" className="h-4 w-4" />
-              <span className="text-sm font-semibold text-brand-navy">
-                Programme de la leçon
+            <div className="flex items-center gap-3">
+              <BookOpen className="w-4 h-4 text-brand-gold" />
+              <span className="text-sm font-black uppercase tracking-widest text-white">
+                CURRICULUM DE LA LEÇON
                 {totalDuration && (
-                  <span className="ml-2 rounded-full bg-brand-gold/15 px-2 py-0.5 text-2xs font-bold text-brand-gold-dark">
+                  <span className="ml-3 rounded-full bg-brand-gold/15 border border-brand-gold/30 px-3 py-0.5 text-[10px] font-black text-brand-gold tabular-nums shadow-lg backdrop-blur-md">
                     {totalDuration}
                   </span>
                 )}
               </span>
             </div>
-            <span
-              className={`text-zinc-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-            >
-              ▼
-            </span>
+            <ChevronDown className={`w-4 h-4 text-white/20 transition-transform duration-500 ${open ? "rotate-180" : ""}`} />
           </button>
 
-          <div
-            className={`overflow-hidden transition-all duration-300 ${
-              open ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
-            }`}
-          >
-            <div className="border-t border-zinc-100 px-5 py-4 space-y-5">
-              {/* Expert quote */}
-              {expertQuote && (
-                <blockquote className="rounded-xl border-l-4 border-brand-gold bg-brand-gold/5 py-3 pl-4 pr-3">
-                  <p className="text-sm italic leading-relaxed text-zinc-700">&ldquo;{expertQuote.text}&rdquo;</p>
-                  <footer className="mt-2 text-3xs font-semibold text-zinc-500">
-                    — {expertQuote.author}
-                    {expertQuote.role && <span className="font-normal">, {expertQuote.role}</span>}
-                  </footer>
-                </blockquote>
-              )}
+          <AnimatePresence>
+            {open && (
+                <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                >
+                    <div className="border-t border-white/5 px-8 py-8 space-y-10 bg-black/20">
+                    {/* Expert quote */}
+                    {expertQuote && (
+                        <div className="relative group overflow-hidden rounded-2xl border border-brand-gold/20 bg-brand-gold/5 p-6 shadow-2xl">
+                            <Quote className="absolute -right-2 -top-2 w-16 h-16 text-brand-gold opacity-10 -rotate-12" />
+                            <p className="relative z-10 text-base italic leading-relaxed text-white font-medium">&ldquo;{expertQuote.text}&rdquo;</p>
+                            <footer className="relative z-10 mt-4 flex items-center gap-3">
+                                <div className="h-6 w-px bg-brand-gold/30" />
+                                <p className="text-[10px] font-black uppercase tracking-widest text-brand-gold">
+                                    {expertQuote.author} <span className="text-white/40 not-italic ml-1">— {expertQuote.role}</span>
+                                </p>
+                            </footer>
+                        </div>
+                    )}
 
-              {/* Objectives */}
-              {objectives && objectives.length > 0 && (
-                <div>
-                  <p className="text-2xs font-bold uppercase tracking-widest text-zinc-400 mb-2">
-                    Objectifs
-                  </p>
-                  <ul className="space-y-1.5">
-                    {objectives.map((obj, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-zinc-700">
-                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-navy text-2xs font-bold text-white">
-                          {i + 1}
-                        </span>
-                        {obj}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+                    {/* Objectives */}
+                    {objectives && objectives.length > 0 && (
+                        <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-6 flex items-center gap-3 px-1">
+                            <Target className="w-3.5 h-3.5" /> OBJECTIFS DE MAÎTRISE
+                        </p>
+                        <ul className="grid gap-3 sm:grid-cols-2">
+                            {objectives.map((obj, i) => (
+                            <li key={i} className="flex items-start gap-4 rounded-xl bg-white/[0.02] border border-white/5 p-4 transition-all hover:bg-white/5">
+                                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-brand-navy border border-white/10 text-[10px] font-black text-white shadow-xl">
+                                {i + 1}
+                                </span>
+                                <span className="text-sm font-bold text-white/70 leading-relaxed">{obj}</span>
+                            </li>
+                            ))}
+                        </ul>
+                        </div>
+                    )}
 
-              {/* Sections */}
-              {sections && sections.length > 0 && (
-                <div>
-                  <p className="text-2xs font-bold uppercase tracking-widest text-zinc-400 mb-2">
-                    Chapitres
-                  </p>
-                  <ol className="space-y-1">
-                    {sections.map((s, i) => (
-                      <li
-                        key={s.id}
-                        className="flex items-center gap-3 rounded-xl px-3 py-2 transition hover:bg-zinc-50"
-                      >
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-3xs font-bold text-zinc-500">
-                          {i + 1}
-                        </span>
-                        <EmojiIcon emoji={s.icon} className="h-4 w-4" />
-                        <span className="flex-1 text-sm font-medium text-zinc-800">{s.title}</span>
-                        <span className="shrink-0 rounded-full bg-zinc-100 px-2 py-0.5 text-2xs font-semibold text-zinc-500">
-                          {s.duration}
-                        </span>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              )}
-            </div>
-          </div>
+                    {/* Sections */}
+                    {sections && sections.length > 0 && (
+                        <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-6 flex items-center gap-3 px-1">
+                            <Sparkles className="w-3.5 h-3.5" /> PLAN DÉTAILLÉ
+                        </p>
+                        <ol className="divide-y divide-white/5 border-y border-white/5">
+                            {sections.map((s, i) => (
+                            <li
+                                key={s.id}
+                                className="flex items-center gap-5 py-4 px-2 transition hover:bg-white/[0.01] group"
+                            >
+                                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-black/40 text-[9px] font-black text-white/20 border border-white/5 group-hover:text-brand-gold transition-colors">
+                                {i + 1}
+                                </span>
+                                <EmojiIcon emoji={s.icon} className="h-5 w-5 transition-transform group-hover:scale-110" />
+                                <span className="flex-1 text-sm font-black uppercase tracking-tight text-white/60 group-hover:text-white transition-colors">{s.title}</span>
+                                <span className="shrink-0 rounded-lg bg-white/5 border border-white/5 px-2.5 py-1 text-[9px] font-black text-white/30 tabular-nums">
+                                {s.duration}
+                                </span>
+                            </li>
+                            ))}
+                        </ol>
+                        </div>
+                    )}
+                    </div>
+                </motion.div>
+            )}
+          </AnimatePresence>
         </>
       )}
     </div>

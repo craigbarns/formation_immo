@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { CaseStudy, CaseStudyField } from "@/data/case-studies";
+import { motion, AnimatePresence } from "framer-motion";
+import { Calculator, CheckCircle2, AlertCircle, Sparkles, Lightbulb } from "lucide-react";
 
 type FieldStatus = "idle" | "correct" | "wrong";
 
@@ -23,37 +25,52 @@ function FieldRow({
 }) {
   const border =
     status === "correct"
-      ? "border-emerald-400/60 ring-emerald-500/20"
+      ? "border-emerald-500/50 bg-emerald-500/5"
       : status === "wrong"
-        ? "border-red-400/50 ring-red-500/15"
-        : "border-zinc-200";
+        ? "border-red-500/50 bg-red-500/5"
+        : "border-white/10 bg-white/5";
 
   return (
-    <div className="rounded-xl border bg-white px-4 py-3 shadow-sm">
-      <label className="flex flex-wrap items-baseline justify-between gap-2">
-        <span className="text-sm font-medium text-zinc-800">{field.label}</span>
-        <span className="text-xs text-zinc-400">({field.unit})</span>
+    <div className={`rounded-2xl border-2 p-5 transition-all duration-300 shadow-2xl ${border}`}>
+      <label className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+        <span className="text-sm font-black uppercase tracking-tight text-white/90">{field.label}</span>
+        <span className="text-[10px] font-black uppercase tracking-widest text-white/30">{field.unit}</span>
       </label>
-      <div className="mt-2 flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap items-center gap-3">
         <input
           type="text"
           inputMode="decimal"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`min-w-[120px] flex-1 rounded-lg border px-3 py-2 text-sm tabular-nums outline-none ring-2 ring-transparent transition focus:border-brand-gold focus:ring-brand-gold/30 ${border}`}
-          placeholder="Votre calcul"
+          className={`min-w-[120px] flex-1 rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-base font-black text-white tabular-nums outline-none focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10 transition-all placeholder:text-white/10`}
+          placeholder="Calculer..."
           autoComplete="off"
         />
-        {status === "correct" && (
-          <span className="text-xs font-semibold text-emerald-600">Correct</span>
-        )}
-        {status === "wrong" && (
-          <span className="text-xs font-medium text-red-600">À ajuster</span>
-        )}
+        <AnimatePresence mode="wait">
+            {status === "correct" && (
+            <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-emerald-400">
+                <CheckCircle2 size={16} /> VALIDÉ
+            </motion.span>
+            )}
+            {status === "wrong" && (
+            <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-red-400">
+                <AlertCircle size={16} /> À REVOIR
+            </motion.span>
+            )}
+        </AnimatePresence>
       </div>
-      {status === "wrong" && field.hint && (
-        <p className="mt-2 text-xs text-zinc-500">Indice : {field.hint}</p>
-      )}
+      <AnimatePresence>
+        {status === "wrong" && field.hint && (
+            <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                className="mt-4 flex gap-3 rounded-xl bg-amber-500/5 border border-amber-500/20 p-3 text-xs text-amber-200/60 italic font-medium"
+            >
+                <Lightbulb size={14} className="shrink-0 text-amber-400" />
+                <span>Indice : {field.hint}</span>
+            </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -101,69 +118,93 @@ export function CaseStudyBlock({ studies }: { studies: CaseStudy[] }) {
   if (studies.length === 0 || !study) return null;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-lg">
-      <div className="border-b border-brand-navy/10 bg-gradient-to-r from-brand-navy to-brand-navy-deep px-5 py-5 sm:px-8">
-        <p className="text-3xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
-          Étude de cas chiffrée
-        </p>
-        <h2 className="mt-1 text-xl font-bold text-white sm:text-2xl">{study.title}</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/85">{study.description}</p>
+    <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#070d18] shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-brand-gold/20">
+      <div className="relative border-b border-white/10 bg-[#030712] px-8 py-8 sm:px-12 md:py-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.03] to-transparent pointer-events-none" />
+        <div className="relative">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold mb-4">
+            ANALYSE DE CAS COMPLEXE
+            </p>
+            <h2 className="text-3xl font-black text-white uppercase tracking-tight leading-none">{study.title}</h2>
+            <p className="mt-4 max-w-2xl text-lg text-white/50 leading-relaxed italic">&laquo; {study.description} &raquo;</p>
+        </div>
       </div>
 
       {studies.length > 1 && (
-        <div className="flex gap-1 border-b border-zinc-100 bg-zinc-50 px-5 sm:px-8">
+        <div className="flex gap-2 overflow-x-auto border-b border-white/5 bg-black/20 px-6 py-4 scrollbar-hide">
           {studies.map((s, i) => (
             <button
               key={s.id}
               type="button"
               onClick={() => setActive(i)}
-              className={`relative px-4 py-3 text-sm font-medium transition ${
-                i === active ? "text-brand-navy" : "text-zinc-400 hover:text-zinc-600"
+              className={`flex shrink-0 items-center gap-2.5 rounded-xl px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
+                i === active
+                  ? "bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20"
+                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
-              Cas {i + 1}
-              {i === active && (
-                <span className="absolute inset-x-2 bottom-0 h-0.5 rounded-full bg-brand-gold" />
-              )}
+              CAS {i + 1}
             </button>
           ))}
         </div>
       )}
 
-      <div className="space-y-6 px-5 py-7 sm:px-8 sm:py-9">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="p-8 sm:p-10 lg:p-12 space-y-10">
+        {/* Context Details */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {study.propertyDetails.map((d) => (
             <div
               key={d.label}
-              className="rounded-lg border border-zinc-100 bg-zinc-50/80 px-3 py-2 text-sm"
+              className="rounded-2xl border border-white/5 bg-[#030712] p-5 shadow-inner transition-all hover:bg-white/5 group"
             >
-              <p className="text-3xs font-semibold uppercase tracking-wide text-zinc-400">
+              <p className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-1 group-hover:text-brand-gold/60 transition-colors">
                 {d.label}
               </p>
-              <p className="mt-0.5 font-medium text-zinc-800">{d.value}</p>
+              <p className="text-base font-black text-white uppercase tracking-tight">{d.value}</p>
             </div>
           ))}
         </div>
 
-        <div className="space-y-4">
-          <h3 className="text-sm font-bold text-brand-navy">Vos calculs</h3>
-          {study.questions.map((q) => (
-            <FieldRow
-              key={q.id}
-              field={q}
-              value={values[q.id] ?? ""}
-              onChange={(v) => handleChange(q, v)}
-              status={status[q.id] ?? "idle"}
-            />
-          ))}
+        <div className="space-y-6">
+          <div className="flex items-center gap-4 mb-2">
+            <Calculator className="w-5 h-5 text-brand-gold" />
+            <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Équations de terrain</h3>
+          </div>
+          <div className="grid gap-6">
+            {study.questions.map((q) => (
+                <FieldRow
+                key={q.id}
+                field={q}
+                value={values[q.id] ?? ""}
+                onChange={(v) => handleChange(q, v)}
+                status={status[q.id] ?? "idle"}
+                />
+            ))}
+          </div>
         </div>
 
-        {allCorrect && (
-          <div className="rounded-xl border border-emerald-200 bg-emerald-50/80 px-4 py-4 text-sm leading-relaxed text-emerald-950">
-            <p className="font-semibold text-emerald-800">Bravo — scénario validé</p>
-            <p className="mt-2 text-emerald-900/90">{study.explanation}</p>
-          </div>
-        )}
+        <AnimatePresence>
+            {allCorrect && (
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="relative overflow-hidden rounded-[2rem] border-2 border-emerald-500/30 bg-emerald-500/5 p-8 shadow-2xl"
+            >
+                <div className="relative z-10 flex flex-col sm:flex-row items-center gap-8">
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 border border-emerald-500/30 shadow-xl">
+                        <Sparkles className="h-8 w-8 text-emerald-400 animate-pulse" />
+                    </div>
+                    <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-400 mb-2">EXCELLENCE ATTEINTE</p>
+                        <h4 className="text-xl font-black text-white uppercase tracking-tight mb-3">Scénario validé avec succès</h4>
+                        <p className="text-base leading-relaxed text-emerald-100 font-medium italic">
+                            &laquo; {study.explanation} &raquo;
+                        </p>
+                    </div>
+                </div>
+            </motion.div>
+            )}
+        </AnimatePresence>
       </div>
     </div>
   );

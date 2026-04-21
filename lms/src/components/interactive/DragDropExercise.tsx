@@ -2,6 +2,9 @@
 
 import { useCallback, useMemo, useState } from "react";
 import type { DragDropExercise } from "@/data/drag-drop-exercises";
+import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle2, RotateCcw, MousePointer2, ListOrdered, Sparkles, XCircle } from "lucide-react";
+import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 /** Mélange identique côté serveur et client (évite les erreurs d'hydratation). */
 function mulberry32(seed: number) {
@@ -42,20 +45,15 @@ export function DragDropExerciseBlock({ exercises }: Props) {
   if (exercises.length === 0) return null;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-xl ring-1 ring-black/5">
+    <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#070d18] shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-brand-gold/20">
       {/* En-tete */}
-      <div className="relative border-b border-brand-navy/10 bg-brand-navy px-5 py-5 sm:px-8">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
+      <div className="relative border-b border-white/10 bg-[#030712] px-8 py-8 sm:px-12 md:py-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.03] to-transparent pointer-events-none" />
         <div className="relative">
-          <p className="text-3xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
-            Exercice interactif
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold">
+            ATELIER PRATIQUE INTERACTIF
           </p>
-          <h2 className="mt-1.5 text-xl font-bold leading-snug tracking-tight text-white sm:text-2xl">
+          <h2 className="mt-2 text-3xl font-black text-white uppercase tracking-tight leading-none">
             {exercises[activeTab].title}
           </h2>
         </div>
@@ -63,28 +61,25 @@ export function DragDropExerciseBlock({ exercises }: Props) {
 
       {/* Onglets si plusieurs exercices */}
       {exercises.length > 1 && (
-        <div className="flex gap-1 border-b border-brand-navy/10 bg-slate-50 px-5 sm:px-8">
+        <div className="flex gap-2 overflow-x-auto border-b border-white/5 bg-black/20 px-6 py-4 scrollbar-hide">
           {exercises.map((ex, i) => (
             <button
               key={ex.id}
               onClick={() => setActiveTab(i)}
-              className={`relative px-4 py-3 text-sm font-medium transition-colors ${
+              className={`flex shrink-0 items-center gap-2.5 rounded-xl px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
                 i === activeTab
-                  ? "text-brand-navy"
-                  : "text-zinc-400 hover:text-zinc-600"
+                  ? "bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20"
+                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
-              Exercice {i + 1}
-              {i === activeTab && (
-                <span className="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-brand-gold" />
-              )}
+              EXERCICE {i + 1}
             </button>
           ))}
         </div>
       )}
 
       {/* Contenu */}
-      <div className="px-5 py-7 sm:px-8 sm:py-9">
+      <div className="p-8 sm:p-10 lg:p-12">
         {exercises[activeTab].type === "order" ? (
           <OrderExercise key={exercises[activeTab].id} exercise={exercises[activeTab]} />
         ) : (
@@ -164,50 +159,62 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
   }, [validated, placedItems, correctOrder]);
 
   return (
-    <div>
-      <p className="mb-6 text-sm leading-relaxed text-zinc-600">
-        {exercise.instruction}
-      </p>
+    <div className="space-y-10">
+      <div className="flex items-start gap-4">
+          <ListOrdered className="w-6 h-6 text-brand-gold shrink-0 mt-1" />
+          <p className="text-lg leading-relaxed text-white/70 italic font-medium">
+            {exercise.instruction}
+          </p>
+      </div>
 
       {/* Slots numerotes */}
-      <div className="mb-6 space-y-3">
+      <div className="space-y-3">
         {placedItems.map((itemIdx, slotIdx) => {
-          let borderColor = "border-brand-navy/15";
-          let bgColor = "bg-slate-50";
+          let borderColor = "border-white/10";
+          let bgColor = "bg-white/[0.02]";
           if (validated && itemIdx !== null) {
             const isCorrect = itemIdx === correctOrder[slotIdx];
-            borderColor = isCorrect ? "border-emerald-400" : "border-red-400";
-            bgColor = isCorrect ? "bg-emerald-50" : "bg-red-50";
+            borderColor = isCorrect ? "border-emerald-500/50" : "border-red-500/50";
+            bgColor = isCorrect ? "bg-emerald-500/5" : "bg-red-500/5";
           }
 
           return (
-            <div key={slotIdx} className="flex items-center gap-3">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-navy text-xs font-bold text-white">
+            <div key={slotIdx} className="flex items-center gap-5">
+              <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-xs font-black transition-colors ${
+                  itemIdx !== null ? "bg-brand-gold text-brand-navy" : "bg-white/5 text-white/20 border border-white/5"
+              }`}>
                 {slotIdx + 1}
               </span>
               <button
                 onClick={() => handleRemoveFromSlot(slotIdx)}
                 disabled={validated || itemIdx === null}
-                className={`min-h-[48px] w-full rounded-xl border-2 ${borderColor} ${bgColor} px-4 py-3 text-left text-sm font-medium transition-all ${
+                className={`min-h-[64px] w-full rounded-2xl border-2 px-6 py-4 text-left text-base font-bold transition-all duration-300 ${borderColor} ${bgColor} ${
                   itemIdx !== null && !validated
-                    ? "cursor-pointer text-brand-navy hover:border-red-300 hover:bg-red-50/50"
+                    ? "cursor-pointer text-white hover:border-red-500/50 hover:bg-red-500/10"
                     : itemIdx !== null
-                      ? "cursor-default text-brand-navy"
-                      : "cursor-default text-zinc-300"
+                      ? "cursor-default text-white"
+                      : "cursor-default text-white/20 italic"
                 }`}
               >
                 {itemIdx !== null ? (
-                  <span className="flex items-center gap-2">
-                    {exercise.items[itemIdx]}
-                    {validated &&
-                      (itemIdx === correctOrder[slotIdx] ? (
-                        <span className="ml-auto text-lg">&#10003;</span>
-                      ) : (
-                        <span className="ml-auto text-lg">&#10007;</span>
-                      ))}
-                  </span>
+                  <div className="flex items-center justify-between gap-4">
+                    <span>{exercise.items[itemIdx]}</span>
+                    {validated && (
+                        <AnimatePresence>
+                            {itemIdx === correctOrder[slotIdx] ? (
+                                <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-emerald-400">
+                                    <CheckCircle2 size={20} />
+                                </motion.span>
+                            ) : (
+                                <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-red-400">
+                                    <XCircle size={20} />
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                    )}
+                  </div>
                 ) : (
-                  "Cliquez sur un element ci-dessous..."
+                  "Emplacement vide"
                 )}
               </button>
             </div>
@@ -216,17 +223,17 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
       </div>
 
       {/* Elements disponibles */}
-      {!validated && availableItems.length > 0 && (
-        <div className="mb-6">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">
-            Elements a placer
+      {!validated && (
+        <div className="rounded-[2rem] border border-white/5 bg-white/[0.01] p-8 shadow-inner">
+          <p className="mb-6 text-[10px] font-black uppercase tracking-widest text-white/30 text-center">
+            ÉLÉMENTS À CLASSER
           </p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap justify-center gap-3">
             {availableItems.map((itemIdx) => (
               <button
                 key={itemIdx}
                 onClick={() => handlePickItem(itemIdx)}
-                className="rounded-xl border-2 border-brand-gold/30 bg-white px-4 py-3 text-sm font-medium text-brand-navy shadow-sm transition-all hover:border-brand-gold hover:bg-brand-gold/5 hover:shadow-md active:scale-[0.97]"
+                className="rounded-2xl border-2 border-white/10 bg-white/5 px-6 py-4 text-sm font-bold text-white transition-all hover:border-brand-gold hover:bg-brand-gold/10 hover:-translate-y-1 active:scale-[0.97] shadow-xl"
               >
                 {exercise.items[itemIdx]}
               </button>
@@ -236,50 +243,61 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
       )}
 
       {/* Score + boutons */}
-      {validated && (
-        <div className="mb-6 rounded-xl border border-brand-navy/10 bg-gradient-to-r from-brand-navy/5 to-transparent p-4">
-          <div className="flex items-center gap-3">
-            <span className="text-3xl font-bold text-brand-navy">
-              {score}/{totalSlots}
-            </span>
-            <div>
-              <p className="text-sm font-semibold text-brand-navy">
-                {score === totalSlots
-                  ? "Parfait !"
-                  : score >= totalSlots / 2
-                    ? "Bien joue !"
-                    : "Continuez vos efforts !"}
-              </p>
-              <p className="text-xs text-zinc-500">
-                {score === totalSlots
-                  ? "Vous maîtrisez parfaitement cet enchaînement."
-                  : "Relisez la lecon et reessayez pour ameliorer votre score."}
-              </p>
-            </div>
-            {score === totalSlots && (
-              <span className="ml-auto rounded-full bg-brand-gold/15 px-3 py-1.5 text-xs font-bold text-brand-gold">
-                +25 XP
-              </span>
-            )}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {validated && (
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="relative overflow-hidden rounded-[2rem] border-2 border-white/10 bg-white/5 p-8 shadow-2xl"
+            >
+                <div className="relative z-10 flex flex-col sm:flex-row items-center gap-8">
+                    <div className="flex flex-col items-center">
+                        <span className="text-5xl font-black text-brand-gold tabular-nums">
+                            {score}<span className="text-2xl text-white/20">/{totalSlots}</span>
+                        </span>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mt-2">SCORE FINAL</p>
+                    </div>
+                    <div className="flex-1 text-center sm:text-left">
+                        <p className="text-xl font-black text-white uppercase tracking-tight mb-2">
+                            {score === totalSlots
+                            ? "Maîtrise Parfaite"
+                            : score >= totalSlots / 2
+                                ? "Résultat Encourageant"
+                                : "Nécessite une Révision"}
+                        </p>
+                        <p className="text-base text-white/50 font-medium italic">
+                            {score === totalSlots
+                            ? "Vous avez ordonné les étapes avec une précision chirurgicale."
+                            : "Certaines nuances du processus sont encore à valider."}
+                        </p>
+                    </div>
+                    {score === totalSlots && (
+                        <div className="flex flex-col items-center gap-2 px-6 py-4 rounded-2xl bg-brand-gold/10 border border-brand-gold/20 shadow-xl">
+                            <Sparkles className="text-brand-gold w-6 h-6 animate-pulse" />
+                            <span className="text-xs font-black text-brand-gold">+25 XP</span>
+                        </div>
+                    )}
+                </div>
+            </motion.div>
+        )}
+      </AnimatePresence>
 
-      <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row justify-center gap-4">
         {!validated && (
           <button
             onClick={handleValidate}
             disabled={!allPlaced}
-            className="rounded-xl bg-brand-navy px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-brand-navy/90 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-2xl bg-brand-gold px-12 py-5 text-sm font-black uppercase tracking-widest text-brand-navy shadow-2xl shadow-brand-gold/20 transition hover:bg-white hover:scale-105 active:scale-95 disabled:opacity-30 disabled:grayscale"
           >
-            Verifier
+            Vérifier l&apos;ordre
           </button>
         )}
         {validated && (
           <button
             onClick={handleRetry}
-            className="rounded-xl border-2 border-brand-navy/20 bg-white px-6 py-3 text-sm font-semibold text-brand-navy transition-all hover:border-brand-navy/40 hover:bg-slate-50"
+            className="group flex items-center justify-center gap-3 rounded-2xl border-2 border-white/10 bg-white/5 px-10 py-5 text-xs font-black uppercase tracking-widest text-white transition hover:bg-white hover:text-brand-navy shadow-xl active:scale-95"
           >
+            <RotateCcw className="w-4 h-4 transition-transform group-hover:rotate-180 duration-500" />
             Recommencer
           </button>
         )}
@@ -293,19 +311,17 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
    ───────────────────────────────────────────── */
 
 const PAIR_COLORS = [
-  { bg: "bg-blue-50", border: "border-blue-400", text: "text-blue-700" },
-  { bg: "bg-amber-50", border: "border-amber-400", text: "text-amber-700" },
-  { bg: "bg-emerald-50", border: "border-emerald-400", text: "text-emerald-700" },
-  { bg: "bg-purple-50", border: "border-purple-400", text: "text-purple-700" },
-  { bg: "bg-rose-50", border: "border-rose-400", text: "text-rose-700" },
-  { bg: "bg-cyan-50", border: "border-cyan-400", text: "text-cyan-700" },
-  { bg: "bg-orange-50", border: "border-orange-400", text: "text-orange-700" },
-  { bg: "bg-teal-50", border: "border-teal-400", text: "text-teal-700" },
+  { bg: "bg-blue-500/10", border: "border-blue-500/30", text: "text-blue-300" },
+  { bg: "bg-amber-500/10", border: "border-amber-500/30", text: "text-brand-gold" },
+  { bg: "bg-emerald-500/10", border: "border-emerald-500/30", text: "text-emerald-300" },
+  { bg: "bg-purple-500/10", border: "border-purple-500/30", text: "text-purple-300" },
+  { bg: "bg-rose-500/10", border: "border-rose-500/30", text: "text-rose-300" },
+  { bg: "bg-cyan-500/10", border: "border-cyan-500/30", text: "text-cyan-300" },
+  { bg: "bg-orange-500/10", border: "border-orange-500/30", text: "text-orange-300" },
+  { bg: "bg-teal-500/10", border: "border-teal-500/30", text: "text-teal-300" },
 ];
 
 function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
-  // Mémoïsation stable de matchPairs pour préserver la référence entre rendus
-  // (sinon React Compiler ne peut pas conserver les memos en aval).
   const matchPairs = useMemo(
     () => exercise.matchPairs ?? [],
     [exercise.matchPairs],
@@ -420,32 +436,36 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
   );
 
   return (
-    <div>
-      <p className="mb-6 text-sm leading-relaxed text-zinc-600">
-        {exercise.instruction}
-      </p>
-
-      <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-zinc-400">
-        {selectedLeft !== null
-          ? "Maintenant, cliquez sur la definition correspondante a droite"
-          : "Cliquez sur un element a gauche, puis sur sa definition a droite"}
-      </p>
-
-      <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {/* Colonne gauche */}
-        <div className="space-y-2">
-          <p className="mb-2 text-xs font-bold uppercase tracking-widest text-brand-navy/60">
-            Elements
+    <div className="space-y-10">
+      <div className="flex items-start gap-4">
+          <MousePointer2 className="w-6 h-6 text-brand-gold shrink-0 mt-1" />
+          <p className="text-lg leading-relaxed text-white/70 italic font-medium">
+            {exercise.instruction}
           </p>
+      </div>
+
+      <p className="text-center text-[10px] font-black uppercase tracking-[0.3em] text-white/20">
+        {selectedLeft !== null
+          ? "ÉTAPE 2 : Sélectionnez la définition correspondante à droite"
+          : "ÉTAPE 1 : Choisissez un élément dans la colonne de gauche"}
+      </p>
+
+      <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 relative">
+        {/* Decorative divider */}
+        <div className="hidden sm:block absolute left-1/2 top-0 bottom-0 w-px bg-white/5 -translate-x-1/2" />
+
+        {/* Colonne gauche */}
+        <div className="space-y-4">
+          <h3 className="text-[10px] font-black uppercase tracking-widest text-brand-gold/60 mb-4 px-2">ÉLÉMENTS CLÉS</h3>
           {leftItems.map((label, leftIdx) => {
             const color = getColorForLeft(leftIdx);
             const isSelected = selectedLeft === leftIdx;
             const isMatched = matchedLeftIndices.has(leftIdx);
-            let validationClass = "";
+            let validationClass = "border-white/5 bg-white/[0.02]";
             if (validated && results.has(leftIdx)) {
               validationClass = results.get(leftIdx)
-                ? "border-emerald-400 bg-emerald-50"
-                : "border-red-400 bg-red-50";
+                ? "border-emerald-500/50 bg-emerald-500/5 text-emerald-400"
+                : "border-red-500/50 bg-red-500/5 text-red-400";
             }
 
             return (
@@ -453,36 +473,34 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
                 key={leftIdx}
                 onClick={() => handleLeftClick(leftIdx)}
                 disabled={validated}
-                className={`w-full rounded-xl border-2 px-4 py-3 text-left text-sm font-medium transition-all ${
+                className={`w-full rounded-2xl border-2 px-6 py-5 text-left text-base font-black transition-all duration-300 ${
                   validated
                     ? `cursor-default ${validationClass}`
                     : isSelected
-                      ? "border-brand-gold bg-brand-gold/10 text-brand-navy shadow-md"
+                      ? "border-brand-gold bg-brand-gold/10 text-white shadow-[0_0_30px_rgba(212,175,55,0.1)]"
                       : isMatched && color
-                        ? `${color.border} ${color.bg} ${color.text}`
-                        : "border-brand-navy/15 bg-white text-brand-navy hover:border-brand-gold/50 hover:bg-brand-gold/5"
+                        ? `${color.border} ${color.bg} ${color.text} opacity-60`
+                        : "border-white/10 bg-[#030712] text-white/70 hover:border-brand-gold/50 hover:bg-white/5"
                 }`}
               >
-                <span className="flex items-center gap-2">
-                  {label}
-                  {validated &&
-                    results.has(leftIdx) &&
-                    (results.get(leftIdx) ? (
-                      <span className="ml-auto text-emerald-600">&#10003;</span>
-                    ) : (
-                      <span className="ml-auto text-red-500">&#10007;</span>
-                    ))}
-                </span>
+                <div className="flex items-center justify-between gap-4">
+                  <span>{label}</span>
+                  <AnimatePresence>
+                    {validated && results.has(leftIdx) && (
+                        <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }}>
+                            {results.get(leftIdx) ? <CheckCircle2 size={20} /> : <XCircle size={20} />}
+                        </motion.span>
+                    )}
+                  </AnimatePresence>
+                </div>
               </button>
             );
           })}
         </div>
 
         {/* Colonne droite */}
-        <div className="space-y-2">
-          <p className="mb-2 text-xs font-bold uppercase tracking-widest text-brand-navy/60">
-            Definitions
-          </p>
+        <div className="space-y-4">
+          <h3 className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-4 px-2">DÉFINITIONS & ANALYSES</h3>
           {shuffledRight.map((def, rightIdx) => {
             const color = getColorForRight(rightIdx);
             const isMatched = matchedRightIndices.has(rightIdx);
@@ -492,14 +510,14 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
                 key={rightIdx}
                 onClick={() => handleRightClick(rightIdx)}
                 disabled={validated}
-                className={`w-full rounded-xl border-2 px-4 py-3 text-left text-sm transition-all ${
+                className={`w-full rounded-2xl border-2 px-6 py-5 text-left text-sm font-medium leading-relaxed transition-all duration-300 ${
                   validated
-                    ? "cursor-default border-brand-navy/10 bg-slate-50 text-zinc-600"
+                    ? "cursor-default border-white/5 bg-black/20 text-white/30"
                     : isMatched && color
-                      ? `${color.border} ${color.bg} ${color.text}`
+                      ? `${color.border} ${color.bg} ${color.text} opacity-60`
                       : selectedLeft !== null
-                        ? "border-brand-navy/15 bg-white text-zinc-600 hover:border-brand-gold/50 hover:bg-brand-gold/5"
-                        : "border-brand-navy/10 bg-slate-50 text-zinc-500"
+                        ? "border-white/20 bg-white/5 text-white hover:border-brand-gold/50 hover:bg-white/10"
+                        : "border-white/5 bg-black/20 text-white/40"
                 }`}
               >
                 {def}
@@ -510,51 +528,62 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
       </div>
 
       {/* Score + boutons */}
-      {validated && (
-        <div className="mb-6 rounded-xl border border-brand-navy/10 bg-gradient-to-r from-brand-navy/5 to-transparent p-4">
-          <div className="flex items-center gap-3">
-            <span className="text-3xl font-bold text-brand-navy">
-              {score}/{leftItems.length}
-            </span>
-            <div>
-              <p className="text-sm font-semibold text-brand-navy">
-                {score === leftItems.length
-                  ? "Parfait !"
-                  : score >= leftItems.length / 2
-                    ? "Bien joue !"
-                    : "Continuez vos efforts !"}
-              </p>
-              <p className="text-xs text-zinc-500">
-                {score === leftItems.length
-                  ? "Toutes les correspondances sont correctes."
-                  : "Relisez la lecon et reessayez."}
-              </p>
-            </div>
-            {score === leftItems.length && (
-              <span className="ml-auto rounded-full bg-brand-gold/15 px-3 py-1.5 text-xs font-bold text-brand-gold">
-                +25 XP
-              </span>
-            )}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {validated && (
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="relative overflow-hidden rounded-[2rem] border-2 border-white/10 bg-white/5 p-8 shadow-2xl"
+            >
+                <div className="relative z-10 flex flex-col sm:flex-row items-center gap-8">
+                    <div className="flex flex-col items-center">
+                        <span className="text-5xl font-black text-brand-gold tabular-nums">
+                            {score}<span className="text-2xl text-white/20">/{leftItems.length}</span>
+                        </span>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mt-2">PRÉCISION</p>
+                    </div>
+                    <div className="flex-1 text-center sm:text-left">
+                        <p className="text-xl font-black text-white uppercase tracking-tight mb-2">
+                            {score === leftItems.length
+                            ? "Parcours sans faute"
+                            : score >= leftItems.length / 2
+                                ? "Bons acquis de base"
+                                : "Révision Recommandée"}
+                        </p>
+                        <p className="text-base text-white/50 font-medium italic">
+                            {score === leftItems.length
+                            ? "Toutes les corrélations terminologiques sont maîtrisées."
+                            : "Quelques confusions subsistent entre les différents concepts."}
+                        </p>
+                    </div>
+                    {score === leftItems.length && (
+                        <div className="flex flex-col items-center gap-2 px-6 py-4 rounded-2xl bg-brand-gold/10 border border-brand-gold/20 shadow-xl">
+                            <Sparkles className="text-brand-gold w-6 h-6 animate-pulse" />
+                            <span className="text-xs font-black text-brand-gold">+25 XP</span>
+                        </div>
+                    )}
+                </div>
+            </motion.div>
+        )}
+      </AnimatePresence>
 
-      <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row justify-center gap-4">
         {!validated && (
           <button
             onClick={handleValidate}
             disabled={!allMatched}
-            className="rounded-xl bg-brand-navy px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-brand-navy/90 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-2xl bg-brand-gold px-12 py-5 text-sm font-black uppercase tracking-widest text-brand-navy shadow-2xl shadow-brand-gold/20 transition hover:bg-white hover:scale-105 active:scale-95 disabled:opacity-30 disabled:grayscale"
           >
-            Verifier
+            Valider mes choix
           </button>
         )}
         {validated && (
           <button
             onClick={handleRetry}
-            className="rounded-xl border-2 border-brand-navy/20 bg-white px-6 py-3 text-sm font-semibold text-brand-navy transition-all hover:border-brand-navy/40 hover:bg-slate-50"
+            className="group flex items-center justify-center gap-3 rounded-2xl border-2 border-white/10 bg-white/5 px-10 py-5 text-xs font-black uppercase tracking-widest text-white transition hover:bg-white hover:text-brand-navy shadow-xl active:scale-95"
           >
-            Recommencer
+            <RotateCcw className="w-4 h-4 transition-transform group-hover:rotate-180 duration-500" />
+            Réinitialiser
           </button>
         )}
       </div>

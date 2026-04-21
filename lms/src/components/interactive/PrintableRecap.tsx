@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
+import { Printer, X, FileText, Sparkles, BookOpen, Target, Quote, PenLine } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Section = { icon: string; title: string; duration: string };
 type KeyTerm = { term: string; definition: string };
@@ -27,7 +29,7 @@ export function PrintableRecap({
   sections,
   expertQuote,
   avatarName,
-  accentColor = "#1a3a5c",
+  accentColor = "#d4af37",
 }: Props) {
   const [open, setOpen] = useState(false);
 
@@ -43,6 +45,8 @@ export function PrintableRecap({
         #print-content { display: block !important; position: static !important; }
         #print-controls { display: none !important; }
         @page { margin: 15mm; size: A4; }
+        .print-only-white { background: white !important; color: black !important; border-color: #ddd !important; }
+        .print-hide { display: none !important; }
       }
     `;
     document.head.appendChild(style);
@@ -53,171 +57,162 @@ export function PrintableRecap({
       {/* Trigger button */}
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-2 rounded-xl border border-brand-gold/40 bg-brand-gold/5 px-4 py-2.5 text-sm font-semibold text-brand-gold-dark transition hover:bg-brand-gold/15 hover:shadow-sm"
+        className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-[10px] font-black uppercase tracking-widest text-white/70 transition hover:bg-brand-gold hover:text-brand-navy hover:border-brand-gold shadow-xl"
       >
-        <EmojiIcon emoji="🖨️" className="h-4 w-4 inline-block" /> Fiche récap imprimable
+        <Printer size={16} className="transition-transform group-hover:scale-110" /> 
+        FICHE RÉCAPITULATIVE
       </button>
 
       {/* Modal backdrop */}
-      {open && (
-        <div
-          id="print-backdrop"
-          className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/60 px-4 py-8 backdrop-blur-sm"
-        >
-          {/* Modal */}
-          <div className="w-full max-w-2xl rounded-2xl bg-white shadow-2xl">
-            {/* Modal controls */}
-            <div
-              id="print-controls"
-              className="flex items-center justify-between border-b border-zinc-100 px-6 py-4"
+      <AnimatePresence>
+        {open && (
+            <motion.div
+            id="print-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-[#020617]/95 px-4 py-8 backdrop-blur-xl sm:py-16"
             >
-              <p className="text-sm font-bold text-brand-navy">Fiche récap — {lessonTitle}</p>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => window.print()}
-                  className="flex items-center gap-2 rounded-xl bg-brand-navy px-4 py-2 text-sm font-bold text-white shadow-md transition hover:bg-brand-navy-deep"
+            {/* Modal */}
+            <motion.div 
+                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                className="w-full max-w-3xl rounded-[2.5rem] border border-white/10 bg-[#070d18] shadow-[0_30px_100px_rgba(0,0,0,0.8)] overflow-hidden"
+            >
+                {/* Modal controls */}
+                <div
+                id="print-controls"
+                className="flex items-center justify-between border-b border-white/5 bg-[#030712] px-8 py-6"
                 >
-                  <EmojiIcon emoji="🖨️" className="h-4 w-4 inline-block" /> Imprimer
-                </button>
-                <button
-                  onClick={() => setOpen(false)}
-                  className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-200 text-zinc-500 transition hover:bg-zinc-100"
-                >
-                  <EmojiIcon emoji="✕" className="h-4 w-4 inline-block" />
-                </button>
-              </div>
-            </div>
-
-            {/* Printable content */}
-            <div id="print-content" className="p-6 space-y-5">
-              {/* Header band */}
-              <div
-                className="rounded-xl px-5 py-4 text-white"
-                style={{ backgroundColor: accentColor }}
-              >
-                <p className="text-2xs font-bold uppercase tracking-widest opacity-70">
-                  Formation Agent Immobilier — 42h
-                </p>
-                <p className="text-xs font-semibold opacity-80 mt-0.5">{moduleTitle}</p>
-                <h1 className="mt-1 text-xl font-black leading-tight">{lessonTitle}</h1>
-                {avatarName && (
-                  <p className="mt-1 text-xs opacity-70">Formateur : {avatarName}</p>
-                )}
-              </div>
-
-              {/* Introduction */}
-              {introduction && (
-                <div className="rounded-xl border border-zinc-100 bg-zinc-50 px-4 py-3 text-sm leading-relaxed text-zinc-700">
-                  {introduction}
-                </div>
-              )}
-
-              {/* Objectives */}
-              {objectives && objectives.length > 0 && (
-                <div>
-                  <p
-                    className="mb-2 text-2xs font-bold uppercase tracking-widest"
-                    style={{ color: accentColor }}
-                  >
-                    Objectifs de la leçon
-                  </p>
-                  <ul className="space-y-1.5">
-                    {objectives.map((obj, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-zinc-700">
-                        <span
-                          className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-2xs font-bold text-white"
-                          style={{ backgroundColor: accentColor }}
+                    <div className="flex items-center gap-3">
+                        <FileText className="text-brand-gold w-5 h-5" />
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">Prévisualisation impression</p>
+                    </div>
+                    <div className="flex gap-3">
+                        <button
+                            onClick={() => window.print()}
+                            className="flex items-center gap-2 rounded-xl bg-brand-gold px-6 py-3 text-[10px] font-black uppercase tracking-widest text-brand-navy shadow-lg shadow-brand-gold/20 transition hover:bg-white hover:scale-105 active:scale-95"
                         >
-                          {i + 1}
-                        </span>
-                        {obj}
-                      </li>
-                    ))}
-                  </ul>
+                            <Printer size={14} /> IMPRIMER (PDF)
+                        </button>
+                        <button
+                            onClick={() => setOpen(false)}
+                            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/40 transition hover:bg-white/10 hover:text-white"
+                        >
+                            <X size={18} />
+                        </button>
+                    </div>
                 </div>
-              )}
 
-              {/* Key terms */}
-              {keyTerms && keyTerms.length > 0 && (
-                <div>
-                  <p
-                    className="mb-2 text-2xs font-bold uppercase tracking-widest"
-                    style={{ color: accentColor }}
-                  >
-                    Vocabulaire clé
-                  </p>
-                  <div className="grid gap-2 sm:grid-cols-2">
-                    {keyTerms.map((kt) => (
-                      <div key={kt.term} className="rounded-xl border border-zinc-100 bg-zinc-50 p-3">
-                        <p className="text-xs font-bold text-zinc-800">{kt.term}</p>
-                        <p className="mt-0.5 text-xs leading-relaxed text-zinc-600">{kt.definition}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Sections */}
-              {sections && sections.length > 0 && (
-                <div>
-                  <p
-                    className="mb-2 text-2xs font-bold uppercase tracking-widest"
-                    style={{ color: accentColor }}
-                  >
-                    Programme
-                  </p>
-                  <ol className="space-y-1">
-                    {sections.map((s, i) => (
-                      <li
-                        key={i}
-                        className="flex items-center gap-3 rounded-xl border border-zinc-100 px-3 py-2"
-                      >
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-3xs font-bold text-white" style={{ backgroundColor: accentColor }}>
-                          {i + 1}
-                        </span>
-                        <EmojiIcon emoji={s.icon} className="h-4 w-4" />
-                        <span className="flex-1 text-sm text-zinc-800">{s.title}</span>
-                        <span className="text-2xs font-semibold text-zinc-400">{s.duration}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              )}
-
-              {/* Expert quote */}
-              {expertQuote && (
-                <blockquote
-                  className="rounded-xl border-l-4 py-3 pl-4 pr-3"
-                  style={{ borderColor: accentColor, backgroundColor: `${accentColor}08` }}
+                {/* Printable content */}
+                <div id="print-content" className="p-8 md:p-12 space-y-10">
+                {/* Header band */}
+                <div
+                    className="relative overflow-hidden rounded-[2rem] px-8 py-10 text-white shadow-2xl"
+                    style={{ background: `linear-gradient(135deg, ${accentColor}, color-mix(in srgb, ${accentColor}, black 40%))` }}
                 >
-                  <p className="text-sm italic leading-relaxed text-zinc-700">
-                    &ldquo;{expertQuote.text}&rdquo;
-                  </p>
-                  <footer className="mt-2 text-3xs font-semibold text-zinc-500">
-                    — {expertQuote.author}, {expertQuote.role}
-                  </footer>
-                </blockquote>
-              )}
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.2),transparent_70%)]" />
+                    <p className="relative z-10 text-[10px] font-black uppercase tracking-[0.3em] opacity-70">
+                    FORMATION AGENT IMMOBILIER — 42H
+                    </p>
+                    <h1 className="relative z-10 mt-6 text-3xl md:text-5xl font-black uppercase leading-[1.1] tracking-tight">{lessonTitle}</h1>
+                    <div className="relative z-10 mt-8 flex flex-wrap items-center gap-6 border-t border-white/20 pt-6">
+                        <div>
+                            <p className="text-[9px] font-black uppercase tracking-widest opacity-60">MODULE</p>
+                            <p className="text-sm font-bold uppercase mt-1">{moduleTitle}</p>
+                        </div>
+                        {avatarName && (
+                            <div>
+                                <p className="text-[9px] font-black uppercase tracking-widest opacity-60">FORMATEUR</p>
+                                <p className="text-sm font-bold mt-1 uppercase">{avatarName}</p>
+                            </div>
+                        )}
+                        <div className="ml-auto">
+                            <Sparkles className="w-8 h-8 opacity-30" />
+                        </div>
+                    </div>
+                </div>
 
-              {/* Notes box */}
-              <div>
-                <p
-                  className="mb-2 text-2xs font-bold uppercase tracking-widest"
-                  style={{ color: accentColor }}
-                >
-                  Mes notes
-                </p>
-                <div className="h-28 rounded-xl border border-dashed border-zinc-200 bg-zinc-50/50" />
-              </div>
+                {/* Introduction */}
+                {introduction && (
+                    <div className="relative rounded-2xl border border-white/5 bg-white/[0.02] p-8 text-lg leading-relaxed text-white/70 italic font-medium shadow-inner">
+                        <Quote className="absolute -left-2 -top-2 w-10 h-10 text-white/5" />
+                        &laquo; {introduction} &raquo;
+                    </div>
+                )}
 
-              {/* Footer */}
-              <div className="border-t border-zinc-100 pt-3 text-center text-2xs text-zinc-400">
-                Formation Agent Immobilier — 42h · Tous droits réservés
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+                {/* Objectives */}
+                {objectives && objectives.length > 0 && (
+                    <div>
+                    <p className="mb-6 text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold flex items-center gap-3">
+                        <Target size={14} /> OBJECTIFS DE MAÎTRISE
+                    </p>
+                    <ul className="grid gap-3 sm:grid-cols-2">
+                        {objectives.map((obj, i) => (
+                        <li key={i} className="flex items-start gap-4 p-4 rounded-xl bg-white/[0.01] border border-white/5">
+                            <span
+                            className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-[10px] font-black text-brand-navy shadow-xl"
+                            style={{ backgroundColor: accentColor }}
+                            >
+                            {i + 1}
+                            </span>
+                            <span className="text-sm font-bold text-white/60 leading-relaxed">{obj}</span>
+                        </li>
+                        ))}
+                    </ul>
+                    </div>
+                )}
+
+                {/* Key terms */}
+                {keyTerms && keyTerms.length > 0 && (
+                    <div>
+                    <p className="mb-6 text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold flex items-center gap-3">
+                        <BookOpen size={14} /> LEXIQUE STRATÉGIQUE
+                    </p>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                        {keyTerms.map((kt) => (
+                        <div key={kt.term} className="rounded-2xl border border-white/5 bg-[#030712] p-6 shadow-xl transition-all hover:bg-white/[0.02]">
+                            <p className="text-base font-black text-white uppercase tracking-tight mb-2">{kt.term}</p>
+                            <p className="text-sm leading-relaxed text-white/40 font-medium italic">&laquo; {kt.definition} &raquo;</p>
+                        </div>
+                        ))}
+                    </div>
+                    </div>
+                )}
+
+                {/* Expert quote */}
+                {expertQuote && (
+                    <blockquote
+                    className="relative rounded-2xl border-l-4 p-8 bg-[#030712] shadow-2xl"
+                    style={{ borderColor: accentColor }}
+                    >
+                    <p className="text-lg italic leading-relaxed text-white/80 font-medium">
+                        &ldquo;{expertQuote.text}&rdquo;
+                    </p>
+                    <footer className="mt-4 text-[10px] font-black uppercase tracking-widest text-brand-gold">
+                        — {expertQuote.author} <span className="text-white/20 ml-2 font-bold not-italic">{expertQuote.role}</span>
+                    </footer>
+                    </blockquote>
+                )}
+
+                {/* Notes box */}
+                <div className="print-hide">
+                    <p className="mb-6 text-[10px] font-black uppercase tracking-[0.3em] text-white/20 flex items-center gap-3">
+                        <PenLine size={14} /> NOTES PERSONNELLES
+                    </p>
+                    <div className="h-40 rounded-[2rem] border-2 border-dashed border-white/5 bg-white/[0.01]" />
+                </div>
+
+                {/* Footer */}
+                <div className="border-t border-white/5 pt-8 text-center text-[9px] font-black uppercase tracking-[0.4em] text-white/10">
+                    DOCUMENT RÉSERVÉ À L&apos;USAGE EXCLUSIF DES STAGIAIRES · © 2026
+                </div>
+                </div>
+            </motion.div>
+            </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
