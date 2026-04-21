@@ -1,10 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { CheckCircle2, Scale, TrendingUp, Check, Info, AlertTriangle, Lightbulb } from "lucide-react";
-import { EmojiIcon } from "@/components/ui/EmojiIcon";
+import { CheckCircle2, Scale, TrendingUp, Check, Info, AlertTriangle } from "lucide-react";
 import type { SupportVisuelMeta } from "@/data/supports-visuels";
 
 function LessonLink({ href, label }: { href: string; label: string }) {

@@ -266,7 +266,7 @@ export function CertificateGenerator() {
     const sigBaseY = 760;
     
     // Director Signature (Simulated)
-    ctx.font = "italic 28px sript, 'Brush Script MT', cursive";
+    ctx.font = "italic 28px script, 'Brush Script MT', cursive";
     ctx.fillStyle = "#1a3a5c";
     ctx.fillText("Sarah Benali", 340, sigBaseY - 20);
     
@@ -305,25 +305,7 @@ export function CertificateGenerator() {
     link.click();
   }
 
-  if (loading) {
-    return (
-      <div className="rounded-2xl border-2 border-brand-navy/15 bg-white shadow-lg">
-        <div className="border-b border-zinc-100 bg-gradient-to-br from-brand-navy via-[var(--brand-navy-light)] to-brand-navy-soft px-6 py-5 text-white rounded-t-2xl">
-          <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15"><Building2 className="h-5 w-5 text-white" /></span>
-            <div>
-              <h3 className="text-lg font-bold">Certificat de formation</h3>
-              <p className="text-xs text-white/80">Chargement…</p>
-            </div>
-          </div>
-        </div>
-        <div className="p-6">
-          <div className="h-32 animate-pulse rounded-xl bg-zinc-100" />
-        </div>
-      </div>
-    );
-  }
-
+  // Unified return to avoid Turbopack parsing issues with early returns in some contexts
   return (
     <div className="rounded-2xl border-2 border-brand-navy/15 bg-white shadow-lg">
       <div className="border-b border-zinc-100 bg-gradient-to-br from-brand-navy via-[var(--brand-navy-light)] to-brand-navy-soft px-6 py-5 text-white rounded-t-2xl">
@@ -331,13 +313,17 @@ export function CertificateGenerator() {
           <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15"><Building2 className="h-5 w-5 text-white" /></span>
           <div>
             <h3 className="text-lg font-bold">Certificat de formation</h3>
-            <p className="text-xs text-white/80">Générez votre attestation de réussite</p>
+            <p className="text-xs text-white/80">
+              {loading ? "Chargement…" : "Générez votre attestation de réussite"}
+            </p>
           </div>
         </div>
       </div>
 
       <div className="p-6">
-        {!canGenerate ? (
+        {loading ? (
+          <div className="h-32 animate-pulse rounded-xl bg-zinc-100" />
+        ) : !canGenerate ? (
           <div className="rounded-xl border border-amber-200 bg-amber-50 p-6 text-center">
             <div className="flex justify-center"><Lock className="h-8 w-8 text-amber-500" /></div>
             <h4 className="mt-2 text-lg font-bold text-amber-800">Certificat verrouillé</h4>

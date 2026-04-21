@@ -632,7 +632,6 @@ export function CinematicPlayer({
   title,
   avatar,
   visuals,
-  moduleTitle,
   moduleSlug,
   lessonSlug,
   audioQuizSchedule = [],

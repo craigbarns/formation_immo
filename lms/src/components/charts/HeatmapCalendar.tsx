@@ -57,7 +57,6 @@ export function HeatmapCalendar({ data }: HeatmapCalendarProps) {
   }
 
   const totalActive = activityData.filter((d) => d.count > 0).length;
-  const totalDays = activityData.length;
 
   return (
     <div className="space-y-6">

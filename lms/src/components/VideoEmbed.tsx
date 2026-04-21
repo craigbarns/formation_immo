@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HelpCircle, CheckCircle, Play, Film } from "lucide-react";
+import { HelpCircle, CheckCircle, Film } from "lucide-react";
 
 type Props = {
   url: string | null;

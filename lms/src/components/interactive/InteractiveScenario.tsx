@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import type { InteractiveScenario as Scenario, ScenarioStep } from "@/data/interactive-scenarios";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import Link from "next/link";
+import Image from "next/image";
 import { Lightbulb, ArrowRight, RotateCcw, Trophy, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -186,11 +187,12 @@ function StepVideo({
       </div>
 
       {coverSrc ? (
-        <div className="relative group overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl">
-          <img
+        <div className="relative group overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl aspect-[21/9] sm:aspect-[2.4/1]">
+          <Image
             src={coverSrc}
             alt={step.title}
-            className="aspect-[21/9] w-full object-cover sm:aspect-[2.4/1] transition-transform duration-700 group-hover:scale-105"
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
             onError={() => {
               if (coverSrc !== FALLBACK_COVER) {
                 setCoverSrc(FALLBACK_COVER);
@@ -198,9 +200,10 @@ function StepVideo({
                 setCoverSrc(null);
               }
             }}
+            sizes="(max-width: 1200px) 100vw, 1200px"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent opacity-60" />
-          <div className="absolute bottom-6 left-8 right-8">
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent opacity-60 pointer-events-none" />
+          <div className="absolute bottom-6 left-8 right-8 pointer-events-none">
              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold mb-1">Contextualisation</p>
              <p className="text-sm font-bold text-white/90 drop-shadow-md">
                 Environnement professionnel simulé
