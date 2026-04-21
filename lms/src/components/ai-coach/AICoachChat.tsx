@@ -139,7 +139,17 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
   // Load conversation history on mount
   useEffect(() => {
     if (isOpen) {
-      loadServerHistory();
+      // ── Sanitization ──
+      const history = getConversationHistory();
+      const poisoningTerms = ["confidoc", "golden set", "ocr stress", "anonymisation", "pii leak", "comptable"];
+      const isPoisoned = history.some(m => poisoningTerms.some(term => m.content.toLowerCase().includes(term)));
+      
+      if (isPoisoned) {
+        console.warn("[Marie Coach] Sanitizing poisoned history (found ConfiDoc terms)");
+        handleClearChat();
+      } else {
+        loadServerHistory();
+      }
       inputRef.current?.focus();
     }
   }, [isOpen, loadServerHistory]);

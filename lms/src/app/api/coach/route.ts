@@ -4,8 +4,6 @@ import { createClient } from "@/lib/supabase/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { CoachRequestSchema } from "@/lib/validation";
 
-const openai = createOpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
 const SYSTEM_PROMPT = `Tu es Marie, coach experte en immobilier français avec 15 ans d'expérience terrain.
 Tu accompagnes des agents immobiliers en formation professionnelle (certification Loi ALUR).
 
@@ -33,6 +31,18 @@ function sanitizeContextNote(note: string): string {
 }
 
 export async function POST(request: Request) {
+  // ── Environment Check ──
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    console.error("[Marie Coach] Missing OPENAI_API_KEY in environment");
+    return new Response(
+      JSON.stringify({ error: "Configuration API manquante" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  const openai = createOpenAI({ apiKey });
+
   // ── Auth ──
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -74,13 +84,19 @@ export async function POST(request: Request) {
 
   const { messages, moduleSlug, lessonSlug, lessonTitle } = parse.data;
 
+  // Identify and strictly restrict to Real Estate context
+  const STRICT_IDENTITY_NOTE = `\n\nIMPORTANT: Tu es EXCLUSIVEMENT une coach IMMOBILIER pour la formation "Formation 42h". 
+Si l'historique contient des messages sur d'autres sujets (comptabilité, ConfiDoc, tests OCR, etc.), IGNORE-LES COMPLÈTEMENT. 
+Ne réponds JAMAIS sur des sujets techniques de développement logiciel ou d'IA comptable.
+Focalise-toi uniquement sur l'immobilier français et la Loi ALUR.`;
+
   const rawContext = lessonTitle
     ? `\n\n[CONTEXTE: L'étudiant est en train de travailler sur la leçon "${lessonTitle}" (${moduleSlug}/${lessonSlug}). Adapte tes réponses à ce contexte.]`
     : "";
 
-  const contextNote = sanitizeContextNote(rawContext);
+  const contextNote = sanitizeContextNote(STRICT_IDENTITY_NOTE + rawContext);
 
-  // Truncate history to last 10 messages (~5 exchanges) to control cost
+  // Truncate history to last 10 messages (~5 exchanges) to control cost and avoid history contamination
   const recentMessages = messages.slice(-10);
 
   try {
@@ -92,7 +108,8 @@ export async function POST(request: Request) {
     });
 
     return result.toTextStreamResponse();
-  } catch {
+  } catch (err) {
+    console.error("[Marie Coach] Stream Error:", err);
     return new Response(
       JSON.stringify({ error: "Erreur coach IA" }),
       { status: 500, headers: { "Content-Type": "application/json" } }
