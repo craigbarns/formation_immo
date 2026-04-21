@@ -7,7 +7,6 @@ interface EmptyStateProps {
   description?: string;
   action?: React.ReactNode;
   className?: string;
-  variant?: "default" | "dark";
 }
 
 export function EmptyState({
@@ -16,52 +15,35 @@ export function EmptyState({
   description,
   action,
   className,
-  variant = "default",
 }: EmptyStateProps) {
-  const isDark = variant === "dark";
-
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center rounded-2xl border px-6 py-12 text-center",
-        isDark
-          ? "border-white/10 bg-brand-navy/50"
-          : "border-zinc-200/80 bg-white",
+        "flex flex-col items-center justify-center rounded-[2.5rem] border border-white/10 bg-white/5 px-8 py-16 text-center shadow-2xl backdrop-blur-xl",
         className
       )}
     >
       <div
-        className={cn(
-          "flex h-14 w-14 items-center justify-center rounded-2xl",
-          isDark ? "bg-white/10" : "bg-brand-gold-soft"
-        )}
+        className="relative flex h-20 w-20 items-center justify-center rounded-[1.5rem] bg-white/5 border border-white/10 shadow-xl group"
       >
+        <div className="absolute inset-0 rounded-full blur-2xl bg-brand-gold/10 animate-pulse" />
         <Icon
-          className={cn(
-            "h-6 w-6",
-            isDark ? "text-brand-gold" : "text-brand-navy"
-          )}
+          className="relative h-8 w-8 text-white/20 group-hover:text-brand-gold transition-colors"
         />
       </div>
       <h3
-        className={cn(
-          "mt-4 text-sm font-bold",
-          isDark ? "text-white" : "text-brand-navy"
-        )}
+        className="mt-8 text-xl font-black text-white uppercase tracking-tight"
       >
         {title}
       </h3>
       {description && (
         <p
-          className={cn(
-            "mt-1.5 max-w-xs text-xs leading-relaxed",
-            isDark ? "text-white/80" : "text-zinc-500"
-          )}
+          className="mt-4 max-w-sm text-base leading-relaxed text-white/50 font-medium italic"
         >
-          {description}
+          &laquo; {description} &raquo;
         </p>
       )}
-      {action && <div className="mt-5">{action}</div>}
+      {action && <div className="mt-8">{action}</div>}
     </div>
   );
 }

@@ -12,11 +12,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const inputId = id || label?.toLowerCase().replace(/\s+/g, "-");
 
     return (
-      <div className="flex w-full flex-col gap-1.5">
+      <div className="flex w-full flex-col gap-2">
         {label && (
           <label
             htmlFor={inputId}
-            className="text-sm font-medium text-zinc-700"
+            className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1"
           >
             {label}
           </label>
@@ -26,13 +26,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           id={inputId}
           type={type}
           className={cn(
-            "flex h-10 w-full rounded-xl border border-zinc-200/90 bg-white px-3 py-2 text-sm text-zinc-900",
-            "placeholder:text-zinc-400",
-            "outline-none transition duration-150",
-            "focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20",
-            "hover:border-zinc-300",
+            "flex h-12 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white font-bold",
+            "placeholder:text-white/20",
+            "outline-none transition-all duration-300 backdrop-blur-xl shadow-2xl",
+            "focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10",
+            "hover:bg-white/10 hover:border-white/20",
             "disabled:pointer-events-none disabled:opacity-50",
-            error && "border-red-300 focus:border-red-400 focus:ring-red-400/20",
+            error && "border-red-500/50 focus:border-red-500 focus:ring-red-500/10",
             className
           )}
           aria-invalid={!!error}
@@ -42,12 +42,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         {description && !error && (
-          <p id={`${inputId}-desc`} className="text-xs text-zinc-500">
+          <p id={`${inputId}-desc`} className="text-[10px] text-white/30 italic ml-1">
             {description}
           </p>
         )}
         {error && (
-          <p id={`${inputId}-error`} className="text-xs text-red-600" role="alert">
+          <p id={`${inputId}-error`} className="text-xs text-red-400 font-bold ml-1" role="alert">
             {error}
           </p>
         )}
@@ -69,11 +69,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const textareaId = id || label?.toLowerCase().replace(/\s+/g, "-");
 
     return (
-      <div className="flex w-full flex-col gap-1.5">
+      <div className="flex w-full flex-col gap-2">
         {label && (
           <label
             htmlFor={textareaId}
-            className="text-sm font-medium text-zinc-700"
+            className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 ml-1"
           >
             {label}
           </label>
@@ -82,13 +82,13 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           id={textareaId}
           className={cn(
-            "flex min-h-[80px] w-full rounded-xl border border-zinc-200/90 bg-white px-3 py-2 text-sm text-zinc-900",
-            "placeholder:text-zinc-400",
-            "outline-none transition duration-150",
-            "focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20",
-            "hover:border-zinc-300",
+            "flex min-h-[100px] w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white font-bold",
+            "placeholder:text-white/20",
+            "outline-none transition-all duration-300 backdrop-blur-xl shadow-2xl",
+            "focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10",
+            "hover:bg-white/10 hover:border-white/20",
             "disabled:pointer-events-none disabled:opacity-50",
-            error && "border-red-300 focus:border-red-400 focus:ring-red-400/20",
+            error && "border-red-500/50 focus:border-red-500 focus:ring-red-500/10",
             className
           )}
           aria-invalid={!!error}
@@ -98,12 +98,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...props}
         />
         {description && !error && (
-          <p id={`${textareaId}-desc`} className="text-xs text-zinc-500">
+          <p id={`${textareaId}-desc`} className="text-[10px] text-white/30 italic ml-1">
             {description}
           </p>
         )}
         {error && (
-          <p id={`${textareaId}-error`} className="text-xs text-red-600" role="alert">
+          <p id={`${textareaId}-error`} className="text-xs text-red-400 font-bold ml-1" role="alert">
             {error}
           </p>
         )}
