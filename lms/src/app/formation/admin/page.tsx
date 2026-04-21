@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
-import { COURSE } from "@/data/course";
+import { COURSE, lessonId } from "@/data/course";
 import { 
   Users, 
   BookOpen, 
@@ -14,15 +14,32 @@ import {
   ChevronRight,
   ShieldCheck,
   User,
-  Zap
+  Zap,
+  X,
+  Target,
+  Trophy,
+  Activity,
+  Calendar,
+  BarChart3,
+  CheckCircle2,
+  FileText
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { motion, AnimatePresence } from "framer-motion";
+import { CircularProgress } from "@/components/charts/CircularProgress";
 
 interface SupabaseLearner {
   id: string;
   full_name: string | null;
-  gamification_state: { xp: number; streak: number; last_login_date: string }[];
-  lesson_progress: { count: number }[];
+  gamification_state: { 
+    xp: number; 
+    streak: number; 
+    last_login_date: string;
+    total_quiz_correct: number;
+    total_exams_taken: number;
+    exam_scores: Record<string, { score: number, total: number, date: string }>;
+  }[];
+  lesson_progress: { lesson_key: string; completed: boolean }[];
 }
 
 interface LearnerStats {
@@ -32,12 +49,17 @@ interface LearnerStats {
   lessons_completed: number;
   last_activity: string;
   streak: number;
+  quiz_correct: number;
+  exams_taken: number;
+  exam_scores: Record<string, { score: number, total: number, date: string }>;
+  completed_keys: Set<string>;
 }
 
 export default function AdminPage() {
   const [learners, setLearners] = useState<LearnerStats[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedLearner, setSelectedLearner] = useState<LearnerStats | null>(null);
   
   const totalLessons = COURSE.reduce((a, m) => a + m.lessons.length, 0);
   const totalModules = COURSE.length;
@@ -54,10 +76,14 @@ export default function AdminPage() {
           gamification_state (
             xp,
             streak,
-            last_login_date
+            last_login_date,
+            total_quiz_correct,
+            total_exams_taken,
+            exam_scores
           ),
           lesson_progress (
-            count
+            lesson_key,
+            completed
           )
         `);
 
@@ -73,7 +99,11 @@ export default function AdminPage() {
         xp: p.gamification_state?.[0]?.xp || 0,
         streak: p.gamification_state?.[0]?.streak || 0,
         last_activity: p.gamification_state?.[0]?.last_login_date || "Jamais",
-        lessons_completed: p.lesson_progress?.length || 0,
+        quiz_correct: p.gamification_state?.[0]?.total_quiz_correct || 0,
+        exams_taken: p.gamification_state?.[0]?.total_exams_taken || 0,
+        exam_scores: p.gamification_state?.[0]?.exam_scores || {},
+        lessons_completed: p.lesson_progress?.filter(lp => lp.completed).length || 0,
+        completed_keys: new Set(p.lesson_progress?.filter(lp => lp.completed).map(lp => lp.lesson_key) || []),
       }));
 
       setLearners(formatted);
@@ -148,7 +178,7 @@ export default function AdminPage() {
             ) : filteredLearners.length > 0 ? (
               <div className="divide-y divide-white/5">
                 {filteredLearners.map((learner) => (
-                  <div key={learner.id} className="group p-6 transition-all hover:bg-white/[0.02]">
+                  <div key={learner.id} className="group p-6 transition-all hover:bg-white/[0.02] cursor-pointer" onClick={() => setSelectedLearner(learner)}>
                     <div className="flex items-center justify-between gap-6">
                       <div className="flex items-center gap-5">
                         <div className="h-12 w-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-lg font-black text-brand-gold shadow-xl group-hover:scale-110 transition-transform">
@@ -238,6 +268,182 @@ export default function AdminPage() {
             </div>
         </div>
       </div>
+
+      {/* Learner Detail Modal */}
+      <AnimatePresence>
+        {selectedLearner && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-10">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedLearner(null)}
+              className="absolute inset-0 bg-[#020617]/95 backdrop-blur-xl"
+            />
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-5xl h-[90vh] overflow-hidden rounded-[3rem] border border-white/10 bg-[#070d18] shadow-[0_50px_150px_rgba(0,0,0,0.8)]"
+            >
+              {/* Modal Header */}
+              <div className="relative border-b border-white/5 bg-[#030712] p-8 sm:p-12">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.05] to-transparent pointer-events-none" />
+                <button 
+                  onClick={() => setSelectedLearner(null)}
+                  className="absolute top-8 right-8 p-3 rounded-2xl bg-white/5 border border-white/10 text-white/40 hover:text-white transition-all"
+                >
+                  <X size={20} />
+                </button>
+                
+                <div className="relative flex flex-col md:flex-row items-center gap-10 text-center md:text-left">
+                  <div className="h-32 w-32 rounded-[2.5rem] bg-gradient-to-br from-brand-gold to-yellow-600 p-1 shadow-2xl">
+                    <div className="h-full w-full rounded-[2.2rem] bg-[#030712] flex items-center justify-center text-4xl font-black text-brand-gold uppercase">
+                      {selectedLearner.full_name[0]}
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-gold mb-3 flex items-center justify-center md:justify-start gap-3">
+                       <ShieldCheck size={14} /> DOSSIER APPRENANT
+                    </p>
+                    <h2 className="text-4xl font-black text-white uppercase tracking-tight">{selectedLearner.full_name}</h2>
+                    <div className="mt-6 flex flex-wrap justify-center md:justify-start gap-4">
+                       <Badge icon={<Zap size={10} />} label={`${selectedLearner.xp} XP`} color="purple" />
+                       <Badge icon={<Calendar size={10} />} label={`Actif le ${selectedLearner.last_activity}`} color="blue" />
+                       <Badge icon={<Target size={10} />} label={`${selectedLearner.lessons_completed}/${totalLessons} Leçons`} color="gold" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Modal Body */}
+              <div className="h-full overflow-y-auto p-8 sm:p-12 pb-32 scrollbar-hide">
+                <div className="grid gap-12 lg:grid-cols-3">
+                  {/* Left Column: Progress & Exams */}
+                  <div className="lg:col-span-2 space-y-12">
+                    {/* Module Progress Grid */}
+                    <div className="space-y-6">
+                        <h3 className="text-xs font-black uppercase tracking-widest text-white/30 flex items-center gap-3">
+                            <BarChart3 size={14} /> État des modules
+                        </h3>
+                        <div className="grid gap-4 sm:grid-cols-2">
+                            {COURSE.map((mod, i) => {
+                                const doneInMod = mod.lessons.filter(l => selectedLearner.completed_keys.has(lessonId(mod.slug, l.slug))).length;
+                                const pct = Math.round((doneInMod / mod.lessons.length) * 100);
+                                return (
+                                    <div key={mod.slug} className="rounded-3xl border border-white/5 bg-white/[0.02] p-6 shadow-xl">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <p className="text-[10px] font-black uppercase tracking-widest text-white/60">{mod.title.replace(/^Module \d+ — /, "")}</p>
+                                            <span className="text-xs font-black text-brand-gold">{pct}%</span>
+                                        </div>
+                                        <div className="h-1.5 rounded-full bg-white/5 overflow-hidden ring-1 ring-white/10">
+                                            <div className="h-full bg-brand-gold" style={{ width: `${pct}%` }} />
+                                        </div>
+                                        <p className="mt-3 text-[9px] font-black uppercase text-white/20 tracking-widest">
+                                            {doneInMod} sur {mod.lessons.length} leçons acquises
+                                        </p>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* Detailed Exam Results */}
+                    <div className="space-y-6">
+                        <h3 className="text-xs font-black uppercase tracking-widest text-white/30 flex items-center gap-3">
+                            <FileText size={14} /> Résultats d&apos;examens
+                        </h3>
+                        <div className="rounded-3xl border border-white/10 bg-[#030712] shadow-inner overflow-hidden">
+                            <table className="w-full text-left border-collapse">
+                                <thead className="bg-white/5 border-b border-white/10">
+                                    <tr className="text-[9px] font-black uppercase tracking-widest text-brand-gold">
+                                        <th className="p-5">Module</th>
+                                        <th className="p-5 text-center">Score</th>
+                                        <th className="p-5 text-right">Dernière tentative</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-white/5">
+                                    {COURSE.map(mod => {
+                                        const exam = selectedLearner.exam_scores[mod.slug];
+                                        return (
+                                            <tr key={mod.slug} className="group hover:bg-white/[0.01] transition-colors">
+                                                <td className="p-5">
+                                                    <p className="text-sm font-black text-white/80 uppercase tracking-tight">{mod.title.replace(/^Module \d+ — /, "")}</p>
+                                                </td>
+                                                <td className="p-5 text-center">
+                                                    {exam ? (
+                                                        <span className={`text-sm font-black tabular-nums ${exam.score / exam.total >= 0.7 ? "text-emerald-400" : "text-amber-400"}`}>
+                                                            {exam.score}/{exam.total}
+                                                        </span>
+                                                    ) : (
+                                                        <span className="text-[10px] font-black text-white/10 uppercase tracking-widest">Non tenté</span>
+                                                    )}
+                                                </td>
+                                                <td className="p-5 text-right">
+                                                    <span className="text-xs font-medium text-white/30 tabular-nums">
+                                                        {exam ? new Date(exam.date).toLocaleDateString("fr-FR") : "—"}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Performance Summary */}
+                  <div className="space-y-8">
+                     <div className="rounded-[2.5rem] border border-white/10 bg-[#030712] p-8 text-center shadow-2xl">
+                        <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 mb-8">Maîtrise Globale</h3>
+                        <CircularProgress 
+                           value={selectedLearner.lessons_completed} 
+                           max={totalLessons} 
+                           size={180} 
+                           color="var(--brand-gold)" 
+                           label={`${Math.round((selectedLearner.lessons_completed / totalLessons) * 100)}%`}
+                           sublabel="CURRICULUM"
+                        />
+                     </div>
+
+                     <div className="rounded-[2.5rem] border border-white/10 bg-[#070d18] p-8 shadow-2xl space-y-6">
+                        <h3 className="text-xs font-black uppercase tracking-widest text-white/30 flex items-center gap-3">
+                            <Activity size={14} /> Engagement IA
+                        </h3>
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                                <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Réponses QCM</span>
+                                <span className="text-sm font-black text-white tabular-nums">{selectedLearner.quiz_correct}</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Examens passés</span>
+                                <span className="text-sm font-black text-white tabular-nums">{selectedLearner.exams_taken}</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Série active</span>
+                                <span className="text-sm font-black text-orange-400 tabular-nums">{selectedLearner.streak} j</span>
+                            </div>
+                        </div>
+                     </div>
+
+                     <div className="rounded-[2.5rem] border border-brand-gold/20 bg-brand-gold/5 p-8 text-center shadow-2xl">
+                        <Trophy className="mx-auto h-8 w-8 text-brand-gold mb-4" />
+                        <h3 className="text-sm font-black text-white uppercase tracking-widest mb-2">Certification</h3>
+                        <p className="text-xs text-white/50 leading-relaxed font-medium italic">
+                            {selectedLearner.lessons_completed / totalLessons >= 0.8 && Object.values(selectedLearner.exam_scores).filter(e => e.score / e.total >= 0.7).length >= 3
+                                ? "L'apprenant remplit les critères de génération du certificat."
+                                : "Critères ALUR non encore atteints (80% progression + 3 examens réussis)."}
+                        </p>
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -264,4 +470,18 @@ function StatCard({
       <p className="text-[9px] font-bold text-white/20 uppercase tracking-widest mt-2">{sub}</p>
     </div>
   );
+}
+
+function Badge({ icon, label, color }: { icon: React.ReactNode, label: string, color: "purple" | "blue" | "gold" }) {
+    const colors = {
+        purple: "bg-purple-500/10 text-purple-300 border-purple-500/20",
+        blue: "bg-blue-500/10 text-blue-300 border-blue-500/20",
+        gold: "bg-brand-gold/10 text-brand-gold border-brand-gold/20"
+    };
+    return (
+        <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[9px] font-black uppercase tracking-widest ${colors[color]}`}>
+            {icon}
+            {label}
+        </span>
+    );
 }
