@@ -15,15 +15,17 @@ interface RadarSkillsProps {
 
 export function RadarSkills({ skills, size = 250 }: RadarSkillsProps) {
   const center = size / 2;
-  const radius = (size / 2) * 0.7;
+  // Reduce radius to give more room for long labels
+  const radius = (size / 2) * 0.55;
   const angleStep = (2 * Math.PI) / skills.length;
 
-  const getPoint = (index: number, value: number, max: number) => {
+  const getPoint = (index: number, value: number, max: number, rFactor = 1) => {
     const angle = index * angleStep - Math.PI / 2;
-    const r = (value / max) * radius;
+    const r = (value / max) * radius * rFactor;
     return {
       x: center + r * Math.cos(angle),
       y: center + r * Math.sin(angle),
+      angle,
     };
   };
 
@@ -99,19 +101,34 @@ export function RadarSkills({ skills, size = 250 }: RadarSkillsProps) {
           );
         })}
 
-        {/* Labels */}
+        {/* Labels with improved positioning */}
         {skills.map((skill, i) => {
-          const point = getPoint(i, 125, 100);
+          // Push labels slightly further out
+          const point = getPoint(i, 100, 100, 1.25);
+          
+          // Smart alignment based on position
+          let textAnchor: "start" | "middle" | "end" = "middle";
+          if (point.x < center - 20) textAnchor = "end";
+          else if (point.x > center + 20) textAnchor = "start";
+
+          let dy = "0.35em";
+          if (point.y < center - 20) dy = "-0.5em"; // Top
+          else if (point.y > center + 20) dy = "1.2em"; // Bottom
+
           return (
             <text
               key={`label-${i}`}
               x={point.x}
               y={point.y}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              className="text-[9px] font-black fill-white/40 uppercase tracking-widest"
+              textAnchor={textAnchor}
+              dy={dy}
+              className="text-[8px] font-black fill-white/50 uppercase tracking-widest"
             >
-              {skill.name}
+              {skill.name.split(' & ').map((part, j, arr) => (
+                <tspan key={j} x={point.x} dy={j === 0 ? dy : "1.2em"}>
+                  {part}{j < arr.length - 1 ? ' &' : ''}
+                </tspan>
+              ))}
             </text>
           );
         })}
