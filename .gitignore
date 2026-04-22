@@ -8,3 +8,6 @@ Thumbs.db
 .vscode/
 *.swp
 .vercel
+
+# Local Netlify folder
+.netlify

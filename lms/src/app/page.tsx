@@ -250,6 +250,8 @@ const testimonials = [
   },
 ];
 
+const VERCEL_APP_URL = "https://app.monpassformation.com";
+
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white text-zinc-950">
@@ -281,7 +283,7 @@ export default function HomePage() {
 
           <div className="flex items-center gap-3">
             <Link
-              href="/login"
+              href={`${VERCEL_APP_URL}/login`}
               className="hidden rounded-lg px-4 py-2 text-sm font-bold text-zinc-600 transition hover:bg-zinc-100 hover:text-brand-navy sm:inline-flex"
             >
               Connexion
@@ -861,7 +863,7 @@ export default function HomePage() {
                 </a>
               </li>
               <li>
-                <Link href="/login" className="transition hover:text-brand-navy">
+                <Link href={`${VERCEL_APP_URL}/login`} className="transition hover:text-brand-navy">
                   Connexion apprenant
                 </Link>
               </li>

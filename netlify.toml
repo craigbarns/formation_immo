@@ -1,29 +1,16 @@
 [build]
   base = "lms"
-  publish = ".next"
   command = "npm run build"
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "22"
-  NPM_FLAGS = "--no-audit --no-fund"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Redirection de la formation vers le domaine Vercel
 [[redirects]]
   from = "/formation/*"
   to = "https://app.monpassformation.com/formation/:splat"
   status = 301
   force = true
-
-# Redirection du login/register vers Vercel
-[[redirects]]
-  from = "/login"
-  to = "https://app.monpassformation.com/login"
-  status = 301
-
-[[redirects]]
-  from = "/register"
-  to = "https://app.monpassformation.com/register"
-  status = 301
