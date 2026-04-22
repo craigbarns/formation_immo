@@ -1,13 +1,18 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-01-27" as any,
-});
+export const dynamic = "force-dynamic";
+
+const stripe = process.env.STRIPE_SECRET_KEY 
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2025-01-27" as any })
+  : null;
 
 const VERCEL_APP_URL = "https://app.monpassformation.com";
 
 export async function POST(request: Request) {
+  if (!stripe) {
+    return NextResponse.json({ error: "Stripe is not configured" }, { status: 500 });
+  }
   try {
     const { formationId } = await request.json();
 

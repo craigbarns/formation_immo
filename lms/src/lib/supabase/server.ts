@@ -2,13 +2,18 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
 export async function createClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    console.warn("Supabase keys are missing. Using dummy client.");
+    // Dummy client for build time
+    return createServerClient("https://dummy.supabase.co", "dummy-key", { cookies: { getAll: () => [], setAll: () => {} } });
+  }
+
   const cookieStore = await cookies();
 
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
+  return createServerClient(supabaseUrl, supabaseKey, {
         getAll() {
           return cookieStore.getAll();
         },
