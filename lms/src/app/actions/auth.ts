@@ -4,8 +4,14 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
+function getValidNext(value: FormDataEntryValue | null, fallback = "/formation") {
+  if (typeof value !== "string") return fallback;
+  return value.startsWith("/") && !value.startsWith("//") ? value : fallback;
+}
+
 export async function login(formData: FormData) {
   const supabase = await createClient();
+  const next = getValidNext(formData.get("next"));
 
   const data = {
     email: formData.get("email") as string,
@@ -19,11 +25,12 @@ export async function login(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/formation");
+  redirect(next);
 }
 
 export async function signup(formData: FormData) {
   const supabase = await createClient();
+  const next = getValidNext(formData.get("next"));
 
   const data = {
     email: formData.get("email") as string,
@@ -32,7 +39,7 @@ export async function signup(formData: FormData) {
       data: {
         full_name: formData.get("full_name") as string,
       },
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://formation-immo.vercel.app"}/auth/callback?next=/formation`,
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://app.monpassformation.com"}/auth/callback?next=${encodeURIComponent(next)}`,
     },
   };
 
@@ -43,7 +50,7 @@ export async function signup(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/login?message=Vérifiez votre email pour confirmer votre compte.");
+  redirect(`/login?next=${encodeURIComponent(next)}&message=Vérifiez votre email pour confirmer votre compte.`);
 }
 
 export async function logout() {

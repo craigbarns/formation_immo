@@ -1,0 +1,462 @@
+# ============================================================================
+# DESIGN SYSTEM - FORMATION AGENT IMMOBILIER 42H
+# ============================================================================
+# Document de spécifications visuelles pour tous les supports de la formation
+# Version: 1.0
+# Date: 21 avril 2026
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# 1. PROFILE & STRATEGY
+# ----------------------------------------------------------------------------
+profile:
+  type: "Corporate Training Premium"
+  baseline: "profiles/education.md"
+  
+  audience:
+    - "Futurs agents immobiliers"
+    - "Reconversion professionnelle"
+    - "Créateurs d'agence"
+    - "Négociateurs indépendants"
+    - "Équipes commerciales"
+  
+  information_density: "60-70%"
+  text_visual_ratio: "70/30"
+  
+  style_anchor: "Sotheby's International Realty × McKinsey/BCG"
+  
+  narrative_style:
+    - "Practice-oriented"
+    - "Concise"
+    - "Professional"
+    - "Premium"
+
+# ----------------------------------------------------------------------------
+# 2. COLOR SYSTEM
+# ----------------------------------------------------------------------------
+colors:
+  # Primary Palette
+  primary:
+    name: "Navy Blue"
+    hex: "#1a3a5c"
+    usage: 
+      - "Page titles"
+      - "Dark backgrounds (cover/chapter)"
+      - "Table headers"
+      - "Primary text on light bg"
+      - "Icon fills"
+    
+  accent:
+    name: "Premium Gold"
+    hex: "#d4af37"
+    usage:
+      - "Accent lines/dividers"
+      - "KPI numbers"
+      - "Chapter numbers"
+      - "Highlights (max 2-3 per page)"
+      - "Decorative elements"
+    
+  # Background Colors
+  background:
+    light:
+      name: "Warm Off-White"
+      hex: "#f5f3ef"
+      usage: "Content pages background"
+    dark:
+      name: "Navy Dark"
+      hex: "#1a3a5c"
+      usage: "Cover, chapter, and closing pages"
+    
+  # Text Colors
+  text:
+    dark:
+      name: "Navy Text"
+      hex: "#1a3a5c"
+      usage: "Text on light backgrounds"
+    light:
+      name: "White"
+      hex: "#ffffff"
+      usage: "Text on dark backgrounds"
+    secondary:
+      name: "Blue-Gray"
+      hex: "#6b7d8e"
+      usage: 
+        - "Secondary text"
+        - "Captions"
+        - "Annotations"
+        - "Dividers"
+    
+  # Utility Colors
+  utility:
+    card_bg: "#ffffff"
+    border: "#e0e0e0"
+    table_alt_row: "#f5f3ef"
+
+# ----------------------------------------------------------------------------
+# 3. TYPOGRAPHY SYSTEM
+# ----------------------------------------------------------------------------
+typography:
+  fonts:
+    title:
+      family: "Oranienbaum"
+      category: "serif"
+      weights: [400, 700]
+      usage: "Page titles, chapter headings, hero text, KPI numbers"
+      
+    body:
+      family: "QuattrocentoSans"
+      category: "sans-serif"
+      weights: [400, 700]
+      usage: "Body text, tables, captions, labels"
+  
+  sizes:
+    hero_title:
+      size_px: 52
+      line_height: 1.2
+      font: "Oranienbaum"
+      color: "$light"
+      usage: "Cover and chapter page main titles"
+      
+    title:
+      size_px: 30
+      line_height: 1.3
+      font: "Oranienbaum"
+      color: "$primary"
+      usage: "Content page titles"
+      
+    subtitle:
+      size_px: 20
+      line_height: 1.4
+      font: "QuattrocentoSans"
+      color: "$secondary"
+      usage: "Page subtitles and section headers"
+      
+    body_large:
+      size_px: 20
+      line_height: 1.5
+      font: "QuattrocentoSans"
+      color: "$text.dark"
+      usage: "Emphasis paragraphs"
+      
+    body:
+      size_px: 18
+      line_height: 1.6
+      font: "QuattrocentoSans"
+      color: "$text.dark"
+      usage: "Main body text (minimum allowed)"
+      
+    caption:
+      size_px: 14
+      line_height: 1.4
+      font: "QuattrocentoSans"
+      color: "$secondary"
+      usage: "Annotations, sources, page indicators (minimum allowed)"
+      
+    kpi:
+      size_px: 44
+      line_height: 1.1
+      font: "Oranienbaum"
+      color: "$accent"
+      usage: "Large numbers, key metrics, statistics"
+      
+    label:
+      size_px: 14
+      line_height: 1.4
+      font: "QuattrocentoSans"
+      color: "$light"
+      letter_spacing: 1
+      usage: "Small labels and badges (on dark bg)"
+
+# ----------------------------------------------------------------------------
+# 4. LAYOUT SYSTEM
+# ----------------------------------------------------------------------------
+layout:
+  canvas:
+    width_px: 1280
+    height_px: 720
+    aspect_ratio: "16:9"
+    
+  margins:
+    top_px: 50
+    bottom_px: 50
+    left_px: 60
+    right_px: 60
+    
+  grid:
+    columns: 12
+    gutter_px: 24
+    
+  # Unified Page Elements
+  footer_elements:
+    gold_line:
+      position_y: 690
+      height_px: 2
+      color: "$accent"
+      span: "full-width"
+      
+    page_indicator:
+      position: "bottom-right"
+      font_size_px: 14
+      color: "$secondary"
+      format: "Section Name"
+
+# ----------------------------------------------------------------------------
+# 5. PAGE TEMPLATES
+# ----------------------------------------------------------------------------
+templates:
+  cover_page:
+    background: "full-bleed luxury real estate image"
+    gradient_mask: "dark navy from left to transparent right"
+    layout:
+      title:
+        position: "left"
+        style: "hero_title"
+        underline: "gold accent"
+      subtitle:
+        position: "below title"
+        style: "subtitle"
+        color: "light with opacity"
+    
+  chapter_page:
+    background: "full-bleed image with heavy navy gradient mask"
+    elements:
+      chapter_number:
+        style: "kpi"
+        color: "$accent"
+        size: 48
+      chapter_title:
+        style: "hero_title"
+        color: "$light"
+      divider:
+        style: "thin gold line"
+        
+  table_of_contents:
+    layout: "split"
+    left_side:
+      element: "large 'SOMMAIRE' vertical text or navy decorative block"
+    right_side:
+      layout: "grid"
+      entries: 5
+      entry_format: "gold number + title + brief description"
+      
+  content_page_pattern_a:
+    name: "Left-Right Split"
+    layout: "50% text / 50% image or visual"
+    usage: "Overview pages, introductions"
+    
+  content_page_pattern_b:
+    name: "Full-Width Structured"
+    layout: "Title + full-width table or structured list"
+    usage: "Detailed module content, specifications"
+    
+  content_page_pattern_c:
+    name: "Cards Grid"
+    layout: "2-3 equal cards in a row"
+    card_content: "icon + title + description"
+    usage: "Features, benefits, key points"
+    
+  content_page_pattern_d:
+    name: "Top Hero + Content"
+    layout: "Hero image 40% top / Content 60% bottom"
+    usage: "Emphasis pages, transitions"
+    
+  closing_page:
+    background: "solid navy #1a3a5c"
+    elements:
+      quote:
+        style: "hero_title"
+        color: "$light"
+        max_length: "short inspirational"
+      contact:
+        style: "subtitle"
+        color: "$accent"
+
+# ----------------------------------------------------------------------------
+# 6. COMPONENT STYLES
+# ----------------------------------------------------------------------------
+components:
+  # Cards
+  card:
+    border_radius: 0
+    corners: "sharp"
+    fill_light: "$background.light"
+    fill_dark: "rgba(255,255,255,0.1)"
+    border: "none"
+    shadow: "none"
+    
+  # Tables
+  table_default:
+    header:
+      fill: "$primary"
+      color: "$light"
+      font: "QuattrocentoSans Bold"
+      size_px: 16
+    body:
+      fill_alternating: ["#ffffff", "$background.light"]
+      color: "$text.dark"
+      font: "QuattrocentoSans"
+      size_px: 16
+    border:
+      style: "solid"
+      width_px: 1
+      color: "$utility.border"
+      
+  table_minimal:
+    header:
+      fill: "$background.light"
+      color: "$primary"
+      font: "QuattrocentoSans Bold"
+    body:
+      fill: ["#ffffff"]
+      color: "$text.dark"
+    border:
+      style: "solid"
+      width_px: 1
+      color: "$utility.border"
+  
+  # Decorative Elements
+  divider_gold:
+    height_px: 2
+    color: "$accent"
+    style: "solid"
+    
+  bullet_marker:
+    style: "small gold square or dot"
+    size_px: 6
+    color: "$accent"
+    
+  accent_bar:
+    width_px: 4
+    color: "$primary"
+    style: "vertical"
+    
+  # Icons
+  icon:
+    library: "Font Awesome (fas)"
+    colors: ["$primary", "$accent"]
+    usage: "Key features, module identification only"
+    restraint: "high"
+
+# ----------------------------------------------------------------------------
+# 7. IMAGE GUIDELINES
+# ----------------------------------------------------------------------------
+images:
+  style: "Premium real estate photography"
+  subjects:
+    - "Luxury properties"
+    - "Professional agents"
+    - "Modern architecture"
+    - "Upscale interiors"
+    - "City skylines"
+  
+  color_treatment: "Cool blue tone to harmonize with navy palette"
+  
+  cover_chapter:
+    treatment: "Full-bleed with gradient mask"
+    mask_direction: "left to right"
+    mask_opacity: "70-80%"
+    
+  content_pages:
+    restraint: "Every image must relate to real estate/training"
+    no_decorative: true
+
+# ----------------------------------------------------------------------------
+# 8. CONTENT MAPPING - FORMATION SPECIFIC
+# ----------------------------------------------------------------------------
+content_mapping:
+  # Module Colors (for visual distinction)
+  modules:
+    m1_juridique:
+      icon: "fa-scale-balanced"
+      accent_element: "gold gavel/scale icon"
+      
+    m2_transaction:
+      icon: "fa-handshake"
+      accent_element: "gold handshake icon"
+      
+    m3_financement:
+      icon: "fa-calculator"
+      accent_element: "gold calculator/coins icon"
+      
+    m4_marketing:
+      icon: "fa-bullhorn"
+      accent_element: "gold megaphone/chart icon"
+      
+    m5_terrain:
+      icon: "fa-key"
+      accent_element: "gold key/home icon"
+  
+  # KPI Highlight Numbers
+  key_metrics:
+    - value: "42h"
+      label: "de formation"
+      style: "kpi large gold"
+      
+    - value: "5"
+      label: "modules"
+      style: "kpi large gold"
+      
+    - value: "36"
+      label: "leçons"
+      style: "kpi medium"
+      
+    - value: "20+"
+      label: "templates"
+      style: "kpi medium"
+      
+    - value: "90%"
+      label: "échec sans méthode"
+      style: "kpi warning red"
+
+# ----------------------------------------------------------------------------
+# 9. RISK PROHIBITIONS (Quality Checklist)
+# ----------------------------------------------------------------------------
+prohibitions:
+  colors:
+    - "NO blue-cyan or turquoise - stay strictly with navy #1a3a5c"
+    - "NO gold overuse - maximum 2-3 gold elements per page"
+    
+  shapes:
+    - "NO rounded rectangles - sharp corners only"
+    - "NO gradient backgrounds on content pages"
+    
+  typography:
+    - "NO body text below 18px"
+    - "NO annotation text below 14px"
+    - "NO all-caps for French titles (accents don't render well)"
+    
+  layout:
+    - "NO misaligned layouts - splits must match bottom edges"
+    - "NO dense text walls - max 6 lines before breaking"
+    
+  imagery:
+    - "NO cheap clip art - premium photography or Font Awesome only"
+    - "NO pure decorative images - must relate to real estate"
+
+# ----------------------------------------------------------------------------
+# 10. EXPORT SETTINGS
+# ----------------------------------------------------------------------------
+export:
+  pdf:
+    format: "A4 landscape"
+    quality: "print"
+    bleed: "3mm"
+    color_profile: "CMYK ready"
+    
+  presentation:
+    format: "1280×720"
+    aspect: "16:9"
+    
+  web:
+    format: "responsive"
+    max_width: "1200px"
+
+# ----------------------------------------------------------------------------
+# 11. USAGE EXAMPLES
+# ----------------------------------------------------------------------------
+examples:
+  hero_title_usage: "Formation Agent Immobilier - Certification 42H"
+  subtitle_usage: "Devenez un professionnel compétent et conforme"
+  body_usage: "Cette formation complète de 42 heures couvre l'ensemble des compétences nécessaires..."
+  kpi_usage: "42h", "5 modules", "90%"
+  label_usage: "MODULE 1", "JURIDIQUE", "BONUS"

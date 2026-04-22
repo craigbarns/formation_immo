@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Parcours de formation",
@@ -20,7 +22,30 @@ import { AdaptiveLearningPath } from "@/components/learning-path";
 import { Greeting } from "@/components/Greeting";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
-export default function FormationHomePage() {
+async function checkPlacementTest() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  
+  if (!user) return null;
+  
+  const { data: placementResult } = await supabase
+    .from("placement_results")
+    .select("user_id")
+    .eq("user_id", user.id)
+    .single();
+  
+  return placementResult;
+}
+
+export default async function FormationHomePage() {
+  // Vérifier si l'utilisateur a passé le test de positionnement
+  const hasPlacementResult = await checkPlacementTest();
+  
+  // Si c'est un nouvel utilisateur sans test, rediriger vers le test
+  if (!hasPlacementResult) {
+    redirect("/formation/test");
+  }
+  
   const totalLessons = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
   const totalModules = COURSE.length;
   const totalDuration = formatDuration(getTotalCourseDurationMin());

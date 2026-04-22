@@ -11,6 +11,7 @@ export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
+  const next = searchParams.get("next") ?? "/formation";
 
   async function handleSubmit(formData: FormData) {
     setLoading(true);
@@ -45,6 +46,8 @@ export default function RegisterForm() {
           <div className="h-1.5 bg-gradient-to-r from-brand-gold via-brand-navy-soft to-brand-navy" aria-hidden />
           <div className="p-8">
             <form action={handleSubmit} className="space-y-5" aria-busy={loading}>
+              <input type="hidden" name="next" value={next} />
+
               <div>
                 <label htmlFor="full_name" className="mb-2 flex items-center gap-2 text-sm font-semibold text-zinc-800">
                   <User className="h-4 w-4 text-brand-navy/70" aria-hidden />
@@ -118,7 +121,7 @@ export default function RegisterForm() {
             </form>
 
             <div className="mt-5 text-center text-sm">
-              <Link href="/login" className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:underline">
+              <Link href={`/login?next=${encodeURIComponent(next)}`} className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:underline">
                 <ArrowLeft className="h-4 w-4" />
                 Déjà un compte ? Se connecter
               </Link>

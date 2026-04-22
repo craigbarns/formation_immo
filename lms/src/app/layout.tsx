@@ -3,9 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/toast";
 import { FocusModeProvider } from "@/components/focus-mode";
-import { AICoachButton } from "@/components/ai-coach";
-import { StreakReminder } from "@/components/retention";
-import { ProactiveCoachBanner } from "@/components/ai-coach/ProactiveCoachBanner";
 import { PwaRegister } from "@/components/PwaRegister";
 
 const geistSans = Geist({
@@ -20,19 +17,20 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Formation agent immobilier — 42 h",
-    template: "%s | Formation 42 h",
+    default: "MonPassFormation — Formations professionnelles",
+    template: "%s | MonPassFormation",
   },
   description:
-    "Parcours professionnel : juridique, transaction, financement, marketing et terrain. Leçons, QCM, fiches et simulateurs.",
+    "Plateforme de formations professionnelles en ligne, avec un premier module immobilier 42h conforme ALUR 2026.",
+  metadataBase: new URL("https://www.monpassformation.com"),
   openGraph: {
-    title: "Formation agent immobilier — 42 h",
+    title: "MonPassFormation — Formations professionnelles",
     description:
-      "5 modules, leçons audio, QCM, simulateurs et fiches — aligné sur la pratique terrain.",
+      "Catalogue de formations professionnelles en ligne, dont le module immobilier 42h conforme ALUR 2026.",
     locale: "fr_FR",
     type: "website",
-    siteName: "Formation 42h",
-    url: "https://formation-immo.vercel.app",
+    siteName: "MonPassFormation",
+    url: "https://www.monpassformation.com",
   },
 };
 
@@ -57,9 +55,6 @@ export default function RootLayout({
         <FocusModeProvider>
           <ToastProvider>
             {children}
-            <StreakReminder />
-            <ProactiveCoachBanner />
-            <AICoachButton />
             <PwaRegister />
           </ToastProvider>
         </FocusModeProvider>
@@ -67,4 +62,3 @@ export default function RootLayout({
     </html>
   );
 }
-
