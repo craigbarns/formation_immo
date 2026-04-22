@@ -23,34 +23,34 @@ export default function RegisterForm() {
     <div className="formation-canvas relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-12">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <p className="inline-flex items-center gap-2 rounded-full border border-brand-navy/10 bg-white/80 px-4 py-1.5 text-xs font-semibold text-brand-navy shadow-sm">
+          <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/20 bg-brand-gold/5 px-4 py-1.5 text-xs font-semibold text-brand-gold shadow-sm">
             <Sparkles className="h-3.5 w-3.5 text-brand-gold" aria-hidden />
             Nouveau sur la plateforme
           </p>
 
           <div className="mt-5 flex justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-navy text-3xl shadow-lg ring-1 ring-brand-navy/20">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-gold shadow-lg ring-1 ring-brand-gold/20">
               <EmojiIcon emoji="🏛️" className="h-9 w-9" />
             </div>
           </div>
 
-          <h1 className="mt-4 text-2xl font-bold tracking-tight text-brand-navy md:text-3xl">
+          <h1 className="mt-4 text-2xl font-bold tracking-tight text-white md:text-3xl">
             Créer votre compte
           </h1>
-          <p className="mt-2 text-sm leading-relaxed text-zinc-600">
+          <p className="mt-2 text-sm leading-relaxed text-zinc-400">
             Inscrivez-vous pour accéder à la formation 42 h et suivre votre progression.
           </p>
         </div>
 
-        <div className="card-elevated overflow-hidden rounded-3xl border-brand-navy/10">
-          <div className="h-1.5 bg-gradient-to-r from-brand-gold via-brand-navy-soft to-brand-navy" aria-hidden />
+        <div className="card-elevated overflow-hidden rounded-3xl border-white/10 bg-white/5 backdrop-blur-xl">
+          <div className="h-1.5 bg-gradient-to-r from-brand-gold/50 via-brand-gold to-brand-gold/50" aria-hidden />
           <div className="p-8">
             <form action={handleSubmit} className="space-y-5" aria-busy={loading}>
               <input type="hidden" name="next" value={next} />
 
               <div>
-                <label htmlFor="full_name" className="mb-2 flex items-center gap-2 text-sm font-semibold text-zinc-800">
-                  <User className="h-4 w-4 text-brand-navy/70" aria-hidden />
+                <label htmlFor="full_name" className="mb-2 flex items-center gap-2 text-sm font-semibold text-zinc-300">
+                  <User className="h-4 w-4 text-brand-gold/70" aria-hidden />
                   Nom complet
                 </label>
                 <input
@@ -59,14 +59,14 @@ export default function RegisterForm() {
                   type="text"
                   autoComplete="name"
                   required
-                  className="link-focus w-full rounded-xl border border-zinc-200 bg-zinc-50/80 px-4 py-3.5 text-zinc-900 placeholder:text-zinc-400"
+                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-2 focus:ring-brand-gold/20"
                   placeholder="Jean Dupont"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="mb-2 flex items-center gap-2 text-sm font-semibold text-zinc-800">
-                  <Mail className="h-4 w-4 text-brand-navy/70" aria-hidden />
+                <label htmlFor="email" className="mb-2 flex items-center gap-2 text-sm font-semibold text-zinc-300">
+                  <Mail className="h-4 w-4 text-brand-gold/70" aria-hidden />
                   Email
                 </label>
                 <input
@@ -75,14 +75,14 @@ export default function RegisterForm() {
                   type="email"
                   autoComplete="email"
                   required
-                  className="link-focus w-full rounded-xl border border-zinc-200 bg-zinc-50/80 px-4 py-3.5 text-zinc-900 placeholder:text-zinc-400"
+                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-2 focus:ring-brand-gold/20"
                   placeholder="vous@exemple.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="mb-2 flex items-center gap-2 text-sm font-semibold text-zinc-800">
-                  <Lock className="h-4 w-4 text-brand-navy/70" aria-hidden />
+                <label htmlFor="password" className="mb-2 flex items-center gap-2 text-sm font-semibold text-zinc-300">
+                  <Lock className="h-4 w-4 text-brand-gold/70" aria-hidden />
                   Mot de passe
                 </label>
                 <input
@@ -92,14 +92,14 @@ export default function RegisterForm() {
                   autoComplete="new-password"
                   required
                   minLength={6}
-                  className="link-focus w-full rounded-xl border border-zinc-200 bg-zinc-50/80 px-4 py-3.5 text-zinc-900 placeholder:text-zinc-400"
+                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-2 focus:ring-brand-gold/20"
                   placeholder="••••••••"
                 />
                 <p className="mt-1 text-xs text-zinc-500">Minimum 6 caractères</p>
               </div>
 
               {error ? (
-                <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700" role="alert">
+                <p className="rounded-lg bg-red-500/10 border border-red-500/20 px-3 py-2 text-sm text-red-400" role="alert">
                   {error}
                 </p>
               ) : null}
@@ -121,7 +121,7 @@ export default function RegisterForm() {
             </form>
 
             <div className="mt-5 text-center text-sm">
-              <Link href={`/login?next=${encodeURIComponent(next)}`} className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:underline">
+              <Link href={`/login?next=${encodeURIComponent(next)}`} className="inline-flex items-center gap-1 font-semibold text-brand-gold hover:text-brand-gold/80 hover:underline">
                 <ArrowLeft className="h-4 w-4" />
                 Déjà un compte ? Se connecter
               </Link>
