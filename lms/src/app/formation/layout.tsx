@@ -18,6 +18,20 @@ export default async function FormationLayout({
     redirect("/login?next=/formation");
   }
 
+  // 🔒 VÉRIFICATION DU PAIEMENT STRIPE
+  // On vérifie si l'email de l'utilisateur correspond à un achat validé
+  const { data: subscription } = await supabase
+    .from("user_subscriptions")
+    .select("status")
+    .eq("email", user.email)
+    .eq("formation_id", "immobilier")
+    .single();
+
+  if (!subscription || subscription.status !== "active") {
+    // Si l'utilisateur n'a pas payé, on le renvoie au tunnel de vente
+    redirect("/checkout/immobilier?error=accès_non_autorisé");
+  }
+
   return (
     <FormationShell>
       {children}

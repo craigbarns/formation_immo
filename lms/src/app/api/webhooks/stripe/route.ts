@@ -42,15 +42,8 @@ export async function POST(request: Request) {
     console.log(`Payment successful for ${customerEmail} (Formation: ${formationId})`);
 
     if (customerEmail) {
-      // 1. Chercher si l'utilisateur existe déjà
-      const { data: user } = await supabaseAdmin
-        .from("profiles")
-        .select("id")
-        .eq("email_auth", customerEmail) // Note: On devra peut-être adapter selon ta structure
-        .single();
-
-      // 2. Inscrire l'accès dans une nouvelle table 'user_subscriptions'
-      // On crée la table si elle n'existe pas via SQL plus tard
+      // 1. Inscrire l'accès dans la table 'user_subscriptions'
+      // Le user_id sera lié lors de l'inscription ou de la prochaine connexion
       const { error: subError } = await supabaseAdmin
         .from("user_subscriptions")
         .upsert({
@@ -58,7 +51,6 @@ export async function POST(request: Request) {
           formation_id: formationId,
           stripe_session_id: session.id,
           status: "active",
-          user_id: user?.id || null, // Sera lié plus tard si l'user n'existe pas encore
         }, { onConflict: "email,formation_id" });
 
       if (subError) {
