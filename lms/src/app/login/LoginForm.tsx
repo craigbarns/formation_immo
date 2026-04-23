@@ -24,11 +24,11 @@ export default function LoginForm() {
       <style>{`
         @keyframes floatIcon {
           0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
-          50% { transform: translateY(-14px) rotate(6deg); opacity: 0.2; }
+          50% { transform: translateY(-14px) rotate(6deg); opacity: 0.15; }
         }
         @keyframes floatIcon2 {
           0%, 100% { transform: translateY(0px) rotate(-4deg); opacity: 0.08; }
-          50% { transform: translateY(-10px) rotate(4deg); opacity: 0.15; }
+          50% { transform: translateY(-10px) rotate(4deg); opacity: 0.12; }
         }
         @keyframes fadeInCard {
           from { opacity: 0; transform: translateY(16px) scale(0.97); }
@@ -41,43 +41,43 @@ export default function LoginForm() {
         .login-card { animation: fadeInCard 0.6s ease-out forwards; }
       `}</style>
 
-      <span className="pointer-events-none float-icon-1 fixed left-[6%] top-[12%] select-none text-brand-gold/10" aria-hidden><Home className="h-12 w-12" /></span>
-      <span className="pointer-events-none float-icon-2 fixed left-[12%] bottom-[18%] select-none text-brand-gold/10" aria-hidden><ClipboardList className="h-10 w-10" /></span>
-      <span className="pointer-events-none float-icon-3 fixed right-[8%] top-[20%] select-none text-brand-gold/10" aria-hidden><Scale className="h-12 w-12" /></span>
-      <span className="pointer-events-none float-icon-4 fixed right-[14%] bottom-[14%] select-none text-brand-gold/10" aria-hidden><Briefcase className="h-10 w-10" /></span>
+      <span className="pointer-events-none float-icon-1 fixed left-[6%] top-[12%] select-none text-brand-gold/20" aria-hidden><Home className="h-12 w-12" /></span>
+      <span className="pointer-events-none float-icon-2 fixed left-[12%] bottom-[18%] select-none text-brand-gold/20" aria-hidden><ClipboardList className="h-10 w-10" /></span>
+      <span className="pointer-events-none float-icon-3 fixed right-[8%] top-[20%] select-none text-brand-gold/20" aria-hidden><Scale className="h-12 w-12" /></span>
+      <span className="pointer-events-none float-icon-4 fixed right-[14%] bottom-[14%] select-none text-brand-gold/20" aria-hidden><Briefcase className="h-10 w-10" /></span>
 
       <div className="login-card w-full max-w-md">
         <div className="mb-8 text-center">
-          <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/20 bg-brand-gold/5 px-4 py-1.5 text-xs font-semibold text-brand-gold shadow-sm">
+          <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-navy-hero px-4 py-1.5 text-xs font-bold text-brand-gold shadow-lg">
             <Sparkles className="h-3.5 w-3.5 text-brand-gold" aria-hidden />
             Espace réservé aux inscrits
           </p>
 
           <div className="mt-5 flex justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-gold shadow-lg ring-1 ring-brand-gold/20">
-              <Building2 className="h-8 w-8 text-brand-navy" />
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-gold shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+              <Building2 className="h-8 w-8 text-brand-navy-deep" />
             </div>
           </div>
 
-          <h1 className="mt-4 text-2xl font-bold tracking-tight text-white md:text-3xl">
+          <h1 className="mt-5 text-3xl font-black tracking-tight text-white md:text-4xl">
             Accédez à votre formation
           </h1>
-          <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+          <p className="mt-3 text-base font-medium leading-relaxed text-white/80">
             Connectez-vous pour retrouver l&apos;intégralité du parcours 42 h
             et suivre votre progression sur tous vos appareils.
           </p>
         </div>
 
-        <div className="card-elevated overflow-hidden rounded-3xl border-white/10 bg-white/5 backdrop-blur-xl">
-          <div className="h-1.5 bg-gradient-to-r from-brand-gold/50 via-brand-gold to-brand-gold/50" aria-hidden />
-          <div className="p-8">
-            <form action={handleSubmit} className="space-y-5" aria-busy={loading}>
+        <div className="overflow-hidden rounded-[2rem] border border-white/20 bg-[#0a1224] shadow-2xl backdrop-blur-2xl">
+          <div className="h-1.5 bg-gradient-to-r from-brand-gold/40 via-brand-gold to-brand-gold/40" aria-hidden />
+          <div className="p-8 sm:p-10">
+            <form action={handleSubmit} className="space-y-6" aria-busy={loading}>
               <input type="hidden" name="next" value={next} />
 
               <div>
-                <label htmlFor="email" className="mb-2 flex items-center gap-2 text-sm font-semibold text-zinc-300">
-                  <Mail className="h-4 w-4 text-brand-gold/70" aria-hidden />
-                  Email
+                <label htmlFor="email" className="mb-2.5 flex items-center gap-2 text-sm font-bold text-white">
+                  <Mail className="h-4 w-4 text-brand-gold" aria-hidden />
+                  Email professionnel
                 </label>
                 <input
                   id="email"
@@ -85,14 +85,14 @@ export default function LoginForm() {
                   type="email"
                   autoComplete="email"
                   required
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-2 focus:ring-brand-gold/20"
-                  placeholder="vous@exemple.com"
+                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all"
+                  placeholder="votre@email.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="mb-2 flex items-center gap-2 text-sm font-semibold text-zinc-300">
-                  <Lock className="h-4 w-4 text-brand-gold/70" aria-hidden />
+                <label htmlFor="password" className="mb-2.5 flex items-center gap-2 text-sm font-bold text-white">
+                  <Lock className="h-4 w-4 text-brand-gold" aria-hidden />
                   Mot de passe
                 </label>
                 <input
@@ -101,19 +101,19 @@ export default function LoginForm() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-2 focus:ring-brand-gold/20"
+                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all"
                   placeholder="••••••••"
                 />
               </div>
 
               {error ? (
-                <p className="rounded-lg bg-red-500/10 border border-red-500/20 px-3 py-2 text-sm text-red-400" role="alert">
+                <p className="rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm font-bold text-red-400" role="alert">
                   {error}
                 </p>
               ) : null}
 
               {message ? (
-                <p className="rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 text-sm text-emerald-400" role="status">
+                <p className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-4 py-3 text-sm font-bold text-emerald-400" role="status">
                   {message}
                 </p>
               ) : null}
@@ -121,12 +121,12 @@ export default function LoginForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="btn-primary-solid inline-flex w-full items-center justify-center gap-2 py-3.5 text-base disabled:opacity-60"
+                className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-brand-gold py-4 text-base font-black text-brand-navy-deep shadow-xl shadow-brand-gold/10 transition hover:bg-white hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
               >
                 {loading ? (
                   <>
                     <Loader2 className="h-5 w-5 shrink-0 animate-spin" aria-hidden />
-                    Connexion…
+                    Connexion en cours…
                   </>
                 ) : (
                   "Entrer dans l'espace formation"
@@ -134,43 +134,44 @@ export default function LoginForm() {
               </button>
             </form>
 
-            <div className="mt-5 flex items-center justify-between text-sm">
-              <Link href={`/register?next=${encodeURIComponent(next)}`} className="inline-flex items-center gap-1 font-semibold text-brand-gold hover:text-brand-gold/80 hover:underline">
-                <UserPlus className="h-4 w-4" />
-                Créer un compte
-              </Link>
-              <Link href="/login?reset=1" className="text-zinc-400 hover:text-zinc-300">
-                Mot de passe oublié ?
-              </Link>
+            <div className="mt-6 flex flex-col gap-4 text-center">
+              <div className="flex items-center justify-between text-sm font-bold">
+                <Link href={`/register?next=${encodeURIComponent(next)}`} className="text-brand-gold hover:text-white transition-colors underline decoration-brand-gold/30 underline-offset-4">
+                  Créer un compte
+                </Link>
+                <Link href="/login?reset=1" className="text-white/60 hover:text-white transition-colors">
+                  Mot de passe oublié ?
+                </Link>
+              </div>
             </div>
 
-            <div className="mt-7 rounded-2xl border border-brand-gold/20 bg-brand-gold/5 px-5 py-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-brand-gold/80 mb-3">
-                Ce que vous allez apprendre
+            <div className="mt-8 rounded-2xl border border-white/5 bg-white/[0.03] p-5">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-4 text-center">
+                Au programme de votre formation
               </p>
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {[
-                  { Icon: Scale, text: "Juridique & ALUR" },
+                  { Icon: Scale, text: "Juridique & ALUR 2026" },
                   { Icon: CircleDollarSign, text: "Financement & fiscalité" },
                   { Icon: Handshake, text: "Techniques de vente" },
                 ].map(({ Icon, text }) => (
-                  <li key={text} className="flex items-center gap-2.5 text-sm font-medium text-zinc-300">
-                    <span className="text-brand-gold" aria-hidden><Icon className="h-4 w-4" /></span>
+                  <li key={text} className="flex items-center gap-3 text-sm font-bold text-white/90">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-gold/10 text-brand-gold" aria-hidden><Icon className="h-3.5 w-3.5" /></span>
                     {text}
                   </li>
                 ))}
               </ul>
             </div>
 
-            <p className="mt-6 text-center text-sm text-zinc-400">
-              <Link href="/" className="font-semibold text-brand-gold underline-offset-4 hover:underline">
+            <p className="mt-8 text-center">
+              <Link href="/" className="text-xs font-black uppercase tracking-widest text-white/40 hover:text-brand-gold transition-colors">
                 ← Retour à l&apos;accueil
               </Link>
             </p>
           </div>
         </div>
 
-        <p className="mt-6 text-center text-sm font-medium italic text-white/40">
+        <p className="mt-8 text-center text-sm font-bold italic text-white/30">
           &ldquo;Votre réussite dans l&apos;immobilier commence ici.&rdquo;
         </p>
       </div>
