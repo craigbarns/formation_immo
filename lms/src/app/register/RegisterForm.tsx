@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Loader2, Lock, Mail, User, Sparkles, ArrowLeft } from "lucide-react";
+import { Loader2, Lock, Mail, User, Sparkles, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { signup } from "@/app/actions/auth";
 import { useEffect } from "react";
