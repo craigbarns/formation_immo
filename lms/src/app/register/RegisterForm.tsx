@@ -6,12 +6,23 @@ import { useSearchParams } from "next/navigation";
 import { Loader2, Lock, Mail, User, Sparkles, ArrowLeft } from "lucide-react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { signup } from "@/app/actions/auth";
+import { useEffect } from "react";
 
 export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
+  const [prefilledEmail, setPrefilledEmail] = useState("");
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
+  const sessionId = searchParams.get("session_id");
   const next = searchParams.get("next") ?? "/formation";
+
+  // Récupérer l'email de Stripe si on arrive d'un paiement
+  useEffect(() => {
+    if (sessionId) {
+      // On pourrait appeler une API pour récupérer l'email exact, 
+      // mais pour l'instant on laisse l'utilisateur le saisir ou on le passera en query param
+    }
+  }, [sessionId]);
 
   async function handleSubmit(formData: FormData) {
     setLoading(true);
@@ -23,10 +34,19 @@ export default function RegisterForm() {
     <div className="formation-canvas relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-12">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/20 bg-brand-gold/5 px-4 py-1.5 text-xs font-semibold text-brand-gold shadow-sm">
-            <Sparkles className="h-3.5 w-3.5 text-brand-gold" aria-hidden />
-            Nouveau sur la plateforme
-          </p>
+          {sessionId ? (
+            <div className="mb-6 animate-bounce">
+              <p className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-bold text-emerald-400 backdrop-blur-md">
+                <CheckCircle2 className="h-4 w-4" />
+                Paiement validé ! Créez votre accès
+              </p>
+            </div>
+          ) : (
+            <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/20 bg-brand-gold/5 px-4 py-1.5 text-xs font-semibold text-brand-gold shadow-sm">
+              <Sparkles className="h-3.5 w-3.5 text-brand-gold" aria-hidden />
+              Nouveau sur la plateforme
+            </p>
+          )}
 
           <div className="mt-5 flex justify-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-gold shadow-lg ring-1 ring-brand-gold/20">
