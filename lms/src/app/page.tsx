@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import {
   ArrowRight,
   BookOpen,
@@ -252,7 +254,13 @@ const testimonials = [
 
 const VERCEL_APP_URL = "https://app.monpassformation.com";
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Redirection automatique pour le sous-domaine "app"
+  const host = (await headers()).get("host");
+  if (host === "app.monpassformation.com") {
+    redirect("/formation");
+  }
+
   return (
     <div className="min-h-screen bg-white text-zinc-950">
       <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/95 backdrop-blur">
