@@ -1,12 +1,20 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { verifySubscription } from "@/lib/access";
 
 export async function GET(request: Request) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) {
-    return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
+  
+  // ── Auth & Subscription Check ──
+  let user;
+  try {
+    const access = await verifySubscription();
+    user = access.user;
+  } catch (err: any) {
+    return NextResponse.json(
+      { error: err.message || "Accès refusé" },
+      { status: 403 }
+    );
   }
 
   const { searchParams } = new URL(request.url);

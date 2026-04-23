@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { z } from "zod";
+import { verifySubscription } from "@/lib/access";
 
 const RequestSchema = z.object({
   currentLessonTimeMs: z.number().optional(),
@@ -26,9 +27,18 @@ function daysSince(dateStr: string): number {
 
 export async function POST(request: Request) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) return NextResponse.json({ message: null });
+  
+  // ── Auth & Subscription Check ──
+  let user;
+  try {
+    const access = await verifySubscription();
+    user = access.user;
+  } catch (err: any) {
+    return NextResponse.json(
+      { error: err.message || "Accès refusé" },
+      { status: 403 }
+    );
+  }
 
   const { allowed } = checkRateLimit(user.id + ":proactive");
   if (!allowed) return NextResponse.json({ message: null });

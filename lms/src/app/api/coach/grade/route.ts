@@ -1,8 +1,9 @@
 import { generateText } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
-import { createClient } from "@/lib/supabase/server";
+
 import { checkRateLimit } from "@/lib/rate-limit";
 import { z } from "zod";
+import { verifySubscription } from "@/lib/access";
 
 const openai = createOpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -34,11 +35,16 @@ Format attendu :
 }`;
 
 export async function POST(request: Request) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) {
-    return new Response(JSON.stringify({ error: "Non authentifié" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  // ── Auth & Subscription Check ──
+  let user;
+  try {
+    const access = await verifySubscription();
+    user = access.user;
+  } catch (err: any) {
+    return new Response(
+      JSON.stringify({ error: err.message || "Accès refusé" }),
+      { status: 403, headers: { "Content-Type": "application/json" } }
+    );
   }
 
   const { allowed } = checkRateLimit(user.id + ":grade");

@@ -1,8 +1,9 @@
 import { streamText } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
-import { createClient } from "@/lib/supabase/server";
+
 import { checkRateLimit } from "@/lib/rate-limit";
 import { CoachRequestSchema } from "@/lib/validation";
+import { verifySubscription } from "@/lib/access";
 
 const SYSTEM_PROMPT = `Tu es Marie, coach experte en immobilier français avec 15 ans d'expérience terrain.
 Tu accompagnes des agents immobiliers en formation professionnelle (certification Loi ALUR).
@@ -43,14 +44,15 @@ export async function POST(request: Request) {
 
   const openai = createOpenAI({ apiKey });
 
-  // ── Auth ──
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) {
+  // ── Auth & Subscription Check ──
+  let user;
+  try {
+    const access = await verifySubscription();
+    user = access.user;
+  } catch (err: any) {
     return new Response(
-      JSON.stringify({ error: "Non authentifié" }),
-      { status: 401, headers: { "Content-Type": "application/json" } }
+      JSON.stringify({ error: err.message || "Accès refusé" }),
+      { status: 403, headers: { "Content-Type": "application/json" } }
     );
   }
 
