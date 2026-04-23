@@ -4,7 +4,7 @@ import Stripe from "stripe";
 export const dynamic = "force-dynamic";
 
 const stripe = process.env.STRIPE_SECRET_KEY 
-  ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2025-01-27" as any })
+  ? new Stripe(process.env.STRIPE_SECRET_KEY)
   : null;
 
 const VERCEL_APP_URL = "https://app.monpassformation.com";
