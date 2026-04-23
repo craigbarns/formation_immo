@@ -3,16 +3,24 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+export const dynamic = "force-dynamic";
 
-// Client Supabase avec Service Role pour contourner RLS et inscrire l'accès
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+// Initialisation sécurisée pour éviter les crashs au build
+const stripe = process.env.STRIPE_SECRET_KEY 
+  ? new Stripe(process.env.STRIPE_SECRET_KEY) 
+  : null;
+
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+const supabaseAdmin = (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY)
+  ? createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY)
+  : null;
 
 export async function POST(request: Request) {
+  if (!stripe || !supabaseAdmin || !webhookSecret) {
+    console.error("Webhook configuration missing");
+    return NextResponse.json({ error: "Configuration missing" }, { status: 500 });
+  }
   const body = await request.text();
   const signature = (await headers()).get("stripe-signature") as string;
 
