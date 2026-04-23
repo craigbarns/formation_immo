@@ -11,17 +11,27 @@ import { useEffect } from "react";
 export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const [prefilledEmail, setPrefilledEmail] = useState("");
+  const [prefilledName, setPrefilledName] = useState("");
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
   const sessionId = searchParams.get("session_id");
   const next = searchParams.get("next") ?? "/formation";
 
-  // Récupérer l'email de Stripe si on arrive d'un paiement
+  // Récupérer les infos de Stripe si on arrive d'un paiement
   useEffect(() => {
-    if (sessionId) {
-      // On pourrait appeler une API pour récupérer l'email exact, 
-      // mais pour l'instant on laisse l'utilisateur le saisir ou on le passera en query param
+    async function fetchSession() {
+      if (sessionId) {
+        try {
+          const res = await fetch(`/api/checkout/session?session_id=${sessionId}`);
+          const data = await res.json();
+          if (data.email) setPrefilledEmail(data.email);
+          if (data.name) setPrefilledName(data.name);
+        } catch (err) {
+          console.error("Erreur récupération session Stripe:", err);
+        }
+      }
     }
+    fetchSession();
   }, [sessionId]);
 
   async function handleSubmit(formData: FormData) {
@@ -79,6 +89,8 @@ export default function RegisterForm() {
                   type="text"
                   autoComplete="name"
                   required
+                  defaultValue={prefilledName}
+                  key={`name-${prefilledName}`}
                   className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all"
                   placeholder="Jean Dupont"
                 />
@@ -95,6 +107,8 @@ export default function RegisterForm() {
                   type="email"
                   autoComplete="email"
                   required
+                  defaultValue={prefilledEmail}
+                  key={`email-${prefilledEmail}`}
                   className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all"
                   placeholder="vous@exemple.com"
                 />

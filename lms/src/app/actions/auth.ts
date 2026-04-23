@@ -31,9 +31,10 @@ export async function login(formData: FormData) {
 export async function signup(formData: FormData) {
   const supabase = await createClient();
   const next = getValidNext(formData.get("next"));
+  const email = formData.get("email") as string;
 
   const data = {
-    email: formData.get("email") as string,
+    email,
     password: formData.get("password") as string,
     options: {
       data: {
@@ -43,14 +44,29 @@ export async function signup(formData: FormData) {
     },
   };
 
-  const { error } = await supabase.auth.signUp(data);
+  const { data: authData, error } = await supabase.auth.signUp(data);
 
   if (error) {
     redirect("/register?error=" + encodeURIComponent(error.message));
   }
 
+  // 🔗 LIEN AUTOMATIQUE AVEC L'ACHAT STRIPE
+  // Si un achat existe déjà pour cet email, on lie le user_id
+  if (authData.user) {
+    await supabase
+      .from("user_subscriptions")
+      .update({ user_id: authData.user.id })
+      .eq("email", email);
+  }
+
   revalidatePath("/", "layout");
-  redirect(`/login?next=${encodeURIComponent(next)}&message=Vérifiez votre email pour confirmer votre compte.`);
+  
+  // Message personnalisé si c'est un retour de paiement
+  const message = next.includes("session_id") 
+    ? "Compte créé ! Confirmez votre email pour accéder à votre formation."
+    : "Vérifiez votre email pour confirmer votre compte.";
+
+  redirect(`/login?next=${encodeURIComponent(next)}&message=${encodeURIComponent(message)}`);
 }
 
 export async function logout() {
