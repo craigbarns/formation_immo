@@ -12,7 +12,18 @@ export async function verifySubscription() {
     throw new Error("Non authentifié");
   }
 
-  // Vérification dans la table des abonnements
+  // 1. Vérifier si l'utilisateur est ADMIN
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  if (profile?.role === "admin") {
+    return { user, isAdmin: true };
+  }
+
+  // 2. Sinon, vérification dans la table des abonnements
   const { data: subscription, error } = await supabase
     .from("user_subscriptions")
     .select("status")
@@ -24,5 +35,5 @@ export async function verifySubscription() {
     throw new Error("Accès refusé : Aucun abonnement actif trouvé");
   }
 
-  return { user };
+  return { user, isAdmin: false };
 }
