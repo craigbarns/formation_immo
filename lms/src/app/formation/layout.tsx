@@ -4,6 +4,7 @@ import { AICoachButton } from "@/components/ai-coach";
 import { ProactiveCoachBanner } from "@/components/ai-coach/ProactiveCoachBanner";
 import { StreakReminder } from "@/components/retention";
 import { StudyReminder } from "@/components/retention/StudyReminder";
+import { AttendanceTracker } from "@/components/AttendanceTracker";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function FormationLayout({
@@ -43,6 +44,7 @@ export default async function FormationLayout({
 
   return (
     <FormationShell>
+      <AttendanceTracker />
       {children}
       <StreakReminder />
       <ProactiveCoachBanner />
