@@ -22,11 +22,14 @@ import {
   Calendar,
   BarChart3,
   CheckCircle2,
-  FileText
+  FileText,
+  Download,
+  History
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { CircularProgress } from "@/components/charts/CircularProgress";
+import { exportAttendanceToCSV } from "@/lib/utils/export";
 
 interface SupabaseLearner {
   id: string;
@@ -60,6 +63,8 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedLearner, setSelectedLearner] = useState<LearnerStats | null>(null);
+  const [attendanceLogs, setAttendanceLogs] = useState<any[]>([]);
+  const [loadingLogs, setLoadingLogs] = useState(false);
   
   const totalLessons = COURSE.reduce((a, m) => a + m.lessons.length, 0);
   const totalModules = COURSE.length;
@@ -112,6 +117,25 @@ export default function AdminPage() {
 
     fetchLearners();
   }, []);
+
+  // Fetch logs when a learner is selected
+  useEffect(() => {
+    async function fetchLogs() {
+      if (selectedLearner) {
+        setLoadingLogs(true);
+        const supabase = createClient();
+        const { data } = await supabase
+          .from("connection_logs")
+          .select("*")
+          .eq("user_id", selectedLearner.id)
+          .order("started_at", { ascending: false });
+        
+        setAttendanceLogs(data || []);
+        setLoadingLogs(false);
+      }
+    }
+    fetchLogs();
+  }, [selectedLearner]);
 
   const filteredLearners = learners.filter(l => 
     l.full_name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -262,7 +286,10 @@ export default function AdminPage() {
                 <p className="text-xs text-white/40 leading-relaxed italic mb-6">
                     Générez un rapport Excel complet de l&apos;activité des apprenants pour votre conformité Qualiopi.
                 </p>
-                <button className="w-full rounded-xl bg-brand-gold px-6 py-4 text-xs font-black uppercase tracking-widest text-brand-navy transition hover:bg-white shadow-xl shadow-brand-gold/10">
+                <button 
+                  onClick={() => alert("Sélectionnez un apprenant pour exporter son relevé détaillé.")}
+                  className="w-full rounded-xl bg-brand-gold px-6 py-4 text-xs font-black uppercase tracking-widest text-brand-navy transition hover:bg-white shadow-xl shadow-brand-gold/10"
+                >
                     Exporter les scores (.xlsx)
                 </button>
             </div>
@@ -314,6 +341,14 @@ export default function AdminPage() {
                        <Badge icon={<Target size={10} />} label={`${selectedLearner.lessons_completed}/${totalLessons} Leçons`} color="gold" />
                     </div>
                   </div>
+                  <div className="flex flex-col gap-3">
+                    <button 
+                      onClick={() => exportAttendanceToCSV(selectedLearner.full_name, attendanceLogs)}
+                      className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-6 py-4 text-xs font-black uppercase tracking-widest text-brand-navy transition hover:bg-white shadow-xl shadow-brand-gold/10"
+                    >
+                      <Download size={14} /> Relevé Assiduité
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -349,45 +384,44 @@ export default function AdminPage() {
                         </div>
                     </div>
 
-                    {/* Detailed Exam Results */}
+                    {/* Attendance Logs Table */}
                     <div className="space-y-6">
                         <h3 className="text-xs font-black uppercase tracking-widest text-white/30 flex items-center gap-3">
-                            <FileText size={14} /> Résultats d&apos;examens
+                            <History size={14} /> Journal d&apos;assiduité récent
                         </h3>
                         <div className="rounded-3xl border border-white/10 bg-[#030712] shadow-inner overflow-hidden">
                             <table className="w-full text-left border-collapse">
                                 <thead className="bg-white/5 border-b border-white/10">
                                     <tr className="text-[9px] font-black uppercase tracking-widest text-brand-gold">
-                                        <th className="p-5">Module</th>
-                                        <th className="p-5 text-center">Score</th>
-                                        <th className="p-5 text-right">Dernière tentative</th>
+                                        <th className="p-5">Date & Heure</th>
+                                        <th className="p-5">Leçon / Module</th>
+                                        <th className="p-5 text-right">Durée</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-white/5">
-                                    {COURSE.map(mod => {
-                                        const exam = selectedLearner.exam_scores[mod.slug];
-                                        return (
-                                            <tr key={mod.slug} className="group hover:bg-white/[0.01] transition-colors">
-                                                <td className="p-5">
-                                                    <p className="text-sm font-black text-white/80 uppercase tracking-tight">{mod.title.replace(/^Module \d+ — /, "")}</p>
-                                                </td>
-                                                <td className="p-5 text-center">
-                                                    {exam ? (
-                                                        <span className={`text-sm font-black tabular-nums ${exam.score / exam.total >= 0.7 ? "text-emerald-400" : "text-amber-400"}`}>
-                                                            {exam.score}/{exam.total}
-                                                        </span>
-                                                    ) : (
-                                                        <span className="text-[10px] font-black text-white/10 uppercase tracking-widest">Non tenté</span>
-                                                    )}
-                                                </td>
-                                                <td className="p-5 text-right">
-                                                    <span className="text-xs font-medium text-white/30 tabular-nums">
-                                                        {exam ? new Date(exam.date).toLocaleDateString("fr-FR") : "—"}
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
+                                    {loadingLogs ? (
+                                      <tr><td colSpan={3} className="p-10 text-center text-white/20 text-xs font-bold uppercase animate-pulse">Chargement des relevés...</td></tr>
+                                    ) : attendanceLogs.length > 0 ? (
+                                      attendanceLogs.slice(0, 10).map((log, i) => (
+                                        <tr key={i} className="group hover:bg-white/[0.01] transition-colors">
+                                            <td className="p-5">
+                                                <p className="text-sm font-bold text-white/80">{new Date(log.started_at).toLocaleDateString('fr-FR')}</p>
+                                                <p className="text-[10px] font-medium text-white/20">{new Date(log.started_at).toLocaleTimeString('fr-FR')}</p>
+                                            </td>
+                                            <td className="p-5">
+                                                <p className="text-xs font-black text-white/60 uppercase tracking-tight">{log.lesson_slug || "Navigation"}</p>
+                                                <p className="text-[10px] font-bold text-white/20 uppercase tracking-widest mt-0.5">{log.module_slug || "Dashboard"}</p>
+                                            </td>
+                                            <td className="p-5 text-right">
+                                                <span className="text-sm font-black text-brand-gold tabular-nums">
+                                                    {Math.round(log.duration_seconds / 60)} min
+                                                </span>
+                                            </td>
+                                        </tr>
+                                      ))
+                                    ) : (
+                                      <tr><td colSpan={3} className="p-10 text-center text-white/20 text-[10px] font-black uppercase tracking-widest">Aucune donnée de session enregistrée</td></tr>
+                                    )}
                                 </tbody>
                             </table>
                         </div>
