@@ -18,18 +18,27 @@ export default async function FormationLayout({
     redirect("/login?next=/formation");
   }
 
-  // 🔒 VÉRIFICATION DU PAIEMENT STRIPE
-  // On vérifie si l'email de l'utilisateur correspond à un achat validé
-  const { data: subscription } = await supabase
-    .from("user_subscriptions")
-    .select("status")
-    .eq("email", user.email)
-    .eq("formation_id", "immobilier")
+  // 1. On vérifie d'abord si l'utilisateur est ADMIN
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
     .single();
 
-  if (!subscription || subscription.status !== "active") {
-    // Si l'utilisateur n'a pas payé, on le renvoie au tunnel de vente
-    redirect("/checkout/immobilier?error=accès_non_autorisé");
+  const isAdmin = profile?.role === "admin";
+
+  // 2. 🔒 VÉRIFICATION DU PAIEMENT STRIPE (sauf pour les admins)
+  if (!isAdmin) {
+    const { data: subscription } = await supabase
+      .from("user_subscriptions")
+      .select("status")
+      .eq("email", user.email)
+      .eq("formation_id", "immobilier")
+      .single();
+
+    if (!subscription || subscription.status !== "active") {
+      redirect("/checkout/immobilier?error=accès_non_autorisé");
+    }
   }
 
   return (
