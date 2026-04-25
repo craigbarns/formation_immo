@@ -18,10 +18,12 @@ function getInitialShow(): boolean {
 }
 
 export function StudyReminder() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return getInitialShow();
+  });
 
   useEffect(() => {
-    setShow(getInitialShow());
     localStorage.setItem(LAST_VISIT_KEY, String(Date.now()));
   }, []);
 

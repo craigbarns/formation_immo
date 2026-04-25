@@ -58,19 +58,50 @@ interface LearnerStats {
   completed_keys: Set<string>;
 }
 
+interface ConnectionLog {
+  id: string;
+  user_id: string;
+  started_at: string;
+  ended_at: string | null;
+  duration_seconds: number | null;
+  module_slug: string | null;
+  lesson_slug: string | null;
+}
+
 export default function AdminPage() {
   const [learners, setLearners] = useState<LearnerStats[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAccessDenied, setIsAccessDenied] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedLearner, setSelectedLearner] = useState<LearnerStats | null>(null);
-  const [attendanceLogs, setAttendanceLogs] = useState<any[]>([]);
+  const [attendanceLogs, setAttendanceLogs] = useState<ConnectionLog[]>([]);
   const [loadingLogs, setLoadingLogs] = useState(false);
-  
+
   const totalLessons = COURSE.reduce((a, m) => a + m.lessons.length, 0);
   const totalModules = COURSE.length;
 
+  // ── Guard: vérifier explicitement que l'utilisateur est admin ──
+  useEffect(() => {
+    async function checkAdminRole() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setIsAccessDenied(true); setLoading(false); return; }
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+      if (profile?.role !== "admin") {
+        setIsAccessDenied(true);
+        setLoading(false);
+      }
+    }
+    checkAdminRole();
+  }, []);
+
   useEffect(() => {
     async function fetchLearners() {
+      if (isAccessDenied) return;
       const supabase = createClient();
       
       const { data, error } = await supabase
@@ -116,7 +147,7 @@ export default function AdminPage() {
     }
 
     fetchLearners();
-  }, []);
+  }, [isAccessDenied]);
 
   // Fetch logs when a learner is selected
   useEffect(() => {
@@ -140,6 +171,19 @@ export default function AdminPage() {
   const filteredLearners = learners.filter(l => 
     l.full_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if (isAccessDenied) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+        <ShieldCheck className="h-16 w-16 text-red-400/60" />
+        <h1 className="text-2xl font-black text-white uppercase tracking-tight">Accès refusé</h1>
+        <p className="text-white/40 text-sm">Cette page est réservée aux formateurs.</p>
+        <Link href="/formation" className="text-brand-gold hover:underline text-sm font-bold">
+          Retour au parcours
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-12 pb-20">

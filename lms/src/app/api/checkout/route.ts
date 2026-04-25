@@ -1,3 +1,4 @@
+import { toErrorMessage } from "@/lib/utils/error";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -7,7 +8,8 @@ const stripe = process.env.STRIPE_SECRET_KEY
   ? new Stripe(process.env.STRIPE_SECRET_KEY)
   : null;
 
-const VERCEL_APP_URL = "https://app.monpassformation.com";
+const VERCEL_APP_URL =
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://app.monpassformation.com";
 
 export async function POST(request: Request) {
   if (!stripe) {
@@ -17,6 +19,11 @@ export async function POST(request: Request) {
     const { formationId } = await request.json();
 
     // Configuration du produit par défaut (Immobilier)
+    const unitAmount = parseInt(
+      process.env.FORMATION_PRICE_CENTS ?? "29900",
+      10
+    );
+
     const lineItems = [
       {
         price_data: {
@@ -26,7 +33,7 @@ export async function POST(request: Request) {
             description: "Accès complet aux 5 modules (42h) et certification MasterClass.",
             images: [`${VERCEL_APP_URL}/generated/fal/transaction/cover-immobilier.jpg`],
           },
-          unit_amount: 29900, // 299.00 €
+          unit_amount: unitAmount,
         },
         quantity: 1,
       },
@@ -44,8 +51,8 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (err: any) {
+  } catch (err) {
     console.error("Stripe Error:", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: toErrorMessage(err) }, { status: 500 });
   }
 }

@@ -118,10 +118,11 @@ export function NegotiationSimulator() {
 
   useEffect(() => {
     recordSimulatorUsed("negotiation");
-    // Lancer le premier message
     const firstNode = activeScenario.nodes[activeScenario.startNode];
     if (firstNode.type === "client") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setHistory([{ role: "client", text: firstNode.text }]);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCurrentNodeId(firstNode.next);
     }
   }, [activeScenario]);
@@ -258,12 +259,12 @@ export function NegotiationSimulator() {
                                     <div className="relative">
                                         <div className="absolute inset-0 rounded-full bg-brand-gold/20 blur-2xl animate-pulse" />
                                         <div className="relative text-6xl font-black text-white tabular-nums tracking-tighter shadow-2xl">
-                                            {(currentNode as any).score}<span className="text-2xl opacity-20">/100</span>
+                                            {(currentNode as Extract<DialogueNode, { type: "end" }>).score}<span className="text-2xl opacity-20">/100</span>
                                         </div>
                                     </div>
                                 </div>
                                 <p className="text-lg leading-relaxed text-white/80 italic font-medium max-w-lg mx-auto mb-8 px-4">
-                                    &laquo; {(currentNode as any).feedback} &raquo;
+                                    &laquo; {(currentNode as Extract<DialogueNode, { type: "end" }>).feedback} &raquo;
                                 </p>
                                 <button
                                     onClick={reset}

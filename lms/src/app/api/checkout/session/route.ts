@@ -1,3 +1,4 @@
+import { toErrorMessage } from "@/lib/utils/error";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -25,7 +26,7 @@ export async function GET(request: Request) {
       email: session.customer_details?.email,
       name: session.customer_details?.name 
     });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ error: toErrorMessage(err) }, { status: 500 });
   }
 }

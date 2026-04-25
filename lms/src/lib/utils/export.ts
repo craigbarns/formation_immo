@@ -1,6 +1,13 @@
 "use client";
 
-export function exportAttendanceToCSV(learnerName: string, logs: any[]) {
+interface ConnectionLog {
+  started_at: string;
+  duration_seconds: number | null;
+  module_slug: string | null;
+  lesson_slug: string | null;
+}
+
+export function exportAttendanceToCSV(learnerName: string, logs: ConnectionLog[]) {
   const headers = ["Date", "Heure début", "Module", "Leçon", "Durée (min)"];
   const rows = logs.map(log => {
     const date = new Date(log.started_at);
@@ -9,7 +16,7 @@ export function exportAttendanceToCSV(learnerName: string, logs: any[]) {
       date.toLocaleTimeString('fr-FR'),
       log.module_slug || "N/A",
       log.lesson_slug || "N/A",
-      Math.round(log.duration_seconds / 60)
+      Math.round((log.duration_seconds ?? 0) / 60)
     ];
   });
 
@@ -19,7 +26,7 @@ export function exportAttendanceToCSV(learnerName: string, logs: any[]) {
     headers,
     ...rows,
     [],
-    ["TOTAL GENERAL", "", "", "", Math.round(logs.reduce((acc, log) => acc + log.duration_seconds, 0) / 60) + " minutes"]
+    ["TOTAL GENERAL", "", "", "", Math.round(logs.reduce((acc, log) => acc + (log.duration_seconds ?? 0), 0) / 60) + " minutes"]
   ].map(e => e.join(",")).join("\n");
 
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });

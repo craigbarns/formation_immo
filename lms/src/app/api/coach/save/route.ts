@@ -1,3 +1,4 @@
+import { toErrorMessage } from "@/lib/utils/error";
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { checkRateLimit } from "@/lib/rate-limit";
@@ -12,9 +13,9 @@ export async function POST(request: Request) {
   try {
     const access = await verifySubscription();
     user = access.user;
-  } catch (err: any) {
+  } catch (err) {
     return NextResponse.json(
-      { error: err.message || "Accès refusé" },
+      { error: toErrorMessage(err, "Accès refusé") },
       { status: 403 }
     );
   }

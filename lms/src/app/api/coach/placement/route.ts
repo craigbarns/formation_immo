@@ -1,3 +1,4 @@
+import { toErrorMessage } from "@/lib/utils/error";
 import { streamText } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
 
@@ -46,9 +47,9 @@ export async function POST(request: Request) {
   try {
     const access = await verifySubscription();
     user = access.user;
-  } catch (err: any) {
+  } catch (err) {
     return new Response(
-      JSON.stringify({ error: err.message || "Accès refusé" }),
+      JSON.stringify({ error: toErrorMessage(err, "Accès refusé") }),
       { status: 403, headers: { "Content-Type": "application/json" } }
     );
   }

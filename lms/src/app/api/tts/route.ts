@@ -1,3 +1,4 @@
+import { toErrorMessage } from "@/lib/utils/error";
 import { NextResponse } from "next/server";
 
 import { checkRateLimit } from "@/lib/rate-limit";
@@ -10,14 +11,14 @@ export async function POST(request: Request) {
   try {
     const access = await verifySubscription();
     user = access.user;
-  } catch (err: any) {
+  } catch (err) {
     return NextResponse.json(
-      { error: err.message || "Accès refusé" },
+      { error: toErrorMessage(err, "Accès refusé") },
       { status: 403 }
     );
   }
 
-  const { allowed } = checkRateLimit(user.id + ":tts");
+  const { allowed } = await checkRateLimit(user.id + ":tts");
   if (!allowed) {
     return NextResponse.json(
       { error: "Trop de requêtes. Réessaie dans une minute." },

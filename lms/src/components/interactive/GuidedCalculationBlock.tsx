@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { GuidedCalculation, CalcStep } from "@/data/guided-calculations";
 import { motion, AnimatePresence } from "framer-motion";
@@ -338,7 +338,7 @@ export function GuidedCalculationBlock({
   );
 }
 
-function Trophy(props: any) {
+function Trophy(props: React.SVGProps<SVGSVGElement>) {
     return (
       <svg
         {...props}

@@ -28,7 +28,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Lint : activer quand `npm run lint` est vert (eslint strict sur tout le repo).
+      - name: Lint
+        run: npm run lint
+
       - name: Build
         env:
           # Valeurs factices pour un build CI (pas de secrets réels)

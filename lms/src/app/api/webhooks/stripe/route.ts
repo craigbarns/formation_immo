@@ -1,3 +1,4 @@
+import { toErrorMessage } from "@/lib/utils/error";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
@@ -28,9 +29,9 @@ export async function POST(request: Request) {
 
   try {
     event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
-  } catch (err: any) {
-    console.error(`Webhook signature verification failed: ${err.message}`);
-    return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
+  } catch (err) {
+    console.error(`Webhook signature verification failed: ${toErrorMessage(err)}`);
+    return NextResponse.json({ error: `Webhook Error: ${toErrorMessage(err)}` }, { status: 400 });
   }
 
   // Gérer l'événement de succès de paiement
