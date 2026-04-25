@@ -99,7 +99,7 @@ function TableView({ table }: { table: DataTable }) {
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
                 placeholder="Filtrer..."
-                className="w-48 rounded-xl border border-white/10 bg-white/5 pl-9 pr-4 py-2 text-sm text-white outline-none placeholder:text-white/20 focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10 transition-all"
+                className="w-full sm:w-48 rounded-xl border border-white/10 bg-white/5 pl-9 pr-4 py-2 text-sm text-white outline-none placeholder:text-white/20 focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10 transition-all"
             />
           </div>
           <button

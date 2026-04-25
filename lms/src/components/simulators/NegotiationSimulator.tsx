@@ -168,7 +168,7 @@ export function NegotiationSimulator() {
     <div className="space-y-10">
         <div className="flex flex-col lg:flex-row gap-10">
             {/* Chat Area */}
-            <div className="flex-1 flex flex-col h-[600px] rounded-[2.5rem] border border-white/10 bg-[#030712] shadow-2xl overflow-hidden">
+            <div className="flex-1 flex flex-col h-[450px] sm:h-[600px] rounded-[2.5rem] border border-white/10 bg-[#030712] shadow-2xl overflow-hidden">
                 <div className="bg-[#070d18] border-b border-white/5 px-8 py-6 flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <div className="h-10 w-10 rounded-xl bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center text-brand-gold">
@@ -288,7 +288,7 @@ export function NegotiationSimulator() {
             </div>
 
             {/* Sidebar Context */}
-            <aside className="lg:w-80 space-y-6">
+            <aside className="w-full lg:w-80 space-y-6">
                 <div className="rounded-[2rem] border border-white/10 bg-[#070d18] p-8 shadow-2xl">
                     <div className="flex items-center gap-3 mb-6">
                         <Brain className="text-brand-gold w-6 h-6" />

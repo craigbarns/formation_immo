@@ -356,7 +356,7 @@ export default function AdminPage() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-5xl h-[90vh] overflow-hidden rounded-[3rem] border border-white/10 bg-[#070d18] shadow-[0_50px_150px_rgba(0,0,0,0.8)]"
+              className="relative w-full max-w-5xl h-full sm:h-[90vh] overflow-hidden rounded-2xl sm:rounded-[3rem] border border-white/10 bg-[#070d18] shadow-[0_50px_150px_rgba(0,0,0,0.8)]"
             >
               {/* Modal Header */}
               <div className="relative border-b border-white/5 bg-[#030712] p-8 sm:p-12">
@@ -397,7 +397,7 @@ export default function AdminPage() {
               </div>
 
               {/* Modal Body */}
-              <div className="h-full overflow-y-auto p-8 sm:p-12 pb-32 scrollbar-hide">
+              <div className="h-full overflow-y-auto p-4 sm:p-8 lg:p-12 pb-20 sm:pb-32 scrollbar-hide">
                 <div className="grid gap-12 lg:grid-cols-3">
                   {/* Left Column: Progress & Exams */}
                   <div className="lg:col-span-2 space-y-12">
@@ -433,10 +433,10 @@ export default function AdminPage() {
                         <h3 className="text-xs font-black uppercase tracking-widest text-white/30 flex items-center gap-3">
                             <History size={14} /> Journal d&apos;assiduité récent
                         </h3>
-                        <div className="rounded-3xl border border-white/10 bg-[#030712] shadow-inner overflow-hidden">
-                            <table className="w-full text-left border-collapse">
+                        <div className="rounded-3xl border border-white/10 bg-[#030712] shadow-inner overflow-x-auto">
+                            <table className="w-full min-w-[400px] text-left border-collapse">
                                 <thead className="bg-white/5 border-b border-white/10">
-                                    <tr className="text-[9px] font-black uppercase tracking-widest text-brand-gold">
+                                    <tr className="text-[10px] font-black uppercase tracking-widest text-brand-gold">
                                         <th className="p-5">Date & Heure</th>
                                         <th className="p-5">Leçon / Module</th>
                                         <th className="p-5 text-right">Durée</th>

@@ -119,7 +119,7 @@ export default async function ImmobilierCheckoutPage() {
           <div className="rounded-3xl border border-zinc-200 bg-white p-8 shadow-2xl lg:sticky lg:top-24">
             <p className="text-xs font-black uppercase tracking-widest text-brand-gold">Tarif Unique</p>
             <div className="mt-4 flex items-baseline gap-2 border-b border-zinc-100 pb-8">
-              <span className="text-6xl font-black text-brand-navy">299€</span>
+              <span className="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-navy">299€</span>
               <span className="text-sm font-bold text-zinc-400">TTC</span>
             </div>
 
