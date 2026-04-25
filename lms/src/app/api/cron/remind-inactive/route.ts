@@ -31,7 +31,8 @@ export async function GET(request: Request) {
 
   let sent = 0;
 
-  for (const sub of subs as any[]) {
+  interface SubRow { email: string; profiles: { full_name: string | null; gamification_state: { last_login_date: string }[] } }
+  for (const sub of subs as SubRow[]) {
     const profile = sub.profiles;
     const lastLogin = profile?.gamification_state?.[0]?.last_login_date;
     if (!lastLogin) continue;
