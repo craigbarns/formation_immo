@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Clock } from "lucide-react";
 import { notFound } from "next/navigation";
-import { getLesson, getPrevNext, lessonId, type Lesson } from "@/data/course";
+import { getLesson, getPrevNext, lessonId, COURSE, type Lesson } from "@/data/course";
 import { getInteractiveScenario } from "@/data/interactive-scenarios";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getVisuals, type LessonVisuals } from "@/data/lesson-keyconcepts";
@@ -123,6 +123,14 @@ export default async function LessonPage({ params }: Props) {
   const { module: mod, lesson } = result;
   const key = lessonId(moduleSlug, lessonSlug);
   const nav = getPrevNext(moduleSlug, lessonSlug);
+  const moduleIndex = COURSE.findIndex((m) => m.slug === moduleSlug);
+  const moduleInfo = {
+    slug: moduleSlug,
+    title: mod.title,
+    number: moduleIndex + 1,
+    lessonKeys: mod.lessons.map((l) => lessonId(moduleSlug, l.slug)),
+    isLast: moduleIndex === COURSE.length - 1,
+  };
   const interactive =
     lesson.interactiveScenarioId != null
       ? getInteractiveScenario(lesson.interactiveScenarioId)
@@ -404,7 +412,7 @@ export default async function LessonPage({ params }: Props) {
       {/* Progress & module time */}
       <div className="mt-12 flex flex-wrap items-start gap-6">
         <div className="flex-1 min-w-[280px]">
-          <LessonProgress lessonKey={key} />
+          <LessonProgress lessonKey={key} moduleInfo={moduleInfo} />
         </div>
         <div className="flex-1 min-w-[280px]">
           <ModuleTimeTracker moduleSlug={moduleSlug} />

@@ -7,6 +7,14 @@ import { createClient } from "@/lib/supabase/client";
 import { completeLesson } from "@/lib/gamification";
 import { sounds } from "@/lib/sounds";
 
+interface ModuleInfo {
+  slug: string;
+  title: string;
+  number: number;
+  lessonKeys: string[];
+  isLast: boolean;
+}
+
 const FORMATION_PROGRESS_CHANGED_EVENT = "formation-progress-changed";
 
 function notifyProgressChanged() {
@@ -24,7 +32,7 @@ export function getStoredProgress(): Record<string, boolean> {
   }
 }
 
-export function LessonProgress({ lessonKey }: { lessonKey: string }) {
+export function LessonProgress({ lessonKey, moduleInfo }: { lessonKey: string; moduleInfo?: ModuleInfo }) {
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(true);
   const supabase = createClient();
@@ -66,13 +74,39 @@ export function LessonProgress({ lessonKey }: { lessonKey: string }) {
         completeLesson(lessonKey);
         sounds.lessonComplete();
         import("canvas-confetti").then((mod) => {
-          mod.default({ 
-            particleCount: 150, 
-            spread: 70, 
-            origin: { y: 0.7 }, 
-            colors: ["#d4af37", "#ffffff", "#1e3a8a", "#10b981"] 
+          mod.default({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.7 },
+            colors: ["#d4af37", "#ffffff", "#1e3a8a", "#10b981"]
           });
         });
+
+        // Vérifier si le module est complété → envoyer email
+        if (moduleInfo) {
+          const { data: rows } = await supabase
+            .from("lesson_progress")
+            .select("lesson_key")
+            .eq("user_id", user.id)
+            .eq("completed", true)
+            .in("lesson_key", moduleInfo.lessonKeys);
+          const completedKeys = new Set(rows?.map((r) => r.lesson_key) ?? []);
+          completedKeys.add(lessonKey); // inclure la leçon qu'on vient de valider
+          const moduleComplete = moduleInfo.lessonKeys.every((k) => completedKeys.has(k));
+          if (moduleComplete) {
+            const xp = moduleInfo.isLast ? 2500 : 500;
+            fetch("/api/email/module-complete", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                moduleTitle: moduleInfo.title,
+                moduleNumber: moduleInfo.number,
+                xp,
+                isCertification: moduleInfo.isLast,
+              }),
+            }).catch(() => {}); // fire-and-forget, non bloquant
+          }
+        }
       } else {
         await supabase
           .from("lesson_progress")
