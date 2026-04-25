@@ -458,7 +458,7 @@ export default function AdminPage() {
                                             </td>
                                             <td className="p-5 text-right">
                                                 <span className="text-sm font-black text-brand-gold tabular-nums">
-                                                    {Math.round(log.duration_seconds / 60)} min
+                                                    {Math.round((log.duration_seconds ?? 0) / 60)} min
                                                 </span>
                                             </td>
                                         </tr>
