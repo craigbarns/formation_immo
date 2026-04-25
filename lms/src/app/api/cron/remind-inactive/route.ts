@@ -42,7 +42,7 @@ export async function GET(request: Request) {
 
     // Envoyer uniquement à J+3 ou J+7 (pas tous les jours)
     if (lastLoginDate < threeDaysAgo && lastLoginDate >= sevenDaysAgo) {
-      await sendReminderEmail(sub.email, profile?.full_name, daysSince);
+      await sendReminderEmail(sub.email, profile?.full_name ?? undefined, daysSince);
       sent++;
     }
   }
