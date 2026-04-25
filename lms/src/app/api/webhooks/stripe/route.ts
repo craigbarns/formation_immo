@@ -1,4 +1,5 @@
 import { toErrorMessage } from "@/lib/utils/error";
+import { sendWelcomeEmail } from "@/lib/email/resend";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
@@ -58,6 +59,10 @@ export async function POST(request: Request) {
         console.error("Error saving subscription:", subError);
         return NextResponse.json({ error: "Error saving subscription" }, { status: 500 });
       }
+
+      // Envoyer l'email de bienvenue
+      const customerName = session.customer_details?.name ?? undefined;
+      await sendWelcomeEmail(customerEmail, customerName);
     }
   }
 
