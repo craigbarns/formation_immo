@@ -88,7 +88,7 @@ export default function CertificationPage() {
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-gold via-brand-gold-pale to-brand-gold"></div>
           
           <div className="p-8 sm:p-12">
-            <ExamMode exam={finalExam} />
+            <ExamMode exam={finalExam} showCertificate />
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ export default function CertificationPage() {
             </div>
             <div>
                 <h3 className="text-xl font-bold">Certificat Nominatif</h3>
-                <p className="text-white/60 text-sm max-w-sm">Une fois l&apos;examen réussi, vous recevrez un certificat PDF certifié Loi ALUR à partager sur LinkedIn.</p>
+                <p className="text-white/60 text-sm max-w-sm">Une fois l&apos;examen réussi, téléchargez votre certificat nominatif certifié Loi ALUR directement depuis cette page.</p>
             </div>
         </div>
         <div className="text-center md:text-right">

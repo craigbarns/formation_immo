@@ -11,6 +11,7 @@ import { saveUserAnswers } from "@/app/actions/user-answers";
 import { generateFlashcardsFromMistakes } from "@/app/actions/flashcards-auto";
 import { submitExamResult } from "@/app/actions/certification";
 import { motion, AnimatePresence } from "framer-motion";
+import { CertificateGenerator } from "@/components/certificate/CertificateGenerator";
 
 type ExamState = "intro" | "running" | "review";
 
@@ -82,7 +83,7 @@ async function getPreviousScore(moduleSlug: string): Promise<{ score: number; to
   return { score: entry.score, total: entry.total };
 }
 
-export function ExamMode({ exam }: { exam: ModuleExam }) {
+export function ExamMode({ exam, showCertificate }: { exam: ModuleExam; showCertificate?: boolean }) {
   const [state, setState] = useState<ExamState>("intro");
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number | string>>({});
@@ -364,6 +365,14 @@ export function ExamMode({ exam }: { exam: ModuleExam }) {
             )}
           </div>
         </div>
+
+        {/* Certificate download — only on certification exam after passing */}
+        {passed && showCertificate && (
+          <div className="border-t border-white/5 px-8 md:px-12 py-10">
+            <p className="mb-6 text-center text-[10px] font-black uppercase tracking-[0.4em] text-white/20">VOTRE CERTIFICAT</p>
+            <CertificateGenerator />
+          </div>
+        )}
 
         {/* Detailed review */}
         <div className="border-t border-white/5 bg-[#030712]/60 p-8 md:p-12 lg:p-16">
