@@ -370,7 +370,7 @@ export function ExamMode({ exam, showCertificate }: { exam: ModuleExam; showCert
         {passed && showCertificate && (
           <div className="border-t border-white/5 px-8 md:px-12 py-10">
             <p className="mb-6 text-center text-[10px] font-black uppercase tracking-[0.4em] text-white/20">VOTRE CERTIFICAT</p>
-            <CertificateGenerator />
+            <CertificateGenerator forceUnlock />
           </div>
         )}
 

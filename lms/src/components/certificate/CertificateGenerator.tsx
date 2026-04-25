@@ -8,7 +8,7 @@ import { COURSE } from "@/data/course";
 import { FORMATION_PROGRESS_STORAGE_KEY } from "@/constants/formation-storage";
 import { createClient } from "@/lib/supabase/client";
 
-export function CertificateGenerator() {
+export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } = {}) {
   const [name, setName] = useState("");
   const [generated, setGenerated] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -92,7 +92,7 @@ export function CertificateGenerator() {
   }, []);
 
   const completionPct = Math.round((completedLessons / totalLessons) * 100);
-  const canGenerate = completionPct >= 80 && examsPassed >= 3;
+  const canGenerate = forceUnlock || (completionPct >= 80 && examsPassed >= 3);
 
   function generateCertificate() {
     if (!canvasRef.current || !name.trim()) return;
