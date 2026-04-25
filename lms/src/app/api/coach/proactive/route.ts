@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const { allowed } = checkRateLimit(user.id + ":proactive");
+  const { allowed } = await checkRateLimit(user.id + ":proactive");
   if (!allowed) return NextResponse.json({ message: null });
 
   let body: unknown;

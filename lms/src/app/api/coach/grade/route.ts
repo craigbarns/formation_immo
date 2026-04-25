@@ -48,7 +48,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const { allowed } = checkRateLimit(user.id + ":grade");
+  const { allowed } = await checkRateLimit(user.id + ":grade");
   if (!allowed) {
     return new Response(JSON.stringify({ error: "Trop de requêtes" }), { status: 429, headers: { "Content-Type": "application/json" } });
   }

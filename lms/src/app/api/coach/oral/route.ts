@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const { allowed } = checkRateLimit(user.id + ":oral");
+  const { allowed } = await checkRateLimit(user.id + ":oral");
   if (!allowed) {
     return new Response(
       JSON.stringify({ error: "Trop de requêtes. Réessaie dans une minute." }),

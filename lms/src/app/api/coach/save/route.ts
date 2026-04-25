@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const { allowed } = checkRateLimit(user.id + ":save");
+  const { allowed } = await checkRateLimit(user.id + ":save");
   if (!allowed) {
     return NextResponse.json(
       { error: "Trop de requêtes. Réessaie dans une minute." },
