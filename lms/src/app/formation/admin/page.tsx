@@ -29,7 +29,7 @@ import {
 import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { CircularProgress } from "@/components/charts/CircularProgress";
-import { exportAttendanceToCSV, type ConnectionLog } from "@/lib/utils/export";
+import { exportAttendanceToCSV } from "@/lib/utils/export";
 
 interface SupabaseLearner {
   id: string;

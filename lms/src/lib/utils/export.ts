@@ -2,9 +2,9 @@
 
 export interface ConnectionLog {
   started_at: string;
-  duration_seconds: number;
-  module_slug?: string;
-  lesson_slug?: string;
+  duration_seconds: number | null;
+  module_slug?: string | null;
+  lesson_slug?: string | null;
 }
 
 export function exportAttendanceToCSV(learnerName: string, logs: ConnectionLog[]) {
