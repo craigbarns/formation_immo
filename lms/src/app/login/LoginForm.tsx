@@ -135,10 +135,7 @@ export default function LoginForm() {
             </form>
 
             <div className="mt-6 flex flex-col gap-4 text-center">
-              <div className="flex items-center justify-between text-sm font-bold">
-                <Link href={`/register?next=${encodeURIComponent(next)}`} className="text-brand-gold hover:text-white transition-colors underline decoration-brand-gold/30 underline-offset-4">
-                  Créer un compte
-                </Link>
+              <div className="flex items-center justify-end text-sm font-bold">
                 <Link href="/login?reset=1" className="text-white/60 hover:text-white transition-colors">
                   Mot de passe oublié ?
                 </Link>
