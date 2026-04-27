@@ -1,10 +1,10 @@
 "use client";
 
-interface ConnectionLog {
+export interface ConnectionLog {
   started_at: string;
-  duration_seconds: number | null;
-  module_slug: string | null;
-  lesson_slug: string | null;
+  duration_seconds: number;
+  module_slug?: string;
+  lesson_slug?: string;
 }
 
 export function exportAttendanceToCSV(learnerName: string, logs: ConnectionLog[]) {

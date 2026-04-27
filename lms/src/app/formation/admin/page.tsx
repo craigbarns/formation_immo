@@ -29,7 +29,7 @@ import {
 import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { CircularProgress } from "@/components/charts/CircularProgress";
-import { exportAttendanceToCSV } from "@/lib/utils/export";
+import { exportAttendanceToCSV, type ConnectionLog } from "@/lib/utils/export";
 
 interface SupabaseLearner {
   id: string;
@@ -161,7 +161,7 @@ export default function AdminPage() {
           .eq("user_id", selectedLearner.id)
           .order("started_at", { ascending: false });
         
-        setAttendanceLogs(data || []);
+        setAttendanceLogs((data || []) as ConnectionLog[]);
         setLoadingLogs(false);
       }
     }

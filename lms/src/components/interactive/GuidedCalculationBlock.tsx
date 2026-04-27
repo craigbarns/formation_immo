@@ -266,7 +266,7 @@ function CalcView({ calc }: { calc: GuidedCalculation }) {
             <div className="relative z-10 text-center">
                 <div className="flex justify-center mb-8">
                     <div className="h-16 w-16 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/30 shadow-xl">
-                        <Trophy size={32} className="text-brand-gold animate-bounce" />
+                        <Trophy width={32} height={32} className="text-brand-gold animate-bounce" />
                     </div>
                 </div>
                 <h3 className="text-2xl font-black uppercase tracking-tight text-white mb-6">Bilan de l&apos;Analyse</h3>
