@@ -4,16 +4,17 @@ import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import { COURSE, lessonId } from "@/data/course";
 import { 
-  Users, 
-  BookOpen, 
-  Award, 
-  TrendingUp, 
-  Search, 
-  ArrowLeft, 
-  Clock, 
+  Users,
+  BookOpen,
+  Award,
+  TrendingUp,
+  Search,
+  ArrowLeft,
+  Clock,
   ChevronRight,
   ShieldCheck,
   User,
+  UserPlus,
   Zap,
   X,
   Target,
@@ -30,6 +31,7 @@ import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { CircularProgress } from "@/components/charts/CircularProgress";
 import { exportAttendanceToCSV } from "@/lib/utils/export";
+import { inviteUser } from "@/app/actions/admin";
 
 interface SupabaseLearner {
   id: string;
@@ -76,6 +78,8 @@ export default function AdminPage() {
   const [selectedLearner, setSelectedLearner] = useState<LearnerStats | null>(null);
   const [attendanceLogs, setAttendanceLogs] = useState<ConnectionLog[]>([]);
   const [loadingLogs, setLoadingLogs] = useState(false);
+  const [inviteLoading, setInviteLoading] = useState(false);
+  const [inviteResult, setInviteResult] = useState<{ success?: string; error?: string } | null>(null);
 
   const totalLessons = COURSE.reduce((a, m) => a + m.lessons.length, 0);
   const totalModules = COURSE.length;
@@ -219,6 +223,45 @@ export default function AdminPage() {
             className="w-full md:w-80 rounded-2xl bg-white/5 border border-white/10 pl-12 pr-6 py-4 text-sm font-bold text-white outline-none focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10 transition-all backdrop-blur-xl shadow-2xl"
           />
         </div>
+      </div>
+
+      {/* Invite User */}
+      <div className="rounded-[2rem] border border-brand-gold/20 bg-white/[0.03] p-6 shadow-xl">
+        <h2 className="mb-4 text-xs font-black uppercase tracking-[0.3em] text-white/40 flex items-center gap-3">
+          <UserPlus className="h-4 w-4 text-brand-gold" /> Inviter un utilisateur manuellement
+        </h2>
+        <form
+          action={async (fd) => {
+            setInviteLoading(true);
+            setInviteResult(null);
+            const result = await inviteUser(fd);
+            setInviteResult(result);
+            setInviteLoading(false);
+          }}
+          className="flex flex-col gap-4 sm:flex-row sm:items-end"
+        >
+          <div className="flex-1">
+            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-white/40">Prénom</label>
+            <input name="first_name" type="text" required placeholder="Jean" className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
+          </div>
+          <div className="flex-1">
+            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-white/40">Nom</label>
+            <input name="last_name" type="text" required placeholder="Dupont" className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
+          </div>
+          <div className="flex-1">
+            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-white/40">Email</label>
+            <input name="email" type="email" required placeholder="jean@exemple.com" className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
+          </div>
+          <button type="submit" disabled={inviteLoading} className="shrink-0 rounded-xl bg-brand-gold px-6 py-3 text-sm font-black text-brand-navy-deep shadow-lg transition hover:bg-white disabled:opacity-50">
+            {inviteLoading ? "Envoi…" : "Inviter →"}
+          </button>
+        </form>
+        {inviteResult?.success && (
+          <p className="mt-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-4 py-2.5 text-sm font-bold text-emerald-400">{inviteResult.success}</p>
+        )}
+        {inviteResult?.error && (
+          <p className="mt-3 rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-2.5 text-sm font-bold text-red-400">{inviteResult.error}</p>
+        )}
       </div>
 
       {/* Global Stats */}
