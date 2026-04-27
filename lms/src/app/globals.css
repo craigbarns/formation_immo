@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 @plugin "@tailwindcss/typography";
 
 :root {
@@ -98,6 +99,13 @@ body {
   background: var(--brand-gold);
   color: var(--brand-navy-deep);
 }
+
+/* Leaflet map — override dark theme */
+.leaflet-container {
+  background-color: #e8eaed !important;
+  z-index: 0;
+}
+.leaflet-tile-pane { opacity: 1 !important; }
 
 /* Zone formation : Experience Cinematique */
 .formation-canvas {

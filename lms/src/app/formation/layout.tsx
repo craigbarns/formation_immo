@@ -35,7 +35,7 @@ export default async function FormationLayout({
       .select("status")
       .eq("email", user.email)
       .eq("formation_id", "immobilier")
-      .single();
+      .maybeSingle();
 
     if (!subscription || subscription.status !== "active") {
       redirect("/checkout/immobilier?error=accès_non_autorisé");

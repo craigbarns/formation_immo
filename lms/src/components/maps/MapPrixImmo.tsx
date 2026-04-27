@@ -1,6 +1,5 @@
 "use client";
 
-import "leaflet/dist/leaflet.css";
 import { useEffect, useRef, useState } from "react";
 import { ZONES_PRIX, type ZonePrix } from "@/data/prix-immo";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
