@@ -12,6 +12,16 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // Prevent stale Server Action IDs after redeployment
+        source: "/(login|register|formation)(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store",
+          },
+        ],
+      },
+      {
         source: "/:path*",
         headers: [
           {
