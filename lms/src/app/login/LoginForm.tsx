@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Loader2, Lock, Mail, Sparkles, UserPlus, Home, ClipboardList, Scale, Briefcase, Building2, CircleDollarSign, Handshake } from "lucide-react";
-import { login } from "@/app/actions/auth";
+import { login, resetPassword } from "@/app/actions/auth";
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
@@ -12,10 +12,17 @@ export default function LoginForm() {
   const error = searchParams.get("error");
   const message = searchParams.get("message");
   const next = searchParams.get("next") ?? "/formation";
+  const isReset = searchParams.get("reset") === "1";
 
   async function handleSubmit(formData: FormData) {
     setLoading(true);
     await login(formData);
+    setLoading(false);
+  }
+
+  async function handleReset(formData: FormData) {
+    setLoading(true);
+    await resetPassword(formData);
     setLoading(false);
   }
 
@@ -71,7 +78,50 @@ export default function LoginForm() {
         <div className="overflow-hidden rounded-[2rem] border border-white/20 bg-[#0a1224] shadow-2xl backdrop-blur-2xl">
           <div className="h-1.5 bg-gradient-to-r from-brand-gold/40 via-brand-gold to-brand-gold/40" aria-hidden />
           <div className="p-8 sm:p-10">
-            <form action={handleSubmit} className="space-y-6" aria-busy={loading}>
+            {isReset ? (
+              <form action={handleReset} className="space-y-6" aria-busy={loading}>
+                <div>
+                  <p className="mb-4 text-sm font-medium text-white/70">
+                    Entrez votre email — vous recevrez un lien pour réinitialiser votre mot de passe.
+                  </p>
+                  <label htmlFor="reset-email" className="mb-2.5 flex items-center gap-2 text-sm font-bold text-white">
+                    <Mail className="h-4 w-4 text-brand-gold" aria-hidden />
+                    Email
+                  </label>
+                  <input
+                    id="reset-email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all"
+                    placeholder="votre@email.com"
+                  />
+                </div>
+
+                {error && (
+                  <p className="rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm font-bold text-red-400" role="alert">{error}</p>
+                )}
+                {message && (
+                  <p className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-4 py-3 text-sm font-bold text-emerald-400" role="status">{message}</p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-brand-gold py-4 text-base font-black text-brand-navy-deep shadow-xl transition hover:bg-white hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
+                >
+                  {loading ? <><Loader2 className="h-5 w-5 animate-spin" />Envoi…</> : "Envoyer le lien"}
+                </button>
+
+                <div className="text-center">
+                  <Link href="/login" className="text-sm text-white/50 hover:text-white transition-colors">
+                    ← Retour à la connexion
+                  </Link>
+                </div>
+              </form>
+            ) : (
+            <><form action={handleSubmit} className="space-y-6" aria-busy={loading}>
               <input type="hidden" name="next" value={next} />
 
               <div>
@@ -165,6 +215,7 @@ export default function LoginForm() {
                 ← Retour à l&apos;accueil
               </Link>
             </p>
+            </>)}
           </div>
         </div>
 
