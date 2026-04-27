@@ -33,6 +33,19 @@ export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } 
 
         setCompletedLessons(progressRows?.length ?? 0);
 
+        // Charger le nom depuis profiles
+        const { data: profileRow } = await supabase
+          .from("profiles")
+          .select("first_name, last_name, full_name")
+          .eq("id", user.id)
+          .single();
+
+        if (profileRow) {
+          const fn = profileRow.first_name ?? "";
+          const ln = profileRow.last_name ?? "";
+          setName(fn && ln ? `${fn} ${ln}` : (profileRow.full_name ?? ""));
+        }
+
         const { data: gameRow } = await supabase
           .from("gamification_state")
           .select("*")
@@ -348,16 +361,9 @@ export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } 
         ) : (
           <>
             <div className="flex flex-col gap-4 sm:flex-row">
-              <input
-                type="text"
-                placeholder="Votre nom complet"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                  setGenerated(false);
-                }}
-                className="flex-1 rounded-xl border border-zinc-300 px-4 py-3 text-sm focus:border-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-navy/20"
-              />
+              <div className="flex-1 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-700">
+                {name || "Chargement du nom…"}
+              </div>
               <button
                 onClick={generateCertificate}
                 disabled={!name.trim()}

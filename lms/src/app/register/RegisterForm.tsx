@@ -11,7 +11,8 @@ import { useEffect } from "react";
 export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const [prefilledEmail, setPrefilledEmail] = useState("");
-  const [prefilledName, setPrefilledName] = useState("");
+  const [prefilledFirstName, setPrefilledFirstName] = useState("");
+  const [prefilledLastName, setPrefilledLastName] = useState("");
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
   const sessionId = searchParams.get("session_id");
@@ -25,7 +26,11 @@ export default function RegisterForm() {
           const res = await fetch(`/api/checkout/session?session_id=${sessionId}`);
           const data = await res.json();
           if (data.email) setPrefilledEmail(data.email);
-          if (data.name) setPrefilledName(data.name);
+          if (data.name) {
+            const parts = (data.name as string).trim().split(/\s+/);
+            setPrefilledFirstName(parts[0] ?? "");
+            setPrefilledLastName(parts.slice(1).join(" ") ?? "");
+          }
         } catch (err) {
           console.error("Erreur récupération session Stripe:", err);
         }
@@ -78,22 +83,41 @@ export default function RegisterForm() {
             <form action={handleSubmit} className="space-y-6" aria-busy={loading}>
               <input type="hidden" name="next" value={next} />
 
-              <div>
-                <label htmlFor="full_name" className="mb-2.5 flex items-center gap-2 text-sm font-bold text-white">
-                  <User className="h-4 w-4 text-brand-gold" aria-hidden />
-                  Nom complet
-                </label>
-                <input
-                  id="full_name"
-                  name="full_name"
-                  type="text"
-                  autoComplete="name"
-                  required
-                  defaultValue={prefilledName}
-                  key={`name-${prefilledName}`}
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all"
-                  placeholder="Jean Dupont"
-                />
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label htmlFor="first_name" className="mb-2.5 flex items-center gap-2 text-sm font-bold text-white">
+                    <User className="h-4 w-4 text-brand-gold" aria-hidden />
+                    Prénom
+                  </label>
+                  <input
+                    id="first_name"
+                    name="first_name"
+                    type="text"
+                    autoComplete="given-name"
+                    required
+                    defaultValue={prefilledFirstName}
+                    key={`first-${prefilledFirstName}`}
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all"
+                    placeholder="Jean"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="last_name" className="mb-2.5 flex items-center gap-2 text-sm font-bold text-white">
+                    <User className="h-4 w-4 text-brand-gold" aria-hidden />
+                    Nom
+                  </label>
+                  <input
+                    id="last_name"
+                    name="last_name"
+                    type="text"
+                    autoComplete="family-name"
+                    required
+                    defaultValue={prefilledLastName}
+                    key={`last-${prefilledLastName}`}
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all"
+                    placeholder="Dupont"
+                  />
+                </div>
               </div>
 
               <div>

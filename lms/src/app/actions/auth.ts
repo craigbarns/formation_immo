@@ -32,13 +32,18 @@ export async function signup(formData: FormData) {
   const supabase = await createClient();
   const next = getValidNext(formData.get("next"));
   const email = formData.get("email") as string;
+  const firstName = (formData.get("first_name") as string ?? "").trim();
+  const lastName = (formData.get("last_name") as string ?? "").trim();
+  const fullName = `${firstName} ${lastName}`.trim();
 
   const data = {
     email,
     password: formData.get("password") as string,
     options: {
       data: {
-        full_name: formData.get("full_name") as string,
+        full_name: fullName,
+        first_name: firstName,
+        last_name: lastName,
       },
       emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://app.monpassformation.com"}/auth/callback?next=${encodeURIComponent(next)}`,
     },
@@ -50,13 +55,22 @@ export async function signup(formData: FormData) {
     redirect("/register?error=" + encodeURIComponent(error.message));
   }
 
-  // 🔗 LIEN AUTOMATIQUE AVEC L'ACHAT STRIPE
-  // Si un achat existe déjà pour cet email, on lie le user_id
   if (authData.user) {
+    // Lien automatique avec l'achat Stripe
     await supabase
       .from("user_subscriptions")
       .update({ user_id: authData.user.id })
       .eq("email", email);
+
+    // Upsert profil avec prénom + nom séparés
+    await supabase
+      .from("profiles")
+      .upsert({
+        id: authData.user.id,
+        full_name: fullName,
+        first_name: firstName,
+        last_name: lastName,
+      }, { onConflict: "id" });
   }
 
   revalidatePath("/", "layout");
