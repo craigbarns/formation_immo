@@ -105,7 +105,12 @@ export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } 
   }, []);
 
   const completionPct = Math.round((completedLessons / totalLessons) * 100);
-  const canGenerate = forceUnlock || (completionPct >= 80 && examsPassed >= 3);
+  const totalTrackedSeconds = gameState
+    ? Object.values(gameState.moduleTimers).reduce((a, b) => a + b, 0)
+    : 0;
+  const totalTrackedHours = totalTrackedSeconds / 3600;
+  const hasEnoughHours = totalTrackedHours >= 42;
+  const canGenerate = forceUnlock || (completionPct >= 80 && examsPassed >= 3 && hasEnoughHours);
 
   function generateCertificate() {
     if (!canvasRef.current || !name.trim()) return;
@@ -246,20 +251,24 @@ export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } 
     ctx.font = "400 16px Georgia, serif";
     ctx.fillText("pour la validation complète du cursus de formation", w / 2, 570);
 
+    const trackedH = Math.floor(totalTrackedHours);
+    const trackedMin = Math.floor((totalTrackedHours - trackedH) * 60);
+    const trackedLabel = trackedMin > 0 ? `${trackedH}H${String(trackedMin).padStart(2, "0")}` : `${trackedH}H`;
+
     ctx.fillStyle = "#1a3a5c";
     ctx.font = "bold 24px Georgia, serif";
-    ctx.fillText("AGENT IMMOBILIER EXPERT — 42 HEURES", w / 2, 605);
+    ctx.fillText(`AGENT IMMOBILIER EXPERT — ${trackedLabel} DE FORMATION`, w / 2, 605);
 
     // Bottom Stats
     const statsY = 680;
     ctx.fillStyle = "#777777";
     ctx.font = "bold 12px Montserrat, Arial, sans-serif";
     ctx.letterSpacing = "1px";
-    
+
     const statsText = [
       `XP ACQUISE : ${gameState?.xp || 0}`,
       `MODULES VALIDÉS : 5/5`,
-      `CRÉDITS FORMATION : 42H (LOI ALUR)`
+      `CRÉDITS FORMATION : ${trackedLabel} (LOI ALUR — MIN. 42H)`
     ].join("   •   ");
     
     ctx.fillText(statsText, w / 2, statsY);
@@ -355,6 +364,12 @@ export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } 
                   <EmojiIcon emoji={examsPassed >= 3 ? "✓" : "○"} className="h-4 w-4" />
                 </span>
                 Réussir au moins 3 examens ({examsPassed}/3)
+              </li>
+              <li className="flex items-center justify-center gap-2">
+                <span className={hasEnoughHours ? "text-emerald-600" : "text-amber-600"}>
+                  <EmojiIcon emoji={hasEnoughHours ? "✓" : "○"} className="h-4 w-4" />
+                </span>
+                Valider 42h de formation — Loi ALUR ({Math.floor(totalTrackedHours)}h{Math.floor((totalTrackedHours % 1) * 60) > 0 ? Math.floor((totalTrackedHours % 1) * 60) + "min" : ""} / 42h)
               </li>
             </ul>
           </div>

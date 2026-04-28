@@ -105,6 +105,9 @@ function generateCertNumber(): string {
   return `ATC-${year}-${rand}`;
 }
 
+const REQUIRED_HOURS = 42;
+const REQUIRED_SECONDS = REQUIRED_HOURS * 3600;
+
 export async function issueCertificate(studentName: string, modules: string[], finalScore: number) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -118,12 +121,31 @@ export async function issueCertificate(studentName: string, modules: string[], f
     .eq("completed", true);
 
   const completedLessons = progressRows?.length ?? 0;
-  // Total lessons = 36 (hardcoded from course structure)
   const totalLessons = 36;
   const completionPct = Math.round((completedLessons / totalLessons) * 100);
 
   if (completionPct < 80) {
     return { error: `Complétion insuffisante (${completionPct}%). Minimum requis : 80%.` };
+  }
+
+  // Check 42h of training time (Loi ALUR requirement)
+  const { data: gamRow } = await supabase
+    .from("gamification_state")
+    .select("module_timers")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  const moduleTimers = (gamRow?.module_timers ?? {}) as Record<string, number>;
+  const totalSeconds = Object.values(moduleTimers).reduce((a, b) => a + b, 0);
+  const totalHours = totalSeconds / 3600;
+
+  if (totalSeconds < REQUIRED_SECONDS) {
+    const remaining = Math.ceil(REQUIRED_HOURS - totalHours);
+    const doneH = Math.floor(totalHours);
+    const doneMin = Math.floor((totalHours - doneH) * 60);
+    return {
+      error: `Durée insuffisante pour la certification ALUR. Temps validé : ${doneH}h${doneMin > 0 ? doneMin + "min" : ""}. Il vous reste environ ${remaining}h de formation à compléter.`,
+    };
   }
 
   // Check if all modules passed (score >= 70)
@@ -141,6 +163,7 @@ export async function issueCertificate(studentName: string, modules: string[], f
   if (finalScore < 70) return { error: "Score final insuffisant (minimum 70%)" };
 
   const certNumber = generateCertNumber();
+  const trackedHours = Math.round(totalHours * 10) / 10;
 
   const { data, error } = await supabase
     .from("certificates")
@@ -151,6 +174,7 @@ export async function issueCertificate(studentName: string, modules: string[], f
       modules,
       final_score: finalScore,
       passed: true,
+      qr_payload: JSON.stringify({ trackedHours }),
     })
     .select()
     .single();
