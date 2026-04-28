@@ -264,7 +264,19 @@ export default function SupportsVisuelsPage() {
                         </span>
                       </div>
                   </div>
-                  <button className="ml-auto group inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white/80 transition hover:bg-white hover:text-brand-navy hover:scale-105 shadow-xl">
+                  <button
+                    onClick={async () => {
+                      const url = `/formation-infographies/${meta.imageFile}`;
+                      const res = await fetch(url);
+                      const blob = await res.blob();
+                      const a = document.createElement("a");
+                      a.href = URL.createObjectURL(blob);
+                      a.download = meta.imageFile;
+                      a.click();
+                      URL.revokeObjectURL(a.href);
+                    }}
+                    className="ml-auto group inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white/80 transition hover:bg-white hover:text-brand-navy hover:scale-105 shadow-xl"
+                  >
                     <Download className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
                     Télécharger HD
                   </button>
