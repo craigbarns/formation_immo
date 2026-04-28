@@ -343,7 +343,7 @@ export default function AdminPage() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-5xl h-full sm:h-[90vh] overflow-hidden rounded-2xl sm:rounded-[3rem] border border-white/10 bg-[#070d18] shadow-[0_50px_150px_rgba(0,0,0,0.8)]"
+              className="relative w-full max-w-5xl h-full sm:h-[90vh] overflow-hidden rounded-2xl sm:rounded-[3rem] border border-white/10 bg-[#070d18] shadow-[0_50px_150px_rgba(0,0,0,0.8)] flex flex-col"
             >
               {/* Modal Header */}
               <div className="relative border-b border-white/5 bg-[#030712] p-8 sm:p-12">
@@ -384,7 +384,7 @@ export default function AdminPage() {
               </div>
 
               {/* Modal Body */}
-              <div className="h-full overflow-y-auto p-4 sm:p-8 lg:p-12 pb-20 sm:pb-32 scrollbar-hide">
+              <div className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-8 lg:p-12 pb-20 sm:pb-32 scrollbar-hide">
                 <div className="grid gap-12 lg:grid-cols-3">
                   {/* Left Column: Progress & Exams */}
                   <div className="lg:col-span-2 space-y-12">
