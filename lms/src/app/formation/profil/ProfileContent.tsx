@@ -9,6 +9,7 @@ import { CertificateGenerator } from "@/components/certificate/CertificateGenera
 import { CertificatePreview } from "@/components/certificate";
 import { FormationCalendar } from "@/components/learning-path/FormationCalendar";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
+import { Lock, Loader2, CheckCircle2 } from "lucide-react";
 
 export function ProfileContent() {
   const [state, setState] = useState<GamificationState | null>(null);
@@ -188,11 +189,101 @@ export function ProfileContent() {
 
       {/* Certificate */}
       <CertificateGenerator />
-      
+
       {/* LinkedIn Certificate */}
       <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
         <CertificatePreview />
       </div>
+
+      {/* Password change */}
+      <ChangePasswordForm />
+    </div>
+  );
+}
+
+function ChangePasswordForm() {
+  const [newPassword, setNewPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError("");
+    setSuccess(false);
+
+    if (newPassword.length < 6) {
+      setError("Le mot de passe doit contenir au moins 6 caractères.");
+      return;
+    }
+    if (newPassword !== confirm) {
+      setError("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    setLoading(true);
+    const supabase = createClient();
+    const { error: updateError } = await supabase.auth.updateUser({ password: newPassword });
+    setLoading(false);
+
+    if (updateError) {
+      setError(updateError.message);
+      return;
+    }
+
+    setSuccess(true);
+    setNewPassword("");
+    setConfirm("");
+  }
+
+  return (
+    <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+      <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-2">
+        <Lock className="h-4 w-4" /> Changer mon mot de passe
+      </h3>
+      <form onSubmit={handleSubmit} className="space-y-4 max-w-sm">
+        <div>
+          <label className="mb-1.5 block text-xs font-bold text-zinc-500">Nouveau mot de passe</label>
+          <input
+            type="password"
+            required
+            minLength={6}
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            placeholder="••••••••"
+            className="w-full rounded-lg border border-zinc-200 px-4 py-3 text-sm text-zinc-800 placeholder:text-zinc-300 focus:border-brand-navy/40 focus:outline-none focus:ring-2 focus:ring-brand-navy/10 transition-all"
+          />
+        </div>
+        <div>
+          <label className="mb-1.5 block text-xs font-bold text-zinc-500">Confirmer le mot de passe</label>
+          <input
+            type="password"
+            required
+            value={confirm}
+            onChange={(e) => setConfirm(e.target.value)}
+            placeholder="••••••••"
+            className="w-full rounded-lg border border-zinc-200 px-4 py-3 text-sm text-zinc-800 placeholder:text-zinc-300 focus:border-brand-navy/40 focus:outline-none focus:ring-2 focus:ring-brand-navy/10 transition-all"
+          />
+        </div>
+
+        {error && (
+          <p className="rounded-lg bg-red-50 border border-red-200 px-4 py-2.5 text-sm font-medium text-red-600">{error}</p>
+        )}
+        {success && (
+          <p className="rounded-lg bg-emerald-50 border border-emerald-200 px-4 py-2.5 text-sm font-medium text-emerald-600 flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4" /> Mot de passe mis à jour.
+          </p>
+        )}
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="inline-flex items-center gap-2 rounded-lg bg-brand-navy px-6 py-3 text-sm font-bold text-white transition hover:bg-brand-navy/80 disabled:opacity-50"
+        >
+          {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Mise à jour…</> : "Enregistrer"}
+        </button>
+      </form>
     </div>
   );
 }
