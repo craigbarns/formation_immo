@@ -16,7 +16,8 @@ DO $$
 BEGIN
   IF NOT EXISTS (
     SELECT 1 FROM pg_constraint
-    WHERE conname = 'exam_results_user_id_module_slug_attempt_number_key'
+    WHERE conrelid = 'public.exam_results'::regclass
+      AND conname = 'exam_results_user_id_module_slug_attempt_number_key'
   ) THEN
     ALTER TABLE public.exam_results
       ADD CONSTRAINT exam_results_user_id_module_slug_attempt_number_key
