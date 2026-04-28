@@ -146,15 +146,22 @@ export async function sendAdminCreatedAccountEmail(
             <p style="margin:0;color:#fff;font-size:15px"><strong style="color:#d4af37">Mot de passe temporaire :</strong> <span style="font-family:monospace;background:#ffffff15;padding:2px 8px;border-radius:6px">${temporaryPassword}</span></p>
           </div>
 
-          <div style="margin:32px 0;text-align:center">
+          <p style="color:#ffffff80;line-height:1.7;margin:24px 0 8px">Clique sur le bouton ci-dessous pour te connecter directement à ta formation :</p>
+
+          <div style="margin:24px 0 32px;text-align:center">
             <a href="${APP_URL}/login" style="display:inline-block;background:#d4af37;color:#0a1628;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:2px;padding:16px 32px;border-radius:12px;text-decoration:none">
-              Accéder à ma formation →
+              Me connecter à ma formation →
             </a>
           </div>
 
-          <p style="color:#ffffff60;font-size:13px;line-height:1.7;border-top:1px solid #ffffff15;padding-top:20px;margin-top:8px">
-            🔒 Pour changer ton mot de passe, connecte-toi puis va dans <strong style="color:#ffffff80">Mon profil</strong> → <strong style="color:#ffffff80">Changer mon mot de passe</strong>.
-          </p>
+          <div style="border-top:1px solid #ffffff15;padding-top:20px;margin-top:8px">
+            <p style="color:#ffffff60;font-size:13px;line-height:1.7;margin:0 0 12px">
+              🔒 Pour changer ton mot de passe, connecte-toi puis va dans <strong style="color:#ffffff80">Mon profil</strong> → <strong style="color:#ffffff80">Changer mon mot de passe</strong>.
+            </p>
+            <p style="color:#ffffff60;font-size:13px;line-height:1.7;margin:0">
+              📞 En cas de difficulté, contacte notre service technique au <a href="tel:0618130727" style="color:#d4af37;text-decoration:none;font-weight:700">06 18 13 07 27</a>.
+            </p>
+          </div>
         </div>
         <div style="background:#ffffff08;padding:24px 32px;text-align:center">
           <p style="color:#ffffff30;font-size:12px;margin:0">MonPassFormation · <a href="${APP_URL}" style="color:#d4af37;text-decoration:none">app.monpassformation.com</a></p>
