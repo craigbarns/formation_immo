@@ -69,6 +69,10 @@ async function requireAdmin() {
   return { user };
 }
 
+function getSiteUrl() {
+  return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://app.monpassformation.com").replace(/\/$/, "");
+}
+
 export async function listLearners(): Promise<{ learners?: LearnerStatsPayload[]; error?: string }> {
   const adminCheck = await requireAdmin();
   if ("error" in adminCheck) return { error: adminCheck.error };
@@ -180,6 +184,7 @@ export async function inviteUser(formData: FormData): Promise<{ success?: string
 
   const { data: inviteData, error: inviteError } = await admin.auth.admin.inviteUserByEmail(email, {
     data: { full_name: fullName, first_name: firstName, last_name: lastName },
+    redirectTo: `${getSiteUrl()}/settings/reset-password`,
   });
 
   if (inviteError) return { error: inviteError.message };
