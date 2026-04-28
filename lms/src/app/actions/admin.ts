@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { upsertStudentProfile, upsertSubscription } from "@/lib/auth-access";
+import { sendAdminCreatedAccountEmail } from "@/lib/email/resend";
 
 type ExamScores = Record<string, { score: number; total: number; date: string }>;
 
@@ -268,8 +269,10 @@ export async function createFullAccessUser(formData: FormData): Promise<AdminAcc
     };
   }
 
+  await sendAdminCreatedAccountEmail(email, firstName || fullName, password);
+
   const action = wasCreated ? "Compte créé" : "Compte existant mis à jour";
-  return { success: `${action}. Accès complet activé pour ${email}.` };
+  return { success: `${action}. Accès complet activé pour ${email}. Email envoyé avec les identifiants.` };
 }
 
 export async function inviteUser(formData: FormData): Promise<AdminAccessResult> {

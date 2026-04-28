@@ -120,6 +120,50 @@ export async function sendCertificationEmail(email: string, name: string | undef
   });
 }
 
+export async function sendAdminCreatedAccountEmail(
+  email: string,
+  firstName: string,
+  temporaryPassword: string
+) {
+  if (!resend) return;
+  await resend.emails.send({
+    from: FROM,
+    to: email,
+    subject: "Ton accès à la formation MonPassFormation",
+    html: `
+      <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#070d18;color:#fff;border-radius:16px;overflow:hidden">
+        <div style="background:linear-gradient(135deg,#0a1628,#0f2040);padding:40px 32px;text-align:center">
+          <h1 style="color:#d4af37;font-size:28px;margin:0 0 8px">MonPassFormation</h1>
+          <p style="color:#ffffff60;margin:0;font-size:13px;text-transform:uppercase;letter-spacing:2px">Formation Agent Immobilier — Loi ALUR 2026</p>
+        </div>
+        <div style="padding:40px 32px">
+          <h2 style="color:#fff;font-size:22px;margin:0 0 16px">Bonjour ${firstName} 👋</h2>
+          <p style="color:#ffffff80;line-height:1.7">Ton accès à la formation a été créé. Voici tes identifiants de connexion :</p>
+
+          <div style="background:#ffffff0d;border:1px solid #d4af3740;border-radius:12px;padding:24px;margin:24px 0">
+            <p style="margin:0 0 12px;color:#ffffff60;font-size:12px;text-transform:uppercase;letter-spacing:2px">Tes identifiants</p>
+            <p style="margin:0 0 8px;color:#fff;font-size:15px"><strong style="color:#d4af37">Email :</strong> ${email}</p>
+            <p style="margin:0;color:#fff;font-size:15px"><strong style="color:#d4af37">Mot de passe temporaire :</strong> <span style="font-family:monospace;background:#ffffff15;padding:2px 8px;border-radius:6px">${temporaryPassword}</span></p>
+          </div>
+
+          <div style="margin:32px 0;text-align:center">
+            <a href="${APP_URL}/login" style="display:inline-block;background:#d4af37;color:#0a1628;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:2px;padding:16px 32px;border-radius:12px;text-decoration:none">
+              Accéder à ma formation →
+            </a>
+          </div>
+
+          <p style="color:#ffffff60;font-size:13px;line-height:1.7;border-top:1px solid #ffffff15;padding-top:20px;margin-top:8px">
+            🔒 Pour changer ton mot de passe, connecte-toi puis va dans <strong style="color:#ffffff80">Mon profil</strong> → <strong style="color:#ffffff80">Changer mon mot de passe</strong>.
+          </p>
+        </div>
+        <div style="background:#ffffff08;padding:24px 32px;text-align:center">
+          <p style="color:#ffffff30;font-size:12px;margin:0">MonPassFormation · <a href="${APP_URL}" style="color:#d4af37;text-decoration:none">app.monpassformation.com</a></p>
+        </div>
+      </div>
+    `,
+  });
+}
+
 export async function sendReminderEmail(email: string, name: string | undefined, daysSince: number) {
   if (!resend) return;
   const prenom = name?.split(" ")[0] ?? "là";
