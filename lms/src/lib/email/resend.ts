@@ -39,6 +39,11 @@ export async function sendWelcomeEmail(email: string, name?: string) {
       </div>
     `,
   });
+  if (error) {
+    console.error("[email] Erreur Resend sendAdminCreatedAccountEmail:", JSON.stringify(error));
+  } else {
+    console.log("[email] Email envoyé avec succès, id:", data?.id);
+  }
 }
 
 export async function sendModuleCompletionEmail(
@@ -125,8 +130,11 @@ export async function sendAdminCreatedAccountEmail(
   firstName: string,
   temporaryPassword: string
 ) {
-  if (!resend) return;
-  await resend.emails.send({
+  if (!resend) {
+    console.error("[email] RESEND_API_KEY manquant — email non envoyé");
+    return;
+  }
+  const { data, error } = await resend.emails.send({
     from: FROM,
     to: email,
     subject: "Ton accès à la formation MonPassFormation",
