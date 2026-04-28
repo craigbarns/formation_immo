@@ -23,12 +23,13 @@ import {
   Calendar,
   BarChart3,
   Download,
-  History
+  History,
+  KeyRound
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CircularProgress } from "@/components/charts/CircularProgress";
 import { exportAttendanceToCSV } from "@/lib/utils/export";
-import { inviteUser, listLearnerConnectionLogs, listLearners } from "@/app/actions/admin";
+import { createFullAccessUser, listLearnerConnectionLogs, listLearners } from "@/app/actions/admin";
 import type { ConnectionLogPayload, LearnerStatsPayload } from "@/app/actions/admin";
 
 interface LearnerStats {
@@ -52,9 +53,9 @@ export default function AdminPage() {
   const [selectedLearner, setSelectedLearner] = useState<LearnerStats | null>(null);
   const [attendanceLogs, setAttendanceLogs] = useState<ConnectionLogPayload[]>([]);
   const [loadingLogs, setLoadingLogs] = useState(false);
-  const [inviteLoading, setInviteLoading] = useState(false);
-  const [inviteResult, setInviteResult] = useState<{ success?: string; error?: string } | null>(null);
-  const inviteFormRef = useRef<HTMLFormElement>(null);
+  const [accessLoading, setAccessLoading] = useState(false);
+  const [accessResult, setAccessResult] = useState<{ success?: string; error?: string } | null>(null);
+  const accessFormRef = useRef<HTMLFormElement>(null);
 
   const totalLessons = COURSE.reduce((a, m) => a + m.lessons.length, 0);
   const totalModules = COURSE.length;
@@ -160,51 +161,57 @@ export default function AdminPage() {
         </div>
       </div>
 
-      {/* Invite User */}
+      {/* Create User Access */}
       <div className="rounded-[2rem] border border-brand-gold/20 bg-white/[0.03] p-6 shadow-xl">
         <h2 className="mb-4 text-xs font-black uppercase tracking-[0.3em] text-white/40 flex items-center gap-3">
-          <UserPlus className="h-4 w-4 text-brand-gold" /> Inviter un utilisateur manuellement
+          <UserPlus className="h-4 w-4 text-brand-gold" /> Créer un accès complet
         </h2>
         <form
-          ref={inviteFormRef}
+          ref={accessFormRef}
           action={async (fd) => {
-            setInviteLoading(true);
-            setInviteResult(null);
+            setAccessLoading(true);
+            setAccessResult(null);
             try {
-              const result = await inviteUser(fd);
-              setInviteResult(result);
+              const result = await createFullAccessUser(fd);
+              setAccessResult(result);
               if (result.success) {
-                inviteFormRef.current?.reset();
+                accessFormRef.current?.reset();
                 setSearchTerm("");
                 await loadLearners({ showLoading: false });
               }
             } finally {
-              setInviteLoading(false);
+              setAccessLoading(false);
             }
           }}
-          className="flex flex-col gap-4 sm:flex-row sm:items-end"
+          className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1fr_1fr_1.4fr_1.2fr_auto] xl:items-end"
         >
-          <div className="flex-1">
+          <div>
             <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-white/40">Prénom</label>
             <input name="first_name" type="text" required placeholder="Jean" className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
           </div>
-          <div className="flex-1">
+          <div>
             <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-white/40">Nom</label>
             <input name="last_name" type="text" required placeholder="Dupont" className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
           </div>
-          <div className="flex-1">
+          <div>
             <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-white/40">Email</label>
             <input name="email" type="email" required placeholder="jean@exemple.com" className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
           </div>
-          <button type="submit" disabled={inviteLoading} className="shrink-0 rounded-xl bg-brand-gold px-6 py-3 text-sm font-black text-brand-navy-deep shadow-lg transition hover:bg-white disabled:opacity-50">
-            {inviteLoading ? "Envoi…" : "Inviter →"}
+          <div>
+            <label className="mb-1.5 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/40">
+              <KeyRound className="h-3.5 w-3.5 text-brand-gold" /> Mot de passe
+            </label>
+            <input name="password" type="text" required minLength={6} placeholder="Temporaire123" className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
+          </div>
+          <button type="submit" disabled={accessLoading} className="shrink-0 rounded-xl bg-brand-gold px-6 py-3 text-sm font-black text-brand-navy-deep shadow-lg transition hover:bg-white disabled:opacity-50">
+            {accessLoading ? "Création…" : "Créer accès"}
           </button>
         </form>
-        {inviteResult?.success && (
-          <p className="mt-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-4 py-2.5 text-sm font-bold text-emerald-400">{inviteResult.success}</p>
+        {accessResult?.success && (
+          <p className="mt-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-4 py-2.5 text-sm font-bold text-emerald-400">{accessResult.success}</p>
         )}
-        {inviteResult?.error && (
-          <p className="mt-3 rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-2.5 text-sm font-bold text-red-400">{inviteResult.error}</p>
+        {accessResult?.error && (
+          <p className="mt-3 rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-2.5 text-sm font-bold text-red-400">{accessResult.error}</p>
         )}
       </div>
 

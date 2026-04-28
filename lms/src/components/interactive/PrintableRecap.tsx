@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { Printer, X, FileText, Sparkles, BookOpen, Target, Quote, PenLine } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -26,7 +25,6 @@ export function PrintableRecap({
   introduction,
   objectives,
   keyTerms,
-  sections,
   expertQuote,
   avatarName,
   accentColor = "#d4af37",

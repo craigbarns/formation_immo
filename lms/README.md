@@ -15,10 +15,12 @@ cp .env.local.example .env.local
 
 Renseigner **au minimum** :
 
-- `LMS_PASSWORD` — mot de passe pour `/login`
-- `SESSION_SECRET` — **32 caractères minimum** (ex. `openssl rand -base64 32`)
+- `NEXT_PUBLIC_SITE_URL` — URL publique de l'app (`http://localhost:3000` en local)
+- `NEXT_PUBLIC_SUPABASE_URL` — URL du projet Supabase
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` — clé anon Supabase
+- `SUPABASE_SERVICE_ROLE_KEY` — requis pour créer des comptes depuis `/formation/admin`
 
-Sans `LMS_PASSWORD`, l’API `/api/login` répond 500.
+La connexion utilise Supabase Auth email/mot de passe. Depuis `/formation/admin`, un formateur admin peut créer un compte apprenant, définir son mot de passe et lui donner un accès complet à la formation sans passer par Stripe.
 
 ## Développement
 
@@ -27,7 +29,7 @@ npm install
 npm run dev
 ```
 
-Ouvrir [http://localhost:3000](http://localhost:3000) → **Accéder à la formation** → saisir le mot de passe.
+Ouvrir [http://localhost:3000](http://localhost:3000) → **Accéder à la formation** → se connecter avec un compte Supabase.
 
 ## Production
 
@@ -71,8 +73,8 @@ Ne commitez **jamais** la clé API.
 
 ## Progression élève
 
-Stockée dans **localStorage** du navigateur (clé `formation-immobilier-progress`). Pour une progression serveur multi-appareils, il faudra une base de données et des comptes utilisateurs (NextAuth + Prisma, Clerk, Supabase, etc.).
+Stockée dans Supabase pour les comptes connectés, avec une partie synchronisée depuis le navigateur selon les composants.
 
 ## Sécurité
 
-Le mot de passe unique convient à un **prototype ou une petite cohorte**. Pour de la vente à grande échelle, prévoir **comptes par email**, reset mot de passe, et **HTTPS** en production.
+Supabase Auth gère les comptes par email. Les accès formation sont contrôlés par `user_subscriptions` : Stripe peut créer une ligne active via webhook, et l'admin peut créer une ligne active manuellement depuis `/formation/admin`.

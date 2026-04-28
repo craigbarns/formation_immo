@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calculator, TrendingUp, Info, Briefcase, CheckCircle2, AlertTriangle, Sparkles, Building2 } from "lucide-react";
+import { TrendingUp, Info, CheckCircle2, AlertTriangle, Sparkles, Building2 } from "lucide-react";
 import { Slider } from "@/components/ui/Slider";
 import { recordSimulatorUsed } from "@/lib/gamification";
 
@@ -11,8 +11,8 @@ export function RentabilitySimulator() {
   const [travaux, setTravaux] = useState(30000);
   const [loyerMensuel, setLoyerMensuel] = useState(1150);
   const [taxeFonciere, setTaxeFonciere] = useState(1200);
-  const [chargesMensuelles, setChargesMensuelles] = useState(80);
-  const [fraisGestionPct, setFraisGestionPct] = useState(7);
+  const [chargesMensuelles] = useState(80);
+  const [fraisGestionPct] = useState(7);
   const [isLMNP, setIsLMNP] = useState(false);
 
   useEffect(() => {

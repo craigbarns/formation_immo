@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, Circle, Sparkles, Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -35,7 +35,7 @@ export function getStoredProgress(): Record<string, boolean> {
 export function LessonProgress({ lessonKey, moduleInfo }: { lessonKey: string; moduleInfo?: ModuleInfo }) {
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(true);
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
   useEffect(() => {
     async function load() {
@@ -142,7 +142,7 @@ export function LessonProgress({ lessonKey, moduleInfo }: { lessonKey: string; m
 
     setDone(next);
     notifyProgressChanged();
-  }, [done, lessonKey, supabase]);
+  }, [done, lessonKey, moduleInfo, supabase]);
 
   if (loading) {
     return (

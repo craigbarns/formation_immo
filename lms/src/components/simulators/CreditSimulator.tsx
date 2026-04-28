@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Calculator, Euro, TrendingUp, Info } from "lucide-react";
+import { Calculator, Info } from "lucide-react";
 import { Slider } from "@/components/ui/Slider";
 
 export function CreditSimulator() {

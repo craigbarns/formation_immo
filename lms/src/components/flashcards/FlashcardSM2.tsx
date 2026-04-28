@@ -2,8 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Brain, RotateCw, CheckCircle2, XCircle, MoreHorizontal, Trophy, PartyPopper, BookOpen, Loader2, ChevronDown, Sparkles } from "lucide-react";
-import { EmojiIcon } from "@/components/ui/EmojiIcon";
+import { Brain, RotateCw, CheckCircle2, XCircle, MoreHorizontal, Trophy, PartyPopper, BookOpen, ChevronDown, Sparkles } from "lucide-react";
 import { recordFlashcardReviewed } from "@/lib/gamification";
 import { createClient } from "@/lib/supabase/client";
 

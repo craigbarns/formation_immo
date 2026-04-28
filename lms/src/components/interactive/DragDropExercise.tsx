@@ -4,7 +4,6 @@ import { useCallback, useMemo, useState } from "react";
 import type { DragDropExercise } from "@/data/drag-drop-exercises";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, RotateCcw, MousePointer2, ListOrdered, Sparkles, XCircle } from "lucide-react";
-import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 /** Mélange identique côté serveur et client (évite les erreurs d'hydratation). */
 function mulberry32(seed: number) {

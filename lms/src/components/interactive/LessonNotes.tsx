@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { PenLine, ChevronDown, CheckCircle2, Trash2, X, Sparkles } from "lucide-react";
+import { PenLine, ChevronDown, Trash2, X, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {

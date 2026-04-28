@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
-import { ArrowLeft, Sparkles, Gavel, HandCoins, Banknote, Briefcase, FileSpreadsheet, Wrench, Calculator } from "lucide-react";
+import { ArrowLeft, Sparkles, Gavel, HandCoins, Banknote, FileSpreadsheet, Calculator } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Simulateurs & outils",

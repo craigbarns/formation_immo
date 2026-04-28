@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Loader2, Lock, Mail, Sparkles, UserPlus, Home, ClipboardList, Scale, Briefcase, Building2, CircleDollarSign, Handshake } from "lucide-react";
+import { Loader2, Lock, Mail, Sparkles, Home, ClipboardList, Scale, Briefcase, Building2, CircleDollarSign, Handshake } from "lucide-react";
 import { login, resetPassword } from "@/app/actions/auth";
 
 export default function LoginForm() {

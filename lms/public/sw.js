@@ -1,6 +1,6 @@
 const CACHE_NAME = "formation-immo-v2";
 
-self.addEventListener("install", (event) => {
+self.addEventListener("install", () => {
   self.skipWaiting();
 });
 

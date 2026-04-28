@@ -7,14 +7,10 @@ import {
   User, 
   RotateCcw, 
   Send, 
-  Sparkles, 
   Trophy, 
   Brain,
-  Quote,
   Target,
-  ChevronDown
 } from "lucide-react";
-import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { recordSimulatorUsed } from "@/lib/gamification";
 
 interface DialogueLine {
@@ -109,23 +105,22 @@ const SCENARIOS: Scenario[] = [
   }
 ];
 
+const ACTIVE_SCENARIO = SCENARIOS[0];
+const INITIAL_NODE = ACTIVE_SCENARIO.nodes[ACTIVE_SCENARIO.startNode];
+const INITIAL_HISTORY: DialogueLine[] =
+  INITIAL_NODE.type === "client" ? [{ role: "client", text: INITIAL_NODE.text }] : [];
+const INITIAL_NODE_ID = INITIAL_NODE.type === "client" ? INITIAL_NODE.next : ACTIVE_SCENARIO.startNode;
+
 export function NegotiationSimulator() {
-  const [activeScenario, setActiveScenario] = useState(SCENARIOS[0]);
-  const [history, setHistory] = useState<DialogueLine[]>([]);
-  const [currentNodeId, setCurrentNodeId] = useState(activeScenario.startNode);
+  const activeScenario = ACTIVE_SCENARIO;
+  const [history, setHistory] = useState<DialogueLine[]>(INITIAL_HISTORY);
+  const [currentNodeId, setCurrentNodeId] = useState(INITIAL_NODE_ID);
   const [finished, setFinished] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     recordSimulatorUsed("negotiation");
-    const firstNode = activeScenario.nodes[activeScenario.startNode];
-    if (firstNode.type === "client") {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setHistory([{ role: "client", text: firstNode.text }]);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setCurrentNodeId(firstNode.next);
-    }
-  }, [activeScenario]);
+  }, []);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });

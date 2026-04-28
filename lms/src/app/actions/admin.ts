@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { upsertStudentProfile, upsertSubscription } from "@/lib/auth-access";
 
 type ExamScores = Record<string, { score: number; total: number; date: string }>;
 
@@ -51,6 +52,11 @@ export interface ConnectionLogPayload {
   lesson_slug: string | null;
 }
 
+export interface AdminAccessResult {
+  success?: string;
+  error?: string;
+}
+
 async function requireAdmin() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -71,6 +77,15 @@ async function requireAdmin() {
 
 function getSiteUrl() {
   return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://app.monpassformation.com").replace(/\/$/, "");
+}
+
+function getString(value: FormDataEntryValue | null) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function isAlreadyRegistered(message: string) {
+  const normalized = message.toLowerCase();
+  return normalized.includes("already") || normalized.includes("registered");
 }
 
 export async function listLearners(): Promise<{ learners?: LearnerStatsPayload[]; error?: string }> {
@@ -169,13 +184,101 @@ export async function listLearnerConnectionLogs(
   }
 }
 
-export async function inviteUser(formData: FormData): Promise<{ success?: string; error?: string }> {
+export async function createFullAccessUser(formData: FormData): Promise<AdminAccessResult> {
   const adminCheck = await requireAdmin();
   if ("error" in adminCheck) return { error: adminCheck.error };
 
-  const email = (formData.get("email") as string).trim().toLowerCase();
-  const firstName = (formData.get("first_name") as string).trim();
-  const lastName = (formData.get("last_name") as string).trim();
+  const email = getString(formData.get("email")).toLowerCase();
+  const firstName = getString(formData.get("first_name"));
+  const lastName = getString(formData.get("last_name"));
+  const password = getString(formData.get("password"));
+  const fullName = `${firstName} ${lastName}`.trim();
+
+  if (!email || !firstName || !lastName || !password) {
+    return { error: "Prénom, nom, email et mot de passe sont requis" };
+  }
+
+  if (password.length < 6) {
+    return { error: "Le mot de passe doit contenir au moins 6 caractères" };
+  }
+
+  const admin = createAdminClient();
+  let userId: string | null = null;
+  let wasCreated = false;
+
+  const { data: createdUser, error: createError } = await admin.auth.admin.createUser({
+    email,
+    password,
+    email_confirm: true,
+    user_metadata: { full_name: fullName, first_name: firstName, last_name: lastName },
+  });
+
+  if (createError) {
+    if (!isAlreadyRegistered(createError.message)) {
+      return { error: createError.message };
+    }
+
+    const { data: users, error: usersError } = await admin.auth.admin.listUsers({
+      page: 1,
+      perPage: 1000,
+    });
+
+    if (usersError) return { error: usersError.message };
+
+    const existingUser = users.users.find((user) => user.email?.toLowerCase() === email);
+
+    if (!existingUser) {
+      return { error: "Compte existant introuvable dans Supabase Auth" };
+    }
+
+    userId = existingUser.id;
+    const { error: updateError } = await admin.auth.admin.updateUserById(userId, {
+      password,
+      email_confirm: true,
+      user_metadata: { full_name: fullName, first_name: firstName, last_name: lastName },
+    });
+
+    if (updateError) return { error: updateError.message };
+  } else {
+    userId = createdUser.user.id;
+    wasCreated = true;
+  }
+
+  if (!userId) {
+    return { error: "Création du compte impossible" };
+  }
+
+  try {
+    await upsertSubscription({
+      user_id: userId,
+      email,
+      formation_id: "immobilier",
+      status: "active",
+    });
+
+    await upsertStudentProfile({
+      id: userId,
+      full_name: fullName,
+      first_name: firstName,
+      last_name: lastName,
+    });
+  } catch (error) {
+    return {
+      error: error instanceof Error ? error.message : "Accès formation impossible à créer",
+    };
+  }
+
+  const action = wasCreated ? "Compte créé" : "Compte existant mis à jour";
+  return { success: `${action}. Accès complet activé pour ${email}.` };
+}
+
+export async function inviteUser(formData: FormData): Promise<AdminAccessResult> {
+  const adminCheck = await requireAdmin();
+  if ("error" in adminCheck) return { error: adminCheck.error };
+
+  const email = getString(formData.get("email")).toLowerCase();
+  const firstName = getString(formData.get("first_name"));
+  const lastName = getString(formData.get("last_name"));
   const fullName = `${firstName} ${lastName}`.trim();
 
   if (!email || !firstName || !lastName) return { error: "Tous les champs sont requis" };
@@ -189,21 +292,25 @@ export async function inviteUser(formData: FormData): Promise<{ success?: string
 
   if (inviteError) return { error: inviteError.message };
 
-  const userId = inviteData.user.id;
+  try {
+    await upsertSubscription({
+      user_id: inviteData.user.id,
+      email,
+      formation_id: "immobilier",
+      status: "active",
+    });
 
-  const { error: subscriptionError } = await admin.from("user_subscriptions").upsert(
-    { user_id: userId, email, formation_id: "immobilier", status: "active" },
-    { onConflict: "email,formation_id" }
-  );
+    await upsertStudentProfile({
+      id: inviteData.user.id,
+      full_name: fullName,
+      first_name: firstName,
+      last_name: lastName,
+    });
+  } catch (error) {
+    return {
+      error: error instanceof Error ? error.message : "Accès formation impossible à créer",
+    };
+  }
 
-  if (subscriptionError) return { error: subscriptionError.message };
-
-  const { error: profileError } = await admin.from("profiles").upsert(
-    { id: userId, full_name: fullName, first_name: firstName, last_name: lastName, role: "student" },
-    { onConflict: "id" }
-  );
-
-  if (profileError) return { error: profileError.message };
-
-  return { success: `Invitation envoyée à ${email}` };
+  return { success: `Invitation envoyée à ${email}. Accès complet activé.` };
 }

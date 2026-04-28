@@ -2,13 +2,12 @@ import fs from "fs";
 import path from "path";
 import type { LessonVisuals, KeyConcept, StatCard, ComparisonRow } from "@/data/lesson-keyconcepts";
 
-const PROJECT_ROOT = path.resolve(/*turbopackIgnore: true*/ process.cwd(), "..");
-
 function findScriptFile(relPath: string): string | null {
+  const cwd = process.cwd();
   const candidates = [
-    path.join(PROJECT_ROOT, relPath),
-    path.join(process.cwd(), relPath),
-    path.join(process.cwd(), "public", relPath),
+    path.join(/*turbopackIgnore: true*/ cwd, "..", relPath),
+    path.join(/*turbopackIgnore: true*/ cwd, relPath),
+    path.join(/*turbopackIgnore: true*/ cwd, "public", relPath),
   ];
   for (const p of candidates) {
     if (fs.existsSync(p)) return p;

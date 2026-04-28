@@ -1,9 +1,9 @@
 import { toErrorMessage } from "@/lib/utils/error";
 import { sendWelcomeEmail } from "@/lib/email/resend";
+import { upsertSubscription } from "@/lib/auth-access";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { createClient } from "@supabase/supabase-js";
 
 export const dynamic = "force-dynamic";
 
@@ -14,12 +14,12 @@ const stripe = process.env.STRIPE_SECRET_KEY
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-const supabaseAdmin = (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY)
-  ? createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY)
-  : null;
+const isSupabaseAdminConfigured =
+  Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL) &&
+  Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 export async function POST(request: Request) {
-  if (!stripe || !supabaseAdmin || !webhookSecret) {
+  if (!stripe || !isSupabaseAdminConfigured || !webhookSecret) {
     console.error("Webhook configuration missing");
     return NextResponse.json({ error: "Configuration missing" }, { status: 500 });
   }
@@ -46,16 +46,14 @@ export async function POST(request: Request) {
     if (customerEmail) {
       // 1. Inscrire l'accès dans la table 'user_subscriptions'
       // Le user_id sera lié lors de l'inscription ou de la prochaine connexion
-      const { error: subError } = await supabaseAdmin
-        .from("user_subscriptions")
-        .upsert({
+      try {
+        await upsertSubscription({
           email: customerEmail,
           formation_id: formationId,
           stripe_session_id: session.id,
           status: "active",
-        }, { onConflict: "email,formation_id" });
-
-      if (subError) {
+        });
+      } catch (subError) {
         console.error("Error saving subscription:", subError);
         return NextResponse.json({ error: "Error saving subscription" }, { status: 500 });
       }

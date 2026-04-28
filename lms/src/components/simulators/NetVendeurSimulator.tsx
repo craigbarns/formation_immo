@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calculator, Euro, TrendingUp, Info, HandCoins, CheckCircle2, MessageSquare, Quote } from "lucide-react";
+import { Info, HandCoins, CheckCircle2, MessageSquare, Quote } from "lucide-react";
 import { Slider } from "@/components/ui/Slider";
 import { recordSimulatorUsed } from "@/lib/gamification";
 

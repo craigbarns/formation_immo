@@ -2,8 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { FileText, Trophy, PartyPopper, BookOpen, CheckCircle2, XCircle, Clock, ChevronLeft, ChevronRight, Sparkles, Send, Brain, Zap, Loader2, RotateCcw, HelpCircle, Lightbulb } from "lucide-react";
-import { EmojiIcon } from "@/components/ui/EmojiIcon";
+import { FileText, Trophy, PartyPopper, BookOpen, CheckCircle2, XCircle, Clock, ChevronLeft, ChevronRight, Sparkles, Brain, Zap, Loader2, RotateCcw, HelpCircle, Lightbulb } from "lucide-react";
 import type { ExamQuestion, ModuleExam } from "@/data/exam-questions";
 import { recordExamScore } from "@/lib/gamification";
 import { createClient } from "@/lib/supabase/client";
@@ -226,10 +225,6 @@ export function ExamMode({ exam, showCertificate }: { exam: ModuleExam; showCert
   const answeredCount = Object.keys(answers).length;
   const mins = Math.floor(timeLeft / 60);
   const secs = timeLeft % 60;
-  const timerPct = ((exam.duration * 60 - timeLeft) / (exam.duration * 60)) * 100;
-  const radius = 18;
-  const circumference = 2 * Math.PI * radius;
-  const timerDash = circumference * (timeLeft / (exam.duration * 60));
 
   /* ─── INTRO SCREEN ──────────────────────────────────────────── */
   if (state === "intro") {
@@ -645,4 +640,3 @@ function ReviewQuestion({
     </div>
   );
 }
-

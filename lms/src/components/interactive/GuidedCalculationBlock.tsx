@@ -4,7 +4,7 @@ import React, { useCallback, useState } from "react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { GuidedCalculation, CalcStep } from "@/data/guided-calculations";
 import { motion, AnimatePresence } from "framer-motion";
-import { Lock, CheckCircle2, RotateCcw, Calculator, Sparkles, AlertCircle } from "lucide-react";
+import { Lock, CheckCircle2, RotateCcw, Calculator, AlertCircle } from "lucide-react";
 
 type StepStatus = "locked" | "active" | "correct" | "wrong";
 

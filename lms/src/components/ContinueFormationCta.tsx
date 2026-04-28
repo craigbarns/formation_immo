@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, PartyPopper, Sparkles, Play, Award } from "lucide-react";
+import { ArrowRight, PartyPopper, Sparkles, Play } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { getStoredProgress } from "@/components/LessonProgress";
 import { findNextLesson, type NextLessonInfo } from "@/lib/formation-journey";

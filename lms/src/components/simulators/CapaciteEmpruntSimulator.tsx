@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calculator, Euro, TrendingUp, Info, ShieldCheck } from "lucide-react";
+import { TrendingUp, Info, ShieldCheck } from "lucide-react";
 import { Slider } from "@/components/ui/Slider";
 import { recordSimulatorUsed } from "@/lib/gamification";
 

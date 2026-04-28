@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { getLevelForXP, updateStreak } from "@/lib/gamification";
-import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { Flame, ShieldCheck, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 

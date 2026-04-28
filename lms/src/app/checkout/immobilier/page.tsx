@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   CheckCircle2,
-  CreditCard,
   GraduationCap,
   Lock,
   ShieldCheck,
@@ -20,7 +19,6 @@ export const metadata: Metadata = {
     "Finalisez votre inscription à la formation Agent Immobilier Loi ALUR 2026.",
 };
 
-const checkoutPath = "/checkout/immobilier";
 const coverImage = "/generated/fal/transaction/cover-immobilier.jpg";
 
 import { StripeButton } from "@/components/StripeButton";

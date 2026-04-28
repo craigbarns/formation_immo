@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { getGamificationState } from "@/lib/gamification";
-import { Clock, Activity, Zap } from "lucide-react";
+import { Clock, Activity } from "lucide-react";
 import { motion } from "framer-motion";
 
 const MODULE_TARGET_HOURS: Record<string, number> = {

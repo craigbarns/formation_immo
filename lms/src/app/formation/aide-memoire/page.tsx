@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { Calculator, Map, Megaphone, Scale, TrendingUp, ArrowLeft, Sparkles, Printer, FileText } from "lucide-react";
+import { Calculator, Map, Megaphone, Scale, TrendingUp, ArrowLeft, Sparkles } from "lucide-react";
 import { CHEAT_SHEETS, type CheatSheet, type CheatSheetRow } from "@/data/cheat-sheets";
 import { COURSE } from "@/data/course";
 import { PrintButton } from "./PrintButton";
-import { EmojiIcon } from "@/components/ui/EmojiIcon";
 
 export const metadata = {
   title: "Aide-mémoire — Fiches de référence | Formation immobilier",

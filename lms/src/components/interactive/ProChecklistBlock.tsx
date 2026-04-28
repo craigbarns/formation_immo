@@ -5,8 +5,8 @@ import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import type { ProChecklist } from "@/data/pro-checklists";
 import { recordChecklistComplete } from "@/lib/gamification";
 import { createClient } from "@/lib/supabase/client";
-import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, Download, Printer, ClipboardList, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import { CheckCircle2, Download, Printer, Sparkles } from "lucide-react";
 
 function storageKey(clId: string) {
   return `pro-checklist-${clId}`;
@@ -260,7 +260,7 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
         </div>
 
         <div className="space-y-12">
-          {byCategory.map(({ category, items }, catIdx) =>
+          {byCategory.map(({ category, items }) =>
             items.length === 0 ? null : (
               <div key={category} className="space-y-6">
                 <div className="flex items-center gap-4">

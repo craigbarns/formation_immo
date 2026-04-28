@@ -82,6 +82,7 @@ export default function RegisterForm() {
           <div className="p-8 sm:p-10">
             <form action={handleSubmit} className="space-y-6" aria-busy={loading}>
               <input type="hidden" name="next" value={next} />
+              {sessionId ? <input type="hidden" name="session_id" value={sessionId} /> : null}
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
