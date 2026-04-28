@@ -24,14 +24,16 @@ export async function verifySubscription() {
   }
 
   // 2. Sinon, vérification dans la table des abonnements
-  const { data: subscription, error } = await supabase
+  const { data: subscription } = await supabase
     .from("user_subscriptions")
     .select("status")
-    .eq("email", user.email)
     .eq("formation_id", "immobilier")
-    .single();
+    .or(`email.eq.${user.email},user_id.eq.${user.id}`)
+    .eq("status", "active")
+    .limit(1)
+    .maybeSingle();
 
-  if (error || !subscription || subscription.status !== "active") {
+  if (!subscription) {
     throw new Error("Accès refusé : Aucun abonnement actif trouvé");
   }
 

@@ -28,16 +28,18 @@ export default async function FormationLayout({
 
   const isAdmin = profile?.role === "admin";
 
-  // 2. 🔒 VÉRIFICATION DU PAIEMENT STRIPE (sauf pour les admins)
+  // 2. 🔒 VÉRIFICATION DE L'ACCÈS (sauf pour les admins)
   if (!isAdmin) {
     const { data: subscription } = await supabase
       .from("user_subscriptions")
       .select("status")
-      .eq("email", user.email)
       .eq("formation_id", "immobilier")
+      .or(`email.eq.${user.email},user_id.eq.${user.id}`)
+      .eq("status", "active")
+      .limit(1)
       .maybeSingle();
 
-    if (!subscription || subscription.status !== "active") {
+    if (!subscription) {
       redirect("/checkout/immobilier?error=accès_non_autorisé");
     }
   }
