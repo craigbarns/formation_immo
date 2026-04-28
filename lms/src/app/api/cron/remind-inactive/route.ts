@@ -19,22 +19,33 @@ export async function GET(request: Request) {
   const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString();
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
 
-  // Apprenants inactifs depuis 3 ou 7 jours (pas de connection_log récent)
-  // et dont la formation est active
+  // 1. Récupère les subscriptions actives (sans join FK supprimée)
   const { data: subs } = await supabase
     .from("user_subscriptions")
-    .select("email, profiles!inner(id, full_name, gamification_state(last_login_date))")
+    .select("email, user_id")
     .eq("status", "active")
     .eq("formation_id", "immobilier");
 
-  if (!subs) return NextResponse.json({ sent: 0 });
+  if (!subs || subs.length === 0) return NextResponse.json({ sent: 0 });
+
+  const userIds = subs.map((s) => s.user_id).filter(Boolean) as string[];
+
+  // 2. Récupère les profils et la dernière connexion en deux requêtes séparées
+  const [{ data: profiles }, { data: gamStates }] = await Promise.all([
+    supabase.from("profiles").select("id, full_name").in("id", userIds),
+    supabase.from("gamification_state").select("user_id, last_login_date").in("user_id", userIds),
+  ]);
+
+  const profileMap = new Map((profiles ?? []).map((p) => [p.id, p.full_name as string | null]));
+  const gamMap = new Map((gamStates ?? []).map((g) => [g.user_id, g.last_login_date as string | null]));
 
   let sent = 0;
 
-  interface SubRow { email: string; profiles: { full_name: string | null; gamification_state: { last_login_date: string }[] }[] }
-  for (const sub of (subs as unknown as SubRow[])) {
-    const profile = sub.profiles?.[0];
-    const lastLogin = profile?.gamification_state?.[0]?.last_login_date;
+  for (const sub of subs) {
+    const userId = sub.user_id;
+    if (!userId) continue;
+
+    const lastLogin = gamMap.get(userId);
     if (!lastLogin) continue;
 
     const lastLoginDate = new Date(lastLogin).toISOString();
@@ -42,7 +53,8 @@ export async function GET(request: Request) {
 
     // Envoyer uniquement à J+3 ou J+7 (pas tous les jours)
     if (lastLoginDate < threeDaysAgo && lastLoginDate >= sevenDaysAgo) {
-      await sendReminderEmail(sub.email, profile?.full_name ?? undefined, daysSince);
+      const fullName = profileMap.get(userId) ?? undefined;
+      await sendReminderEmail(sub.email, fullName, daysSince);
       sent++;
     }
   }

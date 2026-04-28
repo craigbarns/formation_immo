@@ -98,23 +98,23 @@ export async function POST(request: Request) {
     }
   }
 
-  // ── 3. Last exam failed (< 50%) ──
+  // ── 3. Last exam failed (< 70%) ──
   const { data: lastExam } = await supabase
     .from("exam_results")
-    .select("module_slug, score, total, taken_at")
+    .select("module_slug, score, passed, created_at")
     .eq("user_id", user.id)
-    .order("taken_at", { ascending: false })
+    .order("created_at", { ascending: false })
     .limit(1)
-    .single();
+    .maybeSingle();
 
-  if (lastExam && lastExam.score / lastExam.total < 0.5) {
-    const days = daysSince(lastExam.taken_at);
+  if (lastExam && !lastExam.passed) {
+    const days = daysSince(lastExam.created_at);
     if (days <= 2) {
       messages.push({
         id: "exam_fail",
         type: "exam_fail",
         title: "Ton dernier examen était difficile",
-        message: `Tu as eu ${Math.round((lastExam.score / lastExam.total) * 100)}% sur ${lastExam.module_slug}. Ne lâche rien — on peut reprendre les bases ensemble.`,
+        message: `Tu as eu ${lastExam.score}% sur ${lastExam.module_slug}. Ne lâche rien — on peut reprendre les bases ensemble.`,
         cta: "Revoir les bases",
         priority: 90,
       });
