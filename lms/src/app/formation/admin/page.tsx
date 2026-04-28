@@ -24,11 +24,12 @@ import {
   BarChart3,
   Download,
   History,
+  Trash2,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CircularProgress } from "@/components/charts/CircularProgress";
 import { exportAttendanceToCSV } from "@/lib/utils/export";
-import { createFullAccessUser, listLearnerConnectionLogs, listLearners } from "@/app/actions/admin";
+import { createFullAccessUser, deleteUser, listLearnerConnectionLogs, listLearners } from "@/app/actions/admin";
 import type { ConnectionLogPayload, LearnerStatsPayload } from "@/app/actions/admin";
 
 interface LearnerStats {
@@ -55,6 +56,7 @@ export default function AdminPage() {
   const [accessLoading, setAccessLoading] = useState(false);
   const [accessResult, setAccessResult] = useState<{ success?: string; error?: string } | null>(null);
   const accessFormRef = useRef<HTMLFormElement>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const totalLessons = COURSE.reduce((a, m) => a + m.lessons.length, 0);
   const totalModules = COURSE.length;
@@ -263,9 +265,29 @@ export default function AdminPage() {
                              </span>
                           </div>
                         </div>
-                        <button className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/40 group-hover:text-brand-gold group-hover:border-brand-gold/30 transition-all">
-                          <ChevronRight className="h-5 w-5" />
-                        </button>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setSelectedLearner(learner); }}
+                            className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/40 group-hover:text-brand-gold group-hover:border-brand-gold/30 transition-all"
+                          >
+                            <ChevronRight className="h-5 w-5" />
+                          </button>
+                          <button
+                            onClick={async (e) => {
+                              e.stopPropagation();
+                              if (!confirm(`Supprimer ${learner.full_name} ? Cette action est irréversible.`)) return;
+                              setDeletingId(learner.id);
+                              await deleteUser(learner.id);
+                              setDeletingId(null);
+                              if (selectedLearner?.id === learner.id) setSelectedLearner(null);
+                              await loadLearners({ showLoading: false });
+                            }}
+                            disabled={deletingId === learner.id}
+                            className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/40 hover:text-red-400 hover:border-red-400/30 transition-all disabled:opacity-40"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

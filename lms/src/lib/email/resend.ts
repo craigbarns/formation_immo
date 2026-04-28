@@ -39,11 +39,6 @@ export async function sendWelcomeEmail(email: string, name?: string) {
       </div>
     `,
   });
-  if (error) {
-    console.error("[email] Erreur Resend sendAdminCreatedAccountEmail:", JSON.stringify(error));
-  } else {
-    console.log("[email] Email envoyé avec succès, id:", data?.id);
-  }
 }
 
 export async function sendModuleCompletionEmail(
@@ -177,6 +172,11 @@ export async function sendAdminCreatedAccountEmail(
       </div>
     `,
   });
+  if (error) {
+    console.error("[email] Erreur Resend sendAdminCreatedAccountEmail:", JSON.stringify(error));
+  } else {
+    console.log("[email] Email envoyé avec succès, id:", data?.id);
+  }
 }
 
 export async function sendReminderEmail(email: string, name: string | undefined, daysSince: number) {

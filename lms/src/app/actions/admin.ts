@@ -283,6 +283,28 @@ export async function createFullAccessUser(formData: FormData): Promise<AdminAcc
   return { success: `${action}. Accès complet activé pour ${email}. Email envoyé avec les identifiants.` };
 }
 
+export async function deleteUser(userId: string): Promise<AdminAccessResult> {
+  const adminCheck = await requireAdmin();
+  if ("error" in adminCheck) return { error: adminCheck.error };
+
+  if (!userId) return { error: "ID utilisateur manquant" };
+
+  const admin = createAdminClient();
+
+  // Supprimer subscriptions, profil, gamification, progression
+  await Promise.all([
+    admin.from("user_subscriptions").delete().eq("user_id", userId),
+    admin.from("profiles").delete().eq("id", userId),
+    admin.from("gamification_state").delete().eq("user_id", userId),
+    admin.from("lesson_progress").delete().eq("user_id", userId),
+  ]);
+
+  const { error } = await admin.auth.admin.deleteUser(userId);
+  if (error) return { error: error.message };
+
+  return { success: "Apprenant supprimé." };
+}
+
 export async function inviteUser(formData: FormData): Promise<AdminAccessResult> {
   const adminCheck = await requireAdmin();
   if ("error" in adminCheck) return { error: adminCheck.error };
