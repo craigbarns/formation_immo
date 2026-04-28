@@ -1590,50 +1590,38 @@ export function CinematicPlayer({
           </>
         )}
 
-        {/* Big play overlay if paused */}
-        {!playing && !quizOverlay && (
+        {/* Resume overlay — shown only when there is saved progress */}
+        {!playing && !quizOverlay && resumeTime !== null && resumeTime > 5 && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-            {resumeTime !== null && resumeTime > 5 ? (
-              <div className="flex flex-col items-center gap-4">
-                <button
-                  onClick={() => {
-                    const el = audioRef.current;
-                    if (!el) return;
-                    el.currentTime = resumeTime;
-                    setCurrent(resumeTime);
-                    setResumeTime(null);
-                    el.play();
-                    setPlaying(true);
-                  }}
-                  className="flex items-center gap-3 rounded-full bg-brand-gold px-6 py-3 text-brand-navy shadow-xl shadow-brand-gold/30 transition hover:scale-105 active:scale-100"
-                >
-                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                  <span className="font-bold text-sm">Reprendre à {fmt(resumeTime)}</span>
-                </button>
-                <button
-                  onClick={() => {
-                    clearProgress(audioUrl);
-                    setResumeTime(null);
-                    toggle();
-                  }}
-                  className="text-xs text-white/60 hover:text-white/90 transition underline underline-offset-2"
-                >
-                  Recommencer depuis le début
-                </button>
-              </div>
-            ) : (
+            <div className="flex flex-col items-center gap-4">
               <button
-                onClick={toggle}
-                className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-gold text-brand-navy shadow-xl shadow-brand-gold/30 transition hover:scale-110 active:scale-100"
-                aria-label="Lancer la lecture"
+                onClick={() => {
+                  const el = audioRef.current;
+                  if (!el) return;
+                  el.currentTime = resumeTime;
+                  setCurrent(resumeTime);
+                  setResumeTime(null);
+                  el.play();
+                  setPlaying(true);
+                }}
+                className="flex items-center gap-3 rounded-full bg-brand-gold px-6 py-3 text-brand-navy shadow-xl shadow-brand-gold/30 transition hover:scale-105 active:scale-100"
               >
-                <svg className="h-7 w-7 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
+                <span className="font-bold text-sm">Reprendre à {fmt(resumeTime)}</span>
               </button>
-            )}
+              <button
+                onClick={() => {
+                  clearProgress(audioUrl);
+                  setResumeTime(null);
+                  toggle();
+                }}
+                className="text-xs text-white/60 hover:text-white/90 transition underline underline-offset-2"
+              >
+                Recommencer depuis le début
+              </button>
+            </div>
           </div>
         )}
       </div>
