@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { COURSE, lessonId } from "@/data/course";
 import { 
@@ -22,30 +22,14 @@ import {
   Activity,
   Calendar,
   BarChart3,
-  CheckCircle2,
-  FileText,
   Download,
   History
 } from "lucide-react";
-import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { CircularProgress } from "@/components/charts/CircularProgress";
 import { exportAttendanceToCSV } from "@/lib/utils/export";
-import { inviteUser } from "@/app/actions/admin";
-
-interface SupabaseLearner {
-  id: string;
-  full_name: string | null;
-  gamification_state: { 
-    xp: number; 
-    streak: number; 
-    last_login_date: string;
-    total_quiz_correct: number;
-    total_exams_taken: number;
-    exam_scores: Record<string, { score: number, total: number, date: string }>;
-  }[];
-  lesson_progress: { lesson_key: string; completed: boolean }[];
-}
+import { inviteUser, listLearnerConnectionLogs, listLearners } from "@/app/actions/admin";
+import type { ConnectionLogPayload, LearnerStatsPayload } from "@/app/actions/admin";
 
 interface LearnerStats {
   id: string;
@@ -60,112 +44,63 @@ interface LearnerStats {
   completed_keys: Set<string>;
 }
 
-interface ConnectionLog {
-  id: string;
-  user_id: string;
-  started_at: string;
-  ended_at: string | null;
-  duration_seconds: number | null;
-  module_slug: string | null;
-  lesson_slug: string | null;
-}
-
 export default function AdminPage() {
   const [learners, setLearners] = useState<LearnerStats[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAccessDenied, setIsAccessDenied] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedLearner, setSelectedLearner] = useState<LearnerStats | null>(null);
-  const [attendanceLogs, setAttendanceLogs] = useState<ConnectionLog[]>([]);
+  const [attendanceLogs, setAttendanceLogs] = useState<ConnectionLogPayload[]>([]);
   const [loadingLogs, setLoadingLogs] = useState(false);
   const [inviteLoading, setInviteLoading] = useState(false);
   const [inviteResult, setInviteResult] = useState<{ success?: string; error?: string } | null>(null);
+  const inviteFormRef = useRef<HTMLFormElement>(null);
 
   const totalLessons = COURSE.reduce((a, m) => a + m.lessons.length, 0);
   const totalModules = COURSE.length;
 
-  // ── Guard: vérifier explicitement que l'utilisateur est admin ──
-  useEffect(() => {
-    async function checkAdminRole() {
-      const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { setIsAccessDenied(true); setLoading(false); return; }
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .single();
-      if (profile?.role !== "admin") {
+  const loadLearners = useCallback(async ({ showLoading = true } = {}) => {
+    if (showLoading) setLoading(true);
+
+    const result = await listLearners();
+
+    if (result.error) {
+      if (result.error === "Accès refusé" || result.error === "Non authentifié") {
         setIsAccessDenied(true);
-        setLoading(false);
+      } else {
+        console.error("Error fetching learners:", result.error);
       }
+      setLearners([]);
+      setLoading(false);
+      return;
     }
-    checkAdminRole();
+
+    const formatted = ((result.learners || []) as LearnerStatsPayload[]).map((learner) => ({
+      ...learner,
+      completed_keys: new Set(learner.completed_keys),
+    }));
+
+    setIsAccessDenied(false);
+    setLearners(formatted);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
-    async function fetchLearners() {
-      if (isAccessDenied) return;
-      const supabase = createClient();
-      
-      const { data, error } = await supabase
-        .from("profiles")
-        .select(`
-          id,
-          full_name,
-          gamification_state (
-            xp,
-            streak,
-            last_login_date,
-            total_quiz_correct,
-            total_exams_taken,
-            exam_scores
-          ),
-          lesson_progress (
-            lesson_key,
-            completed
-          )
-        `);
-
-      if (error) {
-        console.error("Error fetching learners:", error);
-        setLoading(false);
-        return;
-      }
-
-      const formatted = ((data as unknown as SupabaseLearner[]) || []).map((p) => ({
-        id: p.id,
-        full_name: p.full_name || "Apprenant anonyme",
-        xp: p.gamification_state?.[0]?.xp || 0,
-        streak: p.gamification_state?.[0]?.streak || 0,
-        last_activity: p.gamification_state?.[0]?.last_login_date || "Jamais",
-        quiz_correct: p.gamification_state?.[0]?.total_quiz_correct || 0,
-        exams_taken: p.gamification_state?.[0]?.total_exams_taken || 0,
-        exam_scores: p.gamification_state?.[0]?.exam_scores || {},
-        lessons_completed: p.lesson_progress?.filter(lp => lp.completed).length || 0,
-        completed_keys: new Set(p.lesson_progress?.filter(lp => lp.completed).map(lp => lp.lesson_key) || []),
-      }));
-
-      setLearners(formatted);
-      setLoading(false);
-    }
-
-    fetchLearners();
-  }, [isAccessDenied]);
+    loadLearners();
+  }, [loadLearners]);
 
   // Fetch logs when a learner is selected
   useEffect(() => {
     async function fetchLogs() {
       if (selectedLearner) {
         setLoadingLogs(true);
-        const supabase = createClient();
-        const { data } = await supabase
-          .from("connection_logs")
-          .select("*")
-          .eq("user_id", selectedLearner.id)
-          .order("started_at", { ascending: false });
-        
-        setAttendanceLogs((data || []) as ConnectionLog[]);
+        const result = await listLearnerConnectionLogs(selectedLearner.id);
+        if (result.error) {
+          console.error("Error fetching learner logs:", result.error);
+          setAttendanceLogs([]);
+        } else {
+          setAttendanceLogs(result.logs || []);
+        }
         setLoadingLogs(false);
       }
     }
@@ -231,12 +166,21 @@ export default function AdminPage() {
           <UserPlus className="h-4 w-4 text-brand-gold" /> Inviter un utilisateur manuellement
         </h2>
         <form
+          ref={inviteFormRef}
           action={async (fd) => {
             setInviteLoading(true);
             setInviteResult(null);
-            const result = await inviteUser(fd);
-            setInviteResult(result);
-            setInviteLoading(false);
+            try {
+              const result = await inviteUser(fd);
+              setInviteResult(result);
+              if (result.success) {
+                inviteFormRef.current?.reset();
+                setSearchTerm("");
+                await loadLearners({ showLoading: false });
+              }
+            } finally {
+              setInviteLoading(false);
+            }
           }}
           className="flex flex-col gap-4 sm:flex-row sm:items-end"
         >
@@ -450,7 +394,7 @@ export default function AdminPage() {
                             <BarChart3 size={14} /> État des modules
                         </h3>
                         <div className="grid gap-4 sm:grid-cols-2">
-                            {COURSE.map((mod, i) => {
+                            {COURSE.map((mod) => {
                                 const doneInMod = mod.lessons.filter(l => selectedLearner.completed_keys.has(lessonId(mod.slug, l.slug))).length;
                                 const pct = Math.round((doneInMod / mod.lessons.length) * 100);
                                 return (
@@ -489,8 +433,8 @@ export default function AdminPage() {
                                     {loadingLogs ? (
                                       <tr><td colSpan={3} className="p-10 text-center text-white/20 text-xs font-bold uppercase animate-pulse">Chargement des relevés...</td></tr>
                                     ) : attendanceLogs.length > 0 ? (
-                                      attendanceLogs.slice(0, 10).map((log, i) => (
-                                        <tr key={i} className="group hover:bg-white/[0.01] transition-colors">
+                                      attendanceLogs.slice(0, 10).map((log) => (
+                                        <tr key={log.id} className="group hover:bg-white/[0.01] transition-colors">
                                             <td className="p-5">
                                                 <p className="text-sm font-bold text-white/80">{new Date(log.started_at).toLocaleDateString('fr-FR')}</p>
                                                 <p className="text-[10px] font-medium text-white/20">{new Date(log.started_at).toLocaleTimeString('fr-FR')}</p>
