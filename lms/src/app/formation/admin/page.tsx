@@ -24,7 +24,6 @@ import {
   BarChart3,
   Download,
   History,
-  KeyRound
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CircularProgress } from "@/components/charts/CircularProgress";
@@ -183,7 +182,7 @@ export default function AdminPage() {
               setAccessLoading(false);
             }
           }}
-          className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1fr_1fr_1.4fr_1.2fr_auto] xl:items-end"
+          className="grid gap-4 md:grid-cols-3 xl:grid-cols-[1fr_1fr_1.6fr_auto] xl:items-end"
         >
           <div>
             <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-white/40">Prénom</label>
@@ -196,12 +195,6 @@ export default function AdminPage() {
           <div>
             <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-white/40">Email</label>
             <input name="email" type="email" required placeholder="jean@exemple.com" className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
-          </div>
-          <div>
-            <label className="mb-1.5 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/40">
-              <KeyRound className="h-3.5 w-3.5 text-brand-gold" /> Mot de passe
-            </label>
-            <input name="password" type="text" required minLength={6} placeholder="Temporaire123" className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
           </div>
           <button type="submit" disabled={accessLoading} className="shrink-0 rounded-xl bg-brand-gold px-6 py-3 text-sm font-black text-brand-navy-deep shadow-lg transition hover:bg-white disabled:opacity-50">
             {accessLoading ? "Création…" : "Créer accès"}

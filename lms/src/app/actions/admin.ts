@@ -185,6 +185,17 @@ export async function listLearnerConnectionLogs(
   }
 }
 
+function generatePassword(): string {
+  const upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+  const lower = "abcdefghjkmnpqrstuvwxyz";
+  const digits = "23456789";
+  const special = "@#!$";
+  const all = upper + lower + digits + special;
+  const rand = (set: string) => set[Math.floor(Math.random() * set.length)];
+  const base = Array.from({ length: 8 }, () => rand(all)).join("");
+  return rand(upper) + rand(digits) + rand(special) + base;
+}
+
 export async function createFullAccessUser(formData: FormData): Promise<AdminAccessResult> {
   const adminCheck = await requireAdmin();
   if ("error" in adminCheck) return { error: adminCheck.error };
@@ -192,16 +203,13 @@ export async function createFullAccessUser(formData: FormData): Promise<AdminAcc
   const email = getString(formData.get("email")).toLowerCase();
   const firstName = getString(formData.get("first_name"));
   const lastName = getString(formData.get("last_name"));
-  const password = getString(formData.get("password"));
   const fullName = `${firstName} ${lastName}`.trim();
 
-  if (!email || !firstName || !lastName || !password) {
-    return { error: "Prénom, nom, email et mot de passe sont requis" };
+  if (!email || !firstName || !lastName) {
+    return { error: "Prénom, nom et email sont requis" };
   }
 
-  if (password.length < 6) {
-    return { error: "Le mot de passe doit contenir au moins 6 caractères" };
-  }
+  const password = generatePassword();
 
   const admin = createAdminClient();
   let userId: string | null = null;
