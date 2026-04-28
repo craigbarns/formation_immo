@@ -6,6 +6,7 @@ import { StreakReminder } from "@/components/retention";
 import { StudyReminder } from "@/components/retention/StudyReminder";
 import { AttendanceTracker } from "@/components/AttendanceTracker";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export default async function FormationLayout({
   children,
@@ -29,8 +30,11 @@ export default async function FormationLayout({
   const isAdmin = profile?.role === "admin";
 
   // 2. 🔒 VÉRIFICATION DE L'ACCÈS (sauf pour les admins)
+  // Utilise le client admin (service role) côté serveur pour éviter les
+  // blocages RLS/PostgREST sur auth.users.
   if (!isAdmin) {
-    const { data: subscription } = await supabase
+    const admin = createAdminClient();
+    const { data: subscription } = await admin
       .from("user_subscriptions")
       .select("status")
       .eq("formation_id", "immobilier")

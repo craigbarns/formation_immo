@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 /**
  * Vérifie si un utilisateur authentifié possède un accès payant actif.
@@ -23,8 +24,10 @@ export async function verifySubscription() {
     return { user, isAdmin: true };
   }
 
-  // 2. Sinon, vérification dans la table des abonnements
-  const { data: subscription } = await supabase
+  // 2. Sinon, vérification dans la table des abonnements via service role
+  // pour éviter les blocages RLS/PostgREST sur auth.users.
+  const admin = createAdminClient();
+  const { data: subscription } = await admin
     .from("user_subscriptions")
     .select("status")
     .eq("formation_id", "immobilier")
