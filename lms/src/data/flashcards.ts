@@ -2,8 +2,8 @@
  * Flashcards interactives — révision visuelle par module ET par leçon.
  *
  * Deux niveaux de granularité :
- *  - `ALL_FLASHCARDS`         : 5 decks "module complet" (rétrocompat)
- *  - `LESSON_FLASHCARDS`      : 36 decks leçon-par-leçon (révision ciblée)
+ *  - `ALL_FLASHCARDS`         : 6 decks "module complet" (rétrocompat)
+ *  - `LESSON_FLASHCARDS`      : 40 decks leçon-par-leçon (révision ciblée)
  *
  * Chaque carte a une face question et une face réponse.
  */
@@ -31,7 +31,7 @@ export type LessonFlashcardDeck = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// LESSON DECKS — 36 decks (8-12 cartes chacun)
+// LESSON DECKS — 40 decks (4-10 cartes chacun)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
@@ -2961,6 +2961,171 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       },
     ],
   },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // MODULE DÉONTOLOGIE — 4 leçons
+  // ══════════════════════════════════════════════════════════════════════════
+  {
+    moduleSlug: "deontologie",
+    lessonSlug: "non-discrimination",
+    title: "Non-discrimination — Cadre légal",
+    cards: [
+      {
+        id: "de-nd-01",
+        question: "Combien de critères de discrimination sont définis par l'art. 225-1 du Code pénal ?",
+        answer: "25 critères, dont l'origine, le sexe, la situation de famille, l'état de santé, le handicap, l'orientation sexuelle et les revenus.",
+        category: "Cadre légal",
+        difficulty: 1,
+      },
+      {
+        id: "de-nd-02",
+        question: "Quelle est la peine maximale pour discrimination dans l'accès au logement ?",
+        answer: "3 ans d'emprisonnement et 45 000 € d'amende (art. 225-2 Code pénal).",
+        category: "Cadre légal",
+        difficulty: 2,
+      },
+      {
+        id: "de-nd-03",
+        question: "Différence entre discrimination directe et indirecte ?",
+        answer: "Directe : refus explicite fondé sur un critère. Indirecte : règle neutre en apparence mais qui désavantage un groupe (ex. : exiger un CDI exclut systématiquement certains profils).",
+        category: "Cadre légal",
+        difficulty: 2,
+      },
+      {
+        id: "de-nd-04",
+        question: "Qu'est-ce que le testing en matière de discrimination ?",
+        answer: "Technique de preuve : deux candidats au profil identique sauf un critère protégé envoient le même dossier. L'écart de traitement constitue une preuve de discrimination.",
+        category: "Cadre légal",
+        difficulty: 2,
+      },
+      {
+        id: "de-nd-05",
+        question: "La loi Égalité et Citoyenneté 2017 interdit quoi en matière de baux ?",
+        answer: "Elle interdit au bailleur de refuser un locataire bénéficiaire des APL. C'est un critère discriminatoire depuis 2017.",
+        category: "Cadre légal",
+        difficulty: 1,
+      },
+    ],
+  },
+  {
+    moduleSlug: "deontologie",
+    lessonSlug: "non-discrimination-pratique",
+    title: "Non-discrimination — Pratique",
+    cards: [
+      {
+        id: "de-ndp-01",
+        question: "Comment rédiger une annonce non-discriminante ?",
+        answer: "Décrire uniquement les caractéristiques objectives du bien (surface, étage, équipements). Bannir toute mention de profil de locataire souhaité.",
+        category: "Pratique",
+        difficulty: 1,
+      },
+      {
+        id: "de-ndp-02",
+        question: "Quels critères sont légaux pour sélectionner un locataire ?",
+        answer: "Solvabilité financière (revenus, garant, assurance loyer), adéquation du logement à la taille du foyer. Tout critère lié aux 25 critères protégés est interdit.",
+        category: "Pratique",
+        difficulty: 2,
+      },
+      {
+        id: "de-ndp-03",
+        question: "Que faire si un propriétaire vous demande de refuser les bénéficiaires d'APL ?",
+        answer: "Refus catégorique. Informer le propriétaire que c'est illégal depuis la loi 2017. Refuser le mandat si le propriétaire maintient sa demande.",
+        category: "Pratique",
+        difficulty: 2,
+      },
+      {
+        id: "de-ndp-04",
+        question: "Quel organisme peut accompagner une victime de discrimination au logement ?",
+        answer: "Le Défenseur des droits (saisine gratuite en ligne). Aussi : associations comme SOS Racisme, GISTI, ou les ADIL.",
+        category: "Pratique",
+        difficulty: 3,
+      },
+    ],
+  },
+  {
+    moduleSlug: "deontologie",
+    lessonSlug: "code-deontologie",
+    title: "Code de déontologie",
+    cards: [
+      {
+        id: "de-cd-01",
+        question: "Quel texte institue le code de déontologie des agents immobiliers ?",
+        answer: "Le décret n°2015-1090 du 28 août 2015, pris en application de la loi ALUR.",
+        category: "Déontologie",
+        difficulty: 1,
+      },
+      {
+        id: "de-cd-02",
+        question: "Quel est le rôle du CNTGI ?",
+        answer: "Conseil National de la Transaction et de la Gestion Immobilières : instance disciplinaire qui peut prononcer avertissement, blâme, interdiction temporaire ou définitive d'exercer.",
+        category: "Déontologie",
+        difficulty: 2,
+      },
+      {
+        id: "de-cd-03",
+        question: "Citez 3 des 10 principes du code de déontologie immobilier.",
+        answer: "Compétence, loyauté, désintéressement, confraternité, discrétion, indépendance, transparence, prévention des conflits d'intérêts, formation continue, refus de toute discrimination.",
+        category: "Déontologie",
+        difficulty: 2,
+      },
+      {
+        id: "de-cd-04",
+        question: "Quelle obligation de formation le code de déontologie impose-t-il ?",
+        answer: "42 heures de formation continue sur 3 ans (ou 14h/an) pour maintenir la carte professionnelle — c'est l'objet de cette formation ALUR.",
+        category: "Déontologie",
+        difficulty: 1,
+      },
+      {
+        id: "de-cd-05",
+        question: "Que signifie le devoir de désintéressement pour un agent immobilier ?",
+        answer: "Ne pas favoriser ses intérêts personnels au détriment du client. Interdiction de recevoir des commissions cachées ou des avantages de prestataires tiers sans en informer le mandant.",
+        category: "Déontologie",
+        difficulty: 2,
+      },
+    ],
+  },
+  {
+    moduleSlug: "deontologie",
+    lessonSlug: "ethique-pratique",
+    title: "Éthique pratique",
+    cards: [
+      {
+        id: "de-ep-01",
+        question: "Qu'est-ce que le double mandant et quelles sont les obligations ?",
+        answer: "Représenter à la fois vendeur et acheteur. Obligations : informer les deux parties par écrit, ne pas divulguer le prix plancher du vendeur à l'acheteur, facturer de façon transparente.",
+        category: "Éthique",
+        difficulty: 2,
+      },
+      {
+        id: "de-ep-02",
+        question: "Quelles sont les durées de conservation RGPD en immobilier ?",
+        answer: "Dossiers locataires refusés : 1 an. Mandats et actes : 5 ans (prescription civile). Données comptables : 10 ans.",
+        category: "RGPD",
+        difficulty: 2,
+      },
+      {
+        id: "de-ep-03",
+        question: "Délai de notification à la CNIL en cas de violation de données ?",
+        answer: "72 heures après avoir eu connaissance de la violation (art. 33 RGPD).",
+        category: "RGPD",
+        difficulty: 2,
+      },
+      {
+        id: "de-ep-04",
+        question: "Un vendeur vous demande de taire l'humidité de la cave aux acheteurs. Que faire ?",
+        answer: "Refus. L'art. 1112-1 du Code civil impose de révéler les informations déterminantes pour le consentement. Dissimuler expose à annulation de vente et dommages-intérêts.",
+        category: "Éthique",
+        difficulty: 2,
+      },
+      {
+        id: "de-ep-05",
+        question: "Un acheteur vous propose 2 000 € pour faire accepter son offre sous le prix. Que faire ?",
+        answer: "Refus catégorique. C'est un abus de confiance (art. 314-1 Code pénal) et une violation du devoir de loyauté envers le mandant vendeur.",
+        category: "Éthique",
+        difficulty: 1,
+      },
+    ],
+  },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -2972,7 +3137,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
  * composé de toutes les cartes des leçons correspondantes.
  */
 export const ALL_FLASHCARDS: ModuleFlashcards[] = (() => {
-  const moduleSlugs = ["juridique", "transaction", "financement", "marketing", "terrain"];
+  const moduleSlugs = ["juridique", "transaction", "financement", "marketing", "terrain", "deontologie"];
   return moduleSlugs.map((moduleSlug) => ({
     moduleSlug,
     cards: LESSON_FLASHCARDS
