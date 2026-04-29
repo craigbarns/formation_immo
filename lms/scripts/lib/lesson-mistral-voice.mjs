@@ -26,6 +26,7 @@ const FOLDER_TO_SLUG = {
   "module3-financement": "financement",
   "module4-marketing": "marketing",
   "module5-terrain": "terrain",
+  "module6-deontologie": "deontologie",
 };
 
 /**

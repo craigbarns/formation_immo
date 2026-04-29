@@ -39,6 +39,7 @@ const roots = [
   path.join(repoRoot, "module3-financement", "scripts"),
   path.join(repoRoot, "module4-marketing", "scripts"),
   path.join(repoRoot, "module5-terrain", "scripts"),
+  path.join(repoRoot, "module6-deontologie", "scripts"),
 ];
 
 let total = 0;
