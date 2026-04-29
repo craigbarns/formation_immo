@@ -911,6 +911,94 @@ export const MODULE_EXAMS: ModuleExam[] = [
       },
     ],
   },
+  {
+    moduleSlug: "deontologie",
+    title: "Examen — Déontologie & éthique professionnelle",
+    duration: 15,
+    questions: [
+      {
+        id: "d1",
+        question: "Le Code de déontologie des professionnels de l'immobilier a été instauré par :",
+        options: [
+          "La loi Hoguet du 2 janvier 1970",
+          "Le décret n°2015-1090 du 28 août 2015",
+          "La loi ALUR du 24 mars 2014",
+          "Le Code civil article 1240",
+        ],
+        correctIndex: 1,
+        explanation: "Le Code de déontologie est issu du décret n°2015-1090 du 28 août 2015, pris en application de la loi ALUR.",
+      },
+      {
+        id: "d2",
+        question: "Combien de critères de discrimination sont listés à l'article 225-1 du Code pénal ?",
+        options: ["12", "18", "25", "30"],
+        correctIndex: 2,
+        explanation: "L'article 225-1 du Code pénal liste 25 critères de discrimination prohibés, dont l'origine, le sexe, l'état de santé, l'orientation sexuelle, la domiciliation bancaire, etc.",
+      },
+      {
+        id: "d3",
+        question: "Quelle est la sanction pénale maximale pour discrimination dans l'accès au logement ?",
+        options: [
+          "1 an et 15 000 €",
+          "2 ans et 30 000 €",
+          "3 ans et 45 000 €",
+          "5 ans et 75 000 €",
+        ],
+        correctIndex: 2,
+        explanation: "L'article 225-2 du Code pénal prévoit 3 ans d'emprisonnement et 45 000 € d'amende pour discrimination dans l'accès au logement.",
+      },
+      {
+        id: "d4",
+        question: "Le testing immobilier consiste à :",
+        options: [
+          "Tester la solidité d'un bien avant achat",
+          "Envoyer deux candidats similaires financièrement mais différents sur un critère protégé pour détecter une discrimination",
+          "Faire visiter un bien à plusieurs acquéreurs simultanément",
+          "Tester la performance énergétique d'un logement",
+        ],
+        correctIndex: 1,
+        explanation: "Le testing envoie deux candidats comparables financièrement mais différents sur un critère protégé (origine, prénom…). Reconnu comme preuve depuis la loi du 27 janvier 2017.",
+      },
+      {
+        id: "d5",
+        question: "Lequel de ces principes NE fait PAS partie des 10 principes du Code de déontologie ?",
+        options: ["Loyauté", "Désintéressement", "Rentabilité", "Confraternité"],
+        correctIndex: 2,
+        explanation: "La rentabilité n'est pas un principe du Code de déontologie. Les 10 principes sont : compétence, conscience professionnelle, loyauté, désintéressement, confraternité, délicatesse, modération, courtoisie, indépendance, secret professionnel.",
+      },
+      {
+        id: "d6",
+        question: "La CNTGI est :",
+        options: [
+          "La Commission Nationale des Transactions et Gestions Immobilières",
+          "Le Centre National de Traitement des Garanties Immobilières",
+          "La Commission Nationale de la Transaction et de la Gestion Immobilières",
+          "Le Comité National de Transparence et de Gouvernance Immobilière",
+        ],
+        correctIndex: 2,
+        explanation: "La CNTGI est la Commission Nationale de la Transaction et de la Gestion Immobilières, instance disciplinaire de la profession.",
+      },
+      {
+        id: "d7",
+        question: "En cas de double mandant (représenter vendeur ET acheteur), l'agent doit :",
+        options: [
+          "Refuser systématiquement — c'est interdit",
+          "Informer les deux parties par écrit de son double rôle avant toute négociation",
+          "Facturer uniquement le vendeur",
+          "Obtenir l'accord du préfet",
+        ],
+        correctIndex: 1,
+        explanation: "Le double mandant est légal mais nécessite une information écrite des deux parties avant toute négociation, conformément au Code de déontologie.",
+      },
+      {
+        id: "d8",
+        question: "Combien de temps maximum peut-on conserver un dossier locataire refusé selon le RGPD ?",
+        options: ["6 mois", "1 an", "3 ans", "5 ans"],
+        correctIndex: 1,
+        explanation: "Un dossier locataire refusé ne doit pas être conservé plus d'1 an. Les mandats et actes se conservent 5 ans (prescription civile).",
+      },
+    ],
+  },
 ];
 
 export const FINAL_EXAM_ID = "certification-finale";
