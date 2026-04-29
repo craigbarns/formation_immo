@@ -6,45 +6,48 @@ import { logConnectionSession } from "@/app/actions/tracking";
 
 export function AttendanceTracker() {
   const params = useParams();
-  const startTimeRef = useRef(new Date());
   const lastSyncRef = useRef(new Date());
 
   useEffect(() => {
-    // Réinitialiser le chrono au changement de page
-    startTimeRef.current = new Date();
     lastSyncRef.current = new Date();
 
     const saveSession = async () => {
       const now = new Date();
       const durationSeconds = Math.floor((now.getTime() - lastSyncRef.current.getTime()) / 1000);
 
-      if (durationSeconds > 10) { // Ne pas enregistrer moins de 10 secondes
-        await logConnectionSession({
+      if (durationSeconds > 10) {
+        const result = await logConnectionSession({
           startedAt: lastSyncRef.current.toISOString(),
           durationSeconds,
           moduleSlug: params.moduleSlug as string,
           lessonSlug: params.lessonSlug as string,
         });
+        if (result?.error) {
+          console.error("[AttendanceTracker] Échec de la sauvegarde de session:", result.error);
+          return;
+        }
         lastSyncRef.current = now;
       }
     };
 
-    // Sauvegarde automatique toutes les 2 minutes pour éviter de perdre les données
-    const interval = setInterval(saveSession, 120000);
+    // Sauvegarde toutes les 30 secondes
+    const interval = setInterval(saveSession, 30000);
 
-    // Sauvegarde quand on quitte la page
-    const handleBeforeUnload = () => {
-      saveSession();
+    // Sauvegarde quand l'onglet devient inactif (changement d'onglet, minimisation)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        saveSession();
+      }
     };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener("beforeunload", handleBeforeUnload);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       saveSession();
     };
   }, [params]);
 
-  return null; // Composant invisible
+  return null;
 }
