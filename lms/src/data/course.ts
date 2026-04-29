@@ -54,7 +54,7 @@ export function formatDuration(minutes: number): string {
 // Répartition : M1 9h (540) · M2 7h (420) · M3 9h (540) · M4 7h (420) · M5 10h (600)  =  2520 min = 42h
 export const COURSE: CourseModule[] = [
   // ═══════════════════════════════════════════════════════════════════════════
-  // MODULE 1 — JURIDIQUE & CONFORMITÉ  (540 min = 9h)
+  // MODULE 1 — JURIDIQUE & CONFORMITÉ  (480 min = 8h)
   // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "juridique",
@@ -167,21 +167,6 @@ export const COURSE: CourseModule[] = [
           "Reconnaître les signaux d'alerte d'une opération suspecte",
           "Effectuer une déclaration de soupçon sur la plateforme ERMES",
           "Protéger son agence contre les sanctions pénales anti-blanchiment",
-        ],
-      },
-      {
-        slug: "non-discrimination",
-        title: "Non-discrimination — obligations et conformité",
-        scriptFile: "module1-juridique/scripts/08-non-discrimination.md",
-        videoUrl: null,
-        audioUrl: "/audio/08-non-discrimination.mp3",
-        duration: 60,
-        difficulty: "intermediaire",
-        objectives: [
-          "Connaître les 25 critères de discrimination prohibés",
-          "Identifier la discrimination directe, indirecte et les instructions",
-          "Mettre en place une grille de sélection locataire conforme",
-          "Répondre professionnellement à une demande discriminatoire",
         ],
       },
       {
@@ -322,7 +307,7 @@ export const COURSE: CourseModule[] = [
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // MODULE 3 — FINANCEMENT & FISCALITÉ  (540 min = 9h)
+  // MODULE 3 — FINANCEMENT & FISCALITÉ  (480 min = 8h)
   // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "financement",
@@ -379,21 +364,6 @@ export const COURSE: CourseModule[] = [
         ],
       },
       {
-        slug: "dispositifs",
-        title: "Dispositifs fiscaux",
-        scriptFile: "module3-financement/scripts/script04-dispositifs-fiscaux.md",
-        videoUrl: null,
-        audioUrl: "/audio/script04-dispositifs-fiscaux.mp3",
-        duration: 90,
-        difficulty: "avance",
-        objectives: [
-          "Maîtriser Denormandie, Malraux et Monuments Historiques",
-          "Calculer les réductions d'impôt par dispositif",
-          "Conseiller sur le Pinel Plus et ses conditions 2026",
-          "Présenter un dossier de défiscalisation clé en main",
-        ],
-      },
-      {
         slug: "assurances",
         title: "Assurances immobilières",
         scriptFile: "module3-financement/scripts/script05-assurances-immobilieres.md",
@@ -409,18 +379,18 @@ export const COURSE: CourseModule[] = [
         ],
       },
       {
-        slug: "defiscalisation",
-        title: "Défiscalisation — dispositifs et stratégies",
-        scriptFile: "module3-financement/scripts/06-defiscalisation-dispositifs.md",
+        slug: "fiscalite-avancee",
+        title: "Fiscalité avancée — dispositifs et défiscalisation",
+        scriptFile: "module3-financement/scripts/script07-fiscalite-avancee-dispositifs-defiscalisation.md",
         videoUrl: null,
-        audioUrl: "/audio/06-defiscalisation-dispositifs.mp3",
-        duration: 90,
-        difficulty: "intermediaire",
+        audioUrl: null,
+        duration: 120,
+        difficulty: "avance",
         objectives: [
-          "Connaître l'histoire des dispositifs Besson, Robien, Scellier, Pinel",
-          "Maîtriser les dispositifs actifs en 2025 : Denormandie, Loc'Avantages, Malraux",
+          "Maîtriser les dispositifs fiscaux actifs en 2026 : Denormandie, Malraux, Loc'Avantages",
           "Expliquer la fin du Pinel (31/12/2024) à vos clients investisseurs",
-          "Orienter vers un conseiller en gestion de patrimoine pour l'optimisation fiscale",
+          "Comprendre l'historique des dispositifs pour conseiller sur les biens existants",
+          "Identifier le rôle du CGP et les limites de votre conseil fiscal",
         ],
       },
     ],
@@ -546,7 +516,7 @@ export const COURSE: CourseModule[] = [
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // MODULE 5 — VISITE, CLOSING & FIDÉLISATION  (600 min = 10h)
+  // MODULE 5 — VISITE, CLOSING & FIDÉLISATION  (480 min = 8h)
   // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "terrain",
@@ -577,7 +547,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module5-terrain/scripts/02-argumentaire-convertit.md",
         videoUrl: null,
         audioUrl: "/audio/02-argumentaire-convertit.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "intermediaire",
         objectives: [
           "Construire votre pitch de présentation en 90 secondes",
@@ -622,7 +592,7 @@ export const COURSE: CourseModule[] = [
         scriptFile: "module5-terrain/scripts/05-fidelisation-recommandation.md",
         videoUrl: null,
         audioUrl: "/audio/05-fidelisation-recommandation.mp3",
-        duration: 90,
+        duration: 60,
         difficulty: "intermediaire",
         objectives: [
           "Mettre en place un suivi post-vente sur 90 jours",
@@ -632,33 +602,93 @@ export const COURSE: CourseModule[] = [
         ],
       },
       {
-        slug: "r0-r1-r2",
-        title: "R0 / R1 / R2 — Prise de mandat en 3 étapes",
-        scriptFile: "module5-terrain/scripts/06-r0-r1-r2-prise-mandat.md",
+        slug: "prise-de-mandat-decouverte-client",
+        title: "Prise de mandat & découverte client",
+        scriptFile: "module5-terrain/scripts/08-prise-de-mandat-decouverte-client.md",
         videoUrl: null,
-        audioUrl: "/audio/06-r0-r1-r2-prise-mandat.mp3",
-        duration: 75,
+        audioUrl: null,
+        duration: 90,
         difficulty: "intermediaire",
         objectives: [
-          "Qualifier efficacement un prospect par téléphone (R0)",
+          "Qualifier un prospect par téléphone et préparer le R1 (R0)",
           "Conduire la visite du bien et la découverte vendeur (R1)",
           "Présenter une estimation argumentée et signer le mandat (R2)",
-          "Ne jamais annoncer un prix avant d'avoir des données marché formalisées",
+          "Identifier les besoins profonds d'un acquéreur avec la méthode iceberg",
+          "Structurer un suivi acquéreur sur 30 jours pour convertir sans forcer",
+        ],
+      },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MODULE 6 — DÉONTOLOGIE & ÉTHIQUE PROFESSIONNELLE  (240 min = 4h)
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    slug: "deontologie",
+    title: "Module 6 — Déontologie & éthique professionnelle",
+    summary: "Code de déontologie, non-discrimination, conflits d'intérêts, éthique pratique.",
+    description:
+      "Maîtrisez le cadre éthique et légal de votre métier : Code de déontologie (décret 2015-1090), obligations en matière de non-discrimination à l'accès au logement, gestion des conflits d'intérêts et mises en situation réelles. Un module indispensable pour exercer avec intégrité et sécurité juridique.",
+    lessons: [
+      {
+        slug: "non-discrimination",
+        title: "Non-discrimination — obligations et conformité",
+        scriptFile: "module1-juridique/scripts/08-non-discrimination.md",
+        videoUrl: null,
+        audioUrl: "/audio/08-non-discrimination.mp3",
+        duration: 60,
+        difficulty: "intermediaire",
+        objectives: [
+          "Connaître les 25 critères de discrimination prohibés",
+          "Identifier la discrimination directe, indirecte et les instructions",
+          "Mettre en place une grille de sélection locataire conforme",
+          "Répondre professionnellement à une demande discriminatoire",
         ],
       },
       {
-        slug: "decouverte-client",
-        title: "Découverte client & suivi acquéreur",
-        scriptFile: "module5-terrain/scripts/07-decouverte-client-suivi.md",
+        slug: "non-discrimination-pratique",
+        title: "Non-discrimination à l'accès au logement — pratiques et prévention",
+        scriptFile: "module6-deontologie/scripts/01-non-discrimination-pratique.md",
         videoUrl: null,
-        audioUrl: "/audio/07-decouverte-client-suivi.mp3",
-        duration: 75,
+        audioUrl: null,
+        duration: 60,
         difficulty: "intermediaire",
         objectives: [
-          "Identifier les besoins profonds d'un acquéreur avec la méthode iceberg",
-          "Poser les 4 catégories de questions de découverte client",
-          "Mettre à jour la fiche acquéreur après chaque contact",
-          "Structurer un suivi acquéreur sur 30 jours pour convertir sans forcer",
+          "Maîtriser les 25 critères de l'art. 225-1 du Code pénal",
+          "Distinguer discrimination directe, indirecte et systémique",
+          "Comprendre la procédure de testing et sa valeur de preuve",
+          "Appliquer des scripts d'entretien non-discriminants",
+          "Répondre à un bailleur qui demande une pratique discriminatoire",
+        ],
+      },
+      {
+        slug: "code-deontologie",
+        title: "Le Code de déontologie des professionnels de l'immobilier",
+        scriptFile: "module6-deontologie/scripts/02-code-deontologie.md",
+        videoUrl: null,
+        audioUrl: null,
+        duration: 60,
+        difficulty: "intermediaire",
+        objectives: [
+          "Connaître le décret 2015-1090 et son périmètre d'application",
+          "Maîtriser les 10 principes fondamentaux du Code de déontologie",
+          "Comprendre le rôle de la CNTGI et la procédure disciplinaire",
+          "Identifier les responsabilités civile, disciplinaire et pénale",
+        ],
+      },
+      {
+        slug: "ethique-pratique",
+        title: "Éthique pratique — conflits d'intérêts et situations à risque",
+        scriptFile: "module6-deontologie/scripts/03-ethique-pratique.md",
+        videoUrl: null,
+        audioUrl: null,
+        duration: 60,
+        difficulty: "avance",
+        objectives: [
+          "Identifier et gérer les situations de conflits d'intérêts",
+          "Appliquer les règles du secret professionnel et du RGPD",
+          "Reconnaître les pratiques commerciales trompeuses",
+          "Résoudre des dilemmes éthiques réels par la mise en situation",
         ],
       },
     ],
