@@ -1,0 +1,125 @@
+# SCRIPT LEÇON 3 — M6 : LE CODE DE DÉONTOLOGIE DES PROFESSIONNELS DE L'IMMOBILIER
+
+> **Narration audio (TTS)** : texte nettoyé dans `*.narration.txt`. Régénérer avec `node lms/scripts/extract-narration-for-audio.mjs`, puis MP3 via `node lms/scripts/mistral-voxtral-tts.mjs`.
+
+## INFORMATIONS TECHNIQUES
+
+- **Durée** : 10 minutes 30 secondes
+- **Nombre de mots** : 1 680 mots
+- **Rythme** : 160 mots/minute
+- **Voix recommandée** : `Josh` (voix masculine, posée, professionnelle)
+
+---
+
+## PROMPT MIDJOURNEY - VISUEL PRINCIPAL
+
+```
+French real estate professional studying a legal document, elegant office, French flag, scales of justice in background, professional attire, 8k photorealistic --ar 16:9 --style raw
+```
+
+---
+
+## SCRIPT COMPLET
+
+---
+
+### INTRODUCTION (40 secondes)
+
+[B-ROLL : Agent immobilier consulte un document officiel dans son bureau]
+
+**Voix off :**
+Depuis 2015, les professionnels de l'immobilier sont soumis à un Code de déontologie officiel — un texte réglementaire qui définit vos obligations éthiques et les sanctions encourues en cas de manquement. Méconnu de nombreux praticiens, ce code est pourtant central dans votre pratique. Il vous protège, il protège vos clients, et il structure votre réputation professionnelle.
+
+---
+
+### PARTIE 1 — LE DÉCRET 2015-1090 : HISTORIQUE ET PORTÉE (2 minutes)
+
+[SLIDE : Décret n°2015-1090 du 28 août 2015]
+
+**Voix off :**
+Le Code de déontologie des professionnels de l'immobilier a été institué par le décret n°2015-1090 du 28 août 2015, pris en application de la loi ALUR. Il s'applique à toutes les personnes physiques ou morales titulaires d'une carte professionnelle au titre de la loi Hoguet du 2 janvier 1970.
+
+Ce code s'impose à vous, à vos collaborateurs habilités, et à vos négociateurs, qu'ils soient salariés ou agents commerciaux. Il est opposable devant les instances disciplinaires et les tribunaux.
+
+---
+
+### PARTIE 2 — LES 10 PRINCIPES FONDAMENTAUX (3 minutes)
+
+[SLIDE : liste des 10 principes]
+
+**Voix off :**
+Le Code de déontologie repose sur 10 principes fondamentaux. Retenez-les.
+
+**1. Compétence :** Vous devez maintenir et développer vos connaissances. C'est la base de l'obligation de formation continue (42h/3 ans).
+
+**2. Conscience professionnelle :** Vous exercez avec soin, diligence, et dans l'intérêt de votre client.
+
+**3. Loyauté :** Vous ne trompez pas, vous ne dissimulez pas d'informations essentielles.
+
+**4. Désintéressement :** Vous ne cherchez pas à tirer un avantage personnel au détriment de votre client. Pas de double commission cachée, pas de rétrocession non déclarée.
+
+**5. Confraternité :** Vous respectez vos confrères. Pas de dénigrement, pas de débauchage de clients.
+
+**6. Délicatesse :** Vous exercez avec tact dans les situations sensibles (succession, divorce, difficultés financières).
+
+**7. Modération :** Vos communications commerciales restent mesurées et véridiques.
+
+**8. Courtoisie :** Vous traitez chacun avec respect, indépendamment de sa situation.
+
+**9. Indépendance :** Vous résistez aux pressions qui pourraient vous amener à manquer à vos obligations.
+
+**10. Secret professionnel :** Vous préservez la confidentialité des informations que vos clients vous confient.
+
+---
+
+### PARTIE 3 — LA CNTGI : RÔLE ET PROCÉDURE DISCIPLINAIRE (2 minutes 30)
+
+[SLIDE : organigramme CNTGI]
+
+**Voix off :**
+La Commission Nationale de la Transaction et de la Gestion Immobilières — la CNTGI — est l'instance disciplinaire de la profession. Elle est composée de représentants de l'État, de professionnels, et de consommateurs.
+
+**Qui peut la saisir ?** Tout client s'estimant lésé, un confrère, ou le préfet de département.
+
+**Procédure :** Saisine écrite → instruction → audition du professionnel → délibération.
+
+**Sanctions possibles :**
+- Avertissement
+- Blâme
+- Interdiction temporaire d'exercer (1 à 3 ans)
+- Interdiction définitive d'exercer
+
+Ces sanctions sont indépendantes des poursuites civiles ou pénales — vous pouvez cumuler une sanction disciplinaire ET une condamnation pénale pour le même fait.
+
+---
+
+### PARTIE 4 — RESPONSABILITÉS CIVILE, DISCIPLINAIRE ET PÉNALE (1 minute 30)
+
+[SLIDE : 3 colonnes de responsabilité]
+
+**Voix off :**
+En cas de manquement, vous pouvez faire face à trois types de responsabilité simultanément.
+
+**Responsabilité civile :** votre client obtient des dommages-intérêts si vous lui avez causé un préjudice (renseignement erroné, vice caché non signalé).
+
+**Responsabilité disciplinaire :** la CNTGI prononce une sanction pouvant aller jusqu'à l'interdiction d'exercer.
+
+**Responsabilité pénale :** le Code pénal punit certains manquements — escroquerie, abus de confiance, discrimination.
+
+---
+
+### PARTIE 5 — L'OBLIGATION DE FORMATION CONTINUE (1 minute)
+
+[SLIDE : 14h/an, 42h/3 ans]
+
+**Voix off :**
+La loi ALUR impose 42 heures de formation continue sur 3 ans pour renouveler votre carte professionnelle. Ces heures doivent couvrir des thématiques précises : droit, techniques de l'immobilier, déontologie, non-discrimination.
+
+Cette formation, que vous êtes en train de suivre, contribue directement à remplir cette obligation. Conservez vos attestations de suivi — elles sont requises pour le renouvellement de la carte T.
+
+---
+
+### CONCLUSION (30 secondes)
+
+**Voix off :**
+Le Code de déontologie n'est pas une contrainte abstraite. C'est votre bouclier professionnel. En le respectant, vous vous protégez des litiges, vous construisez une réputation solide, et vous contribuez à élever le niveau de toute la profession. Dans la leçon suivante, nous allons mettre ces principes à l'épreuve avec des situations réelles : conflits d'intérêts, dilemmes éthiques, RGPD.
