@@ -8,6 +8,8 @@ import { COURSE } from "@/data/course";
 import { FORMATION_PROGRESS_STORAGE_KEY } from "@/constants/formation-storage";
 import { createClient } from "@/lib/supabase/client";
 
+const supabase = createClient();
+
 export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } = {}) {
   const [name, setName] = useState("");
   const [generated, setGenerated] = useState(false);
@@ -16,6 +18,8 @@ export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } 
   const [examsPassed, setExamsPassed] = useState(0);
   const [gameState, setGameState] = useState<GamificationState | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [pdfLoading, setPdfLoading] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
 
   const totalLessons = COURSE.reduce((a, m) => a + m.lessons.length, 0);
 
@@ -327,6 +331,29 @@ export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } 
     link.click();
   }
 
+  const downloadAttestation = async () => {
+    setPdfLoading(true);
+    setPdfError(null);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token;
+      if (!token) throw new Error("Non connecté");
+
+      const res = await fetch("/api/certificates/generate", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error ?? "Erreur");
+
+      window.open(json.pdfUrl, "_blank");
+    } catch (err) {
+      setPdfError(err instanceof Error ? err.message : "Erreur");
+    } finally {
+      setPdfLoading(false);
+    }
+  };
+
   // Unified return to avoid Turbopack parsing issues with early returns in some contexts
   return (
     <div className="rounded-2xl border-2 border-brand-navy/15 bg-white shadow-lg">
@@ -401,6 +428,19 @@ export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } 
                   </svg>
                   Télécharger le certificat (PNG)
                 </button>
+                <button
+                  onClick={downloadAttestation}
+                  disabled={pdfLoading}
+                  className="mt-3 px-5 py-2.5 bg-blue-900 hover:bg-blue-800 text-white text-sm font-semibold rounded-lg flex items-center gap-2 mx-auto disabled:opacity-60"
+                >
+                  {pdfLoading ? (
+                    <span className="animate-spin">⏳</span>
+                  ) : (
+                    <span>📄</span>
+                  )}
+                  {pdfLoading ? "Génération en cours..." : "Télécharger l'attestation officielle (PDF)"}
+                </button>
+                {pdfError && <p className="text-red-400 text-xs mt-2 text-center">{pdfError}</p>}
               </div>
             )}
           </>
