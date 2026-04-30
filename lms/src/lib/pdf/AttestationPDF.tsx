@@ -10,17 +10,20 @@ import {
 } from "@react-pdf/renderer";
 import { FORMATION, ORGANIZATION, REPRESENTATIVE } from "./formation-data";
 
-// Load logo once at module init (server-side only)
-function loadLogo(): string {
+// Load assets once at module init (server-side only)
+function loadAsset(filename: string): string {
   try {
-    const filePath = path.join(process.cwd(), "public", "logo-pass-formation.png");
+    const filePath = path.join(process.cwd(), "public", filename);
     const buf = fs.readFileSync(filePath);
-    return `data:image/png;base64,${buf.toString("base64")}`;
+    const ext = filename.split(".").pop() ?? "png";
+    const mime = ext === "jpg" || ext === "jpeg" ? "image/jpeg" : "image/png";
+    return `data:${mime};base64,${buf.toString("base64")}`;
   } catch {
     return "";
   }
 }
-const LOGO_SRC = loadLogo();
+const LOGO_SRC   = loadAsset("logo-pass-formation.png");
+const TAMPON_SRC = loadAsset("tampon-pass-formation.jpg");
 
 const DARK = "#1a1a1a";
 const NAVY = "#1e3a6e";
@@ -55,9 +58,7 @@ const s = StyleSheet.create({
   validTxt:   { fontSize: 10, lineHeight: 1.7, fontWeight: "bold", marginBottom: 5 },
   alurTxt:    { fontSize: 10, fontWeight: "bold", marginBottom: 10 },
   sigArea:    { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginTop: 8 },
-  cachet:     { width: 128, borderWidth: 1, borderColor: NAVY, padding: "5 7", alignItems: "center" },
-  cachetBold: { fontSize: 7.5, fontWeight: "bold", color: NAVY, textAlign: "center", marginBottom: 2 },
-  cachetTxt:  { fontSize: 6.5, color: NAVY, textAlign: "center", lineHeight: 1.55 },
+  cachet:     { width: 140, height: 100 },
   sigRight:   { width: 155, alignItems: "center" },
   sigSpacer:  { height: 30 },
   sigLine:    { borderBottomWidth: 0.5, borderBottomColor: "#999", width: 130, marginBottom: 4 },
@@ -216,14 +217,7 @@ export function AttestationPDF({ data }: { data: AttestationData }) {
 
         {/* Signature row: cachet + signature */}
         <View style={s.sigArea}>
-          <View style={s.cachet}>
-            <Text style={s.cachetBold}>PASS FORMATION</Text>
-            <Text style={s.cachetTxt}>6 Rue Maurice Caunes</Text>
-            <Text style={s.cachetTxt}>31200 Toulouse</Text>
-            <Text style={s.cachetTxt}>RCS Toulouse 517 603 783</Text>
-            <Text style={s.cachetTxt}>Tél : {ORGANIZATION.phone}</Text>
-            <Text style={s.cachetTxt}>N° Déc/activité : {ORGANIZATION.activityDeclarationNumber}</Text>
-          </View>
+          {TAMPON_SRC ? <Image src={TAMPON_SRC} style={s.cachet} /> : null}
           <View style={s.sigRight}>
             <View style={s.sigSpacer} />
             <View style={s.sigLine} />
