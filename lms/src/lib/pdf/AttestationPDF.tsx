@@ -1,316 +1,111 @@
+import * as fs from "fs";
+import * as path from "path";
 import {
   Document,
   Page,
   Text,
   View,
+  Image,
   StyleSheet,
-  Font,
 } from "@react-pdf/renderer";
 import { FORMATION, ORGANIZATION, REPRESENTATIVE } from "./formation-data";
 
-Font.register({
-  family: "Helvetica",
-  fonts: [
-    { src: "Helvetica" },
-    { src: "Helvetica-Bold", fontWeight: "bold" },
-    { src: "Helvetica-Oblique", fontStyle: "italic" },
-  ],
+// Load logo once at module init (server-side only)
+function loadLogo(): string {
+  try {
+    const filePath = path.join(process.cwd(), "public", "logo-pass-formation.png");
+    const buf = fs.readFileSync(filePath);
+    return `data:image/png;base64,${buf.toString("base64")}`;
+  } catch {
+    return "";
+  }
+}
+const LOGO_SRC = loadLogo();
+
+const DARK = "#1a1a1a";
+const NAVY = "#1e3a6e";
+const GRAY = "#555555";
+const LGRAY = "#f0f0f0";
+const BGRAY = "#e0e0e0";
+
+const s = StyleSheet.create({
+  page:       { paddingTop: 20, paddingBottom: 38, paddingHorizontal: 40, fontFamily: "Helvetica", fontSize: 10, color: DARK, backgroundColor: "#fff" },
+  logoWrap:   { alignItems: "center", marginBottom: 4 },
+  logo:       { width: 115, height: 50 },
+  titleH1:    { fontSize: 22, fontWeight: "bold", textAlign: "center", marginBottom: 12, marginTop: 4 },
+  topLine:    { borderBottomWidth: 0.5, borderBottomColor: "#aaa", marginBottom: 10 },
+  bodyTxt:    { fontSize: 10, lineHeight: 1.8, marginBottom: 3 },
+  bold:       { fontWeight: "bold" },
+  italic:     { fontStyle: "italic" },
+  ftBox:      { backgroundColor: LGRAY, padding: "6 10", marginBottom: 10, marginTop: 6 },
+  ftTxt:      { fontSize: 10.5, fontWeight: "bold", textAlign: "center" },
+  table:      { marginBottom: 10, borderWidth: 0.5, borderColor: "#bbb" },
+  tHead:      { flexDirection: "row", borderBottomWidth: 0.5, borderBottomColor: "#bbb" },
+  tHCell:     { fontSize: 9, fontWeight: "bold", padding: "4 5" },
+  tRow:       { flexDirection: "row", borderBottomWidth: 0.5, borderBottomColor: BGRAY },
+  tCell:      { fontSize: 9, padding: "3 5" },
+  cMod:       { flex: 3.5 },
+  cMod2:      { flex: 1.2 },
+  cDur:       { flex: 0.8 },
+  cDates:     { flex: 1.8 },
+  infoRow:    { flexDirection: "row", marginBottom: 2 },
+  infoLbl:    { fontSize: 9.5, width: 148 },
+  infoVal:    { fontSize: 9.5, flex: 1 },
+  objTitle:   { fontSize: 11, fontWeight: "bold", textDecoration: "underline", marginBottom: 8, marginTop: 4 },
+  validTxt:   { fontSize: 10, lineHeight: 1.7, fontWeight: "bold", marginBottom: 5 },
+  alurTxt:    { fontSize: 10, fontWeight: "bold", marginBottom: 10 },
+  sigArea:    { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginTop: 8 },
+  cachet:     { width: 128, borderWidth: 1, borderColor: NAVY, padding: "5 7", alignItems: "center" },
+  cachetBold: { fontSize: 7.5, fontWeight: "bold", color: NAVY, textAlign: "center", marginBottom: 2 },
+  cachetTxt:  { fontSize: 6.5, color: NAVY, textAlign: "center", lineHeight: 1.55 },
+  sigRight:   { width: 155, alignItems: "center" },
+  sigSpacer:  { height: 30 },
+  sigLine:    { borderBottomWidth: 0.5, borderBottomColor: "#999", width: 130, marginBottom: 4 },
+  sigName:    { fontSize: 9, fontWeight: "bold", textAlign: "center" },
+  sigRole:    { fontSize: 7.5, fontStyle: "italic", textAlign: "center", color: GRAY },
+  footer:     { position: "absolute", bottom: 14, left: 40, right: 40 },
+  footerLine: { borderTopWidth: 0.5, borderTopColor: "#ccc", marginBottom: 3 },
+  footerTxt:  { fontSize: 6.5, color: GRAY, textAlign: "center", lineHeight: 1.5, fontStyle: "italic" },
+  pageNum:    { fontSize: 7.5, color: GRAY, textAlign: "right", marginTop: 2 },
+  annexeH2:   { fontSize: 14, fontWeight: "bold", textAlign: "center", marginBottom: 4, marginTop: 4 },
+  annexeSub:  { fontSize: 10, fontStyle: "italic", textAlign: "center", marginBottom: 12 },
+  secLbl:     { fontSize: 10, marginBottom: 5 },
+  bullet:     { flexDirection: "row", marginBottom: 3, paddingLeft: 6 },
+  bulletDot:  { fontSize: 9.5, marginRight: 6 },
+  bulletTxt:  { fontSize: 9.5, flex: 1, lineHeight: 1.5 },
+  modHeader:  { fontSize: 10, fontWeight: "bold", marginTop: 9, marginBottom: 3, paddingLeft: 4, borderLeftWidth: 2, borderLeftColor: NAVY },
 });
 
-const NAVY = "#1a2e5a";
-const GOLD = "#b8860b";
-const LIGHT_GRAY = "#f5f5f5";
-const BORDER_GRAY = "#d0d0d0";
-const TEXT_DARK = "#1a1a1a";
-const TEXT_GRAY = "#555555";
+function fmt(iso: string) {
+  return new Date(iso).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" });
+}
+function fmtLong(iso: string) {
+  return new Date(iso).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+}
 
-const styles = StyleSheet.create({
-  page: {
-    padding: "28mm 20mm 20mm 20mm",
-    fontFamily: "Helvetica",
-    fontSize: 9,
-    color: TEXT_DARK,
-    backgroundColor: "#ffffff",
-  },
-  // Header
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    borderBottomWidth: 2,
-    borderBottomColor: NAVY,
-    paddingBottom: 10,
-    marginBottom: 14,
-  },
-  orgName: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: NAVY,
-    marginBottom: 3,
-  },
-  orgInfo: {
-    fontSize: 8,
-    color: TEXT_GRAY,
-    lineHeight: 1.5,
-  },
-  badge: {
-    backgroundColor: NAVY,
-    color: "#ffffff",
-    padding: "4 8",
-    fontSize: 7,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  // Title section
-  titleSection: {
-    alignItems: "center",
-    marginBottom: 18,
-    paddingVertical: 10,
-    borderTopWidth: 0.5,
-    borderBottomWidth: 0.5,
-    borderColor: GOLD,
-  },
-  mainTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: NAVY,
-    textTransform: "uppercase",
-    letterSpacing: 2,
-    marginBottom: 2,
-  },
-  titleSubline: {
-    fontSize: 8,
-    color: GOLD,
-    fontStyle: "italic",
-  },
-  // Body text
-  bodySection: {
-    marginBottom: 14,
-    lineHeight: 1.6,
-  },
-  bodyText: {
-    fontSize: 10,
-    color: TEXT_DARK,
-    lineHeight: 1.7,
-  },
-  learnerName: {
-    fontSize: 12,
-    fontWeight: "bold",
-    color: NAVY,
-  },
-  formationTitle: {
-    fontSize: 11,
-    fontWeight: "bold",
-    color: NAVY,
-    fontStyle: "italic",
-  },
-  // Table
-  table: {
-    marginBottom: 14,
-    borderWidth: 1,
-    borderColor: BORDER_GRAY,
-  },
-  tableHeader: {
-    flexDirection: "row",
-    backgroundColor: NAVY,
-  },
-  tableHeaderCell: {
-    color: "#ffffff",
-    fontWeight: "bold",
-    fontSize: 8,
-    padding: "5 6",
-    textAlign: "center",
-  },
-  tableRow: {
-    flexDirection: "row",
-    borderTopWidth: 0.5,
-    borderTopColor: BORDER_GRAY,
-  },
-  tableRowAlt: {
-    backgroundColor: LIGHT_GRAY,
-  },
-  tableCell: {
-    fontSize: 8,
-    padding: "4 6",
-    color: TEXT_DARK,
-  },
-  tableTotalRow: {
-    flexDirection: "row",
-    backgroundColor: "#e8edf4",
-    borderTopWidth: 1,
-    borderTopColor: NAVY,
-  },
-  tableTotalCell: {
-    fontSize: 8,
-    fontWeight: "bold",
-    padding: "4 6",
-    color: NAVY,
-  },
-  colModule: { flex: 3.5 },
-  colModalite: { flex: 1.5 },
-  colDuree: { flex: 1 },
-  colDates: { flex: 2 },
-  // Info section
-  infoSection: {
-    marginBottom: 14,
-    backgroundColor: LIGHT_GRAY,
-    padding: "8 10",
-    borderLeftWidth: 3,
-    borderLeftColor: NAVY,
-  },
-  infoRow: {
-    flexDirection: "row",
-    marginBottom: 3,
-  },
-  infoLabel: {
-    fontSize: 8.5,
-    fontWeight: "bold",
-    color: NAVY,
-    width: 140,
-  },
-  infoValue: {
-    fontSize: 8.5,
-    color: TEXT_DARK,
-    flex: 1,
-  },
-  // Validation
-  validationSection: {
-    marginBottom: 14,
-    padding: "8 10",
-    borderWidth: 1,
-    borderColor: GOLD,
-    borderStyle: "dashed",
-  },
-  validationText: {
-    fontSize: 9,
-    color: TEXT_DARK,
-    lineHeight: 1.6,
-    fontStyle: "italic",
-    marginBottom: 5,
-  },
-  alurBadge: {
-    backgroundColor: GOLD,
-    color: "#ffffff",
-    fontSize: 8,
-    fontWeight: "bold",
-    padding: "2 6",
-    alignSelf: "flex-start",
-  },
-  // Signature
-  signatureSection: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  signatureBox: {
-    width: 200,
-    alignItems: "center",
-  },
-  signatureDate: {
-    fontSize: 9,
-    color: TEXT_GRAY,
-    marginBottom: 30,
-  },
-  signatureLine: {
-    borderBottomWidth: 1,
-    borderBottomColor: BORDER_GRAY,
-    width: 160,
-    marginBottom: 4,
-  },
-  signatureName: {
-    fontSize: 9,
-    fontWeight: "bold",
-    color: NAVY,
-    textAlign: "center",
-  },
-  signatureTitle: {
-    fontSize: 7.5,
-    color: TEXT_GRAY,
-    textAlign: "center",
-    fontStyle: "italic",
-  },
-  // Page number
-  pageNumber: {
-    position: "absolute",
-    bottom: 15,
-    left: 0,
-    right: 0,
-    textAlign: "center",
-    fontSize: 7.5,
-    color: TEXT_GRAY,
-  },
-  pageDecorBottom: {
-    position: "absolute",
-    bottom: 24,
-    left: "20mm",
-    right: "20mm",
-    borderTopWidth: 0.5,
-    borderTopColor: BORDER_GRAY,
-  },
-  // Annexe
-  annexeTitle: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: NAVY,
-    textAlign: "center",
-    marginBottom: 4,
-  },
-  annexeSubtitle: {
-    fontSize: 9,
-    color: TEXT_GRAY,
-    textAlign: "center",
-    marginBottom: 16,
-    fontStyle: "italic",
-  },
-  sectionTitle: {
-    fontSize: 10,
-    fontWeight: "bold",
-    color: NAVY,
-    marginBottom: 6,
-    marginTop: 10,
-    borderBottomWidth: 0.5,
-    borderBottomColor: BORDER_GRAY,
-    paddingBottom: 3,
-  },
-  objectiveItem: {
-    flexDirection: "row",
-    marginBottom: 3,
-  },
-  bullet: {
-    fontSize: 9,
-    color: GOLD,
-    marginRight: 6,
-    fontWeight: "bold",
-  },
-  objectiveText: {
-    fontSize: 9,
-    color: TEXT_DARK,
-    flex: 1,
-    lineHeight: 1.5,
-  },
-  moduleBlock: {
-    marginBottom: 10,
-    padding: "6 8",
-    backgroundColor: LIGHT_GRAY,
-    borderLeftWidth: 2,
-    borderLeftColor: NAVY,
-  },
-  moduleBlockTitle: {
-    fontSize: 9.5,
-    fontWeight: "bold",
-    color: NAVY,
-    marginBottom: 5,
-  },
-  certNumberSection: {
-    position: "absolute",
-    bottom: 30,
-    right: "20mm",
-    fontSize: 7,
-    color: TEXT_GRAY,
-    textAlign: "right",
-  },
-});
+function PageHeader() {
+  return (
+    <View>
+      <View style={s.logoWrap}>
+        {LOGO_SRC ? <Image src={LOGO_SRC} style={s.logo} /> : null}
+      </View>
+      <Text style={s.titleH1}>Attestation de formation</Text>
+      <View style={s.topLine} />
+    </View>
+  );
+}
+
+function PageFooter({ page, total }: { page: number; total: number }) {
+  return (
+    <View style={s.footer}>
+      <View style={s.footerLine} />
+      <Text style={s.footerTxt}>
+        {ORGANIZATION.name}  |  {ORGANIZATION.address}  |  Numéro SIRET: {ORGANIZATION.siret}  |  Numéro de déclaration d'activité: {ORGANIZATION.activityDeclarationNumber} (auprès du préfet de région de: {ORGANIZATION.prefectureRegion}){"\n"}e-mail: {ORGANIZATION.email}   tel: {ORGANIZATION.phone}
+      </Text>
+      <Text style={s.pageNum}>Page {page} / {total}</Text>
+    </View>
+  );
+}
 
 export interface AttestationData {
   learner: {
@@ -324,58 +119,15 @@ export interface AttestationData {
     endDate: string;
     moduleDates: Array<{ slug: string; startDate: string; endDate: string }>;
   };
-  quiz: {
-    score: number;
-  };
-  certificate: {
-    generatedAt: string;
-    certNumber: string;
-  };
-}
-
-function formatDate(isoDate: string): string {
-  const d = new Date(isoDate);
-  return d.toLocaleDateString("fr-FR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
-}
-
-function Header() {
-  return (
-    <View style={styles.header}>
-      <View>
-        <Text style={styles.orgName}>{ORGANIZATION.name}</Text>
-        <Text style={styles.orgInfo}>{ORGANIZATION.address}</Text>
-        <Text style={styles.orgInfo}>SIRET : {ORGANIZATION.siret}</Text>
-        <Text style={styles.orgInfo}>
-          N° déclaration d'activité : {ORGANIZATION.activityDeclarationNumber}
-        </Text>
-        <Text style={styles.orgInfo}>
-          Déclaré auprès du préfet de région {ORGANIZATION.prefectureRegion}
-        </Text>
-        <Text style={styles.orgInfo}>
-          {ORGANIZATION.email} · {ORGANIZATION.phone}
-        </Text>
-      </View>
-      <View>
-        <Text style={styles.badge}>ORGANISME DE FORMATION</Text>
-      </View>
-    </View>
-  );
+  quiz: { score: number };
+  certificate: { generatedAt: string; certNumber: string };
 }
 
 export function AttestationPDF({ data }: { data: AttestationData }) {
-  const civilite =
-    data.learner.gender === "F"
-      ? "Madame"
-      : data.learner.gender === "M"
-        ? "Monsieur"
-        : "L'apprenant(e)";
-
-  const fullName = `${data.learner.firstName} ${data.learner.lastName.toUpperCase()}`;
-  const totalPages = 2;
+  const { learner, training, quiz, certificate } = data;
+  const civ = learner.gender === "F" ? "Mme" : "M.";
+  const fullName = `${learner.firstName} ${learner.lastName}`;
+  const TOTAL = 3;
 
   return (
     <Document
@@ -383,251 +135,155 @@ export function AttestationPDF({ data }: { data: AttestationData }) {
       author={ORGANIZATION.name}
       subject={FORMATION.title}
     >
-      {/* ─── PAGE 1 — Attestation ─────────────────────────────── */}
-      <Page size="A4" style={styles.page}>
-        <Header />
+      {/* ═══ PAGE 1 — Attestation principale ═══ */}
+      <Page size="A4" style={s.page}>
+        <PageHeader />
 
-        {/* Title */}
-        <View style={styles.titleSection}>
-          <Text style={styles.mainTitle}>Attestation de Formation</Text>
-          <Text style={styles.titleSubline}>
-            Formation professionnelle continue – Loi ALUR
-          </Text>
-        </View>
+        <Text style={s.bodyTxt}>
+          Je, soussigné{" "}
+          <Text style={s.bold}>{REPRESENTATIVE.name}</Text>
+          {", représentant de l'organisme de formation "}
+          <Text style={s.bold}>{ORGANIZATION.name}</Text>,
+        </Text>
+        <Text style={[s.bodyTxt, { marginBottom: 6 }]}>
+          {"Atteste que : "}
+          <Text style={s.bold}>{civ}{"  "}{fullName}, {learner.status}.</Text>
+        </Text>
+        <Text style={s.bodyTxt}>A bien suivi la formation suivante :</Text>
 
-        {/* Main body */}
-        <View style={styles.bodySection}>
-          <Text style={styles.bodyText}>
-            Je, soussigné{" "}
-            <Text style={{ fontWeight: "bold" }}>
-              {REPRESENTATIVE.name}
-            </Text>
-            , représentant de l'organisme de formation{" "}
-            <Text style={{ fontWeight: "bold" }}>{ORGANIZATION.name}</Text>,
-          </Text>
-          <Text style={styles.bodyText}>atteste que :</Text>
-          <Text style={[styles.bodyText, { marginTop: 6, marginBottom: 6 }]}>
-            <Text style={styles.learnerName}>
-              {civilite} {fullName}
-            </Text>
-            ,{" "}
-            <Text style={{ fontStyle: "italic" }}>{data.learner.status}</Text>,
-          </Text>
-          <Text style={styles.bodyText}>
-            a bien suivi et achevé la formation suivante :
-          </Text>
-          <Text style={[styles.formationTitle, { marginTop: 5 }]}>
-            « {FORMATION.title} »
-          </Text>
+        <View style={s.ftBox}>
+          <Text style={s.ftTxt}>{FORMATION.title}</Text>
         </View>
 
         {/* Table */}
-        <View style={styles.table}>
-          <View style={styles.tableHeader}>
-            <Text style={[styles.tableHeaderCell, styles.colModule]}>
-              Module
-            </Text>
-            <Text style={[styles.tableHeaderCell, styles.colModalite]}>
-              Modalité
-            </Text>
-            <Text style={[styles.tableHeaderCell, styles.colDuree]}>
-              Durée
-            </Text>
-            <Text style={[styles.tableHeaderCell, styles.colDates]}>
-              Dates
-            </Text>
+        <View style={s.table}>
+          <View style={s.tHead}>
+            <Text style={[s.tHCell, s.cMod]}>Module</Text>
+            <Text style={[s.tHCell, s.cMod2]}>Modalité</Text>
+            <Text style={[s.tHCell, s.cDur]}>Durée</Text>
+            <Text style={[s.tHCell, s.cDates]}>Dates</Text>
           </View>
           {FORMATION.modules.map((mod, idx) => {
-            const modDate = data.training.moduleDates.find(
-              (d) => d.slug === mod.slug
-            );
-            const dateStr = modDate
-              ? `du ${formatDate(modDate.startDate)} au ${formatDate(modDate.endDate)}`
-              : `du ${formatDate(data.training.startDate)} au ${formatDate(data.training.endDate)}`;
+            const md = training.moduleDates.find(d => d.slug === mod.slug);
+            const dateStr = md
+              ? `${fmt(md.startDate)} – ${fmt(md.endDate)}`
+              : fmt(training.startDate);
             return (
-              <View
-                key={mod.slug}
-                style={[styles.tableRow, idx % 2 === 1 ? styles.tableRowAlt : {}]}
-              >
-                <Text style={[styles.tableCell, styles.colModule]}>
-                  {mod.title}
-                </Text>
-                <Text
-                  style={[
-                    styles.tableCell,
-                    styles.colModalite,
-                    { textAlign: "center" },
-                  ]}
-                >
-                  {mod.modality}
-                </Text>
-                <Text
-                  style={[
-                    styles.tableCell,
-                    styles.colDuree,
-                    { textAlign: "center" },
-                  ]}
-                >
-                  {mod.durationHours}h
-                </Text>
-                <Text style={[styles.tableCell, styles.colDates]}>
-                  {dateStr}
-                </Text>
+              <View key={mod.slug} style={s.tRow}>
+                <Text style={[s.tCell, s.cMod]}>{mod.title}</Text>
+                <Text style={[s.tCell, s.cMod2]}>{mod.modality}</Text>
+                <Text style={[s.tCell, s.cDur]}>{mod.durationHours}h</Text>
+                <Text style={[s.tCell, s.cDates]}>{dateStr}</Text>
               </View>
             );
           })}
-          <View style={styles.tableTotalRow}>
-            <Text style={[styles.tableTotalCell, styles.colModule]}>
-              TOTAL
-            </Text>
-            <Text
-              style={[styles.tableTotalCell, styles.colModalite, { textAlign: "center" }]}
-            >
-              E-learning
-            </Text>
-            <Text
-              style={[styles.tableTotalCell, styles.colDuree, { textAlign: "center" }]}
-            >
-              {FORMATION.durationHours}h
-            </Text>
-            <Text style={[styles.tableTotalCell, styles.colDates]}>
-              du {formatDate(data.training.startDate)} au{" "}
-              {formatDate(data.training.endDate)}
-            </Text>
+        </View>
+
+        {/* Infos */}
+        <View style={{ marginBottom: 8 }}>
+          <View style={s.infoRow}>
+            <Text style={s.infoLbl}>modalité pédagogique :</Text>
+            <Text style={[s.infoVal, s.bold]}>cf. tableau_liste des modules</Text>
+          </View>
+          <Text style={[s.bodyTxt, { marginBottom: 2 }]}>Lieu de la formation :</Text>
+          <Text style={[s.bodyTxt, { paddingLeft: 8, marginBottom: 5 }]}>Formation à distance</Text>
+          <View style={s.infoRow}>
+            <Text style={s.infoLbl}>Dates de la formation :</Text>
+            <Text style={[s.infoVal, s.bold]}>du {fmtLong(training.startDate)} au {fmtLong(training.endDate)}</Text>
+          </View>
+          <View style={s.infoRow}>
+            <Text style={s.infoLbl}>Durée de la formation :</Text>
+            <Text style={[s.infoVal, s.bold]}>{FORMATION.durationHours} heures ({FORMATION.durationDays} jours)</Text>
+          </View>
+          <View style={s.infoRow}>
+            <Text style={s.infoLbl}>Nature de l'action de formation :</Text>
+            <Text style={[s.infoVal, s.bold]}>Action de formation</Text>
           </View>
         </View>
 
-        {/* Info section */}
-        <View style={styles.infoSection}>
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Modalité pédagogique :</Text>
-            <Text style={styles.infoValue}>
-              cf. tableau liste des modules
-            </Text>
-          </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Lieu de la formation :</Text>
-            <Text style={styles.infoValue}>{FORMATION.location}</Text>
-          </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Dates de la formation :</Text>
-            <Text style={styles.infoValue}>
-              du {formatDate(data.training.startDate)} au{" "}
-              {formatDate(data.training.endDate)}
-            </Text>
-          </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Durée de la formation :</Text>
-            <Text style={styles.infoValue}>
-              {FORMATION.durationHours} heures ({FORMATION.durationDays} jours)
-            </Text>
-          </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Nature de l'action :</Text>
-            <Text style={styles.infoValue}>Action de formation</Text>
-          </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Objectifs de la formation :</Text>
-            <Text style={styles.infoValue}>
-              cf. programme détaillé en annexe
-            </Text>
-          </View>
-        </View>
+        <Text style={s.objTitle}>Objectifs de la formation : cf.programme détaillé en annexe</Text>
 
-        {/* Validation */}
-        <View style={styles.validationSection}>
-          <Text style={styles.validationText}>
-            Les objectifs pédagogiques ont été atteints et l'apprenant a acquis
-            les connaissances conformément au programme de la formation, en
-            atteignant un taux de réussite au quiz final de{" "}
-            <Text style={{ fontWeight: "bold" }}>{data.quiz.score}%</Text>,
-            supérieur au seuil requis de 80%.
-          </Text>
-          <Text style={[styles.validationText, { marginBottom: 6 }]}>
-            La formation est conforme à la{" "}
-            <Text style={{ fontWeight: "bold" }}>loi ALUR</Text> (Accès au
-            Logement et Urbanisme Rénové) et répond aux exigences de formation
-            continue obligatoire de 42 heures sur 3 ans pour les professionnels
-            de l'immobilier.
-          </Text>
-          <Text style={styles.alurBadge}>✓ LOI ALUR – 42H VALIDÉES</Text>
-        </View>
-
-        {/* Signature */}
-        <View style={styles.signatureSection}>
-          <View style={styles.signatureBox}>
-            <Text style={styles.signatureDate}>
-              Fait à Toulouse, le {formatDate(data.certificate.generatedAt)}
-            </Text>
-            <View style={styles.signatureLine} />
-            <Text style={styles.signatureName}>{REPRESENTATIVE.name}</Text>
-            <Text style={styles.signatureTitle}>
-              Représentant – {ORGANIZATION.name}
-            </Text>
-          </View>
-        </View>
-
-        {/* Cert number */}
-        <View style={styles.certNumberSection}>
-          <Text>N° certificat : {data.certificate.certNumber}</Text>
-        </View>
-
-        {/* Page number */}
-        <View style={styles.pageDecorBottom} />
-        <Text style={styles.pageNumber}>
-          Page 1 / {totalPages}
+        <Text style={s.validTxt}>
+          Les objectifs pédagogiques ont été atteints et l'apprenant a acquis les connaissances
+          conformément au programme de la formation en atteignant un taux de réussite au Quizz final
+          {" superieur à 80%."}{"\n"}
+          {"(Score obtenu : "}<Text style={s.bold}>{quiz.score}%</Text>{")"}
         </Text>
+        <Text style={s.alurTxt}>La formation est conforme à la loi ALUR.</Text>
+        <Text style={[s.bodyTxt, { marginBottom: 14 }]}>
+          {"Fait à TOULOUSE, le "}<Text style={s.bold}>{fmtLong(certificate.generatedAt)}</Text>
+        </Text>
+
+        {/* Signature row: cachet + signature */}
+        <View style={s.sigArea}>
+          <View style={s.cachet}>
+            <Text style={s.cachetBold}>PASS FORMATION</Text>
+            <Text style={s.cachetTxt}>6 Rue Maurice Caunes</Text>
+            <Text style={s.cachetTxt}>31200 Toulouse</Text>
+            <Text style={s.cachetTxt}>RCS Toulouse 517 603 783</Text>
+            <Text style={s.cachetTxt}>Tél : {ORGANIZATION.phone}</Text>
+            <Text style={s.cachetTxt}>N° Déc/activité : {ORGANIZATION.activityDeclarationNumber}</Text>
+          </View>
+          <View style={s.sigRight}>
+            <View style={s.sigSpacer} />
+            <View style={s.sigLine} />
+            <Text style={s.sigName}>{REPRESENTATIVE.name}</Text>
+            <Text style={s.sigRole}>Représentant – {ORGANIZATION.name}</Text>
+          </View>
+        </View>
+
+        <PageFooter page={1} total={TOTAL} />
       </Page>
 
-      {/* ─── PAGE 2 — Annexe ─────────────────────────────────── */}
-      <Page size="A4" style={styles.page}>
-        <Header />
+      {/* ═══ PAGE 2 — Annexe (modules 1–3) ═══ */}
+      <Page size="A4" style={s.page}>
+        <PageHeader />
+        <Text style={s.annexeH2}>Annexe_Programme détaillé</Text>
+        <Text style={s.annexeSub}>
+          {"intitulé: "}<Text style={s.bold}>{FORMATION.title}</Text>
+        </Text>
 
-        <View style={[styles.titleSection, { marginBottom: 12 }]}>
-          <Text style={styles.annexeTitle}>
-            Annexe – Programme détaillé
-          </Text>
-          <Text style={styles.annexeSubtitle}>
-            {FORMATION.title}
-          </Text>
-        </View>
-
-        {/* Formation objectives */}
-        <Text style={styles.sectionTitle}>Objectifs de la formation</Text>
+        <Text style={s.secLbl}>Objectifs de la formation:</Text>
         {FORMATION.objectives.map((obj, i) => (
-          <View key={i} style={styles.objectiveItem}>
-            <Text style={styles.bullet}>•</Text>
-            <Text style={styles.objectiveText}>{obj}</Text>
+          <View key={`obj-${i}`} style={s.bullet}>
+            <Text style={s.bulletDot}>•</Text>
+            <Text style={[s.bulletTxt, s.bold]}>{obj}</Text>
           </View>
         ))}
 
-        {/* Program per module */}
-        <Text style={[styles.sectionTitle, { marginTop: 14 }]}>
-          Contenu détaillé par module
-        </Text>
-        {FORMATION.programItems.map((prog, i) => {
-          const mod = FORMATION.modules[i];
-          return (
-            <View key={i} style={styles.moduleBlock}>
-              <Text style={styles.moduleBlockTitle}>
-                Module {i + 1} – {prog.moduleTitle}
-                {mod ? ` (${mod.durationHours}h)` : ""}
-              </Text>
-              {prog.items.map((item, j) => (
-                <View key={j} style={styles.objectiveItem}>
-                  <Text style={styles.bullet}>–</Text>
-                  <Text style={styles.objectiveText}>{item}</Text>
-                </View>
-              ))}
-            </View>
-          );
-        })}
+        <Text style={[s.secLbl, { marginTop: 10 }]}>Contenu</Text>
+        {FORMATION.programItems.slice(0, 3).map((prog, i) => (
+          <View key={`prog-${i}`}>
+            <Text style={s.modHeader}>{prog.moduleTitle}{"  "}{`(${FORMATION.modules[i]?.durationHours ?? ""}h)`}</Text>
+            {prog.items.map((item, j) => (
+              <View key={`item-${i}-${j}`} style={s.bullet}>
+                <Text style={s.bulletDot}>•</Text>
+                <Text style={s.bulletTxt}>{item}</Text>
+              </View>
+            ))}
+          </View>
+        ))}
 
-        {/* Page number */}
-        <View style={styles.pageDecorBottom} />
-        <Text style={styles.pageNumber}>
-          Page 2 / {totalPages}
-        </Text>
+        <PageFooter page={2} total={TOTAL} />
+      </Page>
+
+      {/* ═══ PAGE 3 — Annexe suite (modules 4–6) ═══ */}
+      <Page size="A4" style={s.page}>
+        <PageHeader />
+
+        {FORMATION.programItems.slice(3).map((prog, i) => (
+          <View key={`prog2-${i}`}>
+            <Text style={s.modHeader}>{prog.moduleTitle}{"  "}{`(${FORMATION.modules[i + 3]?.durationHours ?? ""}h)`}</Text>
+            {prog.items.map((item, j) => (
+              <View key={`item2-${i}-${j}`} style={s.bullet}>
+                <Text style={s.bulletDot}>•</Text>
+                <Text style={s.bulletTxt}>{item}</Text>
+              </View>
+            ))}
+          </View>
+        ))}
+
+        <PageFooter page={3} total={TOTAL} />
       </Page>
     </Document>
   );
