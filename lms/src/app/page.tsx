@@ -13,7 +13,6 @@ import {
   CreditCard,
   FileCheck2,
   FileText,
-  GraduationCap,
   HandCoins,
   Headphones,
   Mail,
@@ -27,6 +26,7 @@ import {
 const DOMAIN = "https://www.monpassformation.com";
 const IMMOBILIER_COVER = "/generated/fal/transaction/cover-immobilier.jpg";
 const IMMOBILIER_CHECKOUT = "/checkout/immobilier";
+const PASS_FORMATION_LOGO = "/images/pass-formation-logo.svg";
 
 export const metadata: Metadata = {
   metadataBase: new URL(DOMAIN),
@@ -265,13 +265,15 @@ export default async function HomePage() {
     <div className="min-h-screen bg-white text-zinc-950">
       <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-3" aria-label="MonPassFormation">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-navy text-white">
-              <GraduationCap className="h-5 w-5" aria-hidden />
-            </span>
-            <span className="text-lg font-black text-brand-navy">
-              MonPass<span className="text-brand-gold">Formation</span>
-            </span>
+          <Link href="/" className="flex items-center" aria-label="MonPassFormation">
+            <Image
+              src={PASS_FORMATION_LOGO}
+              alt="PASS Formation"
+              width={140}
+              height={61}
+              priority
+              className="h-12 w-auto"
+            />
           </Link>
 
           <nav className="hidden items-center gap-7 text-sm font-semibold text-zinc-600 md:flex">
@@ -799,13 +801,14 @@ export default async function HomePage() {
       <footer className="border-t border-zinc-200 bg-white">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 sm:px-6 md:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] lg:px-8">
           <div>
-            <Link href="/" className="flex items-center gap-3" aria-label="MonPassFormation">
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-navy text-white">
-                <GraduationCap className="h-5 w-5" aria-hidden />
-              </span>
-              <span className="text-lg font-black text-brand-navy">
-                MonPass<span className="text-brand-gold">Formation</span>
-              </span>
+            <Link href="/" className="inline-flex items-center" aria-label="MonPassFormation">
+              <Image
+                src={PASS_FORMATION_LOGO}
+                alt="PASS Formation"
+                width={140}
+                height={61}
+                className="h-12 w-auto"
+              />
             </Link>
             <p className="mt-4 max-w-md text-sm leading-6 text-zinc-600">
               Espace digital de formation professionnelle. PASS Formation, 6 rue Maurice Caunes,
