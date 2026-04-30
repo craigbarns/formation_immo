@@ -51,35 +51,61 @@ export async function POST(request: Request) {
       .limit(1)
       .single();
 
-    // 3. Get existing certificate or check eligibility
-    const { data: certificate } = await supabaseAdmin
+    // 3. Get final exam result (moduleSlug = "certification-finale")
+    const { data: examResult } = await supabaseAdmin
+      .from("exam_results")
+      .select("score, created_at")
+      .eq("user_id", userId)
+      .eq("module_slug", "certification-finale")
+      .eq("passed", true)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .single();
+
+    if (!examResult) {
+      return NextResponse.json(
+        { error: "La certification finale n'a pas encore été validée (score ≥ 70% requis)." },
+        { status: 403 }
+      );
+    }
+
+    const finalScore = examResult.score;
+
+    // 4. Get or create certificate record
+    let { data: certificate } = await supabaseAdmin
       .from("certificates")
       .select("*")
       .eq("user_id", userId)
       .eq("passed", true)
       .order("issued_at", { ascending: false })
       .limit(1)
-      .single();
+      .maybeSingle();
 
     if (!certificate) {
-      return NextResponse.json(
-        { error: "Aucun certificat validé trouvé. La formation doit être complétée avec un score ≥ 80%." },
-        { status: 403 }
-      );
+      const year = new Date().getFullYear();
+      const rand = Math.floor(10000 + Math.random() * 90000);
+      const certNumber = `ATC-${year}-${rand}`;
+
+      const { data: created, error: createErr } = await supabaseAdmin
+        .from("certificates")
+        .insert({
+          user_id: userId,
+          cert_number: certNumber,
+          student_name: fullName,
+          modules: FORMATION.modules.map(m => m.slug),
+          final_score: finalScore,
+          passed: true,
+          issued_at: examResult.created_at,
+          qr_payload: JSON.stringify({ certNumber, userId, issuedAt: examResult.created_at }),
+        })
+        .select()
+        .single();
+
+      if (createErr || !created) {
+        return NextResponse.json({ error: "Impossible de créer le certificat." }, { status: 500 });
+      }
+      certificate = created;
     }
-
-    // 4. Get final exam score
-    const { data: examResult } = await supabaseAdmin
-      .from("exam_results")
-      .select("score")
-      .eq("user_id", userId)
-      .eq("module_slug", "certification")
-      .eq("passed", true)
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .single();
-
-    const finalScore = examResult?.score ?? certificate.final_score ?? 80;
 
     // 5. Compute dates
     const startDate = subscription?.created_at ?? certificate.issued_at;
