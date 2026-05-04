@@ -31,37 +31,37 @@ export const FORMATION = {
       slug: "juridique",
       title: "Module 1 — Juridique & conformité",
       durationHours: 8,
-      modality: "E-learning",
+      modality: "Distanciel Asynchrone",
     },
     {
       slug: "transaction",
       title: "Module 2 — Transaction & négociation",
       durationHours: 7,
-      modality: "E-learning",
+      modality: "Distanciel Asynchrone",
     },
     {
       slug: "financement",
       title: "Module 3 — Financement & fiscalité",
       durationHours: 8,
-      modality: "E-learning",
+      modality: "Distanciel Asynchrone",
     },
     {
       slug: "marketing",
       title: "Module 4 — Marketing digital",
       durationHours: 7,
-      modality: "E-learning",
+      modality: "Distanciel Asynchrone",
     },
     {
       slug: "terrain",
       title: "Module 5 — Visite, closing & fidélisation",
       durationHours: 8,
-      modality: "E-learning",
+      modality: "Distanciel Asynchrone",
     },
     {
       slug: "deontologie",
-      title: "Module 6 — Déontologie & éthique professionnelle",
+      title: "Module 6 — Déontologie & Non Discrimination",
       durationHours: 4,
-      modality: "E-learning",
+      modality: "Distanciel Asynchrone",
     },
   ],
   programItems: [
@@ -121,7 +121,7 @@ export const FORMATION = {
       ],
     },
     {
-      moduleTitle: "Module 6 — Déontologie & éthique professionnelle",
+      moduleTitle: "Module 6 — Déontologie & Non Discrimination",
       items: [
         "Code de déontologie — décret 2015-1090 et ses 10 principes",
         "Non-discrimination à l'accès au logement (25 critères, art. 225-1 CP)",

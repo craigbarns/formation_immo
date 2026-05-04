@@ -33,7 +33,7 @@ const BGRAY = "#e0e0e0";
 
 const s = StyleSheet.create({
   page:       { paddingTop: 20, paddingBottom: 38, paddingHorizontal: 40, fontFamily: "Helvetica", fontSize: 10, color: DARK, backgroundColor: "#fff" },
-  logoWrap:   { alignItems: "center", marginBottom: 4 },
+  logoWrap:   { alignItems: "center", marginBottom: 16 },
   logo:       { width: 115, height: 50 },
   titleH1:    { fontSize: 22, fontWeight: "bold", textAlign: "center", marginBottom: 12, marginTop: 4 },
   topLine:    { borderBottomWidth: 0.5, borderBottomColor: "#aaa", marginBottom: 10 },
@@ -58,7 +58,7 @@ const s = StyleSheet.create({
   validTxt:   { fontSize: 10, lineHeight: 1.7, fontWeight: "bold", marginBottom: 5 },
   alurTxt:    { fontSize: 10, fontWeight: "bold", marginBottom: 10 },
   sigArea:    { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginTop: 8 },
-  cachet:     { width: 140, height: 100 },
+  cachet:     { width: 154, height: 110 },
   sigRight:   { width: 155, alignItems: "center" },
   sigSpacer:  { height: 30 },
   sigLine:    { borderBottomWidth: 0.5, borderBottomColor: "#999", width: 130, marginBottom: 4 },
@@ -148,7 +148,7 @@ export function AttestationPDF({ data }: { data: AttestationData }) {
         </Text>
         <Text style={[s.bodyTxt, { marginBottom: 6 }]}>
           {"Atteste que : "}
-          <Text style={s.bold}>{civ}{"  "}{fullName}, {learner.status}.</Text>
+          <Text style={s.bold}>{civ} {fullName}</Text>
         </Text>
         <Text style={s.bodyTxt}>A bien suivi la formation suivante :</Text>
 
@@ -194,7 +194,7 @@ export function AttestationPDF({ data }: { data: AttestationData }) {
           </View>
           <View style={s.infoRow}>
             <Text style={s.infoLbl}>Durée de la formation :</Text>
-            <Text style={[s.infoVal, s.bold]}>{FORMATION.durationHours} heures ({FORMATION.durationDays} jours)</Text>
+            <Text style={[s.infoVal, s.bold]}>{FORMATION.durationHours} h</Text>
           </View>
           <View style={s.infoRow}>
             <Text style={s.infoLbl}>Nature de l'action de formation :</Text>
@@ -215,15 +215,15 @@ export function AttestationPDF({ data }: { data: AttestationData }) {
           {"Fait à TOULOUSE, le "}<Text style={s.bold}>{fmtLong(certificate.generatedAt)}</Text>
         </Text>
 
-        {/* Signature row: cachet + signature */}
+        {/* Signature row: nom à gauche, tampon à droite */}
         <View style={s.sigArea}>
-          {TAMPON_SRC ? <Image src={TAMPON_SRC} style={s.cachet} /> : null}
           <View style={s.sigRight}>
             <View style={s.sigSpacer} />
             <View style={s.sigLine} />
             <Text style={s.sigName}>{REPRESENTATIVE.name}</Text>
             <Text style={s.sigRole}>Représentant – {ORGANIZATION.name}</Text>
           </View>
+          {TAMPON_SRC ? <Image src={TAMPON_SRC} style={s.cachet} /> : null}
         </View>
 
         <PageFooter page={1} total={TOTAL} />
