@@ -58,9 +58,13 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "Error saving subscription" }, { status: 500 });
       }
 
-      // Envoyer l'email de bienvenue
+      // Envoyer l'email de bienvenue (best-effort — ne doit pas bloquer le webhook)
       const customerName = session.customer_details?.name ?? undefined;
-      await sendWelcomeEmail(customerEmail, customerName);
+      try {
+        await sendWelcomeEmail(customerEmail, customerName);
+      } catch (emailError) {
+        console.error("Error sending welcome email:", emailError);
+      }
     }
   }
 
