@@ -55,7 +55,7 @@ export function PrintableRecap({
       {/* Trigger button */}
       <button
         onClick={() => setOpen(true)}
-        className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-[10px] font-black uppercase tracking-widest text-white/70 transition hover:bg-brand-gold hover:text-brand-navy hover:border-brand-gold shadow-xl"
+        className="group flex items-center gap-3 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-700 dark:text-white/70 transition hover:bg-brand-gold hover:text-brand-navy hover:border-brand-gold shadow-xl"
       >
         <Printer size={16} className="transition-transform group-hover:scale-110" /> 
         FICHE RÉCAPITULATIVE

@@ -36,7 +36,7 @@ export function NetVendeurSimulator() {
   return (
     <div className="space-y-10">
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="space-y-8 rounded-[2rem] border border-white/5 bg-white/[0.02] p-8 shadow-inner">
+        <div className="space-y-8 rounded-[2rem] border border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-white/[0.02] p-8 shadow-inner">
             <h4 className="text-xs font-black uppercase tracking-widest text-brand-gold flex items-center gap-3">
                 <HandCoins className="h-4 w-4" />
                 Valorisation Marché
@@ -81,13 +81,13 @@ export function NetVendeurSimulator() {
       <section className="space-y-6">
           <div className="flex items-center gap-4">
             <MessageSquare className="w-5 h-5 text-brand-gold" />
-            <h3 className="text-xs font-black uppercase tracking-[0.3em] text-white/40">Éléments de langage stratégiques</h3>
+            <h3 className="text-xs font-black uppercase tracking-[0.3em] text-slate-500 dark:text-white/40">Éléments de langage stratégiques</h3>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             {argumentaires.map((arg, i) => (
-                <div key={i} className="relative group overflow-hidden rounded-[1.5rem] border border-white/5 bg-[#070d18] p-6 shadow-2xl transition-all hover:border-brand-gold/20 hover:bg-white/[0.02]">
-                    <Quote className="absolute -right-1 -top-1 w-12 h-12 text-white/5 opacity-50" />
-                    <p className="relative z-10 text-sm leading-relaxed text-white/70 italic font-medium">
+                <div key={i} className="relative group overflow-hidden rounded-[1.5rem] border border-slate-200 dark:border-white/5 bg-slate-100 dark:bg-[#070d18] p-6 shadow-2xl transition-all hover:border-brand-gold/20 hover:bg-slate-50 dark:hover:bg-white/[0.02]">
+                    <Quote className="absolute -right-1 -top-1 w-12 h-12 text-slate-300 dark:text-white/5 opacity-50" />
+                    <p className="relative z-10 text-sm leading-relaxed text-slate-600 dark:text-white/70 italic font-medium">
                         &laquo; {arg} &raquo;
                     </p>
                 </div>
@@ -95,9 +95,9 @@ export function NetVendeurSimulator() {
           </div>
       </section>
 
-      <div className="p-6 rounded-2xl bg-black/40 border border-white/5 flex gap-4 items-start shadow-inner">
+      <div className="p-6 rounded-2xl bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 flex gap-4 items-start shadow-inner">
           <Info className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
-          <p className="text-xs text-white/30 leading-relaxed font-medium">
+          <p className="text-xs text-slate-400 dark:text-white/30 leading-relaxed font-medium">
               Note : Assurez-vous que vos honoraires respectent le barème affiché en agence et que le mandat précise clairement qui supporte la charge des honoraires (acquéreur ou vendeur).
           </p>
       </div>

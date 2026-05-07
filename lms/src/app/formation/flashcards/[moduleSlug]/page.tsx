@@ -22,7 +22,7 @@ export default async function FlashcardsPage({ params }: Props) {
     <div className="space-y-8">
       <Link
         href={`/formation/${mod.slug}`}
-        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-brand-gold"
+        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40 transition-colors hover:text-brand-gold"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" /> Retour au module
       </Link>

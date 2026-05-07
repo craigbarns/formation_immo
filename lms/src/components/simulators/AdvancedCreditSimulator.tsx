@@ -119,19 +119,19 @@ export function AdvancedCreditSimulator() {
     <div className="space-y-10">
       {/* Presets */}
       <div className="flex flex-wrap items-center gap-3">
-        <span className="text-[10px] font-black uppercase tracking-widest text-white/30 mr-2">Scénarios types :</span>
+        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/30 mr-2">Scénarios types :</span>
         {presets.map((p) => (
           <button
             key={p.label}
             onClick={() => applyPreset(p)}
-            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-white/60 transition hover:bg-brand-gold hover:text-brand-navy hover:border-brand-gold"
+            className="rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-white/60 transition hover:bg-brand-gold hover:text-brand-navy hover:border-brand-gold"
           >
             {p.label}
           </button>
         ))}
         <button
           onClick={() => applyPreset(presets[0])}
-          className="ml-auto inline-flex items-center gap-2 rounded-xl border border-white/5 bg-white/5 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-white/20 transition hover:text-white"
+          className="ml-auto inline-flex items-center gap-2 rounded-xl border border-slate-100 dark:border-white/5 bg-white dark:bg-white/5 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/20 transition hover:text-slate-900 dark:hover:text-white"
         >
           <RefreshCcw size={12} /> Réinitialiser
         </button>
@@ -139,7 +139,7 @@ export function AdvancedCreditSimulator() {
 
       {/* Input Section */}
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="space-y-8 rounded-[2rem] border border-white/5 bg-white/[0.02] p-8 shadow-inner">
+        <div className="space-y-8 rounded-[2rem] border border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-white/[0.02] p-8 shadow-inner">
           <h4 className="text-xs font-black uppercase tracking-widest text-brand-gold flex items-center gap-3">
             <Landmark className="h-4 w-4" />
             Paramètres du projet
@@ -151,7 +151,7 @@ export function AdvancedCreditSimulator() {
           <Slider label="Taux d'intérêt (nominal)" value={taux} onChange={setTaux} min={0.5} max={8} step={0.1} format={(v) => `${v}%`} />
         </div>
         
-        <div className="space-y-8 rounded-[2rem] border border-white/5 bg-white/[0.02] p-8 shadow-inner">
+        <div className="space-y-8 rounded-[2rem] border border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-white/[0.02] p-8 shadow-inner">
           <h4 className="text-xs font-black uppercase tracking-widest text-brand-gold flex items-center gap-3">
             <ShieldCheck className="h-4 w-4" />
             Garanties & Revenus

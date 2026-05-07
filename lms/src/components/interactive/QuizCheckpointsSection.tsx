@@ -124,11 +124,11 @@ export function QuizCheckpointsSection({
 
   return (
     <section className="space-y-8">
-      <div className="flex items-center gap-4 border-b border-white/10 pb-6">
+      <div className="flex items-center gap-4 border-b border-slate-200 dark:border-white/10 pb-6">
         <div className="h-1.5 w-1.5 rounded-full bg-brand-gold animate-pulse" />
         <div>
             <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold">{title}</h2>
-            <p className="mt-1 text-sm text-white/40 font-medium italic">
+            <p className="mt-1 text-sm text-slate-500 dark:text-white/40 font-medium italic">
             Testez votre compréhension stratégique avant de valider cette étape.
             </p>
         </div>

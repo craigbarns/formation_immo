@@ -209,13 +209,13 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
     return (
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <div className="h-4 w-32 bg-white/5 rounded-lg animate-pulse" />
-          <div className="h-4 w-20 bg-white/5 rounded-lg animate-pulse" />
+          <div className="h-4 w-32 bg-slate-100 dark:bg-white/5 rounded-lg animate-pulse" />
+          <div className="h-4 w-20 bg-slate-100 dark:bg-white/5 rounded-lg animate-pulse" />
         </div>
-        <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+        <div className="h-2 w-full bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden">
             <div className="h-full w-1/3 bg-brand-gold/20 animate-shimmer" />
         </div>
-        <div className="h-64 w-full bg-[#070d18] border border-white/5 rounded-[2rem] animate-pulse" />
+        <div className="h-64 w-full bg-[#070d18] border border-slate-200 dark:border-white/5 rounded-[2rem] animate-pulse" />
       </div>
     );
   }
@@ -328,9 +328,9 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
               <Brain size={20} />
           </div>
           <div>
-            <p className="text-[10px] font-black uppercase tracking-widest text-white/40">ANCRAGE EN COURS</p>
-            <p className="text-sm font-black text-white tabular-nums">
-                {currentIndex + 1} <span className="text-white/20">/ {dueCards.length} CARTES</span>
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40">ANCRAGE EN COURS</p>
+            <p className="text-sm font-black text-slate-900 dark:text-white tabular-nums">
+                {currentIndex + 1} <span className="text-slate-400 dark:text-white/20">/ {dueCards.length} CARTES</span>
             </p>
           </div>
         </div>
@@ -338,7 +338,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
           <p className="text-sm font-black text-brand-gold tabular-nums tracking-widest uppercase">
             {sessionStats.easy + sessionStats.good} RÉUSSIES
           </p>
-          <div className="mt-1 flex items-center justify-end gap-1.5 text-[9px] font-black text-white/20">
+          <div className="mt-1 flex items-center justify-end gap-1.5 text-[9px] font-black text-slate-400 dark:text-white/20">
               <div className="h-1 w-1 rounded-full bg-brand-gold animate-pulse" />
               <span>{Math.round(progress)}% TERMINÉ</span>
           </div>
@@ -346,7 +346,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
       </div>
 
       {/* Progress bar */}
-      <div className="h-1.5 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10 shadow-inner mx-2">
+      <div className="h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-white/5 ring-1 ring-slate-200 dark:ring-white/10 shadow-inner mx-2">
         <motion.div
           className="h-full rounded-full bg-gradient-to-r from-brand-gold via-white to-brand-gold shadow-[0_0_10px_rgba(212,175,55,0.4)]"
           initial={{ width: 0 }}
@@ -420,7 +420,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
             >
                 <XCircle className="h-8 w-8 text-red-500 opacity-60 group-hover:opacity-100" />
                 <div className="text-center">
-                    <span className="block text-sm font-black text-white uppercase tracking-tight">ENCORE</span>
+                    <span className="block text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight">ENCORE</span>
                     <span className="text-[9px] font-black text-red-400/60 uppercase tracking-widest">&lt; 1 MIN</span>
                 </div>
             </button>
@@ -430,7 +430,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
             >
                 <MoreHorizontal className="h-8 w-8 text-blue-400 opacity-60 group-hover:opacity-100" />
                 <div className="text-center">
-                    <span className="block text-sm font-black text-white uppercase tracking-tight">BIEN</span>
+                    <span className="block text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight">BIEN</span>
                     <span className="text-[9px] font-black text-blue-400/60 uppercase tracking-widest">1 JOUR</span>
                 </div>
             </button>
@@ -440,7 +440,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
             >
                 <CheckCircle2 className="h-8 w-8 text-emerald-400 opacity-60 group-hover:opacity-100" />
                 <div className="text-center">
-                    <span className="block text-sm font-black text-white uppercase tracking-tight">FACILE</span>
+                    <span className="block text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight">FACILE</span>
                     <span className="text-[9px] font-black text-emerald-400/60 uppercase tracking-widest">4 JOURS</span>
                 </div>
             </button>

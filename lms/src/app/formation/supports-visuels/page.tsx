@@ -127,7 +127,7 @@ export default function SupportsVisuelsPage() {
 
       <Link
         href="/formation"
-        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-brand-gold"
+        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40 transition-colors hover:text-brand-gold"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" aria-hidden /> Retour au parcours
       </Link>
@@ -168,7 +168,7 @@ export default function SupportsVisuelsPage() {
 
       <nav
         aria-label="Sommaire par thème"
-        className="rounded-[2rem] border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-2xl"
+        className="rounded-[2rem] border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 p-8 backdrop-blur-xl shadow-2xl"
       >
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-4">
@@ -176,10 +176,10 @@ export default function SupportsVisuelsPage() {
               <Filter className="h-6 w-6 text-brand-gold" />
             </div>
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40">
                 Organisation
               </p>
-              <h2 className="text-xl font-black text-white uppercase tracking-tight">
+              <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">
                 Filtrer par thématique
               </h2>
             </div>
@@ -187,7 +187,7 @@ export default function SupportsVisuelsPage() {
           {activeTheme && (
             <button
               onClick={() => setActiveTheme(null)}
-              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-black uppercase tracking-widest text-white transition hover:bg-white/10 hover:border-white/20"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-2 text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white transition hover:bg-slate-100 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/20"
             >
               <X className="h-3 w-3" /> Réinitialiser
             </button>
@@ -206,13 +206,13 @@ export default function SupportsVisuelsPage() {
                 className={`inline-flex items-center gap-3 rounded-2xl border px-5 py-3 text-sm font-black uppercase tracking-widest transition-all ${
                   isActive
                     ? `${palette.chip} ring-2 ${palette.ring} shadow-xl scale-105`
-                    : `bg-white/5 text-white/60 border-white/10 hover:border-white/30 hover:bg-white/10`
+                    : `bg-white dark:bg-white/5 text-slate-600 dark:text-white/60 border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/30 hover:bg-slate-50 dark:hover:bg-white/10`
                 }`}
               >
-                <Icon className={`h-4 w-4 ${isActive ? palette.text : "text-white/30"}`} />
+                <Icon className={`h-4 w-4 ${isActive ? palette.text : "text-slate-400 dark:text-white/30"}`} />
                 {THEME_LABEL[group.theme]}
                 <span className={`ml-2 rounded-full px-2 py-0.5 text-[10px] font-black ${
-                  isActive ? "bg-white/20 text-white" : "bg-black/20 text-white/40"
+                  isActive ? "bg-white/20 text-white" : "bg-slate-100 dark:bg-black/20 text-slate-500 dark:text-white/40"
                 }`}>
                   {group.sheets.length}
                 </span>
@@ -259,7 +259,7 @@ export default function SupportsVisuelsPage() {
                             <Icon className="h-3 w-3" />
                             {THEME_LABEL[meta.theme]}
                         </span>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-white/20">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/20">
                             Ressource {globalIndex + 1} / {SUPPORTS_VISUELS.length}
                         </span>
                       </div>
@@ -275,7 +275,7 @@ export default function SupportsVisuelsPage() {
                       a.click();
                       URL.revokeObjectURL(a.href);
                     }}
-                    className="ml-auto group inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white/80 transition hover:bg-white hover:text-brand-navy hover:scale-105 shadow-xl"
+                    className="ml-auto group inline-flex items-center gap-3 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-slate-700 dark:text-white/80 transition hover:bg-white hover:text-brand-navy hover:scale-105 shadow-xl"
                   >
                     <Download className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
                     Télécharger HD
@@ -344,7 +344,7 @@ export default function SupportsVisuelsPage() {
         </Link>
       </section>
 
-      <div className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-8 text-center text-sm leading-relaxed text-white/40 italic">
+      <div className="rounded-[2rem] border border-dashed border-slate-300 dark:border-white/20 bg-white dark:bg-white/5 p-8 text-center text-sm leading-relaxed text-slate-500 dark:text-white/40 italic">
         Nota : Ces supports constituent une base pédagogique d&apos;excellence mais ne se substituent pas à une consultation juridique ou notariale personnalisée.
       </div>
     </div>

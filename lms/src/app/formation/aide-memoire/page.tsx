@@ -48,7 +48,7 @@ export default function AideMemoirePage() {
     <div className="space-y-12 pb-20">
       <Link
         href="/formation"
-        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-brand-gold print:hidden"
+        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40 transition-colors hover:text-brand-gold print:hidden"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" /> Retour au parcours
       </Link>
@@ -91,10 +91,10 @@ export default function AideMemoirePage() {
       <div className="space-y-20">
         {grouped.map((group) => (
           <section key={group.moduleSlug} className="space-y-10 scroll-mt-24">
-            <div className="flex items-end justify-between gap-6 border-b border-white/10 pb-8 print:hidden">
+            <div className="flex items-end justify-between gap-6 border-b border-slate-200 dark:border-white/10 pb-8 print:hidden">
               <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/20 mb-3">CURRICULUM</p>
-                <h2 className="text-3xl font-black text-white uppercase tracking-tight">{group.moduleTitle}</h2>
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-white/20 mb-3">CURRICULUM</p>
+                <h2 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tight">{group.moduleTitle}</h2>
               </div>
               <Link
                 href={`/formation/${group.moduleSlug}`}

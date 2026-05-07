@@ -309,7 +309,7 @@ export function NegotiationSimulator() {
                         <Target size={20} />
                         <h4 className="text-xs font-black uppercase tracking-widest">Le conseil de Marie</h4>
                     </div>
-                    <p className="text-sm leading-relaxed text-white/70 italic font-medium">
+                    <p className="text-sm leading-relaxed text-slate-600 dark:text-white/70 italic font-medium">
                         &laquo; En négociation, celui qui pose les questions dirige l&apos;entretien. Ne vous justifiez pas, argumentez en bénéfices clients. &raquo;
                     </p>
                 </div>

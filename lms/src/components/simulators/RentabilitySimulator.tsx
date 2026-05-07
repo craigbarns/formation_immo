@@ -60,28 +60,28 @@ export function RentabilitySimulator() {
   return (
     <div className="space-y-10">
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="space-y-8 rounded-[2rem] border border-white/5 bg-white/[0.02] p-8 shadow-inner">
+        <div className="space-y-8 rounded-[2rem] border border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-white/[0.02] p-8 shadow-inner">
             <h4 className="text-xs font-black uppercase tracking-widest text-brand-gold flex items-center gap-3">
                 <Building2 className="h-4 w-4" />
                 Dépenses d&apos;acquisition
             </h4>
             <Slider label="Prix d'achat net vendeur" value={prixAchat} onChange={setPrixAchat} min={50000} max={1000000} step={10000} format={(v) => formatCurrency(v)} />
             <Slider label="Budget travaux" value={travaux} onChange={setTravaux} min={0} max={200000} step={5000} format={(v) => formatCurrency(v)} />
-            <div className="p-4 rounded-xl bg-black/20 border border-white/5 text-xs text-white/40 italic">
-                Frais de notaire estimés : <span className="text-white/60 font-bold">{formatCurrency(result.fraisNotaire)} (7.5%)</span>
+            <div className="p-4 rounded-xl bg-slate-100 dark:bg-black/20 border border-slate-200 dark:border-white/5 text-xs text-slate-500 dark:text-white/40 italic">
+                Frais de notaire estimés : <span className="text-slate-700 dark:text-white/60 font-bold">{formatCurrency(result.fraisNotaire)} (7.5%)</span>
             </div>
         </div>
 
-        <div className="space-y-8 rounded-[2rem] border border-white/5 bg-white/[0.02] p-8 shadow-inner">
+        <div className="space-y-8 rounded-[2rem] border border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-white/[0.02] p-8 shadow-inner">
             <h4 className="text-xs font-black uppercase tracking-widest text-brand-gold flex items-center gap-3">
                 <TrendingUp className="h-4 w-4" />
                 Exploitation & Fiscalité
             </h4>
             <Slider label="Loyer mensuel HC" value={loyerMensuel} onChange={setLoyerMensuel} min={300} max={5000} step={50} format={(v) => formatCurrency(v)} />
             <Slider label="Taxe foncière annuelle" value={taxeFonciere} onChange={setTaxeFonciere} min={0} max={5000} step={100} format={(v) => formatCurrency(v)} />
-            
-            <div className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 transition-all hover:bg-white/10">
-                <label className="text-sm font-black text-white uppercase tracking-tight cursor-pointer" htmlFor="lmnp-toggle">Simulation LMNP (Micro-BIC)</label>
+
+            <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-300 dark:border-white/10 transition-all hover:bg-slate-100 dark:hover:bg-white/10">
+                <label className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight cursor-pointer" htmlFor="lmnp-toggle">Simulation LMNP (Micro-BIC)</label>
                 <input 
                     id="lmnp-toggle"
                     type="checkbox" 

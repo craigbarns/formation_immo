@@ -50,7 +50,7 @@ export function CapaciteEmpruntSimulator() {
   return (
     <div className="space-y-10">
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="space-y-8 rounded-[2rem] border border-white/5 bg-white/[0.02] p-8 shadow-inner">
+        <div className="space-y-8 rounded-[2rem] border border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-white/[0.02] p-8 shadow-inner">
             <h4 className="text-xs font-black uppercase tracking-widest text-brand-gold flex items-center gap-3">
                 <ShieldCheck className="h-4 w-4" />
                 Profil Emprunteur
@@ -59,7 +59,7 @@ export function CapaciteEmpruntSimulator() {
             <Slider label="Charges & Crédits" value={charges} onChange={setCharges} min={0} max={5000} step={50} format={(v) => formatCurrency(v)} />
         </div>
 
-        <div className="space-y-8 rounded-[2rem] border border-white/5 bg-white/[0.02] p-8 shadow-inner">
+        <div className="space-y-8 rounded-[2rem] border border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-white/[0.02] p-8 shadow-inner">
             <h4 className="text-xs font-black uppercase tracking-widest text-brand-gold flex items-center gap-3">
                 <TrendingUp className="h-4 w-4" />
                 Paramètres Marché

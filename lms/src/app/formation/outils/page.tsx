@@ -23,7 +23,7 @@ export default function OutilsPage() {
     <div className="space-y-12 pb-20">
       <Link
         href="/formation"
-        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-brand-gold"
+        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40 transition-colors hover:text-brand-gold"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" /> Retour au parcours
       </Link>
@@ -156,7 +156,7 @@ function ToolHeader({
         <span className={`rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-widest ${colors[tagColor]}`}>
           {tag}
         </span>
-        <h2 className="mt-2 text-2xl font-black text-white uppercase tracking-tight leading-none">{title}</h2>
+        <h2 className="mt-2 text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight leading-none">{title}</h2>
       </div>
       <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" aria-hidden />
     </div>

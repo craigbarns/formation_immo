@@ -19,7 +19,7 @@ const CONFIG: Record<CalloutType, {
     bg: "bg-amber-500/5",
     border: "border-l-amber-500",
     titleColor: "text-amber-400",
-    bodyColor: "text-white/70",
+    bodyColor: "text-slate-700 dark:text-white/70",
     badgeBg: "bg-amber-500/10 text-amber-400",
     accent: "#f59e0b",
   },
@@ -29,7 +29,7 @@ const CONFIG: Record<CalloutType, {
     bg: "bg-red-500/5",
     border: "border-l-red-500",
     titleColor: "text-red-400",
-    bodyColor: "text-white/70",
+    bodyColor: "text-slate-700 dark:text-white/70",
     badgeBg: "bg-red-500/10 text-red-400",
     accent: "#ef4444",
   },
@@ -39,7 +39,7 @@ const CONFIG: Record<CalloutType, {
     bg: "bg-brand-gold/5",
     border: "border-l-brand-gold",
     titleColor: "text-brand-gold",
-    bodyColor: "text-white/70",
+    bodyColor: "text-slate-700 dark:text-white/70",
     badgeBg: "bg-brand-gold/10 text-brand-gold",
     accent: "#d4af37",
   },
@@ -49,7 +49,7 @@ const CONFIG: Record<CalloutType, {
     bg: "bg-blue-500/5",
     border: "border-l-blue-500",
     titleColor: "text-blue-400",
-    bodyColor: "text-white/70",
+    bodyColor: "text-slate-700 dark:text-white/70",
     badgeBg: "bg-blue-500/10 text-blue-400",
     accent: "#3b82f6",
   },
@@ -59,7 +59,7 @@ const CONFIG: Record<CalloutType, {
     bg: "bg-emerald-500/5",
     border: "border-l-emerald-500",
     titleColor: "text-emerald-400",
-    bodyColor: "text-white/70",
+    bodyColor: "text-slate-700 dark:text-white/70",
     badgeBg: "bg-emerald-500/10 text-emerald-400",
     accent: "#10b981",
   },
@@ -69,7 +69,7 @@ const CONFIG: Record<CalloutType, {
     bg: "bg-purple-500/5",
     border: "border-l-purple-500",
     titleColor: "text-purple-400",
-    bodyColor: "text-white/70",
+    bodyColor: "text-slate-700 dark:text-white/70",
     badgeBg: "bg-purple-500/10 text-purple-400",
     accent: "#8b5cf6",
   },
@@ -79,7 +79,7 @@ function CalloutCard({ c }: { c: TrainerCallout }) {
   const cfg = CONFIG[c.type];
   return (
     <div
-      className={`relative flex gap-5 rounded-r-[1.5rem] border-l-4 p-6 transition-all duration-300 hover:bg-white/[0.03] shadow-2xl border border-white/5 ${cfg.bg} ${cfg.border}`}
+      className={`relative flex gap-5 rounded-r-[1.5rem] border-l-4 p-6 transition-all duration-300 hover:bg-white/[0.03] shadow-2xl border border-slate-100 dark:border-white/5 ${cfg.bg} ${cfg.border}`}
     >
       {/* Icon */}
       <div 

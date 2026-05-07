@@ -99,7 +99,7 @@ export function ModuleLanding({
     <div className="space-y-12 pb-16">
       <Link
         href="/formation"
-        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-brand-gold"
+        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-white/40 transition-colors hover:text-brand-gold"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" /> TOUS LES MODULES
       </Link>
@@ -233,7 +233,7 @@ export function ModuleLanding({
       <section className="grid gap-4 sm:grid-cols-3">
         <Link
           href={flashcardsHref}
-          className="group flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-5 text-xs font-black uppercase tracking-widest text-white transition hover:bg-white hover:text-brand-navy hover:border-white shadow-xl"
+          className="group flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-5 text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white transition hover:bg-white hover:text-brand-navy hover:border-white shadow-xl"
         >
           <Layers className="w-4 h-4 text-brand-gold transition-transform group-hover:rotate-12" />
           Flashcards du module
@@ -247,7 +247,7 @@ export function ModuleLanding({
         </Link>
         <Link
           href="/formation/outils"
-          className="group flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-[#030712] px-6 py-5 text-xs font-black uppercase tracking-widest text-white/80 transition hover:bg-white hover:text-brand-navy shadow-xl"
+          className="group flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-[#030712] px-6 py-5 text-xs font-black uppercase tracking-widest text-slate-700 dark:text-white/80 transition hover:bg-white hover:text-brand-navy shadow-xl"
         >
           <ArrowLeft className="w-4 h-4 rotate-180 transition-transform group-hover:translate-x-1" />
           Outils & Simulateurs
@@ -256,13 +256,13 @@ export function ModuleLanding({
 
       {/* Liste des leçons */}
       <section className="scroll-mt-24">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-white/10 pb-8">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-slate-200 dark:border-white/10 pb-8">
           <div>
-            <h2 className="text-xs font-black uppercase tracking-[0.4em] text-white/40 mb-3">CURRICULUM DÉTAILLÉ</h2>
-            <h3 className="text-3xl font-black text-white uppercase tracking-tight">Leçons & Ateliers</h3>
+            <h2 className="text-xs font-black uppercase tracking-[0.4em] text-slate-400 dark:text-white/40 mb-3">CURRICULUM DÉTAILLÉ</h2>
+            <h3 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Leçons & Ateliers</h3>
           </div>
           {modulePct !== null && (
-            <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-xs font-black uppercase tracking-widest text-brand-gold shadow-lg backdrop-blur-md">
+            <div className="flex items-center gap-3 rounded-full border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-5 py-2 text-xs font-black uppercase tracking-widest text-brand-gold shadow-lg backdrop-blur-md">
               <span className="h-2 w-2 rounded-full bg-brand-gold animate-pulse" />
               {modulePct}% MAÎTRISÉ
             </div>
@@ -351,7 +351,7 @@ export function ModuleLanding({
 
       {/* Navigation inter-modules */}
       <nav
-        className="grid gap-6 border-t border-white/10 pt-16 sm:grid-cols-2"
+        className="grid gap-6 border-t border-slate-200 dark:border-white/10 pt-16 sm:grid-cols-2"
         aria-label="Modules précédent et suivant"
       >
         {prevModule ? (
@@ -385,7 +385,7 @@ export function ModuleLanding({
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-400 mx-auto mb-4 border border-emerald-500/20 shadow-xl group-hover:scale-110 transition-transform">
                 <Sparkles size={24} />
             </div>
-            <p className="text-sm font-black text-white uppercase tracking-widest">Parcours complété</p>
+            <p className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest">Parcours complété</p>
             <p className="mt-1 text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Obtenez votre certificat &rarr;</p>
           </Link>
         )}

@@ -99,12 +99,12 @@ export function GlobalSearch({ isOpen: controlledOpen, onClose }: Props) {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm text-white/60 transition hover:bg-white/10 hover:text-white"
+        className="flex items-center gap-2 rounded-full border border-slate-300 dark:border-white/15 bg-white dark:bg-white/5 px-3 py-1.5 text-sm text-slate-600 dark:text-white/60 transition hover:bg-slate-100 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white"
         title="Rechercher (Cmd+K)"
       >
         <Search className="h-3.5 w-3.5" />
         <span className="hidden sm:inline">Rechercher…</span>
-        <kbd className="ml-1 hidden rounded border border-white/20 px-1 text-2xs font-mono text-white/40 lg:inline">
+        <kbd className="ml-1 hidden rounded border border-slate-300 dark:border-white/20 px-1 text-2xs font-mono text-slate-500 dark:text-white/40 lg:inline">
           ⌘K
         </kbd>
       </button>

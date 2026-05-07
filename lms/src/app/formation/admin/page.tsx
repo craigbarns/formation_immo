@@ -117,8 +117,8 @@ export default function AdminPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
         <ShieldCheck className="h-16 w-16 text-red-400/60" />
-        <h1 className="text-2xl font-black text-white uppercase tracking-tight">Accès refusé</h1>
-        <p className="text-white/40 text-sm">Cette page est réservée aux formateurs.</p>
+        <h1 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Accès refusé</h1>
+        <p className="text-slate-500 dark:text-white/40 text-sm">Cette page est réservée aux formateurs.</p>
         <Link href="/formation" className="text-brand-gold hover:underline text-sm font-bold">
           Retour au parcours
         </Link>
@@ -133,7 +133,7 @@ export default function AdminPage() {
         <div>
           <Link
             href="/formation"
-            className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-brand-gold"
+            className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40 transition-colors hover:text-brand-gold"
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" /> Retour au parcours
           </Link>
@@ -142,29 +142,29 @@ export default function AdminPage() {
                 <ShieldCheck className="h-7 w-7 text-brand-gold" />
              </div>
              <div>
-                <h1 className="text-3xl font-black text-white uppercase tracking-tight">Vue Formateur</h1>
-                <p className="text-sm text-white/40 font-medium">Administration & Suivi des apprenants</p>
+                <h1 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Vue Formateur</h1>
+                <p className="text-sm text-slate-500 dark:text-white/40 font-medium">Administration & Suivi des apprenants</p>
              </div>
           </div>
         </div>
 
         <div className="relative group">
           <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-            <Search className="h-4 w-4 text-white/20 group-focus-within:text-brand-gold transition-colors" />
+            <Search className="h-4 w-4 text-slate-400 dark:text-white/20 group-focus-within:text-brand-gold transition-colors" />
           </div>
           <input
             type="text"
             placeholder="Rechercher un apprenant..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full md:w-80 rounded-2xl bg-white/5 border border-white/10 pl-12 pr-6 py-4 text-sm font-bold text-white outline-none focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10 transition-all backdrop-blur-xl shadow-2xl"
+            className="w-full md:w-80 rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 pl-12 pr-6 py-4 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10 transition-all backdrop-blur-xl shadow-2xl"
           />
         </div>
       </div>
 
       {/* Create User Access */}
-      <div className="rounded-[2rem] border border-brand-gold/20 bg-white/[0.03] p-6 shadow-xl">
-        <h2 className="mb-4 text-xs font-black uppercase tracking-[0.3em] text-white/40 flex items-center gap-3">
+      <div className="rounded-[2rem] border border-brand-gold/20 bg-slate-50 dark:bg-white/[0.03] p-6 shadow-xl">
+        <h2 className="mb-4 text-xs font-black uppercase tracking-[0.3em] text-slate-500 dark:text-white/40 flex items-center gap-3">
           <UserPlus className="h-4 w-4 text-brand-gold" /> Créer un accès complet
         </h2>
         <form
@@ -187,16 +187,16 @@ export default function AdminPage() {
           className="grid gap-4 md:grid-cols-3 xl:grid-cols-[1fr_1fr_1.6fr_auto] xl:items-end"
         >
           <div>
-            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-white/40">Prénom</label>
-            <input name="first_name" type="text" required placeholder="Jean" className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
+            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40">Prénom</label>
+            <input name="first_name" type="text" required placeholder="Jean" className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-3 text-sm font-bold text-slate-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
           </div>
           <div>
-            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-white/40">Nom</label>
-            <input name="last_name" type="text" required placeholder="Dupont" className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
+            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40">Nom</label>
+            <input name="last_name" type="text" required placeholder="Dupont" className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-3 text-sm font-bold text-slate-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
           </div>
           <div>
-            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-white/40">Email</label>
-            <input name="email" type="email" required placeholder="jean@exemple.com" className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
+            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40">Email</label>
+            <input name="email" type="email" required placeholder="jean@exemple.com" className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-3 text-sm font-bold text-slate-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
           </div>
           <button type="submit" disabled={accessLoading} className="shrink-0 rounded-xl bg-brand-gold px-6 py-3 text-sm font-black text-brand-navy-deep shadow-lg transition hover:bg-white disabled:opacity-50">
             {accessLoading ? "Création…" : "Créer accès"}
@@ -221,7 +221,7 @@ export default function AdminPage() {
       <div className="grid gap-8 lg:grid-cols-3">
         {/* Learners List */}
         <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-white/40 flex items-center gap-3">
+          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-slate-500 dark:text-white/40 flex items-center gap-3">
             <User className="h-4 w-4" /> Liste des apprenants
           </h2>
           
@@ -304,7 +304,7 @@ export default function AdminPage() {
 
         {/* Modules & Control Panel */}
         <div className="space-y-8">
-            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-white/40 flex items-center gap-3">
+            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-slate-500 dark:text-white/40 flex items-center gap-3">
                 <BookOpen className="h-4 w-4" /> Gestion du curriculum
             </h2>
             
@@ -336,7 +336,7 @@ export default function AdminPage() {
 
             <div className="rounded-[2.5rem] border border-brand-gold/20 bg-brand-gold/5 p-8 shadow-2xl">
                 <h3 className="text-[10px] font-black text-brand-gold uppercase tracking-[0.3em] mb-4">Export de données</h3>
-                <p className="text-xs text-white/40 leading-relaxed italic mb-6">
+                <p className="text-xs text-slate-500 dark:text-white/40 leading-relaxed italic mb-6">
                     Générez un rapport Excel complet de l&apos;activité des apprenants pour votre conformité Qualiopi.
                 </p>
                 <button 
@@ -547,14 +547,14 @@ function StatCard({
   sub: string;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-xl transition-all hover:border-white/20">
+    <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 p-6 shadow-2xl backdrop-blur-xl transition-all hover:border-slate-300 dark:hover:border-white/20">
       <div className="flex items-center justify-between mb-4">
           <div className="text-brand-gold">{icon}</div>
           <div className="h-1.5 w-1.5 rounded-full bg-brand-gold/40 animate-pulse" />
       </div>
-      <p className="text-3xl font-black text-white tracking-tighter tabular-nums">{value}</p>
-      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/60 mt-1">{label}</p>
-      <p className="text-[9px] font-bold text-white/20 uppercase tracking-widest mt-2">{sub}</p>
+      <p className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter tabular-nums">{value}</p>
+      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 dark:text-white/60 mt-1">{label}</p>
+      <p className="text-[9px] font-bold text-slate-400 dark:text-white/20 uppercase tracking-widest mt-2">{sub}</p>
     </div>
   );
 }

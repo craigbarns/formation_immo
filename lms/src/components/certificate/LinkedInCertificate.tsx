@@ -236,7 +236,7 @@ export function CertificatePreview() {
     <div className="space-y-4">
       <div className="flex items-center gap-2">
         <Award className="h-5 w-5 text-brand-gold" />
-        <h3 className="font-bold text-white">Votre certificat</h3>
+        <h3 className="font-bold text-slate-900 dark:text-white">Votre certificat</h3>
       </div>
 
       <input
@@ -244,7 +244,7 @@ export function CertificatePreview() {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Votre nom complet"
-        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/30 focus:border-brand-gold/50 focus:outline-none"
+        className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 focus:border-brand-gold/50 focus:outline-none"
       />
 
       <LinkedInCertificate userName={name || "Apprenant"} />

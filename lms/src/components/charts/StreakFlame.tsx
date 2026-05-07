@@ -14,7 +14,7 @@ export function StreakFlame({ streak, maxStreak = 24 }: StreakFlameProps) {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <p className="text-[10px] font-black uppercase tracking-widest text-white/40">Engagement quotidien</p>
+        <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/40">Engagement quotidien</p>
         <div className="flex items-center gap-2 bg-orange-500/10 border border-orange-500/20 px-4 py-1.5 rounded-xl">
           <Flame className="w-5 h-5 text-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.5)]" />
           <span className="text-xl font-black text-orange-500 tabular-nums">{streak}</span>
@@ -60,24 +60,24 @@ export function StreakFlame({ streak, maxStreak = 24 }: StreakFlameProps) {
         {Array.from({ length: Math.max(0, maxStreak - streak) }, (_, i) => (
           <div
             key={`empty-${i}`}
-            className="w-10 h-10 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center"
+            className="w-10 h-10 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 flex items-center justify-center"
           >
-            <Flame className="w-5 h-5 text-white/10" />
+            <Flame className="w-5 h-5 text-slate-300 dark:text-white/10" />
           </div>
         ))}
       </div>
 
-      <div className="text-center bg-[#030712] rounded-2xl p-4 border border-white/5 shadow-inner">
+      <div className="text-center bg-slate-50 dark:bg-[#030712] rounded-2xl p-4 border border-slate-200 dark:border-white/5 shadow-inner">
         {streak >= 7 ? (
           <p className="text-xs text-orange-400 font-black uppercase tracking-widest flex items-center justify-center gap-2">
             <Flame className="h-4 w-4" /> Performance d&apos;Élite !
           </p>
         ) : streak >= 1 ? (
-          <p className="text-xs text-white/40 font-black uppercase tracking-widest">
+          <p className="text-xs text-slate-500 dark:text-white/40 font-black uppercase tracking-widest">
             Série active — Maintenez le rythme.
           </p>
         ) : (
-          <p className="text-xs text-white/20 font-black uppercase tracking-widest">
+          <p className="text-xs text-slate-400 dark:text-white/20 font-black uppercase tracking-widest">
             Commencez votre ascension demain.
           </p>
         )}

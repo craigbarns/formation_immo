@@ -14,7 +14,7 @@ export default function FormateursPage() {
     <div className="space-y-12">
       <Link
         href="/formation"
-        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-brand-gold"
+        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40 transition-colors hover:text-brand-gold"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" aria-hidden /> Retour au parcours
       </Link>
@@ -88,13 +88,13 @@ export default function FormateursPage() {
         ))}
       </div>
 
-      <div className="rounded-[2.5rem] border border-white/5 bg-white/[0.02] p-10 flex flex-col md:flex-row items-center gap-8 shadow-2xl">
+      <div className="rounded-[2.5rem] border border-slate-100 dark:border-white/5 bg-white dark:bg-white/[0.02] p-10 flex flex-col md:flex-row items-center gap-8 shadow-2xl">
           <div className="h-16 w-16 shrink-0 rounded-2xl bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center text-brand-gold">
               <UserCheck size={32} />
           </div>
           <div className="text-center md:text-left">
-              <h3 className="text-xl font-black text-white uppercase tracking-tight">Accompagnement personnalisé</h3>
-              <p className="mt-2 text-white/40 leading-relaxed max-w-2xl">
+              <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Accompagnement personnalisé</h3>
+              <p className="mt-2 text-slate-500 dark:text-white/40 leading-relaxed max-w-2xl">
                   En plus de ces supports vidéo, nos expertes répondent à vos questions techniques directement dans l&apos;espace commentaire de chaque leçon. Profitez de ce mentorat pour sécuriser vos dossiers.
               </p>
           </div>
