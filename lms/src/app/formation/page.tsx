@@ -116,20 +116,20 @@ export default async function FormationHomePage() {
       <ScrollReveal>
       <section className="grid gap-8 md:grid-cols-2">
         <div className="space-y-5">
-          <h2 className="flex items-center gap-3 text-xl font-black uppercase tracking-wider text-white">
+          <h2 className="flex items-center gap-3 text-xl font-black uppercase tracking-wider text-slate-900 dark:text-white">
             <Target className="h-6 w-6 text-brand-gold" />
             Objectif quotidien
           </h2>
-          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-1 shadow-xl">
+          <div className="rounded-[2rem] border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 p-1 shadow-md dark:shadow-xl">
             <DailyGoalTracker />
           </div>
         </div>
         <div className="space-y-5">
-          <h2 className="flex items-center gap-3 text-xl font-black uppercase tracking-wider text-white">
+          <h2 className="flex items-center gap-3 text-xl font-black uppercase tracking-wider text-slate-900 dark:text-white">
             <Brain className="h-6 w-6 text-brand-gold" />
             Parcours recommandé
           </h2>
-          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-1 shadow-xl">
+          <div className="rounded-[2rem] border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 p-1 shadow-md dark:shadow-xl">
             <AdaptiveLearningPath />
           </div>
         </div>
@@ -137,9 +137,9 @@ export default async function FormationHomePage() {
       </ScrollReveal>
 
       <ScrollReveal delay={0.1}>
-      <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.02] p-2">
+      <div className="rounded-[2.5rem] border border-slate-200 dark:border-white/10 bg-white dark:bg-white/[0.02] p-2 shadow-sm dark:shadow-none">
         <DashboardAnalytics />
-        <div className="mt-2 border-t border-white/5 pt-2">
+        <div className="mt-2 border-t border-slate-100 dark:border-white/5 pt-2">
           <DashboardGamification />
         </div>
       </div>
@@ -171,11 +171,11 @@ export default async function FormationHomePage() {
       {/* Raccourcis */}
       <ScrollReveal>
       <section className="scroll-mt-8">
-        <h2 className="flex items-center gap-3 text-2xl font-black uppercase tracking-wider text-white">
+        <h2 className="flex items-center gap-3 text-2xl font-black uppercase tracking-wider text-slate-900 dark:text-white">
           <Layers className="h-6 w-6 text-brand-gold" />
           Accès rapide
         </h2>
-        <p className="mt-3 text-base text-white/50 font-medium">
+        <p className="mt-3 text-base text-slate-500 dark:text-white/50 font-medium">
           Les outils professionnels indispensables — un clic pour approfondir.
         </p>
         <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-7">
@@ -210,11 +210,11 @@ export default async function FormationHomePage() {
 
       {/* Modules */}
       <section id="parcours" className="scroll-mt-24">
-        <h2 className="flex items-center gap-3 text-3xl font-black uppercase tracking-widest text-white">
+        <h2 className="flex items-center gap-3 text-3xl font-black uppercase tracking-widest text-slate-900 dark:text-white">
           <BookOpen className="h-8 w-8 text-brand-gold" />
           VOTRE PARCOURS
         </h2>
-        <p className="mt-4 text-lg text-white/50 font-medium">
+        <p className="mt-4 text-lg text-slate-500 dark:text-white/50 font-medium">
           Maîtrisez chaque étape du métier — progressez leçon par leçon vers l&apos;excellence.
         </p>
         <StaggerContainer className="mt-10 space-y-8">

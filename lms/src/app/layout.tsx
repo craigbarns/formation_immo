@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 import { ToastProvider } from "@/components/toast";
 import { FocusModeProvider } from "@/components/focus-mode";
 import { PwaRegister } from "@/components/PwaRegister";
@@ -49,15 +50,18 @@ export default function RootLayout({
     <html
       lang="fr"
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <FocusModeProvider>
-          <ToastProvider>
-            {children}
-            <PwaRegister />
-          </ToastProvider>
-        </FocusModeProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          <FocusModeProvider>
+            <ToastProvider>
+              {children}
+              <PwaRegister />
+            </ToastProvider>
+          </FocusModeProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

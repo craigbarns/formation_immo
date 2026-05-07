@@ -2,9 +2,13 @@
 @import "leaflet/dist/leaflet.css";
 @plugin "@tailwindcss/typography";
 
+/* Dark mode activé via la classe .dark sur <html> (next-themes) */
+@variant dark (&:where(.dark, .dark *));
+
+/* ── Thème clair (défaut) ─────────────────────────────────────────── */
 :root {
-  --background: #020617;
-  --foreground: #f8fafc;
+  --background: #f8fafc;
+  --foreground: #0f172a;
   --brand-navy: #1a3a5c;
   --brand-navy-deep: #020617;
   --brand-navy-soft: #1e293b;
@@ -18,9 +22,18 @@
   --brand-gold-pale: #fde68a;
   --brand-gold-dark: #b45309;
   --brand-gold-hover: #e5c158;
+  --surface-elevated: #ffffff;
+  --surface-warm: #f8fafc;
+  --surface-dark: #0f172a;
+  --muted-foreground: #64748b;
+}
+
+/* ── Thème sombre ─────────────────────────────────────────────────── */
+.dark {
+  --background: #020617;
+  --foreground: #f8fafc;
   --surface-elevated: #0f172a;
   --surface-warm: #020617;
-  --surface-dark: #0f172a;
   --muted-foreground: #cbd5e1;
 }
 
@@ -234,9 +247,11 @@ body {
 
 /* Scrollbar premium gold */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: #020617; }
-::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.2); border-radius: 99px; border: 2px solid #020617; }
+::-webkit-scrollbar-track { background: #e2e8f0; }
+::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.4); border-radius: 99px; border: 2px solid #e2e8f0; }
 ::-webkit-scrollbar-thumb:hover { background: var(--brand-gold); }
+.dark ::-webkit-scrollbar-track { background: #020617; }
+.dark ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.2); border-color: #020617; }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
