@@ -154,6 +154,31 @@ export const MODULE_SHOWCASE: Record<string, ModuleShowcase> = {
       fidelisation: "Recommandations, avis Google, base active : la machine à mandats.",
     },
   },
+  deontologie: {
+    badge: "🤝",
+    headline: "Exercer avec intégrité — le socle éthique et légal du métier",
+    subhead:
+      "Code de déontologie, non-discrimination, conflits d'intérêts et mises en situation réelles : devenez l'agent que vos clients peuvent confier sans réserve.",
+    outcomes: [
+      "Décret 2015-1090 : 10 principes maîtrisés, sanctions comprises",
+      "25 critères de discrimination — détection et prévention active",
+      "Conflits d'intérêts : identifier, déclarer, se protéger",
+      "Dilemmes éthiques : résolution par cas concrets",
+    ],
+    durationLabel: "~4 h",
+    proofLine: [
+      "Scripts d'entretien non-discriminants prêts à l'emploi",
+      "Procédure CNTGI et recours disciplinaires expliqués",
+      "Grilles de sélection locataire conformes Loi Alur",
+    ],
+    heroGradient: "from-[#1e1b4b] via-[#3730a3] to-[#4338ca]",
+    lessonTeaser: {
+      "non-discrimination": "25 critères, testing, scripts : la conformité comme réflexe.",
+      "non-discrimination-pratique": "Distinguer discrimination directe, indirecte et systémique sur le terrain.",
+      "code-deontologie": "Décret 2015-1090 : vos obligations, la CNTGI, les sanctions.",
+      "ethique-pratique": "Conflits d'intérêts, RGPD, pratiques trompeuses : les bons réflexes.",
+    },
+  },
 };
 
 export function getModuleShowcase(slug: string): ModuleShowcase | null {

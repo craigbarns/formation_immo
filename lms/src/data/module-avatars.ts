@@ -83,6 +83,20 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
     photoUrl: "/avatars/marketing.png",
   },
   {
+    moduleSlug: "deontologie",
+    name: v.deontologie.name,
+    role: "Juriste spécialisée déontologie immobilière",
+    description:
+      "Avocate au barreau de Paris, ancienne membre de la CNTGI. Spécialiste du Code de déontologie et de la non-discrimination dans l'immobilier.",
+    mistralVoiceId: v.deontologie.mistralVoiceId,
+    mistralVoiceLabel: v.deontologie.mistralVoiceLabel,
+    portraitPrompt:
+      "Professional headshot, French woman 45 years old, elegant dark suit, silver jewelry, authoritative yet warm expression, law library background with books, soft focused lighting, photorealistic --ar 1:1 --style raw --s 250 --q 2",
+    accentColor: "#4338ca",
+    initials: "CD",
+    photoUrl: "/avatars/deontologie.png",
+  },
+  {
     moduleSlug: "terrain",
     name: v.terrain.name,
     role: "Directrice d'agence",
