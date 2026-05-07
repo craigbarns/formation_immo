@@ -66,10 +66,10 @@ export default function LoginForm() {
             </div>
           </div>
 
-          <h1 className="mt-5 text-3xl font-black tracking-tight text-white md:text-4xl">
+          <h1 className="mt-5 text-3xl font-black tracking-tight text-slate-900 dark:text-white md:text-4xl">
             Accédez à votre formation
           </h1>
-          <p className="mt-3 text-base font-medium leading-relaxed text-white/80">
+          <p className="mt-3 text-base font-medium leading-relaxed text-slate-600 dark:text-white/80">
             Connectez-vous pour retrouver l&apos;intégralité du parcours 42 h
             et suivre votre progression sur tous vos appareils.
           </p>
@@ -219,7 +219,7 @@ export default function LoginForm() {
           </div>
         </div>
 
-        <p className="mt-8 text-center text-sm font-bold italic text-white/30">
+        <p className="mt-8 text-center text-sm font-bold italic text-slate-400 dark:text-white/30">
           &ldquo;Votre réussite dans l&apos;immobilier commence ici.&rdquo;
         </p>
       </div>
