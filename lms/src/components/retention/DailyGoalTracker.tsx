@@ -162,7 +162,7 @@ export function DailyGoalTracker() {
   const { goal, progress, progressPercent, isGoalReached } = useDailyGoal();
 
   return (
-    <div className="rounded-2xl border border-brand-gold/20 bg-gradient-to-br from-brand-navy/50 to-[var(--surface-dark)]/50 p-4">
+    <div className="rounded-2xl border border-brand-gold/20 bg-gradient-to-br from-brand-navy to-[#0a1f35] dark:from-brand-navy/50 dark:to-[#0f172a]/50 p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className={`flex h-10 w-10 items-center justify-center rounded-full ${

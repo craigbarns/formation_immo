@@ -353,14 +353,14 @@ function QuickLink({
       className={`group relative overflow-hidden rounded-2xl border p-5 text-center transition-all duration-300 ${
         highlight
           ? "border-brand-gold/30 bg-gradient-to-b from-brand-gold/10 to-transparent hover:border-brand-gold hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] hover:-translate-y-1"
-          : "border-white/10 bg-white/5 hover:border-white/30 hover:bg-white/10 hover:-translate-y-1 shadow-lg"
+          : "border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 hover:border-slate-300 dark:hover:border-white/30 hover:bg-slate-100 dark:hover:bg-white/10 hover:-translate-y-1 shadow-sm dark:shadow-lg"
       }`}
     >
       <div className="relative z-10 transition duration-500 group-hover:scale-110">
         <EmojiIcon emoji={icon} className="h-9 w-9" />
       </div>
-      <p className="relative z-10 mt-3 text-sm font-black uppercase tracking-wider text-white group-hover:text-brand-gold transition-colors">{label}</p>
-      <p className="relative z-10 mt-1 text-[10px] font-bold uppercase tracking-tight text-white/40">{desc}</p>
+      <p className="relative z-10 mt-3 text-sm font-black uppercase tracking-wider text-slate-900 dark:text-white group-hover:text-brand-gold transition-colors">{label}</p>
+      <p className="relative z-10 mt-1 text-[10px] font-bold uppercase tracking-tight text-slate-500 dark:text-white/40">{desc}</p>
       {highlight && (
         <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       )}

@@ -179,7 +179,7 @@ export function DashboardAnalytics() {
       <div className="space-y-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[...Array(8)].map((_, i) => (
-            <div key={i} className="h-24 bg-white/5 rounded-2xl animate-pulse" />
+            <div key={i} className="h-24 bg-slate-200 dark:bg-white/5 rounded-2xl animate-pulse" />
           ))}
         </div>
       </div>
@@ -213,20 +213,20 @@ export function DashboardAnalytics() {
   return (
     <section className="space-y-10 p-6 md:p-10">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-6 border-b border-white/5 pb-8">
+      <div className="flex flex-wrap items-center justify-between gap-6 border-b border-slate-100 dark:border-white/5 pb-8">
         <div className="flex items-center gap-4">
           <div className="p-3 bg-brand-gold/10 border border-brand-gold/20 rounded-2xl shadow-lg">
             <BarChart3 className="w-8 h-8 text-brand-gold" />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white uppercase tracking-tight">Tableau de bord</h2>
-            <p className="text-sm text-white/40 font-medium">Analyse de performance & progression</p>
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Tableau de bord</h2>
+            <p className="text-sm text-slate-500 dark:text-white/40 font-medium">Analyse de performance & progression</p>
           </div>
         </div>
         {xpToNextLevel > 0 && (
-          <div className="flex items-center gap-3 px-5 py-2.5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md">
+          <div className="flex items-center gap-3 px-5 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl backdrop-blur-md">
             <Activity className="w-4 h-4 text-brand-gold" />
-            <span className="text-xs font-black uppercase tracking-widest text-white/80">
+            <span className="text-xs font-black uppercase tracking-widest text-slate-700 dark:text-white/80">
               {xpToNextLevel} XP pour le niveau {stats.level + 1}
             </span>
           </div>
@@ -241,15 +241,15 @@ export function DashboardAnalytics() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
-            className={`relative overflow-hidden rounded-3xl border ${card.border} bg-white/5 p-6 transition-all duration-300 hover:border-white/30 group`}
+            className={`relative overflow-hidden rounded-3xl border ${card.border} bg-slate-50 dark:bg-white/5 p-6 transition-all duration-300 hover:border-slate-300 dark:hover:border-white/30 group`}
           >
-            <div className={`w-12 h-12 rounded-2xl ${card.color} flex items-center justify-center mb-4 border border-white/5 shadow-xl`}>
+            <div className={`w-12 h-12 rounded-2xl ${card.color} flex items-center justify-center mb-4 border border-slate-100 dark:border-white/5 shadow-xl`}>
               <card.icon className="w-6 h-6" />
             </div>
-            <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] mb-1">{card.label}</p>
-            <p className="text-2xl font-black text-white tracking-tight tabular-nums">
+            <p className="text-[10px] font-black text-slate-500 dark:text-white/30 uppercase tracking-[0.2em] mb-1">{card.label}</p>
+            <p className="text-2xl font-black text-slate-900 dark:text-white tracking-tight tabular-nums">
               {card.isText ? card.value : <AnimatedCounter value={card.value as number} />}
-              <span className="text-xs font-bold text-white/20 ml-1 uppercase">{card.suffix}</span>
+              <span className="text-xs font-bold text-slate-400 dark:text-white/20 ml-1 uppercase">{card.suffix}</span>
             </p>
           </motion.div>
         ))}
@@ -258,7 +258,7 @@ export function DashboardAnalytics() {
       {/* Toggle stats détaillées */}
       <button
         onClick={() => setShowCharts(!showCharts)}
-        className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white/40 hover:text-white/70 transition-colors"
+        className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-white/40 hover:text-slate-700 dark:hover:text-white/70 transition-colors"
       >
         <ChevronDown
           className={`h-4 w-4 transition-transform duration-300 ${showCharts ? "rotate-180" : ""}`}
@@ -269,8 +269,8 @@ export function DashboardAnalytics() {
       {showCharts && <>
       {/* Visual charts row */}
       <div className="grid md:grid-cols-3 gap-8">
-        <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 flex flex-col items-center text-center shadow-2xl backdrop-blur-xl transition-all hover:border-brand-gold/20">
-          <h3 className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-8 w-full">Progression globale</h3>
+        <div className="rounded-[2rem] border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-8 flex flex-col items-center text-center shadow-sm dark:shadow-2xl backdrop-blur-xl transition-all hover:border-brand-gold/20">
+          <h3 className="text-[10px] font-black text-slate-500 dark:text-white/40 uppercase tracking-[0.3em] mb-8 w-full">Progression globale</h3>
           <CircularProgress
             value={stats.lessonsCompleted}
             max={stats.totalLessons}
@@ -281,32 +281,32 @@ export function DashboardAnalytics() {
           />
         </div>
 
-        <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl transition-all hover:border-brand-gold/20">
-          <h3 className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-8">Compétences / Module</h3>
+        <div className="rounded-[2rem] border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-8 shadow-sm dark:shadow-2xl backdrop-blur-xl transition-all hover:border-brand-gold/20">
+          <h3 className="text-[10px] font-black text-slate-500 dark:text-white/40 uppercase tracking-[0.3em] mb-8">Compétences / Module</h3>
           <RadarSkills skills={skillsData} size={220} />
         </div>
 
-        <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl flex flex-col justify-center transition-all hover:border-brand-gold/20">
+        <div className="rounded-[2rem] border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-8 shadow-sm dark:shadow-2xl backdrop-blur-xl flex flex-col justify-center transition-all hover:border-brand-gold/20">
           <StreakFlame streak={stats.streak} />
         </div>
       </div>
 
       {/* Heatmap & Modules */}
       <div className="grid md:grid-cols-2 gap-8">
-        <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-8 shadow-2xl">
-          <h3 className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-8 italic">Activité d&apos;apprentissage</h3>
+        <div className="rounded-[2.5rem] border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-8 shadow-sm dark:shadow-2xl">
+          <h3 className="text-[10px] font-black text-slate-500 dark:text-white/40 uppercase tracking-[0.3em] mb-8 italic">Activité d&apos;apprentissage</h3>
           <HeatmapCalendar data={stats.dailyActivity} />
         </div>
 
-        <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-8 shadow-2xl">
-          <h3 className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-8 italic">Progression par thématique</h3>
+        <div className="rounded-[2.5rem] border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-8 shadow-sm dark:shadow-2xl">
+          <h3 className="text-[10px] font-black text-slate-500 dark:text-white/40 uppercase tracking-[0.3em] mb-8 italic">Progression par thématique</h3>
           <ModuleProgressBars progress={stats.moduleProgress} />
         </div>
       </div>
 
       {/* Exam Scores */}
-      <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-8 shadow-2xl">
-        <h3 className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-8 italic">Historique des examens</h3>
+      <div className="rounded-[2.5rem] border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-8 shadow-sm dark:shadow-2xl">
+        <h3 className="text-[10px] font-black text-slate-500 dark:text-white/40 uppercase tracking-[0.3em] mb-8 italic">Historique des examens</h3>
         <ExamScoresChart scores={stats.examScores} />
       </div>
 
