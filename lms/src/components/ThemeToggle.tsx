@@ -1,7 +1,6 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { Sun, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
@@ -10,7 +9,7 @@ export function ThemeToggle() {
 
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) return <div className="h-9 w-9" />;
+  if (!mounted) return <div className="h-9 w-20" />;
 
   const isDark = theme === "dark";
 
@@ -18,9 +17,9 @@ export function ThemeToggle() {
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label={isDark ? "Passer en mode clair" : "Passer en mode sombre"}
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 text-slate-600 dark:text-white/70 transition hover:bg-slate-100 dark:hover:bg-white/15 hover:text-brand-gold dark:hover:text-brand-gold"
+      className="rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-3 py-2 text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-white/70 transition hover:bg-slate-100 dark:hover:bg-white/15 hover:text-brand-gold dark:hover:text-brand-gold"
     >
-      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {isDark ? "Mode clair" : "Mode sombre"}
     </button>
   );
 }
