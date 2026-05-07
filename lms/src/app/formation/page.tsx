@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Parcours de formation",
   description: "Accédez aux 5 modules de formation immobilière : juridique, transaction, financement, marketing et terrain.",
 };
-import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award, Trophy, CheckCircle2, GraduationCap, type LucideIcon } from "lucide-react";
+import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award, Trophy, type LucideIcon } from "lucide-react";
 import { COURSE, getTotalCourseDurationMin, formatDuration } from "@/data/course";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getModuleShowcase } from "@/data/module-showcase";
@@ -21,6 +21,7 @@ import { DailyGoalTracker } from "@/components/retention";
 import { AdaptiveLearningPath } from "@/components/learning-path";
 import { Greeting } from "@/components/Greeting";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
+import { ModuleLessonsToggle } from "./ModuleLessonsToggle";
 
 async function checkPlacementTest() {
   const supabase = await createClient();
@@ -144,52 +145,26 @@ export default async function FormationHomePage() {
       </div>
       </ScrollReveal>
 
-      {/* Certification Final CTA */}
+      {/* Certification CTA — compact */}
       <ScrollReveal delay={0.15}>
-      <section className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#0a1224] to-[#040813] p-10 md:p-16 text-white shadow-2xl border border-brand-gold/20">
-        <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-            <Trophy className="w-64 h-64 text-brand-gold -rotate-12 translate-x-12 -translate-y-12" />
+      <section className="flex flex-wrap items-center justify-between gap-6 rounded-2xl border border-brand-gold/20 bg-gradient-to-r from-[#0a1224] to-[#040813] px-8 py-6 shadow-xl">
+        <div className="flex items-center gap-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-brand-gold/20 bg-brand-gold/10">
+            <Trophy className="h-6 w-6 text-brand-gold" />
+          </div>
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-gold/80">Étape ultime</p>
+            <h2 className="text-lg font-black text-white">Certification MasterClass — ALUR 2026</h2>
+            <p className="text-xs font-medium text-white/40">30 QCM · 45 min · Seuil 70%</p>
+          </div>
         </div>
-        <div className="relative z-10 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-gold/15 text-brand-gold text-xs font-black uppercase tracking-[0.2em] mb-8 border border-brand-gold/30 backdrop-blur-md">
-                <Sparkles className="w-4 h-4 animate-pulse" />
-                Étape Ultime
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
-                Décrochez votre <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-white">Certification MasterClass</span>
-            </h2>
-            <p className="text-white/60 text-lg md:text-xl mb-10 leading-relaxed">
-                Prêt pour le grand saut ? L&apos;examen final synthétise l&apos;intégralité du cursus.
-                Réussissez-le pour obtenir votre diplôme d&apos;Expert Immobilier certifié.
-            </p>
-            <Link 
-                href="/formation/certification" 
-                className="group inline-flex items-center gap-4 rounded-2xl bg-brand-gold px-10 py-5 text-brand-navy font-black shadow-[0_20px_50px_rgba(212,175,55,0.25)] transition hover:bg-white hover:scale-105 active:scale-95"
-            >
-                Passer l&apos;Examen de Certification
-                <Award className="w-6 h-6 transition-transform group-hover:rotate-12" />
-            </Link>
-        </div>
-        <div className="mt-12 pt-12 border-t border-white/10 flex flex-wrap gap-10">
-            <div className="flex items-center gap-3 group">
-                <div className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-brand-gold/50 transition-colors">
-                  <CheckCircle2 className="w-4 h-4 text-brand-gold" />
-                </div>
-                <span className="text-xs font-black uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors">ALUR 2026</span>
-            </div>
-            <div className="flex items-center gap-3 group">
-                <div className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-brand-gold/50 transition-colors">
-                  <CheckCircle2 className="w-4 h-4 text-brand-gold" />
-                </div>
-                <span className="text-xs font-black uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors">Blockchain</span>
-            </div>
-            <div className="flex items-center gap-3 group">
-                <div className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-brand-gold/50 transition-colors">
-                  <CheckCircle2 className="w-4 h-4 text-brand-gold" />
-                </div>
-                <span className="text-xs font-black uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors">LinkedIn</span>
-            </div>
-        </div>
+        <Link
+          href="/formation/certification"
+          className="inline-flex items-center gap-3 rounded-xl bg-brand-gold px-6 py-3 text-xs font-black uppercase tracking-wider text-brand-navy shadow-lg transition hover:bg-white hover:scale-105 active:scale-95"
+        >
+          Passer l&apos;examen
+          <Award className="h-4 w-4" />
+        </Link>
       </section>
       </ScrollReveal>
 
@@ -229,42 +204,6 @@ export default async function FormationHomePage() {
           <QuickLink href="/formation/flashcards/juridique" icon="🃏" label="Flashcards" desc="Révision rapide" />
           <QuickLink href="/formation/profil" icon="🏅" label="Badges" desc="Progression" />
           <QuickLink href="/formation/certification" icon="🎓" label="Certification" desc="Examen final" highlight />
-        </div>
-      </section>
-      </ScrollReveal>
-
-      {/* Examens rapides par module */}
-      <ScrollReveal delay={0.05}>
-      <section className="scroll-mt-8">
-        <h2 className="flex items-center gap-3 text-2xl font-black uppercase tracking-wider text-white">
-          <Award className="h-6 w-6 text-brand-gold" />
-          Évaluations
-        </h2>
-        <p className="mt-3 text-base text-white/50 font-medium">Testez vos connaissances module par module avec les QCM certifiants.</p>
-        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          {COURSE.map((mod, i) => {
-            const avatar = getAvatarForModule(mod.slug);
-            const accent = avatar?.accentColor ?? "#d4af37";
-            return (
-              <Link
-                key={mod.slug}
-                href={`/formation/examen/${mod.slug}`}
-                className="group relative flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:border-brand-gold/30 hover:bg-white/10 hover:-translate-y-1 shadow-lg"
-              >
-                <div className="absolute top-2 right-2 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <GraduationCap className="h-12 w-12" style={{ color: accent }} />
-                </div>
-                <span
-                  className="flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black text-white shadow-xl ring-2 ring-white/10"
-                  style={{ backgroundColor: accent }}
-                >
-                  {i + 1}
-                </span>
-                <span className="text-sm font-black leading-snug text-white group-hover:text-brand-gold transition-colors line-clamp-2 uppercase tracking-wide">{mod.title.replace(/Module \d — /, "")}</span>
-                <span className="text-[10px] text-white/40 font-black uppercase tracking-widest">{mod.lessons.length} leçons</span>
-              </Link>
-            );
-          })}
         </div>
       </section>
       </ScrollReveal>
@@ -348,33 +287,7 @@ export default async function FormationHomePage() {
                   </div>
                   <p className="mt-8 text-base leading-relaxed text-white/60">{mod.summary}</p>
                   
-                  {/* Quick Lesson List */}
-                  <StaggerContainer className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-2 border-t border-white/5 pt-8" staggerDelay={0.03}>
-                    {mod.lessons.map((lesson) => (
-                      <StaggerItem key={lesson.slug}>
-                        <Link
-                          href={`/formation/${mod.slug}/${lesson.slug}`}
-                          className="flex items-center justify-between gap-4 rounded-xl px-4 py-3 transition hover:bg-white/5 hover:translate-x-1 group/item border border-transparent hover:border-white/5"
-                        >
-                          <span className="flex items-center gap-3 text-sm font-bold text-white/70 group-hover/item:text-white transition-colors">
-                            <span className="h-1.5 w-1.5 rounded-full bg-brand-gold opacity-40 group-hover/item:opacity-100 transition-opacity" />
-                            {lesson.title}
-                          </span>
-                          <div className="flex items-center gap-3">
-                            {lesson.interactiveScenarioId && (
-                                <span className="rounded-md bg-brand-gold/20 px-2 py-0.5 text-[9px] font-black uppercase text-brand-gold border border-brand-gold/20">
-                                  Interactif
-                                </span>
-                              )}
-                            <span className="shrink-0 text-[10px] font-black uppercase tracking-widest text-white/30 flex items-center gap-1.5">
-                              <Clock className="h-3 w-3" aria-hidden />
-                              {formatDuration(lesson.duration)}
-                            </span>
-                          </div>
-                        </Link>
-                      </StaggerItem>
-                    ))}
-                  </StaggerContainer>
+                  <ModuleLessonsToggle lessons={mod.lessons} moduleSlug={mod.slug} />
                 </div>
               </StaggerItem>
             );

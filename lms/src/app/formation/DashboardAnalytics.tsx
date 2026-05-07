@@ -13,6 +13,7 @@ import {
   Award,
   BarChart3,
   Activity,
+  ChevronDown,
 } from "lucide-react";
 import {
   getGamificationState,
@@ -58,6 +59,7 @@ interface Stats {
 
 export function DashboardAnalytics() {
   const [stats, setStats] = useState<Stats | null>(null);
+  const [showCharts, setShowCharts] = useState(false);
   const mounted = stats !== null;
 
   useEffect(() => {
@@ -253,6 +255,18 @@ export function DashboardAnalytics() {
         ))}
       </div>
 
+      {/* Toggle stats détaillées */}
+      <button
+        onClick={() => setShowCharts(!showCharts)}
+        className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white/40 hover:text-white/70 transition-colors"
+      >
+        <ChevronDown
+          className={`h-4 w-4 transition-transform duration-300 ${showCharts ? "rotate-180" : ""}`}
+        />
+        {showCharts ? "Masquer les graphiques" : "Voir les stats détaillées"}
+      </button>
+
+      {showCharts && <>
       {/* Visual charts row */}
       <div className="grid md:grid-cols-3 gap-8">
         <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 flex flex-col items-center text-center shadow-2xl backdrop-blur-xl transition-all hover:border-brand-gold/20">
@@ -329,6 +343,7 @@ export function DashboardAnalytics() {
             )}
         </div>
       </div>
+      </>}
     </section>
   );
 }
