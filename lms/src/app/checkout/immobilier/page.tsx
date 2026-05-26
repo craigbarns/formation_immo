@@ -3,13 +3,64 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
+  BookOpen,
   CheckCircle2,
+  DoorOpen,
+  Handshake,
   Lock,
   Mail,
+  Megaphone,
   Phone,
+  PiggyBank,
+  Scale,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+
+const PROGRAMME_MODULES = [
+  {
+    number: "01",
+    icon: Scale,
+    title: "Juridique & conformité",
+    summary: "Loi ALUR 2026, compromis, diagnostics, mandats, copropriété, TRACFIN, baux d'habitation.",
+    lessons: 8,
+  },
+  {
+    number: "02",
+    icon: Handshake,
+    title: "Transaction & négociation",
+    summary: "Estimation, prospection, négociation avancée, CRM, offre d'achat, acte authentique.",
+    lessons: 7,
+  },
+  {
+    number: "03",
+    icon: PiggyBank,
+    title: "Financement & fiscalité",
+    summary: "Crédit, fiscalité, rentabilité, assurances, dispositifs avancés.",
+    lessons: 5,
+  },
+  {
+    number: "04",
+    icon: Megaphone,
+    title: "Marketing digital",
+    summary: "Photos pro, annonces, portails, réseaux sociaux, SEO, vidéo, personal branding.",
+    lessons: 7,
+  },
+  {
+    number: "05",
+    icon: DoorOpen,
+    title: "Visite, closing & fidélisation",
+    summary: "Visites, argumentaire, closing, promesse, fidélisation, découverte client.",
+    lessons: 6,
+  },
+  {
+    number: "06",
+    icon: BookOpen,
+    title: "Déontologie & éthique professionnelle",
+    summary: "Code de déontologie, non-discrimination, conflits d'intérêts, éthique pratique.",
+    lessons: 4,
+  },
+];
 import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -155,6 +206,51 @@ export default async function ImmobilierCheckoutPage() {
             )}
           </div>
         </aside>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 pb-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-gold">
+            Programme complet
+          </p>
+          <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-brand-navy sm:text-4xl">
+            6 modules · 37 leçons · 42h de formation
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-zinc-600">
+            Un parcours structuré couvrant l&apos;ensemble du métier d&apos;agent immobilier, de la conformité juridique à l&apos;éthique professionnelle.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {PROGRAMME_MODULES.map((mod) => {
+            const Icon = mod.icon;
+            return (
+              <div
+                key={mod.number}
+                className="group relative overflow-hidden rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-brand-gold/40 hover:shadow-xl"
+              >
+                <div className="flex items-start justify-between">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-navy text-brand-gold">
+                    <Icon className="h-6 w-6" aria-hidden />
+                  </span>
+                  <span className="text-3xl font-black text-brand-gold/30 leading-none">
+                    {mod.number}
+                  </span>
+                </div>
+                <h3 className="mt-5 text-lg font-black uppercase tracking-tight text-brand-navy">
+                  {mod.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-zinc-600">
+                  {mod.summary}
+                </p>
+                <div className="mt-5 flex items-center gap-2 border-t border-zinc-100 pt-4 text-xs font-bold text-zinc-500">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                  {mod.lessons} leçons interactives
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </section>
 
       <section className="mt-16 rounded-3xl bg-brand-navy px-6 py-16 text-center sm:px-12 md:py-20">
