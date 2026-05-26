@@ -77,20 +77,20 @@ export function ProgressOverview() {
       <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.03] to-transparent pointer-events-none" />
       <div className="relative z-10 flex flex-wrap items-end justify-between gap-6">
         <div className="space-y-2">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 group-hover:text-brand-gold/60 transition-colors">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/75 group-hover:text-brand-gold/60 transition-colors">
             VOTRE AVANCEMENT
           </p>
           <div className="flex items-baseline gap-2">
             <span className="text-4xl font-black tabular-nums text-white tracking-tighter">
               <AnimatedCounter value={stats.done} duration={1.5} />
             </span>
-            <span className="text-xl font-bold text-white/20">/ {stats.total}</span>
-            <span className="ml-2 text-xs font-black uppercase tracking-widest text-white/40">leçons maîtrisées</span>
+            <span className="text-xl font-bold text-white/75">/ {stats.total}</span>
+            <span className="ml-2 text-xs font-black uppercase tracking-widest text-white/75">leçons maîtrisées</span>
           </div>
         </div>
         <div className="text-right space-y-1">
           <div className="flex items-center justify-end gap-3">
-            <span className="text-xs font-black uppercase tracking-widest text-white/40">COMPLÉTÉ</span>
+            <span className="text-xs font-black uppercase tracking-widest text-white/75">COMPLÉTÉ</span>
             <AnimatedCounter value={pct} suffix="%" duration={2} className="text-5xl font-black tabular-nums text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-brand-gold drop-shadow-lg" />
           </div>
         </div>
@@ -109,7 +109,7 @@ export function ProgressOverview() {
 
       <div className="mt-6 flex items-start gap-3">
         <div className="mt-1 h-1.5 w-1.5 rounded-full bg-brand-gold/40 animate-pulse" />
-        <p className="text-xs leading-relaxed text-white/40 font-medium italic">
+        <p className="text-xs leading-relaxed text-white/75 font-medium italic">
           {remaining > 0 ? (
             <>
               Encore {remaining} étape{remaining > 1 ? "s" : ""} stratégique{remaining > 1 ? "s" : ""} pour valider l&apos;intégralité du cursus. Chaque validation renforce votre expertise terrain.

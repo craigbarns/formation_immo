@@ -220,7 +220,7 @@ export function DashboardAnalytics() {
           </div>
           <div>
             <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Tableau de bord</h2>
-            <p className="text-sm text-slate-500 dark:text-white/40 font-medium">Analyse de performance & progression</p>
+            <p className="text-sm text-slate-500 dark:text-white/75 font-medium">Analyse de performance & progression</p>
           </div>
         </div>
         {xpToNextLevel > 0 && (
@@ -246,10 +246,10 @@ export function DashboardAnalytics() {
             <div className={`w-12 h-12 rounded-2xl ${card.color} flex items-center justify-center mb-4 border border-slate-100 dark:border-white/5 shadow-xl`}>
               <card.icon className="w-6 h-6" />
             </div>
-            <p className="text-[10px] font-black text-slate-500 dark:text-white/30 uppercase tracking-[0.2em] mb-1">{card.label}</p>
+            <p className="text-[10px] font-black text-slate-500 dark:text-white/75 uppercase tracking-[0.2em] mb-1">{card.label}</p>
             <p className="text-2xl font-black text-slate-900 dark:text-white tracking-tight tabular-nums">
               {card.isText ? card.value : <AnimatedCounter value={card.value as number} />}
-              <span className="text-xs font-bold text-slate-400 dark:text-white/20 ml-1 uppercase">{card.suffix}</span>
+              <span className="text-xs font-bold text-slate-400 dark:text-white/75 ml-1 uppercase">{card.suffix}</span>
             </p>
           </motion.div>
         ))}
@@ -258,7 +258,7 @@ export function DashboardAnalytics() {
       {/* Toggle stats détaillées */}
       <button
         onClick={() => setShowCharts(!showCharts)}
-        className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-white/40 hover:text-slate-700 dark:hover:text-white/70 transition-colors"
+        className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-white/75 hover:text-slate-700 dark:hover:text-white/70 transition-colors"
       >
         <ChevronDown
           className={`h-4 w-4 transition-transform duration-300 ${showCharts ? "rotate-180" : ""}`}
@@ -270,7 +270,7 @@ export function DashboardAnalytics() {
       {/* Visual charts row */}
       <div className="grid md:grid-cols-3 gap-8">
         <div className="rounded-[2rem] border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-8 flex flex-col items-center text-center shadow-sm dark:shadow-2xl backdrop-blur-xl transition-all hover:border-brand-gold/20">
-          <h3 className="text-[10px] font-black text-slate-500 dark:text-white/40 uppercase tracking-[0.3em] mb-8 w-full">Progression globale</h3>
+          <h3 className="text-[10px] font-black text-slate-500 dark:text-white/75 uppercase tracking-[0.3em] mb-8 w-full">Progression globale</h3>
           <CircularProgress
             value={stats.lessonsCompleted}
             max={stats.totalLessons}
@@ -282,7 +282,7 @@ export function DashboardAnalytics() {
         </div>
 
         <div className="rounded-[2rem] border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-8 shadow-sm dark:shadow-2xl backdrop-blur-xl transition-all hover:border-brand-gold/20">
-          <h3 className="text-[10px] font-black text-slate-500 dark:text-white/40 uppercase tracking-[0.3em] mb-8">Compétences / Module</h3>
+          <h3 className="text-[10px] font-black text-slate-500 dark:text-white/75 uppercase tracking-[0.3em] mb-8">Compétences / Module</h3>
           <RadarSkills skills={skillsData} size={220} />
         </div>
 
@@ -294,19 +294,19 @@ export function DashboardAnalytics() {
       {/* Heatmap & Modules */}
       <div className="grid md:grid-cols-2 gap-8">
         <div className="rounded-[2.5rem] border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-8 shadow-sm dark:shadow-2xl">
-          <h3 className="text-[10px] font-black text-slate-500 dark:text-white/40 uppercase tracking-[0.3em] mb-8 italic">Activité d&apos;apprentissage</h3>
+          <h3 className="text-[10px] font-black text-slate-500 dark:text-white/75 uppercase tracking-[0.3em] mb-8 italic">Activité d&apos;apprentissage</h3>
           <HeatmapCalendar data={stats.dailyActivity} />
         </div>
 
         <div className="rounded-[2.5rem] border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-8 shadow-sm dark:shadow-2xl">
-          <h3 className="text-[10px] font-black text-slate-500 dark:text-white/40 uppercase tracking-[0.3em] mb-8 italic">Progression par thématique</h3>
+          <h3 className="text-[10px] font-black text-slate-500 dark:text-white/75 uppercase tracking-[0.3em] mb-8 italic">Progression par thématique</h3>
           <ModuleProgressBars progress={stats.moduleProgress} />
         </div>
       </div>
 
       {/* Exam Scores */}
       <div className="rounded-[2.5rem] border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-8 shadow-sm dark:shadow-2xl">
-        <h3 className="text-[10px] font-black text-slate-500 dark:text-white/40 uppercase tracking-[0.3em] mb-8 italic">Historique des examens</h3>
+        <h3 className="text-[10px] font-black text-slate-500 dark:text-white/75 uppercase tracking-[0.3em] mb-8 italic">Historique des examens</h3>
         <ExamScoresChart scores={stats.examScores} />
       </div>
 
@@ -319,7 +319,7 @@ export function DashboardAnalytics() {
                     <p className="text-[10px] font-black text-brand-gold uppercase tracking-[0.3em] mb-2">Statut de l&apos;agent</p>
                     <h3 className="text-3xl font-black text-white uppercase tracking-tighter">Niveau {stats.level}</h3>
                 </div>
-                <span className="text-xs font-black text-white/20 uppercase tracking-widest">
+                <span className="text-xs font-black text-white/75 uppercase tracking-widest">
                     Expertise {Math.round((stats.level / LEVELS.length) * 100)}%
                 </span>
             </div>
@@ -337,7 +337,7 @@ export function DashboardAnalytics() {
             )}
             </div>
             {nextLevel && (
-            <p className="text-sm text-white/40 mt-6 text-center font-medium italic">
+            <p className="text-sm text-white/75 mt-6 text-center font-medium italic">
                 Encore <span className="text-brand-gold font-black">{xpToNextLevel} XP</span> avant d&apos;atteindre le palier <span className="text-white font-black">{stats.level + 1}</span>
             </p>
             )}

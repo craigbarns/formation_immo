@@ -118,7 +118,7 @@ export default function AdminPage() {
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
         <ShieldCheck className="h-16 w-16 text-red-400/60" />
         <h1 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Accès refusé</h1>
-        <p className="text-slate-500 dark:text-white/40 text-sm">Cette page est réservée aux formateurs.</p>
+        <p className="text-slate-500 dark:text-white/75 text-sm">Cette page est réservée aux formateurs.</p>
         <Link href="/formation" className="text-brand-gold hover:underline text-sm font-bold">
           Retour au parcours
         </Link>
@@ -133,7 +133,7 @@ export default function AdminPage() {
         <div>
           <Link
             href="/formation"
-            className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40 transition-colors hover:text-brand-gold"
+            className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/75 transition-colors hover:text-brand-gold"
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" /> Retour au parcours
           </Link>
@@ -143,14 +143,14 @@ export default function AdminPage() {
              </div>
              <div>
                 <h1 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Vue Formateur</h1>
-                <p className="text-sm text-slate-500 dark:text-white/40 font-medium">Administration & Suivi des apprenants</p>
+                <p className="text-sm text-slate-500 dark:text-white/75 font-medium">Administration & Suivi des apprenants</p>
              </div>
           </div>
         </div>
 
         <div className="relative group">
           <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-            <Search className="h-4 w-4 text-slate-400 dark:text-white/20 group-focus-within:text-brand-gold transition-colors" />
+            <Search className="h-4 w-4 text-slate-400 dark:text-white/75 group-focus-within:text-brand-gold transition-colors" />
           </div>
           <input
             type="text"
@@ -164,7 +164,7 @@ export default function AdminPage() {
 
       {/* Create User Access */}
       <div className="rounded-[2rem] border border-brand-gold/20 bg-slate-50 dark:bg-white/[0.03] p-6 shadow-xl">
-        <h2 className="mb-4 text-xs font-black uppercase tracking-[0.3em] text-slate-500 dark:text-white/40 flex items-center gap-3">
+        <h2 className="mb-4 text-xs font-black uppercase tracking-[0.3em] text-slate-500 dark:text-white/75 flex items-center gap-3">
           <UserPlus className="h-4 w-4 text-brand-gold" /> Créer un accès complet
         </h2>
         <form
@@ -187,15 +187,15 @@ export default function AdminPage() {
           className="grid gap-4 md:grid-cols-3 xl:grid-cols-[1fr_1fr_1.6fr_auto] xl:items-end"
         >
           <div>
-            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40">Prénom</label>
+            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/75">Prénom</label>
             <input name="first_name" type="text" required placeholder="Jean" className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-3 text-sm font-bold text-slate-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
           </div>
           <div>
-            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40">Nom</label>
+            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/75">Nom</label>
             <input name="last_name" type="text" required placeholder="Dupont" className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-3 text-sm font-bold text-slate-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
           </div>
           <div>
-            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40">Email</label>
+            <label className="mb-1.5 block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/75">Email</label>
             <input name="email" type="email" required placeholder="jean@exemple.com" className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-3 text-sm font-bold text-slate-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all" />
           </div>
           <button type="submit" disabled={accessLoading} className="shrink-0 rounded-xl bg-brand-gold px-6 py-3 text-sm font-black text-brand-navy-deep shadow-lg transition hover:bg-white disabled:opacity-50">
@@ -221,7 +221,7 @@ export default function AdminPage() {
       <div className="grid gap-8 lg:grid-cols-3">
         {/* Learners List */}
         <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-slate-500 dark:text-white/40 flex items-center gap-3">
+          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-slate-500 dark:text-white/75 flex items-center gap-3">
             <User className="h-4 w-4" /> Liste des apprenants
           </h2>
           
@@ -243,7 +243,7 @@ export default function AdminPage() {
                         </div>
                         <div>
                           <p className="font-black text-white uppercase tracking-tight">{learner.full_name}</p>
-                          <div className="mt-1 flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-white/30">
+                          <div className="mt-1 flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-white/75">
                             <span className="flex items-center gap-1"><Zap size={10} className="text-brand-gold" /> {learner.xp} XP</span>
                             <span className="flex items-center gap-1"><Clock size={10} /> {learner.last_activity}</span>
                           </div>
@@ -252,7 +252,7 @@ export default function AdminPage() {
                       
                       <div className="flex items-center gap-10">
                         <div className="hidden md:block text-right">
-                          <p className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-1">Progression</p>
+                          <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mb-1">Progression</p>
                           <div className="flex items-center gap-3">
                              <div className="h-1.5 w-24 rounded-full bg-white/5 ring-1 ring-white/10 overflow-hidden">
                                 <div 
@@ -268,7 +268,7 @@ export default function AdminPage() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={(e) => { e.stopPropagation(); setSelectedLearner(learner); }}
-                            className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/40 group-hover:text-brand-gold group-hover:border-brand-gold/30 transition-all"
+                            className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/75 group-hover:text-brand-gold group-hover:border-brand-gold/30 transition-all"
                           >
                             <ChevronRight className="h-5 w-5" />
                           </button>
@@ -283,7 +283,7 @@ export default function AdminPage() {
                               await loadLearners({ showLoading: false });
                             }}
                             disabled={deletingId === learner.id}
-                            className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/40 hover:text-red-400 hover:border-red-400/30 transition-all disabled:opacity-40"
+                            className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/75 hover:text-red-400 hover:border-red-400/30 transition-all disabled:opacity-40"
                           >
                             <Trash2 className="h-4 w-4" />
                           </button>
@@ -295,8 +295,8 @@ export default function AdminPage() {
               </div>
             ) : (
               <div className="p-20 text-center">
-                 <Users className="h-12 w-12 text-white/10 mx-auto mb-4" />
-                 <p className="text-white/40 font-black uppercase tracking-widest">Aucun apprenant trouvé</p>
+                 <Users className="h-12 w-12 text-white/70 mx-auto mb-4" />
+                 <p className="text-white/75 font-black uppercase tracking-widest">Aucun apprenant trouvé</p>
               </div>
             )}
           </div>
@@ -304,7 +304,7 @@ export default function AdminPage() {
 
         {/* Modules & Control Panel */}
         <div className="space-y-8">
-            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-slate-500 dark:text-white/40 flex items-center gap-3">
+            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-slate-500 dark:text-white/75 flex items-center gap-3">
                 <BookOpen className="h-4 w-4" /> Gestion du curriculum
             </h2>
             
@@ -319,7 +319,7 @@ export default function AdminPage() {
                                 </span>
                                 <div>
                                     <p className="text-xs font-black text-white/80 uppercase tracking-tight">{mod.title.replace(/^Module \d+ — /, "")}</p>
-                                    <p className="text-[9px] font-bold text-white/20 uppercase tracking-widest mt-0.5">{mod.lessons.length} LEÇONS</p>
+                                    <p className="text-[9px] font-bold text-white/75 uppercase tracking-widest mt-0.5">{mod.lessons.length} LEÇONS</p>
                                 </div>
                             </div>
                             <Link
@@ -336,7 +336,7 @@ export default function AdminPage() {
 
             <div className="rounded-[2.5rem] border border-brand-gold/20 bg-brand-gold/5 p-8 shadow-2xl">
                 <h3 className="text-[10px] font-black text-brand-gold uppercase tracking-[0.3em] mb-4">Export de données</h3>
-                <p className="text-xs text-slate-500 dark:text-white/40 leading-relaxed italic mb-6">
+                <p className="text-xs text-slate-500 dark:text-white/75 leading-relaxed italic mb-6">
                     Générez un rapport Excel complet de l&apos;activité des apprenants pour votre conformité Qualiopi.
                 </p>
                 <button 
@@ -372,7 +372,7 @@ export default function AdminPage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/[0.05] to-transparent pointer-events-none" />
                 <button 
                   onClick={() => setSelectedLearner(null)}
-                  className="absolute top-8 right-8 p-3 rounded-2xl bg-white/5 border border-white/10 text-white/40 hover:text-white transition-all"
+                  className="absolute top-8 right-8 p-3 rounded-2xl bg-white/5 border border-white/10 text-white/75 hover:text-white transition-all"
                 >
                   <X size={20} />
                 </button>
@@ -412,7 +412,7 @@ export default function AdminPage() {
                   <div className="lg:col-span-2 space-y-12">
                     {/* Module Progress Grid */}
                     <div className="space-y-6">
-                        <h3 className="text-xs font-black uppercase tracking-widest text-white/30 flex items-center gap-3">
+                        <h3 className="text-xs font-black uppercase tracking-widest text-white/75 flex items-center gap-3">
                             <BarChart3 size={14} /> État des modules
                         </h3>
                         <div className="grid gap-4 sm:grid-cols-2">
@@ -428,7 +428,7 @@ export default function AdminPage() {
                                         <div className="h-1.5 rounded-full bg-white/5 overflow-hidden ring-1 ring-white/10">
                                             <div className="h-full bg-brand-gold" style={{ width: `${pct}%` }} />
                                         </div>
-                                        <p className="mt-3 text-[9px] font-black uppercase text-white/20 tracking-widest">
+                                        <p className="mt-3 text-[9px] font-black uppercase text-white/75 tracking-widest">
                                             {doneInMod} sur {mod.lessons.length} leçons acquises
                                         </p>
                                     </div>
@@ -439,7 +439,7 @@ export default function AdminPage() {
 
                     {/* Attendance Logs Table */}
                     <div className="space-y-6">
-                        <h3 className="text-xs font-black uppercase tracking-widest text-white/30 flex items-center gap-3">
+                        <h3 className="text-xs font-black uppercase tracking-widest text-white/75 flex items-center gap-3">
                             <History size={14} /> Journal d&apos;assiduité récent
                         </h3>
                         <div className="rounded-3xl border border-white/10 bg-[#030712] shadow-inner overflow-x-auto">
@@ -453,17 +453,17 @@ export default function AdminPage() {
                                 </thead>
                                 <tbody className="divide-y divide-white/5">
                                     {loadingLogs ? (
-                                      <tr><td colSpan={3} className="p-10 text-center text-white/20 text-xs font-bold uppercase animate-pulse">Chargement des relevés...</td></tr>
+                                      <tr><td colSpan={3} className="p-10 text-center text-white/75 text-xs font-bold uppercase animate-pulse">Chargement des relevés...</td></tr>
                                     ) : attendanceLogs.length > 0 ? (
                                       attendanceLogs.slice(0, 10).map((log) => (
                                         <tr key={log.id} className="group hover:bg-white/[0.01] transition-colors">
                                             <td className="p-5">
                                                 <p className="text-sm font-bold text-white/80">{new Date(log.started_at).toLocaleDateString('fr-FR')}</p>
-                                                <p className="text-[10px] font-medium text-white/20">{new Date(log.started_at).toLocaleTimeString('fr-FR')}</p>
+                                                <p className="text-[10px] font-medium text-white/75">{new Date(log.started_at).toLocaleTimeString('fr-FR')}</p>
                                             </td>
                                             <td className="p-5">
                                                 <p className="text-xs font-black text-white/60 uppercase tracking-tight">{log.lesson_slug || "Navigation"}</p>
-                                                <p className="text-[10px] font-bold text-white/20 uppercase tracking-widest mt-0.5">{log.module_slug || "Dashboard"}</p>
+                                                <p className="text-[10px] font-bold text-white/75 uppercase tracking-widest mt-0.5">{log.module_slug || "Dashboard"}</p>
                                             </td>
                                             <td className="p-5 text-right">
                                                 <span className="text-sm font-black text-brand-gold tabular-nums">
@@ -473,7 +473,7 @@ export default function AdminPage() {
                                         </tr>
                                       ))
                                     ) : (
-                                      <tr><td colSpan={3} className="p-10 text-center text-white/20 text-[10px] font-black uppercase tracking-widest">Aucune donnée de session enregistrée</td></tr>
+                                      <tr><td colSpan={3} className="p-10 text-center text-white/75 text-[10px] font-black uppercase tracking-widest">Aucune donnée de session enregistrée</td></tr>
                                     )}
                                 </tbody>
                             </table>
@@ -484,7 +484,7 @@ export default function AdminPage() {
                   {/* Right Column: Performance Summary */}
                   <div className="space-y-8">
                      <div className="rounded-[2.5rem] border border-white/10 bg-[#030712] p-8 text-center shadow-2xl">
-                        <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 mb-8">Maîtrise Globale</h3>
+                        <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/75 mb-8">Maîtrise Globale</h3>
                         <CircularProgress 
                            value={selectedLearner.lessons_completed} 
                            max={totalLessons} 
@@ -496,20 +496,20 @@ export default function AdminPage() {
                      </div>
 
                      <div className="rounded-[2.5rem] border border-white/10 bg-[#070d18] p-8 shadow-2xl space-y-6">
-                        <h3 className="text-xs font-black uppercase tracking-widest text-white/30 flex items-center gap-3">
+                        <h3 className="text-xs font-black uppercase tracking-widest text-white/75 flex items-center gap-3">
                             <Activity size={14} /> Engagement IA
                         </h3>
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Réponses QCM</span>
+                                <span className="text-[10px] font-black text-white/75 uppercase tracking-widest">Réponses QCM</span>
                                 <span className="text-sm font-black text-white tabular-nums">{selectedLearner.quiz_correct}</span>
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Examens passés</span>
+                                <span className="text-[10px] font-black text-white/75 uppercase tracking-widest">Examens passés</span>
                                 <span className="text-sm font-black text-white tabular-nums">{selectedLearner.exams_taken}</span>
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Série active</span>
+                                <span className="text-[10px] font-black text-white/75 uppercase tracking-widest">Série active</span>
                                 <span className="text-sm font-black text-orange-400 tabular-nums">{selectedLearner.streak} j</span>
                             </div>
                         </div>
@@ -554,7 +554,7 @@ function StatCard({
       </div>
       <p className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter tabular-nums">{value}</p>
       <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 dark:text-white/60 mt-1">{label}</p>
-      <p className="text-[9px] font-bold text-slate-400 dark:text-white/20 uppercase tracking-widest mt-2">{sub}</p>
+      <p className="text-[9px] font-bold text-slate-400 dark:text-white/75 uppercase tracking-widest mt-2">{sub}</p>
     </div>
   );
 }

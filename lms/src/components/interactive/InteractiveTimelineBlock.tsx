@@ -13,7 +13,7 @@ function StepDetail({ step }: { step: TimelineStep }) {
       
       {step.keyDocuments && step.keyDocuments.length > 0 && (
         <div className="rounded-2xl bg-white/5 border border-white/10 p-5 shadow-inner">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-4 flex items-center gap-2">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/75 mb-4 flex items-center gap-2">
             <FileText size={12} /> Dossier documentaire
           </p>
           <ul className="grid gap-2 sm:grid-cols-2">
@@ -81,7 +81,7 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
               className={`flex shrink-0 items-center gap-2.5 rounded-xl px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
                 i === ti
                   ? "bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20"
-                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/5"
+                  : "bg-white/5 text-white/75 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
               {line.title}
@@ -114,7 +114,7 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
                     <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6 p-6 md:p-8">
                         {/* Step Icon */}
                         <div className={`hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-[1.25rem] border-2 transition-all duration-500 shadow-xl ${
-                            expanded ? "bg-brand-gold border-brand-gold text-brand-navy scale-110" : "bg-black/40 border-white/10 text-white/40 group-hover:border-brand-gold/40"
+                            expanded ? "bg-brand-gold border-brand-gold text-brand-navy scale-110" : "bg-black/40 border-white/10 text-white/75 group-hover:border-brand-gold/40"
                         }`}>
                             <EmojiIcon emoji={step.icon} className="h-6 w-6" />
                         </div>
@@ -122,23 +122,23 @@ export function InteractiveTimelineBlock({ timelines }: { timelines: Interactive
                         <div className="flex-1 min-w-0">
                             <div className="flex flex-wrap items-center gap-3 mb-2">
                                 <span className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-[9px] font-black uppercase tracking-widest ${
-                                    expanded ? "bg-brand-gold/20 text-brand-gold" : "bg-white/5 text-white/30"
+                                    expanded ? "bg-brand-gold/20 text-brand-gold" : "bg-white/5 text-white/75"
                                 }`}>
                                     <Clock size={10} /> {step.duration}
                                 </span>
-                                <span className="text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">Étape {idx + 1}</span>
+                                <span className="text-[10px] font-black text-white/75 uppercase tracking-[0.2em]">Étape {idx + 1}</span>
                             </div>
                             <h3 className={`text-xl font-black uppercase tracking-tight transition-colors duration-500 ${
                                 expanded ? "text-white" : "text-white/70 group-hover:text-white"
                             }`}>{step.title}</h3>
                             
                             {!expanded && (
-                                <p className="mt-2 line-clamp-1 text-base text-white/40 font-medium italic">&laquo; {step.description} &raquo;</p>
+                                <p className="mt-2 line-clamp-1 text-base text-white/75 font-medium italic">&laquo; {step.description} &raquo;</p>
                             )}
                         </div>
 
                         <div className={`shrink-0 flex items-center justify-center w-10 h-10 rounded-full transition-all duration-500 ${
-                            expanded ? "bg-brand-gold text-brand-navy rotate-180" : "bg-white/5 text-white/20 group-hover:bg-white/10"
+                            expanded ? "bg-brand-gold text-brand-navy rotate-180" : "bg-white/5 text-white/75 group-hover:bg-white/10"
                         }`}>
                             <ChevronDown size={20} />
                         </div>

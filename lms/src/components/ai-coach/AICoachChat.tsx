@@ -514,7 +514,7 @@ export function AICoachChat({ moduleSlug, lessonSlug, lessonTitle, isOpen, onClo
                 {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
               </button>
             )}
-            <input ref={inputRef} type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder={isListening ? "Écoute en cours..." : "Posez votre question..."} disabled={isListening} className="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/30 focus:border-brand-gold/50 focus:outline-none focus:ring-1 focus:ring-brand-gold/30 disabled:opacity-50" />
+            <input ref={inputRef} type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder={isListening ? "Écoute en cours..." : "Posez votre question..."} disabled={isListening} className="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/75 focus:border-brand-gold/50 focus:outline-none focus:ring-1 focus:ring-brand-gold/30 disabled:opacity-50" />
             <button onClick={handleSend} disabled={!input.trim() || isLoading || isListening} className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold text-brand-navy transition hover:bg-[var(--brand-gold-hover)] disabled:opacity-50 disabled:cursor-not-allowed" aria-label="Envoyer le message"><Send className="h-4 w-4" aria-hidden="true" /></button>
           </div>
           <p className="mt-2 text-2xs text-center text-white/80">{speechSupported ? "Cliquez sur le micro pour parler à Marie • Elle vous répondra à voix haute en temps réel" : "Marie est une IA expérimentale. Vérifiez les informations importantes."}</p>

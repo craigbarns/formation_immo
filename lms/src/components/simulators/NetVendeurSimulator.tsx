@@ -62,11 +62,11 @@ export function NetVendeurSimulator() {
 
             <div className="grid grid-cols-2 gap-4">
                 <div className="p-5 rounded-2xl bg-white/5 border border-white/5 text-center">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-1">Honoraires agence</p>
+                    <p className="text-[9px] font-black uppercase tracking-widest text-white/75 mb-1">Honoraires agence</p>
                     <p className="text-xl font-black text-brand-gold tabular-nums">{formatCurrency(result.honoraires)}</p>
                 </div>
                 <div className="p-5 rounded-2xl bg-white/5 border border-white/5 text-center">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-1">Part honoraires</p>
+                    <p className="text-[9px] font-black uppercase tracking-widest text-white/75 mb-1">Part honoraires</p>
                     <p className="text-xl font-black text-white tabular-nums">{tauxHonoraires}%</p>
                 </div>
             </div>
@@ -81,7 +81,7 @@ export function NetVendeurSimulator() {
       <section className="space-y-6">
           <div className="flex items-center gap-4">
             <MessageSquare className="w-5 h-5 text-brand-gold" />
-            <h3 className="text-xs font-black uppercase tracking-[0.3em] text-slate-500 dark:text-white/40">Éléments de langage stratégiques</h3>
+            <h3 className="text-xs font-black uppercase tracking-[0.3em] text-slate-500 dark:text-white/75">Éléments de langage stratégiques</h3>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             {argumentaires.map((arg, i) => (
@@ -97,7 +97,7 @@ export function NetVendeurSimulator() {
 
       <div className="p-6 rounded-2xl bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 flex gap-4 items-start shadow-inner">
           <Info className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
-          <p className="text-xs text-slate-400 dark:text-white/30 leading-relaxed font-medium">
+          <p className="text-xs text-slate-400 dark:text-white/75 leading-relaxed font-medium">
               Note : Assurez-vous que vos honoraires respectent le barème affiché en agence et que le mandat précise clairement qui supporte la charge des honoraires (acquéreur ou vendeur).
           </p>
       </div>

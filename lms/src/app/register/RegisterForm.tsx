@@ -154,7 +154,7 @@ export default function RegisterForm() {
                   className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all"
                   placeholder="••••••••"
                 />
-                <p className="mt-2 text-xs font-bold text-white/40 tracking-wide uppercase">Minimum 6 caractères</p>
+                <p className="mt-2 text-xs font-bold text-white/75 tracking-wide uppercase">Minimum 6 caractères</p>
               </div>
 
               {error ? (

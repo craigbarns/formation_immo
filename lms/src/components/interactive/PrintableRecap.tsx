@@ -85,7 +85,7 @@ export function PrintableRecap({
                 >
                     <div className="flex items-center gap-3">
                         <FileText className="text-brand-gold w-5 h-5" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">Prévisualisation impression</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/75">Prévisualisation impression</p>
                     </div>
                     <div className="flex gap-3">
                         <button
@@ -96,7 +96,7 @@ export function PrintableRecap({
                         </button>
                         <button
                             onClick={() => setOpen(false)}
-                            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/40 transition hover:bg-white/10 hover:text-white"
+                            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/75 transition hover:bg-white/10 hover:text-white"
                         >
                             <X size={18} />
                         </button>
@@ -172,7 +172,7 @@ export function PrintableRecap({
                         {keyTerms.map((kt) => (
                         <div key={kt.term} className="rounded-2xl border border-white/5 bg-[#030712] p-6 shadow-xl transition-all hover:bg-white/[0.02]">
                             <p className="text-base font-black text-white uppercase tracking-tight mb-2">{kt.term}</p>
-                            <p className="text-sm leading-relaxed text-white/40 font-medium italic">&laquo; {kt.definition} &raquo;</p>
+                            <p className="text-sm leading-relaxed text-white/75 font-medium italic">&laquo; {kt.definition} &raquo;</p>
                         </div>
                         ))}
                     </div>
@@ -189,21 +189,21 @@ export function PrintableRecap({
                         &ldquo;{expertQuote.text}&rdquo;
                     </p>
                     <footer className="mt-4 text-[10px] font-black uppercase tracking-widest text-brand-gold">
-                        — {expertQuote.author} <span className="text-white/20 ml-2 font-bold not-italic">{expertQuote.role}</span>
+                        — {expertQuote.author} <span className="text-white/75 ml-2 font-bold not-italic">{expertQuote.role}</span>
                     </footer>
                     </blockquote>
                 )}
 
                 {/* Notes box */}
                 <div className="print-hide">
-                    <p className="mb-6 text-[10px] font-black uppercase tracking-[0.3em] text-white/20 flex items-center gap-3">
+                    <p className="mb-6 text-[10px] font-black uppercase tracking-[0.3em] text-white/75 flex items-center gap-3">
                         <PenLine size={14} /> NOTES PERSONNELLES
                     </p>
                     <div className="h-40 rounded-[2rem] border-2 border-dashed border-white/5 bg-white/[0.01]" />
                 </div>
 
                 {/* Footer */}
-                <div className="border-t border-white/5 pt-8 text-center text-[9px] font-black uppercase tracking-[0.4em] text-white/10">
+                <div className="border-t border-white/5 pt-8 text-center text-[9px] font-black uppercase tracking-[0.4em] text-white/70">
                     DOCUMENT RÉSERVÉ À L&apos;USAGE EXCLUSIF DES STAGIAIRES · © 2026
                 </div>
                 </div>

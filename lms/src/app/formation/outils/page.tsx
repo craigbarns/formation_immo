@@ -23,7 +23,7 @@ export default function OutilsPage() {
     <div className="space-y-12 pb-20">
       <Link
         href="/formation"
-        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40 transition-colors hover:text-brand-gold"
+        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/75 transition-colors hover:text-brand-gold"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" /> Retour au parcours
       </Link>
@@ -64,7 +64,7 @@ export default function OutilsPage() {
               </div>
               <div className="text-center">
                 <p className="text-xs font-black uppercase tracking-widest text-white/80 group-hover:text-brand-gold transition-colors">{t.label}</p>
-                <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/20 mt-1">{t.tag}</p>
+                <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/75 mt-1">{t.tag}</p>
               </div>
             </a>
           ))}

@@ -68,7 +68,7 @@ export function DragDropExerciseBlock({ exercises }: Props) {
               className={`flex shrink-0 items-center gap-2.5 rounded-xl px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
                 i === activeTab
                   ? "bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20"
-                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/5"
+                  : "bg-white/5 text-white/75 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
               EXERCICE {i + 1}
@@ -180,7 +180,7 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
           return (
             <div key={slotIdx} className="flex items-center gap-5">
               <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-xs font-black transition-colors ${
-                  itemIdx !== null ? "bg-brand-gold text-brand-navy" : "bg-white/5 text-white/20 border border-white/5"
+                  itemIdx !== null ? "bg-brand-gold text-brand-navy" : "bg-white/5 text-white/75 border border-white/5"
               }`}>
                 {slotIdx + 1}
               </span>
@@ -192,7 +192,7 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
                     ? "cursor-pointer text-white hover:border-red-500/50 hover:bg-red-500/10"
                     : itemIdx !== null
                       ? "cursor-default text-white"
-                      : "cursor-default text-white/20 italic"
+                      : "cursor-default text-white/75 italic"
                 }`}
               >
                 {itemIdx !== null ? (
@@ -224,7 +224,7 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
       {/* Elements disponibles */}
       {!validated && (
         <div className="rounded-[2rem] border border-white/5 bg-white/[0.01] p-8 shadow-inner">
-          <p className="mb-6 text-[10px] font-black uppercase tracking-widest text-white/30 text-center">
+          <p className="mb-6 text-[10px] font-black uppercase tracking-widest text-white/75 text-center">
             ÉLÉMENTS À CLASSER
           </p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -252,9 +252,9 @@ function OrderExercise({ exercise }: { exercise: DragDropExercise }) {
                 <div className="relative z-10 flex flex-col sm:flex-row items-center gap-8">
                     <div className="flex flex-col items-center">
                         <span className="text-5xl font-black text-brand-gold tabular-nums">
-                            {score}<span className="text-2xl text-white/20">/{totalSlots}</span>
+                            {score}<span className="text-2xl text-white/75">/{totalSlots}</span>
                         </span>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mt-2">SCORE FINAL</p>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mt-2">SCORE FINAL</p>
                     </div>
                     <div className="flex-1 text-center sm:text-left">
                         <p className="text-xl font-black text-white uppercase tracking-tight mb-2">
@@ -443,7 +443,7 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
           </p>
       </div>
 
-      <p className="text-center text-[10px] font-black uppercase tracking-[0.3em] text-white/20">
+      <p className="text-center text-[10px] font-black uppercase tracking-[0.3em] text-white/75">
         {selectedLeft !== null
           ? "ÉTAPE 2 : Sélectionnez la définition correspondante à droite"
           : "ÉTAPE 1 : Choisissez un élément dans la colonne de gauche"}
@@ -499,7 +499,7 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
 
         {/* Colonne droite */}
         <div className="space-y-4">
-          <h3 className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-4 px-2">DÉFINITIONS & ANALYSES</h3>
+          <h3 className="text-[10px] font-black uppercase tracking-widest text-white/75 mb-4 px-2">DÉFINITIONS & ANALYSES</h3>
           {shuffledRight.map((def, rightIdx) => {
             const color = getColorForRight(rightIdx);
             const isMatched = matchedRightIndices.has(rightIdx);
@@ -511,12 +511,12 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
                 disabled={validated}
                 className={`w-full rounded-2xl border-2 px-6 py-5 text-left text-sm font-medium leading-relaxed transition-all duration-300 ${
                   validated
-                    ? "cursor-default border-white/5 bg-black/20 text-white/30"
+                    ? "cursor-default border-white/5 bg-black/20 text-white/75"
                     : isMatched && color
                       ? `${color.border} ${color.bg} ${color.text} opacity-60`
                       : selectedLeft !== null
                         ? "border-white/20 bg-white/5 text-white hover:border-brand-gold/50 hover:bg-white/10"
-                        : "border-white/5 bg-black/20 text-white/40"
+                        : "border-white/5 bg-black/20 text-white/75"
                 }`}
               >
                 {def}
@@ -537,9 +537,9 @@ function MatchExercise({ exercise }: { exercise: DragDropExercise }) {
                 <div className="relative z-10 flex flex-col sm:flex-row items-center gap-8">
                     <div className="flex flex-col items-center">
                         <span className="text-5xl font-black text-brand-gold tabular-nums">
-                            {score}<span className="text-2xl text-white/20">/{leftItems.length}</span>
+                            {score}<span className="text-2xl text-white/75">/{leftItems.length}</span>
                         </span>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mt-2">PRÉCISION</p>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mt-2">PRÉCISION</p>
                     </div>
                     <div className="flex-1 text-center sm:text-left">
                         <p className="text-xl font-black text-white uppercase tracking-tight mb-2">

@@ -55,7 +55,7 @@ export function InfographieBlocks({ id, meta, themeColor = "#d4af37" }: { id: st
 
         <div className="flex items-center justify-between border-t border-white/5 pt-8">
           <LessonLink href={meta.hrefLesson} label="Consulter la leçon associée" />
-          <div className="hidden sm:flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/20">
+          <div className="hidden sm:flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/75">
               <Info className="w-3 h-3" /> Support pédagogique interactif
           </div>
         </div>
@@ -186,7 +186,7 @@ function BlockMatrice() {
   return (
     <div className="grid gap-12 lg:grid-cols-3">
       <div className="lg:col-span-2">
-        <p className="mb-4 text-center text-[10px] font-black uppercase tracking-widest text-white/30">
+        <p className="mb-4 text-center text-[10px] font-black uppercase tracking-widest text-white/75">
           PROBABILITÉ D&apos;OCCURRENCE →
         </p>
         <div className="overflow-x-auto rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl">
@@ -202,7 +202,7 @@ function BlockMatrice() {
             <tbody>
               {grid.map((row, ri) => (
                 <tr key={ri} className="border-t border-white/10">
-                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-white/40 bg-white/[0.02] text-left">{rowLabels[ri]}</th>
+                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-white/75 bg-white/[0.02] text-left">{rowLabels[ri]}</th>
                   {row.map((cell, ci) => (
                     <td key={ci} className={`p-6 border-l border-white/10 transition-all duration-300 ${riskCellDark[cell.tone]}`}>
                       <p className="text-sm font-black uppercase tracking-tight">{cell.text}</p>
@@ -249,7 +249,7 @@ function BlockNegociation() {
           {["DÉLAIS", "PRIX", "CONDITIONS", "GARANTIES"].map(t => (
             <motion.div key={t} whileHover={{ y: -5 }} className="rounded-[2rem] border border-white/10 bg-white/5 p-6 text-center shadow-xl">
                <p className="text-brand-gold font-black uppercase tracking-widest text-xs mb-1">{t}</p>
-               <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest">Facteur clé</span>
+               <span className="text-[9px] font-bold text-white/75 uppercase tracking-widest">Facteur clé</span>
             </motion.div>
           ))}
         </div>
@@ -299,7 +299,7 @@ function BlockRentabilite() {
       </motion.div>
       <div className="grid gap-6 md:grid-cols-2">
         <div className="rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-xl">
-          <h3 className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-6 italic">Simulation type</h3>
+          <h3 className="text-[10px] font-black uppercase tracking-widest text-white/75 mb-6 italic">Simulation type</h3>
           <div className="space-y-3">
              {[["Prix d&apos;achat", "200k €"], ["Travaux", "20k €"], ["Frais notaire", "16k €"], ["Loyer mensuel", "900 €"]].map(([k, v]) => (
                 <div key={k} className="flex justify-between border-b border-white/5 pb-2">
@@ -365,7 +365,7 @@ function BlockFinancement() {
         <div className="grid gap-4 sm:grid-cols-2">
            {[["Taux endettement", "33%"], ["Reste à vivre", "1500€"], ["Durée max", "25 ans"], ["Assurance", "0.4%"]].map(([k, v]) => (
                 <div key={k} className="rounded-2xl bg-white/5 border border-white/10 p-6 text-center">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-2">{k}</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mb-2">{k}</p>
                     <p className="text-xl font-black text-white">{v}</p>
                 </div>
            ))}
@@ -436,7 +436,7 @@ function BlockMandats() {
                     {i + 1}
                 </div>
                 <h3 className="text-lg font-black text-white uppercase tracking-widest">{t}</h3>
-                <p className="mt-4 text-[10px] font-bold text-white/30 uppercase tracking-widest italic">Performance {70 + i*10}%</p>
+                <p className="mt-4 text-[10px] font-bold text-white/75 uppercase tracking-widest italic">Performance {70 + i*10}%</p>
             </div>
         ))}
     </div>

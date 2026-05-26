@@ -175,7 +175,7 @@ export function NegotiationSimulator() {
                         </div>
                     </div>
                     {finished && (
-                        <button onClick={reset} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition-colors">
+                        <button onClick={reset} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/75 hover:text-white transition-colors">
                             <RotateCcw size={14} /> REJOUER
                         </button>
                     )}
@@ -223,7 +223,7 @@ export function NegotiationSimulator() {
                             >
                                 <div className="flex items-center gap-3 px-2">
                                     <Send size={14} className="text-brand-gold animate-pulse" />
-                                    <p className="text-[10px] font-black uppercase tracking-widest text-white/40">{currentNode.prompt}</p>
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-white/75">{currentNode.prompt}</p>
                                 </div>
                                 <div className="grid gap-4">
                                     {currentNode.options.map((opt, i) => (

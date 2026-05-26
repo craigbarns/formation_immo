@@ -69,7 +69,7 @@ export function StudyReminder() {
                         setShow(false);
                         localStorage.setItem(DISMISSED_KEY, String(Date.now()));
                     }}
-                    className="shrink-0 rounded-full p-1.5 text-white/20 transition hover:bg-white/10 hover:text-white"
+                    className="shrink-0 rounded-full p-1.5 text-white/75 transition hover:bg-white/10 hover:text-white"
                     aria-label="Fermer"
                 >
                     <X className="h-4 w-4" />

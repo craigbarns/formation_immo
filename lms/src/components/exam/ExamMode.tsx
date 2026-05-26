@@ -48,8 +48,8 @@ function AnimatedCounter({ value, total }: { value: number; total: number }) {
         />
       </svg>
       <div className="text-center">
-        <p className="text-5xl font-black text-white tabular-nums tracking-tighter">{display}<span className="text-2xl text-white/20">/{total}</span></p>
-        <p className="text-xs font-black uppercase tracking-[0.2em] text-white/40 mt-1">{pct}%</p>
+        <p className="text-5xl font-black text-white tabular-nums tracking-tighter">{display}<span className="text-2xl text-white/75">/{total}</span></p>
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-white/75 mt-1">{pct}%</p>
       </div>
     </div>
   );
@@ -242,7 +242,7 @@ export function ExamMode({ exam, showCertificate }: { exam: ModuleExam; showCert
 
           {prevScore && prevPct !== null && (
             <div className="mt-10 inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 text-sm backdrop-blur-xl">
-              <span className="text-white/40 font-bold uppercase tracking-widest text-xs">Dernier essai :</span>
+              <span className="text-white/75 font-bold uppercase tracking-widest text-xs">Dernier essai :</span>
               <span className={`font-black tabular-nums ${prevPct >= 70 ? "text-emerald-400" : "text-amber-400"}`}>
                 {prevScore.score}/{prevScore.total} ({prevPct}%)
               </span>
@@ -255,11 +255,11 @@ export function ExamMode({ exam, showCertificate }: { exam: ModuleExam; showCert
           <div className="mx-auto max-w-2xl grid gap-8 md:grid-cols-3 mb-12">
             <div className="rounded-3xl border border-white/5 bg-white/[0.02] p-6 text-center">
                 <p className="text-3xl font-black text-white tabular-nums">{exam.questions.length}</p>
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mt-2">Questions</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mt-2">Questions</p>
             </div>
             <div className="rounded-3xl border border-white/5 bg-white/[0.02] p-6 text-center">
                 <p className="text-3xl font-black text-white tabular-nums">{exam.duration}</p>
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mt-2">Minutes</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mt-2">Minutes</p>
             </div>
             <div className="rounded-3xl border border-brand-gold/20 bg-brand-gold/5 p-6 text-center">
                 <p className="text-3xl font-black text-brand-gold tabular-nums">70%</p>
@@ -364,14 +364,14 @@ export function ExamMode({ exam, showCertificate }: { exam: ModuleExam; showCert
         {/* Certificate download — only on certification exam after passing */}
         {passed && showCertificate && (
           <div className="border-t border-white/5 px-8 md:px-12 py-10">
-            <p className="mb-6 text-center text-[10px] font-black uppercase tracking-[0.4em] text-white/20">VOTRE CERTIFICAT</p>
+            <p className="mb-6 text-center text-[10px] font-black uppercase tracking-[0.4em] text-white/75">VOTRE CERTIFICAT</p>
             <CertificateGenerator forceUnlock />
           </div>
         )}
 
         {/* Detailed review */}
         <div className="border-t border-white/5 bg-[#030712]/60 p-8 md:p-12 lg:p-16">
-            <h3 className="mb-10 text-[10px] font-black uppercase tracking-[0.4em] text-white/20 text-center">ANALYSE PÉDAGOGIQUE DÉTAILLÉE</h3>
+            <h3 className="mb-10 text-[10px] font-black uppercase tracking-[0.4em] text-white/75 text-center">ANALYSE PÉDAGOGIQUE DÉTAILLÉE</h3>
             <div className="space-y-8 max-w-4xl mx-auto">
               {exam.questions.map((q, i) => (
                 <ReviewQuestion key={q.id} question={q} answer={answers[q.id]} index={i} grade={openGrades[q.id]} />
@@ -403,15 +403,15 @@ export function ExamMode({ exam, showCertificate }: { exam: ModuleExam; showCert
         <div className="flex items-center justify-between gap-6">
           <div className="flex items-center gap-6">
             <div>
-              <p className="text-[9px] font-black uppercase tracking-widest text-white/30">Progression</p>
+              <p className="text-[9px] font-black uppercase tracking-widest text-white/75">Progression</p>
               <div className="flex items-center gap-2 mt-1">
                 <span className="text-xl font-black text-white tabular-nums">{current + 1}</span>
-                <span className="text-sm font-bold text-white/20">/ {total}</span>
+                <span className="text-sm font-bold text-white/75">/ {total}</span>
               </div>
             </div>
             <div className="hidden sm:block h-10 w-px bg-white/10" />
             <div className="hidden sm:block">
-              <p className="text-[9px] font-black uppercase tracking-widest text-white/30">Répondues</p>
+              <p className="text-[9px] font-black uppercase tracking-widest text-white/75">Répondues</p>
               <p className="mt-1 text-sm font-black text-brand-gold uppercase tracking-tight">{answeredCount} questions</p>
             </div>
           </div>
@@ -464,7 +464,7 @@ export function ExamMode({ exam, showCertificate }: { exam: ModuleExam; showCert
                         }`}
                     >
                         <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-black border transition-all ${
-                        selected ? "bg-brand-gold border-brand-gold text-brand-navy shadow-lg" : "bg-black/40 border-white/10 text-white/20"
+                        selected ? "bg-brand-gold border-brand-gold text-brand-navy shadow-lg" : "bg-black/40 border-white/10 text-white/75"
                         }`}>
                         {String.fromCharCode(65 + i)}
                         </div>
@@ -483,7 +483,7 @@ export function ExamMode({ exam, showCertificate }: { exam: ModuleExam; showCert
         <button
           onClick={() => setCurrent((c) => Math.max(0, c - 1))}
           disabled={current === 0}
-          className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-xs font-black uppercase tracking-widest text-white/40 transition hover:bg-white hover:text-brand-navy disabled:opacity-10"
+          className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-xs font-black uppercase tracking-widest text-white/75 transition hover:bg-white hover:text-brand-navy disabled:opacity-10"
         >
           <ChevronLeft size={16} className="transition-transform group-hover:-translate-x-1" /> Précédente
         </button>
@@ -549,7 +549,7 @@ function ReviewQuestion({
     }`}>
       <div className="flex items-start gap-6">
         <div className={`mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-[1.25rem] border-2 transition-all ${
-          unanswered ? "bg-white/5 border-white/10 text-white/20" :
+          unanswered ? "bg-white/5 border-white/10 text-white/75" :
           correct ? "bg-emerald-500 border-emerald-400 text-brand-navy" :
           "bg-red-500 border-red-400 text-brand-navy"
         }`}>
@@ -557,7 +557,7 @@ function ReviewQuestion({
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-3 mb-4">
-             <span className="text-[10px] font-black uppercase tracking-widest text-white/20">QUESTION {index + 1}</span>
+             <span className="text-[10px] font-black uppercase tracking-widest text-white/75">QUESTION {index + 1}</span>
              {isOpen && <span className="rounded-md bg-amber-500/20 border border-amber-500/30 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-amber-500">FORMAT OUVERT</span>}
           </div>
           <p className="text-xl font-black tracking-tight text-white uppercase mb-6 leading-tight">
@@ -567,7 +567,7 @@ function ReviewQuestion({
           {isOpen ? (
             <div className="space-y-6">
               <div className="rounded-2xl bg-black/40 border border-white/5 p-6 italic shadow-inner">
-                <p className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">VOTRE ANALYSE</p>
+                <p className="text-[9px] font-black uppercase tracking-widest text-white/75 mb-2">VOTRE ANALYSE</p>
                 <p className="text-base text-white/80 font-medium">&laquo; {unanswered ? "Non renseigné" : String(answer)} &raquo;</p>
               </div>
               
@@ -596,7 +596,7 @@ function ReviewQuestion({
               )}
               {question.modelAnswer && (
                 <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-2">RÉPONSE MODÈLE</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mb-2">RÉPONSE MODÈLE</p>
                   <p className="text-sm text-white/60 leading-relaxed italic">{question.modelAnswer}</p>
                 </div>
               )}
@@ -612,7 +612,7 @@ function ReviewQuestion({
                     className={`flex items-center justify-between gap-4 rounded-xl border-2 px-5 py-4 transition-all ${
                       isCorrect ? "border-emerald-500/40 bg-emerald-500/10 text-white" : 
                       isUser && !isCorrect ? "border-red-500/40 bg-red-500/10 text-red-300" :
-                      "border-white/5 bg-[#030712] text-white/30"
+                      "border-white/5 bg-[#030712] text-white/75"
                     }`}
                   >
                     <div className="flex items-center gap-4">

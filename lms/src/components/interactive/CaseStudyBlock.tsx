@@ -34,7 +34,7 @@ function FieldRow({
     <div className={`rounded-2xl border-2 p-5 transition-all duration-300 shadow-2xl ${border}`}>
       <label className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
         <span className="text-sm font-black uppercase tracking-tight text-white/90">{field.label}</span>
-        <span className="text-[10px] font-black uppercase tracking-widest text-white/30">{field.unit}</span>
+        <span className="text-[10px] font-black uppercase tracking-widest text-white/75">{field.unit}</span>
       </label>
       <div className="flex flex-wrap items-center gap-3">
         <input
@@ -42,7 +42,7 @@ function FieldRow({
           inputMode="decimal"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`min-w-[120px] flex-1 rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-base font-black text-white tabular-nums outline-none focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10 transition-all placeholder:text-white/10`}
+          className={`min-w-[120px] flex-1 rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-base font-black text-white tabular-nums outline-none focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10 transition-all placeholder:text-white/70`}
           placeholder="Calculer..."
           autoComplete="off"
         />
@@ -140,7 +140,7 @@ export function CaseStudyBlock({ studies }: { studies: CaseStudy[] }) {
               className={`flex shrink-0 items-center gap-2.5 rounded-xl px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
                 i === active
                   ? "bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20"
-                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/5"
+                  : "bg-white/5 text-white/75 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
               CAS {i + 1}
@@ -157,7 +157,7 @@ export function CaseStudyBlock({ studies }: { studies: CaseStudy[] }) {
               key={d.label}
               className="rounded-2xl border border-white/5 bg-[#030712] p-5 shadow-inner transition-all hover:bg-white/5 group"
             >
-              <p className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-1 group-hover:text-brand-gold/60 transition-colors">
+              <p className="text-[9px] font-black uppercase tracking-widest text-white/75 mb-1 group-hover:text-brand-gold/60 transition-colors">
                 {d.label}
               </p>
               <p className="text-base font-black text-white uppercase tracking-tight">{d.value}</p>
@@ -168,7 +168,7 @@ export function CaseStudyBlock({ studies }: { studies: CaseStudy[] }) {
         <div className="space-y-6">
           <div className="flex items-center gap-4 mb-2">
             <Calculator className="w-5 h-5 text-brand-gold" />
-            <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Équations de terrain</h3>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/75">Équations de terrain</h3>
           </div>
           <div className="grid gap-6">
             {study.questions.map((q) => (

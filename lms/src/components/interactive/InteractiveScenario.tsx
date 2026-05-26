@@ -213,10 +213,10 @@ function StepVideo({
       ) : (
         <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.02] p-10 text-center shadow-inner">
           <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/5 to-transparent opacity-50" />
-          <p className="relative text-lg font-black text-white/40 uppercase tracking-widest">
+          <p className="relative text-lg font-black text-white/75 uppercase tracking-widest">
             Visuel en attente
           </p>
-          <p className="relative mt-2 text-sm text-white/20 italic">
+          <p className="relative mt-2 text-sm text-white/75 italic">
             Focus sur le contenu pédagogique
           </p>
         </div>
@@ -334,7 +334,7 @@ function StepChoice({
                 <p className="text-base font-bold leading-snug text-white/90 group-hover:text-white transition-colors">
                 {opt.label}
                 </p>
-                <div className="mt-3 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/30 group-hover:text-brand-gold/70 transition-colors">
+                <div className="mt-3 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/75 group-hover:text-brand-gold/70 transition-colors">
                     Sélectionner l&apos;option <ArrowRight className="w-3 h-3" />
                 </div>
             </div>
@@ -380,7 +380,7 @@ function StepQuiz({
         <span className="rounded-full bg-brand-navy border border-brand-gold/30 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-brand-gold">
           CHECKPOINT QCM
         </span>
-        <span className="text-xs font-bold uppercase tracking-widest text-white/30">{step.title}</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-white/75">{step.title}</span>
       </div>
       
       <h3 className="text-2xl font-black leading-tight text-white sm:text-4xl text-center mb-12">
@@ -406,7 +406,7 @@ function StepQuiz({
                     : wrong
                       ? "border-red-500 bg-red-500/10 text-red-400"
                       : disabled
-                        ? "border-white/5 bg-white/[0.02] text-white/20 opacity-50"
+                        ? "border-white/5 bg-white/[0.02] text-white/75 opacity-50"
                         : "border-white/10 bg-white/5 text-white/80 hover:border-brand-gold/50 hover:bg-white/10"
                 }`}
               >
@@ -502,9 +502,9 @@ function StepComplete({
       {quizTotal > 0 && (
         <div className="mb-12">
              <div className="inline-flex flex-col items-center rounded-[2rem] border border-white/10 bg-white/5 px-10 py-6 shadow-2xl">
-                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/40 mb-2">Performance finale</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/75 mb-2">Performance finale</p>
                 <p className="text-4xl font-black text-brand-gold tabular-nums">
-                    {score} <span className="text-xl text-white/20">/ {quizTotal}</span>
+                    {score} <span className="text-xl text-white/75">/ {quizTotal}</span>
                 </p>
             </div>
         </div>

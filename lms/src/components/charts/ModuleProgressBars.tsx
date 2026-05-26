@@ -48,7 +48,7 @@ export function ModuleProgressBars({ progress }: ModuleProgressBarsProps) {
                       <p className="font-black text-white text-sm uppercase tracking-tight">
                         {module.title.replace(/^Module (\d+) — /, "")}
                       </p>
-                      <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] mt-1">
+                      <p className="text-[10px] font-black text-white/75 uppercase tracking-[0.2em] mt-1">
                         {completed} / {total} ÉTAPES
                       </p>
                     </div>

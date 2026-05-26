@@ -60,12 +60,12 @@ export function CircularProgress({
         {/* Center text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-3xl font-black text-white tabular-nums tracking-tighter">
-            {Math.round(progress * 100)}<span className="text-xs text-white/40 ml-0.5">%</span>
+            {Math.round(progress * 100)}<span className="text-xs text-white/75 ml-0.5">%</span>
           </span>
         </div>
       </div>
       <p className="mt-4 text-[10px] font-black uppercase tracking-[0.2em] text-white/60 text-center">{label}</p>
-      {sublabel && <p className="text-[9px] font-bold text-white/20 uppercase tracking-widest mt-1">{sublabel}</p>}
+      {sublabel && <p className="text-[9px] font-bold text-white/75 uppercase tracking-widest mt-1">{sublabel}</p>}
     </div>
   );
 }

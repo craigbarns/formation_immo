@@ -67,7 +67,7 @@ export function RentabilitySimulator() {
             </h4>
             <Slider label="Prix d'achat net vendeur" value={prixAchat} onChange={setPrixAchat} min={50000} max={1000000} step={10000} format={(v) => formatCurrency(v)} />
             <Slider label="Budget travaux" value={travaux} onChange={setTravaux} min={0} max={200000} step={5000} format={(v) => formatCurrency(v)} />
-            <div className="p-4 rounded-xl bg-slate-100 dark:bg-black/20 border border-slate-200 dark:border-white/5 text-xs text-slate-500 dark:text-white/40 italic">
+            <div className="p-4 rounded-xl bg-slate-100 dark:bg-black/20 border border-slate-200 dark:border-white/5 text-xs text-slate-500 dark:text-white/75 italic">
                 Frais de notaire estimés : <span className="text-slate-700 dark:text-white/60 font-bold">{formatCurrency(result.fraisNotaire)} (7.5%)</span>
             </div>
         </div>
@@ -103,15 +103,15 @@ export function RentabilitySimulator() {
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             <div className="text-center p-6 rounded-3xl bg-white/5 border border-white/10 shadow-xl group hover:border-brand-gold/30 transition-all">
-                <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">Investissement total</p>
+                <p className="text-[10px] font-black text-white/75 uppercase tracking-widest mb-2">Investissement total</p>
                 <p className="text-2xl font-black text-white tabular-nums">{formatCurrency(result.totalInvesti)}</p>
             </div>
             <div className="text-center p-6 rounded-3xl bg-white/5 border border-white/10 shadow-xl group hover:border-brand-gold/30 transition-all">
-                <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">Rentabilité brute</p>
+                <p className="text-[10px] font-black text-white/75 uppercase tracking-widest mb-2">Rentabilité brute</p>
                 <p className="text-3xl font-black text-brand-gold tabular-nums">{result.rentabiliteBrute.toFixed(2)}%</p>
             </div>
             <div className="text-center p-6 rounded-3xl bg-white/5 border border-white/10 shadow-xl group hover:border-brand-gold/30 transition-all">
-                <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">Rentabilité nette-net</p>
+                <p className="text-[10px] font-black text-white/75 uppercase tracking-widest mb-2">Rentabilité nette-net</p>
                 <p className="text-3xl font-black text-emerald-400 tabular-nums">{result.rentabiliteNette.toFixed(2)}%</p>
             </div>
             <div className="text-center p-6 rounded-3xl bg-brand-gold/10 border border-brand-gold/30 shadow-xl group transition-all">
@@ -130,7 +130,7 @@ export function RentabilitySimulator() {
                     <AlertTriangle size={16} /> Rendement conservateur
                 </div>
             )}
-            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white/30">
+            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white/75">
                 <Sparkles size={16} className="text-brand-gold" /> Calcul certifié formation 42h
             </div>
         </div>

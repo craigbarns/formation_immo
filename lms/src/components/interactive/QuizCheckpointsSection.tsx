@@ -59,19 +59,19 @@ function QuizCard({ q, moduleSlug, lessonSlug }: { q: QuizCheckpoint; moduleSlug
                 }}
                 className={`w-full group relative flex items-center justify-between gap-4 rounded-2xl border-2 px-6 py-4 text-left transition-all duration-300 ${
                   !reveal
-                    ? "border-white/5 bg-white/[0.02] text-white/70 hover:border-brand-gold/50 hover:bg-white/5"
+                    ? "border-white/10 bg-white/[0.04] text-white hover:border-brand-gold/50 hover:bg-white/10"
                     : correct
-                      ? "border-emerald-500 bg-emerald-500/10 text-emerald-400"
+                      ? "border-emerald-500 bg-emerald-500/10 text-emerald-300"
                       : selected
-                        ? "border-red-500 bg-red-500/10 text-red-400"
-                        : "border-white/5 bg-white/[0.01] text-white/20 opacity-50"
+                        ? "border-red-500 bg-red-500/10 text-red-300"
+                        : "border-white/10 bg-white/[0.02] text-white/60 opacity-70"
                 }`}
               >
                 <div className="flex items-center gap-4">
                     <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-xs font-black transition-colors ${
-                        !reveal ? "bg-white/10 text-white/40 group-hover:bg-brand-gold group-hover:text-brand-navy" :
+                        !reveal ? "bg-white/15 text-white group-hover:bg-brand-gold group-hover:text-brand-navy" :
                         correct ? "bg-emerald-500 text-brand-navy" :
-                        selected ? "bg-red-500 text-brand-navy" : "bg-white/5 text-white/10"
+                        selected ? "bg-red-500 text-brand-navy" : "bg-white/10 text-white/50"
                     }`}>
                         {String.fromCharCode(65 + i)}
                     </span>
@@ -96,7 +96,7 @@ function QuizCard({ q, moduleSlug, lessonSlug }: { q: QuizCheckpoint; moduleSlug
                 : "border-amber-500/20 bg-amber-500/5 text-amber-100"
             }`}
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-2 opacity-50">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-2 opacity-80">
                 {picked === correctIndex ? "Excellente réponse" : "Analyse pédagogique"}
             </p>
             <p className="text-sm leading-relaxed font-medium italic">
@@ -128,7 +128,7 @@ export function QuizCheckpointsSection({
         <div className="h-1.5 w-1.5 rounded-full bg-brand-gold animate-pulse" />
         <div>
             <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold">{title}</h2>
-            <p className="mt-1 text-sm text-slate-500 dark:text-white/40 font-medium italic">
+            <p className="mt-1 text-sm text-slate-600 dark:text-white/70 font-medium italic">
             Testez votre compréhension stratégique avant de valider cette étape.
             </p>
         </div>

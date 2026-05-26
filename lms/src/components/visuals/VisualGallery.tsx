@@ -51,7 +51,7 @@ export function VisualGallery({ prompts }: { prompts: VisualPrompt[] }) {
                 sizes="(max-width: 768px) 100vw, 33vw"
               />
             ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center gap-4 text-white/20">
+              <div className="flex h-full w-full flex-col items-center justify-center gap-4 text-white/75">
                 <div className="relative">
                     <div className="absolute inset-0 rounded-full blur-2xl bg-brand-gold/10 animate-pulse" />
                     <svg className="relative h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,8 +64,8 @@ export function VisualGallery({ prompts }: { prompts: VisualPrompt[] }) {
                     </svg>
                 </div>
                 <div className="text-center">
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 block">Visualisation</span>
-                    <span className="text-xs font-bold text-white/20 uppercase tracking-widest mt-1 block italic">En cours de production</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/75 block">Visualisation</span>
+                    <span className="text-xs font-bold text-white/75 uppercase tracking-widest mt-1 block italic">En cours de production</span>
                 </div>
               </div>
             )}

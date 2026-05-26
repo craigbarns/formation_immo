@@ -99,7 +99,7 @@ export function ModuleLanding({
     <div className="space-y-12 pb-16">
       <Link
         href="/formation"
-        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-white/40 transition-colors hover:text-brand-gold"
+        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-white/75 transition-colors hover:text-brand-gold"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" /> TOUS LES MODULES
       </Link>
@@ -140,7 +140,7 @@ export function ModuleLanding({
 
             <dl className="mt-12 grid grid-cols-3 gap-6 border-t border-white/10 pt-10 sm:max-w-lg">
               <div className="space-y-1">
-                <dt className="text-[10px] font-black uppercase tracking-widest text-white/40 flex items-center gap-2">
+                <dt className="text-[10px] font-black uppercase tracking-widest text-white/75 flex items-center gap-2">
                   <Clock size={12} /> DURÉE
                 </dt>
                 <dd className="text-xl font-black tabular-nums">
@@ -148,13 +148,13 @@ export function ModuleLanding({
                 </dd>
               </div>
               <div className="space-y-1">
-                <dt className="text-[10px] font-black uppercase tracking-widest text-white/40 flex items-center gap-2">
+                <dt className="text-[10px] font-black uppercase tracking-widest text-white/75 flex items-center gap-2">
                    <BookOpen size={12} /> LEÇONS
                 </dt>
                 <dd className="text-xl font-black tabular-nums">{lessons.length}</dd>
               </div>
               <div className="space-y-1">
-                <dt className="text-[10px] font-black uppercase tracking-widest text-white/40 flex items-center gap-2">
+                <dt className="text-[10px] font-black uppercase tracking-widest text-white/75 flex items-center gap-2">
                    <Sparkles size={12} /> INTERACTIFS
                 </dt>
                 <dd className="text-xl font-black tabular-nums">{interactiveCount}</dd>
@@ -175,7 +175,7 @@ export function ModuleLanding({
                 <p className="text-base leading-relaxed text-white/70 italic">&laquo; {avatar.description} &raquo;</p>
                 {modulePct !== null && (
                   <div className="mt-8 space-y-3">
-                    <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-white/40">
+                    <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-white/75">
                       <span>VOTRE AVANCEMENT</span>
                       <span className="tabular-nums text-white">{modulePct}%</span>
                     </div>
@@ -219,7 +219,7 @@ export function ModuleLanding({
             {showcase.proofLine.map((line) => (
                 <p
                 key={line}
-                className="flex items-center gap-3 text-xs font-black uppercase tracking-widest text-white/30"
+                className="flex items-center gap-3 text-xs font-black uppercase tracking-widest text-white/75"
                 >
                 <EmojiIcon emoji="⭐" className="h-4 w-4 text-brand-gold" />
                 {line}
@@ -258,7 +258,7 @@ export function ModuleLanding({
       <section className="scroll-mt-24">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-slate-200 dark:border-white/10 pb-8">
           <div>
-            <h2 className="text-xs font-black uppercase tracking-[0.4em] text-slate-400 dark:text-white/40 mb-3">CURRICULUM DÉTAILLÉ</h2>
+            <h2 className="text-xs font-black uppercase tracking-[0.4em] text-slate-400 dark:text-white/75 mb-3">CURRICULUM DÉTAILLÉ</h2>
             <h3 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Leçons & Ateliers</h3>
           </div>
           {modulePct !== null && (
@@ -298,12 +298,12 @@ export function ModuleLanding({
                             </span>
                             )}
                             {lesson.difficulty === "avance" && (
-                            <span className="rounded-md bg-white/5 border border-white/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-white/40">
+                            <span className="rounded-md bg-white/5 border border-white/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-white/75">
                                 Avancé
                             </span>
                             )}
                             {durLabel && (
-                            <span className="inline-flex items-center gap-2 rounded-full bg-black/20 border border-white/5 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white/40">
+                            <span className="inline-flex items-center gap-2 rounded-full bg-black/20 border border-white/5 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white/75">
                                 <Clock className="h-3 w-3" />
                                 {durLabel}
                             </span>
@@ -315,7 +315,7 @@ export function ModuleLanding({
                         {lesson.objectives && lesson.objectives.length > 0 && (
                             <ul className="mt-6 space-y-2">
                             {lesson.objectives.slice(0, 2).map((obj, j) => (
-                                <li key={j} className="flex items-start gap-2.5 text-xs font-bold text-white/30">
+                                <li key={j} className="flex items-start gap-2.5 text-xs font-bold text-white/75">
                                 <EmojiIcon emoji="✓" className="mt-0.5 h-3.5 w-3.5 text-brand-gold/40" />
                                 {obj}
                                 </li>
@@ -327,7 +327,7 @@ export function ModuleLanding({
 
                     {lesson.audioSrc ? (
                         <div className="flex shrink-0 flex-col justify-center bg-black/20 border-t border-white/5 p-6 md:w-80 md:border-l md:border-t-0 md:p-8">
-                            <span className="mb-4 text-[10px] font-black uppercase tracking-[0.2em] text-white/20">
+                            <span className="mb-4 text-[10px] font-black uppercase tracking-[0.2em] text-white/75">
                                 APERÇU AUDIO
                             </span>
                             <ModuleLessonAudioControls url={lesson.audioSrc} title={lesson.title} />
@@ -336,7 +336,7 @@ export function ModuleLanding({
                                     <Sparkles className="w-3 h-3" /> Production en cours
                                 </p>
                             )}
-                            <Link href={`/formation/${moduleSlug}/${lesson.slug}`} className="mt-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition-colors">
+                            <Link href={`/formation/${moduleSlug}/${lesson.slug}`} className="mt-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/75 hover:text-white transition-colors">
                                 Ouvrir la fiche <ChevronRight size={14} />
                             </Link>
                         </div>
@@ -359,7 +359,7 @@ export function ModuleLanding({
             href={prevModule.href}
             className="group rounded-[2.5rem] border border-white/10 bg-[#070d18] p-8 shadow-2xl transition-all duration-500 hover:border-brand-gold/30 hover:-translate-x-1"
           >
-            <p className="text-[10px] font-black uppercase tracking-widest text-white/20">
+            <p className="text-[10px] font-black uppercase tracking-widest text-white/75">
               Module précédent
             </p>
             <p className="mt-3 text-lg font-black text-white uppercase tracking-tight group-hover:text-brand-gold transition-colors">{prevModule.title}</p>
@@ -372,7 +372,7 @@ export function ModuleLanding({
             href={nextModule.href}
             className="group rounded-[2.5rem] border border-white/10 bg-[#070d18] p-8 shadow-2xl transition-all duration-500 hover:border-brand-gold/30 hover:translate-x-1 text-right"
           >
-            <p className="text-[10px] font-black uppercase tracking-widest text-white/20">
+            <p className="text-[10px] font-black uppercase tracking-widest text-white/75">
               Module suivant
             </p>
             <p className="mt-3 text-lg font-black text-white uppercase tracking-tight group-hover:text-brand-gold transition-colors">{nextModule.title} <ArrowLeft className="inline-block w-4 h-4 ml-2 rotate-180 transition-transform group-hover:translate-x-1" /></p>

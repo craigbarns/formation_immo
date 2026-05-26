@@ -22,7 +22,7 @@ export default async function FlashcardsPage({ params }: Props) {
     <div className="space-y-8">
       <Link
         href={`/formation/${mod.slug}`}
-        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40 transition-colors hover:text-brand-gold"
+        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/75 transition-colors hover:text-brand-gold"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" /> Retour au module
       </Link>
@@ -48,9 +48,9 @@ export default async function FlashcardsPage({ params }: Props) {
                 <Sparkles className="h-4 w-4 animate-pulse" /> RÉVISION ACTIVE
              </div>
              <h1 className="text-3xl font-black tracking-tight text-white md:text-5xl uppercase leading-none">
-                Flashcards <span className="text-white/20">·</span> {mod.title.replace(/^Module \d+ — /, "")}
+                Flashcards <span className="text-white/75">·</span> {mod.title.replace(/^Module \d+ — /, "")}
              </h1>
-             <p className="mt-4 text-base text-white/40 font-medium italic">
+             <p className="mt-4 text-base text-white/75 font-medium italic">
                 {cards.length} concepts clés à ancrer dans votre mémoire{avatar ? ` avec l'accompagnement de ${avatar.name}` : ""}.
              </p>
           </div>
@@ -101,8 +101,8 @@ export default async function FlashcardsPage({ params }: Props) {
         </div>
       ) : (
         <div className="rounded-[2.5rem] border border-white/10 bg-[#070d18] p-20 text-center shadow-2xl">
-          <Brain className="h-16 w-16 text-white/10 mx-auto mb-6" />
-          <p className="text-white/40 font-black uppercase tracking-widest">Aucune flashcard disponible pour ce module.</p>
+          <Brain className="h-16 w-16 text-white/70 mx-auto mb-6" />
+          <p className="text-white/75 font-black uppercase tracking-widest">Aucune flashcard disponible pour ce module.</p>
         </div>
       )}
     </div>

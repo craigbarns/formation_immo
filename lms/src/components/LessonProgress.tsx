@@ -146,7 +146,7 @@ export function LessonProgress({ lessonKey, moduleInfo }: { lessonKey: string; m
 
   if (loading) {
     return (
-      <div className="mt-8 inline-flex items-center gap-3 rounded-2xl border border-white/5 bg-white/[0.02] px-6 py-4 text-[10px] font-black uppercase tracking-widest text-white/20">
+      <div className="mt-8 inline-flex items-center gap-3 rounded-2xl border border-white/5 bg-white/[0.02] px-6 py-4 text-[10px] font-black uppercase tracking-widest text-white/75">
         <Loader2 className="h-4 w-4 animate-spin" />
         Vérification...
       </div>
@@ -184,7 +184,7 @@ export function LessonProgress({ lessonKey, moduleInfo }: { lessonKey: string; m
           </motion.div>
         ) : (
           <motion.div key="undone" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-            <Circle className="h-6 w-6 text-white/10 group-hover:text-brand-gold transition-colors" aria-hidden />
+            <Circle className="h-6 w-6 text-white/70 group-hover:text-brand-gold transition-colors" aria-hidden />
           </motion.div>
         )}
       </AnimatePresence>

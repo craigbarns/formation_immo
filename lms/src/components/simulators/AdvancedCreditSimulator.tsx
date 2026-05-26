@@ -119,7 +119,7 @@ export function AdvancedCreditSimulator() {
     <div className="space-y-10">
       {/* Presets */}
       <div className="flex flex-wrap items-center gap-3">
-        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/30 mr-2">Scénarios types :</span>
+        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/75 mr-2">Scénarios types :</span>
         {presets.map((p) => (
           <button
             key={p.label}
@@ -131,7 +131,7 @@ export function AdvancedCreditSimulator() {
         ))}
         <button
           onClick={() => applyPreset(presets[0])}
-          className="ml-auto inline-flex items-center gap-2 rounded-xl border border-slate-100 dark:border-white/5 bg-white dark:bg-white/5 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/20 transition hover:text-slate-900 dark:hover:text-white"
+          className="ml-auto inline-flex items-center gap-2 rounded-xl border border-slate-100 dark:border-white/5 bg-white dark:bg-white/5 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/75 transition hover:text-slate-900 dark:hover:text-white"
         >
           <RefreshCcw size={12} /> Réinitialiser
         </button>
@@ -186,21 +186,21 @@ export function AdvancedCreditSimulator() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           <div className="text-center p-6 rounded-3xl bg-white/5 border border-white/10 shadow-xl group hover:border-brand-gold/30 transition-all">
-            <p className="text-sm font-black text-white/40 uppercase tracking-widest mb-2">Mensualité</p>
+            <p className="text-sm font-black text-white/75 uppercase tracking-widest mb-2">Mensualité</p>
             <p className="text-3xl font-black text-brand-gold tabular-nums">{formatCurrency(result.monthlyPayment)}</p>
           </div>
           <div className="text-center p-6 rounded-3xl bg-white/5 border border-white/10 shadow-xl group hover:border-brand-gold/30 transition-all">
-            <p className="text-sm font-black text-white/40 uppercase tracking-widest mb-2">Endettement</p>
+            <p className="text-sm font-black text-white/75 uppercase tracking-widest mb-2">Endettement</p>
             <p className={`text-3xl font-black tabular-nums ${result.debtRatio > 35 ? "text-red-400" : "text-emerald-400"}`}>
               {result.debtRatio.toFixed(1)}%
             </p>
           </div>
           <div className="text-center p-6 rounded-3xl bg-white/5 border border-white/10 shadow-xl group hover:border-brand-gold/30 transition-all">
-            <p className="text-sm font-black text-white/40 uppercase tracking-widest mb-2">Coût total</p>
+            <p className="text-sm font-black text-white/75 uppercase tracking-widest mb-2">Coût total</p>
             <p className="text-3xl font-black text-white tabular-nums">{formatCurrency(result.totalInterest)}</p>
           </div>
           <div className="text-center p-6 rounded-3xl bg-white/5 border border-white/10 shadow-xl group hover:border-brand-gold/30 transition-all">
-            <p className="text-sm font-black text-white/40 uppercase tracking-widest mb-2">TAEG cible</p>
+            <p className="text-sm font-black text-white/75 uppercase tracking-widest mb-2">TAEG cible</p>
             <p className="text-3xl font-black text-white tabular-nums">{result.taeg.toFixed(2)}%</p>
           </div>
         </div>
@@ -208,7 +208,7 @@ export function AdvancedCreditSimulator() {
         {/* Amortissement */}
         <div className="mb-10 overflow-hidden rounded-3xl border border-white/5 bg-black/40 shadow-inner">
           <div className="bg-white/5 px-6 py-4 border-b border-white/5">
-              <h5 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Projection d&apos;amortissement stratégique</h5>
+              <h5 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/75">Projection d&apos;amortissement stratégique</h5>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse text-sm text-left">
@@ -223,7 +223,7 @@ export function AdvancedCreditSimulator() {
               <tbody className="divide-y divide-white/5">
                 {amortissement.map((row) => (
                   <tr key={row.year} className="group hover:bg-white/[0.02] transition-colors">
-                    <td className="p-5 font-black text-white/40">{row.year === 1 ? "1ère année" : row.year === duree ? "Dernière" : `Année ${row.year}`}</td>
+                    <td className="p-5 font-black text-white/75">{row.year === 1 ? "1ère année" : row.year === duree ? "Dernière" : `Année ${row.year}`}</td>
                     <td className="p-5 text-right text-red-400/60 font-medium tabular-nums">{formatCurrency(row.interest)}</td>
                     <td className="p-5 text-right text-emerald-400/60 font-medium tabular-nums">{formatCurrency(row.capital)}</td>
                     <td className="p-5 text-right font-black text-white tabular-nums">{formatCurrency(row.balance)}</td>
@@ -245,7 +245,7 @@ export function AdvancedCreditSimulator() {
           </div>
         )}
 
-        <div className="mt-8 pt-8 border-t border-white/5 flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-white/20 italic">
+        <div className="mt-8 pt-8 border-t border-white/5 flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-white/75 italic">
           <Info size={14} />
           <p>Simulation indicative non contractuelle. Les conditions bancaires définitives dépendent du scoring client et de la Loi Lagarde.</p>
         </div>

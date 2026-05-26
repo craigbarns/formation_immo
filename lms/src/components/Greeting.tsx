@@ -14,7 +14,7 @@ export function Greeting() {
   return (
     <span className="inline-flex items-center gap-2">
       {text}
-      <span className="text-white/40">Agent</span>
+      <span className="text-white/75">Agent</span>
       <EmojiIcon emoji="👋" className="h-4 w-4 animate-float-slow" />
     </span>
   );

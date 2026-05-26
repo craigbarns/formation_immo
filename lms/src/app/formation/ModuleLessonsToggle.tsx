@@ -25,7 +25,7 @@ export function ModuleLessonsToggle({
     <div className="mt-8 border-t border-white/5 pt-6">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white/40 hover:text-white/70 transition-colors"
+        className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white/75 hover:text-white/70 transition-colors"
       >
         <ChevronDown
           className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
@@ -50,7 +50,7 @@ export function ModuleLessonsToggle({
                     Interactif
                   </span>
                 )}
-                <span className="shrink-0 text-[10px] font-black uppercase tracking-widest text-white/30 flex items-center gap-1.5">
+                <span className="shrink-0 text-[10px] font-black uppercase tracking-widest text-white/75 flex items-center gap-1.5">
                   <Clock className="h-3 w-3" aria-hidden />
                   {formatDuration(lesson.duration)}
                 </span>

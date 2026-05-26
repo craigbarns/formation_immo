@@ -193,7 +193,7 @@ export default function LoginForm() {
             </div>
 
             <div className="mt-8 rounded-2xl border border-white/5 bg-white/[0.03] p-5">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-4 text-center">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/75 mb-4 text-center">
                 Au programme de votre formation
               </p>
               <ul className="space-y-3">
@@ -211,7 +211,7 @@ export default function LoginForm() {
             </div>
 
             <p className="mt-8 text-center">
-              <Link href="/" className="text-xs font-black uppercase tracking-widest text-white/40 hover:text-brand-gold transition-colors">
+              <Link href="/" className="text-xs font-black uppercase tracking-widest text-white/75 hover:text-brand-gold transition-colors">
                 ← Retour à l&apos;accueil
               </Link>
             </p>
@@ -219,7 +219,7 @@ export default function LoginForm() {
           </div>
         </div>
 
-        <p className="mt-8 text-center text-sm font-bold italic text-slate-400 dark:text-white/30">
+        <p className="mt-8 text-center text-sm font-bold italic text-slate-400 dark:text-white/75">
           &ldquo;Votre réussite dans l&apos;immobilier commence ici.&rdquo;
         </p>
       </div>

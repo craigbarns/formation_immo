@@ -54,7 +54,7 @@ function StepCard({
         <div
           className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-sm font-black shadow-xl ring-1 transition-colors ${
             isLocked
-              ? "bg-white/5 text-white/20 ring-white/10"
+              ? "bg-white/5 text-white/75 ring-white/10"
               : isCorrect
                 ? "bg-emerald-500 text-brand-navy ring-emerald-400/50"
                 : "bg-brand-gold text-brand-navy ring-brand-gold/50"
@@ -63,7 +63,7 @@ function StepCard({
           {isLocked ? <Lock size={18} /> : isCorrect ? <CheckCircle2 size={18} /> : step.stepNumber}
         </div>
         <div className="flex-1 pt-1">
-          <p className={`font-black uppercase tracking-tight ${isLocked ? "text-white/20" : "text-white"}`}>
+          <p className={`font-black uppercase tracking-tight ${isLocked ? "text-white/75" : "text-white"}`}>
             {step.title}
           </p>
           {!isLocked && (
@@ -98,9 +98,9 @@ function StepCard({
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && validate()}
                   placeholder="Saisir le résultat..."
-                  className="flex-1 bg-transparent px-5 py-4 text-base font-black text-white outline-none placeholder:text-white/20"
+                  className="flex-1 bg-transparent px-5 py-4 text-base font-black text-white outline-none placeholder:text-white/75"
                 />
-                <span className="shrink-0 border-l border-white/10 bg-white/5 px-5 py-4 text-[10px] font-black uppercase tracking-widest text-white/40">
+                <span className="shrink-0 border-l border-white/10 bg-white/5 px-5 py-4 text-[10px] font-black uppercase tracking-widest text-white/75">
                   {step.inputUnit}
                 </span>
               </div>
@@ -116,7 +116,7 @@ function StepCard({
                   className={`rounded-2xl border px-6 py-4 text-[10px] font-black uppercase tracking-widest transition-all ${
                     showHint 
                     ? "bg-brand-gold/20 border-brand-gold text-brand-gold" 
-                    : "bg-white/5 border-white/10 text-white/40 hover:bg-white/10 hover:text-white"
+                    : "bg-white/5 border-white/10 text-white/75 hover:bg-white/10 hover:text-white"
                   }`}
                 >
                   {showHint ? "Cacher l'indice" : "Indice"}
@@ -217,7 +217,7 @@ function CalcView({ calc }: { calc: GuidedCalculation }) {
             {calc.propertyContext.map((ctx) => (
                 <div key={ctx.label} className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 text-center shadow-2xl transition-all hover:bg-white/5 group">
                     <div className="flex justify-center mb-3"><EmojiIcon emoji={ctx.icon} className="h-8 w-8 group-hover:scale-110 transition-transform" /></div>
-                    <p className="text-[9px] font-black text-white/30 uppercase tracking-widest">{ctx.label}</p>
+                    <p className="text-[9px] font-black text-white/75 uppercase tracking-widest">{ctx.label}</p>
                     <p className="mt-1 text-base font-black text-white uppercase tracking-tight">{ctx.value}</p>
                 </div>
             ))}
@@ -229,7 +229,7 @@ function CalcView({ calc }: { calc: GuidedCalculation }) {
       <div className="px-2">
         <div className="mb-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">ÉTAPES :</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/75">ÉTAPES :</span>
               <span className="text-sm font-black text-white tabular-nums">{doneCount} / {calc.steps.length}</span>
           </div>
           <span className="text-sm font-black text-brand-gold tabular-nums">{pct}%</span>
@@ -321,7 +321,7 @@ export function GuidedCalculationBlock({
               className={`flex shrink-0 items-center gap-2.5 rounded-xl px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
                 i === active
                   ? "bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20"
-                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/5"
+                  : "bg-white/5 text-white/75 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
               <Calculator size={14} />

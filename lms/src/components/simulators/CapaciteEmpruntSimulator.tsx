@@ -87,15 +87,15 @@ export function CapaciteEmpruntSimulator() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <div className="rounded-3xl border border-white/5 bg-white/5 p-6 shadow-xl text-center group hover:border-brand-gold/30 transition-all">
-            <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-2">Mensualité Max (35%)</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mb-2">Mensualité Max (35%)</p>
             <p className="text-2xl font-black text-white tabular-nums">{formatCurrency(result.mensualiteMax)}</p>
           </div>
           <div className="rounded-3xl border border-white/5 bg-white/5 p-6 shadow-xl text-center group hover:border-brand-gold/30 transition-all">
-            <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-2">Apport Conseillé (10%)</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mb-2">Apport Conseillé (10%)</p>
             <p className="text-2xl font-black text-white tabular-nums">{formatCurrency(result.apportSuggere)}</p>
           </div>
           <div className="rounded-3xl border border-white/5 bg-white/5 p-6 shadow-xl text-center group hover:border-brand-gold/30 transition-all sm:col-span-2 lg:col-span-1">
-            <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-2">Budget Projet Global</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mb-2">Budget Projet Global</p>
             <p className="text-2xl font-black text-brand-gold tabular-nums">{formatCurrency(result.totalProjet)}</p>
           </div>
         </div>

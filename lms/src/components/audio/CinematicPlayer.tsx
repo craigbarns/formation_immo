@@ -1435,7 +1435,7 @@ export function CinematicPlayer({
                         removeBookmark(audioUrl, bm.id);
                         setBookmarks((prev) => prev.filter((b) => b.id !== bm.id));
                       }}
-                      className="text-white/40 hover:text-red-400 text-xs px-1"
+                      className="text-white/75 hover:text-red-400 text-xs px-1"
                     >
                       ✕
                     </button>

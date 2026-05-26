@@ -244,7 +244,7 @@ export function CertificatePreview() {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Votre nom complet"
-        className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 focus:border-brand-gold/50 focus:outline-none"
+        className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/75 focus:border-brand-gold/50 focus:outline-none"
       />
 
       <LinkedInCertificate userName={name || "Apprenant"} />

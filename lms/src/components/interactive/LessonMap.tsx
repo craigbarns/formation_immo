@@ -76,7 +76,7 @@ export function LessonMap({
     <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#070d18] shadow-2xl transition-all duration-500 hover:border-brand-gold/20">
       {/* Feature pills */}
       <div className="flex flex-wrap items-center gap-2 border-b border-white/5 bg-black/40 px-6 py-4">
-        <span className="text-[10px] font-black uppercase tracking-widest text-white/20 mr-2">
+        <span className="text-[10px] font-black uppercase tracking-widest text-white/75 mr-2">
           ACCÈS RAPIDE :
         </span>
         {features.map((f) => (
@@ -109,7 +109,7 @@ export function LessonMap({
                 )}
               </span>
             </div>
-            <ChevronDown className={`w-4 h-4 text-white/20 transition-transform duration-500 ${open ? "rotate-180" : ""}`} />
+            <ChevronDown className={`w-4 h-4 text-white/75 transition-transform duration-500 ${open ? "rotate-180" : ""}`} />
           </button>
 
           <AnimatePresence>
@@ -130,7 +130,7 @@ export function LessonMap({
                             <footer className="relative z-10 mt-4 flex items-center gap-3">
                                 <div className="h-6 w-px bg-brand-gold/30" />
                                 <p className="text-[10px] font-black uppercase tracking-widest text-brand-gold">
-                                    {expertQuote.author} <span className="text-white/40 not-italic ml-1">— {expertQuote.role}</span>
+                                    {expertQuote.author} <span className="text-white/75 not-italic ml-1">— {expertQuote.role}</span>
                                 </p>
                             </footer>
                         </div>
@@ -139,7 +139,7 @@ export function LessonMap({
                     {/* Objectives */}
                     {objectives && objectives.length > 0 && (
                         <div>
-                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-6 flex items-center gap-3 px-1">
+                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/75 mb-6 flex items-center gap-3 px-1">
                             <Target className="w-3.5 h-3.5" /> OBJECTIFS DE MAÎTRISE
                         </p>
                         <ul className="grid gap-3 sm:grid-cols-2">
@@ -158,7 +158,7 @@ export function LessonMap({
                     {/* Sections */}
                     {sections && sections.length > 0 && (
                         <div>
-                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-6 flex items-center gap-3 px-1">
+                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/75 mb-6 flex items-center gap-3 px-1">
                             <Sparkles className="w-3.5 h-3.5" /> PLAN DÉTAILLÉ
                         </p>
                         <ol className="divide-y divide-white/5 border-y border-white/5">
@@ -167,12 +167,12 @@ export function LessonMap({
                                 key={s.id}
                                 className="flex items-center gap-5 py-4 px-2 transition hover:bg-white/[0.01] group"
                             >
-                                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-black/40 text-[9px] font-black text-white/20 border border-white/5 group-hover:text-brand-gold transition-colors">
+                                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-black/40 text-[9px] font-black text-white/75 border border-white/5 group-hover:text-brand-gold transition-colors">
                                 {i + 1}
                                 </span>
                                 <EmojiIcon emoji={s.icon} className="h-5 w-5 transition-transform group-hover:scale-110" />
                                 <span className="flex-1 text-sm font-black uppercase tracking-tight text-white/60 group-hover:text-white transition-colors">{s.title}</span>
-                                <span className="shrink-0 rounded-lg bg-white/5 border border-white/5 px-2.5 py-1 text-[9px] font-black text-white/30 tabular-nums">
+                                <span className="shrink-0 rounded-lg bg-white/5 border border-white/5 px-2.5 py-1 text-[9px] font-black text-white/75 tabular-nums">
                                 {s.duration}
                                 </span>
                             </li>

@@ -146,7 +146,7 @@ export function LessonPresenterPanel({
                   >
                     Lire la suite <span className="text-lg">→</span>
                   </button>
-                  <span className="text-[10px] font-black text-white/20 tracking-widest">{msgIndex + 1} / {messages.length}</span>
+                  <span className="text-[10px] font-black text-white/75 tracking-widest">{msgIndex + 1} / {messages.length}</span>
                 </div>
               )}
             </div>

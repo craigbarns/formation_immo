@@ -60,18 +60,18 @@ export function CreditSimulator() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-5 rounded-2xl bg-white/5 border border-white/5 text-center">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-1">Coût total crédit</p>
+                    <p className="text-[9px] font-black uppercase tracking-widest text-white/75 mb-1">Coût total crédit</p>
                     <p className="text-xl font-black text-brand-gold tabular-nums">{formatCurrency(result.totalInterest)}</p>
                 </div>
                 <div className="p-5 rounded-2xl bg-white/5 border border-white/5 text-center">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-1">Montant total remboursé</p>
+                    <p className="text-[9px] font-black uppercase tracking-widest text-white/75 mb-1">Montant total remboursé</p>
                     <p className="text-xl font-black text-white tabular-nums">{formatCurrency(result.totalCost)}</p>
                 </div>
             </div>
 
             <div className="mt-8 p-4 rounded-xl bg-black/40 border border-white/5 flex gap-3 items-start shadow-inner">
                 <Info className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
-                <p className="text-[10px] text-white/30 leading-relaxed font-medium">
+                <p className="text-[10px] text-white/75 leading-relaxed font-medium">
                     Attention : Ce calcul ne comprend pas l&apos;assurance emprunteur ni les frais de dossier. Utilisez le simulateur avancé pour une analyse complète.
                 </p>
             </div>

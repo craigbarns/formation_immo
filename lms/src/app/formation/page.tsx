@@ -155,7 +155,7 @@ export default async function FormationHomePage() {
           <div>
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-gold/80">Étape ultime</p>
             <h2 className="text-lg font-black text-white">Certification MasterClass — ALUR 2026</h2>
-            <p className="text-xs font-medium text-white/40">30 QCM · 45 min · Seuil 70%</p>
+            <p className="text-xs font-medium text-white/75">30 QCM · 45 min · Seuil 70%</p>
           </div>
         </div>
         <Link
@@ -323,7 +323,7 @@ function StatCard({
         <Icon className="h-6 w-6" aria-hidden />
       </div>
       <div>
-        <dt className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">
+        <dt className="text-[10px] font-black uppercase tracking-[0.2em] text-white/75">
           {label}
         </dt>
         <dd className={`font-black tracking-tight ${isText ? "text-xs uppercase" : "text-xl tabular-nums"} text-white`}>
@@ -360,7 +360,7 @@ function QuickLink({
         <EmojiIcon emoji={icon} className="h-9 w-9" />
       </div>
       <p className="relative z-10 mt-3 text-sm font-black uppercase tracking-wider text-slate-900 dark:text-white group-hover:text-brand-gold transition-colors">{label}</p>
-      <p className="relative z-10 mt-1 text-[10px] font-bold uppercase tracking-tight text-slate-500 dark:text-white/40">{desc}</p>
+      <p className="relative z-10 mt-1 text-[10px] font-bold uppercase tracking-tight text-slate-500 dark:text-white/75">{desc}</p>
       {highlight && (
         <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       )}

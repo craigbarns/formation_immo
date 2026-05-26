@@ -155,7 +155,7 @@ export function ChatRoleplay({ scenario }: { scenario: ChatRoleplayScenario }) {
               >
                 <div className="flex items-center gap-3 px-2">
                     <Send size={14} className="text-brand-gold" />
-                    <p className="text-[10px] font-black uppercase tracking-widest text-white/40">{pendingChoose.prompt}</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-white/75">{pendingChoose.prompt}</p>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {pendingChoose.options.map((opt, i) => (

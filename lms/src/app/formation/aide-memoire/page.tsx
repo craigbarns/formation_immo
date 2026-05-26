@@ -48,7 +48,7 @@ export default function AideMemoirePage() {
     <div className="space-y-12 pb-20">
       <Link
         href="/formation"
-        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40 transition-colors hover:text-brand-gold print:hidden"
+        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/75 transition-colors hover:text-brand-gold print:hidden"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" /> Retour au parcours
       </Link>
@@ -93,7 +93,7 @@ export default function AideMemoirePage() {
           <section key={group.moduleSlug} className="space-y-10 scroll-mt-24">
             <div className="flex items-end justify-between gap-6 border-b border-slate-200 dark:border-white/10 pb-8 print:hidden">
               <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-white/20 mb-3">CURRICULUM</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-white/75 mb-3">CURRICULUM</p>
                 <h2 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tight">{group.moduleTitle}</h2>
               </div>
               <Link
@@ -138,7 +138,7 @@ function CheatSheetCard({ sheet }: { sheet: CheatSheet }) {
           <h3 className="text-xl font-black uppercase tracking-tight text-white leading-none">
             {sheet.title}
           </h3>
-          <p className="mt-3 text-sm font-medium italic text-white/40">&laquo; {sheet.subtitle} &raquo;</p>
+          <p className="mt-3 text-sm font-medium italic text-white/75">&laquo; {sheet.subtitle} &raquo;</p>
         </div>
       </header>
 
@@ -148,7 +148,7 @@ function CheatSheetCard({ sheet }: { sheet: CheatSheet }) {
           <div key={section.title}>
             <div className="flex items-center gap-4 mb-6">
                 <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-                <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/20 text-center">
+                <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/75 text-center">
                 {section.title}
                 </h4>
                 <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -184,7 +184,7 @@ function CheatSheetCard({ sheet }: { sheet: CheatSheet }) {
 
       {/* Disclaimer */}
       {sheet.disclaimer && (
-        <footer className="border-t border-white/5 bg-black/20 p-6 text-[10px] font-black uppercase tracking-widest text-white/20 italic leading-relaxed">
+        <footer className="border-t border-white/5 bg-black/20 p-6 text-[10px] font-black uppercase tracking-widest text-white/75 italic leading-relaxed">
            Nota : {sheet.disclaimer}
         </footer>
       )}

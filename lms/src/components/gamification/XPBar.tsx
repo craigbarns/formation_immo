@@ -79,7 +79,7 @@ export function XPBar() {
                 transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               />
             </div>
-            <div className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-white/30 tabular-nums">
+            <div className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-white/75 tabular-nums">
                 <Zap size={8} className="text-brand-gold" /> {xp} XP
             </div>
           </div>

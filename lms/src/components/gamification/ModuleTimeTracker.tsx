@@ -55,10 +55,10 @@ export function ModuleTimeTracker({ moduleSlug }: { moduleSlug: string }) {
             <div className="h-8 w-8 rounded-lg bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center text-brand-gold shadow-lg">
                 <Clock size={16} />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-widest text-white/40">Engagement</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-white/75">Engagement</p>
         </div>
         <span className="text-sm font-black text-white tabular-nums">
-          {formatTime(seconds)} <span className="text-white/20 ml-1">/ {targetHours}h</span>
+          {formatTime(seconds)} <span className="text-white/75 ml-1">/ {targetHours}h</span>
         </span>
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10 shadow-inner">
@@ -115,7 +115,7 @@ export function GlobalTimeTracker() {
         </div>
         <div className="text-right">
             <p className="text-3xl font-black text-white tabular-nums tracking-tighter">
-                {formatTime(totalSeconds)} <span className="text-sm text-white/20">/ 42h</span>
+                {formatTime(totalSeconds)} <span className="text-sm text-white/75">/ 42h</span>
             </p>
         </div>
       </div>
@@ -171,7 +171,7 @@ function ModuleTimeMini({ moduleSlug }: { moduleSlug: string }) {
 
   return (
     <div className="text-center group">
-      <div className="text-[9px] font-black text-white/20 uppercase tracking-widest group-hover:text-brand-gold/60 transition-colors mb-1">{labels[moduleSlug]}</div>
+      <div className="text-[9px] font-black text-white/75 uppercase tracking-widest group-hover:text-brand-gold/60 transition-colors mb-1">{labels[moduleSlug]}</div>
       <div className="text-xs font-black text-white/60 tabular-nums uppercase">{formatTime(seconds)}</div>
     </div>
   );

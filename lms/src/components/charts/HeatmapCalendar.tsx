@@ -62,12 +62,12 @@ export function HeatmapCalendar({ data }: HeatmapCalendarProps) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">Impact apprentissage</p>
+          <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mb-1">Impact apprentissage</p>
           <p className="text-lg font-black text-white">
-            {totalActive} <span className="text-white/20 text-xs font-bold uppercase ml-1">Jours actifs</span>
+            {totalActive} <span className="text-white/75 text-xs font-bold uppercase ml-1">Jours actifs</span>
           </p>
         </div>
-        <div className="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-white/20">
+        <div className="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-white/75">
           <span>Moins</span>
           <div className="flex gap-1">
             {[0, 1, 2, 3, 4].map(v => (

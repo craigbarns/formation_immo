@@ -66,19 +66,19 @@ export function CertificateView({ studentName, completedAt, score }: Certificate
         {/* Details */}
         <div className="mx-auto grid max-w-sm grid-cols-2 gap-3 text-left">
           <div className="rounded-lg bg-white/5 px-3 py-2">
-            <p className="text-3xs uppercase text-white/40">Date</p>
+            <p className="text-3xs uppercase text-white/75">Date</p>
             <p className="text-xs font-semibold text-white">{completedAt}</p>
           </div>
           <div className="rounded-lg bg-white/5 px-3 py-2">
-            <p className="text-3xs uppercase text-white/40">Score</p>
+            <p className="text-3xs uppercase text-white/75">Score</p>
             <p className="text-xs font-semibold text-white">{score}%</p>
           </div>
           <div className="rounded-lg bg-white/5 px-3 py-2">
-            <p className="text-3xs uppercase text-white/40">Mention</p>
+            <p className="text-3xs uppercase text-white/75">Mention</p>
             <p className={`text-xs font-semibold ${passed ? "text-brand-gold" : "text-red-400"}`}>{mention}</p>
           </div>
           <div className="rounded-lg bg-white/5 px-3 py-2">
-            <p className="text-3xs uppercase text-white/40">N° attestation</p>
+            <p className="text-3xs uppercase text-white/75">N° attestation</p>
             <p className="text-xs font-semibold text-white/80 font-mono">{certNumber}</p>
           </div>
         </div>
@@ -86,11 +86,11 @@ export function CertificateView({ studentName, completedAt, score }: Certificate
         {/* QR placeholder */}
         <div className="mt-6 flex items-center justify-center gap-3">
           <div className="h-16 w-16 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center">
-            <svg className="h-8 w-8 text-white/30" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="h-8 w-8 text-white/75" fill="currentColor" viewBox="0 0 24 24">
               <path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 15h6v6H3v-6zm2 2v2h2v-2H5zm13-2h3v3h-3v-3zm-2 2h3v3h-3v-3zm2 2h3v3h-3v-3zM13 3h2v2h-2V3zm-2 2h2v2h-2V5zm2 2h2v2h-2V7zm-2 2h2v2h-2V9zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm2 2h2v2h-2v-2z"/>
             </svg>
           </div>
-          <p className="text-3xs text-white/40 max-w-[120px]">
+          <p className="text-3xs text-white/75 max-w-[120px]">
             Scannez pour vérifier l&apos;authenticité
           </p>
         </div>
@@ -98,7 +98,7 @@ export function CertificateView({ studentName, completedAt, score }: Certificate
         {/* Footer */}
         <div className="mt-6 flex items-center justify-center gap-2">
           <div className="h-px w-8 bg-gradient-to-r from-transparent to-brand-gold/30" />
-          <p className="text-3xs text-white/30">Formation Immo Local — Conformité 2026</p>
+          <p className="text-3xs text-white/75">Formation Immo Local — Conformité 2026</p>
           <div className="h-px w-8 bg-gradient-to-l from-transparent to-brand-gold/30" />
         </div>
       </div>

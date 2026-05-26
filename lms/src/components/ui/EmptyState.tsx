@@ -28,7 +28,7 @@ export function EmptyState({
       >
         <div className="absolute inset-0 rounded-full blur-2xl bg-brand-gold/10 animate-pulse" />
         <Icon
-          className="relative h-8 w-8 text-slate-300 dark:text-white/20 group-hover:text-brand-gold transition-colors"
+          className="relative h-8 w-8 text-slate-300 dark:text-white/75 group-hover:text-brand-gold transition-colors"
         />
       </div>
       <h3

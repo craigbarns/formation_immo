@@ -278,7 +278,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
             </svg>
             <div className="text-center">
               <p className="text-4xl font-black text-white tabular-nums tracking-tighter">{accuracy.toFixed(0)}<span className="text-sm opacity-40 ml-0.5">%</span></p>
-              <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mt-1">Précision</p>
+              <p className="text-[10px] font-black text-white/75 uppercase tracking-widest mt-1">Précision</p>
             </div>
           </div>
 
@@ -286,20 +286,20 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
           <div className="grid grid-cols-3 gap-4 mb-10">
             <div className="rounded-2xl bg-red-500/5 border border-red-500/20 p-5 text-center transition-all hover:bg-red-500/10">
               <p className="text-2xl font-black text-red-400 tabular-nums">{sessionStats.again}</p>
-              <p className="text-[9px] font-black text-white/30 uppercase tracking-widest mt-1">À REVOIR</p>
+              <p className="text-[9px] font-black text-white/75 uppercase tracking-widest mt-1">À REVOIR</p>
             </div>
             <div className="rounded-2xl bg-blue-500/5 border border-blue-500/20 p-5 text-center transition-all hover:bg-blue-500/10">
               <p className="text-2xl font-black text-blue-400 tabular-nums">{sessionStats.good}</p>
-              <p className="text-[9px] font-black text-white/30 uppercase tracking-widest mt-1">BIEN</p>
+              <p className="text-[9px] font-black text-white/75 uppercase tracking-widest mt-1">BIEN</p>
             </div>
             <div className="rounded-2xl bg-emerald-500/5 border border-emerald-500/20 p-5 text-center transition-all hover:bg-emerald-500/10">
               <p className="text-2xl font-black text-emerald-400 tabular-nums">{sessionStats.easy}</p>
-              <p className="text-[9px] font-black text-white/30 uppercase tracking-widest mt-1">FACILE</p>
+              <p className="text-[9px] font-black text-white/75 uppercase tracking-widest mt-1">FACILE</p>
             </div>
           </div>
 
           <div className="text-center bg-[#030712] rounded-[1.5rem] p-5 border border-white/5 shadow-inner mb-10">
-              <p className="text-[10px] font-black text-white/30 uppercase tracking-widest leading-relaxed">
+              <p className="text-[10px] font-black text-white/75 uppercase tracking-widest leading-relaxed">
                   Prochaine révision planifiée dans 24h pour consolider les acquis.
               </p>
           </div>
@@ -328,9 +328,9 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
               <Brain size={20} />
           </div>
           <div>
-            <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40">ANCRAGE EN COURS</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/75">ANCRAGE EN COURS</p>
             <p className="text-sm font-black text-slate-900 dark:text-white tabular-nums">
-                {currentIndex + 1} <span className="text-slate-400 dark:text-white/20">/ {dueCards.length} CARTES</span>
+                {currentIndex + 1} <span className="text-slate-400 dark:text-white/75">/ {dueCards.length} CARTES</span>
             </p>
           </div>
         </div>
@@ -338,7 +338,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
           <p className="text-sm font-black text-brand-gold tabular-nums tracking-widest uppercase">
             {sessionStats.easy + sessionStats.good} RÉUSSIES
           </p>
-          <div className="mt-1 flex items-center justify-end gap-1.5 text-[9px] font-black text-slate-400 dark:text-white/20">
+          <div className="mt-1 flex items-center justify-end gap-1.5 text-[9px] font-black text-slate-400 dark:text-white/75">
               <div className="h-1 w-1 rounded-full bg-brand-gold animate-pulse" />
               <span>{Math.round(progress)}% TERMINÉ</span>
           </div>
@@ -381,7 +381,7 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
                 <Sparkles size={64} className="text-white" />
             </div>
             
-            <p className={`text-[10px] font-black uppercase tracking-[0.4em] mb-10 ${showBack ? "text-brand-gold" : "text-white/20"}`}>
+            <p className={`text-[10px] font-black uppercase tracking-[0.4em] mb-10 ${showBack ? "text-brand-gold" : "text-white/75"}`}>
               {showBack ? "LA RÉPONSE EXPERTE" : "LA QUESTION STRATÉGIQUE"}
             </p>
             
@@ -395,10 +395,10 @@ export function FlashcardSM2({ flashcards, moduleSlug }: FlashcardSM2Props) {
                 transition={{ duration: 2, repeat: Infinity }}
                 className="mt-12 flex flex-col items-center gap-3"
               >
-                <div className="h-10 w-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40">
+                <div className="h-10 w-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/75">
                     <ChevronDown size={20} />
                 </div>
-                <p className="text-[10px] font-black text-white/20 uppercase tracking-widest">Cliquez pour révéler l&apos;analyse</p>
+                <p className="text-[10px] font-black text-white/75 uppercase tracking-widest">Cliquez pour révéler l&apos;analyse</p>
               </motion.div>
             )}
           </motion.div>

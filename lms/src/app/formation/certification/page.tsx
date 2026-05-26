@@ -104,7 +104,7 @@ export default function CertificationPage() {
             </div>
         </div>
         <div className="text-center md:text-right">
-            <p className="text-sm text-white/40 mb-2 italic">Format Premium MasterClass</p>
+            <p className="text-sm text-white/75 mb-2 italic">Format Premium MasterClass</p>
             <div className="flex gap-2">
                 <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
                 <span className="w-2 h-2 rounded-full bg-brand-gold/60"></span>

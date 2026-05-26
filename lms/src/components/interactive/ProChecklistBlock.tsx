@@ -226,7 +226,7 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
               className={`flex shrink-0 items-center gap-2.5 rounded-xl px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
                 i === tab
                   ? "bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20"
-                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/5"
+                  : "bg-white/5 text-white/75 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
               <EmojiIcon emoji={c.icon} className="h-4 w-4" />
@@ -239,9 +239,9 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
       <div className="p-8 sm:p-10 lg:p-12">
         <div className="mb-10 flex items-center justify-between gap-6 px-2">
           <div>
-            <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">CONFORMITÉ DU DOSSIER</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mb-1">CONFORMITÉ DU DOSSIER</p>
             <p className="text-xl font-black text-white tabular-nums">
-              {done} <span className="text-sm text-white/20">/ {total}</span>
+              {done} <span className="text-sm text-white/75">/ {total}</span>
             </p>
           </div>
           <div className="h-2 flex-1 max-w-md overflow-hidden rounded-full bg-white/5 ring-1 ring-white/5 shadow-inner">
@@ -265,7 +265,7 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
               <div key={category} className="space-y-6">
                 <div className="flex items-center gap-4">
                     <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-                    <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 text-center">
+                    <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/75 text-center">
                     {category}
                     </h3>
                     <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -294,7 +294,7 @@ export function ProChecklistBlock({ checklists }: { checklists: ProChecklist[] }
                             }`}>{it.text}</span>
                             {it.tip && (
                                 <p className={`mt-2 text-sm italic font-medium transition-all ${
-                                    checked.has(it.id) ? "text-white/40" : "text-white/20"
+                                    checked.has(it.id) ? "text-white/75" : "text-white/75"
                                 }`}>&laquo; {it.tip} &raquo;</p>
                             )}
                         </div>

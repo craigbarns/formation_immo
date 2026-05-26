@@ -131,7 +131,7 @@ export function ModuleIntroPlayer({
               </span>
             </div>
           </div>
-          <Volume2 className="h-4 w-4 shrink-0 text-white/40" />
+          <Volume2 className="h-4 w-4 shrink-0 text-white/75" />
         </div>
       </div>
 

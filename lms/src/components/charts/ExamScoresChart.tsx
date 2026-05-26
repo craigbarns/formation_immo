@@ -20,10 +20,10 @@ export function ExamScoresChart({ scores }: ExamScoresChartProps) {
       <div className="text-center py-16">
         <div className="relative mx-auto w-16 h-16 mb-6">
             <div className="absolute inset-0 rounded-full bg-brand-gold/10 blur-2xl animate-pulse" />
-            <Award className="relative w-16 h-16 mx-auto text-slate-200 dark:text-white/10" />
+            <Award className="relative w-16 h-16 mx-auto text-slate-200 dark:text-white/70" />
         </div>
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-white/40">Zéro évaluation</p>
-        <p className="text-sm text-slate-400 dark:text-white/20 mt-2 font-medium italic">Les scores d&apos;examens apparaîtront après vos premiers QCM.</p>
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-white/75">Zéro évaluation</p>
+        <p className="text-sm text-slate-400 dark:text-white/75 mt-2 font-medium italic">Les scores d&apos;examens apparaîtront après vos premiers QCM.</p>
       </div>
     );
   }
@@ -31,9 +31,9 @@ export function ExamScoresChart({ scores }: ExamScoresChartProps) {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/40">Performance académique</p>
+        <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/75">Performance académique</p>
         <div className="flex items-center gap-3 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-4 py-1.5 rounded-xl">
-          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/40">Moyenne :</span>
+          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/75">Moyenne :</span>
           <span className="text-lg font-black text-brand-gold tabular-nums">
             {Math.round(
               scores.reduce((acc, s) => acc + (s.score / s.total) * 100, 0) / scores.length
@@ -45,7 +45,7 @@ export function ExamScoresChart({ scores }: ExamScoresChartProps) {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
         {scores.map((exam, index) => {
           const percentage = (exam.score / exam.total) * 100;
-          let trendIcon = <Minus className="w-4 h-4 text-slate-400 dark:text-white/20" />;
+          let trendIcon = <Minus className="w-4 h-4 text-slate-400 dark:text-white/75" />;
           
           if (index > 0) {
             const prevPercentage = (scores[index - 1].score / scores[index - 1].total) * 100;
@@ -77,7 +77,7 @@ export function ExamScoresChart({ scores }: ExamScoresChartProps) {
                 </div>
                 <div className="text-right">
                     <span className="text-lg font-black text-slate-900 dark:text-white tabular-nums">
-                        {exam.score} <span className="text-xs text-slate-400 dark:text-white/20">/ {exam.total}</span>
+                        {exam.score} <span className="text-xs text-slate-400 dark:text-white/75">/ {exam.total}</span>
                     </span>
                 </div>
               </div>
@@ -92,8 +92,8 @@ export function ExamScoresChart({ scores }: ExamScoresChartProps) {
               </div>
               
               <div className="flex items-center justify-between mt-4">
-                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/30">{Math.round(percentage)}% réussite</span>
-                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/20">{new Date(exam.date).toLocaleDateString("fr-FR")}</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/75">{Math.round(percentage)}% réussite</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/75">{new Date(exam.date).toLocaleDateString("fr-FR")}</span>
               </div>
             </motion.div>
           );

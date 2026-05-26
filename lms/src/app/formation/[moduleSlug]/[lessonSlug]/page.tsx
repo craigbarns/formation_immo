@@ -426,7 +426,7 @@ export default async function LessonPage({ params }: Props) {
       >
         {nav?.prev ? (
           <Link href={nav.prev.href} className="group flex flex-col items-start gap-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40 group-hover:text-brand-gold transition-colors">Précédent</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/75 group-hover:text-brand-gold transition-colors">Précédent</span>
             <div className="flex items-center gap-3 text-lg font-bold text-slate-900 dark:text-white group-hover:text-brand-gold transition-all">
               <span className="transition-transform group-hover:-translate-x-1">←</span>
               {nav.prev.label.replace(/^←\s*/, "")}
@@ -437,7 +437,7 @@ export default async function LessonPage({ params }: Props) {
         )}
         {nav?.next ? (
           <Link href={nav.next.href} className="group flex flex-col items-end gap-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40 group-hover:text-brand-gold transition-colors">Suivant</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/75 group-hover:text-brand-gold transition-colors">Suivant</span>
             <div className="flex items-center gap-3 text-lg font-bold text-slate-900 dark:text-white group-hover:text-brand-gold transition-all">
               {nav.next.label.replace(/\s*→$/, "")}
               <span className="transition-transform group-hover:translate-x-1">→</span>
@@ -445,7 +445,7 @@ export default async function LessonPage({ params }: Props) {
           </Link>
         ) : (
           <Link href="/formation" className="group flex flex-col items-end gap-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/40 group-hover:text-brand-gold transition-colors">Finalisé</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-white/75 group-hover:text-brand-gold transition-colors">Finalisé</span>
             <div className="flex items-center gap-3 text-lg font-bold text-slate-900 dark:text-white group-hover:text-brand-gold transition-all">
               Retour au parcours
               <span className="transition-transform group-hover:translate-x-1">→</span>

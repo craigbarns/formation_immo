@@ -51,11 +51,11 @@ export function VideoEmbed({ url, title }: Props) {
             <div className="relative">
                 <div className="absolute inset-0 rounded-full blur-2xl bg-brand-gold/10 animate-pulse" />
                 <div className="relative h-16 w-16 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 group-hover:border-brand-gold/40 transition-colors">
-                    <Film className="w-8 h-8 text-white/20 group-hover:text-brand-gold transition-colors" />
+                    <Film className="w-8 h-8 text-white/75 group-hover:text-brand-gold transition-colors" />
                 </div>
             </div>
             <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Visualisation</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/75">Visualisation</p>
                 <h3 className="mt-2 text-lg font-black text-white/60 uppercase tracking-widest italic">Contenu vidéo en production</h3>
             </div>
         </div>
@@ -119,7 +119,7 @@ export function VideoEmbed({ url, title }: Props) {
                     </button>
                   ))}
                 </div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/20">Validation requise pour débloquer la suite</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/75">Validation requise pour débloquer la suite</p>
               </motion.div>
             </motion.div>
           )}

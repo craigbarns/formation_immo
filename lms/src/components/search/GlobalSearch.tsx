@@ -104,7 +104,7 @@ export function GlobalSearch({ isOpen: controlledOpen, onClose }: Props) {
       >
         <Search className="h-3.5 w-3.5" />
         <span className="hidden sm:inline">Rechercher…</span>
-        <kbd className="ml-1 hidden rounded border border-slate-300 dark:border-white/20 px-1 text-2xs font-mono text-slate-500 dark:text-white/40 lg:inline">
+        <kbd className="ml-1 hidden rounded border border-slate-300 dark:border-white/20 px-1 text-2xs font-mono text-slate-500 dark:text-white/75 lg:inline">
           ⌘K
         </kbd>
       </button>
@@ -116,17 +116,17 @@ export function GlobalSearch({ isOpen: controlledOpen, onClose }: Props) {
       <div className="fixed inset-0 z-[100] flex items-start justify-center bg-black/60 p-4 pt-[15vh] backdrop-blur-sm">
         <div className="w-full max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-[var(--surface-dark)] shadow-2xl">
           <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
-            <Search className="h-4 w-4 text-white/40" />
+            <Search className="h-4 w-4 text-white/75" />
             <input
               ref={inputRef}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Chercher une leçon, un concept…"
-              className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/30"
+              className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/75"
             />
             <button
               onClick={() => setOpen(false)}
-              className="rounded p-1 text-white/40 hover:bg-white/10"
+              className="rounded p-1 text-white/75 hover:bg-white/10"
             >
               <X className="h-4 w-4" />
             </button>
@@ -134,7 +134,7 @@ export function GlobalSearch({ isOpen: controlledOpen, onClose }: Props) {
 
           <div className="max-h-[60vh] overflow-y-auto p-2">
             {results.length === 0 && query.length >= 2 && (
-              <p className="px-4 py-6 text-center text-sm text-white/40">Aucun résultat</p>
+              <p className="px-4 py-6 text-center text-sm text-white/75">Aucun résultat</p>
             )}
             {results.map((item, i) => (
               <Link
@@ -150,17 +150,17 @@ export function GlobalSearch({ isOpen: controlledOpen, onClose }: Props) {
                 {item.type === "module" ? (
                   <BookOpen className="h-4 w-4 shrink-0 text-brand-gold" />
                 ) : (
-                  <FileText className="h-4 w-4 shrink-0 text-white/40" />
+                  <FileText className="h-4 w-4 shrink-0 text-white/75" />
                 )}
                 <div className="min-w-0">
                   <p className="truncate font-medium text-white">{item.title}</p>
-                  <p className="truncate text-2xs text-white/40">{item.moduleTitle}</p>
+                  <p className="truncate text-2xs text-white/75">{item.moduleTitle}</p>
                 </div>
               </Link>
             ))}
           </div>
 
-          <div className="border-t border-white/10 px-4 py-2 text-2xs text-white/30">
+          <div className="border-t border-white/10 px-4 py-2 text-2xs text-white/75">
             {results.length} résultat{results.length > 1 ? "s" : ""}
           </div>
         </div>

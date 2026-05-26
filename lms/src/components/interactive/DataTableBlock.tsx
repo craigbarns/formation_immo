@@ -83,23 +83,23 @@ function TableView({ table }: { table: DataTable }) {
       {/* Controls */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-white/40">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-white/75">
                 <Table size={18} />
             </div>
             <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/40">ANALYSE</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/75">ANALYSE</p>
                 <p className="text-sm font-bold text-white/70 uppercase tracking-tight">{rows.length} enregistrements</p>
             </div>
         </div>
         <div className="flex gap-3">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/20" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/75" />
             <input
                 type="text"
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
                 placeholder="Filtrer..."
-                className="w-full sm:w-48 rounded-xl border border-white/10 bg-white/5 pl-9 pr-4 py-2 text-sm text-white outline-none placeholder:text-white/20 focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10 transition-all"
+                className="w-full sm:w-48 rounded-xl border border-white/10 bg-white/5 pl-9 pr-4 py-2 text-sm text-white outline-none placeholder:text-white/75 focus:border-brand-gold/50 focus:ring-4 focus:ring-brand-gold/10 transition-all"
             />
           </div>
           <button
@@ -128,7 +128,7 @@ function TableView({ table }: { table: DataTable }) {
                   <div className="flex items-center gap-2">
                     {h}
                     {table.sortable && (
-                      <span className="text-white/20">
+                      <span className="text-white/75">
                         {sortCol === i ? (sortAsc ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />) : <ArrowUpDown className="h-3 w-3" />}
                       </span>
                     )}
@@ -151,8 +151,8 @@ function TableView({ table }: { table: DataTable }) {
             {rows.length === 0 && (
               <tr>
                 <td colSpan={table.headers.length} className="px-6 py-20 text-center">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-2 italic">Aucun résultat trouvé</p>
-                  <p className="text-white/40 text-sm italic">&laquo; {filter} &raquo;</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-white/75 mb-2 italic">Aucun résultat trouvé</p>
+                  <p className="text-white/75 text-sm italic">&laquo; {filter} &raquo;</p>
                 </td>
               </tr>
             )}
@@ -161,7 +161,7 @@ function TableView({ table }: { table: DataTable }) {
       </div>
 
       {table.notes && (
-        <div className="mt-6 flex items-start gap-3 px-2 text-xs leading-relaxed text-white/30 italic font-medium">
+        <div className="mt-6 flex items-start gap-3 px-2 text-xs leading-relaxed text-white/75 italic font-medium">
           <span className="h-1.5 w-1.5 rounded-full bg-white/10 shrink-0 mt-1.5" />
           <p>{table.notes}</p>
         </div>
@@ -204,7 +204,7 @@ export function DataTableBlock({ tables }: { tables: DataTable[] }) {
               className={`flex shrink-0 items-center gap-2.5 rounded-xl px-5 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
                 i === active
                   ? "bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20"
-                  : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/5"
+                  : "bg-white/5 text-white/75 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
               <EmojiIcon emoji={t.icon} className="h-4 w-4" />

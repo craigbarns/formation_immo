@@ -195,7 +195,7 @@ export function LessonNotes({ lessonKey }: Props) {
       >
         <div className="flex items-center gap-3">
           <div className={`flex h-8 w-8 items-center justify-center rounded-lg border transition-colors ${
-              open ? "bg-brand-gold border-brand-gold text-brand-navy" : "bg-white/5 border-white/10 text-white/40"
+              open ? "bg-brand-gold border-brand-gold text-brand-navy" : "bg-white/5 border-white/10 text-white/75"
           }`}>
             <PenLine className="h-4 w-4" />
           </div>
@@ -204,7 +204,7 @@ export function LessonNotes({ lessonKey }: Props) {
              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="h-1.5 w-1.5 rounded-full bg-brand-gold shadow-[0_0_10px_rgba(212,175,55,0.8)]" />
           )}
         </div>
-        <ChevronDown className={`w-4 h-4 text-white/20 transition-transform duration-500 ${open ? "rotate-180" : ""}`} />
+        <ChevronDown className={`w-4 h-4 text-white/75 transition-transform duration-500 ${open ? "rotate-180" : ""}`} />
       </button>
 
       {/* Collapsible content */}
@@ -222,7 +222,7 @@ export function LessonNotes({ lessonKey }: Props) {
                         value={notes}
                         onChange={handleChange}
                         placeholder="Consignez ici vos réflexions stratégiques, points d'attention ou questions pour votre coach... Sauvegarde automatique active."
-                        className="w-full resize-y rounded-2xl border border-white/10 bg-black/40 px-6 py-5 text-base leading-relaxed text-white font-medium placeholder:text-white/10 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all shadow-inner"
+                        className="w-full resize-y rounded-2xl border border-white/10 bg-black/40 px-6 py-5 text-base leading-relaxed text-white font-medium placeholder:text-white/70 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all shadow-inner"
                         style={{ minHeight: "200px" }}
                     />
 
@@ -238,7 +238,7 @@ export function LessonNotes({ lessonKey }: Props) {
                                         exit={{ opacity: 0 }}
                                         type="button"
                                         onClick={handleClear}
-                                        className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/20 hover:text-red-400 transition-colors"
+                                        className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/75 hover:text-red-400 transition-colors"
                                     >
                                         <Trash2 size={12} /> EFFACER
                                     </motion.button>
@@ -260,7 +260,7 @@ export function LessonNotes({ lessonKey }: Props) {
                                         <button
                                             type="button"
                                             onClick={() => setConfirmClear(false)}
-                                            className="flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white"
+                                            className="flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-white/75 hover:text-white"
                                         >
                                             <X size={10} /> ANNULER
                                         </button>
@@ -282,7 +282,7 @@ export function LessonNotes({ lessonKey }: Props) {
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                            <span className="text-[10px] font-black uppercase tracking-widest text-white/20 tabular-nums">
+                            <span className="text-[10px] font-black uppercase tracking-widest text-white/75 tabular-nums">
                                 {notes.length} CARACTÈRES
                             </span>
                         </div>

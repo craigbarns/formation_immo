@@ -116,7 +116,7 @@ export function ContinueFormationCta() {
             <Sparkles size={10} className="animate-pulse" /> REPRENDRE LE PARCOURS
           </p>
           <h3 className="text-xl font-black text-white uppercase tracking-tight leading-tight">{next.lessonTitle}</h3>
-          <p className="mt-2 text-sm font-bold text-white/40 uppercase tracking-widest">
+          <p className="mt-2 text-sm font-bold text-white/75 uppercase tracking-widest">
             Étape {next.stepNumber} sur {next.totalSteps} · <span className="text-brand-gold/60">{next.moduleTitle.replace(/^Module (\d+) — /, "M$1 ")}</span>
           </p>
         </div>

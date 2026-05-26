@@ -127,7 +127,7 @@ export default function SupportsVisuelsPage() {
 
       <Link
         href="/formation"
-        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40 transition-colors hover:text-brand-gold"
+        className="group inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/75 transition-colors hover:text-brand-gold"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" aria-hidden /> Retour au parcours
       </Link>
@@ -176,7 +176,7 @@ export default function SupportsVisuelsPage() {
               <Filter className="h-6 w-6 text-brand-gold" />
             </div>
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/40">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/75">
                 Organisation
               </p>
               <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">
@@ -209,10 +209,10 @@ export default function SupportsVisuelsPage() {
                     : `bg-white dark:bg-white/5 text-slate-600 dark:text-white/60 border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/30 hover:bg-slate-50 dark:hover:bg-white/10`
                 }`}
               >
-                <Icon className={`h-4 w-4 ${isActive ? palette.text : "text-slate-400 dark:text-white/30"}`} />
+                <Icon className={`h-4 w-4 ${isActive ? palette.text : "text-slate-400 dark:text-white/75"}`} />
                 {THEME_LABEL[group.theme]}
                 <span className={`ml-2 rounded-full px-2 py-0.5 text-[10px] font-black ${
-                  isActive ? "bg-white/20 text-white" : "bg-slate-100 dark:bg-black/20 text-slate-500 dark:text-white/40"
+                  isActive ? "bg-white/20 text-white" : "bg-slate-100 dark:bg-black/20 text-slate-500 dark:text-white/75"
                 }`}>
                   {group.sheets.length}
                 </span>
@@ -259,7 +259,7 @@ export default function SupportsVisuelsPage() {
                             <Icon className="h-3 w-3" />
                             {THEME_LABEL[meta.theme]}
                         </span>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/20">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-white/75">
                             Ressource {globalIndex + 1} / {SUPPORTS_VISUELS.length}
                         </span>
                       </div>
@@ -344,7 +344,7 @@ export default function SupportsVisuelsPage() {
         </Link>
       </section>
 
-      <div className="rounded-[2rem] border border-dashed border-slate-300 dark:border-white/20 bg-white dark:bg-white/5 p-8 text-center text-sm leading-relaxed text-slate-500 dark:text-white/40 italic">
+      <div className="rounded-[2rem] border border-dashed border-slate-300 dark:border-white/20 bg-white dark:bg-white/5 p-8 text-center text-sm leading-relaxed text-slate-500 dark:text-white/75 italic">
         Nota : Ces supports constituent une base pédagogique d&apos;excellence mais ne se substituent pas à une consultation juridique ou notariale personnalisée.
       </div>
     </div>
@@ -357,7 +357,7 @@ function StatCell({ value, label }: { value: string | number; label: string }) {
       <p className="text-3xl font-black leading-none tracking-tighter text-white">
         {value}
       </p>
-      <p className="mt-2 text-[10px] font-black uppercase tracking-widest text-white/30">
+      <p className="mt-2 text-[10px] font-black uppercase tracking-widest text-white/75">
         {label}
       </p>
     </div>

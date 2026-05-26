@@ -63,7 +63,7 @@ export function ModuleRowProgress({ moduleSlug }: { moduleSlug: string }) {
   return (
     <div className="mt-4 max-w-xs">
       <div className="flex items-center justify-between gap-3 mb-2">
-        <span className="text-[10px] font-black uppercase tracking-widest text-white/30">MAÎTRISE MODULE</span>
+        <span className="text-[10px] font-black uppercase tracking-widest text-white/75">MAÎTRISE MODULE</span>
         <span className="text-[10px] font-black text-brand-gold tabular-nums uppercase tracking-widest">{label}</span>
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10 shadow-inner">
