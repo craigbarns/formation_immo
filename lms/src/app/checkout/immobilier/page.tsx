@@ -6,6 +6,8 @@ import {
   CheckCircle2,
   GraduationCap,
   Lock,
+  Mail,
+  Phone,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
@@ -151,6 +153,34 @@ export default async function ImmobilierCheckoutPage() {
             )}
           </div>
         </aside>
+      </section>
+
+      <section className="mt-16 rounded-3xl bg-brand-navy px-6 py-16 text-center sm:px-12 md:py-20">
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-gold">
+          Besoin d&apos;un renseignement ?
+        </p>
+        <h2 className="mx-auto mt-4 max-w-4xl text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
+          Parlez à PASS Formation avant de démarrer
+        </h2>
+        <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base">
+          Pour une question sur le financement, l&apos;accessibilité, l&apos;achat en ligne ou l&apos;organisation de la formation, contactez l&apos;équipe.
+        </p>
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a
+            href="tel:0954467773"
+            className="inline-flex items-center gap-3 rounded-2xl bg-brand-gold px-6 py-4 text-base font-black text-brand-navy shadow-lg transition-transform hover:scale-[1.02]"
+          >
+            <Phone className="h-5 w-5" />
+            09 54 46 77 73
+          </a>
+          <a
+            href="mailto:contact@passformation.com"
+            className="inline-flex items-center gap-3 rounded-2xl border border-white/20 px-6 py-4 text-base font-black text-white transition-colors hover:border-brand-gold hover:text-brand-gold"
+          >
+            <Mail className="h-5 w-5" />
+            contact@passformation.com
+          </a>
+        </div>
       </section>
     </main>
   );
