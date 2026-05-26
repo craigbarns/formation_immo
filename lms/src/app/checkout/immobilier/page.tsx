@@ -101,7 +101,7 @@ export default async function ImmobilierCheckoutPage() {
               {[
                 { step: "01", title: "Paiement", desc: "Réglez par CB via l'interface Stripe sécurisée." },
                 { step: "02", title: "Compte", desc: "Créez votre accès après le paiement validé." },
-                { step: "03", title: "Formation", desc: "Accédez directement à vos 5 modules." },
+                { step: "03", title: "Formation", desc: "Accédez directement à vos 6 modules." },
               ].map((item) => (
                 <div key={item.step}>
                   <p className="text-2xl font-black text-brand-gold/40">{item.step}</p>
@@ -149,13 +149,6 @@ export default async function ImmobilierCheckoutPage() {
                 </Link>
               </div>
             )}
-          </div>
-
-          <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-6 text-center">
-            <p className="text-xs font-bold text-zinc-500">Besoin d&apos;un devis CPF ou OPCO ?</p>
-            <a href="tel:0954467773" className="mt-2 block text-sm font-black text-brand-navy hover:text-brand-gold transition-colors">
-              09 54 46 77 73
-            </a>
           </div>
         </aside>
       </section>
