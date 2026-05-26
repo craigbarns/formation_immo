@@ -39,7 +39,16 @@ export async function POST(request: Request) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     const customerEmail = session.customer_details?.email;
-    const formationId = session.metadata?.formationId || "immobilier";
+    const formationId = session.metadata?.formationId;
+
+    // Cette app ne gère que la formation immobilier.
+    // Les autres produits (Digiformat, etc.) sont traités par leur propre système.
+    if (formationId !== "immobilier") {
+      console.log(
+        `Stripe webhook ignored — formationId="${formationId ?? "(none)"}" is not immobilier (session: ${session.id})`
+      );
+      return NextResponse.json({ received: true, ignored: true });
+    }
 
     console.log(`Payment successful for ${customerEmail} (Formation: ${formationId})`);
 
