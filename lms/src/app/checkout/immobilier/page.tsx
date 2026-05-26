@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   CheckCircle2,
-  GraduationCap,
   Lock,
   Mail,
   Phone,
@@ -22,6 +21,7 @@ export const metadata: Metadata = {
 };
 
 const coverImage = "/generated/fal/transaction/cover-immobilier.jpg";
+const PASS_FORMATION_LOGO = "/images/pass-formation-logo.svg";
 
 import { StripeButton } from "@/components/StripeButton";
 
@@ -33,13 +33,15 @@ export default async function ImmobilierCheckoutPage() {
     <main className="min-h-screen bg-zinc-50 text-zinc-950">
       <header className="border-b border-zinc-200 bg-white sticky top-0 z-50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-3" aria-label="MonPassFormation">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-navy text-white">
-              <GraduationCap className="h-5 w-5" aria-hidden />
-            </span>
-            <span className="text-lg font-black text-brand-navy">
-              MonPass<span className="text-brand-gold">Formation</span>
-            </span>
+          <Link href="/" className="flex items-center" aria-label="PASS Formation">
+            <Image
+              src={PASS_FORMATION_LOGO}
+              alt="PASS Formation"
+              width={140}
+              height={61}
+              priority
+              className="h-12 w-auto"
+            />
           </Link>
           <div className="flex items-center gap-4">
             <Link
