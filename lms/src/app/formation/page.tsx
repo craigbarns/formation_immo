@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award, Trophy, type LucideIcon } from "lucide-react";
 import { COURSE, getTotalCourseDurationMin, formatDuration } from "@/data/course";
+import { getAccessSummary } from "@/lib/access";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getModuleShowcase } from "@/data/module-showcase";
 import { ProgressOverview } from "@/components/ProgressOverview";
@@ -46,7 +47,11 @@ export default async function FormationHomePage() {
   if (!hasPlacementResult) {
     redirect("/formation/test");
   }
-  
+
+  // Droits par module : pack/admin = tout ; sinon modules achetés à l'unité.
+  const access = await getAccessSummary();
+  const canAccess = (slug: string) => access.hasPack || access.modules.includes(slug);
+
   const totalLessons = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
   const totalModules = COURSE.length;
   const totalDuration = formatDuration(getTotalCourseDurationMin());
@@ -222,6 +227,7 @@ export default async function FormationHomePage() {
             const avatar = getAvatarForModule(mod.slug);
             const showcase = getModuleShowcase(mod.slug);
             const accent = avatar?.accentColor ?? "#d4af37";
+            const locked = !canAccess(mod.slug);
             return (
               <StaggerItem
                 key={mod.slug}
@@ -247,6 +253,11 @@ export default async function FormationHomePage() {
                           <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-2xs font-bold text-white/60">
                             {formatDuration(mod.lessons.reduce((a, l) => a + l.duration, 0))}
                           </span>
+                          {locked && (
+                            <span className="rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-2xs font-bold uppercase tracking-wider text-amber-300">
+                              🔒 Verrouillé
+                            </span>
+                          )}
                         </div>
                         {avatar && (
                           <div className="flex items-center gap-3">
@@ -268,20 +279,24 @@ export default async function FormationHomePage() {
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-3">
-                      <Link
-                        href={`/formation/flashcards/${mod.slug}`}
-                        className="rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-xs font-black uppercase tracking-wider text-white/80 transition hover:bg-white/15 hover:text-white"
-                      >
-                        Flashcards
-                      </Link>
-                      <Link
-                        href={`/formation/examen/${mod.slug}`}
-                        className="rounded-xl border border-brand-gold/30 bg-brand-gold/10 px-5 py-2.5 text-xs font-black uppercase tracking-wider text-brand-gold transition hover:bg-brand-gold/20"
-                      >
-                        Examen
-                      </Link>
+                      {!locked && (
+                        <>
+                          <Link
+                            href={`/formation/flashcards/${mod.slug}`}
+                            className="rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-xs font-black uppercase tracking-wider text-white/80 transition hover:bg-white/15 hover:text-white"
+                          >
+                            Flashcards
+                          </Link>
+                          <Link
+                            href={`/formation/examen/${mod.slug}`}
+                            className="rounded-xl border border-brand-gold/30 bg-brand-gold/10 px-5 py-2.5 text-xs font-black uppercase tracking-wider text-brand-gold transition hover:bg-brand-gold/20"
+                          >
+                            Examen
+                          </Link>
+                        </>
+                      )}
                       <Link href={`/formation/${mod.slug}`} className="rounded-xl bg-white px-6 py-2.5 text-xs font-black uppercase tracking-wider text-brand-navy shadow-xl transition hover:bg-brand-gold hover:scale-105 active:scale-95">
-                        Ouvrir →
+                        {locked ? "🔒 Débloquer →" : "Ouvrir →"}
                       </Link>
                     </div>
                   </div>
