@@ -4,7 +4,7 @@
 - **Statut :** Validé en brainstorming + **révisé suite à relecture** — prêt pour le plan d'implémentation
 - **Approche retenue :** **A — Extension directe** du système existant (catalogue défini en code), évolutive vers un back-office plus tard.
 
-> **Révision (relecture) — points renforcés :** unicité PostgreSQL via **index partiels** ; **vérification serveur** des droits (jamais se fier au front) ; **connexion obligatoire avant paiement** + rattachement `user_id`+`email` ; **metadata Stripe en JSON** ; **stratégie d'upgrade vers le pack** ; **ordre des phases** (accès avant vitrine) ; **hiérarchie d'offre** pack vs modules. **Correction : les 6 modules (déontologie incluse) sont déjà branchés dans `COURSE`.**
+> **Révision (relecture) — points renforcés :** unicité PostgreSQL via **index partiels** ; **vérification serveur** des droits (jamais se fier au front) ; **connexion obligatoire avant paiement** + rattachement `user_id`+`email` ; **metadata Stripe en JSON** ; **stratégie d'upgrade vers le pack** ; **ordre des phases** (accès avant vitrine) ; **hiérarchie d'offre** pack vs modules. **Correction : les 6 modules (déontologie incluse) sont déjà branchés dans `COURSE`.** **Ajout : attestation de suivi *par module* (§5.8) pour la vente à l'unité.**
 
 ---
 
@@ -47,10 +47,11 @@ La plateforme (`lms/`, **Next.js + Supabase + Stripe**, déployée sur **Vercel*
 - Accès **par module** dans l'espace apprenant (verrouillé / déverrouillé).
 - Clients pack existants : **accès total conservé, automatiquement et rétroactivement**.
 - Catalogue **alimenté par les vraies données de cours** (pas de texte recopié à la main).
+- **Attestation de suivi par module** (preuve d'heures) pour les achats à l'unité ; **certification finale** conservée pour le parcours complet.
 
 **Non-objectifs (reportés)**
 - Back-office d'administration des produits/prix (Approche B) — *plus tard*.
-- Attestation / certification **par module** — inchangé pour l'instant (voir §9).
+- Examen/QCM **bloquant** par module — non retenu : on délivre une **attestation de suivi** (option A, voir §5.8). La **certification finale** (examen global) reste inchangée.
 - CPF / OPCO — inchangé (prise de contact).
 - Autres formations (management, marketing digital) — la structure les accueillera, mais **hors périmètre immédiat**.
 
@@ -133,6 +134,23 @@ Ajouter au panier → Connexion / création de compte → Checkout Stripe → We
 ### 5.7 Stripe
 - Montants via **`price_data` dynamique** (comme aujourd'hui), depuis `catalog.ts` (`MODULE_PRICE_CENTS=5900`, pack `FORMATION_PRICE_CENTS=29900`). Pas besoin de pré-créer des produits Stripe. **Mode test d'abord**, puis réel.
 
+### 5.8 Attestation par module (attestation de suivi)
+Deux niveaux :
+- **Attestation de suivi par module** — pour un client qui **possède** un module et l'a **terminé** (toutes les leçons suivies). Contient : nom, **titre + heures du module** (depuis `COURSE`), date de fin, n° `ATC-…`, QR de vérification. C'est la **preuve réglementaire d'heures suivies** (Loi ALUR).
+- **Certification finale** (existante, **inchangée**) — examen global `certification-finale` ≥ 70 %, couvre tous les modules ; « diplôme » premium pour les parcours complets (pack **ou** 6 modules possédés + terminés).
+
+**Réutilise l'existant :**
+- `certificates.modules` (champ liste déjà présent) → **1 slug** (attestation module) ou **tous** (certification finale). N° + QR identiques.
+- `AttestationPDF` → ajouter une **variante « 1 module »** (titre + heures du module). `formation-data.ts` doit lister les **6 modules** + heures.
+- Suivi de progression des leçons (déjà en place) → « module terminé » = toutes ses leçons complétées (déclencheur option A, **pas d'examen**).
+
+**Génération — `api/certificates/generate` :**
+- Accepte un **scope** : `moduleSlug` (attestation module) **ou** `"full"` (certification finale).
+- **Garde serveur (Règle d'or §4)** : pour `moduleSlug`, vérifier que l'utilisateur **possède** (`verifyModuleAccess`) **et** a **terminé** le module. Pour `"full"`, règle actuelle conservée (examen ≥ 70 %).
+- Idempotent : réutilise le certificat existant pour ce scope.
+
+**UI :** bouton **« Télécharger mon attestation (Module X) »** à la fin d'un module possédé + terminé ; la certification finale reste sur `formation/certification`.
+
 ---
 
 ## 6. Sécurité — « on ne casse rien »
@@ -143,6 +161,7 @@ Ajouter au panier → Connexion / création de compte → Checkout Stripe → We
   - `access.ts` : pack voit tout / module = le sien / aucun accès / admin ;
   - filtrage serveur du panier (`/api/checkout`) : retire modules possédés + pack ;
   - **webhook** : `metadata.product_ids` → bons droits accordés (pack vs modules), idempotence.
+  - **attestation** : refus si module non possédé ou non terminé ; PDF généré si possédé + terminé.
 - Validation sur **aperçu Vercel** en **mode test Stripe**, 4 scénarios :
   1. Client **pack** → voit **tout** · 2. Acheteur **d'un module** → le sien ouvert, les autres verrouillés · 3. **Panier multi-modules** → tout se débloque · 4. **Checkout pack 299 €** → fonctionne toujours.
 - Fusion dans **`main` (= production) uniquement après validation** ; rollback Vercel en 1 clic.
@@ -156,10 +175,11 @@ Ajouter au panier → Connexion / création de compte → Checkout Stripe → We
 4. **Checkout multi-produits** (`/api/checkout` : auth + filtrage serveur + metadata JSON).
 5. **Webhook multi-entitlements** (octroi des droits par produit) + tests.
 6. **Espace apprenant** verrouillé / déverrouillé + garde leçon. *(Le vrai risque : l'accès après achat.)*
-7. **Vitrine + panier** (rendu data-driven, hiérarchie pack/modules).
-8. **Upsell pack**.
-9. **Test Stripe complet** sur aperçu Vercel (4 scénarios, mode test).
-10. **Merge production**.
+7. **Attestation par module** (route `generate` scope module + garde *possédé + terminé* + PDF variante 1-module + `formation-data` / `module-complete` à 6 modules).
+8. **Vitrine + panier** (rendu data-driven, hiérarchie pack/modules).
+9. **Upsell pack**.
+10. **Test Stripe complet** sur aperçu Vercel (4 scénarios, mode test).
+11. **Merge production**.
 
 ---
 
@@ -171,7 +191,8 @@ Ajouter au panier → Connexion / création de compte → Checkout Stripe → We
 - `lms/src/app/page.tsx` (vitrine), `lms/src/components/StripeButton.tsx` + composant **panier** *(nouveau)*
 - `lms/src/app/checkout/...` (généralisation du paiement + connexion préalable)
 - `lms/src/app/formation/...` (verrouillage UI + garde leçon)
-- **Tests** : configuration Vitest + tests `access.ts`, checkout (filtrage), webhook.
+- `lms/src/app/api/certificates/generate/route.ts` (scope module/full + garde), `lms/src/lib/pdf/AttestationPDF.tsx` (variante 1 module), `lms/src/lib/pdf/formation-data.ts` (6 modules + heures), `lms/src/app/api/email/module-complete/route.ts` (`max 5`→6)
+- **Tests** : configuration Vitest + tests `access.ts`, checkout (filtrage), webhook, attestation.
 
 > ⚠️ **Note technique :** ce projet utilise une version **non standard de Next.js** (`lms/AGENTS.md`) → **lire `node_modules/next/dist/docs/` avant d'implémenter**.
 
@@ -179,7 +200,7 @@ Ajouter au panier → Connexion / création de compte → Checkout Stripe → We
 
 ## 9. Décisions par défaut / à confirmer (non bloquantes)
 - **Module 6 (déontologie & éthique pro, slug `deontologie`)** : **branché et vendable** comme les autres. ⚠️ Vérifier que **tous ses audios sont finalisés** avant mise en vente (narration en cours de production). Le mécanisme « Bientôt disponible » ne concerne que les **futurs** modules.
-- **Attestation / certification** : comportement **inchangé** dans cette phase. La vente à l'unité donne accès **au contenu** ; pas de nouvelle attestation par module pour l'instant.
+- **Attestation** : *attestation de suivi par module* (option A) **ajoutée** pour la vente à l'unité (voir §5.8). **Certification finale** (examen global ≥ 70 %) **inchangée** pour le parcours complet.
 - **Upgrade vers le pack** (a acheté des modules puis veut le pack) :
   - **Phase 1 (maintenant)** : pas de remise automatique → pack au plein tarif (299 €), accès total accordé.
   - **Phase 2 (plus tard)** : upgrade intelligent avec **déduction des modules déjà achetés**.
