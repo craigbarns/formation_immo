@@ -4,7 +4,7 @@
 - **Statut :** Validé en brainstorming + **révisé suite à relecture** — prêt pour le plan d'implémentation
 - **Approche retenue :** **A — Extension directe** du système existant (catalogue défini en code), évolutive vers un back-office plus tard.
 
-> **Révision (relecture) — points renforcés :** unicité PostgreSQL via **index partiels** ; **vérification serveur** des droits (jamais se fier au front) ; **connexion obligatoire avant paiement** + rattachement `user_id`+`email` ; **metadata Stripe en JSON** ; **stratégie d'upgrade vers le pack** ; **ordre des phases** (accès avant vitrine) ; **hiérarchie d'offre** pack vs modules.
+> **Révision (relecture) — points renforcés :** unicité PostgreSQL via **index partiels** ; **vérification serveur** des droits (jamais se fier au front) ; **connexion obligatoire avant paiement** + rattachement `user_id`+`email` ; **metadata Stripe en JSON** ; **stratégie d'upgrade vers le pack** ; **ordre des phases** (accès avant vitrine) ; **hiérarchie d'offre** pack vs modules. **Correction : les 6 modules (déontologie incluse) sont déjà branchés dans `COURSE`.**
 
 ---
 
@@ -15,7 +15,7 @@ La plateforme (`lms/`, **Next.js + Supabase + Stripe**, déployée sur **Vercel*
 - **Vitrine / catalogue** = `lms/src/app/page.tsx` (servie sur `monpassformation.com` ; `app.monpassformation.com` redirige vers `/formation` — séparation par *hostname*).
 - **Paiement** = `POST /api/checkout` (produit unique 299 € codé en dur) → Stripe Checkout → webhook `POST /api/webhooks/stripe` → `upsertSubscription()`.
 - **Accès** = table `user_subscriptions (email, formation_id='immobilier', status, user_id, …)`. `verifySubscription()` (`lms/src/lib/access.ts`) répond seulement « a payé / n'a pas payé ».
-- **Contenu** = `lms/src/data/course.ts` : `COURSE` = **5 modules** (juridique, transaction, financement, marketing, terrain). Le **6ᵉ module — déontologie & non-discrimination** est en production (pas encore branché dans `COURSE`).
+- **Contenu** = `lms/src/data/course.ts` : `COURSE` = **6 modules, tous branchés** : juridique, transaction, financement, marketing, terrain, **déontologie** (slug `deontologie`, « Module 6 — Déontologie & éthique professionnelle », **inclut la non-discrimination**). *(La copie marketing « 5 modules / 36 leçons / 42h » est obsolète → à recalculer depuis `COURSE`.)*
 - **Des clients ont déjà acheté le pack 299 €.** → Contrainte absolue : **ne pas leur faire perdre l'accès.**
 
 **Objectif :** vendre chaque module à l'unité **et** conserver le pack, dans le catalogue existant, **sans rien casser** — puis pouvoir élargir le catalogue facilement.
@@ -31,7 +31,7 @@ La plateforme (`lms/`, **Next.js + Supabase + Stripe**, déployée sur **Vercel*
 | Module 3 — Financement & fiscalité | 59 € | ce module |
 | Module 4 — Marketing digital | 59 € | ce module |
 | Module 5 — Visite, closing & fidélisation | 59 € | ce module |
-| Module 6 — Déontologie & non-discrimination | 59 € | ce module (vendu en **1 seul bloc**) |
+| Module 6 — Déontologie & éthique pro *(slug `deontologie`, inclut non-discrimination)* | 59 € | ce module (1 bloc) |
 | **Pack complet** | **299 €** | **tous les modules, présents ET futurs** |
 
 - Le **pack reste vendu en permanence**, mis en avant comme offre « meilleur prix » (299 € vs **354 €** à la carte).
@@ -72,7 +72,7 @@ Conséquences concrètes :
 ### 5.1 Catalogue de produits (config en code)
 - Nouveau fichier **`lms/src/data/catalog.ts`** : liste des produits vendables.
   - Pack : `{ id: 'pack', label, priceCents: 29900, grants: 'all' }`
-  - Modules : pour chaque slug de `COURSE` (+ déontologie) : `{ id: <slug>, priceCents: 5900, grants: [<slug>], available: bool }`
+  - Modules : pour **chaque** slug de `COURSE` (les **6**, déontologie incluse) : `{ id: <slug>, priceCents: 5900, grants: [<slug>], available: bool }`
 - Libellés / durées tirés de `COURSE` (**source unique**) ; `catalog.ts` n'ajoute que **prix + disponibilité**.
 
 ### 5.2 Modèle de droits (entitlements)
@@ -121,7 +121,7 @@ Ajouter au panier → Connexion / création de compte → Checkout Stripe → We
 - **Upsell** : quand le panier approche 5–6 modules (total proche/≥ prix pack), proposer le pack (« débloque TOUT pour 299 € »).
 
 ### 5.5 Vitrine — `lms/src/app/page.tsx`
-- Remplacer `activeFormation` / `formations[]` codés en dur par un rendu basé sur `catalog.ts` + `COURSE` : **carte pack en vedette** + **grille des modules** (59 €, ajouter au panier). Module non publié → « Bientôt disponible ». **Conserver tout le reste de la page**.
+- Remplacer `activeFormation` / `formations[]` codés en dur par un rendu basé sur `catalog.ts` + `COURSE` : **carte pack en vedette** + **grille des 6 modules** (59 €, ajouter au panier). Les 6 modules sont **branchés et vendables** ; « Bientôt disponible » est réservé aux **futurs** modules/formations. **Recalculer les chiffres affichés (nb de modules, leçons, durée totale) depuis `COURSE`** (la copie « 5 modules / 42h » est obsolète). **Conserver tout le reste de la page**.
 - **Hiérarchie d'offre (ne pas cannibaliser le pack) :**
   - Pack → **« Meilleur choix · Tous les modules actuels + futurs »**, mis en avant visuellement.
   - Modules à l'unité → présentés comme **« Pour commencer sans engagement »**, offre secondaire.
@@ -178,7 +178,7 @@ Ajouter au panier → Connexion / création de compte → Checkout Stripe → We
 ---
 
 ## 9. Décisions par défaut / à confirmer (non bloquantes)
-- **Module 6 (déontologie)** affiché « Bientôt disponible » tant que son contenu n'est pas publié *(défaut)*.
+- **Module 6 (déontologie & éthique pro, slug `deontologie`)** : **branché et vendable** comme les autres. ⚠️ Vérifier que **tous ses audios sont finalisés** avant mise en vente (narration en cours de production). Le mécanisme « Bientôt disponible » ne concerne que les **futurs** modules.
 - **Attestation / certification** : comportement **inchangé** dans cette phase. La vente à l'unité donne accès **au contenu** ; pas de nouvelle attestation par module pour l'instant.
 - **Upgrade vers le pack** (a acheté des modules puis veut le pack) :
   - **Phase 1 (maintenant)** : pas de remise automatique → pack au plein tarif (299 €), accès total accordé.
