@@ -3,14 +3,7 @@ import { ArrowLeft, Lock, Sparkles } from "lucide-react";
 import { StripeButton } from "@/components/StripeButton";
 import { getModulePriceCents, getPackPriceCents, PACK_PRODUCT_ID } from "@/data/catalog";
 import { formatDuration } from "@/data/course";
-
-function euros(cents: number): string {
-  return (cents / 100).toLocaleString("fr-FR", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  });
-}
+import { euros } from "@/lib/price";
 
 export function ModuleLockedView({
   moduleSlug,
