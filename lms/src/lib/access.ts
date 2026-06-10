@@ -80,3 +80,33 @@ export async function verifyModuleAccess(moduleSlug: string) {
 
   return { user, isAdmin: false, hasAccess };
 }
+
+/**
+ * Résumé des droits de l'utilisateur courant, pour l'affichage
+ * (badges verrouillé/déverrouillé) et le panier. Admin ⇒ hasPack.
+ */
+export async function getAccessSummary() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user || !user.email) {
+    throw new Error("Non authentifié");
+  }
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  if (profile?.role === "admin") {
+    return { user, isAdmin: true as const, hasPack: true, modules: [] as string[] };
+  }
+
+  const rows = await fetchActiveEntitlementRows({
+    email: user.email,
+    userId: user.id,
+  });
+  const { hasPack, modules } = getEntitlements(rows);
+  return { user, isAdmin: false as const, hasPack, modules: [...modules] };
+}
