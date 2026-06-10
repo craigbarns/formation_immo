@@ -1,8 +1,10 @@
 # Spec — Vente des modules à l'unité + catalogue (formation immobilière)
 
 - **Date :** 2026-06-09
-- **Statut :** Validé en brainstorming — en attente de relecture utilisateur
+- **Statut :** Validé en brainstorming + **révisé suite à relecture** — prêt pour le plan d'implémentation
 - **Approche retenue :** **A — Extension directe** du système existant (catalogue défini en code), évolutive vers un back-office plus tard.
+
+> **Révision (relecture) — points renforcés :** unicité PostgreSQL via **index partiels** ; **vérification serveur** des droits (jamais se fier au front) ; **connexion obligatoire avant paiement** + rattachement `user_id`+`email` ; **metadata Stripe en JSON** ; **stratégie d'upgrade vers le pack** ; **ordre des phases** (accès avant vitrine) ; **hiérarchie d'offre** pack vs modules.
 
 ---
 
@@ -54,13 +56,14 @@ La plateforme (`lms/`, **Next.js + Supabase + Stripe**, déployée sur **Vercel*
 
 ---
 
-## 4. Le design en 5 parties (validé)
+## 4. Règle d'or (sécurité des droits)
 
-1. **Accès** — 3 types de droits : 🎟️ Pack (tous les modules, présents et futurs) · 🧩 Module (ce module) · 👑 Admin (tout). À l'ouverture d'un module : *as-tu le pack ? sinon as-tu ce module ? sinon → verrouillé + CTA.*
-2. **Vitrine** — on garde la page actuelle ; la zone catalogue passe de « 1 formation » à **pack en vedette + grille des modules à 59 €**, pilotée par les données.
-3. **Panier** — « Ajouter au panier » par module, 1 paiement pour le tout, upsell pack, modules « déjà acquis » non rachetables.
-4. **Espace apprenant** — tous les modules visibles ; les non-possédés sont **verrouillés** avec CTA d'achat ; chaque module verrouillé devient sa propre pub.
-5. **Migration & sécurité** — données clients intactes, tests sur la logique d'accès, validation sur aperçu Vercel en mode test Stripe, fusion dans `main` seulement après validation.
+> **Les droits d'accès et l'éligibilité à l'achat sont TOUJOURS recalculés côté serveur. Le front (boutons cachés, panier) n'est qu'un confort d'affichage, jamais une sécurité.**
+
+Conséquences concrètes :
+- **Un module inclus dans le pack n'est jamais revendable.** Si `hasPack = true`, tous les modules sont « Inclus dans votre pack » → achat impossible.
+- **Un module déjà possédé n'est jamais racheté.** `/api/checkout` **retire** du panier tout produit déjà détenu (module possédé OU couvert par le pack) **avant** de créer la session Stripe.
+- Si après filtrage le panier est vide → pas de session Stripe, message clair.
 
 ---
 
@@ -77,26 +80,55 @@ La plateforme (`lms/`, **Next.js + Supabase + Stripe**, déployée sur **Vercel*
   - `module_slug IS NULL` ⇒ **pack** (accès à tous les modules).
   - `module_slug = '<slug>'` ⇒ accès **à ce module**.
 - **Rétrocompatibilité totale : les lignes existantes ont `module_slug = NULL` ⇒ pack ⇒ accès total.** Aucune donnée modifiée ni supprimée.
-- Index d'unicité : passer de `(email, formation_id)` à `(email, formation_id, module_slug)` (gérer le cas `NULL` via index partiel **ou** sentinelle type `'pack'` — détail d'implémentation). `upsertSubscription` : `onConflict` adapté en conséquence.
+- **Unicité (index partiels — évite les pièges du `NULL`) :**
+  ```sql
+  -- un seul accès "pack" par client
+  CREATE UNIQUE INDEX ... ON user_subscriptions (email, formation_id)
+    WHERE module_slug IS NULL;
+  -- un seul accès par module par client
+  CREATE UNIQUE INDEX ... ON user_subscriptions (email, formation_id, module_slug)
+    WHERE module_slug IS NOT NULL;
+  ```
+  Ainsi : un client peut avoir 1 pack **et/ou** plusieurs modules, sans double ligne pack accidentelle, sans toucher aux anciennes lignes.
+- **`upsertSubscription`** s'appuie sur ces index. Si l'upsert PostgREST ne gère pas bien l'arbitrage sur index partiel, on utilise le **chemin manuel *select-puis-insert/update*** déjà présent dans `auth-access.ts` (fallback existant).
+- **`user_id` devient de 1ère importance, à parité avec `email`.** L'achat se faisant connecté (cf. §5.4), on écrit `user_id` **dès** l'octroi du droit (plus seulement l'email). Le rattachement par email reste un filet de sécurité.
 - Migration Supabase **additive** : `lms/supabase/migrations/009_module_entitlements.sql`.
 
 ### 5.3 Logique d'accès — `lms/src/lib/access.ts`
-- `verifyModuleAccess(moduleSlug)` → `admin` **OU** ligne active avec `module_slug IS NULL` (pack) **OU** `module_slug = moduleSlug`.
-- `getEntitlements(user)` → `{ hasPack: boolean, modules: Set<slug> }` pour l'affichage (cartes verrouillées / déverrouillées).
+- `verifyModuleAccess(moduleSlug)` → `admin` **OU** ligne active avec `module_slug IS NULL` (pack) **OU** `module_slug = moduleSlug` (par `user_id` **ou** `email`).
+- `getEntitlements(user)` → `{ hasPack: boolean, modules: Set<slug> }` pour l'affichage **et** pour le filtrage serveur du panier (§4).
 - `verifySubscription()` **conservée** (= « possède au moins un accès actif »), pour ne pas casser les usages existants.
 
-### 5.4 Paiement (panier)
-- **Panier côté client** sur la vitrine : « Ajouter au panier » par module, récapitulatif + bouton payer.
-- `POST /api/checkout` accepte désormais **une liste de produits** (`['pack']` ou `['juridique','transaction', …]`) → construit les `line_items` Stripe (via `price_data`, montants depuis `catalog.ts`) → `metadata.products = "juridique,transaction"`.
-- `POST /api/webhooks/stripe` : à `checkout.session.completed`, lit `metadata.products` → pour **chaque** produit, accorde le droit correspondant (`upsertSubscription` avec `module_slug`, ou pack). Email de bienvenue conservé pour les nouveaux clients.
-- **Upsell** : quand le panier atteint ~5–6 modules (total proche/≥ prix pack), proposer le pack.
-- **Déjà acquis** : pour un utilisateur connecté, les modules possédés sont marqués « Déjà acquis » et non rachetables.
+### 5.4 Paiement (connexion d'abord + panier)
+**Flux retenu (connexion obligatoire avant paiement) :**
+```
+Ajouter au panier → Connexion / création de compte → Checkout Stripe → Webhook → accès accordé (user_id + email)
+```
+- Choix assumé : **connexion avant achat** → on connaît le `user_id` à l'achat, et on évite le cas pénible « email Stripe ≠ email du compte ». **Arbitrage :** ça ajoute un peu de friction avant un achat à 59 € ; on **pré-remplit l'email Stripe** depuis le compte connecté pour limiter la perte. Repli possible plus tard (*guest checkout* rattaché par email) si la conversion en souffre (voir §9).
+- **Panier côté client** (vitrine + espace apprenant) : « Ajouter au panier » par module, récap + bouton payer.
+- `POST /api/checkout` :
+  1. exige une session authentifiée ;
+  2. **recalcule les droits** et **retire** les produits déjà possédés / couverts par le pack (§4) ;
+  3. construit les `line_items` Stripe (via `price_data`, montants depuis `catalog.ts`) ;
+  4. **metadata en JSON** :
+     ```
+     metadata.product_ids   = JSON.stringify(["juridique","transaction"])
+     metadata.purchase_type = "pack" | "module_bundle"
+     metadata.formation_id  = "immobilier"
+     metadata.user_id       = <uuid>
+     ```
+- `POST /api/webhooks/stripe` : à `checkout.session.completed`, lit `metadata.product_ids` → pour **chaque** produit, accorde le droit correspondant (pack ⇒ `module_slug NULL` ; module ⇒ `module_slug=<slug>`), avec `user_id`+`email`. Email de bienvenue conservé pour les nouveaux clients.
+- **Upsell** : quand le panier approche 5–6 modules (total proche/≥ prix pack), proposer le pack (« débloque TOUT pour 299 € »).
 
 ### 5.5 Vitrine — `lms/src/app/page.tsx`
-- Remplacer `activeFormation` / `formations[]` codés en dur par un rendu basé sur `catalog.ts` + `COURSE` : **carte pack en vedette** + **grille des modules** (59 €, ajouter au panier). Module non publié → « Bientôt disponible ». **Conserver tout le reste de la page** (héros, preuves, Qualiopi, financement, documents, FAQ, contact, footer).
+- Remplacer `activeFormation` / `formations[]` codés en dur par un rendu basé sur `catalog.ts` + `COURSE` : **carte pack en vedette** + **grille des modules** (59 €, ajouter au panier). Module non publié → « Bientôt disponible ». **Conserver tout le reste de la page**.
+- **Hiérarchie d'offre (ne pas cannibaliser le pack) :**
+  - Pack → **« Meilleur choix · Tous les modules actuels + futurs »**, mis en avant visuellement.
+  - Modules à l'unité → présentés comme **« Pour commencer sans engagement »**, offre secondaire.
 
 ### 5.6 Espace apprenant — `lms/src/app/formation/...`
 - Afficher **tous** les modules ; **verrouiller** ceux non possédés (overlay + CTA « Débloquer 59 € » / ajouter au panier). Garde d'accès **au niveau leçon** via `verifyModuleAccess`. Clients pack : **tout ouvert**, aucun changement visible.
+- C'est ici que se joue le **vrai risque** : ce que voit le client **après** achat → testé et sécurisé **avant** la vitrine (cf. §7).
 
 ### 5.7 Stripe
 - Montants via **`price_data` dynamique** (comme aujourd'hui), depuis `catalog.ts` (`MODULE_PRICE_CENTS=5900`, pack `FORMATION_PRICE_CENTS=29900`). Pas besoin de pré-créer des produits Stripe. **Mode test d'abord**, puis réel.
@@ -106,23 +138,28 @@ La plateforme (`lms/`, **Next.js + Supabase + Stripe**, déployée sur **Vercel*
 ## 6. Sécurité — « on ne casse rien »
 - Changements **additifs** (nouvelle colonne, nouveaux chemins de code) ; le **flux pack 299 € est conservé tel quel**.
 - Données clients **intactes** ; pack = `NULL` = accès total **rétroactif**.
-- **Tests automatisés** ciblés sur la logique d'accès (point sensible) — **introduire Vitest** (aucun test aujourd'hui dans le projet).
+- **Vérification serveur systématique** des droits et de l'éligibilité à l'achat (§4) — jamais se fier au front.
+- **Tests automatisés** (introduire **Vitest** — aucun test aujourd'hui) ciblés sur les points sensibles :
+  - `access.ts` : pack voit tout / module = le sien / aucun accès / admin ;
+  - filtrage serveur du panier (`/api/checkout`) : retire modules possédés + pack ;
+  - **webhook** : `metadata.product_ids` → bons droits accordés (pack vs modules), idempotence.
 - Validation sur **aperçu Vercel** en **mode test Stripe**, 4 scénarios :
-  1. Client **pack** → voit **tout**.
-  2. Acheteur **d'un module** → le sien ouvert, les autres verrouillés.
-  3. **Panier multi-modules** → tout se débloque.
-  4. **Checkout pack 299 €** → fonctionne toujours.
+  1. Client **pack** → voit **tout** · 2. Acheteur **d'un module** → le sien ouvert, les autres verrouillés · 3. **Panier multi-modules** → tout se débloque · 4. **Checkout pack 299 €** → fonctionne toujours.
 - Fusion dans **`main` (= production) uniquement après validation** ; rollback Vercel en 1 clic.
 
 ---
 
-## 7. Ordre de construction (phases)
-1. **Socle d'accès** : migration `module_slug` + `verifyModuleAccess` / `getEntitlements` + **tests**. *(Ne change rien de visible — sécurise les clients existants d'abord.)*
-2. **Vente** : `catalog.ts` + `/api/checkout` multi-produits + webhook multi-produits.
-3. **Vitrine** : refonte de la zone catalogue (pack + modules) pilotée par les données.
-4. **Panier** : état panier + upsell pack + « déjà acquis ».
-5. **Espace apprenant** : verrouillage / déverrouillage + garde leçon.
-6. **Stripe + go-live** : prix en test → validation aperçu → prix réels → merge `main`.
+## 7. Ordre de construction (phases — révisé : accès avant vitrine)
+1. **Migration DB** (`module_slug` + index partiels) + accès rétrocompatible.
+2. **Tests `access.ts`** — *avant toute UI*.
+3. **Catalogue en code** (`catalog.ts`).
+4. **Checkout multi-produits** (`/api/checkout` : auth + filtrage serveur + metadata JSON).
+5. **Webhook multi-entitlements** (octroi des droits par produit) + tests.
+6. **Espace apprenant** verrouillé / déverrouillé + garde leçon. *(Le vrai risque : l'accès après achat.)*
+7. **Vitrine + panier** (rendu data-driven, hiérarchie pack/modules).
+8. **Upsell pack**.
+9. **Test Stripe complet** sur aperçu Vercel (4 scénarios, mode test).
+10. **Merge production**.
 
 ---
 
@@ -132,9 +169,9 @@ La plateforme (`lms/`, **Next.js + Supabase + Stripe**, déployée sur **Vercel*
 - `lms/src/data/catalog.ts` *(nouveau)*
 - `lms/src/app/api/checkout/route.ts`, `lms/src/app/api/webhooks/stripe/route.ts`
 - `lms/src/app/page.tsx` (vitrine), `lms/src/components/StripeButton.tsx` + composant **panier** *(nouveau)*
-- `lms/src/app/checkout/...` (généralisation du paiement)
+- `lms/src/app/checkout/...` (généralisation du paiement + connexion préalable)
 - `lms/src/app/formation/...` (verrouillage UI + garde leçon)
-- **Tests** : configuration Vitest + tests de `access.ts`.
+- **Tests** : configuration Vitest + tests `access.ts`, checkout (filtrage), webhook.
 
 > ⚠️ **Note technique :** ce projet utilise une version **non standard de Next.js** (`lms/AGENTS.md`) → **lire `node_modules/next/dist/docs/` avant d'implémenter**.
 
@@ -143,4 +180,8 @@ La plateforme (`lms/`, **Next.js + Supabase + Stripe**, déployée sur **Vercel*
 ## 9. Décisions par défaut / à confirmer (non bloquantes)
 - **Module 6 (déontologie)** affiché « Bientôt disponible » tant que son contenu n'est pas publié *(défaut)*.
 - **Attestation / certification** : comportement **inchangé** dans cette phase. La vente à l'unité donne accès **au contenu** ; pas de nouvelle attestation par module pour l'instant.
-- **« Déjà acquis »** appliqué surtout dans l'**espace connecté** ; la vitrine publique (visiteur non connecté) montre tous les modules comme achetables.
+- **Upgrade vers le pack** (a acheté des modules puis veut le pack) :
+  - **Phase 1 (maintenant)** : pas de remise automatique → pack au plein tarif (299 €), accès total accordé.
+  - **Phase 2 (plus tard)** : upgrade intelligent avec **déduction des modules déjà achetés**.
+- **Connexion avant achat** : retenue pour la justesse des droits ; *repli guest-checkout par email* possible en Phase 2 si la conversion baisse.
+- **« Déjà acquis »** : affiché côté connecté ; sur la vitrine publique (visiteur non connecté), tous les modules apparaissent achetables, le **filtrage serveur** s'applique après connexion (§4).
