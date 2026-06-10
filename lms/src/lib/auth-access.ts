@@ -1,4 +1,5 @@
 import { createAdminClient } from "@/lib/supabase/admin";
+import type { EntitlementRow } from "@/lib/entitlements";
 
 export async function upsertStudentProfile(payload: {
   id: string;
@@ -83,6 +84,27 @@ export async function grantEntitlement(payload: {
 
   const { error } = await admin.from("user_subscriptions").insert(row);
   if (error) throw new Error(error.message);
+}
+
+/**
+ * Lit les droits ACTIFS d'un utilisateur (pack + modules) via service role
+ * — réutilisé par verifyModuleAccess et par le filtrage serveur du checkout.
+ */
+export async function fetchActiveEntitlementRows(params: {
+  email: string;
+  userId: string;
+  formationId?: string;
+}): Promise<EntitlementRow[]> {
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("user_subscriptions")
+    .select("module_slug, status")
+    .eq("formation_id", params.formationId ?? "immobilier")
+    .or(`email.eq.${params.email.toLowerCase()},user_id.eq.${params.userId}`)
+    .eq("status", "active");
+
+  if (error) throw new Error(error.message);
+  return (data ?? []) as EntitlementRow[];
 }
 
 export async function linkExistingSubscriptionToUser({

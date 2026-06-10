@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getEntitlements } from "@/lib/entitlements";
+import { fetchActiveEntitlementRows } from "@/lib/auth-access";
 
 /**
  * Vérifie si un utilisateur authentifié possède un accès payant actif.
@@ -69,15 +70,12 @@ export async function verifyModuleAccess(moduleSlug: string) {
   }
 
   // 2. Sinon, lire les droits actifs (pack + modules) via service role
-  const admin = createAdminClient();
-  const { data: rows } = await admin
-    .from("user_subscriptions")
-    .select("module_slug, status")
-    .eq("formation_id", "immobilier")
-    .or(`email.eq.${user.email},user_id.eq.${user.id}`)
-    .eq("status", "active");
+  const rows = await fetchActiveEntitlementRows({
+    email: user.email,
+    userId: user.id,
+  });
 
-  const { hasPack, modules } = getEntitlements(rows ?? []);
+  const { hasPack, modules } = getEntitlements(rows);
   const hasAccess = hasPack || modules.has(moduleSlug);
 
   return { user, isAdmin: false, hasAccess };
