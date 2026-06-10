@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { sendModuleCompletionEmail, sendCertificationEmail } from "@/lib/email/resend";
+import { COURSE } from "@/data/course";
 import { z } from "zod";
 
 const Schema = z.object({
   moduleTitle: z.string(),
-  moduleNumber: z.number().int().min(1).max(5),
+  moduleNumber: z.number().int().min(1).max(COURSE.length),
   xp: z.number().int().min(0),
   isCertification: z.boolean().optional().default(false),
 });
