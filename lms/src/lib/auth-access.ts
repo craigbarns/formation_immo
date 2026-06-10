@@ -21,48 +21,68 @@ export async function upsertSubscription(payload: {
   stripe_session_id?: string | null;
   user_id?: string | null;
 }) {
+  // Le pack = accès complet = module_slug NULL. On délègue à grantEntitlement
+  // (upsert manuel) pour rester compatible avec les index uniques PARTIELS
+  // (migration 010) : l'ancien onConflict s'appuyait sur un index supprimé.
+  await grantEntitlement({
+    email: payload.email,
+    formation_id: payload.formation_id,
+    module_slug: null,
+    status: payload.status,
+    stripe_session_id: payload.stripe_session_id ?? null,
+    user_id: payload.user_id ?? null,
+  });
+}
+
+/**
+ * Octroie un droit d'accès. module_slug === null ⇒ pack (tous les modules).
+ * Upsert MANUEL (select puis insert/update) : les index uniques PARTIELS
+ * (migration 010) ne se prêtent pas à l'onConflict de PostgREST.
+ */
+export async function grantEntitlement(payload: {
+  email: string;
+  formation_id: string;
+  module_slug: string | null;
+  status?: string;
+  stripe_session_id?: string | null;
+  user_id?: string | null;
+}) {
   const admin = createAdminClient();
-  const subscription = {
-    ...payload,
-    email: payload.email.toLowerCase(),
-  };
+  const email = payload.email.toLowerCase();
 
-  const { error } = await admin
-    .from("user_subscriptions")
-    .upsert(subscription, { onConflict: "email,formation_id" });
-
-  if (!error) return;
-
-  // Older databases may be missing the unique constraint required by PostgREST
-  // upsert. Keep access creation working while the migration is applied.
-  if (error.code !== "42P10") {
-    throw new Error(error.message);
-  }
-
-  const { data: existing, error: selectError } = await admin
+  let lookup = admin
     .from("user_subscriptions")
     .select("id")
-    .eq("email", subscription.email)
-    .eq("formation_id", subscription.formation_id)
-    .maybeSingle();
+    .eq("email", email)
+    .eq("formation_id", payload.formation_id);
+  lookup =
+    payload.module_slug === null
+      ? lookup.is("module_slug", null)
+      : lookup.eq("module_slug", payload.module_slug);
 
+  const { data: existing, error: selectError } = await lookup.maybeSingle();
   if (selectError) throw new Error(selectError.message);
 
-  if (existing?.id) {
-    const { error: updateError } = await admin
-      .from("user_subscriptions")
-      .update(subscription)
-      .eq("id", existing.id);
+  const row = {
+    email,
+    formation_id: payload.formation_id,
+    module_slug: payload.module_slug,
+    status: payload.status ?? "active",
+    stripe_session_id: payload.stripe_session_id ?? null,
+    user_id: payload.user_id ?? null,
+  };
 
-    if (updateError) throw new Error(updateError.message);
+  if (existing?.id) {
+    const { error } = await admin
+      .from("user_subscriptions")
+      .update(row)
+      .eq("id", existing.id);
+    if (error) throw new Error(error.message);
     return;
   }
 
-  const { error: insertError } = await admin
-    .from("user_subscriptions")
-    .insert(subscription);
-
-  if (insertError) throw new Error(insertError.message);
+  const { error } = await admin.from("user_subscriptions").insert(row);
+  if (error) throw new Error(error.message);
 }
 
 export async function linkExistingSubscriptionToUser({
