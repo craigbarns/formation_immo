@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { verifyModuleAccess } from "@/lib/access";
 import { ModuleLanding } from "@/components/modules/ModuleLanding";
+import { ModuleLockedView } from "@/components/modules/ModuleLockedView";
 import { COURSE, getModuleDurationMin } from "@/data/course";
 import { getModuleShowcase } from "@/data/module-showcase";
 import { getAvatarForModule } from "@/data/module-avatars";
@@ -36,6 +38,21 @@ export default async function ModulePage({ params }: Props) {
 
   const showcase = getModuleShowcase(mod.slug);
   if (!showcase) notFound();
+
+  // Garde serveur (spec §4) : non possédé ⇒ vue verrouillée avec CTA d'achat.
+  const access = await verifyModuleAccess(mod.slug);
+  if (!access.hasAccess) {
+    return (
+      <ModuleLockedView
+        moduleSlug={mod.slug}
+        moduleTitle={mod.title}
+        moduleSummary={mod.summary}
+        lessonsCount={mod.lessons.length}
+        durationMin={getModuleDurationMin(mod.slug)}
+        headline={showcase.headline ?? null}
+      />
+    );
+  }
 
   const modIndex = COURSE.findIndex((m) => m.slug === mod.slug);
   const prevMod = modIndex > 0 ? COURSE[modIndex - 1] : null;

@@ -3,7 +3,17 @@
 import { useState } from "react";
 import { ArrowRight, Loader2, CreditCard } from "lucide-react";
 
-export function StripeButton({ formationId, label = "Acheter la formation" }: { formationId: string, label?: string }) {
+export function StripeButton({
+  formationId,
+  products,
+  label = "Acheter la formation",
+}: {
+  /** Compat : achat du pack via l'ancien paramètre. */
+  formationId?: string;
+  /** Panier : ids produits ("pack" ou slugs de modules). Prioritaire sur formationId. */
+  products?: string[];
+  label?: string;
+}) {
   const [loading, setLoading] = useState(false);
 
   const handleCheckout = async () => {
@@ -12,8 +22,14 @@ export function StripeButton({ formationId, label = "Acheter la formation" }: { 
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formationId }),
+        body: JSON.stringify(products?.length ? { products } : { formationId }),
       });
+
+      if (response.status === 401) {
+        // Connexion obligatoire avant paiement : on revient ici après login.
+        window.location.href = `/login?next=${encodeURIComponent(window.location.pathname)}`;
+        return;
+      }
 
       const data = await response.json();
       if (data.url) {
