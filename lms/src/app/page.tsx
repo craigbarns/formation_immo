@@ -7,7 +7,6 @@ import {
   ArrowRight,
   BookOpen,
   Briefcase,
-  Building2,
   CheckCircle2,
   Clock,
   CreditCard,
@@ -22,11 +21,29 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
+import { COURSE, formatDuration, getModuleDurationMin, getTotalCourseDurationMin } from "@/data/course";
+import { getCatalog, getModulePriceCents, getPackPriceCents, PACK_PRODUCT_ID } from "@/data/catalog";
+import { euros } from "@/lib/price";
+import { CartProvider } from "@/components/cart/CartProvider";
+import { CartBar } from "@/components/cart/CartBar";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
+import { StripeButton } from "@/components/StripeButton";
 
 const DOMAIN = "https://www.monpassformation.com";
 const IMMOBILIER_COVER = "/generated/fal/transaction/cover-immobilier.jpg";
 const IMMOBILIER_CHECKOUT = "/checkout/immobilier";
 const PASS_FORMATION_LOGO = "/images/pass-formation-logo.svg";
+
+// Chiffres calculés depuis le contenu réel (source unique : COURSE / catalog).
+const TOTAL_MODULES = COURSE.length;
+const TOTAL_LESSONS = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
+const TOTAL_DURATION = formatDuration(getTotalCourseDurationMin());
+
+/** Cover par module ; fallback visuel générique (ex. déontologie). */
+function moduleCover(slug: string): string {
+  const withCover = ["juridique", "transaction", "financement", "marketing", "terrain"];
+  return withCover.includes(slug) ? `/generated/fal/${slug}/cover.jpg` : IMMOBILIER_COVER;
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(DOMAIN),
@@ -83,35 +100,18 @@ type Formation = {
 
 const activeFormation = {
   title: "Formation Agent Immobilier",
-  subtitle: "42h pour consolider vos obligations Loi ALUR et vos réflexes terrain",
+  subtitle: `${TOTAL_DURATION} pour consolider vos obligations Loi ALUR et vos réflexes terrain`,
   image: IMMOBILIER_COVER,
   href: IMMOBILIER_CHECKOUT,
-  price: "299 €",
   bullets: [
-    "5 modules : juridique, transaction, financement, marketing et terrain",
-    "36 leçons structurées avec QCM, supports et exercices pratiques",
-    "Contenus pensés pour les professionnels de l'immobilier et leurs équipes",
-    "Attestation de suivi et espace apprenant personnel",
+    `${TOTAL_MODULES} modules : juridique, transaction, financement, marketing, terrain et déontologie`,
+    `${TOTAL_LESSONS} leçons structurées avec QCM, supports et exercices pratiques`,
+    "Chaque module disponible à l'unité, ou pack complet au meilleur prix",
+    "Attestation de suivi par module et certification finale",
   ],
 };
 
-const formations: Formation[] = [
-  {
-    id: "immobilier",
-    title: "Formation Agent Immobilier",
-    label: "Disponible maintenant",
-    description:
-      "Le parcours complet : cadre juridique, transaction, financement, marketing immobilier et closing terrain.",
-    image: IMMOBILIER_COVER,
-    icon: Building2,
-    duration: "42h",
-    lessons: "36 leçons",
-    status: "Loi ALUR 2026",
-    price: "299 €",
-    accent: "#1a3a5c",
-    href: IMMOBILIER_CHECKOUT,
-    available: true,
-  },
+const upcomingFormations: Formation[] = [
   {
     id: "management",
     title: "Management commercial",
@@ -152,7 +152,7 @@ const proofPoints = [
     label: "taux de satisfaction annoncé",
   },
   {
-    value: "42h",
+    value: TOTAL_DURATION,
     label: "formation immobilière",
   },
   {
@@ -214,11 +214,11 @@ const documents = [
 const faq = [
   {
     q: "La formation est-elle disponible tout de suite ?",
-    a: "Oui, le module immobilier est déjà accessible. Quand Stripe sera branché, l'accès sera automatiquement ouvert après paiement validé.",
+    a: "Oui. L'accès s'ouvre automatiquement après paiement validé : le pack débloque tout, un module acheté à l'unité débloque ce module.",
   },
   {
-    q: "Le paiement Stripe est-il déjà actif ?",
-    a: "Pas encore. La page est prête pour vendre, et le bouton pourra ensuite créer une session Stripe Checkout sécurisée.",
+    q: "Puis-je acheter un seul module ?",
+    a: "Oui. Chaque module est disponible à l'unité, et vous pouvez en ajouter plusieurs au panier pour un seul paiement. Le pack complet reste l'option la plus avantageuse si la formation entière vous intéresse.",
   },
   {
     q: "Puis-je demander une prise en charge CPF ou OPCO ?",
@@ -261,7 +261,13 @@ export default async function HomePage() {
     redirect("/formation");
   }
 
+  // Produits sérialisables pour le panier client (prix = source unique catalog.ts).
+  const cartProducts = getCatalog()
+    .filter((p) => p.available)
+    .map(({ id, kind, label, priceCents }) => ({ id, kind, label, priceCents }));
+
   return (
+    <CartProvider products={cartProducts} packPriceCents={getPackPriceCents()}>
     <div className="min-h-screen bg-white text-zinc-950">
       <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
@@ -356,7 +362,7 @@ export default async function HomePage() {
                   "Formation en ligne",
                   "Espace apprenant",
                   "Attestation",
-                  "Paiement Stripe à venir",
+                  "Paiement sécurisé Stripe",
                 ].map((item) => (
                   <span key={item} className="inline-flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-brand-gold" aria-hidden />
@@ -377,9 +383,9 @@ export default async function HomePage() {
               </p>
               <dl className="mt-6 grid grid-cols-3 gap-3 text-center">
                 {[
-                  ["42h", "durée"],
-                  ["36", "leçons"],
-                  ["5", "modules"],
+                  [TOTAL_DURATION, "durée"],
+                  [String(TOTAL_LESSONS), "leçons"],
+                  [String(TOTAL_MODULES), "modules"],
                 ].map(([value, label]) => (
                   <div key={label} className="rounded-lg bg-zinc-50 p-4">
                     <dt className="text-xs font-bold uppercase text-zinc-500">{label}</dt>
@@ -389,8 +395,11 @@ export default async function HomePage() {
               </dl>
               <div className="mt-6 flex items-end justify-between border-t border-zinc-100 pt-5">
                 <div>
-                  <p className="text-xs font-bold uppercase text-zinc-500">Tarif affiché</p>
-                  <p className="text-3xl font-black text-brand-navy">299 €</p>
+                  <p className="text-xs font-bold uppercase text-zinc-500">Pack complet</p>
+                  <p className="text-3xl font-black text-brand-navy">{euros(getPackPriceCents())}</p>
+                  <p className="text-xs font-semibold text-zinc-500">
+                    ou chaque module à {euros(getModulePriceCents())}
+                  </p>
                 </div>
                 <Link
                   href={IMMOBILIER_CHECKOUT}
@@ -474,13 +483,13 @@ export default async function HomePage() {
                   <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <p className="text-sm font-bold uppercase text-zinc-500">
-                        Accès complet au module
+                        Pack complet — tous les modules
                       </p>
                       <p className="mt-1 text-3xl font-black text-brand-navy">
-                        {activeFormation.price}
+                        {euros(getPackPriceCents())}
                       </p>
                       <p className="mt-1 text-sm text-zinc-500">
-                        Paiement sécurisé Stripe activable à la prochaine étape.
+                        Paiement sécurisé par Stripe. Modules aussi disponibles à l&apos;unité ci-dessous.
                       </p>
                     </div>
                     <Link
@@ -562,21 +571,154 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="bg-zinc-50 py-16 sm:py-20">
+        <section id="catalogue" className="bg-zinc-50 py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="max-w-2xl">
               <p className="text-sm font-black uppercase text-brand-gold">Catalogue</p>
               <h2 className="mt-3 text-3xl font-black text-brand-navy sm:text-4xl">
-                Les autres modules arrivent ensuite
+                À la carte ou en pack complet
               </h2>
               <p className="mt-4 text-base leading-7 text-zinc-600">
-                L&apos;immobilier reste la priorité commerciale. Les cartes suivantes préparent la
-                plateforme à accueillir de nouvelles formations sans modifier la structure.
+                Commencez sans engagement avec un module à {euros(getModulePriceCents())}, ou
+                débloquez toute la formation — modules actuels et futurs — avec le pack complet.
               </p>
             </div>
 
-            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {formations.map((formation) => {
+            {/* Pack en vedette — Meilleur choix */}
+            <article className="mt-10 overflow-hidden rounded-2xl border-2 border-brand-gold bg-brand-navy text-white shadow-xl">
+              <div className="grid gap-0 md:grid-cols-[1fr_1.4fr]">
+                <div className="relative min-h-56 bg-zinc-900">
+                  <Image
+                    src={IMMOBILIER_COVER}
+                    alt=""
+                    fill
+                    sizes="(min-width: 768px) 40vw, 100vw"
+                    className="object-cover opacity-80"
+                  />
+                  <span className="absolute left-4 top-4 rounded-lg bg-brand-gold px-3 py-1 text-xs font-black uppercase tracking-wider text-brand-navy shadow">
+                    ⭐ Meilleur choix
+                  </span>
+                </div>
+                <div className="flex flex-col gap-5 p-7 md:p-9">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-brand-gold">
+                      Pack complet — Loi ALUR 2026
+                    </p>
+                    <h3 className="mt-2 text-2xl font-black md:text-3xl">
+                      Toute la formation Agent Immobilier
+                    </h3>
+                    <p className="mt-3 text-sm leading-6 text-white/75">
+                      Les {TOTAL_MODULES} modules ({TOTAL_DURATION}, {TOTAL_LESSONS} leçons), tous
+                      les modules futurs, la certification finale et l&apos;espace apprenant complet.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap items-end justify-between gap-5">
+                    <div>
+                      <p className="text-4xl font-black text-brand-gold">
+                        {euros(getPackPriceCents())}
+                      </p>
+                      <p className="text-xs font-bold text-white/60">
+                        au lieu de {euros(getModulePriceCents() * TOTAL_MODULES)} à la carte
+                      </p>
+                    </div>
+                    <div className="w-full max-w-xs">
+                      <StripeButton
+                        products={[PACK_PRODUCT_ID]}
+                        label={`Tout débloquer — ${euros(getPackPriceCents())}`}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            {/* Modules à l'unité — pour commencer sans engagement */}
+            <div className="mt-12">
+              <h3 className="text-xl font-black text-brand-navy">
+                Les modules à l&apos;unité — {euros(getModulePriceCents())} chacun
+              </h3>
+              <p className="mt-2 text-sm text-zinc-600">
+                Pour commencer sans engagement. Ajoutez plusieurs modules au panier : un seul
+                paiement, accès immédiat.
+              </p>
+            </div>
+
+            <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {getCatalog()
+                .filter((p) => p.kind === "module")
+                .map((product, i) => {
+                  const durationMin = getModuleDurationMin(product.id);
+                  const lessonsCount =
+                    COURSE.find((m) => m.slug === product.id)?.lessons.length ?? 0;
+                  return (
+                    <article
+                      key={product.id}
+                      className="flex overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm"
+                    >
+                      <div className="flex min-w-0 flex-1 flex-col">
+                        <div className="relative aspect-[16/10] bg-zinc-100">
+                          <Image
+                            src={moduleCover(product.id)}
+                            alt=""
+                            fill
+                            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                            className="object-cover"
+                          />
+                          <div className="absolute inset-0 bg-zinc-950/20" aria-hidden />
+                          <span className="absolute left-4 top-4 rounded-lg bg-white px-3 py-1 text-xs font-black text-brand-navy shadow-sm">
+                            Module {i + 1}
+                          </span>
+                        </div>
+
+                        <div className="flex flex-1 flex-col p-6">
+                          <h3 className="text-lg font-black leading-snug text-brand-navy">
+                            {product.label.replace(/^Module \d+ — /, "")}
+                          </h3>
+                          <p className="mt-3 flex-1 text-sm leading-6 text-zinc-600">
+                            {product.description}
+                          </p>
+
+                          <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold text-zinc-600">
+                            <span className="rounded-lg bg-zinc-100 px-3 py-1.5">
+                              {formatDuration(durationMin)}
+                            </span>
+                            <span className="rounded-lg bg-zinc-100 px-3 py-1.5">
+                              {lessonsCount} leçons
+                            </span>
+                            <span className="rounded-lg bg-brand-gold/15 px-3 py-1.5 text-brand-navy">
+                              {euros(product.priceCents)}
+                            </span>
+                          </div>
+
+                          <div className="mt-6 border-t border-zinc-100 pt-5">
+                            {product.available ? (
+                              <AddToCartButton productId={product.id} />
+                            ) : (
+                              <span className="inline-flex w-full items-center justify-center rounded-lg bg-zinc-100 px-5 py-3 text-sm font-black text-zinc-500">
+                                Bientôt disponible
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+            </div>
+
+            {/* Prochaines formations du catalogue */}
+            <div className="mt-16 max-w-2xl">
+              <h3 className="text-xl font-black text-brand-navy">
+                Les prochaines formations arrivent
+              </h3>
+              <p className="mt-2 text-sm text-zinc-600">
+                La plateforme est prête à accueillir de nouvelles formations sans changer vos
+                habitudes.
+              </p>
+            </div>
+
+            <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {upcomingFormations.map((formation) => {
                 const Icon = formation.icon;
 
                 return (
@@ -634,19 +776,9 @@ export default async function HomePage() {
                         </div>
 
                         <div className="mt-6 border-t border-zinc-100 pt-5">
-                          {formation.available && formation.href ? (
-                            <Link
-                              href={formation.href}
-                              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-navy px-5 py-3 text-sm font-black text-white transition hover:bg-brand-navy-mid"
-                            >
-                              Acheter ce module
-                              <ArrowRight className="h-4 w-4" aria-hidden />
-                            </Link>
-                          ) : (
-                            <span className="inline-flex w-full items-center justify-center rounded-lg bg-zinc-100 px-5 py-3 text-sm font-black text-zinc-500">
-                              Bientôt disponible
-                            </span>
-                          )}
+                          <span className="inline-flex w-full items-center justify-center rounded-lg bg-zinc-100 px-5 py-3 text-sm font-black text-zinc-500">
+                            Bientôt disponible
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -885,6 +1017,8 @@ export default async function HomePage() {
           © 2026 MonPassFormation. Tous droits réservés.
         </div>
       </footer>
+      <CartBar />
     </div>
+    </CartProvider>
   );
 }
