@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { verifyModuleAccess } from "@/lib/access";
 import { COURSE } from "@/data/course";
 import { getFlashcardsForModule } from "@/data/flashcards";
 import { getAvatarForModule } from "@/data/module-avatars";
@@ -14,6 +15,10 @@ export default async function FlashcardsPage({ params }: Props) {
   const { moduleSlug } = await params;
   const mod = COURSE.find((m) => m.slug === moduleSlug);
   if (!mod) notFound();
+
+  // Garde serveur (spec §4) : module possédé (pack ou unité) sinon page module verrouillée.
+  const access = await verifyModuleAccess(moduleSlug);
+  if (!access.hasAccess) redirect(`/formation/${moduleSlug}`);
 
   const cards = getFlashcardsForModule(moduleSlug);
   const avatar = getAvatarForModule(moduleSlug);

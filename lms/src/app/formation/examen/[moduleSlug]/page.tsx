@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { verifyModuleAccess } from "@/lib/access";
 import { getModuleExam } from "@/data/exam-questions";
 import { ExamMode } from "@/components/exam/ExamMode";
 
@@ -19,6 +20,10 @@ export default async function ExamPage({ params }: Props) {
   const { moduleSlug } = await params;
   const exam = getModuleExam(moduleSlug);
   if (!exam) notFound();
+
+  // Garde serveur (spec §4) : module possédé (pack ou unité) sinon page module verrouillée.
+  const access = await verifyModuleAccess(moduleSlug);
+  if (!access.hasAccess) redirect(`/formation/${moduleSlug}`);
 
   return (
     <div>

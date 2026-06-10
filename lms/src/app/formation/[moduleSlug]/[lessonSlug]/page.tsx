@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Clock } from "lucide-react";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { verifyModuleAccess } from "@/lib/access";
 import { getLesson, getPrevNext, lessonId, COURSE, type Lesson } from "@/data/course";
 import { getInteractiveScenario } from "@/data/interactive-scenarios";
 import { getAvatarForModule } from "@/data/module-avatars";
@@ -119,6 +120,10 @@ export default async function LessonPage({ params }: Props) {
   const { moduleSlug, lessonSlug } = await params;
   const result = getLesson(moduleSlug, lessonSlug);
   if (!result) notFound();
+
+  // Garde serveur (spec §4) : module possédé (pack ou unité) sinon page module verrouillée.
+  const access = await verifyModuleAccess(moduleSlug);
+  if (!access.hasAccess) redirect(`/formation/${moduleSlug}`);
 
   const { module: mod, lesson } = result;
   const key = lessonId(moduleSlug, lessonSlug);
