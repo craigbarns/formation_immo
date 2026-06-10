@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { verifyModuleAccess } from "@/lib/access";
+import { getModuleCompletion } from "@/lib/module-completion";
 import { ModuleLanding } from "@/components/modules/ModuleLanding";
 import { ModuleLockedView } from "@/components/modules/ModuleLockedView";
+import { ModuleAttestationButton } from "@/components/modules/ModuleAttestationButton";
 import { COURSE, getModuleDurationMin } from "@/data/course";
 import { getModuleShowcase } from "@/data/module-showcase";
 import { getAvatarForModule } from "@/data/module-avatars";
@@ -60,6 +62,7 @@ export default async function ModulePage({ params }: Props) {
 
   const avatar = getAvatarForModule(mod.slug);
   const firstLesson = mod.lessons[0];
+  const completion = await getModuleCompletion(access.user.id, mod.slug);
 
   const lessons = mod.lessons.map((lesson) => {
     const audioSrc = getLessonModuleListAudioSrc(lesson);
@@ -76,7 +79,16 @@ export default async function ModulePage({ params }: Props) {
   });
 
   return (
-    <ModuleLanding
+    <>
+      {completion.completed && (
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-brand-gold/30 bg-brand-gold/10 px-6 py-4">
+          <p className="text-sm font-black uppercase tracking-wider text-brand-gold">
+            🎓 Module terminé — votre attestation de suivi est disponible
+          </p>
+          <ModuleAttestationButton moduleSlug={mod.slug} />
+        </div>
+      )}
+      <ModuleLanding
       moduleSlug={mod.slug}
       moduleTitle={mod.title}
       moduleDescription={mod.description}
@@ -107,6 +119,7 @@ export default async function ModulePage({ params }: Props) {
           ? { href: `/formation/${nextMod.slug}`, title: nextMod.title.replace(/^Module \d+ — /, "") }
           : null
       }
-    />
+      />
+    </>
   );
 }
