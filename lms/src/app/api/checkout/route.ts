@@ -69,7 +69,7 @@ export async function POST(request: Request) {
       line_items: toLineItems(allowed, VERCEL_APP_URL),
       mode: "payment",
       customer_email: user.email,
-      success_url: `${VERCEL_APP_URL}/formation?achat=confirme&session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${VERCEL_APP_URL}/achat/confirmation?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.passformation.com"}#formation-immobiliere`,
       metadata: buildPurchaseMetadata(allowed, user.id),
     });
