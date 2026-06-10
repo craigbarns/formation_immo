@@ -14,13 +14,14 @@
 
 ## ⚠️ Ordre de déploiement (sécurité production)
 
-La base Supabase peut être **partagée** entre la prod et l'aperçu Vercel. Dropper l'ancien index unique pendant que le code de prod l'utilise **casserait** les achats pack.
+**CONFIRMÉ (2026-06-09) : base Supabase PARTAGÉE avec la production.** `.env.production` et `.env.local` pointent vers le même projet (`uejnir…supabase.co`) → l'aperçu Vercel utilise aussi la base de prod. Dropper l'ancien index unique pendant que le code de prod l'utilise **casserait** les achats pack.
 
-**Avant d'exécuter la Task 5 (migration) sur une base de prod, confirmer :** l'aperçu utilise-t-il un projet Supabase séparé ?
-- **Oui (base séparée)** → exécuter librement sur la base d'aperçu ; appliquer en prod au moment du merge.
-- **Non (base partagée prod)** → respecter cet ordre : **(A)** ajouter la colonne `module_slug` (additif, sans risque) → **(B)** déployer le code (Tasks 2 & 4) qui n'utilise plus l'`onConflict` sur l'ancien index → **(C)** seulement ensuite dropper l'ancien index + créer les index partiels.
+On applique donc la migration en **deux fichiers / deux temps** (Task 5 ci-dessous est scindée) :
+- **(A) `009_add_module_slug.sql`** — ajoute la colonne `module_slug` (additif, **sans risque** : l'ancien code l'ignore). Applicable **dès maintenant**.
+- **(B) Déployer le code** (Tasks 2–4 mergés en prod) — il n'utilise plus l'`onConflict` sur l'ancien index (passe par `grantEntitlement`, upsert manuel).
+- **(C) `010_module_partial_indexes.sql`** — droppe l'ancien index + crée les index partiels. À appliquer **uniquement après** que (B) soit en prod.
 
-Sur la **branche de travail** (notre cas), on écrit tout le code ; l'application réelle de la migration suit l'ordre ci-dessus et n'est faite qu'après validation. Aucune commande de ce plan ne déploie en prod.
+Aucune commande de ce plan ne déploie en prod — le merge reste **ta** décision.
 
 ---
 
@@ -34,7 +35,7 @@ Sur la **branche de travail** (notre cas), on écrit tout le code ; l'applicatio
 | `lms/package.json` | Ajoute la dép `vitest` + scripts `test` | **Modifier** |
 | `lms/src/lib/access.ts` | Ajoute `verifyModuleAccess(moduleSlug)` (fetch + délègue au pur) | **Modifier** |
 | `lms/src/lib/auth-access.ts` | Ajoute `grantEntitlement(...)` ; reroute `upsertSubscription` dessus (n'utilise plus l'index droppé) | **Modifier** |
-| `lms/supabase/migrations/009_module_entitlements.sql` | Colonne `module_slug` + index partiels | **Créer** |
+| `lms/supabase/migrations/009_add_module_slug.sql` + `010_module_partial_indexes.sql` | Colonne `module_slug` (009) puis index partiels (010) — **appliqués en 2 temps** (base partagée prod) | **Créer** |
 
 Toutes les commandes s'exécutent depuis `lms/` sauf indication contraire.
 
@@ -425,26 +426,47 @@ git commit -m "feat(access): grantEntitlement + upsertSubscription via upsert ma
 
 ---
 
-## Task 5 : Migration `009_module_entitlements.sql`
+## Task 5 : Migrations `009` (colonne) puis `010` (index)
 
 **Files:**
-- Create: `lms/supabase/migrations/009_module_entitlements.sql`
+- Create: `lms/supabase/migrations/009_add_module_slug.sql`
+- Create: `lms/supabase/migrations/010_module_partial_indexes.sql`
 
-> ⚠️ Relire la section **Ordre de déploiement** en tête de plan avant d'**appliquer** cette migration sur une base de prod. Ici on **écrit** le fichier et on l'applique sur la base d'aperçu/dev.
+> ⚠️ Base **partagée avec la prod** (cf. Ordre de déploiement). On **écrit les deux fichiers** ici. On **applique 009 tout de suite** (sans risque). On **applique 010 SEULEMENT après** que le code (Tasks 2–4) soit en prod — c'est fait au Plan 5 (go-live).
 
-- [ ] **Step 1 : Écrire la migration (additive + index partiels)**
+- [ ] **Step 1 : Écrire `009_add_module_slug.sql` (colonne seule, additive)**
 
-Create `lms/supabase/migrations/009_module_entitlements.sql` :
+Create `lms/supabase/migrations/009_add_module_slug.sql` :
 ```sql
--- Vente des modules à l'unité : granularité "module" sur user_subscriptions.
--- Additif & rétrocompatible : les lignes existantes ont module_slug NULL = pack (accès total).
-
--- (A) Colonne nullable. NULL = pack (tous les modules). Sans risque sur l'existant.
+-- Vente des modules à l'unité (1/2) : ajoute la granularité "module".
+-- Additif & sans risque : l'ancien code ignore cette colonne.
+-- module_slug NULL = pack (tous les modules).
 alter table public.user_subscriptions
   add column if not exists module_slug text;
+```
 
--- (C) L'ancien index unique (email, formation_id) empêche d'avoir pack + modules
--- pour un même email. On le remplace par deux index PARTIELS.
+- [ ] **Step 2 : Appliquer 009 (base partagée — sans risque)**
+
+Appliquer via le process habituel (`supabase db push`, ou coller dans l'éditeur SQL Supabase de la base).
+Attendu : colonne ajoutée, aucune erreur. L'ancien code continue de tourner normalement.
+
+- [ ] **Step 3 : Vérifier la rétrocompat (les anciens accès = pack)**
+
+```sql
+select email, formation_id, module_slug, status
+from public.user_subscriptions
+order by created_at desc
+limit 20;
+```
+Attendu : **toutes les lignes existantes ont `module_slug = NULL`** → elles valent « pack » → accès total conservé. ✅
+
+- [ ] **Step 4 : Écrire `010_module_partial_indexes.sql` (NE PAS appliquer maintenant)**
+
+Create `lms/supabase/migrations/010_module_partial_indexes.sql` :
+```sql
+-- Vente des modules à l'unité (2/2) : index uniques partiels.
+-- ⚠️ N'appliquer qu'APRÈS que le code (grantEntitlement) soit en prod,
+-- sinon l'octroi pack de l'ancien code casse (il s'appuie sur l'index droppé).
 drop index if exists user_subscriptions_email_formation_id_idx;
 
 -- Un seul accès "pack" par (email, formation) — module_slug IS NULL.
@@ -458,32 +480,11 @@ create unique index if not exists user_subscriptions_module_idx
   where module_slug is not null;
 ```
 
-- [ ] **Step 2 : Appliquer la migration (base d'aperçu/dev)**
-
-Appliquer via le process de migration habituel du projet — au choix :
-```bash
-# Option Supabase CLI (si configuré pour ce projet) :
-supabase db push
-```
-ou coller le contenu du fichier dans l'éditeur SQL Supabase de la base d'aperçu/dev.
-Attendu : exécution sans erreur (colonne ajoutée, 1 index droppé, 2 index créés).
-
-- [ ] **Step 3 : Vérifier la rétrocompat (les anciens accès = pack)**
-
-Exécuter cette requête sur la base :
-```sql
-select email, formation_id, module_slug, status
-from public.user_subscriptions
-order by created_at desc
-limit 20;
-```
-Attendu : **toutes les lignes existantes ont `module_slug = NULL`** → elles valent « pack » → accès total conservé. ✅
-
-- [ ] **Step 4 : Commit**
+- [ ] **Step 5 : Commit (les deux fichiers)**
 
 ```bash
-git add supabase/migrations/009_module_entitlements.sql
-git commit -m "feat(db): migration 009 - module_slug + index partiels (retrocompat pack)"
+git add supabase/migrations/009_add_module_slug.sql supabase/migrations/010_module_partial_indexes.sql
+git commit -m "feat(db): migrations 009 (colonne module_slug) + 010 (index partiels, applique au go-live)"
 ```
 
 ---
