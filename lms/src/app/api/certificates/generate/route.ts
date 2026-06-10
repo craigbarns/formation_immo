@@ -1,9 +1,16 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { renderToBuffer } from "@react-pdf/renderer";
 import { createElement } from "react";
 import { AttestationPDF, type AttestationData } from "@/lib/pdf/AttestationPDF";
+import {
+  ModuleAttestationPDF,
+  type ModuleAttestationData,
+} from "@/lib/pdf/ModuleAttestationPDF";
 import { FORMATION } from "@/lib/pdf/formation-data";
+import { fetchActiveEntitlementRows } from "@/lib/auth-access";
+import { getEntitlements } from "@/lib/entitlements";
+import { getModuleCompletion } from "@/lib/module-completion";
 
 export async function POST(request: Request) {
   const supabaseAdmin = createClient(
@@ -41,6 +48,24 @@ export async function POST(request: Request) {
     const lastName = nameParts.slice(1).join(" ") || nameParts[0];
     const gender = (profile?.gender as "M" | "F") ?? null;
     const status = profile?.learner_status ?? "Agent Immobilier";
+
+    // ── Scope MODULE : attestation de suivi d'un module (spec §5.8) ──
+    // Sans body { moduleSlug } : flux certification finale inchangé ci-dessous.
+    const body = await request.json().catch(() => ({}) as Record<string, unknown>);
+    const moduleSlug =
+      typeof (body as { moduleSlug?: unknown }).moduleSlug === "string"
+        ? ((body as { moduleSlug: string }).moduleSlug)
+        : null;
+
+    if (moduleSlug) {
+      return generateModuleAttestation({
+        supabaseAdmin,
+        userId,
+        email: user.email ?? null,
+        learner: { firstName, lastName, gender, status },
+        moduleSlug,
+      });
+    }
 
     // 2. Get subscription (start date)
     const { data: subscription } = await supabaseAdmin
@@ -136,7 +161,7 @@ export async function POST(request: Request) {
 
     // 7. Generate PDF buffer
     const pdfBuffer = await renderToBuffer(
-      // @ts-ignore – @react-pdf/renderer types don't align with React 19 element types
+      // @ts-expect-error – @react-pdf/renderer types don't align with React 19 element types
       createElement(AttestationPDF, { data: attestationData })
     );
 
@@ -188,4 +213,144 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
+}
+
+/**
+ * Attestation de SUIVI pour un module (option A — spec §5.8).
+ * Gardes serveur (Règle d'or §4) : module possédé (pack ou unité) ET terminé
+ * (toutes les leçons dans lesson_progress). Idempotent par (user, module).
+ */
+async function generateModuleAttestation(args: {
+  supabaseAdmin: SupabaseClient;
+  userId: string;
+  email: string | null;
+  learner: { firstName: string; lastName: string; gender: "M" | "F" | null; status: string };
+  moduleSlug: string;
+}) {
+  const { supabaseAdmin, userId, email, learner, moduleSlug } = args;
+
+  const moduleInfo = FORMATION.modules.find((m) => m.slug === moduleSlug);
+  if (!moduleInfo) {
+    return NextResponse.json({ error: "Module inconnu." }, { status: 404 });
+  }
+  if (!email) {
+    return NextResponse.json({ error: "Email du compte introuvable." }, { status: 403 });
+  }
+
+  // Garde 1 : module possédé (pack ou à l'unité)
+  const rows = await fetchActiveEntitlementRows({ email, userId });
+  const owned = getEntitlements(rows);
+  if (!(owned.hasPack || owned.modules.has(moduleSlug))) {
+    return NextResponse.json({ error: "Module non possédé." }, { status: 403 });
+  }
+
+  // Garde 2 : module terminé (toutes les leçons complétées)
+  const completion = await getModuleCompletion(userId, moduleSlug);
+  if (!completion.completed) {
+    return NextResponse.json(
+      { error: "Terminez toutes les leçons du module pour obtenir votre attestation." },
+      { status: 403 }
+    );
+  }
+
+  // Période : début = octroi du droit (module ou pack), fin = dernière leçon complétée
+  const { data: entitlementRow } = await supabaseAdmin
+    .from("user_subscriptions")
+    .select("created_at")
+    .eq("formation_id", "immobilier")
+    .or(`email.eq.${email.toLowerCase()},user_id.eq.${userId}`)
+    .or(`module_slug.eq.${moduleSlug},module_slug.is.null`)
+    .order("created_at", { ascending: true })
+    .limit(1)
+    .maybeSingle();
+
+  const endDate = completion.completedAt ?? new Date().toISOString();
+  const startDate = (entitlementRow?.created_at as string | undefined) ?? endDate;
+
+  // Certificat idempotent : un seul par (user, module)
+  const { data: existingCerts } = await supabaseAdmin
+    .from("certificates")
+    .select("*")
+    .eq("user_id", userId)
+    .eq("passed", true);
+
+  let certificate =
+    (existingCerts ?? []).find((c) => {
+      const mods = Array.isArray(c.modules) ? (c.modules as string[]) : [];
+      return mods.length === 1 && mods[0] === moduleSlug;
+    }) ?? null;
+
+  if (!certificate) {
+    const year = new Date().getFullYear();
+    const rand = Math.floor(10000 + Math.random() * 90000);
+    const certNumber = `ATM-${year}-${rand}`;
+
+    const { data: created, error: createErr } = await supabaseAdmin
+      .from("certificates")
+      .insert({
+        user_id: userId,
+        cert_number: certNumber,
+        student_name: `${learner.firstName} ${learner.lastName}`.trim(),
+        modules: [moduleSlug],
+        // Attestation de suivi : pas d'examen — le PDF module n'affiche pas de score,
+        // mais certificates.final_score est NOT NULL.
+        final_score: 100,
+        passed: true,
+        issued_at: endDate,
+        qr_payload: JSON.stringify({ certNumber, userId, moduleSlug, issuedAt: endDate }),
+      })
+      .select()
+      .single();
+
+    if (createErr || !created) {
+      return NextResponse.json({ error: "Impossible de créer l'attestation." }, { status: 500 });
+    }
+    certificate = created;
+  }
+
+  const generatedAt = new Date().toISOString();
+  const attestationData: ModuleAttestationData = {
+    learner,
+    module: {
+      slug: moduleSlug,
+      title: moduleInfo.title,
+      durationHours: moduleInfo.durationHours,
+    },
+    period: { startDate, endDate },
+    certificate: { certNumber: certificate.cert_number, generatedAt },
+  };
+
+  const pdfBuffer = await renderToBuffer(
+    // @ts-expect-error – @react-pdf/renderer types don't align with React 19 element types
+    createElement(ModuleAttestationPDF, { data: attestationData })
+  );
+
+  const bucket = "attestations";
+  const filePath = `${certificate.cert_number}.pdf`;
+
+  await supabaseAdmin.storage
+    .createBucket(bucket, { public: true, allowedMimeTypes: ["application/pdf"] })
+    .catch(() => {});
+
+  const { error: uploadError } = await supabaseAdmin.storage
+    .from(bucket)
+    .upload(filePath, pdfBuffer, { contentType: "application/pdf", upsert: true });
+
+  if (uploadError) {
+    console.error("Storage upload error:", uploadError);
+    return new Response(new Uint8Array(pdfBuffer), {
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": `attachment; filename="attestation-${certificate.cert_number}.pdf"`,
+      },
+    });
+  }
+
+  const { data: urlData } = supabaseAdmin.storage.from(bucket).getPublicUrl(filePath);
+  await supabaseAdmin
+    .from("certificates")
+    .update({ pdf_url: urlData.publicUrl, pdf_path: filePath })
+    .eq("id", certificate.id);
+
+  return NextResponse.json({ pdfUrl: urlData.publicUrl, certNumber: certificate.cert_number });
 }
