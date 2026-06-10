@@ -129,11 +129,16 @@ export function grantsFromProducts(
   return [...new Set(known.filter((p) => p.kind === "module").map((p) => p.id))];
 }
 
+/** Type ligne de commande dérivé du SDK (stripe v22 n'exporte plus le namespace imbriqué). */
+export type CheckoutLineItem = NonNullable<
+  Stripe.Checkout.SessionCreateParams["line_items"]
+>[number];
+
 /** Produits → line items Stripe (price_data dynamique, montants depuis le catalogue). */
 export function toLineItems(
   products: Product[],
   appUrl: string
-): Stripe.Checkout.SessionCreateParams.LineItem[] {
+): CheckoutLineItem[] {
   return products.map((p) => ({
     price_data: {
       currency: "eur",

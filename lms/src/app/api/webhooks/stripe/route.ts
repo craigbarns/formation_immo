@@ -1,6 +1,8 @@
 import { toErrorMessage } from "@/lib/utils/error";
 import { sendWelcomeEmail } from "@/lib/email/resend";
-import { upsertSubscription } from "@/lib/auth-access";
+import { grantEntitlement } from "@/lib/auth-access";
+import { grantsFromProducts, parsePurchaseMetadata } from "@/lib/purchase";
+import { FORMATION_ID } from "@/data/catalog";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
@@ -8,8 +10,8 @@ import Stripe from "stripe";
 export const dynamic = "force-dynamic";
 
 // Initialisation sécurisée pour éviter les crashs au build
-const stripe = process.env.STRIPE_SECRET_KEY 
-  ? new Stripe(process.env.STRIPE_SECRET_KEY) 
+const stripe = process.env.STRIPE_SECRET_KEY
+  ? new Stripe(process.env.STRIPE_SECRET_KEY)
   : null;
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -35,39 +37,60 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: `Webhook Error: ${toErrorMessage(err)}` }, { status: 400 });
   }
 
-  // Gérer l'événement de succès de paiement
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     const customerEmail = session.customer_details?.email;
-    const formationId = session.metadata?.formationId;
+    const purchase = parsePurchaseMetadata(session.metadata);
 
     // Cette app ne gère que la formation immobilier.
     // Les autres produits (Digiformat, etc.) sont traités par leur propre système.
-    if (formationId !== "immobilier") {
+    if (purchase.formationId !== FORMATION_ID) {
       console.log(
-        `Stripe webhook ignored — formationId="${formationId ?? "(none)"}" is not immobilier (session: ${session.id})`
+        `Stripe webhook ignored — formation "${purchase.formationId ?? "(none)"}" n'est pas immobilier (session: ${session.id})`
       );
       return NextResponse.json({ received: true, ignored: true });
     }
 
-    console.log(`Payment successful for ${customerEmail} (Formation: ${formationId})`);
+    if (!customerEmail) {
+      console.error(`Webhook sans email client (session: ${session.id})`);
+      return NextResponse.json({ received: true, ignored: true });
+    }
 
-    if (customerEmail) {
-      // 1. Inscrire l'accès dans la table 'user_subscriptions'
-      // Le user_id sera lié lors de l'inscription ou de la prochaine connexion
-      try {
-        await upsertSubscription({
+    // Un droit par produit : pack ⇒ module_slug NULL (accès total),
+    // module ⇒ son slug. Sessions legacy (ancien checkout) ⇒ pack.
+    const grants = grantsFromProducts(purchase.productIds);
+    if (grants.length === 0) {
+      console.error(
+        `Webhook sans produit reconnu (session: ${session.id}, product_ids: ${JSON.stringify(purchase.productIds)})`
+      );
+      return NextResponse.json({ received: true, ignored: true });
+    }
+
+    console.log(
+      `Payment successful for ${customerEmail} — produits: ${purchase.productIds.join(", ")} (session: ${session.id})`
+    );
+
+    try {
+      for (const moduleSlug of grants) {
+        await grantEntitlement({
           email: customerEmail,
-          formation_id: formationId,
-          stripe_session_id: session.id,
+          formation_id: FORMATION_ID,
+          module_slug: moduleSlug,
           status: "active",
+          stripe_session_id: session.id,
+          user_id: purchase.userId,
         });
-      } catch (subError) {
-        console.error("Error saving subscription:", subError);
-        return NextResponse.json({ error: "Error saving subscription" }, { status: 500 });
       }
+    } catch (subError) {
+      // 500 ⇒ Stripe rejouera le webhook ; grantEntitlement est idempotent
+      // (upsert manuel), donc le retry est sans danger.
+      console.error("Error saving entitlements:", subError);
+      return NextResponse.json({ error: "Error saving entitlements" }, { status: 500 });
+    }
 
-      // Envoyer l'email de bienvenue (best-effort — ne doit pas bloquer le webhook)
+    // Email de bienvenue : achats PACK uniquement (comportement historique).
+    // Un client existant qui ajoute un module ne reçoit pas de "bienvenue".
+    if (purchase.purchaseType === "pack") {
       const customerName = session.customer_details?.name ?? undefined;
       try {
         await sendWelcomeEmail(customerEmail, customerName);
