@@ -118,21 +118,24 @@ export async function linkExistingSubscriptionToUser({
 }) {
   const admin = createAdminClient();
   const normalizedEmail = email.toLowerCase();
-  const { data: subscription, error: selectError } = await admin
+  // Un client peut avoir PLUSIEURS droits actifs (pack et/ou modules à l'unité)
+  // → on rattache toutes ses lignes au compte, pas une seule.
+  const { data: subscriptions, error: selectError } = await admin
     .from("user_subscriptions")
     .select("id")
     .eq("email", normalizedEmail)
     .eq("formation_id", formationId)
-    .eq("status", "active")
-    .maybeSingle();
+    .eq("status", "active");
 
   if (selectError) throw new Error(selectError.message);
-  if (!subscription?.id) return false;
+  if (!subscriptions || subscriptions.length === 0) return false;
 
   const { error: updateError } = await admin
     .from("user_subscriptions")
     .update({ user_id: userId })
-    .eq("id", subscription.id);
+    .eq("email", normalizedEmail)
+    .eq("formation_id", formationId)
+    .eq("status", "active");
 
   if (updateError) throw new Error(updateError.message);
   return true;

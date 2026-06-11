@@ -27,18 +27,11 @@ const BodySchema = z.object({
 
 export async function POST(request: Request) {
   try {
-    // 1. Connexion obligatoire avant paiement (spec §5.4) : le user_id est
-    //    rattaché à l'achat et l'email Stripe est pré-rempli.
-    //    Vérifiée AVANT la config Stripe : même mal configuré, l'utilisateur
-    //    est d'abord guidé vers la connexion (parcours d'achat correct).
+    // 1. Connexion FACULTATIVE (paiement d'abord, comme le pack 299 € historique) :
+    //    - connecté  ⇒ user_id rattaché, email pré-rempli, retour /achat/confirmation
+    //    - visiteur  ⇒ Stripe collecte l'email, retour /register?session_id (compte après paiement)
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user?.email) {
-      return NextResponse.json(
-        { error: "Connexion requise avant le paiement", code: "AUTH_REQUIRED" },
-        { status: 401 }
-      );
-    }
 
     if (!stripe) {
       return NextResponse.json({ error: "Stripe is not configured" }, { status: 500 });
@@ -54,11 +47,13 @@ export async function POST(request: Request) {
 
     // 2. Règle d'or (spec §4) : recalcul des droits CÔTÉ SERVEUR — retire tout
     //    produit déjà possédé ou couvert par le pack. Le front n'est jamais cru.
-    const rows = await fetchActiveEntitlementRows({
-      email: user.email,
-      userId: user.id,
-    });
-    const { allowed } = filterPurchasable(requested, getEntitlements(rows));
+    //    (Visiteur non connecté : aucun droit connu — panier filtré tel quel.)
+    const owned = user?.email
+      ? getEntitlements(
+          await fetchActiveEntitlementRows({ email: user.email, userId: user.id })
+        )
+      : { hasPack: false, modules: new Set<string>() };
+    const { allowed } = filterPurchasable(requested, owned);
 
     if (allowed.length === 0) {
       return NextResponse.json(
@@ -71,10 +66,12 @@ export async function POST(request: Request) {
       payment_method_types: ["card"],
       line_items: toLineItems(allowed, VERCEL_APP_URL),
       mode: "payment",
-      customer_email: user.email,
-      success_url: `${VERCEL_APP_URL}/achat/confirmation?session_id={CHECKOUT_SESSION_ID}`,
+      ...(user?.email ? { customer_email: user.email } : {}),
+      success_url: user?.email
+        ? `${VERCEL_APP_URL}/achat/confirmation?session_id={CHECKOUT_SESSION_ID}`
+        : `${VERCEL_APP_URL}/register?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.passformation.com"}#formation-immobiliere`,
-      metadata: buildPurchaseMetadata(allowed, user.id),
+      metadata: buildPurchaseMetadata(allowed, user?.id ?? null),
     });
 
     return NextResponse.json({ url: session.url });

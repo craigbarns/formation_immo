@@ -58,13 +58,14 @@ export function filterPurchasable(
 }
 
 /** Metadata Stripe en JSON (spec §5.4). Pas de clé legacy `formationId` :
- *  en cas de rollback, l'ancien webhook IGNORE plutôt que sur-octroyer. */
-export function buildPurchaseMetadata(products: Product[], userId: string): Record<string, string> {
+ *  en cas de rollback, l'ancien webhook IGNORE plutôt que sur-octroyer.
+ *  userId null = achat invité (paiement d'abord, compte ensuite — comme le pack historique). */
+export function buildPurchaseMetadata(products: Product[], userId: string | null): Record<string, string> {
   return {
     product_ids: JSON.stringify(products.map((p) => p.id)),
     purchase_type: products.some((p) => p.kind === "pack") ? "pack" : "module_bundle",
     formation_id: FORMATION_ID,
-    user_id: userId,
+    ...(userId ? { user_id: userId } : {}),
   };
 }
 

@@ -5,10 +5,11 @@ import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import { getAppUrl } from "@/lib/app-url";
 import {
+  grantEntitlement,
   linkExistingSubscriptionToUser,
   upsertStudentProfile,
-  upsertSubscription,
 } from "@/lib/auth-access";
+import { grantsFromProducts, parsePurchaseMetadata } from "@/lib/purchase";
 import { createClient } from "@/lib/supabase/server";
 
 function getValidNext(value: FormDataEntryValue | null, fallback = "/formation") {
@@ -150,13 +151,29 @@ export async function signup(formData: FormData) {
           throw new Error("L'email du paiement ne correspond pas à l'email du compte.");
         }
 
-        await upsertSubscription({
-          email,
-          user_id: authData.user.id,
-          formation_id: session.metadata?.formationId || "immobilier",
-          stripe_session_id: session.id,
-          status: "active",
-        });
+        // Octroie EXACTEMENT ce qui a été payé : pack ⇒ accès total,
+        // module(s) ⇒ ces modules. (Le webhook fait pareil — grantEntitlement
+        // est idempotent, ceci couvre aussi son éventuel retard.)
+        const purchase = parsePurchaseMetadata(
+          session.metadata as Record<string, string> | null
+        );
+        if (purchase.formationId && purchase.formationId !== "immobilier") {
+          throw new Error("Ce paiement ne correspond pas à la formation immobilière.");
+        }
+        // Sessions historiques sans metadata lisible : comportement d'origine = pack.
+        const grants =
+          purchase.productIds.length > 0 ? grantsFromProducts(purchase.productIds) : [null];
+
+        for (const moduleSlug of grants) {
+          await grantEntitlement({
+            email,
+            user_id: authData.user.id,
+            formation_id: "immobilier",
+            module_slug: moduleSlug,
+            stripe_session_id: session.id,
+            status: "active",
+          });
+        }
       } else {
         const linked = await linkExistingSubscriptionToUser({
           email,

@@ -100,12 +100,15 @@ Conséquences concrètes :
 - `getEntitlements(user)` → `{ hasPack: boolean, modules: Set<slug> }` pour l'affichage **et** pour le filtrage serveur du panier (§4).
 - `verifySubscription()` **conservée** (= « possède au moins un accès actif »), pour ne pas casser les usages existants.
 
-### 5.4 Paiement (connexion d'abord + panier)
-**Flux retenu (connexion obligatoire avant paiement) :**
+### 5.4 Paiement (paiement d'abord + panier) — **révisé 2026-06-11 (décision Gregory)**
+**Flux retenu (identique au pack 299 € historique — paiement d'abord, compte ensuite) :**
 ```
-Ajouter au panier → Connexion / création de compte → Checkout Stripe → Webhook → accès accordé (user_id + email)
+Visiteur : Panier → Checkout Stripe (email saisi chez Stripe) → /register?session_id (email pré-rempli) → accès exact
+Connecté : Panier → Checkout Stripe (email pré-rempli, user_id en metadata) → /achat/confirmation → accès
 ```
-- Choix assumé : **connexion avant achat** → on connaît le `user_id` à l'achat, et on évite le cas pénible « email Stripe ≠ email du compte ». **Arbitrage :** ça ajoute un peu de friction avant un achat à 59 € ; on **pré-remplit l'email Stripe** depuis le compte connecté pour limiter la perte. Repli possible plus tard (*guest checkout* rattaché par email) si la conversion en souffre (voir §9).
+- **Décision :** la connexion obligatoire avant paiement (version initiale de cette section) ajoutait une marche avant le paiement → friction/conversion + incohérence avec le parcours 299 € connu des clients. Le `user_id` est rattaché **à l'inscription** (`linkExistingSubscriptionToUser`, multi-lignes) ou immédiatement si l'acheteur était connecté.
+- L'inscription post-paiement octroie **exactement** les produits payés (`parsePurchaseMetadata` + `grantsFromProducts` — pas de pack par défaut pour un achat module) ; le webhook fait de même (idempotent, l'un couvre le retard de l'autre).
+- *Limite assumée (identique à l'existant 299 €) :* un client possédant déjà un module mais non connecté peut racheter ce module en invité — le filtrage serveur ne connaît pas ses droits sans session. Les pages connectées (app) affichent « déjà acquis ».
 - **Panier côté client** (vitrine + espace apprenant) : « Ajouter au panier » par module, récap + bouton payer.
 - `POST /api/checkout` :
   1. exige une session authentifiée ;
@@ -204,5 +207,5 @@ Deux niveaux :
 - **Upgrade vers le pack** (a acheté des modules puis veut le pack) :
   - **Phase 1 (maintenant)** : pas de remise automatique → pack au plein tarif (299 €), accès total accordé.
   - **Phase 2 (plus tard)** : upgrade intelligent avec **déduction des modules déjà achetés**.
-- **Connexion avant achat** : retenue pour la justesse des droits ; *repli guest-checkout par email* possible en Phase 2 si la conversion baisse.
+- **Connexion avant achat** : ~~retenue initialement~~ **abandonnée le 2026-06-11** (décision Gregory, test utilisateur) au profit du *paiement d'abord* — voir §5.4 révisé.
 - **« Déjà acquis »** : affiché côté connecté ; sur la vitrine publique (visiteur non connecté), tous les modules apparaissent achetables, le **filtrage serveur** s'applique après connexion (§4).

@@ -108,6 +108,12 @@ describe("metadata Stripe (JSON, spec §5.4)", () => {
     const parsed = parsePurchaseMetadata({ formationId: "digiformat" });
     expect(parsed.formationId).toBe("digiformat");
   });
+
+  it("achat invité (userId null) => pas de cle user_id", () => {
+    const meta = buildPurchaseMetadata([juridique], null);
+    expect("user_id" in meta).toBe(false);
+    expect(parsePurchaseMetadata(meta).userId).toBeNull();
+  });
 });
 
 describe("grantsFromProducts (webhook → droits)", () => {
