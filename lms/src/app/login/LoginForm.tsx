@@ -13,6 +13,9 @@ export default function LoginForm() {
   const message = searchParams.get("message");
   const next = searchParams.get("next") ?? "/formation";
   const isReset = searchParams.get("reset") === "1";
+  // Arrivée depuis un panier / bouton d'achat : on guide vers la création de compte.
+  const fromCheckout = searchParams.get("achat") === "1";
+  const registerHref = `/register?next=${encodeURIComponent(next)}${fromCheckout ? "&achat=1" : ""}`;
 
   async function handleSubmit(formData: FormData) {
     setLoading(true);
@@ -57,7 +60,7 @@ export default function LoginForm() {
         <div className="mb-8 text-center">
           <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-navy-hero px-4 py-1.5 text-xs font-bold text-brand-gold shadow-lg">
             <Sparkles className="h-3.5 w-3.5 text-brand-gold" aria-hidden />
-            Espace réservé aux inscrits
+            {fromCheckout ? "Une dernière étape avant le paiement" : "Espace réservé aux inscrits"}
           </p>
 
           <div className="mt-5 flex justify-center">
@@ -67,11 +70,12 @@ export default function LoginForm() {
           </div>
 
           <h1 className="mt-5 text-3xl font-black tracking-tight text-slate-900 dark:text-white md:text-4xl">
-            Accédez à votre formation
+            {fromCheckout ? "Finalisez votre achat" : "Accédez à votre formation"}
           </h1>
           <p className="mt-3 text-base font-medium leading-relaxed text-slate-600 dark:text-white/80">
-            Connectez-vous pour retrouver l&apos;intégralité du parcours 42 h
-            et suivre votre progression sur tous vos appareils.
+            {fromCheckout
+              ? "Connectez-vous ou créez votre compte en 30 secondes — votre panier est conservé, vous reviendrez directement à votre commande."
+              : "Connectez-vous pour retrouver l'intégralité de votre parcours et suivre votre progression sur tous vos appareils."}
           </p>
         </div>
 
@@ -188,6 +192,16 @@ export default function LoginForm() {
               <div className="flex items-center justify-end text-sm font-bold">
                 <Link href="/login?reset=1" className="text-white/60 hover:text-white transition-colors">
                   Mot de passe oublié ?
+                </Link>
+              </div>
+
+              <div className="rounded-xl border border-brand-gold/30 bg-brand-gold/10 px-4 py-3.5 text-sm font-bold">
+                <span className="text-white/80">Pas encore de compte ?</span>{" "}
+                <Link
+                  href={registerHref}
+                  className="text-brand-gold underline decoration-brand-gold/40 underline-offset-4 transition-colors hover:text-white"
+                >
+                  Créer un compte
                 </Link>
               </div>
             </div>

@@ -75,17 +75,30 @@ export function CartProvider({
     }
   }, []);
 
+  /** Mise à jour fonctionnelle : robuste aux clics rapprochés (pas de closure périmée). */
+  const update = useCallback((fn: (prev: string[]) => string[]) => {
+    setItemsState((prev) => {
+      const next = fn(prev);
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      } catch {
+        // stockage indisponible : panier en mémoire seulement
+      }
+      return next;
+    });
+  }, []);
+
   const add = useCallback(
     (id: string) => {
       if (!productMap.has(id)) return;
-      persist(items.includes(id) ? items : [...items, id]);
+      update((prev) => (prev.includes(id) ? prev : [...prev, id]));
     },
-    [items, persist, productMap]
+    [update, productMap]
   );
 
   const remove = useCallback(
-    (id: string) => persist(items.filter((x) => x !== id)),
-    [items, persist]
+    (id: string) => update((prev) => prev.filter((x) => x !== id)),
+    [update]
   );
 
   const clear = useCallback(() => persist([]), [persist]);

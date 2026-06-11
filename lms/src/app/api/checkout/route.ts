@@ -26,12 +26,11 @@ const BodySchema = z.object({
 });
 
 export async function POST(request: Request) {
-  if (!stripe) {
-    return NextResponse.json({ error: "Stripe is not configured" }, { status: 500 });
-  }
   try {
     // 1. Connexion obligatoire avant paiement (spec §5.4) : le user_id est
     //    rattaché à l'achat et l'email Stripe est pré-rempli.
+    //    Vérifiée AVANT la config Stripe : même mal configuré, l'utilisateur
+    //    est d'abord guidé vers la connexion (parcours d'achat correct).
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (!user?.email) {
@@ -39,6 +38,10 @@ export async function POST(request: Request) {
         { error: "Connexion requise avant le paiement", code: "AUTH_REQUIRED" },
         { status: 401 }
       );
+    }
+
+    if (!stripe) {
+      return NextResponse.json({ error: "Stripe is not configured" }, { status: 500 });
     }
 
     const json = await request.json().catch(() => ({}));

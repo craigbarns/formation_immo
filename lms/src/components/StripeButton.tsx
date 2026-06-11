@@ -27,7 +27,8 @@ export function StripeButton({
 
       if (response.status === 401) {
         // Connexion obligatoire avant paiement : on revient ici après login.
-        window.location.href = `/login?next=${encodeURIComponent(window.location.pathname)}`;
+        // achat=1 : la page login/register affiche le parcours "finalisez votre achat".
+        window.location.href = `/login?next=${encodeURIComponent(window.location.pathname)}&achat=1`;
         return;
       }
 

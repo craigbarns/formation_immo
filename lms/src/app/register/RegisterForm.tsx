@@ -17,6 +17,8 @@ export default function RegisterForm() {
   const error = searchParams.get("error");
   const sessionId = searchParams.get("session_id");
   const next = searchParams.get("next") ?? "/formation";
+  // Arrivée depuis un panier / bouton d'achat : messaging dédié.
+  const fromCheckout = searchParams.get("achat") === "1";
 
   // Récupérer les infos de Stripe si on arrive d'un paiement
   useEffect(() => {
@@ -59,7 +61,7 @@ export default function RegisterForm() {
           ) : (
             <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-navy-hero px-4 py-1.5 text-xs font-bold text-brand-gold shadow-lg">
               <Sparkles className="h-3.5 w-3.5 text-brand-gold" aria-hidden />
-              Nouveau sur la plateforme
+              {fromCheckout ? "Une dernière étape avant le paiement" : "Nouveau sur la plateforme"}
             </p>
           )}
 
@@ -73,7 +75,9 @@ export default function RegisterForm() {
             Créer votre compte
           </h1>
           <p className="mt-3 text-base font-medium leading-relaxed text-white/80">
-            Inscrivez-vous pour accéder à la formation 42 h et suivre votre progression.
+            {fromCheckout
+              ? "Créez votre compte en 30 secondes — votre panier est conservé, vous finaliserez ensuite votre paiement."
+              : "Inscrivez-vous pour accéder à votre formation et suivre votre progression."}
           </p>
         </div>
 
@@ -180,7 +184,7 @@ export default function RegisterForm() {
             </form>
 
             <div className="mt-8 text-center text-sm font-bold">
-              <Link href={`/login?next=${encodeURIComponent(next)}`} className="inline-flex items-center gap-2 text-brand-gold hover:text-white transition-colors underline decoration-brand-gold/30 underline-offset-4">
+              <Link href={`/login?next=${encodeURIComponent(next)}${fromCheckout ? "&achat=1" : ""}`} className="inline-flex items-center gap-2 text-brand-gold hover:text-white transition-colors underline decoration-brand-gold/30 underline-offset-4">
                 <ArrowLeft className="h-4 w-4" />
                 Déjà un compte ? Se connecter
               </Link>
