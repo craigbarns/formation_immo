@@ -107,6 +107,25 @@ export async function fetchActiveEntitlementRows(params: {
   return (data ?? []) as EntitlementRow[];
 }
 
+/** Y a-t-il un accès actif (pack ou module) pour cet email ? — vérif d'éligibilité avant signup. */
+export async function hasActiveSubscription(
+  email: string,
+  formationId = "immobilier"
+): Promise<boolean> {
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("user_subscriptions")
+    .select("id")
+    .eq("email", email.toLowerCase())
+    .eq("formation_id", formationId)
+    .eq("status", "active")
+    .limit(1)
+    .maybeSingle();
+
+  if (error) throw new Error(error.message);
+  return Boolean(data?.id);
+}
+
 export async function linkExistingSubscriptionToUser({
   email,
   formationId = "immobilier",

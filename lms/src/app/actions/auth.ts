@@ -6,10 +6,12 @@ import Stripe from "stripe";
 import { getAppUrl } from "@/lib/app-url";
 import {
   grantEntitlement,
+  hasActiveSubscription,
   linkExistingSubscriptionToUser,
   upsertStudentProfile,
 } from "@/lib/auth-access";
 import { grantsFromProducts, parsePurchaseMetadata } from "@/lib/purchase";
+import { getAuthErrorMessage } from "@/lib/auth-errors";
 import { createClient } from "@/lib/supabase/server";
 
 function getValidNext(value: FormDataEntryValue | null, fallback = "/formation") {
@@ -19,24 +21,6 @@ function getValidNext(value: FormDataEntryValue | null, fallback = "/formation")
 
 function getString(value: FormDataEntryValue | null) {
   return typeof value === "string" ? value.trim() : "";
-}
-
-function getAuthErrorMessage(message: string) {
-  const normalized = message.toLowerCase();
-
-  if (normalized.includes("invalid login credentials")) {
-    return "Email ou mot de passe incorrect.";
-  }
-
-  if (normalized.includes("email not confirmed")) {
-    return "Email non confirmé. Vérifiez votre boîte mail avant de vous connecter.";
-  }
-
-  if (normalized.includes("user already registered")) {
-    return "Un compte existe déjà avec cet email. Connectez-vous ou réinitialisez le mot de passe.";
-  }
-
-  return message;
 }
 
 function buildRedirect(path: string, params: Record<string, string | null | undefined>) {
@@ -111,7 +95,42 @@ export async function signup(formData: FormData) {
     }));
   }
 
-  const data = {
+  // ── Étape A — ÉLIGIBILITÉ vérifiée AVANT toute création de compte ──
+  // Empêche les comptes orphelins + la cascade de rate-limit Supabase :
+  // un email sans accès qui s'inscrit puis réessaie déclenchait "you can only
+  // request this after N seconds". On ne crée le compte que si l'achat est valide.
+  let grants: (string | null)[] | null = null;
+  let paidSessionId: string | null = null;
+  try {
+    if (sessionId) {
+      const session = await retrievePaidCheckout(sessionId);
+      const paidEmail = session.customer_details?.email?.toLowerCase();
+      if (paidEmail && paidEmail !== email) {
+        throw new Error("Utilisez l'email indiqué lors du paiement (chez Stripe).");
+      }
+      const purchase = parsePurchaseMetadata(
+        session.metadata as Record<string, string> | null
+      );
+      if (purchase.formationId && purchase.formationId !== "immobilier") {
+        throw new Error("Ce paiement ne correspond pas à la formation immobilière.");
+      }
+      // Sessions historiques sans metadata lisible : comportement d'origine = pack.
+      grants = purchase.productIds.length > 0 ? grantsFromProducts(purchase.productIds) : [null];
+      paidSessionId = session.id;
+    } else if (!(await hasActiveSubscription(email))) {
+      throw new Error("NO_ACCESS");
+    }
+  } catch (eligibilityError) {
+    const raw = eligibilityError instanceof Error ? eligibilityError.message : "";
+    const friendly =
+      raw === "NO_ACCESS"
+        ? "Aucune formation n'est associée à cet email. Achetez d'abord votre formation : votre compte se créera juste après le paiement."
+        : raw || "Impossible de vérifier votre achat. Réessayez ou contactez-nous.";
+    redirect(buildRedirect("/register", { next, session_id: sessionId, error: friendly }));
+  }
+
+  // ── Étape B — création du compte (éligibilité confirmée) ──
+  const { data: authData, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -122,9 +141,7 @@ export async function signup(formData: FormData) {
       },
       emailRedirectTo: `${getAppUrl()}/auth/callback?next=${encodeURIComponent(next)}`,
     },
-  };
-
-  const { data: authData, error } = await supabase.auth.signUp(data);
+  });
 
   if (error) {
     redirect(buildRedirect("/register", {
@@ -134,6 +151,10 @@ export async function signup(formData: FormData) {
     }));
   }
 
+  // ── Étape C — profil + octroi/rattachement (best-effort) ──
+  // L'éligibilité est déjà validée. En cas d'erreur transitoire ici, on NE
+  // renvoie PAS vers /register (sinon nouveau signUp → rate-limit) : l'accès est
+  // de toute façon rattaché par email (webhook + verifyModuleAccess matchent l'email).
   if (authData.user) {
     try {
       await upsertStudentProfile({
@@ -143,55 +164,22 @@ export async function signup(formData: FormData) {
         last_name: lastName,
       });
 
-      if (sessionId) {
-        const session = await retrievePaidCheckout(sessionId);
-        const paidEmail = session.customer_details?.email?.toLowerCase();
-
-        if (paidEmail && paidEmail !== email) {
-          throw new Error("L'email du paiement ne correspond pas à l'email du compte.");
-        }
-
-        // Octroie EXACTEMENT ce qui a été payé : pack ⇒ accès total,
-        // module(s) ⇒ ces modules. (Le webhook fait pareil — grantEntitlement
-        // est idempotent, ceci couvre aussi son éventuel retard.)
-        const purchase = parsePurchaseMetadata(
-          session.metadata as Record<string, string> | null
-        );
-        if (purchase.formationId && purchase.formationId !== "immobilier") {
-          throw new Error("Ce paiement ne correspond pas à la formation immobilière.");
-        }
-        // Sessions historiques sans metadata lisible : comportement d'origine = pack.
-        const grants =
-          purchase.productIds.length > 0 ? grantsFromProducts(purchase.productIds) : [null];
-
+      if (grants) {
         for (const moduleSlug of grants) {
           await grantEntitlement({
             email,
             user_id: authData.user.id,
             formation_id: "immobilier",
             module_slug: moduleSlug,
-            stripe_session_id: session.id,
+            stripe_session_id: paidSessionId,
             status: "active",
           });
         }
       } else {
-        const linked = await linkExistingSubscriptionToUser({
-          email,
-          userId: authData.user.id,
-        });
-
-        if (!linked) {
-          throw new Error("Aucun accès actif n'existe pour cet email. Contactez l'administrateur.");
-        }
+        await linkExistingSubscriptionToUser({ email, userId: authData.user.id });
       }
-    } catch (subscriptionError) {
-      redirect(buildRedirect("/register", {
-        next,
-        session_id: sessionId,
-        error: subscriptionError instanceof Error
-          ? subscriptionError.message
-          : "Impossible de créer l'accès formation.",
-      }));
+    } catch (postSignupError) {
+      console.error("signup: octroi/rattachement post-création échoué:", postSignupError);
     }
   }
 
