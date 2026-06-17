@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Loader2, Lock, Mail, User, Sparkles, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { signup } from "@/app/actions/auth";
+import { PasswordInput } from "@/components/ui/PasswordInput";
 import { useEffect } from "react";
 
 export default function RegisterForm() {
@@ -148,16 +149,7 @@ export default function RegisterForm() {
                   <Lock className="h-4 w-4 text-brand-gold" aria-hidden />
                   Mot de passe
                 </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="new-password"
-                  required
-                  minLength={6}
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all"
-                  placeholder="••••••••"
-                />
+                <PasswordInput id="password" name="password" autoComplete="new-password" minLength={6} />
                 <p className="mt-2 text-xs font-bold text-white/75 tracking-wide uppercase">Minimum 6 caractères</p>
               </div>
 

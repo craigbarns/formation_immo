@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Loader2, Lock, Mail, Sparkles, Home, ClipboardList, Scale, Briefcase, Building2, CircleDollarSign, Handshake } from "lucide-react";
 import { login, resetPassword } from "@/app/actions/auth";
+import { PasswordInput } from "@/components/ui/PasswordInput";
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
@@ -149,15 +150,7 @@ export default function LoginForm() {
                   <Lock className="h-4 w-4 text-brand-gold" aria-hidden />
                   Mot de passe
                 </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-white placeholder:text-zinc-500 focus:border-brand-gold/50 focus:outline-none focus:ring-4 focus:ring-brand-gold/10 transition-all"
-                  placeholder="••••••••"
-                />
+                <PasswordInput id="password" name="password" autoComplete="current-password" />
               </div>
 
               {error ? (
