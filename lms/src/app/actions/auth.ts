@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import type { User } from "@supabase/supabase-js";
 import Stripe from "stripe";
 import { getAppUrl } from "@/lib/app-url";
 import {
@@ -12,6 +13,7 @@ import {
 } from "@/lib/auth-access";
 import { grantsFromProducts, parsePurchaseMetadata } from "@/lib/purchase";
 import { getAuthErrorMessage } from "@/lib/auth-errors";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
 function getValidNext(value: FormDataEntryValue | null, fallback = "/formation") {
@@ -32,6 +34,137 @@ function buildRedirect(path: string, params: Record<string, string | null | unde
 
   const query = searchParams.toString();
   return query ? `${path}?${query}` : path;
+}
+
+function isAlreadyRegisteredError(message: string) {
+  const normalized = message.toLowerCase();
+  return (
+    normalized.includes("user already registered") ||
+    normalized.includes("already been registered") ||
+    (normalized.includes("already") && normalized.includes("registered"))
+  );
+}
+
+async function findAuthUserByEmail(email: string): Promise<User | null> {
+  const admin = createAdminClient();
+  const normalizedEmail = email.toLowerCase();
+  const perPage = 1000;
+
+  for (let page = 1; page <= 20; page += 1) {
+    const { data, error } = await admin.auth.admin.listUsers({ page, perPage });
+    if (error) throw new Error(error.message);
+
+    const match = data.users.find((user) => user.email?.toLowerCase() === normalizedEmail);
+    if (match) return match;
+    if (data.users.length < perPage) return null;
+  }
+
+  throw new Error("Compte existant introuvable dans Supabase Auth.");
+}
+
+async function createPaidCheckoutUser({
+  email,
+  password,
+  fullName,
+  firstName,
+  lastName,
+}: {
+  email: string;
+  password: string;
+  fullName: string;
+  firstName: string;
+  lastName: string;
+}) {
+  const admin = createAdminClient();
+  const metadata = {
+    full_name: fullName,
+    first_name: firstName,
+    last_name: lastName,
+  };
+
+  const { data, error } = await admin.auth.admin.createUser({
+    email,
+    password,
+    email_confirm: true,
+    user_metadata: metadata,
+  });
+
+  if (!error) {
+    return { user: data.user, alreadyExisted: false };
+  }
+
+  if (!isAlreadyRegisteredError(error.message)) {
+    throw new Error(error.message);
+  }
+
+  const existingUser = await findAuthUserByEmail(email);
+  if (!existingUser) {
+    throw new Error("Compte existant introuvable dans Supabase Auth.");
+  }
+
+  // Ne change jamais le mot de passe d'un compte existant. On confirme juste
+  // l'email si besoin pour débloquer un premier signup interrompu.
+  const { error: updateError } = await admin.auth.admin.updateUserById(existingUser.id, {
+    email_confirm: true,
+  });
+
+  if (updateError) throw new Error(updateError.message);
+
+  return { user: existingUser, alreadyExisted: true };
+}
+
+async function upsertSignupProfile({
+  id,
+  fullName,
+  firstName,
+  lastName,
+  preserveExistingRole,
+}: {
+  id: string;
+  fullName: string;
+  firstName: string;
+  lastName: string;
+  preserveExistingRole: boolean;
+}) {
+  if (!preserveExistingRole) {
+    await upsertStudentProfile({
+      id,
+      full_name: fullName,
+      first_name: firstName,
+      last_name: lastName,
+    });
+    return;
+  }
+
+  const admin = createAdminClient();
+  const { data: profile, error: selectError } = await admin
+    .from("profiles")
+    .select("id")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (selectError) throw new Error(selectError.message);
+
+  if (!profile) {
+    await upsertStudentProfile({
+      id,
+      full_name: fullName,
+      first_name: firstName,
+      last_name: lastName,
+    });
+    return;
+  }
+
+  const { error: updateError } = await admin
+    .from("profiles")
+    .update({
+      full_name: fullName,
+      first_name: firstName,
+      last_name: lastName,
+    })
+    .eq("id", id);
+
+  if (updateError) throw new Error(updateError.message);
 }
 
 async function retrievePaidCheckout(sessionId: string) {
@@ -130,45 +263,90 @@ export async function signup(formData: FormData) {
   }
 
   // ── Étape B — création du compte (éligibilité confirmée) ──
-  const { data: authData, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      data: {
-        full_name: fullName,
-        first_name: firstName,
-        last_name: lastName,
-      },
-      emailRedirectTo: `${getAppUrl()}/auth/callback?next=${encodeURIComponent(next)}`,
-    },
-  });
+  let authUser: User | null = null;
+  let paidAccountAlreadyExisted = false;
 
-  if (error) {
-    redirect(buildRedirect("/register", {
-      next,
-      session_id: sessionId,
-      error: getAuthErrorMessage(error.message),
-    }));
+  if (sessionId) {
+    try {
+      const result = await createPaidCheckoutUser({
+        email,
+        password,
+        fullName,
+        firstName,
+        lastName,
+      });
+      authUser = result.user;
+      paidAccountAlreadyExisted = result.alreadyExisted;
+    } catch (createUserError) {
+      console.error("signup: création admin post-paiement échouée, fallback signup public:", createUserError);
+
+      const { data: authData, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: fullName,
+            first_name: firstName,
+            last_name: lastName,
+          },
+          emailRedirectTo: `${getAppUrl()}/auth/callback?next=${encodeURIComponent(next)}`,
+        },
+      });
+
+      if (error) {
+        redirect(buildRedirect("/register", {
+          next,
+          session_id: sessionId,
+          error: getAuthErrorMessage(error.message),
+        }));
+      }
+
+      authUser = authData.user;
+    }
+  } else {
+    const { data: authData, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName,
+          first_name: firstName,
+          last_name: lastName,
+        },
+        emailRedirectTo: `${getAppUrl()}/auth/callback?next=${encodeURIComponent(next)}`,
+      },
+    });
+
+    if (error) {
+      redirect(buildRedirect("/register", {
+        next,
+        session_id: sessionId,
+        error: getAuthErrorMessage(error.message),
+      }));
+    }
+
+    authUser = authData.user;
   }
 
   // ── Étape C — profil + octroi/rattachement (best-effort) ──
   // L'éligibilité est déjà validée. En cas d'erreur transitoire ici, on NE
   // renvoie PAS vers /register (sinon nouveau signUp → rate-limit) : l'accès est
   // de toute façon rattaché par email (webhook + verifyModuleAccess matchent l'email).
-  if (authData.user) {
+  if (authUser) {
     try {
-      await upsertStudentProfile({
-        id: authData.user.id,
-        full_name: fullName,
-        first_name: firstName,
-        last_name: lastName,
+      await upsertSignupProfile({
+        id: authUser.id,
+        fullName,
+        firstName,
+        lastName,
+        preserveExistingRole: paidAccountAlreadyExisted,
       });
 
       if (grants) {
         for (const moduleSlug of grants) {
           await grantEntitlement({
             email,
-            user_id: authData.user.id,
+            user_id: authUser.id,
             formation_id: "immobilier",
             module_slug: moduleSlug,
             stripe_session_id: paidSessionId,
@@ -176,7 +354,7 @@ export async function signup(formData: FormData) {
           });
         }
       } else {
-        await linkExistingSubscriptionToUser({ email, userId: authData.user.id });
+        await linkExistingSubscriptionToUser({ email, userId: authUser.id });
       }
     } catch (postSignupError) {
       console.error("signup: octroi/rattachement post-création échoué:", postSignupError);
@@ -186,9 +364,11 @@ export async function signup(formData: FormData) {
   revalidatePath("/", "layout");
   
   // Message personnalisé si c'est un retour de paiement
-  const message = sessionId
-    ? "Compte créé ! Confirmez votre email pour accéder à votre formation."
-    : "Vérifiez votre email pour confirmer votre compte.";
+  const message = paidAccountAlreadyExisted
+    ? "Votre paiement est bien rattaché. Un compte existe déjà avec cet email : connectez-vous, ou réinitialisez votre mot de passe."
+    : sessionId
+      ? "Compte créé ! Connectez-vous avec le mot de passe choisi pour accéder à votre formation."
+      : "Vérifiez votre email pour confirmer votre compte.";
 
   redirect(`/login?next=${encodeURIComponent(next)}&message=${encodeURIComponent(message)}`);
 }

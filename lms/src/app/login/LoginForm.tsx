@@ -1,16 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Loader2, Lock, Mail, Sparkles, Home, ClipboardList, Scale, Briefcase, Building2, CircleDollarSign, Handshake } from "lucide-react";
 import { login, resetPassword } from "@/app/actions/auth";
+import { getAuthErrorMessage } from "@/lib/auth-errors";
 import { PasswordInput } from "@/components/ui/PasswordInput";
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
+  const submittingRef = useRef(false);
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
+  const displayError = error ? getAuthErrorMessage(error) : null;
   const message = searchParams.get("message");
   const next = searchParams.get("next") ?? "/formation";
   const isReset = searchParams.get("reset") === "1";
@@ -19,15 +22,27 @@ export default function LoginForm() {
   const registerHref = `/register?next=${encodeURIComponent(next)}${fromCheckout ? "&achat=1" : ""}`;
 
   async function handleSubmit(formData: FormData) {
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setLoading(true);
-    await login(formData);
-    setLoading(false);
+    try {
+      await login(formData);
+    } finally {
+      submittingRef.current = false;
+      setLoading(false);
+    }
   }
 
   async function handleReset(formData: FormData) {
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setLoading(true);
-    await resetPassword(formData);
-    setLoading(false);
+    try {
+      await resetPassword(formData);
+    } finally {
+      submittingRef.current = false;
+      setLoading(false);
+    }
   }
 
   return (
@@ -104,8 +119,8 @@ export default function LoginForm() {
                   />
                 </div>
 
-                {error && (
-                  <p className="rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm font-bold text-red-400" role="alert">{error}</p>
+                {displayError && (
+                  <p className="rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm font-bold text-red-400" role="alert">{displayError}</p>
                 )}
                 {message && (
                   <p className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-4 py-3 text-sm font-bold text-emerald-400" role="status">{message}</p>
@@ -153,9 +168,9 @@ export default function LoginForm() {
                 <PasswordInput id="password" name="password" autoComplete="current-password" />
               </div>
 
-              {error ? (
+              {displayError ? (
                 <p className="rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm font-bold text-red-400" role="alert">
-                  {error}
+                  {displayError}
                 </p>
               ) : null}
 

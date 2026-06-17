@@ -1,21 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Loader2, Lock, Mail, User, Sparkles, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { signup } from "@/app/actions/auth";
+import { getAuthErrorMessage } from "@/lib/auth-errors";
 import { PasswordInput } from "@/components/ui/PasswordInput";
-import { useEffect } from "react";
 
 export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const [prefilledEmail, setPrefilledEmail] = useState("");
   const [prefilledFirstName, setPrefilledFirstName] = useState("");
   const [prefilledLastName, setPrefilledLastName] = useState("");
+  const submittingRef = useRef(false);
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
+  const displayError = error ? getAuthErrorMessage(error) : null;
   const sessionId = searchParams.get("session_id");
   const next = searchParams.get("next") ?? "/formation";
   // Arrivée depuis un panier / bouton d'achat : messaging dédié.
@@ -43,9 +45,15 @@ export default function RegisterForm() {
   }, [sessionId]);
 
   async function handleSubmit(formData: FormData) {
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setLoading(true);
-    await signup(formData);
-    setLoading(false);
+    try {
+      await signup(formData);
+    } finally {
+      submittingRef.current = false;
+      setLoading(false);
+    }
   }
 
   return (
@@ -153,9 +161,9 @@ export default function RegisterForm() {
                 <p className="mt-2 text-xs font-bold text-white/75 tracking-wide uppercase">Minimum 6 caractères</p>
               </div>
 
-              {error ? (
+              {displayError ? (
                 <p className="rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm font-bold text-red-400" role="alert">
-                  {error}
+                  {displayError}
                 </p>
               ) : null}
 
