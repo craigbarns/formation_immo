@@ -244,13 +244,16 @@ async function generateModuleAttestation(args: {
     return NextResponse.json({ error: "Module non possédé." }, { status: 403 });
   }
 
-  // Garde 2 : module terminé (toutes les leçons complétées)
+  // Garde 2 : module réellement suivi (toutes les leçons + temps minimum)
   const completion = await getModuleCompletion(userId, moduleSlug);
   if (!completion.completed) {
-    return NextResponse.json(
-      { error: "Terminez toutes les leçons du module pour obtenir votre attestation." },
-      { status: 403 }
+    const remainingMin = Math.ceil(
+      Math.max(0, completion.requiredSec - completion.timeSpentSec) / 60
     );
+    const error = !completion.lessonsDone
+      ? "Terminez toutes les leçons du module pour obtenir votre attestation."
+      : `Temps de suivi insuffisant : il vous reste environ ${remainingMin} min de visionnage dans ce module avant de pouvoir générer l'attestation.`;
+    return NextResponse.json({ error }, { status: 403 });
   }
 
   // Période : début = octroi du droit (module ou pack), fin = dernière leçon complétée

@@ -63,6 +63,9 @@ export default async function ModulePage({ params }: Props) {
   const avatar = getAvatarForModule(mod.slug);
   const firstLesson = mod.lessons[0];
   const completion = await getModuleCompletion(access.user.id, mod.slug);
+  const remainingMin = Math.ceil(
+    Math.max(0, completion.requiredSec - completion.timeSpentSec) / 60
+  );
 
   const lessons = mod.lessons.map((lesson) => {
     const audioSrc = getLessonModuleListAudioSrc(lesson);
@@ -80,14 +83,20 @@ export default async function ModulePage({ params }: Props) {
 
   return (
     <>
-      {completion.completed && (
+      {completion.completed ? (
         <div className="mb-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-brand-gold/30 bg-brand-gold/10 px-6 py-4">
           <p className="text-sm font-black uppercase tracking-wider text-brand-gold">
             🎓 Module terminé — votre attestation de suivi est disponible
           </p>
           <ModuleAttestationButton moduleSlug={mod.slug} />
         </div>
-      )}
+      ) : completion.lessonsDone ? (
+        <div className="mb-6 rounded-2xl border border-amber-400/30 bg-amber-400/10 px-6 py-4">
+          <p className="text-sm font-bold text-amber-200">
+            📚 Vous avez parcouru toutes les leçons — encore <span className="font-black">~{remainingMin} min</span> de visionnage dans ce module pour débloquer votre attestation de suivi.
+          </p>
+        </div>
+      ) : null}
       <ModuleLanding
       moduleSlug={mod.slug}
       moduleTitle={mod.title}
