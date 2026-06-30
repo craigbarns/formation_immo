@@ -3,16 +3,9 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { getGamificationState } from "@/lib/gamification";
+import { COURSE, getModuleDurationMin } from "@/data/course";
 import { Clock, Activity } from "lucide-react";
 import { motion } from "framer-motion";
-
-const MODULE_TARGET_HOURS: Record<string, number> = {
-  juridique: 8,
-  transaction: 8,
-  financement: 8,
-  marketing: 8,
-  terrain: 8,
-};
 
 function formatTime(totalSeconds: number): string {
   const hrs = Math.floor(totalSeconds / 3600);
@@ -44,7 +37,8 @@ export function ModuleTimeTracker({ moduleSlug }: { moduleSlug: string }) {
     load();
   }, [moduleSlug]);
 
-  const targetHours = MODULE_TARGET_HOURS[moduleSlug] || 8;
+  // Cible = durée réelle prévue du module (depuis COURSE), pas un chiffre figé.
+  const targetHours = Math.round(((getModuleDurationMin(moduleSlug) || 480) / 60) * 10) / 10;
   const targetSeconds = targetHours * 3600;
   const pct = Math.min(100, (seconds / targetSeconds) * 100);
 
@@ -129,9 +123,9 @@ export function GlobalTimeTracker() {
         />
       </div>
 
-      <div className="mt-10 grid grid-cols-5 gap-3 border-t border-white/5 pt-8">
-        {["juridique", "transaction", "financement", "marketing", "terrain"].map((mod) => (
-          <ModuleTimeMini key={mod} moduleSlug={mod} />
+      <div className="mt-10 grid grid-cols-3 gap-3 border-t border-white/5 pt-8 sm:grid-cols-6">
+        {COURSE.map((mod) => (
+          <ModuleTimeMini key={mod.slug} moduleSlug={mod.slug} />
         ))}
       </div>
     </div>
@@ -167,11 +161,13 @@ function ModuleTimeMini({ moduleSlug }: { moduleSlug: string }) {
     financement: "FIN.",
     marketing: "MKT.",
     terrain: "TERR.",
+    deontologie: "DÉON.",
   };
+  const label = labels[moduleSlug] ?? moduleSlug.slice(0, 5).toUpperCase();
 
   return (
     <div className="text-center group">
-      <div className="text-[9px] font-black text-white/75 uppercase tracking-widest group-hover:text-brand-gold/60 transition-colors mb-1">{labels[moduleSlug]}</div>
+      <div className="text-[9px] font-black text-white/75 uppercase tracking-widest group-hover:text-brand-gold/60 transition-colors mb-1">{label}</div>
       <div className="text-xs font-black text-white/60 tabular-nums uppercase">{formatTime(seconds)}</div>
     </div>
   );

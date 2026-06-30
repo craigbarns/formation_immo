@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { getTotalLessonCount } from "@/lib/formation-journey";
 
 export type ExamResultInput = {
   moduleSlug: string;
@@ -121,7 +122,7 @@ export async function issueCertificate(studentName: string, modules: string[], f
     .eq("completed", true);
 
   const completedLessons = progressRows?.length ?? 0;
-  const totalLessons = 36;
+  const totalLessons = getTotalLessonCount(); // dynamique : 40 leçons (6 modules)
   const completionPct = Math.round((completedLessons / totalLessons) * 100);
 
   if (completionPct < 80) {
