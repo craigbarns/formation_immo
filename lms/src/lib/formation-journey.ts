@@ -15,6 +15,21 @@ export function getTotalLessonCount(): number {
   return COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
 }
 
+/**
+ * Modules "bonus" hors de la certification finale 42h.
+ * La déontologie (module 6) se vend / se suit à part et a sa propre attestation —
+ * elle ne compte donc PAS dans le diplôme 42h des 5 modules d'origine.
+ */
+export const BONUS_MODULE_SLUGS = ["deontologie"];
+
+/** Nombre de leçons comptant pour la CERTIFICATION 42h (exclut les modules bonus). */
+export function getCertifiedLessonCount(): number {
+  return COURSE.filter((m) => !BONUS_MODULE_SLUGS.includes(m.slug)).reduce(
+    (acc, m) => acc + m.lessons.length,
+    0
+  );
+}
+
 /** Première leçon non marquée « vue », dans l’ordre du parcours. */
 export function findNextLesson(progress: Record<string, boolean>): NextLessonInfo | null {
   const totalSteps = getTotalLessonCount();

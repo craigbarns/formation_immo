@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { getTotalLessonCount } from "@/lib/formation-journey";
+import { getCertifiedLessonCount } from "@/lib/formation-journey";
 
 export type ExamResultInput = {
   moduleSlug: string;
@@ -122,7 +122,9 @@ export async function issueCertificate(studentName: string, modules: string[], f
     .eq("completed", true);
 
   const completedLessons = progressRows?.length ?? 0;
-  const totalLessons = getTotalLessonCount(); // dynamique : 40 leçons (6 modules)
+  // Certification 42h = les 5 modules d'origine (hors déontologie, module bonus).
+  // Compté dynamiquement depuis COURSE — le seuil de 80% suit le contenu réel.
+  const totalLessons = getCertifiedLessonCount();
   const completionPct = Math.round((completedLessons / totalLessons) * 100);
 
   if (completionPct < 80) {
