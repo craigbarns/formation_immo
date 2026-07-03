@@ -1394,7 +1394,7 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   {
     id: "qc-fin-defis-01",
     moduleSlug: "financement",
-    lessonSlug: "defiscalisation",
+    lessonSlug: "fiscalite-avancee",
     question: "Quel dispositif de défiscalisation a pris fin le 31 décembre 2024 ?",
     options: [
       { label: "Denormandie", isCorrect: false },
@@ -1408,7 +1408,7 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   {
     id: "qc-fin-defis-02",
     moduleSlug: "financement",
-    lessonSlug: "defiscalisation",
+    lessonSlug: "fiscalite-avancee",
     question: "Le dispositif Denormandie vise principalement :",
     options: [
       { label: "La construction de logements neufs", isCorrect: false },
@@ -1422,7 +1422,7 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   {
     id: "qc-fin-defis-03",
     moduleSlug: "financement",
-    lessonSlug: "defiscalisation",
+    lessonSlug: "fiscalite-avancee",
     question: "Face à un client souhaitant optimiser massivement sa fiscalité immobilière, vers qui l'orienter ?",
     options: [
       { label: "Un notaire", isCorrect: false },
@@ -1526,7 +1526,7 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   {
     id: "qc-ter-r0r1r2-01",
     moduleSlug: "terrain",
-    lessonSlug: "r0-r1-r2",
+    lessonSlug: "prise-de-mandat-decouverte-client",
     question: "Quel est le principal objectif du R0 (appel téléphonique) ?",
     options: [
       { label: "Vendre le bien au téléphone", isCorrect: false },
@@ -1540,7 +1540,7 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   {
     id: "qc-ter-r0r1r2-02",
     moduleSlug: "terrain",
-    lessonSlug: "r0-r1-r2",
+    lessonSlug: "prise-de-mandat-decouverte-client",
     question: "Pendant le R1 (visite du bien), quand faut-il annoncer le prix d'estimation ?",
     options: [
       { label: "Dès l'arrivée pour cadrer le vendeur", isCorrect: false },
@@ -1554,7 +1554,7 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   {
     id: "qc-ter-r0r1r2-03",
     moduleSlug: "terrain",
-    lessonSlug: "r0-r1-r2",
+    lessonSlug: "prise-de-mandat-decouverte-client",
     question: "La méthode SONCAS sert à :",
     options: [
       { label: "Calculer le rendement locatif d'un bien", isCorrect: false },
@@ -1570,7 +1570,7 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   {
     id: "qc-ter-deco-01",
     moduleSlug: "terrain",
-    lessonSlug: "decouverte-client",
+    lessonSlug: "prise-de-mandat-decouverte-client",
     question: "Quel pourcentage d'acheteurs signe finalement pour un bien différent de leur demande initiale ?",
     options: [
       { label: "25 %", isCorrect: false },
@@ -1584,7 +1584,7 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   {
     id: "qc-ter-deco-02",
     moduleSlug: "terrain",
-    lessonSlug: "decouverte-client",
+    lessonSlug: "prise-de-mandat-decouverte-client",
     question: "Quelle question permet d'identifier les 'critères absolus' (deal-breakers) d'un acquéreur ?",
     options: [
       { label: "Quelle est votre couleur préférée ?", isCorrect: false },
@@ -1598,7 +1598,7 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   {
     id: "qc-ter-deco-03",
     moduleSlug: "terrain",
-    lessonSlug: "decouverte-client",
+    lessonSlug: "prise-de-mandat-decouverte-client",
     question: "Quelle est la durée optimale d'un suivi structuré d'un acquéreur ?",
     options: [
       { label: "7 jours", isCorrect: false },

@@ -383,7 +383,7 @@ export const COURSE: CourseModule[] = [
         title: "Fiscalité avancée — dispositifs et défiscalisation",
         scriptFile: "module3-financement/scripts/script07-fiscalite-avancee-dispositifs-defiscalisation.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/script07-fiscalite-avancee-dispositifs-defiscalisation.mp3",
         duration: 120,
         difficulty: "avance",
         objectives: [
@@ -606,7 +606,7 @@ export const COURSE: CourseModule[] = [
         title: "Prise de mandat & découverte client",
         scriptFile: "module5-terrain/scripts/08-prise-de-mandat-decouverte-client.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/08-prise-de-mandat-decouverte-client.mp3",
         duration: 90,
         difficulty: "intermediaire",
         objectives: [
