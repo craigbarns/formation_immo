@@ -1656,6 +1656,186 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
     explanation: "L'ITT (Incapacité Temporaire de Travail) est la garantie qui prend le relais sur les remboursements de prêt lorsque l'emprunteur est temporairement incapable de travailler à la suite d'un accident ou d'une maladie.",
     difficulty: "medium",
   },
+
+  // ──────────────────────────────────────────────
+  // MODULE 6 — DÉONTOLOGIE & ÉTHIQUE PROFESSIONNELLE
+  // ──────────────────────────────────────────────
+
+  // deontologie / non-discrimination
+  {
+    id: "qc-deo-discr-01",
+    moduleSlug: "deontologie",
+    lessonSlug: "non-discrimination",
+    question: "Que risque un agent qui applique l'instruction discriminatoire d'un propriétaire bailleur ?",
+    options: [
+      { label: "Rien, seul le propriétaire est responsable", isCorrect: false },
+      { label: "Une simple mise en garde du Défenseur des droits", isCorrect: false },
+      { label: "Des poursuites pénales : il est complice et responsable au même titre", isCorrect: true },
+      { label: "Une amende civile réglée par l'agence uniquement", isCorrect: false },
+    ],
+    explanation: "L'instruction de discriminer est un délit pour celui qui la donne ET pour celui qui l'exécute (art. 225-2 Code pénal). L'agent ne peut pas s'abriter derrière la demande du propriétaire.",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-deo-discr-02",
+    moduleSlug: "deontologie",
+    lessonSlug: "non-discrimination",
+    question: "Exiger systématiquement un CDI alors que des profils en CDD ou indépendants présentent des garanties équivalentes constitue :",
+    options: [
+      { label: "Une discrimination directe", isCorrect: false },
+      { label: "Une discrimination indirecte", isCorrect: true },
+      { label: "Une pratique commerciale trompeuse", isCorrect: false },
+      { label: "Une clause parfaitement légale dans tous les cas", isCorrect: false },
+    ],
+    explanation: "La discrimination indirecte applique une règle en apparence neutre qui désavantage disproportionnellement certains candidats, sans justification objective.",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-deo-discr-03",
+    moduleSlug: "deontologie",
+    lessonSlug: "non-discrimination",
+    question: "En matière de discrimination au logement, à qui incombe la charge de la preuve une fois des faits laissant présumer une discrimination établis ?",
+    options: [
+      { label: "Toujours à la victime, du début à la fin", isCorrect: false },
+      { label: "À l'agence, qui doit prouver que la différence de traitement est objectivement justifiée", isCorrect: true },
+      { label: "Au Défenseur des droits exclusivement", isCorrect: false },
+      { label: "Elle est partagée à parts égales sans priorité", isCorrect: false },
+    ],
+    explanation: "C'est l'inversion de la charge de la preuve : une fois des faits présumant la discrimination établis (ex. testing), c'est à l'agence de démontrer un motif objectif étranger à tout critère prohibé.",
+    difficulty: "hard",
+  },
+
+  // deontologie / non-discrimination-pratique
+  {
+    id: "qc-deo-pratique-01",
+    moduleSlug: "deontologie",
+    lessonSlug: "non-discrimination-pratique",
+    question: "Le testing immobilier est :",
+    options: [
+      { label: "Une méthode illégale de piégeage des agences", isCorrect: false },
+      { label: "Une preuve reconnue par les tribunaux depuis la loi du 27 janvier 2017", isCorrect: true },
+      { label: "Réservé aux seules forces de police", isCorrect: false },
+      { label: "Interdit d'utilisation par les associations", isCorrect: false },
+    ],
+    explanation: "Le testing envoie deux candidats comparables financièrement mais différents sur un critère protégé. Depuis 2017, ses résultats sont explicitement admissibles comme preuve devant les tribunaux.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-deo-pratique-02",
+    moduleSlug: "deontologie",
+    lessonSlug: "non-discrimination-pratique",
+    question: "Parmi ces éléments, lequel un agent NE peut PAS demander à un candidat locataire ?",
+    options: [
+      { label: "Justificatifs de revenus", isCorrect: false },
+      { label: "Une photo d'identité", isCorrect: true },
+      { label: "Le contrat de travail", isCorrect: false },
+      { label: "L'avis d'imposition", isCorrect: false },
+    ],
+    explanation: "La photo, la situation familiale détaillée, l'origine ou la religion ne peuvent pas être exigées : seuls des critères objectifs liés à la solvabilité sont autorisés.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-deo-pratique-03",
+    moduleSlug: "deontologie",
+    lessonSlug: "non-discrimination-pratique",
+    question: "Un propriétaire insiste pour exclure les candidats d'une origine donnée malgré votre refus. Quelle est l'attitude conforme au Code de déontologie ?",
+    options: [
+      { label: "Appliquer sa demande discrètement pour garder le mandat", isCorrect: false },
+      { label: "Refuser le mandat plutôt que d'exécuter une instruction discriminatoire", isCorrect: true },
+      { label: "Transférer le dossier à un confrère sans explication", isCorrect: false },
+      { label: "Accepter en le notant simplement dans un email interne", isCorrect: false },
+    ],
+    explanation: "Face à un client qui insiste, l'agent protégé par le Code de déontologie peut et doit refuser le mandat plutôt que de s'exposer, lui et son client, à des poursuites pénales.",
+    difficulty: "medium",
+  },
+
+  // deontologie / code-deontologie
+  {
+    id: "qc-deo-code-01",
+    moduleSlug: "deontologie",
+    lessonSlug: "code-deontologie",
+    question: "Le Code de déontologie des professionnels de l'immobilier s'applique à :",
+    options: [
+      { label: "Uniquement aux titulaires de la carte T, personnellement", isCorrect: false },
+      { label: "Toute personne titulaire d'une carte professionnelle Hoguet, ses collaborateurs et négociateurs habilités", isCorrect: true },
+      { label: "Uniquement aux syndics de copropriété", isCorrect: false },
+      { label: "Uniquement aux réseaux nationaux, pas aux agences indépendantes", isCorrect: false },
+    ],
+    explanation: "Le décret 2015-1090 s'impose au titulaire de la carte professionnelle mais aussi à ses collaborateurs habilités et négociateurs, salariés ou agents commerciaux.",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-deo-code-02",
+    moduleSlug: "deontologie",
+    lessonSlug: "code-deontologie",
+    question: "Un agent sanctionné par la CNTGI pour un manquement déontologique peut-il aussi être condamné pénalement pour les mêmes faits ?",
+    options: [
+      { label: "Non, un seul type de sanction est possible par fait", isCorrect: false },
+      { label: "Oui, les responsabilités disciplinaire, civile et pénale sont cumulables", isCorrect: true },
+      { label: "Seulement si le préfet en fait la demande expresse", isCorrect: false },
+      { label: "Non, la sanction disciplinaire annule la procédure pénale", isCorrect: false },
+    ],
+    explanation: "Les trois responsabilités (civile, disciplinaire, pénale) sont indépendantes et cumulables pour un même manquement.",
+    difficulty: "hard",
+  },
+  {
+    id: "qc-deo-code-03",
+    moduleSlug: "deontologie",
+    lessonSlug: "code-deontologie",
+    question: "Percevoir une rétrocession non déclarée d'un partenaire (notaire, banque…) auquel vous orientez vos clients viole en priorité le principe de :",
+    options: [
+      { label: "Confraternité", isCorrect: false },
+      { label: "Désintéressement", isCorrect: true },
+      { label: "Modération", isCorrect: false },
+      { label: "Délicatesse", isCorrect: false },
+    ],
+    explanation: "Le désintéressement interdit de tirer un avantage personnel caché au détriment du client — une rétrocession non déclarée en est l'exemple type.",
+    difficulty: "medium",
+  },
+
+  // deontologie / ethique-pratique
+  {
+    id: "qc-deo-ethique-01",
+    moduleSlug: "deontologie",
+    lessonSlug: "ethique-pratique",
+    question: "Dans un double mandat (vendeur et acheteur), l'agent doit avant tout :",
+    options: [
+      { label: "Choisir de ne représenter que la partie la plus rentable", isCorrect: false },
+      { label: "Informer les deux parties par écrit de son double rôle avant toute négociation", isCorrect: true },
+      { label: "Ne rien dire tant qu'aucune des parties ne pose de question", isCorrect: false },
+      { label: "Demander l'autorisation de la CNTGI au cas par cas", isCorrect: false },
+    ],
+    explanation: "Le double mandat est légal mais exige une transparence totale : information écrite des deux parties avant toute négociation, sans divulguer le prix plancher de l'une à l'autre.",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-deo-ethique-02",
+    moduleSlug: "deontologie",
+    lessonSlug: "ethique-pratique",
+    question: "Selon le RGPD, combien de temps maximum un dossier de candidat locataire refusé peut-il être conservé ?",
+    options: [
+      { label: "3 mois", isCorrect: false },
+      { label: "1 an", isCorrect: true },
+      { label: "5 ans", isCorrect: false },
+      { label: "10 ans", isCorrect: false },
+    ],
+    explanation: "Un dossier locataire refusé ne doit pas être conservé plus d'un an. Les mandats et actes se conservent 5 ans, les données comptables 10 ans.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-deo-ethique-03",
+    moduleSlug: "deontologie",
+    lessonSlug: "ethique-pratique",
+    question: "Un acquéreur vous propose 2 000 € \"pour vous\" si vous faites accepter son offre en dessous du prix par votre mandant vendeur. Que faites-vous ?",
+    options: [
+      { label: "Vous acceptez discrètement, ça n'engage que vous", isCorrect: false },
+      { label: "Vous refusez : c'est un abus de confiance et une violation du devoir de loyauté envers le vendeur", isCorrect: true },
+      { label: "Vous en informez l'acquéreur que ça se fait mais à 3 000 €", isCorrect: false },
+      { label: "Vous acceptez si le vendeur ne peut pas le savoir", isCorrect: false },
+    ],
+    explanation: "Accepter reviendrait à trahir le mandat de loyauté envers le vendeur et constitue un abus de confiance (art. 314-1 Code pénal). Le refus catégorique est la seule réponse conforme.",
+    difficulty: "medium",
+  },
 ];
 
 export function getQuizCheckpoints(
