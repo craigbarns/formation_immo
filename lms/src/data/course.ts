@@ -650,7 +650,7 @@ export const COURSE: CourseModule[] = [
         title: "Non-discrimination à l'accès au logement — pratiques et prévention",
         scriptFile: "module6-deontologie/scripts/01-non-discrimination-pratique.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/01-non-discrimination-pratique.mp3",
         duration: 60,
         difficulty: "intermediaire",
         objectives: [
@@ -666,7 +666,7 @@ export const COURSE: CourseModule[] = [
         title: "Le Code de déontologie des professionnels de l'immobilier",
         scriptFile: "module6-deontologie/scripts/02-code-deontologie.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/02-code-deontologie.mp3",
         duration: 60,
         difficulty: "intermediaire",
         objectives: [
@@ -681,7 +681,7 @@ export const COURSE: CourseModule[] = [
         title: "Éthique pratique — conflits d'intérêts et situations à risque",
         scriptFile: "module6-deontologie/scripts/03-ethique-pratique.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/03-ethique-pratique.mp3",
         duration: 60,
         difficulty: "avance",
         objectives: [
