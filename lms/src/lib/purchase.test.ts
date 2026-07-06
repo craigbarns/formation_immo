@@ -27,7 +27,12 @@ const brouillon: Product = {
   id: "brouillon", kind: "module", label: "Brouillon", description: "WIP",
   priceCents: 5900, grants: ["brouillon"], available: false,
 };
-const CATALOG = [pack, juridique, transaction, brouillon];
+// TRACFIN : add-on autonome, exclu du pack (voir PACK_EXCLUDED_MODULES).
+const tracfin: Product = {
+  id: "tracfin", kind: "module", label: "TRACFIN", description: "LCB-FT",
+  priceCents: 4900, grants: ["tracfin"], available: true,
+};
+const CATALOG = [pack, juridique, transaction, brouillon, tracfin];
 
 const none: Entitlements = { hasPack: false, modules: new Set() };
 const ownsPack: Entitlements = { hasPack: true, modules: new Set() };
@@ -66,6 +71,31 @@ describe("filterPurchasable (Règle d'or — recalcul serveur)", () => {
 
   it("panier vide => rien", () => {
     expect(filterPurchasable([], none, CATALOG).allowed).toHaveLength(0);
+  });
+
+  it("add-on autonome (tracfin) : un client PACK peut encore l'acheter", () => {
+    const { allowed, removed } = filterPurchasable(["tracfin"], ownsPack, CATALOG);
+    expect(allowed.map((p) => p.id)).toEqual(["tracfin"]);
+    expect(removed).toHaveLength(0);
+  });
+
+  it("add-on autonome : le client pack ne peut PAS racheter un module inclus, mais peut prendre tracfin", () => {
+    const { allowed, removed } = filterPurchasable(["juridique", "tracfin"], ownsPack, CATALOG);
+    expect(allowed.map((p) => p.id)).toEqual(["tracfin"]);
+    expect(removed).toEqual([{ id: "juridique", reason: "already_owned" }]);
+  });
+
+  it("pack + tracfin dans le même panier => les DEUX sont facturés (pas d'absorption)", () => {
+    const { allowed, removed } = filterPurchasable(["pack", "tracfin"], none, CATALOG);
+    expect(allowed.map((p) => p.id)).toEqual(["pack", "tracfin"]);
+    expect(removed).toHaveLength(0);
+  });
+
+  it("tracfin déjà possédé à l'unité => retiré (already_owned)", () => {
+    const ownsTracfin: Entitlements = { hasPack: false, modules: new Set(["tracfin"]) };
+    const { allowed, removed } = filterPurchasable(["tracfin"], ownsTracfin, CATALOG);
+    expect(allowed).toHaveLength(0);
+    expect(removed).toEqual([{ id: "tracfin", reason: "already_owned" }]);
   });
 });
 

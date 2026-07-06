@@ -94,6 +94,19 @@ export const MODULE_THEMES: Record<string, ModuleTheme> = {
     voiceSignature: "Voix : Marie — confiante & expérimentée",
     voiceSignatureColor: "rgba(248,113,113,0.7)",
   },
+  tracfin: {
+    slug: "tracfin",
+    label: "TRACFIN & LCB-FT",
+    primary: "#0f766e",
+    secondary: "#2dd4bf",
+    gradient: "from-[#042f2e] via-[#0f766e] to-[#052e2b]",
+    glow: "rgba(45,212,191,0.3)",
+    watermark: "🛡️",
+    watermarkPosition: "bottom-right",
+    watermarkOpacity: 0.06,
+    voiceSignature: "Voix : Marie — posée & autoritaire",
+    voiceSignatureColor: "rgba(45,212,191,0.7)",
+  },
 };
 
 export function getModuleTheme(moduleSlug: string): ModuleTheme {

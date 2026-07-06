@@ -1836,6 +1836,142 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
     explanation: "Accepter reviendrait à trahir le mandat de loyauté envers le vendeur et constitue un abus de confiance (art. 314-1 Code pénal). Le refus catégorique est la seule réponse conforme.",
     difficulty: "medium",
   },
+
+  // ──────────────────────────────────────────────
+  // MODULE AUTONOME — TRACFIN & LCB-FT
+  // ──────────────────────────────────────────────
+
+  // tracfin / cadre-legal-obligations
+  {
+    id: "qc-tracfin-cadre-01",
+    moduleSlug: "tracfin",
+    lessonSlug: "cadre-legal-obligations",
+    question: "Quel est le rôle de TRACFIN ?",
+    options: [
+      { label: "Poursuivre pénalement les blanchisseurs", isCorrect: false },
+      { label: "Recevoir et analyser les déclarations de soupçon, puis transmettre aux autorités", isCorrect: true },
+      { label: "Délivrer la carte professionnelle des agents immobiliers", isCorrect: false },
+      { label: "Fixer le prix des transactions immobilières", isCorrect: false },
+    ],
+    explanation: "TRACFIN est la cellule de renseignement financier française : elle reçoit les déclarations de soupçon des professionnels assujettis, les analyse et les enrichit, puis transmet à l'autorité judiciaire ou administrative. Elle ne juge ni ne poursuit elle-même.",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-tracfin-cadre-02",
+    moduleSlug: "tracfin",
+    lessonSlug: "cadre-legal-obligations",
+    question: "Dans l'immobilier, quelle autorité contrôle le respect des obligations LCB-FT ?",
+    options: [
+      { label: "L'ACPR (Banque de France)", isCorrect: false },
+      { label: "L'AMF", isCorrect: false },
+      { label: "La DGCCRF (les sanctions étant prononcées par la CNS)", isCorrect: true },
+      { label: "La CNTGI", isCorrect: false },
+    ],
+    explanation: "Contrairement au secteur bancaire (ACPR) ou financier (AMF), les professionnels de l'immobilier sont contrôlés par la DGCCRF. Les sanctions administratives sont prononcées par la Commission nationale des sanctions (CNS).",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-tracfin-cadre-03",
+    moduleSlug: "tracfin",
+    lessonSlug: "cadre-legal-obligations",
+    question: "Quelles sont les trois grandes obligations LCB-FT de l'agent immobilier ?",
+    options: [
+      { label: "Vigilance, approche par les risques, déclaration de soupçon", isCorrect: true },
+      { label: "Estimation, publicité, signature", isCorrect: false },
+      { label: "Assurance, garantie financière, carte T", isCorrect: false },
+      { label: "Formation, mandat, compromis", isCorrect: false },
+    ],
+    explanation: "Le dispositif repose sur trois piliers : la vigilance (identification client et bénéficiaire effectif), l'approche par les risques (moduler la vigilance), et la déclaration de soupçon à TRACFIN.",
+    difficulty: "easy",
+  },
+
+  // tracfin / vigilance-detection
+  {
+    id: "qc-tracfin-vigilance-01",
+    moduleSlug: "tracfin",
+    lessonSlug: "vigilance-detection",
+    question: "Qu'est-ce que le « bénéficiaire effectif » d'une opération ?",
+    options: [
+      { label: "L'agent immobilier qui perçoit la commission", isCorrect: false },
+      { label: "La personne physique qui contrôle réellement l'opération et en tire le bénéfice", isCorrect: true },
+      { label: "Le notaire rédacteur de l'acte", isCorrect: false },
+      { label: "Le premier acquéreur ayant visité le bien", isCorrect: false },
+    ],
+    explanation: "Le bénéficiaire effectif est la personne physique qui détient ou contrôle in fine le client (souvent >25% du capital/droits de vote d'une société). L'identifier permet de percer les sociétés écrans et les prête-noms.",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-tracfin-vigilance-02",
+    moduleSlug: "tracfin",
+    lessonSlug: "vigilance-detection",
+    question: "Une « personne politiquement exposée » (PPE) impose :",
+    options: [
+      { label: "Un refus systématique de la relation d'affaires", isCorrect: false },
+      { label: "Une vigilance renforcée, notamment sur l'origine des fonds", isCorrect: true },
+      { label: "Aucune obligation particulière", isCorrect: false },
+      { label: "Une déclaration de soupçon automatique", isCorrect: false },
+    ],
+    explanation: "Une PPE n'est pas suspecte par nature, mais son exposition justifie une vigilance renforcée (approche par les risques), en particulier sur l'origine des fonds. Ce n'est ni un refus ni une déclaration automatiques.",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-tracfin-vigilance-03",
+    moduleSlug: "tracfin",
+    lessonSlug: "vigilance-detection",
+    question: "Parmi ces éléments, lequel constitue un signal d'alerte (faisceau d'indices) ?",
+    options: [
+      { label: "Un client qui visite le bien et négocie le prix", isCorrect: false },
+      { label: "Un financement par prêt bancaire classique justifié", isCorrect: false },
+      { label: "Une proposition de régler une partie du prix en espèces sans justification", isCorrect: true },
+      { label: "Un acquéreur qui demande les diagnostics techniques", isCorrect: false },
+    ],
+    explanation: "Le paiement partiel en espèces, l'incohérence profil/prix, l'absence de visite, les montages complexes ou l'urgence injustifiée sont des signaux d'alerte. C'est leur accumulation (faisceau d'indices) qui fonde le soupçon.",
+    difficulty: "easy",
+  },
+
+  // tracfin / declaration-soupcon-pratique
+  {
+    id: "qc-tracfin-declaration-01",
+    moduleSlug: "tracfin",
+    lessonSlug: "declaration-soupcon-pratique",
+    question: "Que faut-il pour déclencher une déclaration de soupçon à TRACFIN ?",
+    options: [
+      { label: "Une preuve du blanchiment", isCorrect: false },
+      { label: "Une condamnation pénale du client", isCorrect: false },
+      { label: "Un simple soupçon motivé par des éléments factuels", isCorrect: true },
+      { label: "L'accord préalable du client", isCorrect: false },
+    ],
+    explanation: "La loi exige un soupçon motivé, pas une preuve. L'agent n'est ni enquêteur ni juge : attendre une certitude avant de déclarer serait une faute. Le soupçon doit s'appuyer sur des faits (le faisceau d'indices).",
+    difficulty: "easy",
+  },
+  {
+    id: "qc-tracfin-declaration-02",
+    moduleSlug: "tracfin",
+    lessonSlug: "declaration-soupcon-pratique",
+    question: "Après avoir déclaré un soupçon, pouvez-vous en informer votre client ?",
+    options: [
+      { label: "Oui, par transparence", isCorrect: false },
+      { label: "Non, c'est strictement interdit (délit de divulgation / tipping off)", isCorrect: true },
+      { label: "Oui, si le client le demande expressément", isCorrect: false },
+      { label: "Oui, une fois l'opération conclue", isCorrect: false },
+    ],
+    explanation: "La déclaration est confidentielle. Révéler son existence au client constitue le délit de divulgation (« tipping off »), sanctionné pénalement : cela compromettrait l'enquête. L'agent poursuit la relation comme si de rien n'était.",
+    difficulty: "medium",
+  },
+  {
+    id: "qc-tracfin-declaration-03",
+    moduleSlug: "tracfin",
+    lessonSlug: "declaration-soupcon-pratique",
+    question: "Un client au profil cohérent achète, visite, négocie et finance par un prêt bancaire justifié. Que faites-vous ?",
+    options: [
+      { label: "Vous déclarez par précaution", isCorrect: false },
+      { label: "Aucune déclaration : aucun signal d'alerte factuel", isCorrect: true },
+      { label: "Vous exigez une déclaration du notaire", isCorrect: false },
+      { label: "Vous refusez la transaction", isCorrect: false },
+    ],
+    explanation: "La vigilance n'est pas de la suspicion systématique. Sans faisceau d'indices, aucune déclaration n'est justifiée — déclarer sans motif factuel serait une erreur. La grande majorité des clients sont parfaitement honnêtes.",
+    difficulty: "easy",
+  },
 ];
 
 export function getQuizCheckpoints(

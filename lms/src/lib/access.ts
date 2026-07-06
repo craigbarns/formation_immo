@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getEntitlements } from "@/lib/entitlements";
+import { getEntitlements, hasModuleAccess } from "@/lib/entitlements";
 import { fetchActiveEntitlementRows } from "@/lib/auth-access";
 
 /**
@@ -75,8 +75,7 @@ export async function verifyModuleAccess(moduleSlug: string) {
     userId: user.id,
   });
 
-  const { hasPack, modules } = getEntitlements(rows);
-  const hasAccess = hasPack || modules.has(moduleSlug);
+  const hasAccess = hasModuleAccess(getEntitlements(rows), moduleSlug);
 
   return { user, isAdmin: false, hasAccess };
 }

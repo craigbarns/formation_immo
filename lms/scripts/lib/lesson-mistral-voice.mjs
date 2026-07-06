@@ -27,6 +27,7 @@ const FOLDER_TO_SLUG = {
   "module4-marketing": "marketing",
   "module5-terrain": "terrain",
   "module6-deontologie": "deontologie",
+  "module-tracfin": "tracfin",
 };
 
 /**

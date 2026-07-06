@@ -110,6 +110,19 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
     initials: "NA",
     photoUrl: "/avatars/terrain.png",
   },
+  {
+    moduleSlug: "tracfin",
+    name: v.tracfin.name,
+    role: "Expert conformité LCB-FT",
+    description:
+      "Juriste spécialisé en lutte anti-blanchiment. Ancien référent TRACFIN, il forme les professionnels de l'immobilier à la vigilance et à la déclaration de soupçon.",
+    mistralVoiceId: v.tracfin.mistralVoiceId,
+    mistralVoiceLabel: v.tracfin.mistralVoiceLabel,
+    portraitPrompt:
+      "Professional headshot, French man 52 years old, dark navy suit, rimless glasses, serious trustworthy expression, compliance office with secure documents background, soft focused lighting, photorealistic --ar 1:1 --style raw --s 250 --q 2",
+    accentColor: "#0f766e",
+    initials: "AR",
+  },
 ];
 
 export function getAvatarForModule(moduleSlug: string): ModuleAvatar | undefined {

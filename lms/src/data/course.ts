@@ -50,8 +50,10 @@ export function formatDuration(minutes: number): string {
   return m === 0 ? `${h}h` : `${h}h${m.toString().padStart(2, "0")}`;
 }
 
-// ─── Cours (36 leçons — 42h total) ───────────────────────────────────────────
-// Répartition : M1 9h (540) · M2 7h (420) · M3 9h (540) · M4 7h (420) · M5 10h (600)  =  2520 min = 42h
+// ─── Cours ────────────────────────────────────────────────────────────────────
+// Certification 42h = 5 modules d'origine : M1 9h (540) · M2 7h (420) · M3 9h (540)
+//   · M4 7h (420) · M5 10h (600) = 2520 min = 42h.
+// Modules BONUS hors 42h (voir BONUS_MODULE_SLUGS) : M6 Déontologie, TRACFIN (add-on autonome).
 export const COURSE: CourseModule[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   // MODULE 1 — JURIDIQUE & CONFORMITÉ  (480 min = 8h)
@@ -689,6 +691,68 @@ export const COURSE: CourseModule[] = [
           "Appliquer les règles du secret professionnel et du RGPD",
           "Reconnaître les pratiques commerciales trompeuses",
           "Résoudre des dilemmes éthiques réels par la mise en situation",
+        ],
+      },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MODULE AUTONOME — TRACFIN & LCB-FT  (180 min = 3h)  ·  add-on 49€, hors pack, bonus
+  // Ce n'est PAS un "module 7" de la séquence : c'est un module indépendant.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    slug: "tracfin",
+    title: "TRACFIN & LCB-FT — Lutte anti-blanchiment",
+    summary: "Cadre légal LCB-FT, vigilance client, bénéficiaire effectif, déclaration de soupçon à TRACFIN.",
+    description:
+      "Module autonome dédié à vos obligations anti-blanchiment (LCB-FT). Maîtrisez le cadre juridique (Code monétaire et financier, directives européennes), la vigilance client et l'identification du bénéficiaire effectif, la détection par le faisceau d'indices, et la déclaration de soupçon à TRACFIN via ERMES. Cas pratiques concrets et réflexes de conformité pour protéger votre agence.",
+    lessons: [
+      {
+        slug: "cadre-legal-obligations",
+        title: "Cadre légal & obligations LCB-FT",
+        scriptFile: "module-tracfin/scripts/01-cadre-legal-obligations.md",
+        videoUrl: null,
+        audioUrl: "/audio/01-cadre-legal-obligations.mp3",
+        duration: 60,
+        difficulty: "intermediaire",
+        objectives: [
+          "Comprendre le rôle de TRACFIN et le circuit de la déclaration de soupçon",
+          "Situer le cadre juridique (art. L.561-1 s. du Code monétaire et financier)",
+          "Identifier les professionnels de l'immobilier assujettis",
+          "Connaître les trois grandes obligations : vigilance, approche par les risques, déclaration",
+          "Savoir que la DGCCRF contrôle et la CNS sanctionne dans l'immobilier",
+        ],
+      },
+      {
+        slug: "vigilance-detection",
+        title: "Vigilance client & détection (KYC, faisceau d'indices)",
+        scriptFile: "module-tracfin/scripts/02-vigilance-detection.md",
+        videoUrl: null,
+        audioUrl: "/audio/02-vigilance-detection.mp3",
+        duration: 60,
+        difficulty: "intermediaire",
+        objectives: [
+          "Identifier et vérifier l'identité du client (personne physique et morale)",
+          "Remonter au bénéficiaire effectif réel (sociétés écrans, SCI)",
+          "Appliquer l'approche par les risques (vigilance allégée, standard, renforcée)",
+          "Reconnaître les PPE et les pays à risque (GAFI/UE)",
+          "Détecter une opération suspecte grâce au faisceau d'indices",
+        ],
+      },
+      {
+        slug: "declaration-soupcon-pratique",
+        title: "Déclaration de soupçon à TRACFIN & cas pratiques",
+        scriptFile: "module-tracfin/scripts/03-declaration-soupcon-pratique.md",
+        videoUrl: null,
+        audioUrl: "/audio/03-declaration-soupcon-pratique.mp3",
+        duration: 60,
+        difficulty: "avance",
+        objectives: [
+          "Savoir quand déclarer : le soupçon motivé suffit, la preuve n'est pas exigée",
+          "Rédiger et transmettre une déclaration de soupçon via ERMES",
+          "Respecter la confidentialité absolue (interdiction du tipping off)",
+          "Connaître l'immunité du déclarant de bonne foi",
+          "Appliquer les réflexes sur des cas pratiques concrets",
         ],
       },
     ],

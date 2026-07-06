@@ -1,6 +1,7 @@
 import type Stripe from "stripe";
 import { FORMATION_ID, PACK_PRODUCT_ID, getCatalog, type Product } from "@/data/catalog";
 import type { Entitlements } from "@/lib/entitlements";
+import { hasModuleAccess, PACK_EXCLUDED_MODULES } from "@/lib/entitlements";
 
 /**
  * Logique d'achat PURE (aucune I/O).
@@ -40,15 +41,23 @@ export function filterPurchasable(
   const packInCart = candidates.some((p) => p.kind === "pack");
   const allowed: Product[] = [];
   for (const product of candidates) {
-    if (owned.hasPack) {
+    if (product.kind === "pack") {
+      if (owned.hasPack) {
+        removed.push({ id: product.id, reason: "already_owned" });
+        continue;
+      }
+      allowed.push(product);
+      continue;
+    }
+    // Module : déjà accessible (acheté à l'unité, ou couvert par le pack sauf
+    // add-on autonome exclu) => rien à racheter.
+    if (hasModuleAccess(owned, product.id)) {
       removed.push({ id: product.id, reason: "already_owned" });
       continue;
     }
-    if (product.kind === "module" && owned.modules.has(product.id)) {
-      removed.push({ id: product.id, reason: "already_owned" });
-      continue;
-    }
-    if (product.kind === "module" && packInCart) {
+    // Le pack dans le panier rend le module redondant — SAUF s'il s'agit d'un
+    // add-on autonome que le pack ne couvre pas (ex. TRACFIN) : on facture les deux.
+    if (packInCart && !PACK_EXCLUDED_MODULES.has(product.id)) {
       removed.push({ id: product.id, reason: "included_in_pack" });
       continue;
     }

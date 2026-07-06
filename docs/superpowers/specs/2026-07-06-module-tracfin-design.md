@@ -1,13 +1,15 @@
-# Module 7 — TRACFIN & LCB-FT (module autonome à 49 €)
+# TRACFIN & LCB-FT — module AUTONOME à 49 €
 
 Date : 2026-07-06
 Statut : validé (design approuvé par le propriétaire)
 
 ## Objectif
 
-Ajouter un 7ᵉ module « TRACFIN & lutte contre le blanchiment (LCB-FT) » de 2 h,
+Ajouter un module **autonome** « TRACFIN & lutte contre le blanchiment (LCB-FT) » de 2 h.
+Ce n'est **pas** un « module 7 » dans la séquence numérotée 1→6 : c'est un add-on indépendant,
 vendu **49 €** à l'unité, **non inclus** dans le pack 299 €, **hors** certification 42 h
-(module bonus), avec audio + QCM comme les modules existants.
+(module bonus). Titre sans numéro : « TRACFIN & LCB-FT — Lutte anti-blanchiment ».
+Audio + QCM comme les modules existants.
 
 ## Décisions
 
@@ -24,7 +26,7 @@ vendu **49 €** à l'unité, **non inclus** dans le pack 299 €, **hors** cert
 | 2 | `vigilance-detection` | Vigilance client & détection (KYC, faisceau d'indices) | 40 |
 | 3 | `declaration-soupcon-pratique` | Déclaration de soupçon à TRACFIN & cas pratiques | 40 |
 
-- Scripts de narration : `module7-tracfin/scripts/0N-*.md` (format identique aux modules existants).
+- Scripts de narration : `module-tracfin/scripts/0N-*.md` (format identique aux modules existants).
 - Audio : MP3 générés via Mistral Voxtral → `lms/public/audio/0N-*.mp3`, branchés dans `course.ts`.
 - QCM : 3 par leçon (9 au total) dans `quiz-checkpoints.ts`, `moduleSlug: "tracfin"`.
 
