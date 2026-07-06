@@ -1,4 +1,4 @@
-import { COURSE, lessonId } from "@/data/course";
+import { COURSE, FORMATION_MODULES, lessonId } from "@/data/course";
 
 export type NextLessonInfo = {
   href: string;
@@ -12,7 +12,8 @@ export type NextLessonInfo = {
 };
 
 export function getTotalLessonCount(): number {
-  return COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
+  // Parcours principal uniquement : les add-ons autonomes ne sont pas des étapes.
+  return FORMATION_MODULES.reduce((acc, m) => acc + m.lessons.length, 0);
 }
 
 /**
@@ -35,7 +36,7 @@ export function getCertifiedLessonCount(): number {
 export function findNextLesson(progress: Record<string, boolean>): NextLessonInfo | null {
   const totalSteps = getTotalLessonCount();
   let step = 0;
-  for (const mod of COURSE) {
+  for (const mod of FORMATION_MODULES) {
     for (const lesson of mod.lessons) {
       step += 1;
       const id = lessonId(mod.slug, lesson.slug);
@@ -97,7 +98,7 @@ export function getLessonJourneyPosition(
 ): { stepNumber: number; totalSteps: number } | null {
   const totalSteps = getTotalLessonCount();
   let step = 0;
-  for (const mod of COURSE) {
+  for (const mod of FORMATION_MODULES) {
     for (const lesson of mod.lessons) {
       step += 1;
       if (mod.slug === moduleSlug && lesson.slug === lessonSlug) {

@@ -2,6 +2,7 @@
  * Logique d'accès PURE (aucune I/O). Testable unitairement.
  * Convention : module_slug === null  ⇒  accès "pack" (tous les modules).
  */
+import { STANDALONE_MODULE_SLUGS } from "@/data/course";
 
 export type EntitlementRow = {
   module_slug: string | null;
@@ -18,9 +19,9 @@ const ACTIVE = "active";
 /**
  * Modules vendus en ADD-ON autonome : accessibles UNIQUEMENT à l'achat à
  * l'unité, jamais couverts par le pack "accès complet". Le pack donne accès à
- * tous les modules SAUF ceux-ci.
+ * tous les modules SAUF ceux-ci. Dérivé de la source unique STANDALONE_MODULE_SLUGS.
  */
-export const PACK_EXCLUDED_MODULES = new Set<string>(["tracfin"]);
+export const PACK_EXCLUDED_MODULES = STANDALONE_MODULE_SLUGS;
 
 /** Réduit des lignes user_subscriptions brutes en un set de droits normalisé. */
 export function getEntitlements(rows: EntitlementRow[]): Entitlements {

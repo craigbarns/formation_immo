@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { COURSE, lessonId } from "@/data/course";
+import { FORMATION_MODULES, lessonId } from "@/data/course";
 import { getStoredProgress } from "./LessonProgress";
 import { AnimatedCounter } from "@/components/animations";
 import {
@@ -12,9 +12,9 @@ import {
 import { createClient } from "@/lib/supabase/client";
 
 function computeStatsFromProgress(progress: Record<string, boolean>) {
-  const total = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
+  const total = FORMATION_MODULES.reduce((acc, m) => acc + m.lessons.length, 0);
   let done = 0;
-  for (const mod of COURSE) {
+  for (const mod of FORMATION_MODULES) {
     for (const l of mod.lessons) {
       if (progress[lessonId(mod.slug, l.slug)]) done++;
     }

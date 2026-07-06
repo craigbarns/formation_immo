@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { COURSE } from "@/data/course";
+import { FORMATION_MODULES } from "@/data/course";
 import { getAvatarForModule } from "@/data/module-avatars";
 
 interface ModuleProgress {
@@ -19,7 +19,7 @@ export function ModuleProgressBars({ progress }: ModuleProgressBarsProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-6">
-        {COURSE.map((module, index) => {
+        {FORMATION_MODULES.map((module, index) => {
           const moduleProgress = progress.find((p) => p.slug === module.slug);
           const completed = moduleProgress?.completed || 0;
           const total = moduleProgress?.total || module.lessons.length;

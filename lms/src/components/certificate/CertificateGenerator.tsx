@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Building2, Lock } from "lucide-react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { getGamificationState, type GamificationState } from "@/lib/gamification";
-import { COURSE } from "@/data/course";
+import { FORMATION_MODULES } from "@/data/course";
 import { FORMATION_PROGRESS_STORAGE_KEY } from "@/constants/formation-storage";
 import { createClient } from "@/lib/supabase/client";
 
@@ -21,7 +21,9 @@ export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } 
   const [pdfLoading, setPdfLoading] = useState(false);
   const [pdfError, setPdfError] = useState<string | null>(null);
 
-  const totalLessons = COURSE.reduce((a, m) => a + m.lessons.length, 0);
+  // Parcours principal uniquement : les add-ons autonomes (ex. TRACFIN) ne
+  // comptent pas dans le taux de complétion certifiant.
+  const totalLessons = FORMATION_MODULES.reduce((a, m) => a + m.lessons.length, 0);
 
   useEffect(() => {
     async function load() {
@@ -108,7 +110,7 @@ export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } 
     load();
   }, []);
 
-  const completionPct = Math.round((completedLessons / totalLessons) * 100);
+  const completionPct = Math.min(100, Math.round((completedLessons / totalLessons) * 100));
   const totalTrackedSeconds = gameState
     ? Object.values(gameState.moduleTimers).reduce((a, b) => a + b, 0)
     : 0;

@@ -7,7 +7,7 @@ import { Brain, ArrowRight, TrendingUp, AlertCircle, Sparkles } from "lucide-rea
 import { createClient } from "@/lib/supabase/client";
 import { getGamificationState, type GamificationState } from "@/lib/gamification";
 import { getStoredProgress } from "@/components/LessonProgress";
-import { COURSE } from "@/data/course";
+import { FORMATION_MODULES } from "@/data/course";
 
 interface Recommendation {
   type: "continue" | "review" | "explore" | "practice";
@@ -23,7 +23,7 @@ function generateRecommendations(
   progress: Record<string, boolean>,
 ): Recommendation[] {
   const recommendations: Recommendation[] = [];
-  const modules = COURSE;
+  const modules = FORMATION_MODULES;
 
   // Find weak areas from exam scores
   const weakModules: string[] = [];

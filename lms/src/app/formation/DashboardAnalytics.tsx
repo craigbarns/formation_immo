@@ -21,7 +21,7 @@ import {
   LEVELS,
   BADGES,
 } from "@/lib/gamification";
-import { COURSE, lessonId } from "@/data/course";
+import { COURSE, FORMATION_MODULES, lessonId } from "@/data/course";
 import {
   FORMATION_PROGRESS_CHANGED_EVENT,
   FORMATION_PROGRESS_STORAGE_KEY,
@@ -133,7 +133,7 @@ export function DashboardAnalytics() {
       }
 
       const levelInfo = getLevelForXP(gameState.xp);
-      const moduleProgress = COURSE.map((module) => ({
+      const moduleProgress = FORMATION_MODULES.map((module) => ({
         slug: module.slug,
         completed: module.lessons.filter(
           (l) => progressObj[lessonId(module.slug, l.slug)],
@@ -154,7 +154,7 @@ export function DashboardAnalytics() {
         level: levelInfo.current.level,
         streak: gameState.streak,
         lessonsCompleted,
-        totalLessons: COURSE.reduce((acc, m) => acc + m.lessons.length, 0),
+        totalLessons: FORMATION_MODULES.reduce((acc, m) => acc + m.lessons.length, 0),
         timeSpent: totalTime,
         badgesEarned: gameState.earnedBadges.length,
         totalBadges: BADGES.length,
@@ -189,7 +189,7 @@ export function DashboardAnalytics() {
   const nextLevel = LEVELS.find((l) => l.level === stats.level + 1);
   const xpToNextLevel = nextLevel ? nextLevel.xpRequired - stats.xp : 0;
 
-  const skillsData = COURSE.map((mod, i) => {
+  const skillsData = FORMATION_MODULES.map((mod, i) => {
     const prog = stats.moduleProgress[i];
     const pct = prog && prog.total > 0 ? Math.round((prog.completed / prog.total) * 100) : 0;
     return {

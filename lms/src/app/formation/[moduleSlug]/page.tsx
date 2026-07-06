@@ -5,7 +5,7 @@ import { getModuleCompletion } from "@/lib/module-completion";
 import { ModuleLanding } from "@/components/modules/ModuleLanding";
 import { ModuleLockedView } from "@/components/modules/ModuleLockedView";
 import { ModuleAttestationButton } from "@/components/modules/ModuleAttestationButton";
-import { COURSE, getModuleDurationMin } from "@/data/course";
+import { COURSE, FORMATION_MODULES, STANDALONE_MODULE_SLUGS, getModuleDurationMin } from "@/data/course";
 import { getModuleShowcase } from "@/data/module-showcase";
 import { getAvatarForModule } from "@/data/module-avatars";
 import {
@@ -56,9 +56,14 @@ export default async function ModulePage({ params }: Props) {
     );
   }
 
-  const modIndex = COURSE.findIndex((m) => m.slug === mod.slug);
-  const prevMod = modIndex > 0 ? COURSE[modIndex - 1] : null;
-  const nextMod = modIndex < COURSE.length - 1 ? COURSE[modIndex + 1] : null;
+  // Navigation linéaire dans le PARCOURS principal uniquement. Un module
+  // autonome (ex. TRACFIN) est hors parcours : pas de précédent/suivant, et il
+  // n'apparaît jamais comme "module suivant" à la fin de la déontologie.
+  const navList = STANDALONE_MODULE_SLUGS.has(mod.slug) ? [] : FORMATION_MODULES;
+  const modIndex = navList.findIndex((m) => m.slug === mod.slug);
+  const prevMod = modIndex > 0 ? navList[modIndex - 1] : null;
+  const nextMod =
+    modIndex >= 0 && modIndex < navList.length - 1 ? navList[modIndex + 1] : null;
 
   const avatar = getAvatarForModule(mod.slug);
   const firstLesson = mod.lessons[0];
