@@ -21,8 +21,9 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
-import { COURSE, formatDuration, getModuleDurationMin, getTotalCourseDurationMin } from "@/data/course";
+import { COURSE, formatDuration, getModuleDurationMin } from "@/data/course";
 import { getCatalog, getModulePriceCents, getPackPriceCents, PACK_PRODUCT_ID } from "@/data/catalog";
+import { PACK_EXCLUDED_MODULES } from "@/lib/entitlements";
 import { euros } from "@/lib/price";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { CartBar } from "@/components/cart/CartBar";
@@ -34,10 +35,14 @@ const IMMOBILIER_COVER = "/generated/fal/transaction/cover-immobilier.jpg";
 const IMMOBILIER_CHECKOUT = "/checkout/immobilier";
 const PASS_FORMATION_LOGO = "/images/pass-formation-logo.svg";
 
-// Chiffres calculés depuis le contenu réel (source unique : COURSE / catalog).
-const TOTAL_MODULES = COURSE.length;
-const TOTAL_LESSONS = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
-const TOTAL_DURATION = formatDuration(getTotalCourseDurationMin());
+// Chiffres du PACK : seuls les modules réellement inclus (hors add-ons autonomes
+// comme TRACFIN, vendus à part). Source : COURSE moins PACK_EXCLUDED_MODULES.
+const PACK_MODULES = COURSE.filter((m) => !PACK_EXCLUDED_MODULES.has(m.slug));
+const TOTAL_MODULES = PACK_MODULES.length;
+const TOTAL_LESSONS = PACK_MODULES.reduce((acc, m) => acc + m.lessons.length, 0);
+const TOTAL_DURATION = formatDuration(
+  PACK_MODULES.reduce((acc, m) => acc + m.lessons.reduce((a, l) => a + l.duration, 0), 0)
+);
 
 /** Cover par module ; fallback visuel générique (ex. déontologie). */
 function moduleCover(slug: string): string {
@@ -645,7 +650,7 @@ export default async function HomePage() {
 
             <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {getCatalog()
-                .filter((p) => p.kind === "module")
+                .filter((p) => p.kind === "module" && !PACK_EXCLUDED_MODULES.has(p.id))
                 .map((product, i) => {
                   const durationMin = getModuleDurationMin(product.id);
                   const lessonsCount =
@@ -705,6 +710,85 @@ export default async function HomePage() {
                   );
                 })}
             </div>
+
+            {/* Modules autonomes (add-ons) — vendus à part, hors pack et hors certification 42h */}
+            {getCatalog().filter((p) => p.kind === "module" && PACK_EXCLUDED_MODULES.has(p.id))
+              .length > 0 && (
+              <>
+                <div className="mt-16">
+                  <h3 className="text-xl font-black text-brand-navy">
+                    Modules spécialisés — à l&apos;unité, indépendants du pack
+                  </h3>
+                  <p className="mt-2 text-sm text-zinc-600">
+                    Des modules autonomes pour approfondir un sujet précis. Achetés séparément, ils
+                    ne sont pas inclus dans le pack et ne comptent pas dans la certification 42h.
+                  </p>
+                </div>
+
+                <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {getCatalog()
+                    .filter((p) => p.kind === "module" && PACK_EXCLUDED_MODULES.has(p.id))
+                    .map((product) => {
+                      const durationMin = getModuleDurationMin(product.id);
+                      const lessonsCount =
+                        COURSE.find((m) => m.slug === product.id)?.lessons.length ?? 0;
+                      return (
+                        <article
+                          key={product.id}
+                          className="flex overflow-hidden rounded-lg border-2 border-brand-gold/40 bg-white shadow-sm"
+                        >
+                          <div className="flex min-w-0 flex-1 flex-col">
+                            <div className="relative aspect-[16/10] bg-zinc-100">
+                              <Image
+                                src={moduleCover(product.id)}
+                                alt=""
+                                fill
+                                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                                className="object-cover"
+                              />
+                              <div className="absolute inset-0 bg-zinc-950/20" aria-hidden />
+                              <span className="absolute left-4 top-4 rounded-lg bg-brand-gold px-3 py-1 text-xs font-black text-brand-navy shadow-sm">
+                                Module autonome
+                              </span>
+                            </div>
+
+                            <div className="flex flex-1 flex-col p-6">
+                              <h3 className="text-lg font-black leading-snug text-brand-navy">
+                                {product.label}
+                              </h3>
+                              <p className="mt-3 flex-1 text-sm leading-6 text-zinc-600">
+                                {product.description}
+                              </p>
+
+                              <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold text-zinc-600">
+                                <span className="rounded-lg bg-zinc-100 px-3 py-1.5">
+                                  {formatDuration(durationMin)}
+                                </span>
+                                <span className="rounded-lg bg-zinc-100 px-3 py-1.5">
+                                  {lessonsCount} leçons
+                                </span>
+                                <span className="rounded-lg bg-brand-gold/15 px-3 py-1.5 text-brand-navy">
+                                  {euros(product.priceCents)}
+                                </span>
+                              </div>
+
+                              <div className="mt-6 border-t border-zinc-100 pt-5">
+                                {product.available ? (
+                                  <AddToCartButton productId={product.id} />
+                                ) : (
+                                  <span className="inline-flex w-full items-center justify-center rounded-lg bg-zinc-100 px-5 py-3 text-sm font-black text-zinc-500">
+                                    Bientôt disponible
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      );
+                    })}
+                </div>
+              </>
+            )}
 
             {/* Prochaines formations du catalogue */}
             <div className="mt-16 max-w-2xl">
