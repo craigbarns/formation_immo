@@ -17,12 +17,11 @@ export function getTotalLessonCount(): number {
 }
 
 /**
- * Modules "bonus" hors de la certification finale 42h.
- * La déontologie et TRACFIN (LCB-FT) se vendent / se suivent à part et ont leur
- * propre attestation — ils ne comptent donc PAS dans le diplôme 42h des 5 modules
- * d'origine.
+ * Modules "bonus" hors de la certification finale.
+ * La déontologie reste bonus (hors 42h). TRACFIN, désormais inclus au pack,
+ * COMPTE dans la certification (le diplôme passe à 45h).
  */
-export const BONUS_MODULE_SLUGS = ["deontologie", "tracfin"];
+export const BONUS_MODULE_SLUGS = ["deontologie"];
 
 /** Nombre de leçons comptant pour la CERTIFICATION 42h (exclut les modules bonus). */
 export function getCertifiedLessonCount(): number {

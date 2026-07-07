@@ -760,13 +760,11 @@ export const COURSE: CourseModule[] = [
 ];
 
 /**
- * Modules "autonomes" (add-ons) : vendus à part, hors du parcours de formation
- * principal et hors certification 42h. Ils vivent dans COURSE (pour être
- * consultables/achetables/quizables), mais ne comptent PAS comme des étapes du
- * parcours : progression globale, "prochaine leçon", stats du tableau de bord.
- * Source unique — voir aussi PACK_EXCLUDED_MODULES (dérivé) côté paiement.
+ * Modules "autonomes" (add-ons) éventuels : hors parcours ET hors pack. Vide
+ * aujourd'hui — TRACFIN est inclus dans le pack et dans le parcours. Source
+ * unique dont dérive PACK_EXCLUDED_MODULES (entitlements).
  */
-export const STANDALONE_MODULE_SLUGS = new Set<string>(["tracfin"]);
+export const STANDALONE_MODULE_SLUGS = new Set<string>([]);
 
 /** Modules composant le parcours de formation principal (hors add-ons autonomes). */
 export const FORMATION_MODULES: CourseModule[] = COURSE.filter(
