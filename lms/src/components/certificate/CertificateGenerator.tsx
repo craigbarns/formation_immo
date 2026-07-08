@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Building2, Lock } from "lucide-react";
 import { EmojiIcon } from "@/components/ui/EmojiIcon";
 import { getGamificationState, type GamificationState } from "@/lib/gamification";
-import { FORMATION_MODULES } from "@/data/course";
+import { getCertificationTotalLessons, isPackGrandfathered } from "@/lib/formation-journey";
 import { FORMATION_PROGRESS_STORAGE_KEY } from "@/constants/formation-storage";
 import { createClient } from "@/lib/supabase/client";
 
@@ -16,14 +16,15 @@ export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } 
   const [loading, setLoading] = useState(true);
   const [completedLessons, setCompletedLessons] = useState(0);
   const [examsPassed, setExamsPassed] = useState(0);
+  const [isGrandfathered, setIsGrandfathered] = useState(false);
   const [gameState, setGameState] = useState<GamificationState | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [pdfError, setPdfError] = useState<string | null>(null);
 
-  // Parcours principal uniquement : les add-ons autonomes (ex. TRACFIN) ne
-  // comptent pas dans le taux de complétion certifiant.
-  const totalLessons = FORMATION_MODULES.reduce((a, m) => a + m.lessons.length, 0);
+  // Clients pack historiques (achat avant la bascule) : TRACFIN non requis
+  // pour leur certificat (grandfather). Nouveaux clients : parcours complet.
+  const totalLessons = getCertificationTotalLessons(isGrandfathered);
 
   useEffect(() => {
     async function load() {
@@ -38,6 +39,18 @@ export function CertificateGenerator({ forceUnlock }: { forceUnlock?: boolean } 
           .eq("completed", true);
 
         setCompletedLessons(progressRows?.length ?? 0);
+
+        // Date d'achat du pack (module_slug NULL) pour le grandfathering.
+        const { data: subRow } = await supabase
+          .from("user_subscriptions")
+          .select("created_at")
+          .eq("formation_id", "immobilier")
+          .is("module_slug", null)
+          .eq("status", "active")
+          .order("created_at", { ascending: true })
+          .limit(1)
+          .maybeSingle();
+        setIsGrandfathered(isPackGrandfathered(subRow?.created_at ?? null));
 
         // Charger le nom depuis profiles
         const { data: profileRow } = await supabase
