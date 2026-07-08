@@ -73,21 +73,21 @@ describe("filterPurchasable (Règle d'or — recalcul serveur)", () => {
     expect(filterPurchasable([], none, CATALOG).allowed).toHaveLength(0);
   });
 
-  it("add-on autonome (tracfin) : un client PACK peut encore l'acheter", () => {
+  it("TRACFIN est couvert par le pack : un client PACK ne peut pas le racheter", () => {
     const { allowed, removed } = filterPurchasable(["tracfin"], ownsPack, CATALOG);
-    expect(allowed.map((p) => p.id)).toEqual(["tracfin"]);
-    expect(removed).toHaveLength(0);
+    expect(allowed).toHaveLength(0);
+    expect(removed).toEqual([{ id: "tracfin", reason: "already_owned" }]);
   });
 
-  it("add-on autonome : le client pack ne peut PAS racheter un module inclus, mais peut prendre tracfin", () => {
-    const { allowed, removed } = filterPurchasable(["juridique", "tracfin"], ownsPack, CATALOG);
-    expect(allowed.map((p) => p.id)).toEqual(["tracfin"]);
-    expect(removed).toEqual([{ id: "juridique", reason: "already_owned" }]);
-  });
-
-  it("pack + tracfin dans le même panier => les DEUX sont facturés (pas d'absorption)", () => {
+  it("pack + tracfin dans le panier => tracfin devient redondant (inclus au pack)", () => {
     const { allowed, removed } = filterPurchasable(["pack", "tracfin"], none, CATALOG);
-    expect(allowed.map((p) => p.id)).toEqual(["pack", "tracfin"]);
+    expect(allowed.map((p) => p.id)).toEqual(["pack"]);
+    expect(removed).toEqual([{ id: "tracfin", reason: "included_in_pack" }]);
+  });
+
+  it("sans pack : TRACFIN reste achetable seul (49€)", () => {
+    const { allowed, removed } = filterPurchasable(["tracfin"], none, CATALOG);
+    expect(allowed.map((p) => p.id)).toEqual(["tracfin"]);
     expect(removed).toHaveLength(0);
   });
 

@@ -1,56 +1,56 @@
 import { describe, it, expect } from "vitest";
-import { COURSE, FORMATION_MODULES, STANDALONE_MODULE_SLUGS, lessonId } from "@/data/course";
+import { COURSE, FORMATION_MODULES, STANDALONE_MODULE_SLUGS } from "@/data/course";
 import {
   getEntitlements,
   hasModuleAccess,
+  PACK_EXCLUDED_MODULES,
   type EntitlementRow,
 } from "@/lib/entitlements";
 import {
   getTotalLessonCount,
   getCertifiedLessonCount,
-  findNextLesson,
+  getCertificationTotalLessons,
+  isPackGrandfathered,
 } from "@/lib/formation-journey";
 
 /**
- * Garanties anti-régression pour les utilisateurs EXISTANTS (achats antérieurs
- * à l'ajout du module autonome TRACFIN). L'ajout d'un add-on dans COURSE ne doit
- * RIEN changer pour eux : accès, progression, "prochaine leçon", certification.
+ * TRACFIN est désormais inclus au pack ET compte dans la certification.
+ * Garantie clé : aucun client EXISTANT (achat pack avant la bascule) n'est
+ * pénalisé — son certificat reste débloquable sans TRACFIN (grandfather).
  */
-describe("Non-régression — utilisateurs existants après ajout de TRACFIN", () => {
+describe("TRACFIN inclus au pack — non-régression clients existants", () => {
   const pack: EntitlementRow[] = [{ module_slug: null, status: "active" }];
 
-  it("le parcours principal exclut les add-ons (37 leçons, pas 40)", () => {
-    const coreLessons = FORMATION_MODULES.reduce((a, m) => a + m.lessons.length, 0);
-    const allLessons = COURSE.reduce((a, m) => a + m.lessons.length, 0);
-    expect(getTotalLessonCount()).toBe(coreLessons);
-    expect(getTotalLessonCount()).toBeLessThan(allLessons); // add-ons non comptés
+  it("plus aucun module autonome / exclu du pack", () => {
+    expect(STANDALONE_MODULE_SLUGS.size).toBe(0);
+    expect(PACK_EXCLUDED_MODULES.size).toBe(0);
   });
 
-  it("le seuil de certification est inchangé (33 leçons certifiantes)", () => {
-    expect(getCertifiedLessonCount()).toBe(33);
-  });
-
-  it("un détenteur du pack garde l'accès à TOUS les modules du parcours", () => {
+  it("le détenteur du pack accède à TOUS les modules, TRACFIN compris", () => {
     const ent = getEntitlements(pack);
-    for (const mod of FORMATION_MODULES) {
+    for (const mod of COURSE) {
       expect(hasModuleAccess(ent, mod.slug)).toBe(true);
     }
   });
 
-  it("un détenteur du pack n'a PAS accès aux add-ons autonomes (TRACFIN)", () => {
-    const ent = getEntitlements(pack);
-    for (const slug of STANDALONE_MODULE_SLUGS) {
-      expect(hasModuleAccess(ent, slug)).toBe(false);
-    }
+  it("TRACFIN fait partie du parcours (total = tout COURSE)", () => {
+    const all = COURSE.reduce((a, m) => a + m.lessons.length, 0);
+    expect(getTotalLessonCount()).toBe(all);
+    expect(FORMATION_MODULES.some((m) => m.slug === "tracfin")).toBe(true);
   });
 
-  it("un utilisateur ayant terminé le parcours n'est PAS renvoyé vers un add-on", () => {
-    // Progression = toutes les leçons du parcours principal faites.
-    const progress: Record<string, boolean> = {};
-    for (const mod of FORMATION_MODULES) {
-      for (const l of mod.lessons) progress[lessonId(mod.slug, l.slug)] = true;
-    }
-    // Aucune "prochaine leçon" (et surtout pas une leçon TRACFIN).
-    expect(findNextLesson(progress)).toBeNull();
+  it("certification = 36 leçons (TRACFIN compte, déontologie bonus)", () => {
+    expect(getCertifiedLessonCount()).toBe(36);
+  });
+
+  it("GRANDFATHER : un client pack historique n'a PAS TRACFIN requis pour son certificat", () => {
+    const legacyTotal = getCertificationTotalLessons(true);
+    const fullTotal = getCertificationTotalLessons(false);
+    expect(legacyTotal).toBeLessThan(fullTotal); // seuil plus bas pour l'historique
+    expect(isPackGrandfathered("2026-01-01T00:00:00Z")).toBe(true);
+  });
+
+  it("un NOUVEAU client (achat après bascule) a TRACFIN requis", () => {
+    expect(isPackGrandfathered("2027-01-01T00:00:00Z")).toBe(false);
   });
 });

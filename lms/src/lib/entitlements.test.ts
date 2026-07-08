@@ -55,25 +55,22 @@ describe("canAccessModule", () => {
   });
 });
 
-describe("PACK_EXCLUDED_MODULES (add-ons autonomes hors pack)", () => {
-  it("tracfin est un module exclu du pack", () => {
-    expect(PACK_EXCLUDED_MODULES.has("tracfin")).toBe(true);
+describe("PACK_EXCLUDED_MODULES (add-ons hors pack) — vide désormais", () => {
+  it("aucun module n'est exclu du pack (TRACFIN inclus)", () => {
+    expect(PACK_EXCLUDED_MODULES.size).toBe(0);
+    expect(PACK_EXCLUDED_MODULES.has("tracfin")).toBe(false);
   });
 
-  it("le pack N'OUVRE PAS un module exclu (tracfin)", () => {
-    expect(canAccessModule([pack], "tracfin", false)).toBe(false);
-    expect(hasModuleAccess(getEntitlements([pack]), "tracfin")).toBe(false);
+  it("le pack donne accès à TRACFIN", () => {
+    expect(canAccessModule([pack], "tracfin", false)).toBe(true);
+    expect(hasModuleAccess(getEntitlements([pack]), "tracfin")).toBe(true);
   });
 
-  it("le pack ouvre bien les modules NON exclus", () => {
-    expect(canAccessModule([pack], "transaction", false)).toBe(true);
-  });
-
-  it("acheté à l'unité => accès au module exclu, même sans pack", () => {
+  it("achat TRACFIN à l'unité => accès aussi (sans pack)", () => {
     expect(canAccessModule([tracfin], "tracfin", false)).toBe(true);
   });
 
-  it("admin => accès même à un module exclu", () => {
-    expect(canAccessModule([], "tracfin", true)).toBe(true);
+  it("aucun droit => pas d'accès à TRACFIN", () => {
+    expect(canAccessModule([], "tracfin", false)).toBe(false);
   });
 });

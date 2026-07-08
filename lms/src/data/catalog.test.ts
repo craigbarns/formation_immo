@@ -46,12 +46,10 @@ describe("getCatalog", () => {
     expect(getModulePriceCents()).toBe(5900);
   });
 
-  it("la description du pack ne compte que les modules INCLUS (hors add-ons autonomes)", () => {
+  it("le pack inclut désormais TOUS les modules (TRACFIN compris)", () => {
     const pack = getCatalog()[0];
-    const packModules = COURSE.filter((m) => !PACK_EXCLUDED_MODULES.has(m.slug));
-    expect(pack.description).toContain(`${packModules.length} modules`);
-    // TRACFIN est un add-on autonome : il n'est pas compté dans le pack.
-    expect(packModules.length).toBe(COURSE.length - 1);
+    expect(PACK_EXCLUDED_MODULES.size).toBe(0);
+    expect(pack.description).toContain(`${COURSE.length} modules`);
   });
 
   it("le module deontologie (6e) est vendable", () => {
