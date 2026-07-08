@@ -4,20 +4,21 @@ import {
   BONUS_MODULE_SLUGS,
   getCertifiedLessonCount,
   getTotalLessonCount,
+  isPackGrandfathered,
+  getCertificationTotalLessons,
+  TRACFIN_CERT_CUTOFF_ISO,
 } from "./formation-journey";
 
-describe("comptage des leçons de certification (option A : déontologie = bonus hors cert)", () => {
+describe("comptage des leçons de certification (déontologie = bonus, TRACFIN compte)", () => {
   it("déontologie est marqué comme bonus", () => {
     expect(BONUS_MODULE_SLUGS).toContain("deontologie");
   });
 
-  it("tracfin est marqué comme bonus (add-on autonome)", () => {
-    expect(BONUS_MODULE_SLUGS).toContain("tracfin");
+  it("TRACFIN n'est PLUS bonus : il compte dans la certification", () => {
+    expect(BONUS_MODULE_SLUGS).not.toContain("tracfin");
   });
 
   it("la certification exclut les leçons bonus DU PARCOURS (ex. déontologie)", () => {
-    // getTotalLessonCount ne compte que le parcours principal (add-ons exclus).
-    // Le seul écart avec la certification = les modules bonus du parcours (déontologie).
     const bonusInFormation = FORMATION_MODULES.filter((m) =>
       BONUS_MODULE_SLUGS.includes(m.slug)
     ).reduce((acc, m) => acc + m.lessons.length, 0);
@@ -25,16 +26,39 @@ describe("comptage des leçons de certification (option A : déontologie = bonus
     expect(getCertifiedLessonCount()).toBe(getTotalLessonCount() - bonusInFormation);
   });
 
-  it("les add-ons autonomes ne comptent PAS dans le total du parcours", () => {
-    // TRACFIN (add-on) ne fait pas partie de getTotalLessonCount.
-    const tracfinLessons = COURSE.find((m) => m.slug === "tracfin")?.lessons.length ?? 0;
-    expect(tracfinLessons).toBeGreaterThan(0);
-    expect(getTotalLessonCount()).toBe(
-      COURSE.reduce((acc, m) => acc + m.lessons.length, 0) - tracfinLessons
-    );
+  it("TRACFIN compte désormais dans le total du parcours", () => {
+    const all = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
+    expect(getTotalLessonCount()).toBe(all); // plus d'exclusion d'add-on
   });
 
-  it("= 33 leçons (contenu réel des 5 modules d'origine)", () => {
-    expect(getCertifiedLessonCount()).toBe(33);
+  it("= 36 leçons certifiantes (5 modules coeur + TRACFIN, hors déontologie)", () => {
+    expect(getCertifiedLessonCount()).toBe(36);
+  });
+});
+
+describe("grandfather TRACFIN (clients pack antérieurs à la bascule)", () => {
+  it("achat null => non grandfathered", () => {
+    expect(isPackGrandfathered(null)).toBe(false);
+    expect(isPackGrandfathered(undefined)).toBe(false);
+  });
+
+  it("achat avant la bascule => grandfathered", () => {
+    expect(isPackGrandfathered("2026-06-01T10:00:00+00:00")).toBe(true);
+  });
+
+  it("achat après la bascule => non grandfathered", () => {
+    expect(isPackGrandfathered("2027-07-07T10:00:00Z")).toBe(false);
+  });
+
+  it("dénominateur cert : grandfathered exclut TRACFIN, nouveau l'inclut", () => {
+    const full = getCertificationTotalLessons(false);
+    const legacy = getCertificationTotalLessons(true);
+    const tracfinLessons = full - legacy;
+    expect(tracfinLessons).toBe(3); // TRACFIN = 3 leçons
+    expect(full).toBe(getTotalLessonCount()); // = parcours complet
+  });
+
+  it("le cutoff est une date ISO valide", () => {
+    expect(Number.isFinite(Date.parse(TRACFIN_CERT_CUTOFF_ISO))).toBe(true);
   });
 });

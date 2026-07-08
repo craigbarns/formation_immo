@@ -107,3 +107,28 @@ export function getLessonJourneyPosition(
   }
   return null;
 }
+
+/**
+ * Date de bascule : TRACFIN devient requis pour la certification à partir de là.
+ * Les clients dont l'achat du pack est ANTÉRIEUR sont "grandfathered" (non pénalisés).
+ */
+export const TRACFIN_CERT_CUTOFF_ISO = "2026-07-07T00:00:00.000Z";
+
+/** Modules non requis pour la certification des clients grandfathered. */
+const GRANDFATHER_OPTIONAL_SLUGS = new Set<string>(["tracfin"]);
+
+/** Achat du pack antérieur à la bascule ⇒ client historique non pénalisé. */
+export function isPackGrandfathered(
+  packCreatedAtISO: string | null | undefined,
+): boolean {
+  if (!packCreatedAtISO) return false;
+  const t = Date.parse(packCreatedAtISO);
+  return Number.isFinite(t) && t < Date.parse(TRACFIN_CERT_CUTOFF_ISO);
+}
+
+/** Dénominateur de complétion du certificat selon le statut grandfather. */
+export function getCertificationTotalLessons(isGrandfathered: boolean): number {
+  return FORMATION_MODULES.filter(
+    (m) => !(isGrandfathered && GRANDFATHER_OPTIONAL_SLUGS.has(m.slug)),
+  ).reduce((acc, m) => acc + m.lessons.length, 0);
+}
