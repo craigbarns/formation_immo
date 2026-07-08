@@ -112,7 +112,7 @@ export function getLessonJourneyPosition(
  * Date de bascule : TRACFIN devient requis pour la certification à partir de là.
  * Les clients dont l'achat du pack est ANTÉRIEUR sont "grandfathered" (non pénalisés).
  */
-export const TRACFIN_CERT_CUTOFF_ISO = "2026-07-07T00:00:00.000Z";
+export const TRACFIN_CERT_CUTOFF_ISO = "2026-07-09T00:00:00.000Z";
 
 /** Modules non requis pour la certification des clients grandfathered. */
 const GRANDFATHER_OPTIONAL_SLUGS = new Set<string>(["tracfin"]);
