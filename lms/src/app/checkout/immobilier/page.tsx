@@ -60,6 +60,13 @@ const PROGRAMME_MODULES = [
     summary: "Code de déontologie, non-discrimination, conflits d'intérêts, éthique pratique.",
     lessons: 4,
   },
+  {
+    number: "07",
+    icon: Scale,
+    title: "TRACFIN & LCB-FT — Lutte anti-blanchiment",
+    summary: "Cadre légal LCB-FT, vigilance client, bénéficiaire effectif, déclaration de soupçon à TRACFIN.",
+    lessons: 3,
+  },
 ];
 import { createClient } from "@/lib/supabase/server";
 
@@ -128,13 +135,13 @@ export default async function ImmobilierCheckoutPage() {
             </div>
             <div className="p-8">
               <p className="text-lg leading-relaxed text-zinc-600">
-                Maîtrisez les 5 piliers du métier : juridique, transaction, financement, marketing et terrain. Un parcours certifiant de 42h conçu pour les professionnels exigeants.
+                Maîtrisez les 5 piliers du métier : juridique, transaction, financement, marketing et terrain, complétés par la déontologie et TRACFIN. Un parcours certifiant de 45h conçu pour les professionnels exigeants.
               </p>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 {[
                   "Accès immédiat 24h/24",
-                  "36 leçons interactives",
+                  "40 leçons interactives",
                   "Scripts & Outils terrain",
                   "Certification MasterClass",
                 ].map((item) => (
@@ -156,7 +163,7 @@ export default async function ImmobilierCheckoutPage() {
               {[
                 { step: "01", title: "Paiement", desc: "Réglez par CB via l'interface Stripe sécurisée." },
                 { step: "02", title: "Compte", desc: "Créez votre accès après le paiement validé." },
-                { step: "03", title: "Formation", desc: "Accédez directement à vos 6 modules." },
+                { step: "03", title: "Formation", desc: "Accédez directement à vos 7 modules." },
               ].map((item) => (
                 <div key={item.step}>
                   <p className="text-2xl font-black text-brand-gold/40">{item.step}</p>
@@ -214,7 +221,7 @@ export default async function ImmobilierCheckoutPage() {
             Programme complet
           </p>
           <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-brand-navy sm:text-4xl">
-            6 modules · 37 leçons · 42h de formation
+            7 modules · 40 leçons · 45h de formation
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-zinc-600">
             Un parcours structuré couvrant l&apos;ensemble du métier d&apos;agent immobilier, de la conformité juridique à l&apos;éthique professionnelle.

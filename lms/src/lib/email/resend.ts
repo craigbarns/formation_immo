@@ -22,7 +22,7 @@ export async function sendWelcomeEmail(email: string, name?: string) {
         </div>
         <div style="padding:40px 32px">
           <h2 style="color:#fff;font-size:22px;margin:0 0 16px">Bienvenue ${prenom} ! 🎉</h2>
-          <p style="color:#ffffff80;line-height:1.7">Ta formation est maintenant accessible. Tu as 42h de contenu devant toi : 5 modules, 36 leçons, un coach IA, des simulateurs financiers et un examen certifiant.</p>
+          <p style="color:#ffffff80;line-height:1.7">Ta formation est maintenant accessible. Tu as 45h de contenu devant toi : 7 modules (dont TRACFIN & LCB-FT), 40 leçons, un coach IA, des simulateurs financiers et un examen certifiant.</p>
           <div style="margin:32px 0;text-align:center">
             <a href="${APP_URL}/formation" style="display:inline-block;background:#d4af37;color:#0a1628;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:2px;padding:16px 32px;border-radius:12px;text-decoration:none">
               Commencer la formation →
@@ -102,7 +102,7 @@ export async function sendCertificationEmail(email: string, name: string | undef
           <div style="background:#ffffff08;border:1px solid #d4af3740;border-radius:16px;padding:32px;margin-bottom:32px">
             <p style="color:#ffffff40;font-size:11px;text-transform:uppercase;letter-spacing:3px;margin:0 0 8px">Certifie</p>
             <p style="color:#fff;font-size:22px;font-weight:900;margin:0 0 8px">${fullName}</p>
-            <p style="color:#d4af37;font-size:14px;margin:0">Formation Agent Immobilier — 42h — Loi ALUR 2026</p>
+            <p style="color:#d4af37;font-size:14px;margin:0">Formation Agent Immobilier — 45h — Loi ALUR 2026</p>
           </div>
           <p style="color:#ffffff80;line-height:1.7;text-align:left">Tu as complété les 5 modules et validé l'examen certifiant. Cette formation est reconnue dans le cadre de l'obligation de formation continue des agents immobiliers.</p>
           <div style="margin:32px 0">

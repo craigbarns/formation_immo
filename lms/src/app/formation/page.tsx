@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Accédez aux 5 modules de formation immobilière : juridique, transaction, financement, marketing et terrain.",
 };
 import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award, Trophy, type LucideIcon } from "lucide-react";
-import { COURSE, FORMATION_MODULES, formatDuration } from "@/data/course";
+import { FORMATION_MODULES, formatDuration } from "@/data/course";
 import { PACK_EXCLUDED_MODULES } from "@/lib/entitlements";
 import { getAccessSummary } from "@/lib/access";
 import { getAvatarForModule } from "@/data/module-avatars";
@@ -49,23 +49,17 @@ export default async function FormationHomePage() {
     redirect("/formation/test");
   }
 
-  // Droits par module : pack = tout SAUF les add-ons autonomes (ex. TRACFIN) ;
-  // sinon modules achetés à l'unité. Même règle que verifyModuleAccess.
+  // Droits par module : pack = tout (add-ons éventuels exclus via PACK_EXCLUDED,
+  // vide aujourd'hui) ; sinon modules achetés à l'unité. Même règle que verifyModuleAccess.
   const access = await getAccessSummary();
   const canAccess = (slug: string) =>
     (access.hasPack && !PACK_EXCLUDED_MODULES.has(slug)) || access.modules.includes(slug);
 
-  // Stats du PARCOURS principal (hors add-ons autonomes) — inchangées pour les
-  // utilisateurs existants malgré l'ajout de modules autonomes dans COURSE.
+  // Stats du parcours (FORMATION_MODULES = tous les modules, TRACFIN inclus).
   const totalLessons = FORMATION_MODULES.reduce((acc, m) => acc + m.lessons.length, 0);
   const totalModules = FORMATION_MODULES.length;
   const totalDuration = formatDuration(
     FORMATION_MODULES.reduce((acc, m) => acc + m.lessons.reduce((a, l) => a + l.duration, 0), 0)
-  );
-
-  // Add-ons autonomes que l'utilisateur possède réellement (achetés à l'unité).
-  const ownedAddons = COURSE.filter(
-    (m) => PACK_EXCLUDED_MODULES.has(m.slug) && access.modules.includes(m.slug)
   );
 
   return (
@@ -321,46 +315,6 @@ export default async function FormationHomePage() {
           })}
         </StaggerContainer>
       </section>
-
-      {/* Modules spécialisés (add-ons) que l'utilisateur possède — hors parcours 42h */}
-      {ownedAddons.length > 0 && (
-        <section id="modules-specialises" className="scroll-mt-24">
-          <h2 className="flex items-center gap-3 text-2xl font-black uppercase tracking-widest text-slate-900 dark:text-white">
-            <Award className="h-7 w-7 text-brand-gold" />
-            MODULES SPÉCIALISÉS
-          </h2>
-          <p className="mt-3 text-base text-slate-500 dark:text-white/50 font-medium">
-            Modules autonomes que vous avez débloqués — indépendants du parcours certifiant 42h.
-          </p>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {ownedAddons.map((mod) => (
-              <div
-                key={mod.slug}
-                className="overflow-hidden rounded-[1.5rem] border border-brand-gold/20 bg-[#070d18] p-8 shadow-2xl"
-              >
-                <div className="flex items-center gap-3">
-                  <h3 className="text-xl font-black uppercase tracking-tight text-white">
-                    {mod.title}
-                  </h3>
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-2xs font-bold text-white/60">
-                    {formatDuration(mod.lessons.reduce((a, l) => a + l.duration, 0))}
-                  </span>
-                </div>
-                <p className="mt-4 text-base leading-relaxed text-white/60">{mod.summary}</p>
-                <div className="mt-6">
-                  <ModuleRowProgress moduleSlug={mod.slug} />
-                </div>
-                <Link
-                  href={`/formation/${mod.slug}`}
-                  className="mt-6 inline-flex rounded-xl bg-white px-6 py-2.5 text-xs font-black uppercase tracking-wider text-brand-navy shadow-xl transition hover:bg-brand-gold hover:scale-105 active:scale-95"
-                >
-                  Ouvrir →
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
     </div>
   );
 }
