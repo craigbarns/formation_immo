@@ -999,6 +999,223 @@ export const MODULE_EXAMS: ModuleExam[] = [
       },
     ],
   },
+  {
+    moduleSlug: "murs-fonds-commerce",
+    title: "Examen — Murs & fonds de commerce",
+    duration: 20,
+    questions: [
+      {
+        id: "mf1",
+        question:
+          "Selon l'article L.145-1 du Code de commerce, quel est le critère déterminant pour qualifier un contrat de « bail commercial » au sens strict ?",
+        options: [
+          "L'immatriculation du locataire au Registre du Commerce et des Sociétés (RCS)",
+          "L'exploitation par le locataire d'un fonds de commerce ou d'un établissement artisanal dans le local loué",
+          "La conclusion d'un contrat écrit obligatoirement devant notaire",
+          "La présence d'une enseigne visible depuis la voie publique",
+        ],
+        correctIndex: 1,
+        explanation:
+          "La qualification repose sur l'exploitation effective d'un fonds de commerce ou artisanal dans le local loué : c'est l'articulation entre l'activité et le local qui fonde le statut protecteur. L'acte notarié et l'enseigne ne sont pas des critères (art. L.145-1 C. com.).",
+      },
+      {
+        id: "mf2",
+        question:
+          "Un restaurateur signe un bail commercial. Quelle est la durée minimale légale du bail et comment fonctionne le congé ?",
+        options: [
+          "Durée minimale de 3 ans avec congé possible à tout moment moyennant un préavis de 3 mois",
+          "Durée minimale de 6 ans avec congé possible tous les 3 ans",
+          "Durée minimale de 9 ans, renouvelable, avec congé possible à l'expiration de chaque période triennale (3e, 6e et 9e année)",
+          "Durée minimale de 12 ans avec congé possible uniquement à l'expiration de la 9e année",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Le bail commercial a une durée minimale de 9 ans (art. L.145-4 C. com.). Le congé peut être donné à l'expiration de chaque période triennale, avec un préavis d'au moins 6 mois. À l'issue des 9 ans, le locataire bénéficie du droit au renouvellement.",
+      },
+      {
+        id: "mf3",
+        question:
+          "En cas de désaccord sur le loyer lors du renouvellement du bail commercial, comment le nouveau loyer est-il déterminé ?",
+        options: [
+          "Le loyer est automatiquement indexé sur l'indice du coût de la construction (ICC)",
+          "Le loyer est fixé par le juge en tenant compte de la valeur locative des locaux, des charges, des travaux et des conditions du bail",
+          "Le loyer est imposé par la Chambre de commerce et d'industrie locale",
+          "Le loyer ne peut pas changer et reste identique à celui du bail initial",
+        ],
+        correctIndex: 1,
+        explanation:
+          "À défaut d'accord, le juge fixe le loyer du bail renouvelé d'après la valeur locative : état des lieux, conditions de jouissance, charges du locataire, travaux effectués et usages de la profession (art. L.145-33 et L.145-34 C. com.).",
+      },
+      {
+        id: "mf4",
+        question:
+          "Selon l'article L.141-1 du Code de commerce, lequel de ces éléments constitue un élément essentiel du fonds de commerce ?",
+        options: [
+          "Les stocks de marchandises seulement",
+          "L'enseigne, le nom commercial et la clientèle",
+          "Le mobilier de bureau personnel du commerçant",
+          "Le véhicule personnel du commerçant",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Le fonds de commerce est un ensemble d'éléments corporels et incorporels. Les éléments incorporels — clientèle (élément le plus précieux), enseigne, nom commercial, droit au bail — en constituent l'essence (art. L.141-1 C. com.).",
+      },
+      {
+        id: "mf5",
+        question:
+          "Lors d'une cession de fonds de commerce, quel mécanisme protège les créanciers du cédant après la publicité de la cession ?",
+        options: [
+          "Aucun : les créanciers du cédant perdent tout recours dès la signature de l'acte",
+          "Un délai d'opposition permettant aux créanciers du cédant de faire valoir leurs créances, le prix étant séquestré en cas d'opposition",
+          "Un délai de 60 jours pendant lequel les créanciers du cessionnaire peuvent contester la cession",
+          "Un délai de 90 jours pendant lequel le cessionnaire peut renoncer à la cession",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Après publicité de la cession, les créanciers du cédant disposent d'un délai légal pour former opposition ; en cas d'opposition, le prix de cession est séquestré (généralement chez le notaire) jusqu'à résolution. Sans opposition dans le délai, le prix est libéré (art. L.141-14 et s. C. com.).",
+      },
+      {
+        id: "mf6",
+        question:
+          "Un locataire commercial veut céder son droit au bail seul à un repreneur. Le bail réserve au bailleur une faculté de préemption. Comment s'exerce-t-elle ?",
+        options: [
+          "Le bailleur se substitue au cessionnaire dans le délai prévu, au même prix et aux mêmes conditions que l'offre du repreneur",
+          "Le bailleur peut préempter à tout moment en proposant un prix inférieur au prix de cession",
+          "Le bailleur n'a jamais aucun droit de regard sur la cession du bail commercial",
+          "Le bailleur doit obligatoirement acheter le fonds de commerce entier pour exercer sa préemption",
+        ],
+        correctIndex: 0,
+        explanation:
+          "La préemption s'exerce aux mêmes prix et conditions que l'offre du cessionnaire proposé, dans le délai imparti — le bailleur ne peut pas imposer un prix inférieur. À noter : la cession du bail avec le fonds de commerce, elle, ne peut pas être interdite au locataire (art. L.145-16 C. com.).",
+      },
+      {
+        id: "mf7",
+        question:
+          "Un boulanger conteste les conditions d'un congé avec offre de renouvellement. Dans quel délai peut-il faire valoir ses droits en justice ?",
+        options: [
+          "Il n'a aucun droit au renouvellement et doit quitter les lieux à l'expiration du bail",
+          "Il dispose d'un délai de 2 ans à compter de la date à laquelle le bail a pris fin pour saisir le tribunal",
+          "Il dispose d'un délai de 6 mois après l'expiration du bail, puis le droit est périmé",
+          "Il peut exiger un renouvellement automatique de 12 ans sans conditions",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Les actions relatives au bail commercial se prescrivent par 2 ans (art. L.145-60 C. com.). Le locataire dispose donc de ce délai pour contester le congé ou faire fixer les conditions du bail renouvelé devant le juge.",
+      },
+      {
+        id: "mf8",
+        question:
+          "Un tribunal accorde une indemnité d'éviction de 3 ans de loyer (loyer mensuel : 2 500 €). Le commerçant a réalisé 45 000 € de travaux il y a 4 ans (amortissement d'usage sur 10 ans). Quel raisonnement de calcul est correct ?",
+        options: [
+          "90 000 € (3 ans de loyer uniquement)",
+          "135 000 € (3 ans de loyer + remboursement intégral des travaux)",
+          "90 000 € (3 ans de loyer) + la part non amortie des travaux : 45 000 − (45 000 × 4/10) = 27 000 €",
+          "90 000 € (3 ans de loyer) + remboursement intégral des travaux, sans tenir compte de l'amortissement",
+        ],
+        correctIndex: 2,
+        explanation:
+          "L'indemnité d'éviction (art. L.145-14 C. com.) compense le préjudice : indemnité principale (ici 3 ans de loyer = 90 000 €) plus indemnités accessoires, dont la part non amortie des travaux (27 000 € après 4 ans sur 10), frais de déménagement et perte de clientèle le cas échéant.",
+      },
+      {
+        id: "mf9",
+        question:
+          "Un propriétaire veut donner congé à l'expiration de la première période triennale. Quelles formalités doit-il respecter ?",
+        options: [
+          "Un simple courrier recommandé envoyé au moins 1 mois avant l'échéance suffit",
+          "Un acte d'huissier ou une lettre recommandée avec AR, motivé, notifié au moins 6 mois avant la fin de la période triennale",
+          "Une décision du tribunal de commerce autorisant le congé",
+          "Une information verbale au locataire suivie d'un courriel de confirmation",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Le congé doit être donné par acte extrajudiciaire (huissier) ou LRAR, préciser ses motifs, et être notifié au moins 6 mois avant l'échéance (art. L.145-9 C. com.). Un congé irrégulier en la forme ou hors délai est sans effet.",
+      },
+      {
+        id: "mf10",
+        question:
+          "Un avocat exerce dans un local loué à Paris, sans vente de marchandises. Quel type de bail régit en principe sa location ?",
+        options: [
+          "Un bail commercial car l'avocat est un commerçant inscrit au RCS",
+          "Un bail professionnel, car les activités libérales ne constituent pas une activité commerciale au sens du Code de commerce",
+          "Un bail commercial car tout local loué à usage professionnel est automatiquement un bail commercial",
+          "Un bail mixte commercial et professionnel",
+        ],
+        correctIndex: 1,
+        explanation:
+          "L'activité libérale relève en principe du bail professionnel (durée minimale 6 ans, pas de droit au renouvellement automatique ni d'indemnité d'éviction). Les parties peuvent toutefois se soumettre volontairement au statut des baux commerciaux (art. L.145-2 C. com.).",
+      },
+      {
+        id: "mf11",
+        question:
+          "Le bail ne prévoit rien sur les travaux d'amélioration. Le bailleur rénove la façade et remplace les fenêtres par des baies vitrées (120 000 €). Quelle est la répartition applicable ?",
+        options: [
+          "Le bailleur supporte la totalité car ils relèvent de son obligation de mise en conformité",
+          "Le locataire supporte la totalité car il bénéficie de l'amélioration des locaux",
+          "Le bailleur supporte les deux tiers et le locataire un tiers, proportionnellement à la durée du bail restant à courir",
+          "Le bailleur supporte les travaux lourds (façade, structure) ; le locataire peut participer à hauteur du bénéfice qu'il en retire, selon la nature des travaux et les usages",
+        ],
+        correctIndex: 3,
+        explanation:
+          "Sans stipulation, le locataire supporte l'entretien courant et les réparations locatives, le bailleur les gros travaux (structure, façade — art. 606 C. civ.). Pour les améliorations, la répartition dépend de leur nature et du bénéfice retiré par chaque partie ; le juge apprécie au cas par cas.",
+      },
+      {
+        id: "mf12",
+        question:
+          "Un investisseur achète des murs de boutique via une société soumise à l'IS. Quel est le régime fiscal des loyers et de la future plus-value ?",
+        options: [
+          "Loyers imposés à l'IR en revenus fonciers, plus-value immobilière des particuliers avec abattement pour durée de détention",
+          "Loyers imposés au résultat de la société (IS à 25 %), bien amortissable, et plus-value professionnelle soumise à l'IS sans abattement pour durée de détention",
+          "Les loyers sont exonérés d'impôt car il s'agit de murs de boutique",
+          "Les loyers sont obligatoirement soumis à la TVA au taux de 20 %",
+        ],
+        correctIndex: 1,
+        explanation:
+          "En société à l'IS, les loyers entrent dans le résultat imposable (taux normal 25 %), le bâtiment est amortissable, et la plus-value de cession est calculée sur la valeur nette comptable et imposée à l'IS — sans abattement pour durée de détention, contrairement au régime des particuliers.",
+      },
+      {
+        id: "mf13",
+        question:
+          "Un promoteur veut louer un local 2 ans pour une agence de vente temporaire. Quel bail est adapté et quelles sont ses caractéristiques ?",
+        options: [
+          "Un bail commercial classique de 9 ans avec congé à la 3e année",
+          "Un bail dérogatoire (précaire) de courte durée : 3 ans maximum au total, sans droit au renouvellement ni indemnité d'éviction",
+          "Un bail professionnel de 6 ans",
+          "Un bail emphytéotique de 18 à 99 ans",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Le bail dérogatoire (art. L.145-5 C. com.) permet d'échapper au statut pour une durée totale maximale de 3 ans : pas de droit au renouvellement ni d'indemnité d'éviction. Idéal pour une activité temporaire. Au-delà de 3 ans d'occupation, un bail commercial de 9 ans s'opère de plein droit.",
+      },
+      {
+        id: "mf14",
+        question:
+          "Deux ans après réception, des fissures structurelles compromettent la sécurité d'un bâtiment commercial loué à un restaurateur. Qui peut invoquer la garantie décennale ?",
+        options: [
+          "Seul le propriétaire-investisseur peut agir contre l'entrepreneur dans les 10 ans suivant la réception",
+          "Le propriétaire et les acquéreurs successifs peuvent agir contre les constructeurs (entrepreneur, architecte, bureau d'études) dans les 10 ans suivant la réception",
+          "Seul le locataire commercial peut agir car il subit le préjudice directement",
+          "La garantie décennale ne s'applique pas aux locaux commerciaux",
+        ],
+        correctIndex: 1,
+        explanation:
+          "La garantie décennale (art. 1792 C. civ.) couvre 10 ans les dommages compromettant la solidité de l'ouvrage ou le rendant impropre à sa destination ; elle bénéficie au maître d'ouvrage et aux propriétaires successifs, contre tous les constructeurs. Elle s'applique pleinement aux locaux commerciaux.",
+      },
+      {
+        id: "mf15",
+        question:
+          "Un fleuriste cède son fonds de commerce alors que son bail arrive à échéance avec un congé portant offre de renouvellement. Que peut faire le repreneur ?",
+        options: [
+          "Rien : seul le cédant pouvait former la demande de renouvellement avant la cession",
+          "Le repreneur, substitué dans les droits du cédant, peut faire valoir le droit au renouvellement dans le délai de 2 ans ; la cession du fonds doit par ailleurs respecter la publicité et l'opposition des créanciers",
+          "Le repreneur doit verser au bailleur une prime obligatoire prévue par la loi pour obtenir le renouvellement",
+          "Le bailleur peut refuser le renouvellement sans aucune justification ni indemnité",
+        ],
+        correctIndex: 1,
+        explanation:
+          "La cession du fonds emporte transmission du droit au renouvellement au cessionnaire (art. L.145-16 C. com.), qui dispose du délai de prescription de 2 ans (art. L.145-60). Le refus de renouvellement sans motif grave et légitime ouvre droit à l'indemnité d'éviction (art. L.145-14).",
+      },
+    ],
+  },
 ];
 
 export const FINAL_EXAM_ID = "certification-finale";
