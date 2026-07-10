@@ -44,9 +44,18 @@ const TOTAL_DURATION = formatDuration(
   PACK_MODULES.reduce((acc, m) => acc + m.lessons.reduce((a, l) => a + l.duration, 0), 0)
 );
 
-/** Cover par module ; fallback visuel générique (ex. déontologie). */
+/** Cover par module ; fallback visuel générique pour tout nouveau module sans visuel. */
 function moduleCover(slug: string): string {
-  const withCover = ["juridique", "transaction", "financement", "marketing", "terrain"];
+  const withCover = [
+    "juridique",
+    "transaction",
+    "financement",
+    "marketing",
+    "terrain",
+    "deontologie",
+    "tracfin",
+    "murs-fonds-commerce",
+  ];
   return withCover.includes(slug) ? `/generated/fal/${slug}/cover.jpg` : IMMOBILIER_COVER;
 }
 
