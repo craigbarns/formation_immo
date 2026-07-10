@@ -757,14 +757,94 @@ export const COURSE: CourseModule[] = [
       },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FORMATION AUTONOME — MURS & FONDS DE COMMERCE  (420 min = 7h)  ·  59€
+  // Vendue uniquement à l'unité, PAS incluse au pack, hors parcours certifiant —
+  // voir STANDALONE_MODULE_SLUGS ci-dessous. Attestation propre de 7h.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    slug: "murs-fonds-commerce",
+    title: "Murs & fonds de commerce",
+    summary:
+      "Baux commerciaux, cession de fonds, renouvellement, indemnité d'éviction, murs de boutique et fiscalité.",
+    description:
+      "Maîtrisez l'immobilier commercial de bout en bout : statut des baux commerciaux (art. L.145-1 et s. du Code de commerce), rédaction et négociation du bail, cession de fonds de commerce (art. L.141-1, opposition des créanciers), renouvellement, congé et indemnité d'éviction, et investissement en murs de boutique avec sa fiscalité. Une formation autonome de 7h pour conseiller commerçants, bailleurs et investisseurs en toute sécurité juridique.",
+    lessons: [
+      {
+        slug: "bail-commercial",
+        title: "Le bail commercial — fondamentaux",
+        scriptFile: "module7-murs-fonds/scripts/01-bail-commercial-fondamentaux.md",
+        videoUrl: null,
+        audioUrl: null,
+        duration: 105,
+        difficulty: "intermediaire",
+        objectives: [
+          "Qualifier un bail commercial : les conditions cumulatives de l'art. L.145-1",
+          "Maîtriser le mécanisme 3/6/9 : durée, congés triennaux, renouvellement tacite",
+          "Distinguer bail commercial, bail professionnel et bail précaire (L.145-5)",
+          "Identifier les clauses essentielles et les clauses à risque d'un bail",
+          "Comprendre fixation, révision et réévaluation du loyer commercial",
+        ],
+      },
+      {
+        slug: "cession-fonds",
+        title: "La cession de fonds de commerce",
+        scriptFile: "module7-murs-fonds/scripts/02-cession-fonds-commerce.md",
+        videoUrl: null,
+        audioUrl: null,
+        duration: 105,
+        difficulty: "intermediaire",
+        objectives: [
+          "Définir le fonds de commerce : éléments corporels et incorporels (L.141-1)",
+          "Dérouler la procédure de cession : information du bailleur, agrément, publicité",
+          "Sécuriser le délai d'opposition des créanciers et le séquestre du prix",
+          "Évaluer un fonds : multiples de CA, clientèle, droit au bail",
+          "Accompagner cédant et repreneur jusqu'à l'acte de cession",
+        ],
+      },
+      {
+        slug: "renouvellement-conge",
+        title: "Renouvellement, congé & indemnité d'éviction",
+        scriptFile: "module7-murs-fonds/scripts/03-renouvellement-conge-droits.md",
+        videoUrl: null,
+        audioUrl: null,
+        duration: 105,
+        difficulty: "avance",
+        objectives: [
+          "Faire valoir le droit au renouvellement du preneur (L.145-8 et s.)",
+          "Rédiger et qualifier un congé : avec offre, sans offre, délais de 6 mois",
+          "Calculer une indemnité d'éviction : valeur du fonds, transfert, réinstallation",
+          "Connaître les recours du preneur et les délais pour agir",
+          "Identifier les causes légitimes et sérieuses de refus de renouvellement",
+        ],
+      },
+      {
+        slug: "murs-boutique",
+        title: "Murs de boutique — investissement & fiscalité",
+        scriptFile: "module7-murs-fonds/scripts/04-murs-boutique-investissement.md",
+        videoUrl: null,
+        audioUrl: null,
+        duration: 105,
+        difficulty: "avance",
+        objectives: [
+          "Évaluer un investissement en murs de boutique : rendement, emplacement, bail attaché",
+          "Maîtriser la fiscalité : plus-values, droits d'enregistrement, TVA, IS vs IR",
+          "Choisir le bon montage : détention directe, SCI, holding",
+          "Vérifier conformité ERP et accessibilité avant l'achat",
+        ],
+      },
+    ],
+  },
 ];
 
 /**
- * Modules "autonomes" (add-ons) éventuels : hors parcours ET hors pack. Vide
- * aujourd'hui — TRACFIN est inclus dans le pack et dans le parcours. Source
- * unique dont dérive PACK_EXCLUDED_MODULES (entitlements).
+ * Modules "autonomes" (add-ons) : hors parcours ET hors pack. TRACFIN est
+ * inclus dans le pack et dans le parcours ; MURS & FONDS DE COMMERCE se vend
+ * uniquement à l'unité (59 €). Source unique dont dérive PACK_EXCLUDED_MODULES
+ * (entitlements).
  */
-export const STANDALONE_MODULE_SLUGS = new Set<string>([]);
+export const STANDALONE_MODULE_SLUGS = new Set<string>(["murs-fonds-commerce"]);
 
 /** Modules composant le parcours de formation principal (hors add-ons autonomes). */
 export const FORMATION_MODULES: CourseModule[] = COURSE.filter(

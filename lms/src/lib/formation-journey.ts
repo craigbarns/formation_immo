@@ -23,9 +23,13 @@ export function getTotalLessonCount(): number {
  */
 export const BONUS_MODULE_SLUGS = ["deontologie"];
 
-/** Nombre de leçons comptant pour la CERTIFICATION 42h (exclut les modules bonus). */
+/**
+ * Nombre de leçons comptant pour la CERTIFICATION (exclut les modules bonus).
+ * Base = parcours principal (FORMATION_MODULES) : les add-ons autonomes
+ * (ex. murs & fonds de commerce) n'entrent jamais dans la certification.
+ */
 export function getCertifiedLessonCount(): number {
-  return COURSE.filter((m) => !BONUS_MODULE_SLUGS.includes(m.slug)).reduce(
+  return FORMATION_MODULES.filter((m) => !BONUS_MODULE_SLUGS.includes(m.slug)).reduce(
     (acc, m) => acc + m.lessons.length,
     0
   );

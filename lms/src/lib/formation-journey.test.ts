@@ -26,13 +26,30 @@ describe("comptage des leçons de certification (déontologie = bonus, TRACFIN c
     expect(getCertifiedLessonCount()).toBe(getTotalLessonCount() - bonusInFormation);
   });
 
-  it("TRACFIN compte désormais dans le total du parcours", () => {
-    const all = COURSE.reduce((acc, m) => acc + m.lessons.length, 0);
-    expect(getTotalLessonCount()).toBe(all); // plus d'exclusion d'add-on
+  it("TRACFIN compte dans le total du parcours ; les add-ons autonomes non", () => {
+    const formationTotal = FORMATION_MODULES.reduce((acc, m) => acc + m.lessons.length, 0);
+    expect(getTotalLessonCount()).toBe(formationTotal);
+    expect(FORMATION_MODULES.some((m) => m.slug === "tracfin")).toBe(true);
+    expect(FORMATION_MODULES.some((m) => m.slug === "murs-fonds-commerce")).toBe(false);
   });
 
   it("= 36 leçons certifiantes (5 modules coeur + TRACFIN, hors déontologie)", () => {
     expect(getCertifiedLessonCount()).toBe(36);
+  });
+});
+
+describe("murs & fonds de commerce (formation autonome, hors parcours certifiant)", () => {
+  it("le module existe dans COURSE : 4 leçons, 420 min (7h)", () => {
+    const mod = COURSE.find((m) => m.slug === "murs-fonds-commerce");
+    expect(mod).toBeDefined();
+    expect(mod!.lessons).toHaveLength(4);
+    expect(mod!.lessons.reduce((a, l) => a + l.duration, 0)).toBe(420);
+  });
+
+  it("il est hors parcours : la certification et le grandfather ne bougent pas", () => {
+    expect(getCertifiedLessonCount()).toBe(36);
+    expect(getCertificationTotalLessons(false)).toBe(getTotalLessonCount());
+    expect(getCertificationTotalLessons(false) - getCertificationTotalLessons(true)).toBe(3);
   });
 });
 

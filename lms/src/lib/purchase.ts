@@ -127,7 +127,8 @@ export function parsePurchaseMetadata(
   };
 }
 
-/** Produits achetés → droits à octroyer. Pack ⇒ [null] (module_slug NULL = accès total). */
+/** Produits achetés → droits à octroyer. Pack ⇒ droit NULL (module_slug NULL = accès pack),
+ *  PLUS un droit par add-on autonome acheté en supplément (le pack ne le couvre pas). */
 export function grantsFromProducts(
   productIds: string[],
   catalog: Product[] = getCatalog()
@@ -135,8 +136,11 @@ export function grantsFromProducts(
   const known = productIds
     .map((id) => catalog.find((p) => p.id === id))
     .filter((p): p is Product => Boolean(p));
-  if (known.some((p) => p.kind === "pack")) return [null];
-  return [...new Set(known.filter((p) => p.kind === "module").map((p) => p.id))];
+  const moduleIds = [...new Set(known.filter((p) => p.kind === "module").map((p) => p.id))];
+  if (known.some((p) => p.kind === "pack")) {
+    return [null, ...moduleIds.filter((id) => PACK_EXCLUDED_MODULES.has(id))];
+  }
+  return moduleIds;
 }
 
 /** Type ligne de commande dérivé du SDK (stripe v22 n'exporte plus le namespace imbriqué). */

@@ -27,12 +27,17 @@ const brouillon: Product = {
   id: "brouillon", kind: "module", label: "Brouillon", description: "WIP",
   priceCents: 5900, grants: ["brouillon"], available: false,
 };
-// TRACFIN : add-on autonome, exclu du pack (voir PACK_EXCLUDED_MODULES).
+// TRACFIN : désormais inclus au pack (plus dans PACK_EXCLUDED_MODULES).
 const tracfin: Product = {
   id: "tracfin", kind: "module", label: "TRACFIN", description: "LCB-FT",
   priceCents: 4900, grants: ["tracfin"], available: true,
 };
-const CATALOG = [pack, juridique, transaction, brouillon, tracfin];
+// Murs & fonds de commerce : add-on AUTONOME, exclu du pack (PACK_EXCLUDED_MODULES).
+const mursEtFonds: Product = {
+  id: "murs-fonds-commerce", kind: "module", label: "Murs & fonds", description: "Immo commercial",
+  priceCents: 5900, grants: ["murs-fonds-commerce"], available: true,
+};
+const CATALOG = [pack, juridique, transaction, brouillon, tracfin, mursEtFonds];
 
 const none: Entitlements = { hasPack: false, modules: new Set() };
 const ownsPack: Entitlements = { hasPack: true, modules: new Set() };
@@ -96,6 +101,39 @@ describe("filterPurchasable (Règle d'or — recalcul serveur)", () => {
     const { allowed, removed } = filterPurchasable(["tracfin"], ownsTracfin, CATALOG);
     expect(allowed).toHaveLength(0);
     expect(removed).toEqual([{ id: "tracfin", reason: "already_owned" }]);
+  });
+});
+
+describe("murs & fonds de commerce à l'achat (add-on autonome, hors pack)", () => {
+  it("un client pack PEUT acheter le module autonome", () => {
+    const { allowed, removed } = filterPurchasable(["murs-fonds-commerce"], ownsPack, CATALOG);
+    expect(allowed.map((p) => p.id)).toEqual(["murs-fonds-commerce"]);
+    expect(removed).toEqual([]);
+  });
+
+  it("panier [pack + module autonome] : les deux sont achetables ensemble", () => {
+    const { allowed, removed } = filterPurchasable(
+      ["pack", "murs-fonds-commerce"], none, CATALOG
+    );
+    expect(allowed.map((p) => p.id)).toEqual(["pack", "murs-fonds-commerce"]);
+    expect(removed).toEqual([]);
+  });
+
+  it("déjà possédé à l'unité => retiré (already_owned)", () => {
+    const owns: Entitlements = { hasPack: false, modules: new Set(["murs-fonds-commerce"]) };
+    const { allowed, removed } = filterPurchasable(["murs-fonds-commerce"], owns, CATALOG);
+    expect(allowed).toHaveLength(0);
+    expect(removed).toEqual([{ id: "murs-fonds-commerce", reason: "already_owned" }]);
+  });
+
+  it("grantsFromProducts(pack + add-on autonome) = [null, add-on] — le webhook octroie les DEUX", () => {
+    expect(grantsFromProducts(["pack", "murs-fonds-commerce"], CATALOG)).toEqual([
+      null,
+      "murs-fonds-commerce",
+    ]);
+    // Un module couvert par le pack reste absorbé par le droit pack.
+    expect(grantsFromProducts(["pack", "juridique"], CATALOG)).toEqual([null]);
+    expect(grantsFromProducts(["pack", "tracfin"], CATALOG)).toEqual([null]);
   });
 });
 

@@ -46,10 +46,21 @@ describe("getCatalog", () => {
     expect(getModulePriceCents()).toBe(5900);
   });
 
-  it("le pack inclut désormais TOUS les modules (TRACFIN compris)", () => {
+  it("le pack inclut TRACFIN mais PAS les add-ons autonomes (ex. murs & fonds)", () => {
     const pack = getCatalog()[0];
-    expect(PACK_EXCLUDED_MODULES.size).toBe(0);
-    expect(pack.description).toContain(`${COURSE.length} modules`);
+    expect(PACK_EXCLUDED_MODULES.has("tracfin")).toBe(false);
+    expect(PACK_EXCLUDED_MODULES.has("murs-fonds-commerce")).toBe(true);
+    const packModuleCount = COURSE.filter((m) => !PACK_EXCLUDED_MODULES.has(m.slug)).length;
+    expect(pack.description).toContain(`${packModuleCount} modules`);
+    expect(pack.description).not.toContain(`${COURSE.length} modules`);
+  });
+
+  it("le module autonome murs-fonds-commerce est au catalogue à 59 € (prix standard)", () => {
+    const p = getProduct("murs-fonds-commerce");
+    expect(p?.kind).toBe("module");
+    expect(p?.priceCents).toBe(5900);
+    expect(p?.available).toBe(true);
+    expect(p?.grants).toEqual(["murs-fonds-commerce"]);
   });
 
   it("le module deontologie (6e) est vendable", () => {

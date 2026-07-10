@@ -55,10 +55,10 @@ describe("canAccessModule", () => {
   });
 });
 
-describe("PACK_EXCLUDED_MODULES (add-ons hors pack) — vide désormais", () => {
-  it("aucun module n'est exclu du pack (TRACFIN inclus)", () => {
-    expect(PACK_EXCLUDED_MODULES.size).toBe(0);
+describe("PACK_EXCLUDED_MODULES (add-ons hors pack)", () => {
+  it("TRACFIN est inclus au pack ; murs & fonds de commerce reste autonome", () => {
     expect(PACK_EXCLUDED_MODULES.has("tracfin")).toBe(false);
+    expect(PACK_EXCLUDED_MODULES.has("murs-fonds-commerce")).toBe(true);
   });
 
   it("le pack donne accès à TRACFIN", () => {
@@ -72,5 +72,30 @@ describe("PACK_EXCLUDED_MODULES (add-ons hors pack) — vide désormais", () => 
 
   it("aucun droit => pas d'accès à TRACFIN", () => {
     expect(canAccessModule([], "tracfin", false)).toBe(false);
+  });
+});
+
+describe("murs & fonds de commerce (add-on autonome, hors pack)", () => {
+  const mursEtFonds: EntitlementRow = { module_slug: "murs-fonds-commerce", status: "active" };
+
+  it("le pack ne donne PAS accès au module autonome", () => {
+    expect(canAccessModule([pack], "murs-fonds-commerce", false)).toBe(false);
+    expect(hasModuleAccess(getEntitlements([pack]), "murs-fonds-commerce")).toBe(false);
+  });
+
+  it("le pack donne toujours accès à la déontologie (bonus mais incluse)", () => {
+    expect(canAccessModule([pack], "deontologie", false)).toBe(true);
+  });
+
+  it("l'achat à l'unité donne accès au module autonome", () => {
+    expect(canAccessModule([mursEtFonds], "murs-fonds-commerce", false)).toBe(true);
+  });
+
+  it("admin => accès au module autonome", () => {
+    expect(canAccessModule([], "murs-fonds-commerce", true)).toBe(true);
+  });
+
+  it("aucun droit => pas d'accès", () => {
+    expect(canAccessModule([], "murs-fonds-commerce", false)).toBe(false);
   });
 });

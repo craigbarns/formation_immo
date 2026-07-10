@@ -21,22 +21,27 @@ import {
 describe("TRACFIN inclus au pack — non-régression clients existants", () => {
   const pack: EntitlementRow[] = [{ module_slug: null, status: "active" }];
 
-  it("plus aucun module autonome / exclu du pack", () => {
-    expect(STANDALONE_MODULE_SLUGS.size).toBe(0);
-    expect(PACK_EXCLUDED_MODULES.size).toBe(0);
+  it("TRACFIN n'est plus autonome ; seul murs & fonds de commerce (add-on 59€) l'est", () => {
+    expect(STANDALONE_MODULE_SLUGS.has("tracfin")).toBe(false);
+    expect(PACK_EXCLUDED_MODULES.has("tracfin")).toBe(false);
+    expect([...STANDALONE_MODULE_SLUGS]).toEqual(["murs-fonds-commerce"]);
   });
 
-  it("le détenteur du pack accède à TOUS les modules, TRACFIN compris", () => {
+  it("le détenteur du pack accède à TOUT le parcours, TRACFIN compris", () => {
     const ent = getEntitlements(pack);
-    for (const mod of COURSE) {
+    for (const mod of FORMATION_MODULES) {
       expect(hasModuleAccess(ent, mod.slug)).toBe(true);
     }
+    // …mais pas aux add-ons autonomes vendus à part.
+    expect(hasModuleAccess(ent, "murs-fonds-commerce")).toBe(false);
   });
 
-  it("TRACFIN fait partie du parcours (total = tout COURSE)", () => {
-    const all = COURSE.reduce((a, m) => a + m.lessons.length, 0);
-    expect(getTotalLessonCount()).toBe(all);
+  it("TRACFIN fait partie du parcours (total = parcours principal)", () => {
+    const formationTotal = FORMATION_MODULES.reduce((a, m) => a + m.lessons.length, 0);
+    expect(getTotalLessonCount()).toBe(formationTotal);
     expect(FORMATION_MODULES.some((m) => m.slug === "tracfin")).toBe(true);
+    // Les add-ons autonomes restent dans COURSE (contenu) mais hors parcours.
+    expect(COURSE.some((m) => m.slug === "murs-fonds-commerce")).toBe(true);
   });
 
   it("certification = 36 leçons (TRACFIN compte, déontologie bonus)", () => {

@@ -33,5 +33,10 @@
     "name": "Maître Antoine Rivière",
     "mistralVoiceId": "5a271406-039d-46fe-835b-fbbb00eaf08d",
     "mistralVoiceLabel": "Marie — Neutral (fr_fr) — voix française native, ton posé et autoritaire"
+  },
+  "murs-fonds-commerce": {
+    "name": "Maître Camille Perrin",
+    "mistralVoiceId": "5a271406-039d-46fe-835b-fbbb00eaf08d",
+    "mistralVoiceLabel": "Marie — Neutral (fr_fr) — voix française native, ton posé et autoritaire"
   }
 }

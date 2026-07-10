@@ -179,6 +179,31 @@ export const MODULE_SHOWCASE: Record<string, ModuleShowcase> = {
       "ethique-pratique": "Conflits d'intérêts, RGPD, pratiques trompeuses : les bons réflexes.",
     },
   },
+  "murs-fonds-commerce": {
+    badge: "🏪",
+    headline: "L'immobilier commercial, un marché à part — devenez-y incontournable",
+    subhead:
+      "Baux 3/6/9, cession de fonds, indemnité d'éviction, murs de boutique : 7h pour conseiller commerçants, bailleurs et investisseurs avec l'assurance d'un spécialiste.",
+    outcomes: [
+      "Bail commercial : statut, clauses et loyer maîtrisés de bout en bout",
+      "Cession de fonds : procédure sécurisée, de l'évaluation à la publicité",
+      "Indemnité d'éviction : savoir la calculer et la négocier",
+      "Murs de boutique : rendement, fiscalité et montage adaptés",
+    ],
+    durationLabel: "~7 h",
+    proofLine: [
+      "Modèles d'actes : bail commercial, cession, comparatif des baux",
+      "Cas pratiques chiffrés : loyers, éviction, rendements",
+      "QCM final de 15 questions niveau pro",
+    ],
+    heroGradient: "from-[#1c1917] via-[#7c2d12] to-[#b45309]",
+    lessonTeaser: {
+      "bail-commercial": "L.145-1, 3/6/9, clauses, loyer : les fondamentaux qui protègent.",
+      "cession-fonds": "Céder ou reprendre un fonds sans faux pas : procédure et délais.",
+      "renouvellement-conge": "Congé, renouvellement, éviction : défendre les droits du preneur.",
+      "murs-boutique": "Investir dans les murs : rendement, fiscalité, ERP.",
+    },
+  },
 };
 
 export function getModuleShowcase(slug: string): ModuleShowcase | null {

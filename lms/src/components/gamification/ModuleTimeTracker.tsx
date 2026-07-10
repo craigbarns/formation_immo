@@ -123,7 +123,7 @@ export function GlobalTimeTracker() {
         />
       </div>
 
-      <div className="mt-10 grid grid-cols-3 gap-3 border-t border-white/5 pt-8 sm:grid-cols-6">
+      <div className="mt-10 grid grid-cols-4 gap-3 border-t border-white/5 pt-8 sm:grid-cols-8">
         {COURSE.map((mod) => (
           <ModuleTimeMini key={mod.slug} moduleSlug={mod.slug} />
         ))}
@@ -162,6 +162,8 @@ function ModuleTimeMini({ moduleSlug }: { moduleSlug: string }) {
     marketing: "MKT.",
     terrain: "TERR.",
     deontologie: "DÉON.",
+    tracfin: "TRACF.",
+    "murs-fonds-commerce": "MURS",
   };
   const label = labels[moduleSlug] ?? moduleSlug.slice(0, 5).toUpperCase();
 

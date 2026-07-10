@@ -123,6 +123,19 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
     accentColor: "#0f766e",
     initials: "AR",
   },
+  {
+    moduleSlug: "murs-fonds-commerce",
+    name: v["murs-fonds-commerce"].name,
+    role: "Avocate en droit immobilier commercial",
+    description:
+      "Avocate d'affaires spécialisée dans les baux commerciaux et les cessions de fonds de commerce. Quinze ans de pratique aux côtés de commerçants, bailleurs et investisseurs en murs de boutique.",
+    mistralVoiceId: v["murs-fonds-commerce"].mistralVoiceId,
+    mistralVoiceLabel: v["murs-fonds-commerce"].mistralVoiceLabel,
+    portraitPrompt:
+      "Professional headshot, French woman 40 years old, sharp navy business suit, confident expression, background of a Parisian commercial street with elegant storefronts, soft golden light, photorealistic --ar 1:1 --style raw --s 250 --q 2",
+    accentColor: "#b45309",
+    initials: "CP",
+  },
 ];
 
 export function getAvatarForModule(moduleSlug: string): ModuleAvatar | undefined {
