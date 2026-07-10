@@ -776,7 +776,7 @@ export const COURSE: CourseModule[] = [
         title: "Le bail commercial — fondamentaux",
         scriptFile: "module7-murs-fonds/scripts/01-bail-commercial-fondamentaux.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/01-bail-commercial-fondamentaux.mp3",
         duration: 105,
         difficulty: "intermediaire",
         objectives: [
@@ -792,7 +792,7 @@ export const COURSE: CourseModule[] = [
         title: "La cession de fonds de commerce",
         scriptFile: "module7-murs-fonds/scripts/02-cession-fonds-commerce.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/02-cession-fonds-commerce.mp3",
         duration: 105,
         difficulty: "intermediaire",
         objectives: [
@@ -808,7 +808,7 @@ export const COURSE: CourseModule[] = [
         title: "Renouvellement, congé & indemnité d'éviction",
         scriptFile: "module7-murs-fonds/scripts/03-renouvellement-conge-droits.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/03-renouvellement-conge-droits.mp3",
         duration: 105,
         difficulty: "avance",
         objectives: [
@@ -824,7 +824,7 @@ export const COURSE: CourseModule[] = [
         title: "Murs de boutique — investissement & fiscalité",
         scriptFile: "module7-murs-fonds/scripts/04-murs-boutique-investissement.md",
         videoUrl: null,
-        audioUrl: null,
+        audioUrl: "/audio/04-murs-boutique-investissement.mp3",
         duration: 105,
         difficulty: "avance",
         objectives: [

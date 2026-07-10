@@ -27,6 +27,11 @@ const START_MARKERS = [
   "## SCRIPT COMPLET",
   "### SCRIPT COMPLET",
   "## 🎬 SCRIPT",
+  /** Variante utilisée par module7-murs-fonds */
+  "## SCRIPT INTÉGRAL",
+  "### SCRIPT INTÉGRAL",
+  "## SCRIPT INTEGRAL",
+  "### SCRIPT INTEGRAL",
 ];
 
 /** Ligne entière en gras Markdown `**...**` → contenu interne (pour détecter [B-ROLL] masqué). */

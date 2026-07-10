@@ -10,6 +10,9 @@ export const MISTRAL_TTS_MODEL = "voxtral-mini-tts-2603";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const CHUNK_GAP_MS = 450;
+/** Rate limit Mistral : réessais par segment (sinon un fichier long ne peut jamais finir). */
+const RATE_LIMIT_RETRIES = 4;
+const RATE_LIMIT_WAIT_MS = 35_000;
 
 function requireMistralEnv(voiceIdOverride) {
   const apiKey = process.env.MISTRAL_API_KEY;
@@ -51,6 +54,23 @@ export async function synthesizeMistralSpeechToMp3Buffer(text, voiceIdOverride) 
 }
 
 /**
+ * Segment → buffer MP3, avec réessais espacés sur 429 (rate limit).
+ * Les segments déjà générés du fichier sont ainsi conservés.
+ */
+async function synthesizeWithRetry(text, voiceIdOverride, log) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await synthesizeMistralSpeechToMp3Buffer(text, voiceIdOverride);
+    } catch (e) {
+      const is429 = /\(429\)/.test(String(e?.message ?? e));
+      if (!is429 || attempt > RATE_LIMIT_RETRIES) throw e;
+      log?.(`    … rate limit (429), nouvel essai dans ${RATE_LIMIT_WAIT_MS / 1000}s (${attempt}/${RATE_LIMIT_RETRIES})`);
+      await sleep(RATE_LIMIT_WAIT_MS);
+    }
+  }
+}
+
+/**
  * Texte complet → fichier MP3 (découpe + appels API + concat ffmpeg).
  */
 export async function writeMistralTtsMp3File(text, outAbs, log = console.log, voiceIdOverride) {
@@ -59,7 +79,7 @@ export async function writeMistralTtsMp3File(text, outAbs, log = console.log, vo
   fs.mkdirSync(path.dirname(outAbs), { recursive: true });
 
   if (chunks.length === 1) {
-    const buf = await synthesizeMistralSpeechToMp3Buffer(chunks[0], voiceIdOverride);
+    const buf = await synthesizeWithRetry(chunks[0], voiceIdOverride, log);
     log?.(`    segment 1/1 — ${buf.length} octets`);
     fs.writeFileSync(outAbs, buf);
     return;
@@ -69,7 +89,7 @@ export async function writeMistralTtsMp3File(text, outAbs, log = console.log, vo
   const partPaths = [];
   try {
     for (let i = 0; i < chunks.length; i++) {
-      const buf = await synthesizeMistralSpeechToMp3Buffer(chunks[i], voiceIdOverride);
+      const buf = await synthesizeWithRetry(chunks[i], voiceIdOverride, log);
       log?.(`    segment ${i + 1}/${chunks.length} — ${buf.length} octets`);
       const partPath = path.join(tmpDir, `p${String(i + 1).padStart(2, "0")}.mp3`);
       fs.writeFileSync(partPath, buf);

@@ -28,6 +28,7 @@ const FOLDER_TO_SLUG = {
   "module5-terrain": "terrain",
   "module6-deontologie": "deontologie",
   "module-tracfin": "tracfin",
+  "module7-murs-fonds": "murs-fonds-commerce",
 };
 
 /**

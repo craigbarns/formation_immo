@@ -13,40 +13,20 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { extractNarrationAudio } from "./lib/extract-narration-audio.mjs";
+import { lessonScriptDirectories, walkMarkdownScripts } from "./lib/script-discovery.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const lmsRoot = path.join(__dirname, "..");
 const repoRoot = path.join(lmsRoot, "..");
 
-function walkScripts(dir, acc = []) {
-  if (!fs.existsSync(dir)) return acc;
-  for (const name of fs.readdirSync(dir)) {
-    const p = path.join(dir, name);
-    const st = fs.statSync(p);
-    if (st.isDirectory()) {
-      if (name === "narration-audio" || name === "node_modules") continue;
-      walkScripts(p, acc);
-    } else if (name.endsWith(".md") && !name.startsWith("README")) {
-      acc.push(p);
-    }
-  }
-  return acc;
-}
-
-const roots = [
-  path.join(repoRoot, "module1-juridique", "scripts"),
-  path.join(repoRoot, "module2-transaction", "scripts"),
-  path.join(repoRoot, "module3-financement", "scripts"),
-  path.join(repoRoot, "module4-marketing", "scripts"),
-  path.join(repoRoot, "module5-terrain", "scripts"),
-  path.join(repoRoot, "module6-deontologie", "scripts"),
-];
+// Liste unique des dossiers de scripts : voir scripts/lib/script-discovery.mjs
+const roots = lessonScriptDirectories(repoRoot);
 
 let total = 0;
 let empty = 0;
 
 for (const root of roots) {
-  const files = walkScripts(root);
+  const files = walkMarkdownScripts(root);
   for (const mdPath of files) {
     const raw = fs.readFileSync(mdPath, "utf8");
     const text = extractNarrationAudio(raw);
