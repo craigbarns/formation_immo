@@ -204,6 +204,31 @@ export const MODULE_SHOWCASE: Record<string, ModuleShowcase> = {
       "murs-boutique": "Investir dans les murs : rendement, fiscalité, ERP.",
     },
   },
+  "renovation-energetique": {
+    badge: "🌞",
+    headline: "La transition énergétique décide des prix — soyez celui qui l'explique",
+    subhead:
+      "DPE, interdictions de location, MaPrimeRénov', photovoltaïque : 7h pour transformer la contrainte réglementaire en argument de vente et de conseil.",
+    outcomes: [
+      "DPE et loi Climat & Résilience : calendrier et obligations maîtrisés",
+      "Travaux : hiérarchiser isolation, ventilation, chauffage sans se tromper",
+      "Aides : MaPrimeRénov', CEE, éco-PTZ et leurs cumuls, sans arnaques",
+      "Photovoltaïque : rentabilité réelle et démarches sécurisées",
+    ],
+    durationLabel: "~7 h",
+    proofLine: [
+      "Cas chiffrés : passer de E à C, plan de financement complet",
+      "Étude de rentabilité photovoltaïque 6 kWc pas à pas",
+      "QCM final de 15 questions niveau pro",
+    ],
+    heroGradient: "from-[#052e16] via-[#15803d] to-[#65a30d]",
+    lessonTeaser: {
+      "dpe-cadre-reglementaire": "DPE opposable, interdictions de location, audit : ce qui change vos ventes.",
+      "solutions-techniques": "Isoler, ventiler, chauffer : les bons travaux dans le bon ordre.",
+      "aides-financement": "MaPrimeRénov', CEE, éco-PTZ : monter un plan d'aides sans se perdre.",
+      "photovoltaique": "kWc, autoconsommation, Enedis : le solaire rentable et conforme.",
+    },
+  },
 };
 
 export function getModuleShowcase(slug: string): ModuleShowcase | null {

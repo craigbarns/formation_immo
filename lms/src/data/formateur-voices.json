@@ -38,5 +38,10 @@
     "name": "Maître Camille Perrin",
     "mistralVoiceId": "5a271406-039d-46fe-835b-fbbb00eaf08d",
     "mistralVoiceLabel": "Marie — Neutral (fr_fr) — voix française native, ton posé et autoritaire"
+  },
+  "renovation-energetique": {
+    "name": "Élodie Ferrand",
+    "mistralVoiceId": "e0580ce5-e63c-4cbe-88c8-a983b80c5f1f",
+    "mistralVoiceLabel": "Marie — Curious (fr_fr) — voix française native, pédagogue et analytique"
   }
 }

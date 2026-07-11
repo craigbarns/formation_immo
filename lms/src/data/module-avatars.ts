@@ -136,6 +136,19 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
     accentColor: "#b45309",
     initials: "CP",
   },
+  {
+    moduleSlug: "renovation-energetique",
+    name: v["renovation-energetique"].name,
+    role: "Conseillère en rénovation énergétique",
+    description:
+      "Ingénieure thermicienne, ancienne conseillère France Rénov'. Dix ans d'audits énergétiques et de plans de financement aux côtés des particuliers et des professionnels de l'immobilier.",
+    mistralVoiceId: v["renovation-energetique"].mistralVoiceId,
+    mistralVoiceLabel: v["renovation-energetique"].mistralVoiceLabel,
+    portraitPrompt:
+      "Professional headshot, French woman 38 years old, smart casual blazer over green top, warm confident smile, background of a renovated bright home interior with insulation materials and a tablet showing energy charts, natural light, photorealistic --ar 1:1 --style raw --s 250 --q 2",
+    accentColor: "#15803d",
+    initials: "EF",
+  },
 ];
 
 export function getAvatarForModule(moduleSlug: string): ModuleAvatar | undefined {
