@@ -10,6 +10,7 @@ const MODULE_SCRIPT_ROOTS = [
   "module6-deontologie",
   "module-tracfin",
   "module7-murs-fonds",
+  "module8-renovation-energetique",
 ];
 
 export function lessonScriptDirectories(repoRoot) {

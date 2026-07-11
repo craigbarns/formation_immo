@@ -29,6 +29,7 @@ const FOLDER_TO_SLUG = {
   "module6-deontologie": "deontologie",
   "module-tracfin": "tracfin",
   "module7-murs-fonds": "murs-fonds-commerce",
+  "module8-renovation-energetique": "renovation-energetique",
 };
 
 /**
