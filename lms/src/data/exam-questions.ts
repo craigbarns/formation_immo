@@ -1216,6 +1216,220 @@ export const MODULE_EXAMS: ModuleExam[] = [
       },
     ],
   },
+  {
+    moduleSlug: "renovation-energetique",
+    title: "Examen — Rénovation énergétique & photovoltaïque",
+    duration: 20,
+    questions: [
+      {
+        id: "re1",
+        question:
+          "Depuis la loi ELAN puis la loi Climat & Résilience, quelle est la portée juridique du DPE ?",
+        options: [
+          "Il reste purement informatif : l'acquéreur ne peut rien en tirer",
+          "Il est opposable : l'acquéreur ou le locataire peut se retourner contre le vendeur ou le bailleur en cas d'écart significatif",
+          "Il n'engage que le diagnostiqueur, jamais le vendeur",
+          "Il n'est obligatoire que pour les logements construits avant 1975",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Depuis le 1er juillet 2021, le DPE est opposable : ses résultats engagent le vendeur ou le bailleur, et un écart significatif peut fonder un recours. Seules les recommandations de travaux restent indicatives.",
+      },
+      {
+        id: "re2",
+        question: "Sur quoi se base le calcul du DPE depuis la réforme de 2021 ?",
+        options: [
+          "Sur les factures d'énergie des trois dernières années des occupants",
+          "Sur les caractéristiques physiques du bâti : isolation, menuiseries, chauffage, ventilation (méthode 3CL)",
+          "Sur une simple déclaration du propriétaire",
+          "Sur la moyenne des consommations du quartier",
+        ],
+        correctIndex: 1,
+        explanation:
+          "La méthode 3CL évalue le logement lui-même, indépendamment du comportement des occupants : deux logements identiques obtiennent la même étiquette. Les factures ne servent plus de base de calcul.",
+      },
+      {
+        id: "re3",
+        question:
+          "Selon le calendrier de la loi Climat & Résilience, quand la location des logements classés F devient-elle interdite (indécence énergétique) ?",
+        options: [
+          "Depuis le 1er janvier 2025",
+          "Au 1er janvier 2028",
+          "Au 1er janvier 2034",
+          "Jamais : seuls les G sont concernés",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Le calendrier : classe G interdite depuis le 1er janvier 2025, classe F au 1er janvier 2028, classe E au 1er janvier 2034. Les loyers des F et G sont par ailleurs gelés depuis 2022.",
+      },
+      {
+        id: "re4",
+        question:
+          "Quelle mention est obligatoire dans une annonce immobilière pour un logement classé F ou G ?",
+        options: [
+          "« Logement à consommation énergétique excessive »",
+          "« Passoire thermique certifiée »",
+          "« Travaux obligatoires avant la vente »",
+          "Aucune mention particulière n'est exigée",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Les annonces doivent afficher la classe énergie, la classe climat, l'estimation des dépenses annuelles d'énergie, et pour les F/G la mention « logement à consommation énergétique excessive ». L'annonce non conforme expose à une amende.",
+      },
+      {
+        id: "re5",
+        question:
+          "Dans une maison ancienne non isolée, quel poste représente en général la plus grande part des déperditions de chaleur ?",
+        options: [
+          "Les fenêtres",
+          "Le toit (25 à 30 % des déperditions)",
+          "Le plancher bas",
+          "La porte d'entrée",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Le toit concentre 25 à 30 % des déperditions, devant les murs (20-25 %), les fenêtres (10-15 %) et les planchers bas (7-10 %). D'où la règle : commencer par isoler les combles — le geste le plus rentable.",
+      },
+      {
+        id: "re6",
+        question:
+          "Un client fait isoler sa maison et changer toutes ses fenêtres, sans autre intervention. Quel risque majeur doit-on lui signaler ?",
+        options: [
+          "Aucun : l'isolation n'a que des avantages",
+          "Sans ventilation adaptée (VMC), l'humidité ne s'évacue plus : condensation, moisissures et air intérieur dégradé",
+          "La maison deviendra trop chaude en hiver",
+          "Le DPE sera automatiquement dégradé",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Qui isole doit ventiler : en rendant le logement étanche, on supprime les fuites d'air qui « ventilaient » par défaut. Sans VMC adaptée, l'humidité stagne — moisissures et désordres. Un devis d'isolation sans poste ventilation est un signal d'alerte.",
+      },
+      {
+        id: "re7",
+        question:
+          "Pourquoi recommande-t-on d'isoler AVANT de remplacer le système de chauffage ?",
+        options: [
+          "Parce que c'est imposé par la loi",
+          "Parce qu'une fois l'enveloppe traitée, les besoins chutent : l'équipement est dimensionné plus petit, coûte moins cher et fonctionne mieux",
+          "Parce que les aides n'existent que pour l'isolation",
+          "Parce que les pompes à chaleur ne fonctionnent pas dans les maisons anciennes",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Installer une pompe à chaleur dans une maison qui fuit conduit à un équipement surdimensionné, énergivore et inconfortable. L'ordre des travaux : enveloppe (toit, murs, planchers, fenêtres), ventilation, puis chauffage dimensionné sur les besoins réels.",
+      },
+      {
+        id: "re8",
+        question: "Qu'est-ce qui caractérise une « rénovation d'ampleur » au sens des aides ?",
+        options: [
+          "N'importe quel chantier de plus de 10 000 €",
+          "Un bouquet de travaux cohérent (dont gestes d'isolation) permettant un saut d'au moins deux classes de DPE, avec accompagnement obligatoire",
+          "Le remplacement d'une chaudière par une pompe à chaleur",
+          "Une rénovation faite en moins de six mois",
+        ],
+        correctIndex: 1,
+        explanation:
+          "La rénovation d'ampleur combine plusieurs gestes coordonnés et vise au moins deux classes de DPE gagnées, validées par audit. C'est le parcours le mieux subventionné, avec Mon Accompagnateur Rénov' obligatoire.",
+      },
+      {
+        id: "re9",
+        question: "Comment le montant de MaPrimeRénov' est-il modulé ?",
+        options: [
+          "Selon l'âge du demandeur",
+          "Selon les revenus du ménage : quatre profils, du plus modeste (aide maximale) au plus aisé",
+          "Selon la région uniquement",
+          "Il est identique pour tous les ménages",
+        ],
+        correctIndex: 1,
+        explanation:
+          "MaPrimeRénov' repose sur quatre profils de revenus (historiquement bleu, jaune, violet, rose) : plus les revenus sont modestes, plus le taux d'aide est élevé. Les barèmes évoluent chaque année — seule la simulation officielle sur france-renov.gouv.fr fait foi.",
+      },
+      {
+        id: "re10",
+        question:
+          "Quelle condition est indispensable pour que des travaux ouvrent droit à MaPrimeRénov', aux CEE et à l'éco-PTZ ?",
+        options: [
+          "Que le logement soit vide pendant les travaux",
+          "Que les travaux soient réalisés par une entreprise qualifiée RGE (Reconnu Garant de l'Environnement)",
+          "Que le propriétaire ait plus de 10 ans d'ancienneté dans le logement",
+          "Que le chantier dure moins de trois mois",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Sans entreprise RGE, pas d'aides : c'est la condition transversale du système. La qualification se vérifie sur l'annuaire officiel de France Rénov', pour le bon domaine de travaux et à la date du devis.",
+      },
+      {
+        id: "re11",
+        question:
+          "Un client reçoit un appel : « Bonjour, nous sommes mandatés par l'État pour vos aides à la rénovation à 1 € ». Que doit-il savoir ?",
+        options: [
+          "C'est une offre légitime s'il rappelle rapidement",
+          "Le démarchage téléphonique en rénovation énergétique est interdit par la loi depuis 2020 : cet appel est illégal par définition",
+          "Il doit donner son numéro fiscal pour vérifier son éligibilité",
+          "Les offres à 1 € sont garanties par l'ANAH",
+        ],
+        correctIndex: 1,
+        explanation:
+          "La loi du 24 juillet 2020 interdit le démarchage téléphonique en rénovation énergétique. Personne n'est « mandaté par l'État » à domicile, les conseillers France Rénov' ne démarchent jamais, et les offres « à 1 € » ont été le terreau des grandes fraudes aux CEE.",
+      },
+      {
+        id: "re12",
+        question:
+          "Un couple aux revenus intermédiaires engage 50 000 € de travaux d'ampleur (saut E→C). Comment se structure typiquement son plan de financement ?",
+        options: [
+          "Aucune aide : les revenus intermédiaires sont exclus",
+          "MaPrimeRénov' d'ampleur (CEE intégrés) pour une part significative, TVA 5,5 % sur les devis, aides locales éventuelles, et le reste à charge via un éco-PTZ sans intérêts",
+          "Uniquement un crédit à la consommation classique",
+          "L'État avance 100 % puis se rembourse à la revente",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Le montage type : subvention MaPrimeRénov' d'ampleur selon les revenus (ordre de grandeur 30 à 90 % d'un plafond de travaux), TVA réduite directement facturée, aides locales, et éco-PTZ jusqu'à 50 000 € pour le reste à charge. Les économies d'énergie compensent souvent la mensualité.",
+      },
+      {
+        id: "re13",
+        question:
+          "Une installation photovoltaïque de 6 kWc à Aix-en-Provence, sans batterie, avec un bon pilotage des usages : quel ordre de grandeur de rentabilité annoncer honnêtement ?",
+        options: [
+          "Retour sur investissement en 2 à 3 ans, autonomie totale",
+          "Temps de retour d'environ 8 à 12 ans, pour un matériel garanti 25 ans et plus",
+          "Aucune rentabilité : le photovoltaïque est déficitaire en France",
+          "Rentabilité uniquement si l'on revend la maison dans l'année",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Avec ~10-15 k€ posés (ordre de grandeur début 2026) et 1 000 à 1 500 € de recettes annuelles (économies + vente du surplus) dans le sud, le retour se situe entre 8 et 12 ans. Toute promesse de retour en 2-3 ans ou d'« autonomie totale » sans batterie est un signal d'arnaque.",
+      },
+      {
+        id: "re14",
+        question:
+          "Sans batterie, quelle part de sa production photovoltaïque un foyer autoconsomme-t-il typiquement ?",
+        options: [
+          "100 % : tout est consommé sur place",
+          "30 à 50 % — le reste est injecté au réseau et vendu dans le cadre de l'obligation d'achat (contrat 20 ans)",
+          "Moins de 5 %",
+          "80 à 90 % dans tous les cas",
+        ],
+        correctIndex: 1,
+        explanation:
+          "L'autoconsommation spontanée se situe entre 30 et 50 % : la production a lieu en journée, la consommation plutôt le soir. Le pilotage des usages (chauffe-eau en journée, recharge du véhicule) augmente ce taux — et c'est lui qui fait la rentabilité réelle.",
+      },
+      {
+        id: "re15",
+        question:
+          "Vous vendez une maison équipée de panneaux photovoltaïques. Quelles vérifications s'imposent ?",
+        options: [
+          "Aucune : les panneaux suivent la maison automatiquement et sans risque",
+          "Statut de l'installation (propriété, crédit, location de toiture), contrat d'obligation d'achat transférable par avenant, conformité (Consuel, déclaration préalable, décennale) et impact DPE/valeur",
+          "Il faut obligatoirement démonter les panneaux avant la vente",
+          "Seule la facture d'électricité du vendeur est à vérifier",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Quatre vérifications : qui possède l'installation (un crédit affecté doit être soldé ou repris, un bail de toiture s'impose à l'acquéreur) ; le contrat d'obligation d'achat, actif transférable par avenant ; la conformité administrative et les garanties ; et la valorisation (production documentée, impact DPE). Bien documentée, l'installation est un argument de vente.",
+      },
+    ],
+  },
 ];
 
 export const FINAL_EXAM_ID = "certification-finale";
