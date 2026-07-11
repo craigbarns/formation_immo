@@ -9,10 +9,8 @@ import {
   Briefcase,
   CheckCircle2,
   Clock,
-  CreditCard,
   FileCheck2,
   FileText,
-  HandCoins,
   Headphones,
   Mail,
   Phone,
@@ -300,8 +298,8 @@ export default async function HomePage() {
             <Link href="#formation-immobiliere" className="transition hover:text-brand-navy">
               Immobilier
             </Link>
-            <Link href="#financement" className="transition hover:text-brand-navy">
-              Financement
+            <Link href="#catalogue" className="transition hover:text-brand-navy">
+              Catalogue
             </Link>
             <Link href="#documents" className="transition hover:text-brand-navy">
               Documents
@@ -547,40 +545,6 @@ export default async function HomePage() {
                   </div>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        <section id="financement" className="bg-brand-navy py-16 text-white sm:py-20">
-          <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-            <div>
-              <p className="text-sm font-black uppercase text-brand-gold">Financement et achat</p>
-              <h2 className="mt-3 text-3xl font-black sm:text-4xl">
-                Préparez la vente en ligne sans bloquer les demandes financées
-              </h2>
-              <p className="mt-4 text-base leading-7 text-white/75">
-                Stripe servira au paiement carte bancaire. Pour les clients qui demandent une prise
-                en charge CPF ou OPCO, le contact PASS Formation reste visible.
-              </p>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-lg border border-white/15 bg-white/5 p-6">
-                <CreditCard className="h-7 w-7 text-brand-gold" aria-hidden />
-                <h3 className="mt-4 text-lg font-black">Paiement en ligne</h3>
-                <p className="mt-2 text-sm leading-6 text-white/75">
-                  Bouton Stripe Checkout à brancher plus tard pour ouvrir automatiquement l&apos;accès
-                  après paiement validé.
-                </p>
-              </div>
-              <div className="rounded-lg border border-white/15 bg-white/5 p-6">
-                <HandCoins className="h-7 w-7 text-brand-gold" aria-hidden />
-                <h3 className="mt-4 text-lg font-black">CPF / OPCO</h3>
-                <p className="mt-2 text-sm leading-6 text-white/75">
-                  Les possibilités de financement peuvent être étudiées avec un conseiller selon la
-                  situation du client.
-                </p>
-              </div>
             </div>
           </div>
         </section>
