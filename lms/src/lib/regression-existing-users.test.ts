@@ -21,10 +21,15 @@ import {
 describe("TRACFIN inclus au pack — non-régression clients existants", () => {
   const pack: EntitlementRow[] = [{ module_slug: null, status: "active" }];
 
-  it("TRACFIN n'est plus autonome ; seul murs & fonds de commerce (add-on 59€) l'est", () => {
+  it("TRACFIN n'est plus autonome ; seuls les add-ons 59€ le sont", () => {
     expect(STANDALONE_MODULE_SLUGS.has("tracfin")).toBe(false);
     expect(PACK_EXCLUDED_MODULES.has("tracfin")).toBe(false);
-    expect([...STANDALONE_MODULE_SLUGS]).toEqual(["murs-fonds-commerce"]);
+    expect(STANDALONE_MODULE_SLUGS.has("murs-fonds-commerce")).toBe(true);
+    expect(STANDALONE_MODULE_SLUGS.has("renovation-energetique")).toBe(true);
+    // Aucun module du parcours principal ne doit être autonome.
+    for (const mod of FORMATION_MODULES) {
+      expect(STANDALONE_MODULE_SLUGS.has(mod.slug)).toBe(false);
+    }
   });
 
   it("le détenteur du pack accède à TOUT le parcours, TRACFIN compris", () => {

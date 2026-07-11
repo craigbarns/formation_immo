@@ -836,15 +836,96 @@ export const COURSE: CourseModule[] = [
       },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FORMATION AUTONOME — RÉNOVATION ÉNERGÉTIQUE & PHOTOVOLTAÏQUE (420 min = 7h)
+  // Vendue uniquement à l'unité (59 €), PAS incluse au pack — voir
+  // STANDALONE_MODULE_SLUGS ci-dessous. Attestation propre de 7h.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    slug: "renovation-energetique",
+    title: "Rénovation énergétique & photovoltaïque",
+    summary:
+      "DPE, interdictions de location, travaux, MaPrimeRénov', CEE et solaire : conseiller vos clients sur la transition énergétique.",
+    description:
+      "Le DPE et le calendrier de la loi Climat & Résilience redessinent le marché : passoires interdites à la location, audit obligatoire à la vente, valeur verte qui creuse les écarts de prix. Cette formation autonome de 7h donne aux professionnels de l'immobilier les clés techniques (isolation, chauffage, ventilation, photovoltaïque) et financières (MaPrimeRénov', CEE, éco-PTZ) pour conseiller vendeurs, acquéreurs et bailleurs en toute crédibilité.",
+    lessons: [
+      {
+        slug: "dpe-cadre-reglementaire",
+        title: "Le DPE & le cadre réglementaire",
+        scriptFile: "module8-renovation-energetique/scripts/01-dpe-cadre-reglementaire.md",
+        videoUrl: null,
+        audioUrl: "/audio/01-dpe-cadre-reglementaire.mp3",
+        duration: 105,
+        difficulty: "intermediaire",
+        objectives: [
+          "Expliquer la méthode et les classes du DPE opposable à un client",
+          "Maîtriser le calendrier des interdictions de location (loi Climat & Résilience)",
+          "Identifier quand l'audit énergétique est obligatoire à la vente",
+          "Respecter les mentions obligatoires dans les annonces immobilières",
+          "Argumenter la valeur verte et la décote d'une passoire thermique",
+        ],
+      },
+      {
+        slug: "solutions-techniques",
+        title: "Les solutions techniques de rénovation",
+        scriptFile: "module8-renovation-energetique/scripts/02-solutions-techniques.md",
+        videoUrl: null,
+        audioUrl: "/audio/02-solutions-techniques.mp3",
+        duration: 105,
+        difficulty: "intermediaire",
+        objectives: [
+          "Hiérarchiser les postes de travaux : isolation, ventilation, chauffage",
+          "Comparer rénovation d'ampleur et rénovation par gestes",
+          "Estimer les ordres de grandeur de coûts et les sauts de classes DPE",
+          "Lire un devis de rénovation et repérer les points de vigilance",
+        ],
+      },
+      {
+        slug: "aides-financement",
+        title: "Les aides de l'État & le financement",
+        scriptFile: "module8-renovation-energetique/scripts/03-aides-financement.md",
+        videoUrl: null,
+        audioUrl: "/audio/03-aides-financement.mp3",
+        duration: 105,
+        difficulty: "avance",
+        objectives: [
+          "Orienter un client entre MaPrimeRénov' par geste et rénovation d'ampleur",
+          "Mobiliser CEE, éco-PTZ, TVA réduite et aides locales — et leurs cumuls",
+          "Exiger le bon intervenant : RGE, Mon Accompagnateur Rénov'",
+          "Détecter les arnaques et le démarchage illégal en rénovation énergétique",
+          "Construire un plan de financement de travaux crédible",
+        ],
+      },
+      {
+        slug: "photovoltaique",
+        title: "Photovoltaïque — technique, rentabilité & démarches",
+        scriptFile: "module8-renovation-energetique/scripts/04-photovoltaique.md",
+        videoUrl: null,
+        audioUrl: "/audio/04-photovoltaique.mp3",
+        duration: 105,
+        difficulty: "avance",
+        objectives: [
+          "Dimensionner un projet : kWc, orientation, autoconsommation vs revente",
+          "Connaître les démarches : déclaration préalable, Consuel, Enedis",
+          "Calculer une rentabilité et un temps de retour réalistes",
+          "Sécuriser le photovoltaïque dans une transaction (contrats, DPE, valeur)",
+        ],
+      },
+    ],
+  },
 ];
 
 /**
  * Modules "autonomes" (add-ons) : hors parcours ET hors pack. TRACFIN est
- * inclus dans le pack et dans le parcours ; MURS & FONDS DE COMMERCE se vend
- * uniquement à l'unité (59 €). Source unique dont dérive PACK_EXCLUDED_MODULES
- * (entitlements).
+ * inclus dans le pack et dans le parcours ; MURS & FONDS DE COMMERCE et
+ * RÉNOVATION ÉNERGÉTIQUE se vendent uniquement à l'unité (59 €). Source
+ * unique dont dérive PACK_EXCLUDED_MODULES (entitlements).
  */
-export const STANDALONE_MODULE_SLUGS = new Set<string>(["murs-fonds-commerce"]);
+export const STANDALONE_MODULE_SLUGS = new Set<string>([
+  "murs-fonds-commerce",
+  "renovation-energetique",
+]);
 
 /** Modules composant le parcours de formation principal (hors add-ons autonomes). */
 export const FORMATION_MODULES: CourseModule[] = COURSE.filter(
