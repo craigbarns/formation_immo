@@ -99,3 +99,13 @@ describe("murs & fonds de commerce (add-on autonome, hors pack)", () => {
     expect(canAccessModule([], "murs-fonds-commerce", false)).toBe(false);
   });
 });
+
+describe("rénovation énergétique (add-on autonome, hors pack)", () => {
+  it("le pack ne donne PAS accès ; l'achat unitaire oui ; admin oui", () => {
+    expect(canAccessModule([pack], "renovation-energetique", false)).toBe(false);
+    const rows: EntitlementRow[] = [{ module_slug: "renovation-energetique", status: "active" }];
+    expect(canAccessModule(rows, "renovation-energetique", false)).toBe(true);
+    expect(canAccessModule([], "renovation-energetique", true)).toBe(true);
+    expect(canAccessModule([], "renovation-energetique", false)).toBe(false);
+  });
+});
