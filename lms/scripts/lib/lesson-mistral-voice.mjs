@@ -30,6 +30,7 @@ const FOLDER_TO_SLUG = {
   "module-tracfin": "tracfin",
   "module7-murs-fonds": "murs-fonds-commerce",
   "module8-renovation-energetique": "renovation-energetique",
+  "module9-immobilier-ia": "immobilier-ia",
 };
 
 /**

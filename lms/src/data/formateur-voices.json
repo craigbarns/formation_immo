@@ -43,5 +43,10 @@
     "name": "Élodie Ferrand",
     "mistralVoiceId": "e0580ce5-e63c-4cbe-88c8-a983b80c5f1f",
     "mistralVoiceLabel": "Marie — Curious (fr_fr) — voix française native, pédagogue et analytique"
+  },
+  "immobilier-ia": {
+    "name": "Clara Morel",
+    "mistralVoiceId": "49d024dd-981b-4462-bb17-74d381eb8fd7",
+    "mistralVoiceLabel": "Marie — Happy (fr_fr) — voix française native, chaleureuse et enthousiaste"
   }
 }

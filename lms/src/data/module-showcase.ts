@@ -229,6 +229,31 @@ export const MODULE_SHOWCASE: Record<string, ModuleShowcase> = {
       "photovoltaique": "kWc, autoconsommation, Enedis : le solaire rentable et conforme.",
     },
   },
+  "immobilier-ia": {
+    badge: "🤖",
+    headline: "L'IA ne remplacera pas les agents — elle remplacera les agents qui l'ignorent",
+    subhead:
+      "Prompts, annonces, analyse de documents, RGPD : 7h pour intégrer l'IA à votre quotidien d'agent — avec méthode et sans risque juridique.",
+    outcomes: [
+      "Une méthode de prompt réutilisable pour tout votre quotidien",
+      "Annonces, prospection, réseaux sociaux : produire mieux, bien plus vite",
+      "PV d'AG, baux, diagnostics : analyser des documents longs en minutes",
+      "RGPD, AI Act, discrimination : utiliser l'IA sans se mettre en danger",
+    ],
+    durationLabel: "~7 h",
+    proofLine: [
+      "Cas concrets : annonce premium, PV d'AG de 40 pages, audit d'agence",
+      "Charte IA d'agence en 8 points, prête à adopter",
+      "QCM final de 15 questions niveau pro",
+    ],
+    heroGradient: "from-[#1e1b4b] via-[#5b21b6] to-[#8b5cf6]",
+    lessonTeaser: {
+      "comprendre-ia": "Ce que l'IA fait très bien, très mal — et la règle d'or du pro.",
+      "rediger-vendre-ia": "La méthode CRTE : des prompts qui produisent VOS textes, en mieux.",
+      "ia-transaction": "Estimation, documents, comptes-rendus : l'IA dans la vraie transaction.",
+      "cadre-legal-ia": "RGPD, AI Act, loyauté des annonces : les lignes à ne pas franchir.",
+    },
+  },
 };
 
 export function getModuleShowcase(slug: string): ModuleShowcase | null {

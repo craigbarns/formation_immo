@@ -149,6 +149,19 @@ export const MODULE_AVATARS: ModuleAvatar[] = [
     accentColor: "#15803d",
     initials: "EF",
   },
+  {
+    moduleSlug: "immobilier-ia",
+    name: v["immobilier-ia"].name,
+    role: "Consultante IA & immobilier",
+    description:
+      "Consultante en transformation digitale des métiers de l'immobilier. Forme les réseaux d'agences aux usages concrets de l'IA générative depuis ses débuts — avec un principe : la technologie au service du conseil, jamais l'inverse.",
+    mistralVoiceId: v["immobilier-ia"].mistralVoiceId,
+    mistralVoiceLabel: v["immobilier-ia"].mistralVoiceLabel,
+    portraitPrompt:
+      "Professional headshot, French woman 35 years old, modern tech-forward style, violet blazer, bright engaging smile, background of a sleek real estate agency with screens showing dashboards, soft neon accents, photorealistic --ar 1:1 --style raw --s 250 --q 2",
+    accentColor: "#6d28d9",
+    initials: "CM",
+  },
 ];
 
 export function getAvatarForModule(moduleSlug: string): ModuleAvatar | undefined {

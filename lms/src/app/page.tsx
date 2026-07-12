@@ -54,6 +54,7 @@ function moduleCover(slug: string): string {
     "tracfin",
     "murs-fonds-commerce",
     "renovation-energetique",
+    "immobilier-ia",
   ];
   return withCover.includes(slug) ? `/generated/fal/${slug}/cover.jpg` : IMMOBILIER_COVER;
 }

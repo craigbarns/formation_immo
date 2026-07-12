@@ -11,6 +11,7 @@ const MODULE_SCRIPT_ROOTS = [
   "module-tracfin",
   "module7-murs-fonds",
   "module8-renovation-energetique",
+  "module9-immobilier-ia",
 ];
 
 export function lessonScriptDirectories(repoRoot) {
