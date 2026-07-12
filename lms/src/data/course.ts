@@ -914,6 +914,83 @@ export const COURSE: CourseModule[] = [
       },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FORMATION AUTONOME — IMMOBILIER & INTELLIGENCE ARTIFICIELLE (420 min = 7h)
+  // Vendue uniquement à l'unité (59 €), PAS incluse au pack — voir
+  // STANDALONE_MODULE_SLUGS ci-dessous. Attestation propre de 7h.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    slug: "immobilier-ia",
+    title: "Immobilier & intelligence artificielle",
+    summary:
+      "ChatGPT, estimation, annonces, RGPD : mettre l'IA au service de votre activité immobilière — efficacement et légalement.",
+    description:
+      "L'IA générative est déjà dans les agences : annonces, prospection, analyse de documents, estimation. Cette formation autonome de 7h apprend aux professionnels de l'immobilier à en tirer un gain de temps réel — méthode de prompt, cas d'usage transaction par transaction — tout en évitant les pièges : hallucinations, RGPD, AI Act, discrimination involontaire et loyauté des annonces.",
+    lessons: [
+      {
+        slug: "comprendre-ia",
+        title: "Comprendre l'IA sans jargon",
+        scriptFile: "module9-immobilier-ia/scripts/01-comprendre-ia.md",
+        videoUrl: null,
+        audioUrl: "/audio/01-comprendre-ia.mp3",
+        duration: 105,
+        difficulty: "debutant",
+        objectives: [
+          "Expliquer simplement ce qu'est (et n'est pas) une IA générative",
+          "Identifier les forces et les faiblesses : rédaction, synthèse… et hallucinations",
+          "Appliquer la règle d'or : l'IA propose, le professionnel dispose",
+          "Choisir ses outils et repérer les usages immobiliers rentables",
+        ],
+      },
+      {
+        slug: "rediger-vendre-ia",
+        title: "Rédiger et vendre avec l'IA",
+        scriptFile: "module9-immobilier-ia/scripts/02-rediger-vendre-ia.md",
+        videoUrl: null,
+        audioUrl: "/audio/02-rediger-vendre-ia.mp3",
+        duration: 105,
+        difficulty: "intermediaire",
+        objectives: [
+          "Maîtriser une méthode de prompt réutilisable (Contexte, Rôle, Tâche, Exemple)",
+          "Produire des annonces différenciantes et conformes",
+          "Personnaliser prospection, relances et réseaux sociaux à grande échelle",
+          "Servir une clientèle étrangère grâce à la traduction assistée",
+        ],
+      },
+      {
+        slug: "ia-transaction",
+        title: "L'IA dans la transaction",
+        scriptFile: "module9-immobilier-ia/scripts/03-ia-transaction.md",
+        videoUrl: null,
+        audioUrl: "/audio/03-ia-transaction.mp3",
+        duration: 105,
+        difficulty: "intermediaire",
+        objectives: [
+          "Situer les estimations automatisées : ce qu'elles valent, où l'humain tranche",
+          "Analyser des documents longs (PV d'AG, baux, diagnostics) avec méthode",
+          "Automatiser comptes-rendus de visite et préparation de rendez-vous",
+          "Brancher l'IA sur le quotidien de l'agence sans dérive",
+        ],
+      },
+      {
+        slug: "cadre-legal-ia",
+        title: "Le cadre légal et les pièges",
+        scriptFile: "module9-immobilier-ia/scripts/04-cadre-legal-ia.md",
+        videoUrl: null,
+        audioUrl: "/audio/04-cadre-legal-ia.mp3",
+        duration: 105,
+        difficulty: "avance",
+        objectives: [
+          "Protéger les données clients : RGPD et réflexes d'agence face aux chatbots",
+          "Connaître les obligations pratiques de l'AI Act européen",
+          "Prévenir la discrimination involontaire générée par l'IA (25 critères)",
+          "Rester loyal dans les annonces : images générées, home staging virtuel",
+          "Écrire la charte IA de son agence en 8 points",
+        ],
+      },
+    ],
+  },
 ];
 
 /**
@@ -925,6 +1002,7 @@ export const COURSE: CourseModule[] = [
 export const STANDALONE_MODULE_SLUGS = new Set<string>([
   "murs-fonds-commerce",
   "renovation-energetique",
+  "immobilier-ia",
 ]);
 
 /** Modules composant le parcours de formation principal (hors add-ons autonomes). */

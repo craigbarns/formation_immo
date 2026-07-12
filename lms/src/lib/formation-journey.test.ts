@@ -67,6 +67,20 @@ describe("rénovation énergétique (formation autonome, hors parcours certifian
   });
 });
 
+describe("immobilier & IA (formation autonome, hors parcours certifiant)", () => {
+  it("le module existe dans COURSE : 4 leçons, 420 min (7h)", () => {
+    const mod = COURSE.find((m) => m.slug === "immobilier-ia");
+    expect(mod).toBeDefined();
+    expect(mod!.lessons).toHaveLength(4);
+    expect(mod!.lessons.reduce((a, l) => a + l.duration, 0)).toBe(420);
+  });
+
+  it("il est hors parcours : certification inchangée", () => {
+    expect(FORMATION_MODULES.some((m) => m.slug === "immobilier-ia")).toBe(false);
+    expect(getCertifiedLessonCount()).toBe(36);
+  });
+});
+
 describe("grandfather TRACFIN (clients pack antérieurs à la bascule)", () => {
   it("achat null => non grandfathered", () => {
     expect(isPackGrandfathered(null)).toBe(false);
