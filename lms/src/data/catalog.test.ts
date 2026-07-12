@@ -76,6 +76,14 @@ describe("getCatalog", () => {
     expect(PACK_EXCLUDED_MODULES.has("renovation-energetique")).toBe(true);
   });
 
+  it("le module autonome immobilier-ia est au catalogue à 59 €, hors pack", () => {
+    const p = getProduct("immobilier-ia");
+    expect(p?.kind).toBe("module");
+    expect(p?.priceCents).toBe(5900);
+    expect(p?.available).toBe(true);
+    expect(PACK_EXCLUDED_MODULES.has("immobilier-ia")).toBe(true);
+  });
+
   it("TRACFIN est un module autonome vendable à 49€ (4900)", () => {
     const tracfin = getProduct("tracfin");
     expect(tracfin?.available).toBe(true);

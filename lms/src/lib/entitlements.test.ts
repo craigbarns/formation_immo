@@ -109,3 +109,13 @@ describe("rénovation énergétique (add-on autonome, hors pack)", () => {
     expect(canAccessModule([], "renovation-energetique", false)).toBe(false);
   });
 });
+
+describe("immobilier & IA (add-on autonome, hors pack)", () => {
+  it("le pack ne donne PAS accès ; l'achat unitaire oui ; admin oui", () => {
+    expect(canAccessModule([pack], "immobilier-ia", false)).toBe(false);
+    const rows: EntitlementRow[] = [{ module_slug: "immobilier-ia", status: "active" }];
+    expect(canAccessModule(rows, "immobilier-ia", false)).toBe(true);
+    expect(canAccessModule([], "immobilier-ia", true)).toBe(true);
+    expect(canAccessModule([], "immobilier-ia", false)).toBe(false);
+  });
+});
