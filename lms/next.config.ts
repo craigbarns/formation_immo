@@ -2,6 +2,19 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["@react-pdf/renderer"],
+  // Les médias de public/ sont servis par le CDN : ils n'ont rien à faire dans
+  // la fonction serverless. Sans ces exclusions, le tracing embarque ~180 Mo
+  // d'audio dans la fonction et le déploiement Netlify dépasse sa limite de 250 Mo.
+  outputFileTracingExcludes: {
+    "/*": [
+      "./public/audio/**",
+      "./public/videos/**",
+      "./public/avatars/**",
+      "./public/generated/**",
+      "./public/images/**",
+      "./public/formation-infographies/**",
+    ],
+  },
   images: {
     remotePatterns: [
       {

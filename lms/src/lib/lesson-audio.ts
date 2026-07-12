@@ -47,6 +47,10 @@ export function getLessonModuleListAudioSrc(lesson: Lesson): string | null {
 }
 
 export function isLessonAudioFilePresent(src: string): boolean {
+  // En production serverless, public/audio n'est PAS embarqué dans la fonction
+  // (outputFileTracingExcludes — il est servi par le CDN) : un test fs y serait
+  // toujours faux. On fait confiance à l'URL configurée dans course.ts.
+  if (process.env.NODE_ENV === "production") return true;
   return publicFileExists(src);
 }
 
