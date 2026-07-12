@@ -1430,6 +1430,217 @@ export const MODULE_EXAMS: ModuleExam[] = [
       },
     ],
   },
+  {
+    moduleSlug: "immobilier-ia",
+    title: "Examen — Immobilier & intelligence artificielle",
+    duration: 20,
+    questions: [
+      {
+        id: "ia1",
+        question:
+          "Un agent demande à ChatGPT le prix moyen au m² d'un quartier et obtient un chiffre précis et convaincant. Quel réflexe professionnel s'impose ?",
+        options: [
+          "Le publier tel quel : les IA sont connectées aux données notariales",
+          "Vérifier le chiffre à la source : une IA générative peut « halluciner » des données plausibles mais fausses",
+          "Le majorer de 10 % par prudence",
+          "Demander le même chiffre à une autre IA pour le confirmer",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Un modèle de langage prédit du texte plausible : il peut inventer des chiffres avec aplomb (« hallucination »). Les données chiffrées se vérifient toujours à la source (DVF, notaires, bases professionnelles). Croiser deux IA ne constitue pas une vérification.",
+      },
+      {
+        id: "ia2",
+        question: "Qu'est-ce qu'une IA générative comme ChatGPT, Claude ou Gemini, fondamentalement ?",
+        options: [
+          "Une base de données immobilière connectée en temps réel",
+          "Un modèle de langage entraîné à prédire la suite la plus probable d'un texte",
+          "Un moteur de recherche amélioré qui cite toujours ses sources",
+          "Un logiciel expert programmé règle par règle par des juristes",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Une IA générative est un modèle de langage : elle a appris, sur d'immenses corpus de textes, à générer la suite la plus plausible d'un texte. C'est ce qui explique à la fois son excellence rédactionnelle et ses erreurs factuelles.",
+      },
+      {
+        id: "ia3",
+        question: "Quelle est la « règle d'or » de l'usage professionnel de l'IA présentée dans cette formation ?",
+        options: [
+          "L'IA décide, le professionnel exécute",
+          "L'IA propose, le professionnel dispose : vérifier les faits, relire chaque texte, protéger les données",
+          "Ne jamais utiliser l'IA pour des documents clients",
+          "Utiliser au moins trois IA différentes pour chaque tâche",
+        ],
+        correctIndex: 1,
+        explanation:
+          "L'IA produit des propositions ; le professionnel garde la décision et la responsabilité. Les trois garde-fous : vérifier tout fait ou chiffre, relire tout texte avant envoi, ne jamais exposer de données personnelles de clients.",
+      },
+      {
+        id: "ia4",
+        question: "Parmi ces tâches, laquelle l'IA générative fait-elle le MIEUX aujourd'hui ?",
+        options: [
+          "Estimer précisément un bien atypique sans visite",
+          "Rédiger, résumer, reformuler et traduire des textes",
+          "Négocier un prix avec un acquéreur",
+          "Détecter des fissures structurelles sur photos",
+        ],
+        correctIndex: 1,
+        explanation:
+          "La langue est le terrain naturel des modèles de langage : rédaction, synthèse, reformulation, traduction. L'estimation fiable exige la visite et le terrain ; la négociation et le conseil restent des compétences humaines.",
+      },
+      {
+        id: "ia5",
+        question:
+          "Que signifient les quatre lettres de la méthode de prompt CRTE enseignée dans cette formation ?",
+        options: [
+          "Créativité, Rapidité, Technologie, Efficacité",
+          "Contexte, Rôle, Tâche, Exemple",
+          "Client, Résultat, Ton, Envoi",
+          "Consigne, Relecture, Test, Évaluation",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Un prompt efficace donne le Contexte (les faits que l'IA ne peut pas deviner), un Rôle (qui elle doit être), une Tâche précise (format, longueur, structure) et un Exemple de votre ton. Puis on itère sur la proposition.",
+      },
+      {
+        id: "ia6",
+        question:
+          "Pourquoi joindre une de VOS meilleures annonces à un prompt de rédaction ?",
+        options: [
+          "Pour prouver à l'IA que vous savez écrire",
+          "Parce que l'IA imite très bien un style qu'on lui montre : le texte produit garde VOTRE ton",
+          "Pour que l'IA la republie telle quelle",
+          "C'est inutile : toutes les IA écrivent pareil",
+        ],
+        correctIndex: 1,
+        explanation:
+          "L'exemple est le levier le plus puissant du prompt : le modèle calque le ton, la structure et le niveau de langue du texte fourni. C'est la parade principale contre la « bouillie IA » standardisée.",
+      },
+      {
+        id: "ia7",
+        question:
+          "Quelle instruction réduit le plus le risque qu'une IA invente des informations dans une réponse à un prospect ?",
+        options: [
+          "« Sois créatif et convaincant »",
+          "« Si une information manque, écris [À COMPLÉTER] au lieu de deviner »",
+          "« Réponds le plus vite possible »",
+          "« Utilise beaucoup de superlatifs »",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Autoriser explicitement l'IA à signaler ce qu'elle ne sait pas — plutôt que de combler les trous — élimine une grande partie des inventions. Le professionnel complète ensuite les blancs avec les vraies informations.",
+      },
+      {
+        id: "ia8",
+        question:
+          "Un vendeur arrive avec l'estimation d'un site en ligne, supérieure de 15 % à votre avis de valeur. Quelle est la meilleure réponse professionnelle ?",
+        options: [
+          "S'aligner sur le chiffre du site pour prendre le mandat",
+          "Expliquer ce que l'algorithme ne peut pas savoir de SON bien (état, lumière, vis-à-vis, travaux) et étayer votre avis avec de vraies références de ventes",
+          "Dénigrer les outils en ligne comme des gadgets",
+          "Couper la poire en deux entre les deux chiffres",
+        ],
+        correctIndex: 1,
+        explanation:
+          "L'estimation automatisée croise des données passées mais n'a jamais visité. Montrer précisément ses angles morts sur ce bien, références réelles à l'appui, est la meilleure démonstration de la valeur ajoutée de l'agent — sans dénigrer l'outil que le client a utilisé.",
+      },
+      {
+        id: "ia9",
+        question:
+          "Pour analyser un PV d'assemblée générale de 40 pages avec l'IA, quelle exigence rend l'analyse professionnellement fiable ?",
+        options: [
+          "Demander un résumé « le plus court possible »",
+          "Exiger, pour chaque point relevé, la citation du passage exact et de la page — puis vérifier dans le document",
+          "Faire analyser le document par deux IA et comparer",
+          "Se contenter des 10 premières pages, l'essentiel y figure toujours",
+        ],
+        correctIndex: 1,
+        explanation:
+          "La citation source transforme l'IA de « boîte noire » en index intelligent : chaque alerte (travaux votés, contentieux, impayés) se vérifie en trente secondes dans le document. Jamais de confiance aveugle au résumé seul.",
+      },
+      {
+        id: "ia10",
+        question:
+          "Un agent veut coller le dossier complet d'un candidat locataire (bulletins de salaire, pièce d'identité) dans un chatbot gratuit « pour vérifier la solvabilité ». Qu'en dites-vous ?",
+        options: [
+          "Bonne idée : c'est rapide et gratuit",
+          "Double faute : transmission de données personnelles sensibles à un outil non maîtrisé (RGPD) ET délégation d'une évaluation de personne à l'IA",
+          "Acceptable si le candidat n'est pas informé",
+          "Acceptable si l'agent supprime la conversation après",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Les documents sensibles (identité, revenus) ne transitent jamais par un outil grand public : c'est un traitement de données non conforme au RGPD. Et l'évaluation de candidats ne se délègue pas à une IA — risque discriminatoire en prime.",
+      },
+      {
+        id: "ia11",
+        question: "Quel réflexe RGPD s'applique AVANT de coller un texte concernant un client dans une IA ?",
+        options: [
+          "Vérifier que le client est bien solvable",
+          "Anonymiser : retirer noms, coordonnées et données sensibles — l'IA n'en a pas besoin pour analyser",
+          "Mettre le texte en majuscules",
+          "Attendre 48h après la signature du mandat",
+        ],
+        correctIndex: 1,
+        explanation:
+          "L'anonymisation par défaut (« Monsieur D., cadre, revenus X ») permet presque tous les usages sans exposer de données personnelles. S'y ajoutent : désactiver l'entraînement sur vos conversations et préférer les offres professionnelles pour un usage d'équipe.",
+      },
+      {
+        id: "ia12",
+        question: "Selon l'AI Act européen, que doit savoir un client qui dialogue avec le chatbot de votre site ?",
+        options: [
+          "Le prénom de son conseiller virtuel",
+          "Qu'il converse avec une machine et non un humain — la transparence est obligatoire",
+          "Rien : le chatbot peut se présenter comme un conseiller humain",
+          "Le modèle d'IA exact utilisé et son numéro de version",
+        ],
+        correctIndex: 1,
+        explanation:
+          "L'AI Act impose la transparence : l'utilisateur doit savoir qu'il interagit avec une IA. Un chatbot qui se fait passer pour « Julie, votre conseillère » humaine contrevient à cette exigence. Côté agence, l'autre vigilance concerne les outils de scoring de personnes.",
+      },
+      {
+        id: "ia13",
+        question:
+          "Vous demandez à une IA de « classer 10 dossiers locataires du plus solide au plus fragile ». Quel est le risque juridique principal ?",
+        options: [
+          "Aucun : le classement algorithmique est neutre par nature",
+          "Une discrimination involontaire : si le modèle pondère patronyme, lieu de résidence ou âge, le tri viole les 25 critères prohibés — et la responsabilité reste la vôtre",
+          "Une violation du droit d'auteur des candidats",
+          "Un problème uniquement si le classement est publié",
+        ],
+        correctIndex: 1,
+        explanation:
+          "L'IA peut intégrer des critères prohibés de manière invisible : « c'est l'algorithme » n'est pas une défense — la décision de tri est celle du professionnel. La sélection de candidats ne se délègue pas ; en support, seuls des critères objectifs et légaux (taux d'effort, complétude) sont admissibles.",
+      },
+      {
+        id: "ia14",
+        question: "En matière de photos d'annonces, où passe la ligne entre l'autorisé et l'interdit ?",
+        options: [
+          "Tout est permis tant que le bien se vend",
+          "Home staging virtuel signalé (« photo aménagée virtuellement ») : autorisé ; modifier la réalité du bien (effacer un poteau, agrandir une pièce, inventer une vue) : pratique trompeuse interdite",
+          "Toute retouche, même la luminosité, est interdite",
+          "Les images générées par IA sont interdites dans l'immobilier",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Le critère est la loyauté : aider l'acquéreur à se projeter (meublage virtuel signalé) est légitime ; le tromper sur les caractéristiques réelles du bien relève des pratiques commerciales trompeuses (Code de la consommation) et détruit la confiance en visite.",
+      },
+      {
+        id: "ia15",
+        question:
+          "Une annonce générée par IA contient une erreur qui induit un acquéreur en erreur. Qui est juridiquement responsable ?",
+        options: [
+          "L'éditeur de l'outil d'IA",
+          "Le professionnel qui a publié l'annonce : l'outil n'est jamais responsable à sa place",
+          "Personne : l'erreur d'une machine est un cas de force majeure",
+          "L'acquéreur, qui aurait dû vérifier",
+        ],
+        correctIndex: 1,
+        explanation:
+          "La responsabilité de ce qui est publié incombe au professionnel — c'est la traduction juridique de la règle d'or. D'où la relecture humaine obligatoire avant toute publication, inscrite dans la charte IA d'agence (8 points).",
+      },
+    ],
+  },
 ];
 
 export const FINAL_EXAM_ID = "certification-finale";
