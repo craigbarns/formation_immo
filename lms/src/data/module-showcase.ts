@@ -98,7 +98,7 @@ export const MODULE_SHOWCASE: Record<string, ModuleShowcase> = {
       credit: "Taux, durée, apport : le discours qui rassure l’emprunteur.",
       fiscalite: "IR, LMNP, micro-régimes : quoi dire… et quoi éviter.",
       rentabilite: "Calculs que vos clients peuvent refaire chez eux — transparence totale.",
-      dispositifs: "Pinel, Denormandie, défiscalisation : le bon niveau de détail.",
+      "fiscalite-avancee": "Pinel, Denormandie, défiscalisation : le bon niveau de détail.",
       assurances: "Emprunteur, PNO, garanties : la vente croisée éthique.",
     },
   },
@@ -152,6 +152,30 @@ export const MODULE_SHOWCASE: Record<string, ModuleShowcase> = {
       closing: "Urgence positive, alternatives, signature sans friction.",
       promesse: "Du compromis à l’acte : ce que doit savoir votre client.",
       fidelisation: "Recommandations, avis Google, base active : la machine à mandats.",
+    },
+  },
+  tracfin: {
+    badge: "🕵️",
+    headline: "LCB-FT : l'obligation légale que tout professionnel doit maîtriser",
+    subhead:
+      "Les professionnels de l'immobilier sont assujettis à la lutte anti-blanchiment : vigilance client, détection des signaux, déclaration de soupçon à TRACFIN — 3h pour être irréprochable.",
+    outcomes: [
+      "Cadre légal LCB-FT : qui est assujetti, à quoi, sous quelles sanctions",
+      "Vigilance client (KYC) : identifier, vérifier, tracer — sans braquer le client",
+      "Faisceau d'indices : reconnaître les opérations atypiques",
+      "Déclaration de soupçon : quand, comment, en toute confidentialité",
+    ],
+    durationLabel: "~3 h",
+    proofLine: [
+      "Cas pratiques de détection tirés du terrain",
+      "Procédure de déclaration TRACFIN pas à pas",
+      "Compte dans la certification des nouveaux parcours",
+    ],
+    heroGradient: "from-[#0c1a2e] via-[#1e3a5f] to-[#b45309]",
+    lessonTeaser: {
+      "cadre-legal-obligations": "Assujettissement, obligations et sanctions : le socle LCB-FT.",
+      "vigilance-detection": "KYC et faisceau d'indices : la vigilance au quotidien.",
+      "declaration-soupcon-pratique": "La déclaration de soupçon à TRACFIN, pas à pas.",
     },
   },
   deontologie: {

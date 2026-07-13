@@ -912,6 +912,143 @@ export const MODULE_EXAMS: ModuleExam[] = [
     ],
   },
   {
+    moduleSlug: "tracfin",
+    title: "Examen — TRACFIN & lutte anti-blanchiment",
+    duration: 15,
+    questions: [
+      {
+        id: "tr1",
+        question: "Les professionnels de l'immobilier sont-ils assujettis à la lutte contre le blanchiment (LCB-FT) ?",
+        options: [
+          "Non, seules les banques le sont",
+          "Oui : agents immobiliers et intermédiaires figurent parmi les professions assujetties du Code monétaire et financier",
+          "Uniquement pour les transactions de plus d'un million d'euros",
+          "Uniquement les notaires dans la chaîne immobilière",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Les professionnels de l'immobilier (transaction, et selon les cas location) sont expressément assujettis aux obligations LCB-FT par le Code monétaire et financier (art. L.561-2). L'immobilier est un secteur prioritaire de vigilance : c'est un canal classique de blanchiment.",
+      },
+      {
+        id: "tr2",
+        question: "Que recouvre l'obligation de « vigilance client » (KYC) avant d'entrer en relation d'affaires ?",
+        options: [
+          "Demander uniquement le nom du client",
+          "Identifier le client ET vérifier son identité sur document probant, identifier le bénéficiaire effectif, et comprendre l'objet de la relation",
+          "Vérifier seulement la solvabilité bancaire",
+          "Rien tant que le compromis n'est pas signé",
+        ],
+        correctIndex: 1,
+        explanation:
+          "La vigilance impose d'identifier et vérifier l'identité du client (pièce officielle), d'identifier le bénéficiaire effectif des personnes morales, et de recueillir les informations sur l'objet et la nature de la relation — AVANT la transaction, avec conservation des justificatifs.",
+      },
+      {
+        id: "tr3",
+        question: "Qu'est-ce que le « bénéficiaire effectif » d'une société acheteuse ?",
+        options: [
+          "Le gérant inscrit au Kbis, toujours",
+          "La ou les personnes physiques qui contrôlent en dernier ressort la société (détention significative du capital ou contrôle de fait)",
+          "L'agent immobilier mandaté",
+          "Le notaire chargé de l'acte",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Le bénéficiaire effectif est la personne physique qui, in fine, possède ou contrôle la société (seuil indicatif de détention de 25 % du capital ou contrôle par d'autres moyens). Les montages en cascade visant à le dissimuler sont un signal d'alerte classique.",
+      },
+      {
+        id: "tr4",
+        question: "Parmi ces situations, laquelle constitue un signal d'alerte typique de blanchiment dans une transaction ?",
+        options: [
+          "Un acquéreur qui négocie le prix à la baisse",
+          "Un acquéreur pressé, indifférent au prix et aux caractéristiques du bien, avec un financement au montage opaque",
+          "Un acquéreur qui demande un second rendez-vous de visite",
+          "Un vendeur qui refuse une offre trop basse",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Le faisceau d'indices inclut : indifférence au prix ou aux caractéristiques, précipitation inhabituelle, fonds d'origine floue ou en provenance de tiers/étranger sans justification, montages sociétaires opaques, distance inexpliquée entre le client et le bien.",
+      },
+      {
+        id: "tr5",
+        question: "Un client souhaite régler une partie du prix « en espèces, de la main à la main ». Que devez-vous savoir ?",
+        options: [
+          "C'est légal si les deux parties sont d'accord",
+          "Les paiements en espèces sont strictement plafonnés ; une demande de ce type est un signal d'alerte majeur à documenter",
+          "C'est autorisé jusqu'à 50 000 €",
+          "Cela ne concerne que le notaire",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Le règlement d'une transaction immobilière passe par le notaire et les paiements en espèces sont très strictement plafonnés par la loi. Une telle proposition est un indice caractérisé : refus, documentation de la demande, et évaluation d'une déclaration de soupçon.",
+      },
+      {
+        id: "tr6",
+        question: "Qu'est-ce que la « déclaration de soupçon » ?",
+        options: [
+          "Une plainte pénale déposée au commissariat contre le client",
+          "Un signalement confidentiel transmis à TRACFIN lorsque le professionnel soupçonne que des fonds proviennent d'une infraction",
+          "Un e-mail d'alerte envoyé à la FNAIM",
+          "Une mention obligatoire ajoutée au compromis de vente",
+        ],
+        correctIndex: 1,
+        explanation:
+          "La déclaration de soupçon est le signalement, via la plateforme dédiée de TRACFIN (ERMES), des sommes ou opérations dont on soupçonne qu'elles proviennent d'une infraction ou participent au financement du terrorisme. Ce n'est ni une plainte ni une accusation — c'est une transmission d'informations protégée.",
+      },
+      {
+        id: "tr7",
+        question: "Après avoir déclaré un soupçon à TRACFIN, pouvez-vous en informer votre client « par transparence » ?",
+        options: [
+          "Oui, la transparence prime dans la relation commerciale",
+          "Non : révéler l'existence d'une déclaration est interdit et pénalement sanctionné (interdiction de divulgation)",
+          "Oui, mais seulement après la signature de l'acte",
+          "Oui, si le client le demande par écrit",
+        ],
+        correctIndex: 1,
+        explanation:
+          "L'interdiction de divulgation (« tipping off ») est absolue : informer le client ou un tiers de l'existence d'une déclaration de soupçon est une infraction pénale. La déclaration est confidentielle et le déclarant de bonne foi bénéficie d'une immunité civile et pénale.",
+      },
+      {
+        id: "tr8",
+        question: "Le client visé par un soupçon insiste pour conclure. Faut-il refuser la transaction pour « se couvrir » ?",
+        options: [
+          "Oui, tout soupçon impose de rompre immédiatement la relation",
+          "Pas nécessairement : on déclare à TRACFIN, on renforce la vigilance, et on n'alerte surtout pas le client — rompre brutalement peut constituer une divulgation indirecte",
+          "Oui, et il faut prévenir les autres agences du secteur",
+          "Non, la déclaration dispense de toute autre précaution",
+        ],
+        correctIndex: 1,
+        explanation:
+          "La déclaration n'interdit pas mécaniquement la poursuite de la relation : elle appelle une vigilance renforcée. Une rupture brutale et inexpliquée peut mettre la puce à l'oreille du client (divulgation indirecte). Chaque situation s'apprécie — au besoin avec conseil juridique — sans jamais révéler la déclaration.",
+      },
+      {
+        id: "tr9",
+        question: "Quelles obligations d'organisation interne la LCB-FT impose-t-elle à une agence ?",
+        options: [
+          "Aucune : la vigilance est une affaire individuelle",
+          "Des procédures internes écrites, la formation régulière du personnel et la conservation des justificatifs de vigilance",
+          "Uniquement l'affichage d'une plaque en vitrine",
+          "L'embauche obligatoire d'un juriste à temps plein",
+        ],
+        correctIndex: 1,
+        explanation:
+          "L'assujetti doit disposer de procédures internes adaptées (classification des risques, modalités de vigilance), former régulièrement son personnel et conserver les documents de vigilance pendant cinq ans après la fin de la relation. La DGCCRF contrôle et sanctionne les manquements.",
+      },
+      {
+        id: "tr10",
+        question: "Que risque un professionnel de l'immobilier qui ignore ses obligations LCB-FT ?",
+        options: [
+          "Rien, tant qu'il n'a pas lui-même blanchi d'argent",
+          "Des sanctions administratives et disciplinaires (amendes, interdiction d'exercer) et, en cas de participation, des poursuites pénales pour blanchiment",
+          "Un simple rappel à l'ordre sans conséquence",
+          "Uniquement la perte de sa carte de visite",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Le manquement aux obligations LCB-FT expose à des sanctions administratives et disciplinaires lourdes (Commission nationale des sanctions : amendes, interdictions temporaires d'exercer, publication). Participer sciemment à une opération de blanchiment relève du pénal — jusqu'à 5 ans d'emprisonnement et 375 000 € d'amende, davantage en cas de circonstances aggravantes.",
+      },
+    ],
+  },
+  {
     moduleSlug: "deontologie",
     title: "Examen — Déontologie & éthique professionnelle",
     duration: 15,
