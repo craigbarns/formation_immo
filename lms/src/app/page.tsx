@@ -7,6 +7,7 @@ import {
   ArrowRight,
   BookOpen,
   Briefcase,
+  CalendarDays,
   CheckCircle2,
   Clock,
   FileCheck2,
@@ -306,6 +307,9 @@ export default async function HomePage() {
             <Link href="#documents" className="transition hover:text-brand-navy">
               Documents
             </Link>
+            <Link href="/planning-visioconference" className="transition hover:text-brand-navy">
+              Planning visio
+            </Link>
             <Link href="#faq" className="transition hover:text-brand-navy">
               FAQ
             </Link>
@@ -369,6 +373,13 @@ export default async function HomePage() {
                   <Phone className="h-5 w-5" aria-hidden />
                   Être conseillé
                 </a>
+                <Link
+                  href="/planning-visioconference"
+                  className="inline-flex items-center gap-2 rounded-lg border border-brand-gold/70 bg-brand-navy/40 px-6 py-3.5 text-base font-black text-white transition hover:bg-brand-gold hover:text-brand-navy"
+                >
+                  <CalendarDays className="h-5 w-5" aria-hidden />
+                  Planning des visioconférences
+                </Link>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3 text-sm font-bold text-white/80">
@@ -934,6 +945,11 @@ export default async function HomePage() {
               <li>
                 <Link href={IMMOBILIER_CHECKOUT} className="transition hover:text-brand-navy">
                   Formation immobilière
+                </Link>
+              </li>
+              <li>
+                <Link href="/planning-visioconference" className="transition hover:text-brand-navy">
+                  Planning visioconférence
                 </Link>
               </li>
               <li>Management commercial</li>

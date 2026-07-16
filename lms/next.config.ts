@@ -68,6 +68,7 @@ const nextConfig: NextConfig = {
               "font-src 'self'",
               "connect-src 'self' https://api.openai.com https://*.supabase.co",
               "media-src 'self' blob:",
+              "frame-src 'self' https://view.monday.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",
