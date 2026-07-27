@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { COURSE, lessonId } from "@/data/course";
+import { COURSE, FORMATION_MODULES, lessonId } from "@/data/course";
+import { completedParcoursCount, parcoursProgressPct } from "@/lib/admin-progress";
 import { 
   Users,
   BookOpen,
@@ -58,8 +59,10 @@ export default function AdminPage() {
   const accessFormRef = useRef<HTMLFormElement>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const totalLessons = COURSE.reduce((a, m) => a + m.lessons.length, 0);
-  const totalModules = COURSE.length;
+  // Progression = PARCOURS certifiant (42h), hors formations autonomes (add-ons 59€).
+  // Sans ce cadrage, une cliente pack ayant fini ses 42h plafonnait sous 100 %.
+  const totalLessons = FORMATION_MODULES.reduce((a, m) => a + m.lessons.length, 0);
+  const totalModules = FORMATION_MODULES.length;
 
   const loadLearners = useCallback(async ({ showLoading = true } = {}) => {
     if (showLoading) setLoading(true);
@@ -257,11 +260,11 @@ export default function AdminPage() {
                              <div className="h-1.5 w-24 rounded-full bg-white/5 ring-1 ring-white/10 overflow-hidden">
                                 <div 
                                     className="h-full bg-brand-gold" 
-                                    style={{ width: `${Math.round((learner.lessons_completed / totalLessons) * 100)}%` }} 
+                                    style={{ width: `${parcoursProgressPct(learner.completed_keys)}%` }}
                                 />
                              </div>
                              <span className="text-xs font-black text-white/60 tabular-nums">
-                                {Math.round((learner.lessons_completed / totalLessons) * 100)}%
+                                {parcoursProgressPct(learner.completed_keys)}%
                              </span>
                           </div>
                         </div>
@@ -391,7 +394,7 @@ export default function AdminPage() {
                     <div className="mt-6 flex flex-wrap justify-center md:justify-start gap-4">
                        <Badge icon={<Zap size={10} />} label={`${selectedLearner.xp} XP`} color="purple" />
                        <Badge icon={<Calendar size={10} />} label={`Actif le ${selectedLearner.last_activity}`} color="blue" />
-                       <Badge icon={<Target size={10} />} label={`${selectedLearner.lessons_completed}/${totalLessons} Leçons`} color="gold" />
+                       <Badge icon={<Target size={10} />} label={`${completedParcoursCount(selectedLearner.completed_keys)}/${totalLessons} Leçons`} color="gold" />
                     </div>
                   </div>
                   <div className="flex flex-col gap-3">
@@ -416,7 +419,7 @@ export default function AdminPage() {
                             <BarChart3 size={14} /> État des modules
                         </h3>
                         <div className="grid gap-4 sm:grid-cols-2">
-                            {COURSE.map((mod) => {
+                            {FORMATION_MODULES.map((mod) => {
                                 const doneInMod = mod.lessons.filter(l => selectedLearner.completed_keys.has(lessonId(mod.slug, l.slug))).length;
                                 const pct = Math.round((doneInMod / mod.lessons.length) * 100);
                                 return (
@@ -485,12 +488,12 @@ export default function AdminPage() {
                   <div className="space-y-8">
                      <div className="rounded-[2.5rem] border border-white/10 bg-[#030712] p-8 text-center shadow-2xl">
                         <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/75 mb-8">Maîtrise Globale</h3>
-                        <CircularProgress 
-                           value={selectedLearner.lessons_completed} 
-                           max={totalLessons} 
-                           size={180} 
-                           color="var(--brand-gold)" 
-                           label={`${Math.round((selectedLearner.lessons_completed / totalLessons) * 100)}%`}
+                        <CircularProgress
+                           value={completedParcoursCount(selectedLearner.completed_keys)}
+                           max={totalLessons}
+                           size={180}
+                           color="var(--brand-gold)"
+                           label={`${parcoursProgressPct(selectedLearner.completed_keys)}%`}
                            sublabel="CURRICULUM"
                         />
                      </div>
@@ -519,7 +522,7 @@ export default function AdminPage() {
                         <Trophy className="mx-auto h-8 w-8 text-brand-gold mb-4" />
                         <h3 className="text-sm font-black text-white uppercase tracking-widest mb-2">Certification</h3>
                         <p className="text-xs text-white/50 leading-relaxed font-medium italic">
-                            {selectedLearner.lessons_completed / totalLessons >= 0.8 && Object.values(selectedLearner.exam_scores).filter(e => e.score / e.total >= 0.7).length >= 3
+                            {parcoursProgressPct(selectedLearner.completed_keys) >= 80 && Object.values(selectedLearner.exam_scores).filter(e => e.score / e.total >= 0.7).length >= 3
                                 ? "L'apprenant remplit les critères de génération du certificat."
                                 : "Critères ALUR non encore atteints (80% progression + 3 examens réussis)."}
                         </p>
