@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import {
   ArrowRight,
+  Award,
   BookOpen,
   Briefcase,
   CalendarDays,
@@ -15,6 +16,7 @@ import {
   Headphones,
   Mail,
   Phone,
+  Sparkles,
   ShieldCheck,
   Star,
   Users,
@@ -115,14 +117,14 @@ type Formation = {
 
 const activeFormation = {
   title: "Formation Agent Immobilier",
-  subtitle: `${TOTAL_DURATION} pour consolider vos obligations Loi ALUR et vos réflexes terrain`,
+  subtitle: `${TOTAL_DURATION} pour maîtriser vos obligations Loi ALUR et affûter vos réflexes de terrain, à votre rythme.`,
   image: IMMOBILIER_COVER,
   href: IMMOBILIER_CHECKOUT,
   bullets: [
-    `${TOTAL_MODULES} modules : juridique, transaction, financement, marketing, terrain et déontologie`,
-    `${TOTAL_LESSONS} leçons structurées avec QCM, supports et exercices pratiques`,
-    "Chaque module disponible à l'unité, ou pack complet au meilleur prix",
-    "Attestation de suivi par module et certification finale",
+    `${TOTAL_MODULES} modules complets : juridique, transaction, financement, marketing, terrain et déontologie`,
+    `${TOTAL_LESSONS} leçons structurées, avec QCM, fiches de synthèse et exercices concrets`,
+    "Chaque module accessible à l'unité, ou le pack complet au meilleur prix",
+    "Attestation de suivi par module et certification finale à la clé",
   ],
 };
 
@@ -132,7 +134,7 @@ const upcomingFormations: Formation[] = [
     title: "Management commercial",
     label: "Prochainement",
     description:
-      "Un futur module pour structurer une équipe, suivre la performance et installer des rituels commerciaux efficaces.",
+      "Un futur module pour structurer une équipe, piloter la performance et installer des rituels commerciaux qui tiennent dans la durée.",
     image: "/generated/fal/terrain/cover.jpg",
     icon: Users,
     duration: "20h",
@@ -146,7 +148,7 @@ const upcomingFormations: Formation[] = [
     title: "Marketing digital",
     label: "Prochainement",
     description:
-      "Un futur parcours pour améliorer la visibilité, les contenus, les réseaux sociaux et les campagnes d'acquisition.",
+      "Un futur parcours pour gagner en visibilité : contenus, réseaux sociaux et campagnes d'acquisition qui génèrent des mandats.",
     image: "/generated/fal/marketing/cover.jpg",
     icon: Briefcase,
     duration: "25h",
@@ -164,11 +166,11 @@ const proofPoints = [
   },
   {
     value: "4,9/5",
-    label: "taux de satisfaction annoncé",
+    label: "satisfaction déclarée",
   },
   {
     value: TOTAL_DURATION,
-    label: "formation immobilière",
+    label: "de formation immobilière",
   },
   {
     value: "CPF / OPCO",
@@ -180,22 +182,22 @@ const salesBenefits = [
   {
     icon: ShieldCheck,
     title: "Conforme Loi ALUR",
-    text: "Un parcours pensé pour les professionnels de l'immobilier qui doivent maintenir leurs compétences à jour.",
+    text: "Un parcours pensé pour les professionnels de l'immobilier qui doivent maintenir leurs compétences à jour, sans zone d'ombre réglementaire.",
   },
   {
     icon: Clock,
     title: "À votre rythme",
-    text: "Accès en ligne, progression personnelle, leçons courtes et reprise possible dès que vous avez du temps.",
+    text: "100 % en ligne, progression personnelle, leçons courtes : vous reprenez exactement où vous vous êtes arrêté, dès que vous avez un moment.",
   },
   {
     icon: BookOpen,
-    title: "Outils concrets",
-    text: "QCM, fiches, simulateurs, scripts et supports pratiques pour passer rapidement de la théorie au terrain.",
+    title: "Des outils concrets",
+    text: "QCM, fiches, simulateurs, scripts et supports prêts à l'emploi pour passer de la théorie au terrain sans temps mort.",
   },
   {
     icon: Headphones,
-    title: "Accompagnement",
-    text: "Un espace apprenant clair avec support pédagogique et possibilité de contacter l'équipe PASS Formation.",
+    title: "Un vrai accompagnement",
+    text: "Un espace apprenant clair, un support pédagogique réactif et l'équipe PASS Formation joignable quand vous en avez besoin.",
   },
 ];
 
@@ -229,11 +231,11 @@ const documents = [
 const faq = [
   {
     q: "La formation est-elle disponible tout de suite ?",
-    a: "Oui. L'accès s'ouvre automatiquement après paiement validé : le pack débloque tout, un module acheté à l'unité débloque ce module.",
+    a: "Oui. L'accès s'ouvre automatiquement dès le paiement validé : le pack débloque tout, un module acheté à l'unité débloque ce module.",
   },
   {
     q: "Puis-je acheter un seul module ?",
-    a: "Oui. Chaque module est disponible à l'unité, et vous pouvez en ajouter plusieurs au panier pour un seul paiement. Le pack complet reste l'option la plus avantageuse si la formation entière vous intéresse.",
+    a: "Oui. Chaque module est disponible à l'unité, et vous pouvez en ajouter plusieurs au panier pour un seul paiement. Le pack complet reste l'option la plus avantageuse si toute la formation vous intéresse.",
   },
   {
     q: "Puis-je demander une prise en charge CPF ou OPCO ?",
@@ -269,6 +271,22 @@ const testimonials = [
 
 const VERCEL_APP_URL = "https://app.monpassformation.com";
 
+/** Sur-titre de section : petite pastille dorée, discrète et cohérente partout. */
+function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
+  return (
+    <span
+      className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] ${
+        light
+          ? "bg-white/10 text-brand-gold ring-1 ring-white/15"
+          : "bg-brand-gold/10 text-brand-gold-dark ring-1 ring-brand-gold/20"
+      }`}
+    >
+      <Sparkles className="h-3.5 w-3.5" aria-hidden />
+      {children}
+    </span>
+  );
+}
+
 export default async function HomePage() {
   // Redirection automatique pour le sous-domaine "app"
   const host = (await headers()).get("host");
@@ -284,8 +302,8 @@ export default async function HomePage() {
   return (
     <CartProvider products={cartProducts} packPriceCents={getPackPriceCents()}>
     <div className="min-h-screen bg-white text-zinc-950">
-      <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
+      <header className="sticky top-0 z-50 border-b border-zinc-200/70 bg-white/80 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center" aria-label="MonPassFormation">
             <Image
               src={PASS_FORMATION_LOGO}
@@ -293,38 +311,38 @@ export default async function HomePage() {
               width={140}
               height={61}
               priority
-              className="h-12 w-auto"
+              className="h-11 w-auto"
             />
           </Link>
 
-          <nav className="hidden items-center gap-7 text-sm font-semibold text-zinc-600 md:flex">
-            <Link href="#formation-immobiliere" className="transition hover:text-brand-navy">
+          <nav className="hidden items-center gap-8 text-sm font-medium text-zinc-600 md:flex">
+            <Link href="#formation-immobiliere" className="transition-colors hover:text-brand-navy">
               Immobilier
             </Link>
-            <Link href="#catalogue" className="transition hover:text-brand-navy">
+            <Link href="#catalogue" className="transition-colors hover:text-brand-navy">
               Catalogue
             </Link>
-            <Link href="#documents" className="transition hover:text-brand-navy">
+            <Link href="#documents" className="transition-colors hover:text-brand-navy">
               Documents
             </Link>
-            <Link href="/planning-visioconference" className="transition hover:text-brand-navy">
+            <Link href="/planning-visioconference" className="transition-colors hover:text-brand-navy">
               Planning visio
             </Link>
-            <Link href="#faq" className="transition hover:text-brand-navy">
+            <Link href="#faq" className="transition-colors hover:text-brand-navy">
               FAQ
             </Link>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Link
               href={`${VERCEL_APP_URL}/login`}
-              className="hidden rounded-lg px-4 py-2 text-sm font-bold text-zinc-600 transition hover:bg-zinc-100 hover:text-brand-navy sm:inline-flex"
+              className="hidden rounded-full px-4 py-2 text-sm font-semibold text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-brand-navy sm:inline-flex"
             >
               Connexion
             </Link>
             <Link
               href="#formation-immobiliere"
-              className="inline-flex items-center gap-2 rounded-lg bg-brand-navy px-4 py-2.5 text-sm font-black text-white transition hover:bg-brand-navy-mid"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-brand-navy-mid hover:shadow-md"
             >
               Voir la formation
               <ArrowRight className="h-4 w-4" aria-hidden />
@@ -334,59 +352,68 @@ export default async function HomePage() {
       </header>
 
       <main>
-        <section className="relative isolate overflow-hidden bg-zinc-950 text-white">
+        <section className="relative isolate overflow-hidden bg-brand-navy-hero text-white">
           <Image
             src={IMMOBILIER_COVER}
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center opacity-65"
+            className="object-cover object-center opacity-25"
           />
-          <div className="absolute inset-0 bg-zinc-950/70" aria-hidden />
-          <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-24">
+          {/* Dégradé de marque par-dessus la photo pour un rendu net et profond */}
+          <div
+            className="absolute inset-0 bg-gradient-to-br from-brand-navy-deep/95 via-brand-navy/90 to-brand-navy-hero/80"
+            aria-hidden
+          />
+          <div
+            className="absolute -left-24 top-0 h-96 w-96 rounded-full bg-brand-gold/20 blur-3xl"
+            aria-hidden
+          />
+          <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-6 sm:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-28">
             <div className="max-w-3xl">
-              <p className="text-sm font-black uppercase tracking-wide text-brand-gold">
-                Espace digital PASS Formation
-              </p>
-              <h1 className="mt-5 text-5xl font-black leading-none sm:text-6xl lg:text-7xl">
-                Formez-vous à l&apos;immobilier en ligne, sans perdre de temps
+              <Eyebrow light>Espace digital PASS Formation</Eyebrow>
+              <h1 className="mt-6 text-balance text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+                Formez-vous à l&apos;immobilier en ligne,{" "}
+                <span className="bg-gradient-to-r from-brand-gold to-brand-gold-pale bg-clip-text text-transparent">
+                  sans perdre de temps
+                </span>
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85 sm:text-xl">
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80 sm:text-xl">
                 MonPassFormation centralise vos formations professionnelles. Premier module actif :
-                une formation immobilière Loi ALUR de 42h, conçue pour progresser concrètement et
-                suivre votre parcours à votre rythme.
+                une formation immobilière Loi ALUR de {TOTAL_DURATION}, conçue pour progresser
+                concrètement et suivre votre parcours à votre rythme.
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-9 flex flex-wrap gap-3">
                 <Link
                   href="#formation-immobiliere"
-                  className="inline-flex items-center gap-2 rounded-lg bg-brand-gold px-6 py-3.5 text-base font-black text-brand-navy transition hover:bg-brand-gold-hover"
+                  className="inline-flex items-center gap-2 rounded-full bg-brand-gold px-6 py-3.5 text-base font-bold text-brand-navy shadow-lg shadow-brand-gold/20 transition-all hover:-translate-y-0.5 hover:bg-brand-gold-pale hover:shadow-xl"
                 >
                   Découvrir la formation
                   <ArrowRight className="h-5 w-5" aria-hidden />
                 </Link>
                 <a
                   href="tel:0954467773"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/30 bg-white/10 px-6 py-3.5 text-base font-black text-white transition hover:bg-white hover:text-brand-navy"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-base font-semibold text-white backdrop-blur transition-all hover:bg-white hover:text-brand-navy"
                 >
                   <Phone className="h-5 w-5" aria-hidden />
                   Être conseillé
                 </a>
                 <Link
                   href="/planning-visioconference"
-                  className="inline-flex items-center gap-2 rounded-lg border border-brand-gold/70 bg-brand-navy/40 px-6 py-3.5 text-base font-black text-white transition hover:bg-brand-gold hover:text-brand-navy"
+                  className="inline-flex items-center gap-2 rounded-full border border-brand-gold/50 bg-brand-navy/30 px-6 py-3.5 text-base font-semibold text-white backdrop-blur transition-all hover:bg-brand-gold hover:text-brand-navy"
                 >
                   <CalendarDays className="h-5 w-5" aria-hidden />
                   Planning des visioconférences
                 </Link>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-3 text-sm font-bold text-white/80">
+              <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-white/75">
                 {[
-                  "Formation en ligne",
-                  "Espace apprenant",
-                  "Attestation",
+                  "Formation 100 % en ligne",
+                  "Espace apprenant dédié",
+                  "Attestation de suivi",
                   "Paiement sécurisé Stripe",
                 ].map((item) => (
                   <span key={item} className="inline-flex items-center gap-2">
@@ -397,10 +424,13 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="rounded-lg border border-white/15 bg-white p-6 text-zinc-950 shadow-2xl lg:self-end">
-              <p className="text-sm font-black uppercase text-brand-gold">Formation disponible</p>
-              <h2 className="mt-3 text-3xl font-black text-brand-navy">
-                Agent immobilier - Loi ALUR 2026
+            <div className="rounded-3xl border border-white/15 bg-white p-6 text-zinc-950 shadow-2xl ring-1 ring-black/5 sm:p-7 lg:self-end">
+              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-700 ring-1 ring-emerald-200">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden />
+                Formation disponible
+              </span>
+              <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-brand-navy sm:text-3xl">
+                Agent immobilier — Loi ALUR 2026
               </h2>
               <p className="mt-3 text-sm leading-6 text-zinc-600">
                 Un parcours complet pour revoir les fondamentaux réglementaires et commerciaux de
@@ -412,23 +442,32 @@ export default async function HomePage() {
                   [String(TOTAL_LESSONS), "leçons"],
                   [String(TOTAL_MODULES), "modules"],
                 ].map(([value, label]) => (
-                  <div key={label} className="rounded-lg bg-zinc-50 p-4">
-                    <dt className="text-xs font-bold uppercase text-zinc-500">{label}</dt>
-                    <dd className="mt-1 text-2xl font-black text-brand-navy">{value}</dd>
+                  <div
+                    key={label}
+                    className="rounded-2xl bg-gradient-to-b from-zinc-50 to-zinc-100/60 p-4 ring-1 ring-zinc-200/70"
+                  >
+                    <dt className="text-2xl font-extrabold text-brand-navy">{value}</dt>
+                    <dd className="mt-1 text-xs font-medium uppercase tracking-wide text-zinc-500">
+                      {label}
+                    </dd>
                   </div>
                 ))}
               </dl>
               <div className="mt-6 flex items-end justify-between border-t border-zinc-100 pt-5">
                 <div>
-                  <p className="text-xs font-bold uppercase text-zinc-500">Pack complet</p>
-                  <p className="text-3xl font-black text-brand-navy">{euros(getPackPriceCents())}</p>
-                  <p className="text-xs font-semibold text-zinc-500">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+                    Pack complet
+                  </p>
+                  <p className="text-3xl font-extrabold text-brand-navy">
+                    {euros(getPackPriceCents())}
+                  </p>
+                  <p className="text-xs font-medium text-zinc-500">
                     ou chaque module à {euros(getModulePriceCents())}
                   </p>
                 </div>
                 <Link
                   href={IMMOBILIER_CHECKOUT}
-                  className="inline-flex items-center gap-2 rounded-lg bg-brand-navy px-5 py-3 text-sm font-black text-white transition hover:bg-brand-navy-mid"
+                  className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-brand-navy-mid hover:shadow-md"
                 >
                   Acheter
                   <ArrowRight className="h-4 w-4" aria-hidden />
@@ -439,18 +478,23 @@ export default async function HomePage() {
         </section>
 
         <section className="border-b border-zinc-200 bg-white">
-          <div className="mx-auto max-w-7xl px-5 py-8 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-5 py-10 sm:px-6 lg:px-8">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {proofPoints.map((item) => (
-                <div key={item.label} className="rounded-lg border border-zinc-200 p-5">
-                  <p className="text-3xl font-black text-brand-navy">{item.value}</p>
-                  <p className="mt-1 text-sm font-semibold text-zinc-600">{item.label}</p>
+                <div
+                  key={item.label}
+                  className="rounded-2xl border border-zinc-200/80 bg-gradient-to-b from-white to-zinc-50/50 p-6 text-center shadow-sm sm:text-left"
+                >
+                  <p className="text-4xl font-extrabold tracking-tight text-brand-navy">
+                    {item.value}
+                  </p>
+                  <p className="mt-1.5 text-sm font-medium text-zinc-500">{item.label}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-5 grid gap-5 rounded-lg border border-zinc-200 bg-zinc-50 p-5 md:grid-cols-[360px_1fr] md:items-center">
-              <div className="overflow-hidden rounded-lg bg-white p-5 shadow-sm">
+            <div className="mt-6 grid gap-6 rounded-3xl border border-zinc-200/80 bg-gradient-to-br from-zinc-50 to-white p-6 shadow-sm md:grid-cols-[340px_1fr] md:items-center">
+              <div className="overflow-hidden rounded-2xl bg-white p-5 ring-1 ring-zinc-200/70">
                 <Image
                   src="/images/qualiopi-logo.webp"
                   alt="Qualiopi processus certifié République Française"
@@ -460,9 +504,9 @@ export default async function HomePage() {
                 />
               </div>
               <div>
-                <p className="text-sm font-black uppercase text-brand-gold">Certification qualité</p>
-                <h2 className="mt-2 text-2xl font-black text-brand-navy">
-                  Processus certifié Qualiopi
+                <Eyebrow>Certification qualité</Eyebrow>
+                <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-brand-navy">
+                  Un processus certifié Qualiopi
                 </h2>
                 <p className="mt-2 text-sm leading-6 text-zinc-600">
                   PASS Formation met en avant un processus certifié Qualiopi. La certification
@@ -473,10 +517,10 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section id="formation-immobiliere" className="bg-zinc-50 py-16 sm:py-20">
+        <section id="formation-immobiliere" className="bg-zinc-50 py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-            <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-zinc-200 shadow-xl">
+            <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-zinc-200 shadow-xl ring-1 ring-black/5">
                 <Image
                   src={activeFormation.image}
                   alt=""
@@ -484,42 +528,48 @@ export default async function HomePage() {
                   sizes="(min-width: 1024px) 45vw, 100vw"
                   className="object-cover"
                 />
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-brand-navy-deep/40 via-transparent to-transparent"
+                  aria-hidden
+                />
               </div>
 
               <div>
-                <p className="text-sm font-black uppercase text-brand-gold">
-                  Formation immobilière
-                </p>
-                <h2 className="mt-3 text-4xl font-black leading-tight text-brand-navy sm:text-5xl">
+                <Eyebrow>Formation immobilière</Eyebrow>
+                <h2 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-brand-navy sm:text-5xl">
                   {activeFormation.title}
                 </h2>
                 <p className="mt-4 text-lg leading-8 text-zinc-600">{activeFormation.subtitle}</p>
 
-                <ul className="mt-7 space-y-3">
+                <ul className="mt-8 space-y-3.5">
                   {activeFormation.bullets.map((item) => (
-                    <li key={item} className="flex gap-3 text-sm leading-6 text-zinc-700">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" aria-hidden />
+                    <li key={item} className="flex gap-3 text-[15px] leading-6 text-zinc-700">
+                      <CheckCircle2
+                        className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600"
+                        aria-hidden
+                      />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-8 rounded-lg border border-zinc-200 bg-white p-5">
+                <div className="mt-9 rounded-3xl border border-zinc-200/80 bg-white p-6 shadow-sm">
                   <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                      <p className="text-sm font-bold uppercase text-zinc-500">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
                         Pack complet — tous les modules
                       </p>
-                      <p className="mt-1 text-3xl font-black text-brand-navy">
+                      <p className="mt-1 text-3xl font-extrabold text-brand-navy">
                         {euros(getPackPriceCents())}
                       </p>
                       <p className="mt-1 text-sm text-zinc-500">
-                        Paiement sécurisé par Stripe. Modules aussi disponibles à l&apos;unité ci-dessous.
+                        Paiement sécurisé par Stripe. Modules aussi disponibles à l&apos;unité
+                        ci-dessous.
                       </p>
                     </div>
                     <Link
                       href={activeFormation.href}
-                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-navy px-6 py-3.5 text-base font-black text-white transition hover:bg-brand-navy-mid"
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy px-6 py-3.5 text-base font-semibold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-brand-navy-mid hover:shadow-lg"
                     >
                       Acheter la formation
                       <ArrowRight className="h-5 w-5" aria-hidden />
@@ -537,23 +587,28 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="bg-white py-16 sm:py-20">
+        <section className="bg-white py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="max-w-2xl">
-              <p className="text-sm font-black uppercase text-brand-gold">Pourquoi choisir ce parcours</p>
-              <h2 className="mt-3 text-3xl font-black text-brand-navy sm:text-4xl">
-                Un format clair pour apprendre, suivre et valider
+              <Eyebrow>Pourquoi ce parcours</Eyebrow>
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl">
+                Apprendre, suivre et valider — sans friction
               </h2>
             </div>
 
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {salesBenefits.map((item) => {
                 const Icon = item.icon;
 
                 return (
-                  <div key={item.title} className="rounded-lg border border-zinc-200 p-6">
-                    <Icon className="h-7 w-7 text-brand-gold" aria-hidden />
-                    <h3 className="mt-4 text-lg font-black text-brand-navy">{item.title}</h3>
+                  <div
+                    key={item.title}
+                    className="group rounded-3xl border border-zinc-200/80 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-brand-gold/30 hover:shadow-lg"
+                  >
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-gold/10 text-brand-gold-dark ring-1 ring-brand-gold/20 transition-colors group-hover:bg-brand-gold group-hover:text-brand-navy">
+                      <Icon className="h-6 w-6" aria-hidden />
+                    </span>
+                    <h3 className="mt-5 text-lg font-bold text-brand-navy">{item.title}</h3>
                     <p className="mt-2 text-sm leading-6 text-zinc-600">{item.text}</p>
                   </div>
                 );
@@ -562,12 +617,12 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section id="catalogue" className="bg-zinc-50 py-16 sm:py-20">
+        <section id="catalogue" className="bg-zinc-50 py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="max-w-2xl">
-              <p className="text-sm font-black uppercase text-brand-gold">Catalogue</p>
-              <h2 className="mt-3 text-3xl font-black text-brand-navy sm:text-4xl">
-                À la carte ou en pack complet
+              <Eyebrow>Catalogue</Eyebrow>
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl">
+                À la carte, ou en pack complet
               </h2>
               <p className="mt-4 text-base leading-7 text-zinc-600">
                 Commencez sans engagement avec un module à {euros(getModulePriceCents())}, ou
@@ -576,7 +631,7 @@ export default async function HomePage() {
             </div>
 
             {/* Pack en vedette — Meilleur choix */}
-            <article className="mt-10 overflow-hidden rounded-2xl border-2 border-brand-gold bg-brand-navy text-white shadow-xl">
+            <article className="mt-10 overflow-hidden rounded-3xl border border-brand-gold/40 bg-gradient-to-br from-brand-navy via-brand-navy to-brand-navy-hero text-white shadow-2xl ring-1 ring-brand-gold/20">
               <div className="grid gap-0 md:grid-cols-[1fr_1.4fr]">
                 <div className="relative min-h-56 bg-zinc-900">
                   <Image
@@ -584,18 +639,23 @@ export default async function HomePage() {
                     alt=""
                     fill
                     sizes="(min-width: 768px) 40vw, 100vw"
-                    className="object-cover opacity-80"
+                    className="object-cover opacity-70"
                   />
-                  <span className="absolute left-4 top-4 rounded-lg bg-brand-gold px-3 py-1 text-xs font-black uppercase tracking-wider text-brand-navy shadow">
-                    ⭐ Meilleur choix
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent to-brand-navy/80"
+                    aria-hidden
+                  />
+                  <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-brand-gold px-3 py-1 text-xs font-bold uppercase tracking-wider text-brand-navy shadow-lg">
+                    <Star className="h-3.5 w-3.5 fill-current" aria-hidden />
+                    Meilleur choix
                   </span>
                 </div>
                 <div className="flex flex-col gap-5 p-7 md:p-9">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-brand-gold">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold">
                       Pack complet — Loi ALUR 2026
                     </p>
-                    <h3 className="mt-2 text-2xl font-black md:text-3xl">
+                    <h3 className="mt-2 text-2xl font-extrabold tracking-tight md:text-3xl">
                       Toute la formation Agent Immobilier
                     </h3>
                     <p className="mt-3 text-sm leading-6 text-white/75">
@@ -605,10 +665,10 @@ export default async function HomePage() {
                   </div>
                   <div className="flex flex-wrap items-end justify-between gap-5">
                     <div>
-                      <p className="text-4xl font-black text-brand-gold">
+                      <p className="text-4xl font-extrabold text-brand-gold">
                         {euros(getPackPriceCents())}
                       </p>
-                      <p className="text-xs font-bold text-white/60">
+                      <p className="text-xs font-medium text-white/60">
                         au lieu de {euros(getModulePriceCents() * TOTAL_MODULES)} à la carte
                       </p>
                     </div>
@@ -624,8 +684,8 @@ export default async function HomePage() {
             </article>
 
             {/* Modules à l'unité — pour commencer sans engagement */}
-            <div className="mt-12">
-              <h3 className="text-xl font-black text-brand-navy">
+            <div className="mt-14">
+              <h3 className="text-xl font-bold text-brand-navy">
                 Les modules à l&apos;unité — à partir de {euros(4900)}
               </h3>
               <p className="mt-2 text-sm text-zinc-600">
@@ -644,39 +704,44 @@ export default async function HomePage() {
                   return (
                     <article
                       key={product.id}
-                      className="flex overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm"
+                      className="group flex overflow-hidden rounded-3xl border border-zinc-200/80 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
                     >
                       <div className="flex min-w-0 flex-1 flex-col">
-                        <div className="relative aspect-[16/10] bg-zinc-100">
+                        <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100">
                           <Image
                             src={moduleCover(product.id)}
                             alt=""
                             fill
                             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                            className="object-cover"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
                           />
-                          <div className="absolute inset-0 bg-zinc-950/20" aria-hidden />
-                          <span className="absolute left-4 top-4 rounded-lg bg-white px-3 py-1 text-xs font-black text-brand-navy shadow-sm">
+                          <div
+                            className="absolute inset-0 bg-gradient-to-t from-brand-navy-deep/50 via-transparent to-transparent"
+                            aria-hidden
+                          />
+                          <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-brand-navy shadow-sm backdrop-blur">
                             Module {i + 1}
                           </span>
                         </div>
 
                         <div className="flex flex-1 flex-col p-6">
-                          <h3 className="text-lg font-black leading-snug text-brand-navy">
+                          <h3 className="text-lg font-bold leading-snug text-brand-navy">
                             {product.label.replace(/^Module \d+ — /, "")}
                           </h3>
                           <p className="mt-3 flex-1 text-sm leading-6 text-zinc-600">
                             {product.description}
                           </p>
 
-                          <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold text-zinc-600">
-                            <span className="rounded-lg bg-zinc-100 px-3 py-1.5">
+                          <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-zinc-600">
+                            <span className="inline-flex items-center gap-1.5 rounded-full bg-zinc-100 px-3 py-1.5">
+                              <Clock className="h-3.5 w-3.5" aria-hidden />
                               {formatDuration(durationMin)}
                             </span>
-                            <span className="rounded-lg bg-zinc-100 px-3 py-1.5">
+                            <span className="inline-flex items-center gap-1.5 rounded-full bg-zinc-100 px-3 py-1.5">
+                              <BookOpen className="h-3.5 w-3.5" aria-hidden />
                               {lessonsCount} leçons
                             </span>
-                            <span className="rounded-lg bg-brand-gold/15 px-3 py-1.5 text-brand-navy">
+                            <span className="rounded-full bg-brand-gold/15 px-3 py-1.5 text-brand-gold-dark">
                               {euros(product.priceCents)}
                             </span>
                           </div>
@@ -685,7 +750,7 @@ export default async function HomePage() {
                             {product.available ? (
                               <AddToCartButton productId={product.id} />
                             ) : (
-                              <span className="inline-flex w-full items-center justify-center rounded-lg bg-zinc-100 px-5 py-3 text-sm font-black text-zinc-500">
+                              <span className="inline-flex w-full items-center justify-center rounded-full bg-zinc-100 px-5 py-3 text-sm font-semibold text-zinc-500">
                                 Bientôt disponible
                               </span>
                             )}
@@ -699,7 +764,7 @@ export default async function HomePage() {
 
             {/* Prochaines formations du catalogue */}
             <div className="mt-16 max-w-2xl">
-              <h3 className="text-xl font-black text-brand-navy">
+              <h3 className="text-xl font-bold text-brand-navy">
                 Les prochaines formations arrivent
               </h3>
               <p className="mt-2 text-sm text-zinc-600">
@@ -715,7 +780,7 @@ export default async function HomePage() {
                 return (
                   <article
                     key={formation.id}
-                    className="flex overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm"
+                    className="flex overflow-hidden rounded-3xl border border-zinc-200/80 bg-white shadow-sm"
                   >
                     <div className="flex min-w-0 flex-1 flex-col">
                       <div className="relative aspect-[16/10] bg-zinc-100">
@@ -724,10 +789,10 @@ export default async function HomePage() {
                           alt=""
                           fill
                           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                          className="object-cover"
+                          className="object-cover opacity-90"
                         />
-                        <div className="absolute inset-0 bg-zinc-950/20" aria-hidden />
-                        <span className="absolute left-4 top-4 rounded-lg bg-white px-3 py-1 text-xs font-black text-brand-navy shadow-sm">
+                        <div className="absolute inset-0 bg-zinc-950/25" aria-hidden />
+                        <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-brand-navy shadow-sm backdrop-blur">
                           {formation.label}
                         </span>
                       </div>
@@ -735,18 +800,16 @@ export default async function HomePage() {
                       <div className="flex flex-1 flex-col p-6">
                         <div className="flex items-center gap-3">
                           <span
-                            className="flex h-10 w-10 items-center justify-center rounded-lg text-white"
+                            className="flex h-10 w-10 items-center justify-center rounded-2xl text-white"
                             style={{ backgroundColor: formation.accent }}
                           >
                             <Icon className="h-5 w-5" aria-hidden />
                           </span>
                           <div>
-                            <p className="text-xs font-bold uppercase text-zinc-500">
+                            <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
                               {formation.status}
                             </p>
-                            <h3 className="text-xl font-black text-brand-navy">
-                              {formation.title}
-                            </h3>
+                            <h3 className="text-xl font-bold text-brand-navy">{formation.title}</h3>
                           </div>
                         </div>
 
@@ -754,20 +817,20 @@ export default async function HomePage() {
                           {formation.description}
                         </p>
 
-                        <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold text-zinc-600">
-                          <span className="rounded-lg bg-zinc-100 px-3 py-1.5">
+                        <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-zinc-600">
+                          <span className="rounded-full bg-zinc-100 px-3 py-1.5">
                             {formation.duration}
                           </span>
-                          <span className="rounded-lg bg-zinc-100 px-3 py-1.5">
+                          <span className="rounded-full bg-zinc-100 px-3 py-1.5">
                             {formation.lessons}
                           </span>
-                          <span className="rounded-lg bg-zinc-100 px-3 py-1.5">
+                          <span className="rounded-full bg-zinc-100 px-3 py-1.5">
                             {formation.price}
                           </span>
                         </div>
 
                         <div className="mt-6 border-t border-zinc-100 pt-5">
-                          <span className="inline-flex w-full items-center justify-center rounded-lg bg-zinc-100 px-5 py-3 text-sm font-black text-zinc-500">
+                          <span className="inline-flex w-full items-center justify-center rounded-full bg-zinc-100 px-5 py-3 text-sm font-semibold text-zinc-500">
                             Bientôt disponible
                           </span>
                         </div>
@@ -780,29 +843,37 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section id="avis" className="bg-white py-16 sm:py-20">
+        <section id="avis" className="bg-white py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="max-w-2xl">
-              <p className="text-sm font-black uppercase text-brand-gold">Retours apprenants</p>
-              <h2 className="mt-3 text-3xl font-black text-brand-navy sm:text-4xl">
-                Une promesse simple : un parcours utilisable sur le terrain
+              <Eyebrow>Retours apprenants</Eyebrow>
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl">
+                Un parcours pensé pour le terrain
               </h2>
             </div>
 
-            <div className="mt-10 grid gap-5 md:grid-cols-3">
+            <div className="mt-12 grid gap-6 md:grid-cols-3">
               {testimonials.map((testimonial) => (
-                <figure key={testimonial.name} className="rounded-lg border border-zinc-200 p-6">
+                <figure
+                  key={testimonial.name}
+                  className="flex flex-col rounded-3xl border border-zinc-200/80 bg-gradient-to-b from-white to-zinc-50/50 p-7 shadow-sm"
+                >
                   <div className="flex gap-1 text-brand-gold" aria-label="5 étoiles">
                     {Array.from({ length: 5 }).map((_, index) => (
                       <Star key={index} className="h-4 w-4 fill-current" aria-hidden />
                     ))}
                   </div>
-                  <blockquote className="mt-4 text-sm leading-6 text-zinc-700">
+                  <blockquote className="mt-4 flex-1 text-[15px] leading-7 text-zinc-700">
                     &ldquo;{testimonial.text}&rdquo;
                   </blockquote>
-                  <figcaption className="mt-5 border-t border-zinc-100 pt-4">
-                    <p className="font-black text-brand-navy">{testimonial.name}</p>
-                    <p className="mt-1 text-sm text-zinc-500">{testimonial.role}</p>
+                  <figcaption className="mt-6 flex items-center gap-3 border-t border-zinc-100 pt-5">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy text-sm font-bold text-white">
+                      {testimonial.name.charAt(0)}
+                    </span>
+                    <span>
+                      <span className="block font-bold text-brand-navy">{testimonial.name}</span>
+                      <span className="mt-0.5 block text-sm text-zinc-500">{testimonial.role}</span>
+                    </span>
                   </figcaption>
                 </figure>
               ))}
@@ -810,20 +881,20 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section id="documents" className="bg-zinc-50 py-16 sm:py-20">
+        <section id="documents" className="bg-zinc-50 py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-            <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+            <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
               <div>
-                <p className="text-sm font-black uppercase text-brand-gold">Cadre qualité</p>
-                <h2 className="mt-3 text-3xl font-black text-brand-navy sm:text-4xl">
-                  Les documents utiles sont accessibles avant l&apos;achat
+                <Eyebrow>Cadre qualité</Eyebrow>
+                <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl">
+                  Tout est transparent, dès avant l&apos;achat
                 </h2>
                 <p className="mt-4 text-base leading-7 text-zinc-600">
                   Comme sur le site principal PASS Formation, les informations légales et
                   pédagogiques restent visibles : CGV, mentions légales, livret d&apos;accueil,
                   règlement et accessibilité.
                 </p>
-                <div className="mt-6 max-w-sm overflow-hidden rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
+                <div className="mt-6 max-w-sm overflow-hidden rounded-3xl border border-zinc-200/80 bg-white p-5 shadow-sm">
                   <Image
                     src="/images/qualiopi-logo.webp"
                     alt="Qualiopi processus certifié République Française"
@@ -842,24 +913,24 @@ export default async function HomePage() {
                     <Link
                       key={document.title}
                       href={document.href}
-                      className="rounded-lg border border-zinc-200 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg"
+                      className="group rounded-3xl border border-zinc-200/80 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-brand-gold/30 hover:shadow-lg"
                     >
-                      <Icon className="h-7 w-7 text-brand-gold" aria-hidden />
-                      <h3 className="mt-4 text-lg font-black text-brand-navy">
-                        {document.title}
-                      </h3>
+                      <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-gold/10 text-brand-gold-dark ring-1 ring-brand-gold/20 transition-colors group-hover:bg-brand-gold group-hover:text-brand-navy">
+                        <Icon className="h-5 w-5" aria-hidden />
+                      </span>
+                      <h3 className="mt-4 text-lg font-bold text-brand-navy">{document.title}</h3>
                       <p className="mt-2 text-sm leading-6 text-zinc-600">{document.text}</p>
                     </Link>
                   );
                 })}
                 <Link
                   href="/reglement-interieur"
-                  className="rounded-lg border border-zinc-200 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg sm:col-span-2"
+                  className="group rounded-3xl border border-zinc-200/80 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-brand-gold/30 hover:shadow-lg sm:col-span-2"
                 >
-                  <FileCheck2 className="h-7 w-7 text-brand-gold" aria-hidden />
-                  <h3 className="mt-4 text-lg font-black text-brand-navy">
-                    Règlement intérieur
-                  </h3>
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-gold/10 text-brand-gold-dark ring-1 ring-brand-gold/20 transition-colors group-hover:bg-brand-gold group-hover:text-brand-navy">
+                    <FileCheck2 className="h-5 w-5" aria-hidden />
+                  </span>
+                  <h3 className="mt-4 text-lg font-bold text-brand-navy">Règlement intérieur</h3>
                   <p className="mt-2 text-sm leading-6 text-zinc-600">
                     Règles applicables aux apprenants, discipline, sécurité et cadre de formation.
                   </p>
@@ -869,49 +940,63 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section id="faq" className="bg-white py-16 sm:py-20">
+        <section id="faq" className="bg-white py-20 sm:py-24">
           <div className="mx-auto max-w-4xl px-5 sm:px-6 lg:px-8">
             <div className="text-center">
-              <p className="text-sm font-black uppercase text-brand-gold">Questions fréquentes</p>
-              <h2 className="mt-3 text-3xl font-black text-brand-navy sm:text-4xl">
-                Les réponses avant de s&apos;inscrire
+              <div className="flex justify-center">
+                <Eyebrow>Questions fréquentes</Eyebrow>
+              </div>
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl">
+                Les réponses avant de vous inscrire
               </h2>
             </div>
 
-            <div className="mt-10 space-y-4">
+            <div className="mt-12 space-y-4">
               {faq.map((item) => (
-                <div key={item.q} className="rounded-lg border border-zinc-200 p-6">
-                  <h3 className="text-lg font-black text-brand-navy">{item.q}</h3>
-                  <p className="mt-2 text-sm leading-6 text-zinc-600">{item.a}</p>
-                </div>
+                <details
+                  key={item.q}
+                  className="group rounded-3xl border border-zinc-200/80 bg-white p-6 shadow-sm transition-colors open:border-brand-gold/30 [&_summary::-webkit-details-marker]:hidden"
+                >
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold text-brand-navy">
+                    {item.q}
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-gold/10 text-brand-gold-dark transition-transform group-open:rotate-45">
+                      <span className="text-xl leading-none">+</span>
+                    </span>
+                  </summary>
+                  <p className="mt-3 text-sm leading-6 text-zinc-600">{item.a}</p>
+                </details>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="bg-brand-navy py-16 text-white sm:py-20">
-          <div className="mx-auto max-w-5xl px-5 text-center sm:px-6 lg:px-8">
-            <p className="text-sm font-black uppercase text-brand-gold">
-              Besoin d&apos;un renseignement ?
-            </p>
-            <h2 className="mt-3 text-3xl font-black sm:text-4xl">
+        <section className="relative isolate overflow-hidden bg-gradient-to-br from-brand-navy-deep via-brand-navy to-brand-navy-hero py-20 text-white sm:py-24">
+          <div
+            className="absolute -right-24 top-0 h-96 w-96 rounded-full bg-brand-gold/15 blur-3xl"
+            aria-hidden
+          />
+          <div className="relative mx-auto max-w-5xl px-5 text-center sm:px-6 lg:px-8">
+            <div className="flex justify-center">
+              <Eyebrow light>Besoin d&apos;un renseignement ?</Eyebrow>
+            </div>
+            <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
               Parlez à PASS Formation avant de démarrer
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-white/75">
               Pour une question sur le financement, l&apos;accessibilité, l&apos;achat en ligne ou
               l&apos;organisation de la formation, contactez l&apos;équipe.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <div className="mt-9 flex flex-wrap justify-center gap-3">
               <a
                 href="tel:0954467773"
-                className="inline-flex items-center gap-2 rounded-lg bg-brand-gold px-6 py-3.5 text-base font-black text-brand-navy transition hover:bg-brand-gold-hover"
+                className="inline-flex items-center gap-2 rounded-full bg-brand-gold px-6 py-3.5 text-base font-bold text-brand-navy shadow-lg shadow-brand-gold/20 transition-all hover:-translate-y-0.5 hover:bg-brand-gold-pale"
               >
                 <Phone className="h-5 w-5" aria-hidden />
                 09 54 46 77 73
               </a>
               <a
                 href="mailto:contact@passformation.com"
-                className="inline-flex items-center gap-2 rounded-lg border border-white/30 px-6 py-3.5 text-base font-black text-white transition hover:bg-white hover:text-brand-navy"
+                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-base font-semibold text-white backdrop-blur transition-all hover:bg-white hover:text-brand-navy"
               >
                 <Mail className="h-5 w-5" aria-hidden />
                 contact@passformation.com
@@ -922,7 +1007,7 @@ export default async function HomePage() {
       </main>
 
       <footer className="border-t border-zinc-200 bg-white">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 sm:px-6 md:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:px-6 md:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] lg:px-8">
           <div>
             <Link href="/" className="inline-flex items-center" aria-label="MonPassFormation">
               <Image
@@ -930,25 +1015,32 @@ export default async function HomePage() {
                 alt="PASS Formation"
                 width={140}
                 height={61}
-                className="h-12 w-auto"
+                className="h-11 w-auto"
               />
             </Link>
             <p className="mt-4 max-w-md text-sm leading-6 text-zinc-600">
               Espace digital de formation professionnelle. PASS Formation, 6 rue Maurice Caunes,
               31200 Toulouse.
             </p>
+            <div className="mt-5 flex items-center gap-2 text-xs font-medium text-zinc-500">
+              <Award className="h-4 w-4 text-brand-gold-dark" aria-hidden />
+              Processus certifié Qualiopi
+            </div>
           </div>
 
           <div>
-            <h3 className="font-black text-brand-navy">Formations</h3>
-            <ul className="mt-3 space-y-2 text-sm text-zinc-600">
+            <h3 className="text-sm font-bold uppercase tracking-wide text-brand-navy">Formations</h3>
+            <ul className="mt-4 space-y-2.5 text-sm text-zinc-600">
               <li>
-                <Link href={IMMOBILIER_CHECKOUT} className="transition hover:text-brand-navy">
+                <Link href={IMMOBILIER_CHECKOUT} className="transition-colors hover:text-brand-navy">
                   Formation immobilière
                 </Link>
               </li>
               <li>
-                <Link href="/planning-visioconference" className="transition hover:text-brand-navy">
+                <Link
+                  href="/planning-visioconference"
+                  className="transition-colors hover:text-brand-navy"
+                >
                   Planning visioconférence
                 </Link>
               </li>
@@ -958,30 +1050,36 @@ export default async function HomePage() {
           </div>
 
           <div>
-            <h3 className="font-black text-brand-navy">Documents</h3>
-            <ul className="mt-3 space-y-2 text-sm text-zinc-600">
+            <h3 className="text-sm font-bold uppercase tracking-wide text-brand-navy">Documents</h3>
+            <ul className="mt-4 space-y-2.5 text-sm text-zinc-600">
               <li>
-                <Link href="/cgv" className="transition hover:text-brand-navy">
+                <Link href="/cgv" className="transition-colors hover:text-brand-navy">
                   CGV
                 </Link>
               </li>
               <li>
-                <Link href="/mentions-legales" className="transition hover:text-brand-navy">
+                <Link href="/mentions-legales" className="transition-colors hover:text-brand-navy">
                   Mentions légales
                 </Link>
               </li>
               <li>
-                <Link href="/accessibilite-psh" className="transition hover:text-brand-navy">
+                <Link
+                  href="/accessibilite-psh"
+                  className="transition-colors hover:text-brand-navy"
+                >
                   Accessibilité PSH
                 </Link>
               </li>
               <li>
-                <Link href="/livret-accueil" className="transition hover:text-brand-navy">
+                <Link href="/livret-accueil" className="transition-colors hover:text-brand-navy">
                   Livret d&apos;accueil
                 </Link>
               </li>
               <li>
-                <Link href="/reglement-interieur" className="transition hover:text-brand-navy">
+                <Link
+                  href="/reglement-interieur"
+                  className="transition-colors hover:text-brand-navy"
+                >
                   Règlement intérieur
                 </Link>
               </li>
@@ -989,27 +1087,33 @@ export default async function HomePage() {
           </div>
 
           <div>
-            <h3 className="font-black text-brand-navy">Contact</h3>
-            <ul className="mt-3 space-y-2 text-sm text-zinc-600">
+            <h3 className="text-sm font-bold uppercase tracking-wide text-brand-navy">Contact</h3>
+            <ul className="mt-4 space-y-2.5 text-sm text-zinc-600">
               <li>
-                <a href="tel:0954467773" className="transition hover:text-brand-navy">
+                <a href="tel:0954467773" className="transition-colors hover:text-brand-navy">
                   09 54 46 77 73
                 </a>
               </li>
               <li>
-                <a href="mailto:contact@passformation.com" className="transition hover:text-brand-navy">
+                <a
+                  href="mailto:contact@passformation.com"
+                  className="transition-colors hover:text-brand-navy"
+                >
                   contact@passformation.com
                 </a>
               </li>
               <li>
-                <Link href={`${VERCEL_APP_URL}/login`} className="transition hover:text-brand-navy">
+                <Link
+                  href={`${VERCEL_APP_URL}/login`}
+                  className="transition-colors hover:text-brand-navy"
+                >
                   Connexion apprenant
                 </Link>
               </li>
             </ul>
           </div>
         </div>
-        <div className="border-t border-zinc-100 px-5 py-5 text-center text-sm text-zinc-500">
+        <div className="border-t border-zinc-100 px-5 py-6 text-center text-sm text-zinc-500">
           © 2026 MonPassFormation. Tous droits réservés.
         </div>
       </footer>
