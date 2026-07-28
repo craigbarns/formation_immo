@@ -51,9 +51,9 @@ export function formatDuration(minutes: number): string {
 }
 
 // ─── Cours ────────────────────────────────────────────────────────────────────
-// Certification 42h = 5 modules d'origine : M1 9h (540) · M2 7h (420) · M3 9h (540)
-//   · M4 7h (420) · M5 10h (600) = 2520 min = 42h.
-// Modules BONUS hors 42h (voir BONUS_MODULE_SLUGS) : M6 Déontologie, TRACFIN (add-on autonome).
+// Socle Loi ALUR 42h : M1 8h · M2 7h · M3 8h · M4 7h · M5 8h
+//   · M6 Déontologie 4h = 2520 min. TRACFIN ajoute 3h au parcours principal,
+// soit 45h au total. Les modules autonomes sont définis plus bas.
 export const COURSE: CourseModule[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   // MODULE 1 — JURIDIQUE & CONFORMITÉ  (480 min = 8h)

@@ -4,7 +4,11 @@ import LoginForm from "./LoginForm";
 
 export const metadata: Metadata = {
   title: "Connexion",
-  description: "Connectez-vous à votre espace Formation 42h.",
+  description: "Connectez-vous à votre espace apprenant MonPassFormation.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function LoginPage() {

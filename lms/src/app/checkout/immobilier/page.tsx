@@ -16,6 +16,8 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import { getPackPriceCents } from "@/data/catalog";
+import { euros } from "@/lib/price";
 
 const PROGRAMME_MODULES = [
   {
@@ -68,14 +70,17 @@ const PROGRAMME_MODULES = [
     lessons: 3,
   },
 ];
-import { createClient } from "@/lib/supabase/server";
-
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "Acheter la formation immobilière",
   description:
-    "Finalisez votre inscription à la formation Agent Immobilier Loi ALUR 2026.",
+    "Découvrez puis achetez la formation Agent Immobilier Loi ALUR : 45h, 40 leçons et 7 modules en ligne.",
+  alternates: {
+    canonical: "/formation-immobiliere-loi-alur",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 const coverImage = "/generated/fal/transaction/cover-immobilier.jpg";
@@ -83,10 +88,7 @@ const PASS_FORMATION_LOGO = "/images/pass-formation-logo.svg";
 
 import { StripeButton } from "@/components/StripeButton";
 
-export default async function ImmobilierCheckoutPage() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
+export default function ImmobilierCheckoutPage() {
   return (
     <main className="min-h-screen bg-zinc-50 text-zinc-950">
       <header className="border-b border-zinc-200 bg-white sticky top-0 z-50">
@@ -103,7 +105,7 @@ export default async function ImmobilierCheckoutPage() {
           </Link>
           <div className="flex items-center gap-4">
             <Link
-              href="/login"
+              href="https://app.monpassformation.com/login"
               className="text-sm font-bold text-zinc-600 transition hover:text-brand-navy"
             >
               Déjà un compte ? Connexion
@@ -179,7 +181,9 @@ export default async function ImmobilierCheckoutPage() {
           <div className="rounded-3xl border border-zinc-200 bg-white p-8 shadow-2xl lg:sticky lg:top-24">
             <p className="text-xs font-black uppercase tracking-widest text-brand-gold">Tarif Unique</p>
             <div className="mt-4 flex items-baseline gap-2 border-b border-zinc-100 pb-8">
-              <span className="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-navy">299€</span>
+              <span className="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-navy">
+                {euros(getPackPriceCents())}
+              </span>
               <span className="text-sm font-bold text-zinc-400">TTC</span>
             </div>
 
@@ -190,27 +194,32 @@ export default async function ImmobilierCheckoutPage() {
                 <div className="flex gap-4">
                   <Lock className="h-5 w-5 shrink-0 text-brand-gold" />
                   <p className="text-xs font-medium leading-relaxed text-zinc-500">
-                    Transaction sécurisée par **Stripe**. Vos données bancaires ne transitent jamais par nos serveurs.
+                    Transaction sécurisée par <strong>Stripe</strong>. Vos données bancaires ne
+                    transitent jamais par nos serveurs.
                   </p>
                 </div>
                 <div className="flex gap-4">
                   <ShieldCheck className="h-5 w-5 shrink-0 text-emerald-600" />
                   <p className="text-xs font-medium leading-relaxed text-zinc-500">
-                    **Accès à vie** incluant les mises à jour réglementaires Loi ALUR 2026.
+                    <strong>Accès à vie</strong> incluant les mises à jour réglementaires du
+                    parcours.
                   </p>
                 </div>
               </div>
             </div>
 
-            {user && (
-              <div className="mt-8 rounded-2xl bg-zinc-50 p-4 border border-zinc-100">
-                <p className="text-[10px] font-black uppercase text-zinc-400">Vous êtes connecté</p>
-                <p className="mt-1 text-sm font-bold text-zinc-700 truncate">{user.email}</p>
-                <Link href="/formation" className="mt-3 inline-flex items-center gap-2 text-xs font-black text-brand-navy hover:underline">
-                  Aller directement à ma formation <ArrowRight className="h-3 w-3" />
-                </Link>
-              </div>
-            )}
+            <div className="mt-8 rounded-2xl border border-zinc-100 bg-zinc-50 p-4">
+              <p className="text-[10px] font-black uppercase text-zinc-400">
+                Déjà inscrit ?
+              </p>
+              <Link
+                href="https://app.monpassformation.com/formation"
+                className="mt-2 inline-flex items-center gap-2 text-xs font-black text-brand-navy hover:underline"
+              >
+                Accéder à mon espace apprenant
+                <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
           </div>
         </aside>
       </section>
@@ -260,6 +269,54 @@ export default async function ImmobilierCheckoutPage() {
         </div>
       </section>
 
+      <section className="mx-auto mt-16 max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div className="rounded-3xl border border-zinc-200 bg-white p-7 shadow-sm sm:p-10">
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-gold">
+            Ressources Loi ALUR
+          </p>
+          <h2 className="mt-3 max-w-3xl text-2xl font-black text-brand-navy sm:text-3xl">
+            Vérifiez vos obligations avant de démarrer
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-600">
+            Nos guides s&apos;appuient sur les textes Légifrance et les informations de CCI France
+            pour expliquer les 42 heures obligatoires et le renouvellement de la carte
+            professionnelle.
+          </p>
+          <div className="mt-7 grid gap-4 md:grid-cols-2">
+            <Link
+              href="/guides/formation-loi-alur-42-heures"
+              className="group rounded-2xl border border-zinc-200 bg-zinc-50 p-5 transition hover:border-brand-gold/60 hover:bg-white hover:shadow-md"
+            >
+              <h3 className="font-black text-brand-navy">
+                Formation Loi ALUR : le guide des 42 heures
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-zinc-600">
+                Durée, personnes concernées, déontologie et justificatifs.
+              </p>
+              <span className="mt-4 inline-flex items-center gap-2 text-sm font-black text-brand-navy">
+                Lire le guide
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+              </span>
+            </Link>
+            <Link
+              href="/guides/renouvellement-carte-professionnelle-immobilier"
+              className="group rounded-2xl border border-zinc-200 bg-zinc-50 p-5 transition hover:border-brand-gold/60 hover:bg-white hover:shadow-md"
+            >
+              <h3 className="font-black text-brand-navy">
+                Renouvellement de la carte professionnelle
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-zinc-600">
+                Délai, formation continue et préparation du dossier CCI.
+              </p>
+              <span className="mt-4 inline-flex items-center gap-2 text-sm font-black text-brand-navy">
+                Voir la checklist
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="mt-16 rounded-3xl bg-brand-navy px-6 py-16 text-center sm:px-12 md:py-20">
         <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-gold">
           Besoin d&apos;un renseignement ?
@@ -287,6 +344,26 @@ export default async function ImmobilierCheckoutPage() {
           </a>
         </div>
       </section>
+
+      <footer className="border-t border-zinc-200 bg-white px-5 py-8 text-center">
+        <nav
+          aria-label="Informations légales"
+          className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm font-bold text-zinc-600"
+        >
+          <Link href="/" className="hover:text-brand-navy">
+            Accueil
+          </Link>
+          <Link href="/cgv" className="hover:text-brand-navy">
+            Conditions générales de vente
+          </Link>
+          <Link href="/mentions-legales" className="hover:text-brand-navy">
+            Mentions légales
+          </Link>
+          <Link href="/accessibilite-psh" className="hover:text-brand-navy">
+            Accessibilité
+          </Link>
+        </nav>
+      </footer>
     </main>
   );
 }

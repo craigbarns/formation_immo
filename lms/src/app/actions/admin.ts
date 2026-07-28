@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { upsertStudentProfile, upsertSubscription } from "@/lib/auth-access";
 import { sendAdminCreatedAccountEmail } from "@/lib/email/resend";
+import { getAppUrl } from "@/lib/app-url";
 
 type ExamScores = Record<string, { score: number; total: number; date: string }>;
 
@@ -74,10 +75,6 @@ async function requireAdmin() {
   if (profile?.role !== "admin") return { error: "Accès refusé" as const };
 
   return { user };
-}
-
-function getSiteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://app.monpassformation.com").replace(/\/$/, "");
 }
 
 function getString(value: FormDataEntryValue | null) {
@@ -320,7 +317,7 @@ export async function inviteUser(formData: FormData): Promise<AdminAccessResult>
 
   const { data: inviteData, error: inviteError } = await admin.auth.admin.inviteUserByEmail(email, {
     data: { full_name: fullName, first_name: firstName, last_name: lastName },
-    redirectTo: `${getSiteUrl()}/settings/reset-password`,
+    redirectTo: `${getAppUrl()}/settings/reset-password`,
   });
 
   if (inviteError) return { error: inviteError.message };

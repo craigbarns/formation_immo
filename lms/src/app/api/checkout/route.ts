@@ -4,6 +4,7 @@ import { fetchActiveEntitlementRows } from "@/lib/auth-access";
 import { getEntitlements } from "@/lib/entitlements";
 import { buildPurchaseMetadata, filterPurchasable, toLineItems } from "@/lib/purchase";
 import { PACK_PRODUCT_ID } from "@/data/catalog";
+import { SITE_URL } from "@/lib/seo";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { z } from "zod";
@@ -70,7 +71,7 @@ export async function POST(request: Request) {
       success_url: user?.email
         ? `${VERCEL_APP_URL}/achat/confirmation?session_id={CHECKOUT_SESSION_ID}`
         : `${VERCEL_APP_URL}/register?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.passformation.com"}#formation-immobiliere`,
+      cancel_url: `${SITE_URL}/formation-immobiliere-loi-alur`,
       metadata: buildPurchaseMetadata(allowed, user?.id ?? null),
     });
 

@@ -8,12 +8,14 @@ import {
   RefreshCcw,
   Scale,
 } from "lucide-react";
+import { createPublicPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Conditions générales de vente | MonPassFormation",
+export const metadata = createPublicPageMetadata({
+  title: "Conditions générales de vente",
   description:
     "Conditions générales de vente de MonPassFormation, espace digital de formations professionnelles PASS Formation.",
-};
+  path: "/cgv",
+});
 
 const sections = [
   {
@@ -37,7 +39,7 @@ const sections = [
     title: "Prix et paiement",
     content: [
       "Les prix sont indiqués sur les pages de présentation des formations.",
-      "Le paiement en ligne sera traité par Stripe lorsque l'option sera activée sur le site.",
+      "Le paiement en ligne est traité de manière sécurisée par Stripe.",
       "Certaines demandes peuvent nécessiter un échange préalable avec PASS Formation, notamment en cas de financement CPF, OPCO ou entreprise.",
     ],
   },

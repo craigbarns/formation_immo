@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { ArrowLeft, Building2, FileText, Mail, Server, ShieldCheck } from "lucide-react";
+import { createPublicPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Mentions légales | MonPassFormation",
+export const metadata = createPublicPageMetadata({
+  title: "Mentions légales",
   description:
     "Mentions légales de MonPassFormation, espace digital de formations professionnelles PASS Formation.",
-};
+  path: "/mentions-legales",
+});
 
 const sections = [
   {
@@ -22,8 +24,8 @@ const sections = [
     icon: Server,
     title: "Hébergement",
     content: [
-      "Site hébergé sur une infrastructure web compatible Next.js.",
-      "Les informations d'hébergement définitives seront précisées lors de la mise en production du domaine.",
+      "Le site public monpassformation.com est hébergé par Netlify.",
+      "L'espace apprenant app.monpassformation.com est déployé sur une infrastructure Vercel.",
     ],
   },
   {

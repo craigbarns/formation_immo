@@ -1,5 +1,13 @@
 import type { NextConfig } from "next";
 
+const privateNoStoreRoutes = [
+  "/login/:path*",
+  "/register/:path*",
+  "/formation/:path*",
+  "/achat/:path*",
+  "/settings/:path*",
+];
+
 const nextConfig: NextConfig = {
   serverExternalPackages: ["@react-pdf/renderer"],
   // Les médias de public/ sont servis par le CDN : ils n'ont rien à faire dans
@@ -25,16 +33,16 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
-      {
-        // Prevent stale Server Action IDs after redeployment
-        source: "/(login|register|formation)(.*)",
+      ...privateNoStoreRoutes.map((source) => ({
+        // Prevent stale Server Action IDs and sensitive app responses.
+        source,
         headers: [
           {
             key: "Cache-Control",
             value: "no-store",
           },
         ],
-      },
+      })),
       {
         source: "/:path*",
         headers: [

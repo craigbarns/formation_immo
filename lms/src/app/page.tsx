@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
 import {
   ArrowRight,
   BookOpen,
@@ -28,20 +26,31 @@ import { CartProvider } from "@/components/cart/CartProvider";
 import { CartBar } from "@/components/cart/CartBar";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { StripeButton } from "@/components/StripeButton";
+import {
+  DEFAULT_OG_IMAGE,
+  SITE_NAME,
+  SITE_URL,
+  absoluteUrl,
+  serializeJsonLd,
+} from "@/lib/seo";
 
-const DOMAIN = "https://www.monpassformation.com";
-const IMMOBILIER_COVER = "/generated/fal/transaction/cover-immobilier.jpg";
-const IMMOBILIER_CHECKOUT = "/checkout/immobilier";
+const IMMOBILIER_COVER = DEFAULT_OG_IMAGE;
+const IMMOBILIER_CHECKOUT = "/formation-immobiliere-loi-alur";
 const PASS_FORMATION_LOGO = "/images/pass-formation-logo.svg";
 
-// Chiffres du PACK : seuls les modules réellement inclus (hors add-ons autonomes
-// comme TRACFIN, vendus à part). Source : COURSE moins PACK_EXCLUDED_MODULES.
+// Chiffres du PACK : seuls les modules réellement inclus, hors add-ons
+// autonomes. TRACFIN fait bien partie du parcours principal.
 const PACK_MODULES = COURSE.filter((m) => !PACK_EXCLUDED_MODULES.has(m.slug));
 const TOTAL_MODULES = PACK_MODULES.length;
 const TOTAL_LESSONS = PACK_MODULES.reduce((acc, m) => acc + m.lessons.length, 0);
-const TOTAL_DURATION = formatDuration(
-  PACK_MODULES.reduce((acc, m) => acc + m.lessons.reduce((a, l) => a + l.duration, 0), 0)
+const TOTAL_DURATION_MIN = PACK_MODULES.reduce(
+  (acc, m) => acc + m.lessons.reduce((a, l) => a + l.duration, 0),
+  0,
 );
+const TOTAL_DURATION = formatDuration(TOTAL_DURATION_MIN);
+const TOTAL_DURATION_ISO = `PT${Math.floor(TOTAL_DURATION_MIN / 60)}H${
+  TOTAL_DURATION_MIN % 60 ? `${TOTAL_DURATION_MIN % 60}M` : ""
+}`;
 
 /** Cover par module ; fallback visuel générique pour tout nouveau module sans visuel. */
 function moduleCover(slug: string): string {
@@ -61,29 +70,29 @@ function moduleCover(slug: string): string {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(DOMAIN),
-  title: "MonPassFormation | Formation immobilière Loi ALUR en ligne",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    absolute: "Formation Loi ALUR 42h en ligne | MonPassFormation",
+  },
   description:
-    "Formation immobilière en ligne conforme Loi ALUR 2026 : 42h, 36 leçons, QCM, supports et accès apprenant. Une plateforme digitale par PASS Formation.",
+    "Formation Loi ALUR en ligne : socle de 42h et module TRACFIN de 3h, soit 45h, avec QCM, supports pratiques, suivi et attestation.",
   keywords: [
-    "MonPassFormation",
-    "PASS Formation",
-    "formation immobilière",
-    "formation Loi ALUR",
+    "formation Loi ALUR 42h",
+    "formation immobilière en ligne",
     "formation agent immobilier",
-    "formation en ligne",
-    "OPCO",
-    "CPF",
+    "renouvellement carte professionnelle immobilier",
+    SITE_NAME,
+    "PASS Formation",
   ],
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "MonPassFormation | Formation immobilière Loi ALUR en ligne",
+    title: "Formation Loi ALUR 42h en ligne (+3h TRACFIN)",
     description:
-      "Le nouvel espace digital PASS Formation pour suivre une formation immobilière claire, pratique et accessible en ligne.",
-    url: DOMAIN,
-    siteName: "MonPassFormation",
+      "Un parcours immobilier de 45 heures : socle Loi ALUR de 42h, module TRACFIN, QCM et supports.",
+    url: "/",
+    siteName: SITE_NAME,
     locale: "fr_FR",
     type: "website",
     images: [
@@ -94,6 +103,13 @@ export const metadata: Metadata = {
         alt: "Formation immobilière en ligne",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Formation Loi ALUR 42h en ligne (+3h TRACFIN)",
+    description:
+      "Un parcours immobilier de 45 heures : socle Loi ALUR de 42h, module TRACFIN, QCM et supports.",
+    images: [IMMOBILIER_COVER],
   },
 };
 
@@ -119,7 +135,7 @@ const activeFormation = {
   image: IMMOBILIER_COVER,
   href: IMMOBILIER_CHECKOUT,
   bullets: [
-    `${TOTAL_MODULES} modules : juridique, transaction, financement, marketing, terrain et déontologie`,
+    `${TOTAL_MODULES} modules : juridique, transaction, financement, marketing, terrain, déontologie et TRACFIN`,
     `${TOTAL_LESSONS} leçons structurées avec QCM, supports et exercices pratiques`,
     "Chaque module disponible à l'unité, ou pack complet au meilleur prix",
     "Attestation de suivi par module et certification finale",
@@ -269,21 +285,98 @@ const testimonials = [
 
 const VERCEL_APP_URL = "https://app.monpassformation.com";
 
-export default async function HomePage() {
-  // Redirection automatique pour le sous-domaine "app"
-  const host = (await headers()).get("host");
-  if (host === "app.monpassformation.com") {
-    redirect("/formation");
-  }
-
+export default function HomePage() {
   // Produits sérialisables pour le panier client (prix = source unique catalog.ts).
-  const cartProducts = getCatalog()
+  const catalog = getCatalog();
+  const cartProducts = catalog
     .filter((p) => p.available)
     .map(({ id, kind, label, priceCents }) => ({ id, kind, label, priceCents }));
+  const packModuleIds = new Set(PACK_MODULES.map(({ slug }) => slug));
+  const packModulesIndividualPriceCents = catalog
+    .filter((product) => product.kind === "module" && packModuleIds.has(product.id))
+    .reduce((total, product) => total + product.priceCents, 0);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: "PASS Formation",
+        alternateName: SITE_NAME,
+        url: SITE_URL,
+        logo: absoluteUrl(PASS_FORMATION_LOGO),
+        email: "contact@passformation.com",
+        telephone: "+33954467773",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "6 rue Maurice Caunes",
+          postalCode: "31200",
+          addressLocality: "Toulouse",
+          addressCountry: "FR",
+        },
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: "+33954467773",
+          email: "contact@passformation.com",
+          contactType: "customer support",
+          availableLanguage: "fr",
+          areaServed: "FR",
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: SITE_NAME,
+        alternateName: "PASS Formation en ligne",
+        inLanguage: "fr-FR",
+        publisher: {
+          "@id": `${SITE_URL}/#organization`,
+        },
+      },
+      {
+        "@type": "Course",
+        "@id": `${absoluteUrl(IMMOBILIER_CHECKOUT)}#course`,
+        url: absoluteUrl(IMMOBILIER_CHECKOUT),
+        name: "Formation Agent Immobilier — Loi ALUR 42h + TRACFIN 3h",
+        description:
+          `Parcours de formation continue en ligne de ${TOTAL_DURATION} pour les professionnels de l'immobilier, avec un socle Loi ALUR de 42h, un module TRACFIN de 3h, des QCM, des supports pratiques et une attestation.`,
+        image: absoluteUrl(IMMOBILIER_COVER),
+        inLanguage: "fr-FR",
+        timeRequired: TOTAL_DURATION_ISO,
+        educationalLevel: "Formation professionnelle continue",
+        provider: {
+          "@id": `${SITE_URL}/#organization`,
+        },
+        hasCourseInstance: {
+          "@type": "CourseInstance",
+          courseMode: "online",
+          inLanguage: "fr-FR",
+        },
+        offers: {
+          "@type": "Offer",
+          url: absoluteUrl(IMMOBILIER_CHECKOUT),
+          price: (getPackPriceCents() / 100).toFixed(2),
+          priceCurrency: "EUR",
+          availability: "https://schema.org/InStock",
+        },
+      },
+    ],
+  };
 
   return (
     <CartProvider products={cartProducts} packPriceCents={getPackPriceCents()}>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }}
+    />
     <div className="min-h-screen bg-white text-zinc-950">
+      <a
+        href="#contenu-principal"
+        className="sr-only fixed left-4 top-4 z-[100] rounded-lg bg-white px-4 py-3 font-bold text-brand-navy shadow-xl focus:not-sr-only"
+      >
+        Aller au contenu principal
+      </a>
       <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center" aria-label="MonPassFormation">
@@ -297,7 +390,10 @@ export default async function HomePage() {
             />
           </Link>
 
-          <nav className="hidden items-center gap-7 text-sm font-semibold text-zinc-600 md:flex">
+          <nav
+            aria-label="Navigation principale"
+            className="hidden items-center gap-7 text-sm font-semibold text-zinc-600 md:flex"
+          >
             <Link href="#formation-immobiliere" className="transition hover:text-brand-navy">
               Immobilier
             </Link>
@@ -333,7 +429,7 @@ export default async function HomePage() {
         </div>
       </header>
 
-      <main>
+      <main id="contenu-principal">
         <section className="relative isolate overflow-hidden bg-zinc-950 text-white">
           <Image
             src={IMMOBILIER_COVER}
@@ -353,9 +449,9 @@ export default async function HomePage() {
                 Formez-vous à l&apos;immobilier en ligne, sans perdre de temps
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85 sm:text-xl">
-                MonPassFormation centralise vos formations professionnelles. Premier module actif :
-                une formation immobilière Loi ALUR de 42h, conçue pour progresser concrètement et
-                suivre votre parcours à votre rythme.
+                MonPassFormation centralise vos formations professionnelles. Premier parcours actif :
+                45h de formation immobilière, avec un socle Loi ALUR de 42h et un module TRACFIN
+                de 3h, à suivre à votre rythme.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -508,7 +604,7 @@ export default async function HomePage() {
                   <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <p className="text-sm font-bold uppercase text-zinc-500">
-                        Pack complet — tous les modules
+                        Pack complet — parcours principal
                       </p>
                       <p className="mt-1 text-3xl font-black text-brand-navy">
                         {euros(getPackPriceCents())}
@@ -571,7 +667,7 @@ export default async function HomePage() {
               </h2>
               <p className="mt-4 text-base leading-7 text-zinc-600">
                 Commencez sans engagement avec un module à {euros(getModulePriceCents())}, ou
-                débloquez toute la formation — modules actuels et futurs — avec le pack complet.
+                débloquez les {TOTAL_MODULES} modules du parcours principal avec le pack complet.
               </p>
             </div>
 
@@ -599,8 +695,8 @@ export default async function HomePage() {
                       Toute la formation Agent Immobilier
                     </h3>
                     <p className="mt-3 text-sm leading-6 text-white/75">
-                      Les {TOTAL_MODULES} modules ({TOTAL_DURATION}, {TOTAL_LESSONS} leçons), tous
-                      les modules futurs, la certification finale et l&apos;espace apprenant complet.
+                      Les {TOTAL_MODULES} modules ({TOTAL_DURATION}, {TOTAL_LESSONS} leçons), la
+                      certification finale et l&apos;espace apprenant complet.
                     </p>
                   </div>
                   <div className="flex flex-wrap items-end justify-between gap-5">
@@ -609,7 +705,7 @@ export default async function HomePage() {
                         {euros(getPackPriceCents())}
                       </p>
                       <p className="text-xs font-bold text-white/60">
-                        au lieu de {euros(getModulePriceCents() * TOTAL_MODULES)} à la carte
+                        au lieu de {euros(packModulesIndividualPriceCents)} à la carte
                       </p>
                     </div>
                     <div className="w-full max-w-xs">
@@ -635,7 +731,7 @@ export default async function HomePage() {
             </div>
 
             <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {getCatalog()
+              {catalog
                 .filter((p) => p.kind === "module")
                 .map((product, i) => {
                   const durationMin = getModuleDurationMin(product.id);
@@ -806,6 +902,70 @@ export default async function HomePage() {
                   </figcaption>
                 </figure>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-zinc-200 bg-brand-navy py-16 text-white sm:py-20">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+            <div className="max-w-3xl">
+              <p className="text-sm font-black uppercase text-brand-gold">
+                Comprendre la Loi ALUR
+              </p>
+              <h2 className="mt-3 text-3xl font-black sm:text-4xl">
+                Des guides clairs avant de choisir votre formation
+              </h2>
+              <p className="mt-4 text-base leading-7 text-white/75">
+                Durée obligatoire, professionnels concernés, déontologie et renouvellement de la
+                carte : faites le point à partir des textes officiels.
+              </p>
+            </div>
+
+            <div className="mt-9 grid gap-5 md:grid-cols-2">
+              <Link
+                href="/guides/formation-loi-alur-42-heures"
+                className="group rounded-lg border border-white/15 bg-white/5 p-6 transition hover:-translate-y-1 hover:border-brand-gold/70 hover:bg-white/10"
+              >
+                <p className="text-xs font-black uppercase tracking-wide text-brand-gold">
+                  Guide pratique
+                </p>
+                <h3 className="mt-3 text-xl font-black">
+                  Formation Loi ALUR : comprendre l&apos;obligation des 42 heures
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-white/70">
+                  Durée, public concerné, thèmes obligatoires et justificatifs à conserver.
+                </p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-brand-gold">
+                  Lire le guide
+                  <ArrowRight
+                    className="h-4 w-4 transition group-hover:translate-x-1"
+                    aria-hidden
+                  />
+                </span>
+              </Link>
+
+              <Link
+                href="/guides/renouvellement-carte-professionnelle-immobilier"
+                className="group rounded-lg border border-white/15 bg-white/5 p-6 transition hover:-translate-y-1 hover:border-brand-gold/70 hover:bg-white/10"
+              >
+                <p className="text-xs font-black uppercase tracking-wide text-brand-gold">
+                  Checklist CCI
+                </p>
+                <h3 className="mt-3 text-xl font-black">
+                  Renouveler sa carte professionnelle immobilière
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-white/70">
+                  Anticipez le délai, les justificatifs de formation et les principales pièces du
+                  dossier.
+                </p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-brand-gold">
+                  Voir la checklist
+                  <ArrowRight
+                    className="h-4 w-4 transition group-hover:translate-x-1"
+                    aria-hidden
+                  />
+                </span>
+              </Link>
             </div>
           </div>
         </section>

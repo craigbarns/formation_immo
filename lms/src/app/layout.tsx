@@ -5,6 +5,11 @@ import { ThemeProvider } from "next-themes";
 import { ToastProvider } from "@/components/toast";
 import { FocusModeProvider } from "@/components/focus-mode";
 import { PwaRegister } from "@/components/PwaRegister";
+import {
+  DEFAULT_OG_IMAGE,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,21 +23,62 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "MonPassFormation — Formations professionnelles",
-    template: "%s | MonPassFormation",
+    default: "Formation immobilière Loi ALUR en ligne | MonPassFormation",
+    template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Plateforme de formations professionnelles en ligne, avec un premier module immobilier 42h conforme ALUR 2026.",
-  metadataBase: new URL("https://www.monpassformation.com"),
+    "Formation immobilière en ligne de 45h : socle Loi ALUR de 42h, module TRACFIN de 3h, QCM, supports et suivi de progression.",
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
+  authors: [{ name: "PASS Formation" }],
+  creator: "PASS Formation",
+  publisher: "PASS Formation",
+  category: "Formation professionnelle",
+  formatDetection: {
+    address: false,
+    email: false,
+    telephone: false,
+  },
   openGraph: {
-    title: "MonPassFormation — Formations professionnelles",
+    title: "Formation immobilière Loi ALUR en ligne",
     description:
-      "Catalogue de formations professionnelles en ligne, dont le module immobilier 42h conforme ALUR 2026.",
+      "Un parcours en ligne de 45h : socle Loi ALUR de 42h et module TRACFIN de 3h.",
     locale: "fr_FR",
     type: "website",
-    siteName: "MonPassFormation",
-    url: "https://www.monpassformation.com",
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        width: 1024,
+        height: 576,
+        alt: "Formation immobilière Loi ALUR en ligne",
+      },
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Formation immobilière Loi ALUR en ligne",
+    description:
+      "Un parcours en ligne de 45h : socle Loi ALUR de 42h et module TRACFIN de 3h.",
+    images: [DEFAULT_OG_IMAGE],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? {
+        google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+      }
+    : undefined,
 };
 
 export const viewport: Viewport = {

@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { AlertTriangle, ArrowLeft, CheckCircle2, FileCheck2, ShieldCheck } from "lucide-react";
+import { createPublicPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Règlement intérieur | MonPassFormation",
+export const metadata = createPublicPageMetadata({
+  title: "Règlement intérieur",
   description:
     "Règlement intérieur synthétique applicable aux apprenants des formations MonPassFormation.",
-};
+  path: "/reglement-interieur",
+});
 
 const rules = [
   "Respecter les consignes pédagogiques, les horaires et les modalités de formation communiquées",

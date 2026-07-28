@@ -5,7 +5,8 @@ import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Parcours de formation",
-  description: "Accédez aux 5 modules de formation immobilière : juridique, transaction, financement, marketing et terrain.",
+  description:
+    "Accédez aux 7 modules du parcours immobilier : juridique, transaction, financement, marketing, terrain, déontologie et TRACFIN.",
 };
 import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award, Trophy, type LucideIcon } from "lucide-react";
 import { FORMATION_MODULES, formatDuration } from "@/data/course";

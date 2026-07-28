@@ -4,7 +4,11 @@ import RegisterForm from "./RegisterForm";
 
 export const metadata: Metadata = {
   title: "Inscription",
-  description: "Créez votre compte Formation 42h et commencez votre parcours.",
+  description: "Créez votre compte MonPassFormation et commencez votre parcours.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function RegisterPage() {

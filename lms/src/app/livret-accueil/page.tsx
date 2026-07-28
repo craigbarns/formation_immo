@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { ArrowLeft, BookOpen, CheckCircle2, Mail, Phone } from "lucide-react";
+import { createPublicPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Livret d'accueil | MonPassFormation",
+export const metadata = createPublicPageMetadata({
+  title: "Livret d'accueil",
   description:
     "Livret d'accueil synthétique pour les apprenants MonPassFormation et PASS Formation.",
-};
+  path: "/livret-accueil",
+});
 
 const items = [
   "Présentation de l'organisme de formation et de son espace digital",

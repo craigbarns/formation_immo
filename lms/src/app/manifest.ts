@@ -2,9 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Formation 42h — Agent immobilier",
-    short_name: "Formation 42h",
-    description: "Formation en ligne pour agents immobiliers : juridique, transaction, financement, marketing et terrain.",
+    name: "Formation Loi ALUR — Agent immobilier",
+    short_name: "Formation ALUR",
+    description:
+      "Formation en ligne pour agents immobiliers : Loi ALUR, juridique, transaction, financement, marketing, terrain, déontologie et TRACFIN.",
     start_url: "/formation",
     display: "standalone",
     background_color: "#fafafa",

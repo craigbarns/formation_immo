@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { FormationShell } from "@/components/FormationShell";
 import { AICoachButton } from "@/components/ai-coach";
@@ -7,6 +8,14 @@ import { StudyReminder } from "@/components/retention/StudyReminder";
 import { AttendanceTracker } from "@/components/AttendanceTracker";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+  },
+};
 
 export default async function FormationLayout({
   children,

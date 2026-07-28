@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2, Mail, Phone, ShieldCheck } from "lucide-react";
+import { createPublicPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Accessibilité PSH | MonPassFormation",
+export const metadata = createPublicPageMetadata({
+  title: "Accessibilité des formations aux personnes handicapées",
   description:
     "Conditions d'accès et accompagnement des personnes en situation de handicap pour les formations MonPassFormation.",
-};
+  path: "/accessibilite-psh",
+});
 
 const commitments = [
   "Étude des besoins spécifiques avant ou au démarrage de la formation",

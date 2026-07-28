@@ -10,6 +10,18 @@
   package = "@netlify/plugin-nextjs"
 
 [[redirects]]
+  from = "/checkout/immobilier"
+  to = "/formation-immobiliere-loi-alur"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/formation"
+  to = "https://app.monpassformation.com/formation"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/formation/*"
   to = "https://app.monpassformation.com/formation/:splat"
   status = 301
