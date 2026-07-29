@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Lock, ShieldCheck, Scale, BookOpen } from "lucide-react";
-import { getModulePriceCents, getPackPriceCents } from "@/data/catalog";
+import { getCatalog, getModulePriceCentsFor, getPackPriceCents } from "@/data/catalog";
 import { euros } from "@/lib/price";
 import {
   DEFAULT_OG_IMAGE,
@@ -12,6 +12,8 @@ import {
   serializeJsonLd,
 } from "@/lib/seo";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
+import { CartProvider } from "@/components/cart/CartProvider";
+import { CartBar } from "@/components/cart/CartBar";
 
 const PAGE_PATH = "/formation-juridique-immobilier";
 const MODULE_ID = "juridique";
@@ -57,7 +59,7 @@ export const metadata: Metadata = {
 
 export default function FormationJuridiquePage() {
   const pageUrl = absoluteUrl(PAGE_PATH);
-  const modulePrice = getModulePriceCents(MODULE_ID);
+  const modulePrice = getModulePriceCentsFor(MODULE_ID);
   const packPrice = getPackPriceCents();
 
   const structuredData = {
@@ -114,8 +116,13 @@ export default function FormationJuridiquePage() {
     ],
   };
 
+  const catalog = getCatalog();
+  const cartProducts = catalog
+    .filter((p) => p.available)
+    .map(({ id, kind, label, priceCents }) => ({ id, kind, label, priceCents }));
+
   return (
-    <>
+    <CartProvider products={cartProducts} packPriceCents={getPackPriceCents()}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }}
@@ -157,12 +164,7 @@ export default function FormationJuridiquePage() {
                 Sécurisez vos transactions et maîtrisez les évolutions réglementaires 2026 : mandats, promesses, baux d&apos;habitation, copropriété et dossier de diagnostic technique.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <AddToCartButton
-                  productId={MODULE_ID}
-                  productKind="module"
-                  label={`Acheter le module Juridique — ${euros(modulePrice)}`}
-                  className="rounded-xl bg-brand-gold px-6 py-4 text-base font-black text-brand-navy shadow-lg transition hover:bg-brand-gold-hover"
-                />
+                <AddToCartButton productId={MODULE_ID} />
                 <Link
                   href="/formation-immobiliere-loi-alur"
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-6 py-4 text-base font-bold text-white transition hover:bg-white/20"
@@ -206,12 +208,7 @@ export default function FormationJuridiquePage() {
                   <span className="text-sm font-bold text-zinc-400">TTC</span>
                 </div>
                 <div className="mt-6 space-y-4">
-                  <AddToCartButton
-                    productId={MODULE_ID}
-                    productKind="module"
-                    label={`Ajouter au panier — ${euros(modulePrice)}`}
-                    className="w-full justify-center rounded-xl bg-brand-navy py-4 text-sm font-black text-white transition hover:bg-brand-navy-mid"
-                  />
+                  <AddToCartButton productId={MODULE_ID} />
                   <div className="flex gap-3 text-xs text-zinc-500 pt-2">
                     <Lock className="h-4 w-4 text-brand-gold shrink-0" />
                     Paiement sécurisé Stripe &amp; accès immédiat.
@@ -222,6 +219,7 @@ export default function FormationJuridiquePage() {
           </div>
         </section>
       </main>
-    </>
+      <CartBar />
+    </CartProvider>
   );
 }
