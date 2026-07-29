@@ -23,6 +23,21 @@ export const PUBLIC_SEO_ROUTES: readonly PublicSeoRoute[] = [
     images: [DEFAULT_OG_IMAGE],
   },
   {
+    path: "/formation-tracfin-immobilier",
+    lastModified: "2026-07-29",
+    images: [DEFAULT_OG_IMAGE],
+  },
+  {
+    path: "/formation-deontologie-immobilier",
+    lastModified: "2026-07-29",
+    images: [DEFAULT_OG_IMAGE],
+  },
+  {
+    path: "/formation-juridique-immobilier",
+    lastModified: "2026-07-29",
+    images: [DEFAULT_OG_IMAGE],
+  },
+  {
     path: "/guides/formation-loi-alur-42-heures",
     lastModified: "2026-07-28",
   },

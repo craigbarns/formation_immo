@@ -132,7 +132,7 @@ export default function ImmobilierCheckoutPage() {
                   <Sparkles className="h-3.5 w-3.5" />
                   Conforme Loi ALUR 2026
                 </p>
-                <h1 className="mt-3 text-3xl font-black md:text-4xl">Formation Agent Immobilier</h1>
+                <h1 className="mt-3 text-3xl font-black md:text-4xl">Formation Agent Immobilier — Loi ALUR 42h &amp; TRACFIN</h1>
               </div>
             </div>
             <div className="p-8">
