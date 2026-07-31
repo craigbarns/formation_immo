@@ -4,31 +4,28 @@ import {
   ArrowLeft,
   ArrowRight,
   BookOpen,
-  CalendarDays,
-  CheckCircle2,
   Clock3,
+  Euro,
   ExternalLink,
-  FileCheck2,
   Scale,
-  ShieldCheck,
-  Users,
+  Video,
   type LucideIcon,
 } from "lucide-react";
 
 const SITE_URL = "https://monpassformation.com";
-const PAGE_PATH = "/guides/formation-loi-alur-42-heures";
+const PAGE_PATH = "/guides/formation-loi-alur-prix-comparatif";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const COVER_URL = `${SITE_URL}/generated/fal/transaction/cover-immobilier.jpg`;
 const LEGIFRANCE_DECREE_URL =
   "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000032080616/";
-const LEGIFRANCE_ETHICS_URL =
-  "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000042427805";
+const QUALIOPI_URL =
+  "https://travail-emploi.gouv.fr/formation-professionnelle/acteurs-cadre-et-qualite-de-la-formation-professionnelle/qualiopi";
 const CCI_RENEWAL_URL =
   "https://www.cci.fr/ressources/formalites-en-ligne/fichier-des-professionnels-de-limmobilier/renouvellement-de-carte-professionnelle";
 
-const title = "Formation loi ALUR 42 heures : guide 2026";
+const title = "Formation loi ALUR : prix, comparatif et critères de choix 2026";
 const description =
-  "Durée, personnes concernées, contenus obligatoires et justificatifs : comprendre les 42 heures de formation loi ALUR pour les professionnels de l’immobilier.";
+  "De 119 € à plus de 600 € : panorama des prix des formations loi ALUR, ce qui justifie les écarts (durée, Qualiopi, suivi, TRACFIN) et comment choisir sans se tromper.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -37,12 +34,12 @@ export const metadata: Metadata = {
   },
   description,
   keywords: [
-    "formation loi ALUR 42 heures",
-    "formation ALUR immobilier",
-    "formation continue agent immobilier",
-    "obligation formation loi ALUR",
-    "renouvellement carte professionnelle immobilier",
-    "formation déontologie immobilier",
+    "formation loi ALUR prix",
+    "prix formation ALUR immobilier",
+    "comparatif formation loi ALUR",
+    "formation 42 heures immobilier tarif",
+    "formation ALUR pas chère",
+    "coût formation continue agent immobilier",
   ],
   alternates: {
     canonical: PAGE_URL,
@@ -66,14 +63,14 @@ export const metadata: Metadata = {
     siteName: "MonPassFormation",
     locale: "fr_FR",
     type: "article",
-    publishedTime: "2026-07-28",
-    modifiedTime: "2026-07-28",
+    publishedTime: "2026-07-31",
+    modifiedTime: "2026-07-31",
     images: [
       {
         url: COVER_URL,
         width: 1024,
         height: 576,
-        alt: "Guide de la formation loi ALUR de 42 heures",
+        alt: "Comparatif des prix des formations loi ALUR",
       },
     ],
   },
@@ -85,107 +82,41 @@ export const metadata: Metadata = {
   },
 };
 
-
-type Fact = {
-  icon: LucideIcon;
-  value: string;
-  label: string;
-  detail: string;
-};
-
-const keyFacts: Fact[] = [
-  {
-    icon: Clock3,
-    value: "42 h",
-    label: "sur trois ans",
-    detail: "Au cours de trois années consécutives d’exercice.",
-  },
-  {
-    icon: CalendarDays,
-    value: "14 h",
-    label: "par an",
-    detail: "L’autre rythme prévu par le décret.",
-  },
-  {
-    icon: ShieldCheck,
-    value: "4 h",
-    label: "de déontologie",
-    detail: "Dont 2 h sur la non-discrimination à l’accès au logement.",
-  },
-];
-
-const audiences = [
-  {
-    title: "Titulaires de la carte professionnelle",
-    text: "Sont concernés les titulaires de la carte et, pour une personne morale, son représentant légal et statutaire.",
-  },
-  {
-    title: "Directions d’établissement",
-    text: "L’obligation vise aussi les personnes qui dirigent un établissement, une succursale, une agence ou un bureau.",
-  },
-  {
-    title: "Collaborateurs habilités",
-    text: "Les salariés et indépendants habilités par le titulaire à négocier, s’entremettre ou s’engager pour son compte sont également concernés.",
-  },
-];
-
-const eligibleThemes = [
-  "Droit applicable à l’activité immobilière",
-  "Économie et environnement du marché",
-  "Pratiques commerciales directement liées au métier",
-  "Déontologie des professionnels de l’immobilier",
-  "Construction, habitation et urbanisme",
-  "Transition énergétique",
-];
-
-const planningSteps = [
-  {
-    title: "Recenser les heures déjà effectuées",
-    text: "Rassemblez les attestations et vérifiez leurs dates, leur durée, leur contenu et la période de trois années concernée.",
-  },
-  {
-    title: "Contrôler les quatre heures obligatoires",
-    text: "Le cycle doit comprendre 2 h sur la non-discrimination à l’accès au logement et 2 h sur les autres règles déontologiques.",
-  },
-  {
-    title: "Choisir des thèmes liés à l’activité",
-    text: "Le contenu retenu doit avoir un lien direct avec l’activité professionnelle réellement exercée.",
-  },
-  {
-    title: "Conserver chaque justificatif",
-    text: "L’attestation doit notamment mentionner les objectifs, le contenu, la durée et la date de réalisation de l’activité.",
-  },
-  {
-    title: "Anticiper la formalité CCI",
-    text: "Pour une carte arrivant à échéance, préparez les justificatifs avant l’ouverture de la période de dépôt de la demande.",
-  },
-];
-
 const faqs = [
   {
-    question: "Faut-il suivre exactement 14 heures chaque année ?",
+    question: "Pourquoi les prix des formations loi ALUR varient-ils autant ?",
     answer:
-      "Le décret fixe la durée à 14 heures par an ou 42 heures au cours de trois années consécutives d’exercice. Le rythme annuel aide à répartir la charge, mais le texte prévoit bien ces deux modalités.",
+      "Parce que les prestations ne sont pas identiques : durée réellement délivrée, présence ou non de visioconférences avec un formateur, suivi pédagogique, supports pratiques, certification Qualiopi, inclusion de modules complémentaires comme TRACFIN. Le prix affiché ne dit rien, seul, de ce qui est réellement fourni.",
   },
   {
-    question: "Les 42 heures peuvent-elles porter sur n’importe quel sujet ?",
+    question: "Une formation à 119 € suffit-elle pour renouveler ma carte ?",
     answer:
-      "Non. Les activités doivent concerner les domaines admis par le décret et présenter un lien direct avec l’activité professionnelle exercée. Les obligations spécifiques de déontologie et de non-discrimination doivent aussi être respectées.",
+      "Elle le peut si elle respecte le cadre du décret : 42 heures réelles, contenus en lien direct avec votre activité, 4 heures de déontologie dont 2 heures de non-discrimination, et attestation complète. Le risque des offres très low-cost : des durées annoncées supérieures à la réalité ou un contenu générique. Vérifiez le programme détaillé avant d’acheter.",
   },
   {
-    question: "Combien d’heures de déontologie sont obligatoires ?",
+    question: "La certification Qualiopi fait-elle monter le prix ?",
     answer:
-      "Sur trois années consécutives, il faut au moins 2 heures consacrées à la non-discrimination à l’accès au logement et au moins 2 heures portant sur les autres règles déontologiques, soit 4 heures au total.",
+      "Obtenir et conserver Qualiopi représente un coût réel pour l’organisme (audits, processus qualité), ce qui peut se répercuter sur le tarif. En contrepartie, elle est indispensable si vous visez un financement OPCO, CPF ou employeur via des fonds mutualisés — et c’est un signal de sérieux global.",
   },
   {
-    question: "Une attestation de formation suffit-elle à renouveler la carte ?",
+    question: "TRACFIN est-elle une formation séparée à payer en plus ?",
     answer:
-      "Elle sert à justifier la formation continue, mais le renouvellement reste une formalité distincte soumise à d’autres conditions et pièces. Il faut consulter la liste actualisée de la CCI compétente.",
+      "Cela dépend des organismes : certains vendent le module anti-blanchiment séparément, d’autres l’intègrent. Chez MonPassFormation, les 3 heures TRACFIN sont incluses dans le parcours à 299 €, ce qui porte le total à 45 heures de formation sans surcoût.",
   },
   {
-    question: "Quand demander le renouvellement de la carte professionnelle ?",
+    question: "Le présentiel est-il toujours plus cher que l’e-learning ?",
     answer:
-      "CCI France indique que la demande doit être réalisée dans les deux mois précédant la date d’expiration de la carte. La préparation des formations et des pièces doit donc commencer en amont.",
+      "En général oui, car il implique salle, formateur dédié et logistique. Les présentiels constatés se situent souvent au-dessus de 400 €, quand l’e-learning démarre autour de 119 €. Un format en ligne enrichi de visioconférences se situe entre les deux.",
+  },
+  {
+    question: "Comment comparer deux offres au même prix ?",
+    answer:
+      "Demandez à chacun : le programme heure par heure, le nombre de visioconférences, les modalités de suivi, la preuve Qualiopi, un exemple d’attestation et les mentions exactes qui y figureront. L’organisme qui répond précisément est presque toujours le plus fiable.",
+  },
+  {
+    question: "Puis-je me faire rembourser si la formation ne convient pas ?",
+    answer:
+      "Les conditions dépendent du contrat de formation et de la nature de l’acheteur (professionnel ou consommateur). Lisez les conditions générales avant l’achat, notamment les clauses d’annulation et les délais éventuels de rétractation applicables à votre situation.",
   },
 ];
 
@@ -198,8 +129,8 @@ const structuredData = {
       headline: title,
       description,
       image: COVER_URL,
-      datePublished: "2026-07-28",
-      dateModified: "2026-07-28",
+      datePublished: "2026-07-31",
+      dateModified: "2026-07-31",
       inLanguage: "fr-FR",
       isAccessibleForFree: true,
       mainEntityOfPage: {
@@ -223,7 +154,7 @@ const structuredData = {
       about: [
         {
           "@type": "Thing",
-          name: "Formation continue des professionnels de l’immobilier",
+          name: "Prix de la formation continue immobilière",
         },
         {
           "@type": "Thing",
@@ -250,7 +181,7 @@ const structuredData = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Formation loi ALUR 42 heures",
+          name: "Formation loi ALUR : prix et comparatif",
           item: PAGE_URL,
         },
       ],
@@ -269,6 +200,130 @@ const structuredData = {
     },
   ],
 };
+
+type Fact = {
+  icon: LucideIcon;
+  value: string;
+  label: string;
+  detail: string;
+};
+
+const keyFacts: Fact[] = [
+  {
+    icon: Euro,
+    value: "119–600 €+",
+    label: "sur le marché",
+    detail: "Fourchette observée selon le format et le niveau de prestation.",
+  },
+  {
+    icon: Clock3,
+    value: "42 h",
+    label: "minimum réglementaire",
+    detail: "Sur trois ans, quelle que soit l’offre choisie.",
+  },
+  {
+    icon: Video,
+    value: "299 €",
+    label: "chez MonPassFormation",
+    detail: "Socle 42 h + TRACFIN 3 h, soit 45 h avec visioconférences incluses.",
+  },
+];
+
+const priceRows = [
+  {
+    range: "119 € à ~189 €",
+    format: "E-learning d’entrée de gamme",
+    content:
+      "Modules en ligne auto-rythmés, QCM, peu ou pas d’interaction humaine, suivi minimal.",
+    watch:
+      "Vérifiez la durée réelle des modules et l’attestation : c’est sur ce segment que les promesses de « 42 h » sont les plus optimistes.",
+  },
+  {
+    range: "~250 € à ~400 €",
+    format: "E-learning accompagné",
+    content:
+      "Parcours en ligne enrichi : visioconférences en direct, supports pratiques, suivi pédagogique, certification Qualiopi.",
+    watch:
+      "Le meilleur rapport contenu/prix pour la plupart des professionnels autonomes ; comparez le nombre d’heures de direct.",
+  },
+  {
+    range: "~400 € à 600 € et plus",
+    format: "Présentiel ou formats premium",
+    content:
+      "Sessions en salle, formateur dédié, échanges de groupe, parfois repas et supports papier inclus.",
+    watch:
+      "Pertinent si vous avez besoin d’un cadre collectif ; ajoutez les frais de déplacement et le temps d’absence au coût réel.",
+  },
+];
+
+const gapFactors = [
+  {
+    title: "La durée réellement délivrée",
+    text: "Une offre « 42 h » dont les modules totalisent 20 h de contenu ne vaut pas 42 h. Exigez le détail heure par heure : c’est la première explication des écarts de prix.",
+  },
+  {
+    title: "La certification Qualiopi",
+    text: "Audits, processus qualité, amélioration continue : la certification a un coût, mais elle conditionne l’accès aux financements publics ou mutualisés et atteste un fonctionnement sérieux.",
+  },
+  {
+    title: "Le suivi humain",
+    text: "Visioconférences avec un formateur, réponses aux questions, accompagnement au dossier : l’humain coûte plus cher qu’une plateforme 100 % automatisée, et change l’expérience.",
+  },
+  {
+    title: "TRACFIN et modules inclus",
+    text: "Certains organismes facturent l’anti-blanchiment en option. Une offre qui inclut les 3 h TRACFIN dans le prix affiché est mécaniquement plus compétitive à prestation égale.",
+  },
+  {
+    title: "Les supports pratiques",
+    text: "Modèles de documents, fiches de synthèse, cas concrets d’agence : des supports exploitables au quotidien demandent un vrai travail de conception, répercuté dans le tarif.",
+  },
+  {
+    title: "La preuve fournie à la CCI",
+    text: "Attestation complète (objectifs, contenu, durée, date) et traçabilité de la progression : une paperasse réglementaire rigoureuse évite les mauvaises surprises au renouvellement.",
+  },
+];
+
+const planningSteps = [
+  {
+    title: "Fixez votre budget total",
+    text: "Incluez déplacements éventuels et temps d’absence : un présentiel à 450 € peut coûter plus cher qu’il n’y paraît.",
+  },
+  {
+    title: "Listez vos exigences non négociables",
+    text: "Qualiopi pour un financement, visioconférences pour l’interaction, TRACFIN inclus pour éviter une seconde inscription.",
+  },
+  {
+    title: "Demandez le programme détaillé",
+    text: "Heure par heure, module par module. Comparez-le aux domaines prévus par le décret et aux 4 h de déontologie obligatoires.",
+  },
+  {
+    title: "Vérifiez Qualiopi et l’attestation type",
+    text: "Certificat en cours de validité d’un côté, mentions réglementaires de l’attestation de l’autre : les deux doivent être vérifiables avant l’achat.",
+  },
+  {
+    title: "Lisez les conditions avant de payer",
+    text: "Annulation, report, accès à la plateforme, délivrance de l’attestation : tout doit être écrit dans le contrat ou les conditions générales.",
+  },
+];
+
+const relatedGuides = [
+  {
+    href: "/guides/formation-loi-alur-42-heures",
+    label: "Formation loi ALUR 42 heures : le cadre complet",
+  },
+  {
+    href: "/guides/financement-formation-immobilier-opco-cpf",
+    label: "Financer sa formation immobilier (OPCO, CPF)",
+  },
+  {
+    href: "/guides/formation-immobilier-en-ligne-vs-presentiel",
+    label: "Formation en ligne ou présentiel : que choisir ?",
+  },
+  {
+    href: "/guides/tracfin-obligations-agent-immobilier",
+    label: "TRACFIN : les obligations de l’agent immobilier",
+  },
+];
 
 function SourceLink({
   href,
@@ -290,7 +345,7 @@ function SourceLink({
   );
 }
 
-export default function FormationLoiAlur42HeuresPage() {
+export default function FormationLoiAlurPrixComparatifPage() {
   return (
     <>
       <script
@@ -345,29 +400,29 @@ export default function FormationLoiAlur42HeuresPage() {
                   </li>
                   <li aria-hidden>/</li>
                   <li aria-current="page" className="font-semibold text-white">
-                    Formation loi ALUR 42 heures
+                    Prix des formations ALUR
                   </li>
                 </ol>
               </nav>
 
               <div className="mt-9 max-w-4xl">
                 <p className="inline-flex rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-brand-gold-pale">
-                  Guide réglementaire 2026
+                  Comparatif prix 2026
                 </p>
                 <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                  Formation loi ALUR 42 heures&nbsp;: les obligations à connaître
+                  Formation loi ALUR&nbsp;: les prix du marché passés au crible
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">
-                  À qui s’adresse l’obligation, comment répartir les heures et
-                  quels justificatifs conserver&nbsp;? Voici le cadre pratique,
-                  fondé sur les textes officiels.
+                  De 119&nbsp;€ à plus de 600&nbsp;€ pour une même obligation de
+                  42 heures&nbsp;? Voici ce qui justifie — ou non — l’écart, et la
+                  méthode pour choisir sans se tromper.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Link
-                    href="#comprendre"
+                    href="#panorama"
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-gold px-5 py-3.5 text-sm font-black text-brand-navy transition hover:bg-brand-gold-hover"
                   >
-                    Comprendre les 42 heures
+                    Voir les fourchettes de prix
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                   <a
@@ -418,13 +473,13 @@ export default function FormationLoiAlur42HeuresPage() {
               <nav aria-label="Sommaire" className="mt-4">
                 <ul className="space-y-1 text-sm">
                   {[
-                    ["#comprendre", "Comprendre les 42 h"],
-                    ["#personnes-concernees", "Personnes concernées"],
-                    ["#contenu", "Contenu obligatoire"],
-                    ["#organiser", "Organiser son cycle"],
-                    ["#justificatifs", "Justificatifs"],
+                    ["#panorama", "Panorama des prix"],
+                    ["#justifie", "Ce qui justifie l’écart"],
+                    ["#monpass", "L’offre MonPassFormation"],
+                    ["#choisir", "Choisir sans se tromper"],
                     ["#faq", "Questions fréquentes"],
                     ["#sources", "Sources officielles"],
+                    ["#guides-lies", "Guides liés"],
                   ].map(([href, label]) => (
                     <li key={href}>
                       <a
@@ -440,150 +495,158 @@ export default function FormationLoiAlur42HeuresPage() {
             </aside>
 
             <article className="min-w-0 space-y-14">
-              <section id="comprendre" className="scroll-mt-8">
+              <section id="panorama" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Le principe
+                  Le marché
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy sm:text-4xl">
-                  14 heures par an ou 42 heures sur trois ans
+                  Panorama des prix constatés en 2026
                 </h2>
                 <div className="mt-6 space-y-5 text-base leading-8 text-slate-700">
                   <p>
-                    La formation continue des professionnels de l’immobilier est
-                    une obligation professionnelle. Elle vise la mise à jour et
-                    le perfectionnement des connaissances et compétences utiles
-                    à l’exercice du métier.
-                  </p>
-                  <p>
-                    L’article 2 du{" "}
+                    Pour une même obligation —{" "}
+                    <strong>42 heures sur trois ans</strong>, fixée par le{" "}
                     <SourceLink href={LEGIFRANCE_DECREE_URL}>
-                      décret n°&nbsp;2016-173 du 18 février 2016
+                      décret n°&nbsp;2016-173
                     </SourceLink>{" "}
-                    fixe une durée de <strong>14 heures par an</strong> ou de{" "}
-                    <strong>42 heures au cours de trois années consécutives d’exercice</strong>.
-                    Il ne s’agit donc pas de deux obligations à additionner,
-                    mais de deux rythmes prévus par le texte.
+                    —, les tarifs affichés s’échelonnent d’environ{" "}
+                    <strong>119&nbsp;€ à plus de 600&nbsp;€</strong>. L’écart ne
+                    s’explique pas par le prestige, mais par le format et le
+                    niveau de prestation réellement fourni.
                   </p>
                 </div>
-
-                <div className="mt-7 rounded-2xl border-l-4 border-brand-gold bg-white p-6 shadow-sm">
-                  <div className="flex gap-4">
-                    <Scale className="mt-1 h-6 w-6 shrink-0 text-brand-gold-dark" aria-hidden />
-                    <div>
-                      <h3 className="font-black text-brand-navy">
-                        Pour le renouvellement de la carte
-                      </h3>
-                      <p className="mt-2 leading-7 text-slate-700">
-                        CCI France présente le renouvellement comme soumis,
-                        entre autres conditions, à 42 heures de formation
-                        continue en lien direct avec l’activité exercée. La
-                        formation prépare un justificatif réglementaire&nbsp;;
-                        elle ne remplace pas la demande administrative.
-                      </p>
-                    </div>
-                  </div>
+                <div className="mt-7 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+                  <table className="w-full min-w-[820px] border-collapse text-left text-sm">
+                    <thead>
+                      <tr className="bg-brand-navy text-white">
+                        <th scope="col" className="px-5 py-4 font-black">
+                          Fourchette constatée
+                        </th>
+                        <th scope="col" className="px-5 py-4 font-black">
+                          Format typique
+                        </th>
+                        <th scope="col" className="px-5 py-4 font-black">
+                          Ce que comprend le prix
+                        </th>
+                        <th scope="col" className="px-5 py-4 font-black">
+                          Point de vigilance
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-200">
+                      {priceRows.map((row) => (
+                        <tr key={row.range} className="align-top">
+                          <th
+                            scope="row"
+                            className="bg-slate-50 px-5 py-4 font-black text-brand-navy"
+                          >
+                            {row.range}
+                          </th>
+                          <td className="px-5 py-4 leading-6 text-slate-600">
+                            {row.format}
+                          </td>
+                          <td className="px-5 py-4 leading-6 text-slate-600">
+                            {row.content}
+                          </td>
+                          <td className="px-5 py-4 leading-6 text-slate-600">
+                            {row.watch}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
+                <p className="mt-4 text-xs leading-5 text-slate-500">
+                  Fourchettes indicatives établies à partir des tarifs publics du
+                  marché au 31 juillet 2026. Nous ne citons volontairement aucun
+                  concurrent&nbsp;: comparez les prestations, pas les logos.
+                </p>
               </section>
 
-              <section id="personnes-concernees" className="scroll-mt-8">
+              <section id="justifie" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Public concerné
+                  Analyse
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Qui doit suivre la formation continue&nbsp;?
+                  Ce qui justifie réellement l’écart de prix
                 </h2>
-                <p className="mt-5 max-w-3xl text-base leading-8 text-slate-700">
-                  L’obligation ne concerne pas uniquement la personne dont le
-                  nom figure sur la carte. Le décret distingue trois catégories
-                  de professionnels.
-                </p>
-                <div className="mt-7 grid gap-4 md:grid-cols-3">
-                  {audiences.map((audience, index) => (
+                <div className="mt-7 grid gap-4 md:grid-cols-2">
+                  {gapFactors.map((factor, index) => (
                     <div
-                      key={audience.title}
+                      key={factor.title}
                       className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
                     >
                       <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy text-sm font-black text-white">
                         {index + 1}
                       </span>
                       <h3 className="mt-5 text-lg font-black text-brand-navy">
-                        {audience.title}
+                        {factor.title}
                       </h3>
                       <p className="mt-3 text-sm leading-7 text-slate-600">
-                        {audience.text}
+                        {factor.text}
                       </p>
                     </div>
                   ))}
                 </div>
-                <p className="mt-5 flex gap-3 rounded-xl bg-brand-navy/5 p-4 text-sm leading-6 text-slate-700">
-                  <Users className="mt-0.5 h-5 w-5 shrink-0 text-brand-navy" aria-hidden />
-                  En cas de doute sur votre situation ou sur la période à
-                  justifier, rapprochez-vous de la CCI compétente avant de
-                  constituer votre programme.
-                </p>
-              </section>
-
-              <section id="contenu" className="scroll-mt-8">
-                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Programme recevable
-                </p>
-                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels contenus peuvent compter dans les 42 heures&nbsp;?
-                </h2>
-                <p className="mt-5 text-base leading-8 text-slate-700">
-                  Les activités doivent porter sur des domaines prévus par le
-                  décret et avoir un <strong>lien direct avec l’activité exercée</strong>.
-                  Les thèmes admis couvrent notamment&nbsp;:
-                </p>
-                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {eligibleThemes.map((theme) => (
-                    <li
-                      key={theme}
-                      className="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-semibold leading-6 text-slate-700"
-                    >
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold-dark" aria-hidden />
-                      {theme}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-8 overflow-hidden rounded-2xl bg-brand-navy text-white">
-                  <div className="grid gap-0 md:grid-cols-[1fr_1.35fr]">
-                    <div className="border-b border-white/10 p-6 md:border-b-0 md:border-r md:p-8">
-                      <p className="text-4xl font-black text-brand-gold">4 heures</p>
-                      <p className="mt-2 font-bold">de déontologie sur le cycle</p>
-                    </div>
-                    <div className="p-6 md:p-8">
-                      <p className="leading-7 text-white/80">
-                        Depuis la modification entrée en vigueur en 2021, le
-                        cycle comprend au moins <strong className="text-white">2 heures sur
-                        la non-discrimination à l’accès au logement</strong> et au
-                        moins <strong className="text-white">2 heures sur les autres
-                        règles déontologiques</strong>.
-                      </p>
-                      <p className="mt-4 text-sm text-white/70">
-                        Source&nbsp;:{" "}
-                        <a
-                          href={LEGIFRANCE_ETHICS_URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-bold text-brand-gold-pale underline underline-offset-4"
-                        >
-                          décret n°&nbsp;2020-1259 sur Légifrance
-                        </a>
-                        .
+                <div className="mt-7 rounded-2xl border-l-4 border-brand-gold bg-white p-6 shadow-sm">
+                  <div className="flex gap-4">
+                    <Scale className="mt-1 h-6 w-6 shrink-0 text-brand-gold-dark" aria-hidden />
+                    <div>
+                      <h3 className="font-black text-brand-navy">
+                        La règle d’or du comparatif
+                      </h3>
+                      <p className="mt-2 leading-7 text-slate-700">
+                        Ramenez chaque offre au <strong>prix par heure réellement
+                        délivrée</strong>, en vérifiant ce qui est inclus&nbsp;:
+                        TRACFIN, visioconférences, supports, suivi. C’est le seul
+                        ratio qui met tout le monde sur un pied d’égalité.
                       </p>
                     </div>
                   </div>
                 </div>
               </section>
 
-              <section id="organiser" className="scroll-mt-8">
+              <section id="monpass" className="scroll-mt-8">
+                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
+                  Transparence
+                </p>
+                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
+                  Ce que comprend l’offre MonPassFormation à 299&nbsp;€
+                </h2>
+                <div className="mt-8 overflow-hidden rounded-2xl bg-brand-navy text-white">
+                  <div className="grid gap-0 md:grid-cols-[1fr_1.35fr]">
+                    <div className="border-b border-white/10 p-6 md:border-b-0 md:border-r md:p-8">
+                      <p className="text-4xl font-black text-brand-gold">45 h</p>
+                      <p className="mt-2 font-bold">
+                        soit 42 h loi ALUR + 3 h TRACFIN incluses
+                      </p>
+                    </div>
+                    <div className="p-6 md:p-8">
+                      <p className="leading-7 text-white/80">
+                        100&nbsp;% en ligne, certifié Qualiopi, avec{" "}
+                        <strong className="text-white">visioconférences en direct</strong>,{" "}
+                        <strong className="text-white">QCM</strong>,{" "}
+                        <strong className="text-white">supports pratiques</strong>{" "}
+                        et attestation complète à la clé — le tout pour{" "}
+                        <strong className="text-white">299&nbsp;€</strong>, sans
+                        module à ajouter ensuite.
+                      </p>
+                      <p className="mt-4 text-sm text-white/70">
+                        Positionnement&nbsp;: le segment «&nbsp;e-learning
+                        accompagné&nbsp;», au prix le plus contenu possible pour
+                        ce niveau de prestation.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section id="choisir" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
                   Méthode pratique
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Comment organiser son cycle de formation&nbsp;?
+                  Choisir sans se tromper&nbsp;: la méthode en 5 étapes
                 </h2>
                 <ol className="mt-7 space-y-4">
                   {planningSteps.map((step, index) => (
@@ -604,63 +667,20 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-7 flex flex-col items-start justify-between gap-5 rounded-2xl border border-brand-gold/30 bg-brand-gold/10 p-6 sm:flex-row sm:items-center">
                   <div>
                     <h3 className="font-black text-brand-navy">
-                      Besoin de préparer votre échéance&nbsp;?
+                      Un financement est envisageable&nbsp;?
                     </h3>
                     <p className="mt-2 text-sm leading-6 text-slate-700">
-                      Le guide dédié détaille le calendrier et les points à
-                      vérifier pour la formalité.
+                      OPCO, CPF, plan de développement&nbsp;: notre guide détaille
+                      les dispositifs et le rôle central de Qualiopi.
                     </p>
                   </div>
                   <Link
-                    href="/guides/renouvellement-carte-professionnelle-immobilier"
+                    href="/guides/financement-formation-immobilier-opco-cpf"
                     className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand-navy px-4 py-3 text-sm font-black text-white transition hover:bg-brand-navy-mid"
                   >
-                    Guide du renouvellement
+                    Guide du financement
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
-                </div>
-              </section>
-
-              <section id="justificatifs" className="scroll-mt-8">
-                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Traçabilité
-                </p>
-                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels justificatifs conserver&nbsp;?
-                </h2>
-                <div className="mt-6 grid gap-6 md:grid-cols-[1.3fr_1fr]">
-                  <div className="space-y-5 text-base leading-8 text-slate-700">
-                    <p>
-                      L’organisme de formation délivre une attestation à la
-                      personne qui a accompli l’activité. Le décret prévoit que
-                      ce document mentionne les <strong>objectifs</strong>, le{" "}
-                      <strong>contenu</strong>, la <strong>durée</strong> et la{" "}
-                      <strong>date de réalisation</strong>.
-                    </p>
-                    <p>
-                      Vérifiez ces mentions dès réception et archivez
-                      l’attestation avec les autres pièces de votre cycle. Les
-                      titulaires transmettent leurs justificatifs à la CCI,
-                      après chaque formation ou au plus tard au moment de la
-                      demande de renouvellement.
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <FileCheck2 className="h-8 w-8 text-brand-gold-dark" aria-hidden />
-                    <h3 className="mt-5 font-black text-brand-navy">
-                      Contrôle rapide d’une attestation
-                    </h3>
-                    <ul className="mt-4 space-y-3 text-sm text-slate-700">
-                      {["Objectifs", "Contenu", "Durée", "Date de réalisation"].map(
-                        (item) => (
-                          <li key={item} className="flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-brand-navy" aria-hidden />
-                            {item}
-                          </li>
-                        ),
-                      )}
-                    </ul>
-                  </div>
                 </div>
               </section>
 
@@ -669,7 +689,7 @@ export default function FormationLoiAlur42HeuresPage() {
                   Questions fréquentes
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Formation loi ALUR 42 heures&nbsp;: FAQ
+                  Prix de la formation loi ALUR&nbsp;: FAQ
                 </h2>
                 <div className="mt-7 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white">
                   {faqs.map((faq) => (
@@ -697,15 +717,15 @@ export default function FormationLoiAlur42HeuresPage() {
                         Décret n°&nbsp;2016-173 du 18 février 2016 — Légifrance
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Personnes concernées, durée, activités recevables et justificatifs.
+                        Durée obligatoire, domaines recevables et justificatifs de la formation continue.
                       </p>
                     </li>
                     <li>
-                      <SourceLink href={LEGIFRANCE_ETHICS_URL}>
-                        Décret n°&nbsp;2020-1259 du 14 octobre 2020 — Légifrance
+                      <SourceLink href={QUALIOPI_URL}>
+                        Certification qualité Qualiopi — ministère du Travail
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Intégration de la non-discrimination à l’accès au logement.
+                        Référentiel national qualité et condition d’accès aux fonds publics ou mutualisés.
                       </p>
                     </li>
                     <li>
@@ -713,16 +733,38 @@ export default function FormationLoiAlur42HeuresPage() {
                         Renouvellement de carte professionnelle — CCI France
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Durée de validité, période de dépôt et accès à la formalité.
+                        Conditions et calendrier de la formalité adossée à la formation continue.
                       </p>
                     </li>
                   </ul>
                   <p className="mt-6 border-t border-slate-200 pt-5 text-xs leading-5 text-slate-500">
-                    Informations vérifiées le 28 juillet 2026. Ce guide présente
-                    le cadre général et ne remplace ni les textes officiels ni
-                    l’examen de votre dossier par la CCI compétente.
+                    Informations vérifiées le 31 juillet 2026. Les fourchettes de
+                    prix sont indicatives et évoluent&nbsp;: demandez toujours un
+                    devis détaillé avant de comparer.
                   </p>
                 </div>
+              </section>
+
+              <section id="guides-lies" className="scroll-mt-8">
+                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
+                  Pour aller plus loin
+                </p>
+                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
+                  Guides liés
+                </h2>
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {relatedGuides.map((guide) => (
+                    <li key={guide.href}>
+                      <Link
+                        href={guide.href}
+                        className="group flex h-full items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-bold text-brand-navy transition hover:border-brand-gold/50 hover:shadow-sm"
+                      >
+                        <span>{guide.label}</span>
+                        <ArrowRight className="h-4 w-4 shrink-0 text-brand-gold-dark transition group-hover:translate-x-0.5" aria-hidden />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </section>
 
               <section className="overflow-hidden rounded-3xl bg-brand-navy p-7 text-white sm:p-10">
@@ -730,12 +772,12 @@ export default function FormationLoiAlur42HeuresPage() {
                   <div className="max-w-2xl">
                     <BookOpen className="h-8 w-8 text-brand-gold" aria-hidden />
                     <h2 className="mt-5 text-2xl font-black sm:text-3xl">
-                      Consulter le parcours de formation immobilière
+                      45 heures de formation pour 299&nbsp;€, tout inclus
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Découvrez le programme, ses modules et ses modalités afin
-                      de vérifier s’ils correspondent à votre activité et à
-                      votre calendrier.
+                      Socle 42 h loi ALUR, TRACFIN 3 h, visioconférences, QCM,
+                      supports pratiques et attestation&nbsp;: un seul prix, pas
+                      d’option cachée.
                     </p>
                   </div>
                   <Link
@@ -759,6 +801,14 @@ export default function FormationLoiAlur42HeuresPage() {
                 <li>
                   <Link href="/" className="transition hover:text-brand-navy">
                     Accueil
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/guides"
+                    className="transition hover:text-brand-navy"
+                  >
+                    Guides
                   </Link>
                 </li>
                 <li>

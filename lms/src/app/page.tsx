@@ -418,6 +418,9 @@ export default function HomePage() {
             <Link href="/planning-visioconference" className="transition hover:text-brand-navy">
               Planning visio
             </Link>
+            <Link href="/guides" className="transition hover:text-brand-navy">
+              Guides
+            </Link>
             <Link href="#faq" className="transition hover:text-brand-navy">
               FAQ
             </Link>
@@ -1122,6 +1125,11 @@ export default function HomePage() {
               <li>
                 <Link href="/planning-visioconference" className="transition hover:text-brand-navy">
                   Planning visioconférence
+                </Link>
+              </li>
+              <li>
+                <Link href="/guides" className="transition hover:text-brand-navy">
+                  Guides immobilier
                 </Link>
               </li>
               <li>Management commercial</li>

@@ -4,11 +4,10 @@ import {
   ArrowLeft,
   ArrowRight,
   BookOpen,
-  CalendarDays,
   CheckCircle2,
   Clock3,
   ExternalLink,
-  FileCheck2,
+  Monitor,
   Scale,
   ShieldCheck,
   Users,
@@ -16,7 +15,7 @@ import {
 } from "lucide-react";
 
 const SITE_URL = "https://monpassformation.com";
-const PAGE_PATH = "/guides/formation-loi-alur-42-heures";
+const PAGE_PATH = "/guides/formation-immobilier-en-ligne-vs-presentiel";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const COVER_URL = `${SITE_URL}/generated/fal/transaction/cover-immobilier.jpg`;
 const LEGIFRANCE_DECREE_URL =
@@ -26,9 +25,9 @@ const LEGIFRANCE_ETHICS_URL =
 const CCI_RENEWAL_URL =
   "https://www.cci.fr/ressources/formalites-en-ligne/fichier-des-professionnels-de-limmobilier/renouvellement-de-carte-professionnelle";
 
-const title = "Formation loi ALUR 42 heures : guide 2026";
+const title = "Formation immobilier en ligne ou présentiel : comparatif 2026";
 const description =
-  "Durée, personnes concernées, contenus obligatoires et justificatifs : comprendre les 42 heures de formation loi ALUR pour les professionnels de l’immobilier.";
+  "Flexibilité, coût, interaction et reconnaissance CCI : comparez honnêtement la formation immobilier en ligne et le présentiel pour choisir le format adapté à votre situation.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -37,12 +36,12 @@ export const metadata: Metadata = {
   },
   description,
   keywords: [
-    "formation loi ALUR 42 heures",
-    "formation ALUR immobilier",
-    "formation continue agent immobilier",
-    "obligation formation loi ALUR",
-    "renouvellement carte professionnelle immobilier",
-    "formation déontologie immobilier",
+    "formation immobilier en ligne ou présentiel",
+    "formation immobilier en ligne",
+    "formation immobilier présentiel",
+    "formation loi ALUR à distance",
+    "e-learning immobilier",
+    "formation agent immobilier à distance",
   ],
   alternates: {
     canonical: PAGE_URL,
@@ -66,14 +65,14 @@ export const metadata: Metadata = {
     siteName: "MonPassFormation",
     locale: "fr_FR",
     type: "article",
-    publishedTime: "2026-07-28",
-    modifiedTime: "2026-07-28",
+    publishedTime: "2026-07-31",
+    modifiedTime: "2026-07-31",
     images: [
       {
         url: COVER_URL,
         width: 1024,
         height: 576,
-        alt: "Guide de la formation loi ALUR de 42 heures",
+        alt: "Comparatif formation immobilier en ligne et en présentiel",
       },
     ],
   },
@@ -85,107 +84,41 @@ export const metadata: Metadata = {
   },
 };
 
-
-type Fact = {
-  icon: LucideIcon;
-  value: string;
-  label: string;
-  detail: string;
-};
-
-const keyFacts: Fact[] = [
-  {
-    icon: Clock3,
-    value: "42 h",
-    label: "sur trois ans",
-    detail: "Au cours de trois années consécutives d’exercice.",
-  },
-  {
-    icon: CalendarDays,
-    value: "14 h",
-    label: "par an",
-    detail: "L’autre rythme prévu par le décret.",
-  },
-  {
-    icon: ShieldCheck,
-    value: "4 h",
-    label: "de déontologie",
-    detail: "Dont 2 h sur la non-discrimination à l’accès au logement.",
-  },
-];
-
-const audiences = [
-  {
-    title: "Titulaires de la carte professionnelle",
-    text: "Sont concernés les titulaires de la carte et, pour une personne morale, son représentant légal et statutaire.",
-  },
-  {
-    title: "Directions d’établissement",
-    text: "L’obligation vise aussi les personnes qui dirigent un établissement, une succursale, une agence ou un bureau.",
-  },
-  {
-    title: "Collaborateurs habilités",
-    text: "Les salariés et indépendants habilités par le titulaire à négocier, s’entremettre ou s’engager pour son compte sont également concernés.",
-  },
-];
-
-const eligibleThemes = [
-  "Droit applicable à l’activité immobilière",
-  "Économie et environnement du marché",
-  "Pratiques commerciales directement liées au métier",
-  "Déontologie des professionnels de l’immobilier",
-  "Construction, habitation et urbanisme",
-  "Transition énergétique",
-];
-
-const planningSteps = [
-  {
-    title: "Recenser les heures déjà effectuées",
-    text: "Rassemblez les attestations et vérifiez leurs dates, leur durée, leur contenu et la période de trois années concernée.",
-  },
-  {
-    title: "Contrôler les quatre heures obligatoires",
-    text: "Le cycle doit comprendre 2 h sur la non-discrimination à l’accès au logement et 2 h sur les autres règles déontologiques.",
-  },
-  {
-    title: "Choisir des thèmes liés à l’activité",
-    text: "Le contenu retenu doit avoir un lien direct avec l’activité professionnelle réellement exercée.",
-  },
-  {
-    title: "Conserver chaque justificatif",
-    text: "L’attestation doit notamment mentionner les objectifs, le contenu, la durée et la date de réalisation de l’activité.",
-  },
-  {
-    title: "Anticiper la formalité CCI",
-    text: "Pour une carte arrivant à échéance, préparez les justificatifs avant l’ouverture de la période de dépôt de la demande.",
-  },
-];
-
 const faqs = [
   {
-    question: "Faut-il suivre exactement 14 heures chaque année ?",
+    question: "La formation en ligne est-elle reconnue par la CCI ?",
     answer:
-      "Le décret fixe la durée à 14 heures par an ou 42 heures au cours de trois années consécutives d’exercice. Le rythme annuel aide à répartir la charge, mais le texte prévoit bien ces deux modalités.",
+      "Le décret n° 2016-173 définit les personnes concernées, la durée, les domaines recevables et les justificatifs, sans réserver la formation continue au présentiel. Ce qui compte pour la CCI : le contenu en lien direct avec l’activité, la durée réellement accomplie et une attestation mentionnant objectifs, contenu, durée et date de réalisation.",
   },
   {
-    question: "Les 42 heures peuvent-elles porter sur n’importe quel sujet ?",
+    question: "Puis-je suivre mes 42 heures entièrement à distance ?",
     answer:
-      "Non. Les activités doivent concerner les domaines admis par le décret et présenter un lien direct avec l’activité professionnelle exercée. Les obligations spécifiques de déontologie et de non-discrimination doivent aussi être respectées.",
+      "Oui, à condition que les activités choisies respectent le cadre du décret : thèmes admis, lien direct avec votre activité et 4 heures de déontologie dont 2 heures de non-discrimination sur le cycle de trois ans. Beaucoup de professionnels réalisent aujourd’hui l’intégralité de leur cycle en ligne.",
   },
   {
-    question: "Combien d’heures de déontologie sont obligatoires ?",
+    question: "Le présentiel est-il plus efficace que l’e-learning ?",
     answer:
-      "Sur trois années consécutives, il faut au moins 2 heures consacrées à la non-discrimination à l’accès au logement et au moins 2 heures portant sur les autres règles déontologiques, soit 4 heures au total.",
+      "Pas nécessairement. Le présentiel favorise les échanges directs et impose un rythme, tandis que l’e-learning bien conçu — visioconférences, QCM, supports pratiques — permet de progresser à son rythme et de réviser autant que nécessaire. L’efficacité dépend surtout de la qualité pédagogique et de votre implication.",
   },
   {
-    question: "Une attestation de formation suffit-elle à renouveler la carte ?",
+    question: "Les QCM en ligne ont-ils une valeur pour le justificatif ?",
     answer:
-      "Elle sert à justifier la formation continue, mais le renouvellement reste une formalité distincte soumise à d’autres conditions et pièces. Il faut consulter la liste actualisée de la CCI compétente.",
+      "Le QCM sert à valider l’assimilation des contenus et à tracer votre progression. Le justificatif opposable reste l’attestation délivrée par l’organisme, qui doit mentionner les objectifs, le contenu, la durée et la date de réalisation de l’activité de formation.",
   },
   {
-    question: "Quand demander le renouvellement de la carte professionnelle ?",
+    question: "Comment vérifier la durée réelle d’une formation en ligne ?",
     answer:
-      "CCI France indique que la demande doit être réalisée dans les deux mois précédant la date d’expiration de la carte. La préparation des formations et des pièces doit donc commencer en amont.",
+      "Exigez un programme détaillé indiquant la durée de chaque module et contrôlez que l’attestation finale mentionne une durée cohérente avec ce qui a été réellement suivi. Une plateforme sérieuse horodate votre progression et ne délivre l’attestation qu’après validation complète du parcours.",
+  },
+  {
+    question: "Les visioconférences sont-elles du présentiel ou de la distance ?",
+    answer:
+      "Il s’agit de formation à distance synchrone : vous échangez en direct avec un formateur, sans vous déplacer. Ce format combine l’interaction du présentiel et la flexibilité de l’e-learning, et il est de plus en plus utilisé pour la formation continue immobilière.",
+  },
+  {
+    question: "Quel format choisir si je prépare un renouvellement de carte urgent ?",
+    answer:
+      "Le format en ligne est généralement le plus rapide à démarrer : inscription immédiate, accès permanent et attestation délivrée dès la fin du parcours. Vérifiez néanmoins que vos heures couvrent bien la période exigée — la carte professionnelle est valable trois ans — et les 4 heures de déontologie avant de déposer votre demande auprès de la CCI.",
   },
 ];
 
@@ -198,8 +131,8 @@ const structuredData = {
       headline: title,
       description,
       image: COVER_URL,
-      datePublished: "2026-07-28",
-      dateModified: "2026-07-28",
+      datePublished: "2026-07-31",
+      dateModified: "2026-07-31",
       inLanguage: "fr-FR",
       isAccessibleForFree: true,
       mainEntityOfPage: {
@@ -227,7 +160,7 @@ const structuredData = {
         },
         {
           "@type": "Thing",
-          name: "Loi ALUR",
+          name: "Formation à distance et présentiel",
         },
       ],
     },
@@ -250,7 +183,7 @@ const structuredData = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Formation loi ALUR 42 heures",
+          name: "Formation immobilier en ligne ou présentiel",
           item: PAGE_URL,
         },
       ],
@@ -269,6 +202,149 @@ const structuredData = {
     },
   ],
 };
+
+type Fact = {
+  icon: LucideIcon;
+  value: string;
+  label: string;
+  detail: string;
+};
+
+const keyFacts: Fact[] = [
+  {
+    icon: Monitor,
+    value: "100 %",
+    label: "à distance possible",
+    detail: "Le cycle complet peut être suivi en ligne, sans déplacement.",
+  },
+  {
+    icon: Clock3,
+    value: "42 h",
+    label: "sur trois ans",
+    detail: "L’obligation de durée est identique quel que soit le format choisi.",
+  },
+  {
+    icon: ShieldCheck,
+    value: "Même",
+    label: "validité CCI",
+    detail: "Les justificatifs exigés sont les mêmes en ligne et en présentiel.",
+  },
+];
+
+const comparisonRows = [
+  {
+    criterion: "Flexibilité des horaires",
+    online:
+      "Totale : vous suivez les modules quand vous voulez, y compris le soir et le week-end.",
+    classroom:
+      "Limitée : les sessions sont fixées à dates et horaires imposés.",
+  },
+  {
+    criterion: "Coût global",
+    online:
+      "Généralement plus faible : pas de salle ni de frais de déplacement ou d’hébergement.",
+    classroom:
+      "Souvent plus élevé : location de salle, formateur sur place, trajets et temps d’absence.",
+  },
+  {
+    criterion: "Interaction et échanges",
+    online:
+      "Visioconférences, messagerie et entraide entre apprenants ; échanges différés possibles.",
+    classroom:
+      "Échanges spontanés en salle, mise en réseau directe avec les autres participants.",
+  },
+  {
+    criterion: "Rythme de progression",
+    online:
+      "Auto-rythmé : idéal pour les profils autonomes, exige une bonne organisation.",
+    classroom:
+      "Rythme imposé par le groupe : cadre rassurant mais peu adaptable.",
+  },
+  {
+    criterion: "Supports et mises à jour",
+    online:
+      "Supports numériques actualisés en continu, accessibles à tout moment sur la plateforme.",
+    classroom:
+      "Supports remis en session ; mises à jour plus difficiles après la formation.",
+  },
+  {
+    criterion: "Organisation pratique",
+    online:
+      "Aucune contrainte géographique : compatible avec une activité d’agence soutenue.",
+    classroom:
+      "Déplacements et demi-journées ou journées bloquées à prévoir.",
+  },
+  {
+    criterion: "Reconnaissance CCI",
+    online:
+      "Mêmes exigences : contenu lié à l’activité, durée réelle, attestation complète.",
+    classroom:
+      "Mêmes exigences : le présentiel n’apporte aucune validité supplémentaire.",
+  },
+];
+
+const profiles = [
+  {
+    title: "Le format en ligne est fait pour vous si…",
+    items: [
+      "Votre agenda d’agent ou de négociateur change chaque semaine",
+      "Vous êtes autonome et aimez progresser à votre rythme",
+      "Vous voulez limiter le coût et les déplacements",
+      "Vous devez boucler vos heures avant une échéance proche",
+    ],
+  },
+  {
+    title: "Le présentiel est fait pour vous si…",
+    items: [
+      "Vous apprenez mieux en groupe, avec un formateur en face de vous",
+      "Vous avez besoin d’un cadre imposé pour ne pas procrastiner",
+      "Vous cherchez à développer votre réseau local de professionnels",
+      "Vous pouvez bloquer des journées entières sans impacter l’agence",
+    ],
+  },
+];
+
+const planningSteps = [
+  {
+    title: "Vérifiez d’abord votre besoin réel",
+    text: "Comptez les heures déjà réalisées sur le cycle de trois ans, y compris les 2 h de non-discrimination et les 2 h de déontologie obligatoires.",
+  },
+  {
+    title: "Comparez le contenu, pas seulement le prix",
+    text: "Le programme doit couvrir les domaines prévus par le décret et avoir un lien direct avec l’activité que vous exercez réellement.",
+  },
+  {
+    title: "Exigez la preuve de la durée",
+    text: "Programme détaillé, suivi de progression horodaté et attestation mentionnant objectifs, contenu, durée et date de réalisation.",
+  },
+  {
+    title: "Testez votre autodiscipline",
+    text: "Si vous savez que vous abandonnez les formations sans rendez-vous, préférez un parcours en ligne avec visioconférences planifiées ou une session en présentiel.",
+  },
+  {
+    title: "Anticipez la formalité CCI",
+    text: "La demande de renouvellement se présente dans les deux mois précédant l’expiration de la carte : choisissez un format compatible avec ce calendrier.",
+  },
+];
+
+const relatedGuides = [
+  {
+    href: "/guides/formation-loi-alur-42-heures",
+    label: "Formation loi ALUR 42 heures : le cadre complet",
+  },
+  {
+    href: "/guides/formation-loi-alur-prix-comparatif",
+    label: "Formation loi ALUR : comparatif des prix",
+  },
+  {
+    href: "/guides/financement-formation-immobilier-opco-cpf",
+    label: "Financer sa formation immobilier (OPCO, CPF)",
+  },
+  {
+    href: "/guides/renouvellement-carte-professionnelle-immobilier",
+    label: "Renouvellement de la carte professionnelle",
+  },
+];
 
 function SourceLink({
   href,
@@ -290,7 +366,7 @@ function SourceLink({
   );
 }
 
-export default function FormationLoiAlur42HeuresPage() {
+export default function FormationImmobilierEnLigneVsPresentielPage() {
   return (
     <>
       <script
@@ -345,29 +421,29 @@ export default function FormationLoiAlur42HeuresPage() {
                   </li>
                   <li aria-hidden>/</li>
                   <li aria-current="page" className="font-semibold text-white">
-                    Formation loi ALUR 42 heures
+                    En ligne ou présentiel
                   </li>
                 </ol>
               </nav>
 
               <div className="mt-9 max-w-4xl">
                 <p className="inline-flex rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-brand-gold-pale">
-                  Guide réglementaire 2026
+                  Comparatif 2026
                 </p>
                 <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                  Formation loi ALUR 42 heures&nbsp;: les obligations à connaître
+                  Formation immobilier en ligne ou présentiel&nbsp;: le comparatif honnête
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">
-                  À qui s’adresse l’obligation, comment répartir les heures et
-                  quels justificatifs conserver&nbsp;? Voici le cadre pratique,
-                  fondé sur les textes officiels.
+                  Flexibilité, coût, interaction, reconnaissance par la CCI&nbsp;:
+                  les deux formats se valent juridiquement, mais ne conviennent
+                  pas aux mêmes profils. Voici comment trancher sans idée reçue.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Link
-                    href="#comprendre"
+                    href="#comparatif"
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-gold px-5 py-3.5 text-sm font-black text-brand-navy transition hover:bg-brand-gold-hover"
                   >
-                    Comprendre les 42 heures
+                    Voir le tableau comparatif
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                   <a
@@ -418,13 +494,14 @@ export default function FormationLoiAlur42HeuresPage() {
               <nav aria-label="Sommaire" className="mt-4">
                 <ul className="space-y-1 text-sm">
                   {[
-                    ["#comprendre", "Comprendre les 42 h"],
-                    ["#personnes-concernees", "Personnes concernées"],
-                    ["#contenu", "Contenu obligatoire"],
-                    ["#organiser", "Organiser son cycle"],
-                    ["#justificatifs", "Justificatifs"],
+                    ["#comprendre", "Deux formats, une obligation"],
+                    ["#comparatif", "Tableau comparatif"],
+                    ["#pour-qui", "Pour qui chaque format"],
+                    ["#reconnaissance", "Reconnaissance CCI"],
+                    ["#choisir", "Bien choisir en 5 étapes"],
                     ["#faq", "Questions fréquentes"],
                     ["#sources", "Sources officielles"],
+                    ["#guides-lies", "Guides liés"],
                   ].map(([href, label]) => (
                     <li key={href}>
                       <a
@@ -442,27 +519,29 @@ export default function FormationLoiAlur42HeuresPage() {
             <article className="min-w-0 space-y-14">
               <section id="comprendre" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Le principe
+                  Le cadre
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy sm:text-4xl">
-                  14 heures par an ou 42 heures sur trois ans
+                  Deux formats, une seule et même obligation
                 </h2>
                 <div className="mt-6 space-y-5 text-base leading-8 text-slate-700">
                   <p>
-                    La formation continue des professionnels de l’immobilier est
-                    une obligation professionnelle. Elle vise la mise à jour et
-                    le perfectionnement des connaissances et compétences utiles
-                    à l’exercice du métier.
-                  </p>
-                  <p>
-                    L’article 2 du{" "}
+                    La formation continue des professionnels de l’immobilier
+                    repose sur le{" "}
                     <SourceLink href={LEGIFRANCE_DECREE_URL}>
                       décret n°&nbsp;2016-173 du 18 février 2016
                     </SourceLink>{" "}
-                    fixe une durée de <strong>14 heures par an</strong> ou de{" "}
-                    <strong>42 heures au cours de trois années consécutives d’exercice</strong>.
-                    Il ne s’agit donc pas de deux obligations à additionner,
-                    mais de deux rythmes prévus par le texte.
+                    : <strong>14 heures par an</strong> ou{" "}
+                    <strong>42 heures au cours de trois années consécutives d’exercice</strong>,
+                    dont 2 heures de non-discrimination à l’accès au logement et
+                    2 heures de déontologie par cycle.
+                  </p>
+                  <p>
+                    Le texte encadre le <strong>contenu</strong>, la{" "}
+                    <strong>durée</strong> et les <strong>justificatifs</strong> —
+                    il n’impose pas de modalité physique de présence. En ligne ou
+                    en salle, l’obligation est donc identique et la valeur du
+                    justificatif est la même devant la CCI.
                   </p>
                 </div>
 
@@ -471,119 +550,160 @@ export default function FormationLoiAlur42HeuresPage() {
                     <Scale className="mt-1 h-6 w-6 shrink-0 text-brand-gold-dark" aria-hidden />
                     <div>
                       <h3 className="font-black text-brand-navy">
-                        Pour le renouvellement de la carte
+                        Ce qui fait la validité, ce n’est pas le format
                       </h3>
                       <p className="mt-2 leading-7 text-slate-700">
-                        CCI France présente le renouvellement comme soumis,
-                        entre autres conditions, à 42 heures de formation
-                        continue en lien direct avec l’activité exercée. La
-                        formation prépare un justificatif réglementaire&nbsp;;
-                        elle ne remplace pas la demande administrative.
+                        Une formation «&nbsp;compte&nbsp;» si son contenu est en
+                        lien direct avec votre activité, si sa durée est réelle
+                        et si l’attestation mentionne les objectifs, le contenu,
+                        la durée et la date de réalisation. Le reste est une
+                        question de préférence pédagogique.
                       </p>
                     </div>
                   </div>
                 </div>
               </section>
 
-              <section id="personnes-concernees" className="scroll-mt-8">
+              <section id="comparatif" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Public concerné
+                  Comparatif détaillé
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Qui doit suivre la formation continue&nbsp;?
+                  En ligne vs présentiel&nbsp;: 7 critères passés au crible
                 </h2>
                 <p className="mt-5 max-w-3xl text-base leading-8 text-slate-700">
-                  L’obligation ne concerne pas uniquement la personne dont le
-                  nom figure sur la carte. Le décret distingue trois catégories
-                  de professionnels.
+                  Chaque critère est présenté sans parti pris&nbsp;: le «&nbsp;meilleur&nbsp;»
+                  format dépend de votre contrainte principale — temps, budget,
+                  besoin d’échange ou échéance.
                 </p>
-                <div className="mt-7 grid gap-4 md:grid-cols-3">
-                  {audiences.map((audience, index) => (
+                <div className="mt-7 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+                  <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+                    <thead>
+                      <tr className="bg-brand-navy text-white">
+                        <th scope="col" className="px-5 py-4 font-black">
+                          Critère
+                        </th>
+                        <th scope="col" className="px-5 py-4 font-black">
+                          Formation en ligne
+                        </th>
+                        <th scope="col" className="px-5 py-4 font-black">
+                          Formation en présentiel
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-200">
+                      {comparisonRows.map((row) => (
+                        <tr key={row.criterion} className="align-top">
+                          <th
+                            scope="row"
+                            className="bg-slate-50 px-5 py-4 font-black text-brand-navy"
+                          >
+                            {row.criterion}
+                          </th>
+                          <td className="px-5 py-4 leading-6 text-slate-600">
+                            {row.online}
+                          </td>
+                          <td className="px-5 py-4 leading-6 text-slate-600">
+                            {row.classroom}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section id="pour-qui" className="scroll-mt-8">
+                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
+                  Profils
+                </p>
+                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
+                  Pour qui chaque format&nbsp;?
+                </h2>
+                <div className="mt-7 grid gap-4 md:grid-cols-2">
+                  {profiles.map((profile) => (
                     <div
-                      key={audience.title}
+                      key={profile.title}
                       className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
                     >
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy text-sm font-black text-white">
-                        {index + 1}
-                      </span>
-                      <h3 className="mt-5 text-lg font-black text-brand-navy">
-                        {audience.title}
+                      <h3 className="text-lg font-black text-brand-navy">
+                        {profile.title}
                       </h3>
-                      <p className="mt-3 text-sm leading-7 text-slate-600">
-                        {audience.text}
-                      </p>
+                      <ul className="mt-4 space-y-3">
+                        {profile.items.map((item) => (
+                          <li
+                            key={item}
+                            className="flex gap-3 text-sm leading-6 text-slate-600"
+                          >
+                            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold-dark" aria-hidden />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   ))}
                 </div>
                 <p className="mt-5 flex gap-3 rounded-xl bg-brand-navy/5 p-4 text-sm leading-6 text-slate-700">
                   <Users className="mt-0.5 h-5 w-5 shrink-0 text-brand-navy" aria-hidden />
-                  En cas de doute sur votre situation ou sur la période à
-                  justifier, rapprochez-vous de la CCI compétente avant de
-                  constituer votre programme.
+                  Hésitant&nbsp;? Les parcours hybrides — e-learning auto-rythmé
+                  complété par des visioconférences en direct — offrent un bon
+                  compromis entre souplesse et interaction humaine.
                 </p>
               </section>
 
-              <section id="contenu" className="scroll-mt-8">
+              <section id="reconnaissance" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Programme recevable
+                  Validité administrative
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels contenus peuvent compter dans les 42 heures&nbsp;?
+                  Reconnaissance CCI&nbsp;: les mêmes règles pour tous
                 </h2>
-                <p className="mt-5 text-base leading-8 text-slate-700">
-                  Les activités doivent porter sur des domaines prévus par le
-                  décret et avoir un <strong>lien direct avec l’activité exercée</strong>.
-                  Les thèmes admis couvrent notamment&nbsp;:
-                </p>
-                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {eligibleThemes.map((theme) => (
-                    <li
-                      key={theme}
-                      className="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-semibold leading-6 text-slate-700"
-                    >
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold-dark" aria-hidden />
-                      {theme}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-8 overflow-hidden rounded-2xl bg-brand-navy text-white">
-                  <div className="grid gap-0 md:grid-cols-[1fr_1.35fr]">
-                    <div className="border-b border-white/10 p-6 md:border-b-0 md:border-r md:p-8">
-                      <p className="text-4xl font-black text-brand-gold">4 heures</p>
-                      <p className="mt-2 font-bold">de déontologie sur le cycle</p>
-                    </div>
-                    <div className="p-6 md:p-8">
-                      <p className="leading-7 text-white/80">
-                        Depuis la modification entrée en vigueur en 2021, le
-                        cycle comprend au moins <strong className="text-white">2 heures sur
-                        la non-discrimination à l’accès au logement</strong> et au
-                        moins <strong className="text-white">2 heures sur les autres
-                        règles déontologiques</strong>.
-                      </p>
-                      <p className="mt-4 text-sm text-white/70">
-                        Source&nbsp;:{" "}
-                        <a
-                          href={LEGIFRANCE_ETHICS_URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-bold text-brand-gold-pale underline underline-offset-4"
-                        >
-                          décret n°&nbsp;2020-1259 sur Légifrance
-                        </a>
-                        .
-                      </p>
-                    </div>
+                <div className="mt-6 grid gap-6 md:grid-cols-[1.3fr_1fr]">
+                  <div className="space-y-5 text-base leading-8 text-slate-700">
+                    <p>
+                      Au moment du renouvellement de la carte professionnelle —
+                      valable <strong>trois ans</strong> —, la CCI examine vos
+                      justificatifs de formation continue. Elle applique le même
+                      référentiel à tous les formats&nbsp;: durée accomplie,
+                      contenu en lien direct avec l’activité, mentions
+                      réglementaires sur l’attestation.
+                    </p>
+                    <p>
+                      La demande de renouvellement se présente dans les{" "}
+                      <strong>deux mois précédant l’expiration</strong> de la
+                      carte. Une formation en ligne terminée tôt dans le cycle
+                      vaut exactement autant qu’une session en salle de dernière
+                      minute.
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <ShieldCheck className="h-8 w-8 text-brand-gold-dark" aria-hidden />
+                    <h3 className="mt-5 font-black text-brand-navy">
+                      Votre checklist validité
+                    </h3>
+                    <ul className="mt-4 space-y-3 text-sm text-slate-700">
+                      {[
+                        "42 h sur trois ans (ou 14 h/an)",
+                        "4 h de déontologie dont 2 h de non-discrimination",
+                        "Attestation : objectifs, contenu, durée, date",
+                        "Dépôt CCI dans les 2 mois avant expiration",
+                      ].map((item) => (
+                        <li key={item} className="flex items-start gap-2">
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-navy" aria-hidden />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </section>
 
-              <section id="organiser" className="scroll-mt-8">
+              <section id="choisir" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
                   Méthode pratique
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Comment organiser son cycle de formation&nbsp;?
+                  Bien choisir son format en 5 étapes
                 </h2>
                 <ol className="mt-7 space-y-4">
                   {planningSteps.map((step, index) => (
@@ -604,63 +724,20 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-7 flex flex-col items-start justify-between gap-5 rounded-2xl border border-brand-gold/30 bg-brand-gold/10 p-6 sm:flex-row sm:items-center">
                   <div>
                     <h3 className="font-black text-brand-navy">
-                      Besoin de préparer votre échéance&nbsp;?
+                      Le budget est votre critère décisif&nbsp;?
                     </h3>
                     <p className="mt-2 text-sm leading-6 text-slate-700">
-                      Le guide dédié détaille le calendrier et les points à
-                      vérifier pour la formalité.
+                      Notre comparatif des prix du marché détaille les
+                      fourchettes par format et ce qui les justifie.
                     </p>
                   </div>
                   <Link
-                    href="/guides/renouvellement-carte-professionnelle-immobilier"
+                    href="/guides/formation-loi-alur-prix-comparatif"
                     className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand-navy px-4 py-3 text-sm font-black text-white transition hover:bg-brand-navy-mid"
                   >
-                    Guide du renouvellement
+                    Comparatif des prix
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
-                </div>
-              </section>
-
-              <section id="justificatifs" className="scroll-mt-8">
-                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Traçabilité
-                </p>
-                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels justificatifs conserver&nbsp;?
-                </h2>
-                <div className="mt-6 grid gap-6 md:grid-cols-[1.3fr_1fr]">
-                  <div className="space-y-5 text-base leading-8 text-slate-700">
-                    <p>
-                      L’organisme de formation délivre une attestation à la
-                      personne qui a accompli l’activité. Le décret prévoit que
-                      ce document mentionne les <strong>objectifs</strong>, le{" "}
-                      <strong>contenu</strong>, la <strong>durée</strong> et la{" "}
-                      <strong>date de réalisation</strong>.
-                    </p>
-                    <p>
-                      Vérifiez ces mentions dès réception et archivez
-                      l’attestation avec les autres pièces de votre cycle. Les
-                      titulaires transmettent leurs justificatifs à la CCI,
-                      après chaque formation ou au plus tard au moment de la
-                      demande de renouvellement.
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <FileCheck2 className="h-8 w-8 text-brand-gold-dark" aria-hidden />
-                    <h3 className="mt-5 font-black text-brand-navy">
-                      Contrôle rapide d’une attestation
-                    </h3>
-                    <ul className="mt-4 space-y-3 text-sm text-slate-700">
-                      {["Objectifs", "Contenu", "Durée", "Date de réalisation"].map(
-                        (item) => (
-                          <li key={item} className="flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-brand-navy" aria-hidden />
-                            {item}
-                          </li>
-                        ),
-                      )}
-                    </ul>
-                  </div>
                 </div>
               </section>
 
@@ -669,7 +746,7 @@ export default function FormationLoiAlur42HeuresPage() {
                   Questions fréquentes
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Formation loi ALUR 42 heures&nbsp;: FAQ
+                  En ligne ou présentiel&nbsp;: FAQ
                 </h2>
                 <div className="mt-7 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white">
                   {faqs.map((faq) => (
@@ -718,11 +795,33 @@ export default function FormationLoiAlur42HeuresPage() {
                     </li>
                   </ul>
                   <p className="mt-6 border-t border-slate-200 pt-5 text-xs leading-5 text-slate-500">
-                    Informations vérifiées le 28 juillet 2026. Ce guide présente
+                    Informations vérifiées le 31 juillet 2026. Ce guide présente
                     le cadre général et ne remplace ni les textes officiels ni
                     l’examen de votre dossier par la CCI compétente.
                   </p>
                 </div>
+              </section>
+
+              <section id="guides-lies" className="scroll-mt-8">
+                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
+                  Pour aller plus loin
+                </p>
+                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
+                  Guides liés
+                </h2>
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {relatedGuides.map((guide) => (
+                    <li key={guide.href}>
+                      <Link
+                        href={guide.href}
+                        className="group flex h-full items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-bold text-brand-navy transition hover:border-brand-gold/50 hover:shadow-sm"
+                      >
+                        <span>{guide.label}</span>
+                        <ArrowRight className="h-4 w-4 shrink-0 text-brand-gold-dark transition group-hover:translate-x-0.5" aria-hidden />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </section>
 
               <section className="overflow-hidden rounded-3xl bg-brand-navy p-7 text-white sm:p-10">
@@ -730,12 +829,12 @@ export default function FormationLoiAlur42HeuresPage() {
                   <div className="max-w-2xl">
                     <BookOpen className="h-8 w-8 text-brand-gold" aria-hidden />
                     <h2 className="mt-5 text-2xl font-black sm:text-3xl">
-                      Consulter le parcours de formation immobilière
+                      Une formation 100&nbsp;% en ligne, avec de vrais échanges
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Découvrez le programme, ses modules et ses modalités afin
-                      de vérifier s’ils correspondent à votre activité et à
-                      votre calendrier.
+                      Le parcours MonPassFormation combine modules auto-rythmés,
+                      visioconférences en direct, QCM et supports pratiques — 42 h
+                      loi ALUR + 3 h TRACFIN, avec attestation à la clé.
                     </p>
                   </div>
                   <Link
@@ -759,6 +858,14 @@ export default function FormationLoiAlur42HeuresPage() {
                 <li>
                   <Link href="/" className="transition hover:text-brand-navy">
                     Accueil
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/guides"
+                    className="transition hover:text-brand-navy"
+                  >
+                    Guides
                   </Link>
                 </li>
                 <li>

@@ -86,68 +86,6 @@ export const metadata: Metadata = {
   },
 };
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Article",
-      "@id": `${PAGE_URL}#article`,
-      headline: title,
-      description,
-      image: COVER_URL,
-      datePublished: "2026-07-28",
-      dateModified: "2026-07-28",
-      inLanguage: "fr-FR",
-      isAccessibleForFree: true,
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": PAGE_URL,
-      },
-      author: {
-        "@type": "Organization",
-        name: "MonPassFormation",
-        url: SITE_URL,
-      },
-      publisher: {
-        "@type": "Organization",
-        name: "MonPassFormation",
-        url: SITE_URL,
-        logo: {
-          "@type": "ImageObject",
-          url: `${SITE_URL}/images/pass-formation-logo.svg`,
-        },
-      },
-      about: [
-        {
-          "@type": "Thing",
-          name: "Carte professionnelle immobilière",
-        },
-        {
-          "@type": "Thing",
-          name: "Formation continue loi ALUR",
-        },
-      ],
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": `${PAGE_URL}#breadcrumb`,
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Accueil",
-          item: SITE_URL,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Renouvellement de la carte professionnelle immobilière",
-          item: PAGE_URL,
-        },
-      ],
-    },
-  ],
-};
 
 type KeyPoint = {
   icon: LucideIcon;
@@ -278,6 +216,87 @@ const faqs = [
   },
 ];
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": `${PAGE_URL}#article`,
+      headline: title,
+      description,
+      image: COVER_URL,
+      datePublished: "2026-07-28",
+      dateModified: "2026-07-28",
+      inLanguage: "fr-FR",
+      isAccessibleForFree: true,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": PAGE_URL,
+      },
+      author: {
+        "@type": "Organization",
+        name: "MonPassFormation",
+        url: SITE_URL,
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "MonPassFormation",
+        url: SITE_URL,
+        logo: {
+          "@type": "ImageObject",
+          url: `${SITE_URL}/images/pass-formation-logo.svg`,
+        },
+      },
+      about: [
+        {
+          "@type": "Thing",
+          name: "Carte professionnelle immobilière",
+        },
+        {
+          "@type": "Thing",
+          name: "Formation continue loi ALUR",
+        },
+      ],
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${PAGE_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Accueil",
+          item: SITE_URL,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Guides",
+          item: `${SITE_URL}/guides`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Renouvellement de la carte professionnelle immobilière",
+          item: PAGE_URL,
+        },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${PAGE_URL}#faq`,
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
+  ],
+};
+
 function SourceLink({
   href,
   children,
@@ -343,6 +362,12 @@ export default function RenouvellementCarteProfessionnelleImmobilierPage() {
                   <li>
                     <Link href="/" className="transition hover:text-white">
                       Accueil
+                    </Link>
+                  </li>
+                  <li aria-hidden>/</li>
+                  <li>
+                    <Link href="/guides" className="transition hover:text-white">
+                      Guides
                     </Link>
                   </li>
                   <li aria-hidden>/</li>

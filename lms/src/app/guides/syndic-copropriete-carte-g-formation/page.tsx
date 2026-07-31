@@ -4,6 +4,7 @@ import {
   ArrowLeft,
   ArrowRight,
   BookOpen,
+  Building2,
   CalendarDays,
   CheckCircle2,
   Clock3,
@@ -11,24 +12,25 @@ import {
   FileCheck2,
   Scale,
   ShieldCheck,
-  Users,
   type LucideIcon,
 } from "lucide-react";
 
 const SITE_URL = "https://monpassformation.com";
-const PAGE_PATH = "/guides/formation-loi-alur-42-heures";
+const PAGE_PATH = "/guides/syndic-copropriete-carte-g-formation";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const COVER_URL = `${SITE_URL}/generated/fal/transaction/cover-immobilier.jpg`;
+const LEGIFRANCE_LAW_URL =
+  "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006068387/";
 const LEGIFRANCE_DECREE_URL =
+  "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006061974/";
+const LEGIFRANCE_FORMATION_URL =
   "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000032080616/";
-const LEGIFRANCE_ETHICS_URL =
-  "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000042427805";
 const CCI_RENEWAL_URL =
   "https://www.cci.fr/ressources/formalites-en-ligne/fichier-des-professionnels-de-limmobilier/renouvellement-de-carte-professionnelle";
 
-const title = "Formation loi ALUR 42 heures : guide 2026";
+const title = "Formation syndic de copropriété et carte G : le guide complet (2026)";
 const description =
-  "Durée, personnes concernées, contenus obligatoires et justificatifs : comprendre les 42 heures de formation loi ALUR pour les professionnels de l’immobilier.";
+  "Mention syndic de copropriété, carte gestion immobilière, garantie financière et formation continue 42 h : les obligations spécifiques des syndics professionnels de copropriété.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -37,12 +39,12 @@ export const metadata: Metadata = {
   },
   description,
   keywords: [
-    "formation loi ALUR 42 heures",
-    "formation ALUR immobilier",
-    "formation continue agent immobilier",
-    "obligation formation loi ALUR",
-    "renouvellement carte professionnelle immobilier",
-    "formation déontologie immobilier",
+    "formation syndic copropriété",
+    "carte G syndic copropriété",
+    "mention syndic carte professionnelle",
+    "carte gestion immobilière syndic",
+    "formation continue syndic 42 heures",
+    "obligations syndic professionnel loi Hoguet",
   ],
   alternates: {
     canonical: PAGE_URL,
@@ -66,14 +68,14 @@ export const metadata: Metadata = {
     siteName: "MonPassFormation",
     locale: "fr_FR",
     type: "article",
-    publishedTime: "2026-07-28",
-    modifiedTime: "2026-07-28",
+    publishedTime: "2026-07-31",
+    modifiedTime: "2026-07-31",
     images: [
       {
         url: COVER_URL,
         width: 1024,
         height: 576,
-        alt: "Guide de la formation loi ALUR de 42 heures",
+        alt: "Formation et carte professionnelle du syndic de copropriété",
       },
     ],
   },
@@ -85,107 +87,41 @@ export const metadata: Metadata = {
   },
 };
 
-
-type Fact = {
-  icon: LucideIcon;
-  value: string;
-  label: string;
-  detail: string;
-};
-
-const keyFacts: Fact[] = [
-  {
-    icon: Clock3,
-    value: "42 h",
-    label: "sur trois ans",
-    detail: "Au cours de trois années consécutives d’exercice.",
-  },
-  {
-    icon: CalendarDays,
-    value: "14 h",
-    label: "par an",
-    detail: "L’autre rythme prévu par le décret.",
-  },
-  {
-    icon: ShieldCheck,
-    value: "4 h",
-    label: "de déontologie",
-    detail: "Dont 2 h sur la non-discrimination à l’accès au logement.",
-  },
-];
-
-const audiences = [
-  {
-    title: "Titulaires de la carte professionnelle",
-    text: "Sont concernés les titulaires de la carte et, pour une personne morale, son représentant légal et statutaire.",
-  },
-  {
-    title: "Directions d’établissement",
-    text: "L’obligation vise aussi les personnes qui dirigent un établissement, une succursale, une agence ou un bureau.",
-  },
-  {
-    title: "Collaborateurs habilités",
-    text: "Les salariés et indépendants habilités par le titulaire à négocier, s’entremettre ou s’engager pour son compte sont également concernés.",
-  },
-];
-
-const eligibleThemes = [
-  "Droit applicable à l’activité immobilière",
-  "Économie et environnement du marché",
-  "Pratiques commerciales directement liées au métier",
-  "Déontologie des professionnels de l’immobilier",
-  "Construction, habitation et urbanisme",
-  "Transition énergétique",
-];
-
-const planningSteps = [
-  {
-    title: "Recenser les heures déjà effectuées",
-    text: "Rassemblez les attestations et vérifiez leurs dates, leur durée, leur contenu et la période de trois années concernée.",
-  },
-  {
-    title: "Contrôler les quatre heures obligatoires",
-    text: "Le cycle doit comprendre 2 h sur la non-discrimination à l’accès au logement et 2 h sur les autres règles déontologiques.",
-  },
-  {
-    title: "Choisir des thèmes liés à l’activité",
-    text: "Le contenu retenu doit avoir un lien direct avec l’activité professionnelle réellement exercée.",
-  },
-  {
-    title: "Conserver chaque justificatif",
-    text: "L’attestation doit notamment mentionner les objectifs, le contenu, la durée et la date de réalisation de l’activité.",
-  },
-  {
-    title: "Anticiper la formalité CCI",
-    text: "Pour une carte arrivant à échéance, préparez les justificatifs avant l’ouverture de la période de dépôt de la demande.",
-  },
-];
-
 const faqs = [
   {
-    question: "Faut-il suivre exactement 14 heures chaque année ?",
+    question: "Faut-il une carte spécifique pour exercer comme syndic ?",
     answer:
-      "Le décret fixe la durée à 14 heures par an ou 42 heures au cours de trois années consécutives d’exercice. Le rythme annuel aide à répartir la charge, mais le texte prévoit bien ces deux modalités.",
+      "Oui. Le syndic professionnel doit être titulaire de la carte professionnelle portant la mention « Syndic de copropriété », délivrée par la CCI. Avant le décret n° 2015-702, cette activité relevait de la mention « Gestion immobilière » — la fameuse « carte G » ; elle dispose depuis d'une mention propre.",
   },
   {
-    question: "Les 42 heures peuvent-elles porter sur n’importe quel sujet ?",
+    question: "La carte « Gestion immobilière » suffit-elle pour gérer des copropriétés ?",
     answer:
-      "Non. Les activités doivent concerner les domaines admis par le décret et présenter un lien direct avec l’activité professionnelle exercée. Les obligations spécifiques de déontologie et de non-discrimination doivent aussi être respectées.",
+      "Non. La mention « Gestion immobilière » couvre l'administration de biens (gestion locative, notamment). La fonction de syndic de copropriété exige la mention dédiée ; les deux mentions sont fréquemment demandées et délivrées ensemble, car les conditions d'aptitude sont voisines.",
   },
   {
-    question: "Combien d’heures de déontologie sont obligatoires ?",
+    question: "Quelle garantie financière pour un syndic de copropriété ?",
     answer:
-      "Sur trois années consécutives, il faut au moins 2 heures consacrées à la non-discrimination à l’accès au logement et au moins 2 heures portant sur les autres règles déontologiques, soit 4 heures au total.",
+      "Le syndic détient par nature les fonds des syndicats de copropriétaires : la garantie financière est donc incontournable, d'un minimum légal de 110 000 € (30 000 € pendant les deux premières années d'exercice), ajustée au montant maximal des fonds détenus. Elle est souscrite auprès d'une banque ou d'un organisme garant comme GALIAN ou CEGI.",
   },
   {
-    question: "Une attestation de formation suffit-elle à renouveler la carte ?",
+    question: "La formation continue de 42 heures s'applique-t-elle aux syndics ?",
     answer:
-      "Elle sert à justifier la formation continue, mais le renouvellement reste une formalité distincte soumise à d’autres conditions et pièces. Il faut consulter la liste actualisée de la CCI compétente.",
+      "Oui, dans les mêmes conditions que pour les autres cartes : 14 heures par an ou 42 heures par période de trois ans, avec au minimum deux heures de déontologie et deux heures de non-discrimination par cycle. Le contenu doit être en lien direct avec l'activité déclarée — la gestion de copropriétés pour un syndic.",
   },
   {
-    question: "Quand demander le renouvellement de la carte professionnelle ?",
+    question: "Quelle différence entre une formation « transaction » et une formation « syndic » ?",
     answer:
-      "CCI France indique que la demande doit être réalisée dans les deux mois précédant la date d’expiration de la carte. La préparation des formations et des pièces doit donc commencer en amont.",
+      "Le volume et le régime sont identiques ; ce qui change, c'est le contenu. Pour un syndic, la formation doit porter sur la copropriété : loi de 1965 et décret de 1967, assemblées générales, budgets et appels de fonds, contrat de syndic, travaux, comptabilité séparée. Une formation purement axée transaction ne satisferait pas l'exigence de lien direct avec l'activité.",
+  },
+  {
+    question: "Un syndic bénévole est-il concerné par la carte et la formation ?",
+    answer:
+      "Non. La loi Hoguet encadre les professionnels. Le syndic bénévole (copropriétaire non rémunéré) relève de la loi n° 65-557 du 10 juillet 1965 et de son décret de 1967, sans carte professionnelle ni obligation de formation continue Hoguet.",
+  },
+  {
+    question: "Que risque un professionnel qui fait du syndic sans la mention ?",
+    answer:
+      "L'exercice d'une activité réglementée sans la carte mention correspondante expose aux peines de l'article 14 de la loi (six mois d'emprisonnement et 7 500 € d'amende), à la remise en cause de la rémunération, ainsi qu'à des sanctions administratives pouvant aller jusqu'au retrait de la carte.",
   },
 ];
 
@@ -198,8 +134,8 @@ const structuredData = {
       headline: title,
       description,
       image: COVER_URL,
-      datePublished: "2026-07-28",
-      dateModified: "2026-07-28",
+      datePublished: "2026-07-31",
+      dateModified: "2026-07-31",
       inLanguage: "fr-FR",
       isAccessibleForFree: true,
       mainEntityOfPage: {
@@ -223,11 +159,11 @@ const structuredData = {
       about: [
         {
           "@type": "Thing",
-          name: "Formation continue des professionnels de l’immobilier",
+          name: "Syndic de copropriété",
         },
         {
           "@type": "Thing",
-          name: "Loi ALUR",
+          name: "Formation continue immobilier",
         },
       ],
     },
@@ -250,7 +186,7 @@ const structuredData = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Formation loi ALUR 42 heures",
+          name: "Syndic de copropriété : carte G et formation",
           item: PAGE_URL,
         },
       ],
@@ -269,6 +205,104 @@ const structuredData = {
     },
   ],
 };
+
+type Fact = {
+  icon: LucideIcon;
+  value: string;
+  label: string;
+  detail: string;
+};
+
+const keyFacts: Fact[] = [
+  {
+    icon: Building2,
+    value: "Mention « syndic »",
+    label: "depuis 2015",
+    detail: "Une mention propre, distincte de la gestion immobilière, sur la carte.",
+  },
+  {
+    icon: ShieldCheck,
+    value: "Garantie",
+    label: "financière incontournable",
+    detail: "Le syndic détient les fonds des copropriétés : garantie obligatoire.",
+  },
+  {
+    icon: Clock3,
+    value: "42 h",
+    label: "de formation sur 3 ans",
+    detail: "En lien direct avec l'activité de syndic, déontologie et non-discrimination incluses.",
+  },
+];
+
+const mentions = [
+  {
+    title: "Carte « Transactions »",
+    text: "Entremise pour l'achat, la vente, la location d'immeubles ou de fonds de commerce. Ne couvre ni la gestion locative en propre ni le syndic.",
+  },
+  {
+    title: "Carte « Gestion immobilière » (carte G)",
+    text: "Administration de biens pour le compte d'autrui : gestion locative, encaissement des loyers, suivi des baux. Ne couvre plus le syndic depuis 2015.",
+  },
+  {
+    title: "Carte « Syndic de copropriété »",
+    text: "Fonction de syndic professionnel : convocation des assemblées, exécution des décisions, tenue des comptes du syndicat. Fréquemment délivrée avec la gestion immobilière.",
+  },
+];
+
+const obligations = [
+  "Garantie financière obligatoire, ajustée au montant maximal des fonds détenus (minimum légal de 110 000 €)",
+  "Assurance responsabilité civile professionnelle couvrant chaque établissement",
+  "Comptabilité séparée pour chaque syndicat de copropriétaires, avec compte(s) dédié(s)",
+  "Contrat de syndic conforme au contrat type fixé par le décret n° 2015-342 du 26 mars 2015",
+  "Honoraires décomposés et affichés selon les modalités réglementaires",
+  "Double corpus juridique : loi Hoguet d'un côté, loi de 1965 et décret de 1967 de l'autre",
+];
+
+const renouvellementSteps = [
+  {
+    title: "Vérifier la mention et la date d'expiration",
+    text: "La carte vaut trois ans. Contrôlez que la mention « Syndic de copropriété » figure bien sur la carte et notez sa date d'expiration.",
+  },
+  {
+    title: "Boucler les 42 heures de formation du cycle",
+    text: "Attestations en lien direct avec l'activité de syndic, incluant les heures de déontologie et de non-discrimination : c'est le point de contrôle n° 1 du renouvellement.",
+  },
+  {
+    title: "Renouveler garantie et assurance en amont",
+    text: "La garantie financière doit couvrir le montant maximal des fonds détenus ; l'attestation de garantie et l'attestation RCP doivent être en cours de validité au dépôt.",
+  },
+  {
+    title: "Déposer la demande deux mois avant l'expiration",
+    text: "La demande de renouvellement se présente dans les deux mois précédant l'expiration, auprès de la CCI compétente, avec les justificatifs complets.",
+  },
+  {
+    title: "Tenir l'équipe au même niveau d'exigence",
+    text: "Gestionnaires et collaborateurs habilités sont également visés par la formation continue : planifiez les cycles de toute l'équipe.",
+  },
+];
+
+const relatedGuides = [
+  {
+    href: "/guides/renouvellement-carte-professionnelle-immobilier",
+    title: "Renouvellement de la carte professionnelle",
+    text: "Calendrier triennal, pièces et points de blocage fréquents.",
+  },
+  {
+    href: "/guides/formation-loi-alur-42-heures",
+    title: "Formation loi ALUR 42 heures",
+    text: "Volume, modalités et contenus de l'obligation de formation.",
+  },
+  {
+    href: "/guides/qui-doit-suivre-formation-42-heures",
+    title: "Qui doit suivre la formation 42 heures ?",
+    text: "Titulaires, directions et collaborateurs habilités : le périmètre exact.",
+  },
+  {
+    href: "/formation-tracfin-immobilier",
+    title: "Formation TRACFIN immobilier",
+    text: "Le volet lutte anti-blanchiment, obligatoire pour les professionnels.",
+  },
+];
 
 function SourceLink({
   href,
@@ -290,7 +324,7 @@ function SourceLink({
   );
 }
 
-export default function FormationLoiAlur42HeuresPage() {
+export default function SyndicCoproprieteCarteGFormationPage() {
   return (
     <>
       <script
@@ -345,7 +379,7 @@ export default function FormationLoiAlur42HeuresPage() {
                   </li>
                   <li aria-hidden>/</li>
                   <li aria-current="page" className="font-semibold text-white">
-                    Formation loi ALUR 42 heures
+                    Syndic de copropriété : carte G et formation
                   </li>
                 </ol>
               </nav>
@@ -355,28 +389,29 @@ export default function FormationLoiAlur42HeuresPage() {
                   Guide réglementaire 2026
                 </p>
                 <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                  Formation loi ALUR 42 heures&nbsp;: les obligations à connaître
+                  Formation syndic de copropriété et carte G&nbsp;: les obligations spécifiques
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">
-                  À qui s’adresse l’obligation, comment répartir les heures et
-                  quels justificatifs conserver&nbsp;? Voici le cadre pratique,
-                  fondé sur les textes officiels.
+                  Mention « Syndic de copropriété », garantie financière
+                  renforcée, contrat type et formation continue&nbsp;: le syndic
+                  professionnel relève d’un régime plus strict que la simple
+                  gestion locative. Le point complet.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Link
-                    href="#comprendre"
+                    href="#carte-g"
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-gold px-5 py-3.5 text-sm font-black text-brand-navy transition hover:bg-brand-gold-hover"
                   >
-                    Comprendre les 42 heures
+                    Comprendre carte G et mention syndic
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                   <a
-                    href={LEGIFRANCE_DECREE_URL}
+                    href={CCI_RENEWAL_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3.5 text-sm font-bold text-white transition hover:bg-white/10"
                   >
-                    Lire le décret sur Légifrance
+                    La formalité sur cci.fr
                     <ExternalLink className="h-4 w-4" aria-hidden />
                   </a>
                 </div>
@@ -418,11 +453,11 @@ export default function FormationLoiAlur42HeuresPage() {
               <nav aria-label="Sommaire" className="mt-4">
                 <ul className="space-y-1 text-sm">
                   {[
-                    ["#comprendre", "Comprendre les 42 h"],
-                    ["#personnes-concernees", "Personnes concernées"],
-                    ["#contenu", "Contenu obligatoire"],
-                    ["#organiser", "Organiser son cycle"],
-                    ["#justificatifs", "Justificatifs"],
+                    ["#carte-g", "Carte G et mention syndic"],
+                    ["#differences", "Transactions, gestion, syndic"],
+                    ["#obligations", "Obligations du syndic"],
+                    ["#formation", "Formation continue"],
+                    ["#renouvellement", "Renouvellement"],
                     ["#faq", "Questions fréquentes"],
                     ["#sources", "Sources officielles"],
                   ].map(([href, label]) => (
@@ -440,29 +475,33 @@ export default function FormationLoiAlur42HeuresPage() {
             </aside>
 
             <article className="min-w-0 space-y-14">
-              <section id="comprendre" className="scroll-mt-8">
+              <section id="carte-g" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Le principe
+                  Carte G, carte syndic
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy sm:text-4xl">
-                  14 heures par an ou 42 heures sur trois ans
+                  Quelle carte pour exercer la fonction de syndic&nbsp;?
                 </h2>
                 <div className="mt-6 space-y-5 text-base leading-8 text-slate-700">
                   <p>
-                    La formation continue des professionnels de l’immobilier est
-                    une obligation professionnelle. Elle vise la mise à jour et
-                    le perfectionnement des connaissances et compétences utiles
-                    à l’exercice du métier.
+                    La « carte G » désigne dans le langage courant la carte
+                    professionnelle mention <strong>« Gestion immobilière »</strong>.
+                    Jusqu’en 2015, elle couvrait aussi l’activité de syndic de
+                    copropriété. Le décret n°&nbsp;2015-702 a créé une mention
+                    propre, <strong>« Syndic de copropriété »</strong>, que le
+                    professionnel doit désormais détenir pour exercer la fonction
+                    de syndic.
                   </p>
                   <p>
-                    L’article 2 du{" "}
-                    <SourceLink href={LEGIFRANCE_DECREE_URL}>
-                      décret n°&nbsp;2016-173 du 18 février 2016
-                    </SourceLink>{" "}
-                    fixe une durée de <strong>14 heures par an</strong> ou de{" "}
-                    <strong>42 heures au cours de trois années consécutives d’exercice</strong>.
-                    Il ne s’agit donc pas de deux obligations à additionner,
-                    mais de deux rythmes prévus par le texte.
+                    Comme toute carte professionnelle, elle est délivrée par la
+                    CCI, valable <strong>trois ans</strong> et renouvelable, sous
+                    réserve des conditions d’aptitude professionnelle, de
+                    moralité, de garantie financière et d’assurance prévues par
+                    la{" "}
+                    <SourceLink href={LEGIFRANCE_LAW_URL}>
+                      loi n°&nbsp;70-9 du 2 janvier 1970
+                    </SourceLink>
+                    .
                   </p>
                 </div>
 
@@ -471,78 +510,81 @@ export default function FormationLoiAlur42HeuresPage() {
                     <Scale className="mt-1 h-6 w-6 shrink-0 text-brand-gold-dark" aria-hidden />
                     <div>
                       <h3 className="font-black text-brand-navy">
-                        Pour le renouvellement de la carte
+                        Deux mentions souvent liées
                       </h3>
                       <p className="mt-2 leading-7 text-slate-700">
-                        CCI France présente le renouvellement comme soumis,
-                        entre autres conditions, à 42 heures de formation
-                        continue en lien direct avec l’activité exercée. La
-                        formation prépare un justificatif réglementaire&nbsp;;
-                        elle ne remplace pas la demande administrative.
+                        Les cabinets de syndic exercent presque toujours aussi
+                        la gestion locative&nbsp;: les mentions « Syndic de
+                        copropriété » et « Gestion immobilière » sont donc
+                        fréquemment demandées et délivrées ensemble, chacune
+                        devant être justifiée au titre de l’aptitude
+                        professionnelle.
                       </p>
                     </div>
                   </div>
                 </div>
               </section>
 
-              <section id="personnes-concernees" className="scroll-mt-8">
+              <section id="differences" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Public concerné
+                  Périmètre des mentions
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Qui doit suivre la formation continue&nbsp;?
+                  Transactions, gestion, syndic&nbsp;: trois cartes, trois métiers
                 </h2>
                 <p className="mt-5 max-w-3xl text-base leading-8 text-slate-700">
-                  L’obligation ne concerne pas uniquement la personne dont le
-                  nom figure sur la carte. Le décret distingue trois catégories
-                  de professionnels.
+                  Chaque mention couvre un périmètre d’opérations distinct.
+                  Exercer hors de la mention détenue revient à exercer sans
+                  carte pour cette activité.
                 </p>
                 <div className="mt-7 grid gap-4 md:grid-cols-3">
-                  {audiences.map((audience, index) => (
+                  {mentions.map((mention, index) => (
                     <div
-                      key={audience.title}
+                      key={mention.title}
                       className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
                     >
                       <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy text-sm font-black text-white">
                         {index + 1}
                       </span>
                       <h3 className="mt-5 text-lg font-black text-brand-navy">
-                        {audience.title}
+                        {mention.title}
                       </h3>
                       <p className="mt-3 text-sm leading-7 text-slate-600">
-                        {audience.text}
+                        {mention.text}
                       </p>
                     </div>
                   ))}
                 </div>
                 <p className="mt-5 flex gap-3 rounded-xl bg-brand-navy/5 p-4 text-sm leading-6 text-slate-700">
-                  <Users className="mt-0.5 h-5 w-5 shrink-0 text-brand-navy" aria-hidden />
-                  En cas de doute sur votre situation ou sur la période à
-                  justifier, rapprochez-vous de la CCI compétente avant de
-                  constituer votre programme.
+                  <FileCheck2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-navy" aria-hidden />
+                  À ces trois mentions s’ajoutent « Marchand de listes » et
+                  « Prestations touristiques résiduelles ». Les documents de
+                  contrôle diffèrent selon la mention&nbsp;: registre-répertoire
+                  pour la transaction, livres de caisse et comptes bancaires
+                  pour la gestion et le syndic.
                 </p>
               </section>
 
-              <section id="contenu" className="scroll-mt-8">
+              <section id="obligations" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Programme recevable
+                  Un régime plus strict
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels contenus peuvent compter dans les 42 heures&nbsp;?
+                  Les obligations spécifiques du syndic professionnel
                 </h2>
                 <p className="mt-5 text-base leading-8 text-slate-700">
-                  Les activités doivent porter sur des domaines prévus par le
-                  décret et avoir un <strong>lien direct avec l’activité exercée</strong>.
-                  Les thèmes admis couvrent notamment&nbsp;:
+                  Le syndic gère l’argent des autres — les fonds du syndicat de
+                  copropriétaires. La loi Hoguet et son décret lui imposent en
+                  conséquence un encadrement renforcé&nbsp;:
                 </p>
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {eligibleThemes.map((theme) => (
+                  {obligations.map((obligation) => (
                     <li
-                      key={theme}
+                      key={obligation}
                       className="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-semibold leading-6 text-slate-700"
                     >
                       <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold-dark" aria-hidden />
-                      {theme}
+                      {obligation}
                     </li>
                   ))}
                 </ul>
@@ -550,43 +592,97 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-8 overflow-hidden rounded-2xl bg-brand-navy text-white">
                   <div className="grid gap-0 md:grid-cols-[1fr_1.35fr]">
                     <div className="border-b border-white/10 p-6 md:border-b-0 md:border-r md:p-8">
-                      <p className="text-4xl font-black text-brand-gold">4 heures</p>
-                      <p className="mt-2 font-bold">de déontologie sur le cycle</p>
+                      <p className="text-4xl font-black text-brand-gold">110 000 €</p>
+                      <p className="mt-2 font-bold">de garantie financière minimale</p>
                     </div>
                     <div className="p-6 md:p-8">
                       <p className="leading-7 text-white/80">
-                        Depuis la modification entrée en vigueur en 2021, le
-                        cycle comprend au moins <strong className="text-white">2 heures sur
-                        la non-discrimination à l’accès au logement</strong> et au
-                        moins <strong className="text-white">2 heures sur les autres
-                        règles déontologiques</strong>.
-                      </p>
-                      <p className="mt-4 text-sm text-white/70">
-                        Source&nbsp;:{" "}
+                        Le{" "}
                         <a
-                          href={LEGIFRANCE_ETHICS_URL}
+                          href={LEGIFRANCE_DECREE_URL}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="font-bold text-brand-gold-pale underline underline-offset-4"
                         >
-                          décret n°&nbsp;2020-1259 sur Légifrance
-                        </a>
-                        .
+                          décret du 20 juillet 1972
+                        </a>{" "}
+                        fixe le plancher légal à <strong className="text-white">110&nbsp;000&nbsp;€</strong>,
+                        ramené à <strong className="text-white">30&nbsp;000&nbsp;€</strong>{" "}
+                        pendant les deux premières années d’exercice — le montant
+                        réel devant couvrir le maximum des fonds détenus. Pour un
+                        syndic, la garantie suit donc la croissance du portefeuille
+                        de copropriétés.
+                      </p>
+                      <p className="mt-4 text-sm text-white/70">
+                        Contrairement à l’agent de transaction, le syndic ne peut
+                        pas opter pour la « non-détention de fonds »&nbsp;: la
+                        détention est consubstantielle à sa mission.
                       </p>
                     </div>
                   </div>
                 </div>
               </section>
 
-              <section id="organiser" className="scroll-mt-8">
+              <section id="formation" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Méthode pratique
+                  Formation continue
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Comment organiser son cycle de formation&nbsp;?
+                  Formation du syndic&nbsp;: même obligation, contenu dédié
+                </h2>
+                <div className="mt-6 grid gap-6 md:grid-cols-[1.3fr_1fr]">
+                  <div className="space-y-5 text-base leading-8 text-slate-700">
+                    <p>
+                      Le{" "}
+                      <SourceLink href={LEGIFRANCE_FORMATION_URL}>
+                        décret n°&nbsp;2016-173 du 18 février 2016
+                      </SourceLink>{" "}
+                      soumet tous les titulaires — y compris les syndics — à{" "}
+                      <strong>42 heures de formation par période de trois ans</strong>{" "}
+                      (ou 14 heures par an), dont deux heures de déontologie et
+                      deux heures de non-discrimination par cycle.
+                    </p>
+                    <p>
+                      L’exigence clé pour un syndic est le{" "}
+                      <strong>lien direct avec l’activité déclarée</strong>&nbsp;:
+                      le programme doit porter sur la copropriété — assemblées
+                      générales, budgets et appels de fonds, contrat de syndic,
+                      travaux, comptabilité — et non sur la seule transaction.
+                      Cette obligation est vérifiée au renouvellement de la
+                      carte.
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <BookOpen className="h-8 w-8 text-brand-gold-dark" aria-hidden />
+                    <h3 className="mt-5 font-black text-brand-navy">
+                      Contenus pertinents pour un syndic
+                    </h3>
+                    <ul className="mt-4 space-y-3 text-sm text-slate-700">
+                      {[
+                        "Loi de 1965 et décret de 1967",
+                        "Assemblées générales et votes",
+                        "Budgets, appels de fonds, comptes",
+                        "Déontologie et non-discrimination (2 h + 2 h)",
+                      ].map((item) => (
+                        <li key={item} className="flex items-center gap-2">
+                          <CheckCircle2 className="h-4 w-4 text-brand-navy" aria-hidden />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </section>
+
+              <section id="renouvellement" className="scroll-mt-8">
+                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
+                  Calendrier
+                </p>
+                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
+                  Renouveler la carte d’un syndic en cinq réflexes
                 </h2>
                 <ol className="mt-7 space-y-4">
-                  {planningSteps.map((step, index) => (
+                  {renouvellementSteps.map((step, index) => (
                     <li
                       key={step.title}
                       className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 sm:grid-cols-[44px_1fr] sm:p-6"
@@ -604,11 +700,11 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-7 flex flex-col items-start justify-between gap-5 rounded-2xl border border-brand-gold/30 bg-brand-gold/10 p-6 sm:flex-row sm:items-center">
                   <div>
                     <h3 className="font-black text-brand-navy">
-                      Besoin de préparer votre échéance&nbsp;?
+                      La formalité triennale en détail
                     </h3>
                     <p className="mt-2 text-sm leading-6 text-slate-700">
-                      Le guide dédié détaille le calendrier et les points à
-                      vérifier pour la formalité.
+                      Notre guide du renouvellement liste les pièces et les
+                      erreurs qui font rejeter les dossiers.
                     </p>
                   </div>
                   <Link
@@ -621,55 +717,12 @@ export default function FormationLoiAlur42HeuresPage() {
                 </div>
               </section>
 
-              <section id="justificatifs" className="scroll-mt-8">
-                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Traçabilité
-                </p>
-                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels justificatifs conserver&nbsp;?
-                </h2>
-                <div className="mt-6 grid gap-6 md:grid-cols-[1.3fr_1fr]">
-                  <div className="space-y-5 text-base leading-8 text-slate-700">
-                    <p>
-                      L’organisme de formation délivre une attestation à la
-                      personne qui a accompli l’activité. Le décret prévoit que
-                      ce document mentionne les <strong>objectifs</strong>, le{" "}
-                      <strong>contenu</strong>, la <strong>durée</strong> et la{" "}
-                      <strong>date de réalisation</strong>.
-                    </p>
-                    <p>
-                      Vérifiez ces mentions dès réception et archivez
-                      l’attestation avec les autres pièces de votre cycle. Les
-                      titulaires transmettent leurs justificatifs à la CCI,
-                      après chaque formation ou au plus tard au moment de la
-                      demande de renouvellement.
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <FileCheck2 className="h-8 w-8 text-brand-gold-dark" aria-hidden />
-                    <h3 className="mt-5 font-black text-brand-navy">
-                      Contrôle rapide d’une attestation
-                    </h3>
-                    <ul className="mt-4 space-y-3 text-sm text-slate-700">
-                      {["Objectifs", "Contenu", "Durée", "Date de réalisation"].map(
-                        (item) => (
-                          <li key={item} className="flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-brand-navy" aria-hidden />
-                            {item}
-                          </li>
-                        ),
-                      )}
-                    </ul>
-                  </div>
-                </div>
-              </section>
-
               <section id="faq" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
                   Questions fréquentes
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Formation loi ALUR 42 heures&nbsp;: FAQ
+                  Syndic de copropriété&nbsp;: FAQ
                 </h2>
                 <div className="mt-7 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white">
                   {faqs.map((faq) => (
@@ -679,6 +732,30 @@ export default function FormationLoiAlur42HeuresPage() {
                       </summary>
                       <p className="mt-4 text-sm leading-7 text-slate-600">{faq.answer}</p>
                     </details>
+                  ))}
+                </div>
+              </section>
+
+              <section id="guides-lies" className="scroll-mt-8">
+                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
+                  Pour aller plus loin
+                </p>
+                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
+                  Guides liés
+                </h2>
+                <div className="mt-7 grid gap-4 sm:grid-cols-2">
+                  {relatedGuides.map((guide) => (
+                    <Link
+                      key={guide.href}
+                      href={guide.href}
+                      className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-gold/50 hover:shadow-md"
+                    >
+                      <h3 className="flex items-center justify-between gap-3 font-black text-brand-navy">
+                        {guide.title}
+                        <ArrowRight className="h-4 w-4 shrink-0 text-brand-gold-dark transition group-hover:translate-x-1" aria-hidden />
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">{guide.text}</p>
+                    </Link>
                   ))}
                 </div>
               </section>
@@ -693,19 +770,27 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
                   <ul className="space-y-5 text-sm leading-7 text-slate-700">
                     <li>
-                      <SourceLink href={LEGIFRANCE_DECREE_URL}>
-                        Décret n°&nbsp;2016-173 du 18 février 2016 — Légifrance
+                      <SourceLink href={LEGIFRANCE_LAW_URL}>
+                        Loi n°&nbsp;70-9 du 2 janvier 1970 — Légifrance
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Personnes concernées, durée, activités recevables et justificatifs.
+                        Activités réglementées, carte professionnelle, garantie financière et formation continue (art. 3-1).
                       </p>
                     </li>
                     <li>
-                      <SourceLink href={LEGIFRANCE_ETHICS_URL}>
-                        Décret n°&nbsp;2020-1259 du 14 octobre 2020 — Légifrance
+                      <SourceLink href={LEGIFRANCE_DECREE_URL}>
+                        Décret n°&nbsp;72-678 du 20 juillet 1972 — Légifrance
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Intégration de la non-discrimination à l’accès au logement.
+                        Mentions de la carte, montant de la garantie financière, validité et renouvellement.
+                      </p>
+                    </li>
+                    <li>
+                      <SourceLink href={LEGIFRANCE_FORMATION_URL}>
+                        Décret n°&nbsp;2016-173 du 18 février 2016 — Légifrance
+                      </SourceLink>
+                      <p className="mt-1 text-slate-500">
+                        Formation professionnelle continue : 14 h par an ou 42 h sur trois ans, contenus obligatoires.
                       </p>
                     </li>
                     <li>
@@ -713,12 +798,12 @@ export default function FormationLoiAlur42HeuresPage() {
                         Renouvellement de carte professionnelle — CCI France
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Durée de validité, période de dépôt et accès à la formalité.
+                        Durée de validité de trois ans, dépôt deux mois avant l’expiration, pièces attendues.
                       </p>
                     </li>
                   </ul>
                   <p className="mt-6 border-t border-slate-200 pt-5 text-xs leading-5 text-slate-500">
-                    Informations vérifiées le 28 juillet 2026. Ce guide présente
+                    Informations vérifiées le 31 juillet 2026. Ce guide présente
                     le cadre général et ne remplace ni les textes officiels ni
                     l’examen de votre dossier par la CCI compétente.
                   </p>
@@ -728,14 +813,15 @@ export default function FormationLoiAlur42HeuresPage() {
               <section className="overflow-hidden rounded-3xl bg-brand-navy p-7 text-white sm:p-10">
                 <div className="flex flex-col items-start justify-between gap-7 lg:flex-row lg:items-center">
                   <div className="max-w-2xl">
-                    <BookOpen className="h-8 w-8 text-brand-gold" aria-hidden />
+                    <CalendarDays className="h-8 w-8 text-brand-gold" aria-hidden />
                     <h2 className="mt-5 text-2xl font-black sm:text-3xl">
-                      Consulter le parcours de formation immobilière
+                      Un cycle de formation conforme pour votre cabinet
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Découvrez le programme, ses modules et ses modalités afin
-                      de vérifier s’ils correspondent à votre activité et à
-                      votre calendrier.
+                      Le parcours MonPassFormation (42 h loi ALUR + 3 h TRACFIN,
+                      certifié Qualiopi, avec visioconférences) permet aux
+                      professionnels de la gestion et du syndic de valider leur
+                      cycle complet dans les règles.
                     </p>
                   </div>
                   <Link

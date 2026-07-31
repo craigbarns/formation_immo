@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
+  AlertTriangle,
   ArrowLeft,
   ArrowRight,
   BookOpen,
-  CalendarDays,
   CheckCircle2,
   Clock3,
   ExternalLink,
@@ -16,19 +16,18 @@ import {
 } from "lucide-react";
 
 const SITE_URL = "https://monpassformation.com";
-const PAGE_PATH = "/guides/formation-loi-alur-42-heures";
+const PAGE_PATH = "/guides/tracfin-obligations-agent-immobilier";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const COVER_URL = `${SITE_URL}/generated/fal/transaction/cover-immobilier.jpg`;
-const LEGIFRANCE_DECREE_URL =
-  "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000032080616/";
-const LEGIFRANCE_ETHICS_URL =
-  "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000042427805";
-const CCI_RENEWAL_URL =
-  "https://www.cci.fr/ressources/formalites-en-ligne/fichier-des-professionnels-de-limmobilier/renouvellement-de-carte-professionnelle";
+const CMF_CODE_URL =
+  "https://www.legifrance.gouv.fr/codes/id/LEGITEXT000006072026/";
+const TRACFIN_MISSIONS_URL =
+  "https://www.economie.gouv.fr/tracfin/comprendre-tracfin/les-missions-lorganisation-et-les-pouvoirs-de-tracfin";
+const TRACFIN_HOME_URL = "https://www.economie.gouv.fr/tracfin";
 
-const title = "Formation loi ALUR 42 heures : guide 2026";
+const title = "TRACFIN : les obligations de l’agent immobilier (guide 2026)";
 const description =
-  "Durée, personnes concernées, contenus obligatoires et justificatifs : comprendre les 42 heures de formation loi ALUR pour les professionnels de l’immobilier.";
+  "Vigilance KYC, déclaration de soupçon à TRACFIN, conservation des documents, registre et formation du personnel : le guide des obligations LCB-FT des agents immobiliers.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -37,17 +36,17 @@ export const metadata: Metadata = {
   },
   description,
   keywords: [
-    "formation loi ALUR 42 heures",
-    "formation ALUR immobilier",
-    "formation continue agent immobilier",
-    "obligation formation loi ALUR",
-    "renouvellement carte professionnelle immobilier",
-    "formation déontologie immobilier",
+    "tracfin agent immobilier obligations",
+    "déclaration de soupçon TRACFIN",
+    "LCB-FT immobilier",
+    "lutte contre le blanchiment agent immobilier",
+    "vigilance KYC immobilier",
+    "formation TRACFIN immobilier",
   ],
   alternates: {
     canonical: PAGE_URL,
   },
-  category: "Formation professionnelle immobilière",
+  category: "Conformité des professionnels de l’immobilier",
   robots: {
     index: true,
     follow: true,
@@ -66,14 +65,14 @@ export const metadata: Metadata = {
     siteName: "MonPassFormation",
     locale: "fr_FR",
     type: "article",
-    publishedTime: "2026-07-28",
-    modifiedTime: "2026-07-28",
+    publishedTime: "2026-07-31",
+    modifiedTime: "2026-07-31",
     images: [
       {
         url: COVER_URL,
         width: 1024,
         height: 576,
-        alt: "Guide de la formation loi ALUR de 42 heures",
+        alt: "Obligations TRACFIN et LCB-FT des agents immobiliers",
       },
     ],
   },
@@ -85,107 +84,36 @@ export const metadata: Metadata = {
   },
 };
 
-
-type Fact = {
-  icon: LucideIcon;
-  value: string;
-  label: string;
-  detail: string;
-};
-
-const keyFacts: Fact[] = [
-  {
-    icon: Clock3,
-    value: "42 h",
-    label: "sur trois ans",
-    detail: "Au cours de trois années consécutives d’exercice.",
-  },
-  {
-    icon: CalendarDays,
-    value: "14 h",
-    label: "par an",
-    detail: "L’autre rythme prévu par le décret.",
-  },
-  {
-    icon: ShieldCheck,
-    value: "4 h",
-    label: "de déontologie",
-    detail: "Dont 2 h sur la non-discrimination à l’accès au logement.",
-  },
-];
-
-const audiences = [
-  {
-    title: "Titulaires de la carte professionnelle",
-    text: "Sont concernés les titulaires de la carte et, pour une personne morale, son représentant légal et statutaire.",
-  },
-  {
-    title: "Directions d’établissement",
-    text: "L’obligation vise aussi les personnes qui dirigent un établissement, une succursale, une agence ou un bureau.",
-  },
-  {
-    title: "Collaborateurs habilités",
-    text: "Les salariés et indépendants habilités par le titulaire à négocier, s’entremettre ou s’engager pour son compte sont également concernés.",
-  },
-];
-
-const eligibleThemes = [
-  "Droit applicable à l’activité immobilière",
-  "Économie et environnement du marché",
-  "Pratiques commerciales directement liées au métier",
-  "Déontologie des professionnels de l’immobilier",
-  "Construction, habitation et urbanisme",
-  "Transition énergétique",
-];
-
-const planningSteps = [
-  {
-    title: "Recenser les heures déjà effectuées",
-    text: "Rassemblez les attestations et vérifiez leurs dates, leur durée, leur contenu et la période de trois années concernée.",
-  },
-  {
-    title: "Contrôler les quatre heures obligatoires",
-    text: "Le cycle doit comprendre 2 h sur la non-discrimination à l’accès au logement et 2 h sur les autres règles déontologiques.",
-  },
-  {
-    title: "Choisir des thèmes liés à l’activité",
-    text: "Le contenu retenu doit avoir un lien direct avec l’activité professionnelle réellement exercée.",
-  },
-  {
-    title: "Conserver chaque justificatif",
-    text: "L’attestation doit notamment mentionner les objectifs, le contenu, la durée et la date de réalisation de l’activité.",
-  },
-  {
-    title: "Anticiper la formalité CCI",
-    text: "Pour une carte arrivant à échéance, préparez les justificatifs avant l’ouverture de la période de dépôt de la demande.",
-  },
-];
-
 const faqs = [
   {
-    question: "Faut-il suivre exactement 14 heures chaque année ?",
+    question: "Un agent immobilier est-il vraiment assujetti à TRACFIN ?",
     answer:
-      "Le décret fixe la durée à 14 heures par an ou 42 heures au cours de trois années consécutives d’exercice. Le rythme annuel aide à répartir la charge, mais le texte prévoit bien ces deux modalités.",
+      "Oui. L’article L. 561-2 du code monétaire et financier vise expressément les personnes qui se livrent aux activités immobilières mentionnées à l’article 1er de la loi n° 70-9 du 2 janvier 1970. Les agents immobiliers appliquent donc les obligations de vigilance, de déclaration de soupçon et de conservation prévues par le dispositif LCB-FT.",
   },
   {
-    question: "Les 42 heures peuvent-elles porter sur n’importe quel sujet ?",
+    question: "Qu’est-ce qu’une déclaration de soupçon à TRACFIN ?",
     answer:
-      "Non. Les activités doivent concerner les domaines admis par le décret et présenter un lien direct avec l’activité professionnelle exercée. Les obligations spécifiques de déontologie et de non-discrimination doivent aussi être respectées.",
+      "C’est la transmission à TRACFIN, la cellule de renseignement financier de Bercy, de tout fait ou soupçon concernant des sommes ou une opération susceptibles de provenir d’une infraction passible de la peine du blanchiment, ou liées au financement du terrorisme. Elle s’effectue en pratique via la téléprocédure sécurisée de TRACFIN.",
   },
   {
-    question: "Combien d’heures de déontologie sont obligatoires ?",
+    question: "Peut-on informer le client qu’une déclaration a été faite ?",
     answer:
-      "Sur trois années consécutives, il faut au moins 2 heures consacrées à la non-discrimination à l’accès au logement et au moins 2 heures portant sur les autres règles déontologiques, soit 4 heures au total.",
+      "Non. Le professionnel ne doit pas révéler au client ni à des tiers l’existence d’une déclaration de soupçon ni les suites qui lui sont réservées. Cette interdiction de révélation protège l’efficacité des analyses menées par TRACFIN.",
   },
   {
-    question: "Une attestation de formation suffit-elle à renouveler la carte ?",
+    question: "Quels documents conserver et pendant combien de temps ?",
     answer:
-      "Elle sert à justifier la formation continue, mais le renouvellement reste une formalité distincte soumise à d’autres conditions et pièces. Il faut consulter la liste actualisée de la CCI compétente.",
+      "Les documents et informations relatifs à l’identité des clients et aux opérations réalisées doivent être conservés pendant cinq ans à compter de la fin de la relation d’affaires ou de la réalisation de l’opération, afin de pouvoir répondre à toute demande de l’autorité de contrôle ou de TRACFIN.",
   },
   {
-    question: "Quand demander le renouvellement de la carte professionnelle ?",
+    question: "La formation du personnel à la LCB-FT est-elle obligatoire ?",
     answer:
-      "CCI France indique que la demande doit être réalisée dans les deux mois précédant la date d’expiration de la carte. La préparation des formations et des pièces doit donc commencer en amont.",
+      "Oui. Le dispositif interne imposé aux assujettis comprend l’information et la formation des salariés susceptibles d’être exposés aux risques de blanchiment et de financement du terrorisme. La formation doit être adaptée aux fonctions exercées et actualisée.",
+  },
+  {
+    question: "TRACFIN peut-il sanctionner directement un agent immobilier ?",
+    answer:
+      "Non. TRACFIN est une cellule de renseignement financier placée auprès du ministère de l’Économie : elle recueille, analyse et enrichit les déclarations, puis transmet le résultat de ses investigations à l’autorité judiciaire ou aux administrations compétentes. Les sanctions relèvent des autorités de contrôle et des juridictions.",
   },
 ];
 
@@ -198,8 +126,8 @@ const structuredData = {
       headline: title,
       description,
       image: COVER_URL,
-      datePublished: "2026-07-28",
-      dateModified: "2026-07-28",
+      datePublished: "2026-07-31",
+      dateModified: "2026-07-31",
       inLanguage: "fr-FR",
       isAccessibleForFree: true,
       mainEntityOfPage: {
@@ -223,11 +151,15 @@ const structuredData = {
       about: [
         {
           "@type": "Thing",
-          name: "Formation continue des professionnels de l’immobilier",
+          name: "Lutte contre le blanchiment de capitaux et le financement du terrorisme",
         },
         {
           "@type": "Thing",
-          name: "Loi ALUR",
+          name: "TRACFIN",
+        },
+        {
+          "@type": "Thing",
+          name: "Agent immobilier",
         },
       ],
     },
@@ -250,7 +182,7 @@ const structuredData = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Formation loi ALUR 42 heures",
+          name: "Obligations TRACFIN de l’agent immobilier",
           item: PAGE_URL,
         },
       ],
@@ -269,6 +201,105 @@ const structuredData = {
     },
   ],
 };
+
+type Fact = {
+  icon: LucideIcon;
+  value: string;
+  label: string;
+  detail: string;
+};
+
+const keyFacts: Fact[] = [
+  {
+    icon: Scale,
+    value: "L. 561-1",
+    label: "et suivants du CMF",
+    detail: "Le socle des obligations de vigilance, inscrit dans le code monétaire et financier.",
+  },
+  {
+    icon: Clock3,
+    value: "5 ans",
+    label: "de conservation",
+    detail: "Durée de conservation des documents sur la clientèle et les opérations.",
+  },
+  {
+    icon: ShieldCheck,
+    value: "DS",
+    label: "déclaration de soupçon",
+    detail: "Tout soupçon d’opération liée au blanchiment ou au financement du terrorisme est déclaré à TRACFIN.",
+  },
+];
+
+const audiences = [
+  {
+    title: "Titulaires de la carte professionnelle",
+    text: "Les personnes physiques et morales qui se livrent aux opérations d’achat, de vente, d’échange ou de location d’immeubles et de fonds de commerce sont assujetties au dispositif LCB-FT.",
+  },
+  {
+    title: "Salariés et collaborateurs",
+    text: "Le dispositif interne engage l’ensemble du personnel exposé : négociateurs, assistants, gestionnaires. Chacun doit connaître les mesures de vigilance et la marche à suivre en cas de soupçon.",
+  },
+  {
+    title: "Déclarant et correspondant TRACFIN",
+    text: "Une personne doit être désignée pour centraliser les soupçons internes, rédiger les déclarations et servir d’interlocuteur de la cellule de renseignement financier.",
+  },
+];
+
+const vigilanceMeasures = [
+  "Identifier le client et vérifier son identité sur présentation d’un document probant",
+  "Identifier le bénéficiaire effectif de l’opération lorsque le client est une personne morale",
+  "Comprendre l’objet et la nature de la relation d’affaires et recueillir les informations utiles",
+  "Appliquer un examen renforcé lorsque le risque l’exige : montants atypiques, pays à risque, personnes politiquement exposées",
+  "Suivre la relation d’affaires dans la durée et examiner la cohérence des opérations",
+  "Conserver les documents et informations recueillis pendant cinq ans",
+];
+
+const planningSteps = [
+  {
+    title: "Évaluer les risques de votre agence",
+    text: "Cartographiez les risques de blanchiment et de financement du terrorisme propres à votre clientèle, à vos zones d’activité et aux types d’opérations traités. Cette classification fonde toutes les autres mesures.",
+  },
+  {
+    title: "Formaliser des procédures écrites",
+    text: "Rédigez les procédures de vigilance à l’entrée en relation, de contrôle des opérations et de traitement des soupçons, en les adaptant à la taille et à l’organisation de votre structure.",
+  },
+  {
+    title: "Désigner un déclarant et correspondant TRACFIN",
+    text: "Choisissez la personne responsable des déclarations de soupçon et des échanges avec TRACFIN, et prévoyez un suppléant pour assurer la continuité du dispositif.",
+  },
+  {
+    title: "Former régulièrement le personnel",
+    text: "Organisez des sessions de formation adaptées aux fonctions : repérage des signaux d’alerte, vérification d’identité, conduite à tenir face à une opération atypique.",
+  },
+  {
+    title: "Tracer et contrôler le dispositif",
+    text: "Tenez à jour le registre interne, archivez les justificatifs cinq ans et vérifiez périodiquement que les procédures sont bien appliquées par les équipes.",
+  },
+];
+
+
+const relatedLinks = [
+  {
+    href: "/formation-tracfin-immobilier",
+    label: "Formation TRACFIN immobilier (3 h)",
+    detail: "Le module spécialisé pour sécuriser votre conformité LCB-FT.",
+  },
+  {
+    href: "/guides/loi-hoguet-guide-complet",
+    label: "Loi Hoguet : le guide complet",
+    detail: "Le socle juridique du métier d’agent immobilier.",
+  },
+  {
+    href: "/guides/formation-loi-alur-42-heures",
+    label: "Formation loi ALUR 42 heures",
+    detail: "L’obligation de formation continue des professionnels.",
+  },
+  {
+    href: "/formation-deontologie-immobilier",
+    label: "Formation déontologie immobilier",
+    detail: "Les règles déontologiques applicables à la profession.",
+  },
+];
 
 function SourceLink({
   href,
@@ -290,7 +321,7 @@ function SourceLink({
   );
 }
 
-export default function FormationLoiAlur42HeuresPage() {
+export default function TracfinObligationsAgentImmobilierPage() {
   return (
     <>
       <script
@@ -311,10 +342,10 @@ export default function FormationLoiAlur42HeuresPage() {
               MonPassFormation
             </Link>
             <Link
-              href="/formation-immobiliere-loi-alur"
+              href="/formation-tracfin-immobilier"
               className="rounded-xl bg-brand-navy px-4 py-2.5 text-sm font-black text-white transition hover:bg-brand-navy-mid"
             >
-              Voir la formation
+              Voir la formation TRACFIN
             </Link>
           </div>
         </header>
@@ -345,38 +376,36 @@ export default function FormationLoiAlur42HeuresPage() {
                   </li>
                   <li aria-hidden>/</li>
                   <li aria-current="page" className="font-semibold text-white">
-                    Formation loi ALUR 42 heures
+                    Obligations TRACFIN
                   </li>
                 </ol>
               </nav>
 
               <div className="mt-9 max-w-4xl">
                 <p className="inline-flex rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-brand-gold-pale">
-                  Guide réglementaire 2026
+                  Guide conformité 2026
                 </p>
                 <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                  Formation loi ALUR 42 heures&nbsp;: les obligations à connaître
+                  TRACFIN&nbsp;: les obligations de l’agent immobilier en matière de LCB-FT
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">
-                  À qui s’adresse l’obligation, comment répartir les heures et
-                  quels justificatifs conserver&nbsp;? Voici le cadre pratique,
-                  fondé sur les textes officiels.
+                  Vigilance à l’égard de la clientèle, déclaration de soupçon, conservation des documents et formation du personnel&nbsp;: le cadre complet de la lutte contre le blanchiment dans l’immobilier.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Link
-                    href="#comprendre"
+                    href="#cadre"
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-gold px-5 py-3.5 text-sm font-black text-brand-navy transition hover:bg-brand-gold-hover"
                   >
-                    Comprendre les 42 heures
+                    Comprendre le dispositif LCB-FT
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                   <a
-                    href={LEGIFRANCE_DECREE_URL}
+                    href={TRACFIN_HOME_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3.5 text-sm font-bold text-white transition hover:bg-white/10"
                   >
-                    Lire le décret sur Légifrance
+                    Visiter le site de TRACFIN
                     <ExternalLink className="h-4 w-4" aria-hidden />
                   </a>
                 </div>
@@ -418,11 +447,11 @@ export default function FormationLoiAlur42HeuresPage() {
               <nav aria-label="Sommaire" className="mt-4">
                 <ul className="space-y-1 text-sm">
                   {[
-                    ["#comprendre", "Comprendre les 42 h"],
-                    ["#personnes-concernees", "Personnes concernées"],
-                    ["#contenu", "Contenu obligatoire"],
-                    ["#organiser", "Organiser son cycle"],
-                    ["#justificatifs", "Justificatifs"],
+                    ["#cadre", "Le dispositif LCB-FT"],
+                    ["#personnes-concernees", "Professionnels concernés"],
+                    ["#vigilance", "Vigilance et KYC"],
+                    ["#dispositif", "Dispositif interne"],
+                    ["#conservation-sanctions", "Conservation et sanctions"],
                     ["#faq", "Questions fréquentes"],
                     ["#sources", "Sources officielles"],
                   ].map(([href, label]) => (
@@ -440,29 +469,35 @@ export default function FormationLoiAlur42HeuresPage() {
             </aside>
 
             <article className="min-w-0 space-y-14">
-              <section id="comprendre" className="scroll-mt-8">
+              <section id="cadre" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Le principe
+                  Le cadre général
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy sm:text-4xl">
-                  14 heures par an ou 42 heures sur trois ans
+                  TRACFIN et la lutte contre le blanchiment dans l’immobilier
                 </h2>
                 <div className="mt-6 space-y-5 text-base leading-8 text-slate-700">
                   <p>
-                    La formation continue des professionnels de l’immobilier est
-                    une obligation professionnelle. Elle vise la mise à jour et
-                    le perfectionnement des connaissances et compétences utiles
-                    à l’exercice du métier.
+                    Les transactions immobilières brassent des montants élevés
+                    et peuvent servir de support au blanchiment de capitaux.
+                    C’est pourquoi les professionnels de l’immobilier figurent,
+                    depuis longtemps, parmi les acteurs assujettis au dispositif
+                    français de lutte contre le blanchiment de capitaux et le
+                    financement du terrorisme (<strong>LCB-FT</strong>).
                   </p>
                   <p>
-                    L’article 2 du{" "}
-                    <SourceLink href={LEGIFRANCE_DECREE_URL}>
-                      décret n°&nbsp;2016-173 du 18 février 2016
+                    Les articles{" "}
+                    <SourceLink href={CMF_CODE_URL}>
+                      L. 561-1 et suivants du code monétaire et financier
                     </SourceLink>{" "}
-                    fixe une durée de <strong>14 heures par an</strong> ou de{" "}
-                    <strong>42 heures au cours de trois années consécutives d’exercice</strong>.
-                    Il ne s’agit donc pas de deux obligations à additionner,
-                    mais de deux rythmes prévus par le texte.
+                    définissent ce dispositif. L’article L. 561-2 désigne les
+                    personnes assujetties, parmi lesquelles les professionnels
+                    exerçant les activités immobilières prévues par la loi
+                    Hoguet. Au centre du système se trouve{" "}
+                    <strong>TRACFIN</strong> (Traitement du renseignement et
+                    action contre les circuits financiers clandestins), la
+                    cellule de renseignement financier du ministère de
+                    l’Économie, installée à Bercy.
                   </p>
                 </div>
 
@@ -471,14 +506,15 @@ export default function FormationLoiAlur42HeuresPage() {
                     <Scale className="mt-1 h-6 w-6 shrink-0 text-brand-gold-dark" aria-hidden />
                     <div>
                       <h3 className="font-black text-brand-navy">
-                        Pour le renouvellement de la carte
+                        Une cellule de renseignement, pas une autorité de sanction
                       </h3>
                       <p className="mt-2 leading-7 text-slate-700">
-                        CCI France présente le renouvellement comme soumis,
-                        entre autres conditions, à 42 heures de formation
-                        continue en lien direct avec l’activité exercée. La
-                        formation prépare un justificatif réglementaire&nbsp;;
-                        elle ne remplace pas la demande administrative.
+                        TRACFIN recueille, analyse, enrichit et exploite les
+                        déclarations de soupçon. Le résultat de ses
+                        investigations est transmis à l’autorité judiciaire ou
+                        aux administrations partenaires. Votre obligation est
+                        donc de déclarer&nbsp;; l’enquête et les suites
+                        appartiennent aux autorités.
                       </p>
                     </div>
                   </div>
@@ -490,12 +526,12 @@ export default function FormationLoiAlur42HeuresPage() {
                   Public concerné
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Qui doit suivre la formation continue&nbsp;?
+                  Quels professionnels sont assujettis&nbsp;?
                 </h2>
                 <p className="mt-5 max-w-3xl text-base leading-8 text-slate-700">
-                  L’obligation ne concerne pas uniquement la personne dont le
-                  nom figure sur la carte. Le décret distingue trois catégories
-                  de professionnels.
+                  L’assujettissement ne se limite pas au dirigeant de l’agence.
+                  Il s’organise autour de trois cercles de personnes, chacun
+                  avec un rôle précis dans le dispositif.
                 </p>
                 <div className="mt-7 grid gap-4 md:grid-cols-3">
                   {audiences.map((audience, index) => (
@@ -517,32 +553,33 @@ export default function FormationLoiAlur42HeuresPage() {
                 </div>
                 <p className="mt-5 flex gap-3 rounded-xl bg-brand-navy/5 p-4 text-sm leading-6 text-slate-700">
                   <Users className="mt-0.5 h-5 w-5 shrink-0 text-brand-navy" aria-hidden />
-                  En cas de doute sur votre situation ou sur la période à
-                  justifier, rapprochez-vous de la CCI compétente avant de
-                  constituer votre programme.
+                  Même une petite agence ou un agent indépendant doit disposer
+                  de procédures écrites et d’un interlocuteur identifié pour
+                  TRACFIN. La proportionnalité adapte le dispositif à la taille
+                  de la structure, elle ne le supprime pas.
                 </p>
               </section>
 
-              <section id="contenu" className="scroll-mt-8">
+              <section id="vigilance" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Programme recevable
+                  Obligation de vigilance
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels contenus peuvent compter dans les 42 heures&nbsp;?
+                  Vigilance KYC&nbsp;: connaître son client avant toute opération
                 </h2>
                 <p className="mt-5 text-base leading-8 text-slate-700">
-                  Les activités doivent porter sur des domaines prévus par le
-                  décret et avoir un <strong>lien direct avec l’activité exercée</strong>.
-                  Les thèmes admis couvrent notamment&nbsp;:
+                  Avant d’entrer en relation d’affaires — et tout au long de
+                  celle-ci — vous devez appliquer des mesures de vigilance
+                  proportionnées au risque. Elles recouvrent notamment&nbsp;:
                 </p>
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {eligibleThemes.map((theme) => (
+                  {vigilanceMeasures.map((measure) => (
                     <li
-                      key={theme}
+                      key={measure}
                       className="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-semibold leading-6 text-slate-700"
                     >
                       <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold-dark" aria-hidden />
-                      {theme}
+                      {measure}
                     </li>
                   ))}
                 </ul>
@@ -550,26 +587,29 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-8 overflow-hidden rounded-2xl bg-brand-navy text-white">
                   <div className="grid gap-0 md:grid-cols-[1fr_1.35fr]">
                     <div className="border-b border-white/10 p-6 md:border-b-0 md:border-r md:p-8">
-                      <p className="text-4xl font-black text-brand-gold">4 heures</p>
-                      <p className="mt-2 font-bold">de déontologie sur le cycle</p>
+                      <p className="text-4xl font-black text-brand-gold">Examen renforcé</p>
+                      <p className="mt-2 font-bold">quand le risque l’exige</p>
                     </div>
                     <div className="p-6 md:p-8">
                       <p className="leading-7 text-white/80">
-                        Depuis la modification entrée en vigueur en 2021, le
-                        cycle comprend au moins <strong className="text-white">2 heures sur
-                        la non-discrimination à l’accès au logement</strong> et au
-                        moins <strong className="text-white">2 heures sur les autres
-                        règles déontologiques</strong>.
+                        Face à une situation présentant un risque particulier —
+                        montant inhabituel, paiement comptant, structure
+                        complexe, client établi dans un pays à risque ou
+                        personne politiquement exposée — vous devez aller au-delà
+                        de la vigilance standard&nbsp;: <strong className="text-white">informations
+                        complémentaires sur l’origine des fonds</strong>, sur la
+                        destination de l’opération et validation renforcée du
+                        dossier.
                       </p>
                       <p className="mt-4 text-sm text-white/70">
                         Source&nbsp;:{" "}
                         <a
-                          href={LEGIFRANCE_ETHICS_URL}
+                          href={CMF_CODE_URL}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="font-bold text-brand-gold-pale underline underline-offset-4"
                         >
-                          décret n°&nbsp;2020-1259 sur Légifrance
+                          code monétaire et financier sur Légifrance
                         </a>
                         .
                       </p>
@@ -578,12 +618,12 @@ export default function FormationLoiAlur42HeuresPage() {
                 </div>
               </section>
 
-              <section id="organiser" className="scroll-mt-8">
+              <section id="dispositif" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Méthode pratique
+                  Organisation interne
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Comment organiser son cycle de formation&nbsp;?
+                  Mettre en place le dispositif interne et former le personnel
                 </h2>
                 <ol className="mt-7 space-y-4">
                   {planningSteps.map((step, index) => (
@@ -604,64 +644,78 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-7 flex flex-col items-start justify-between gap-5 rounded-2xl border border-brand-gold/30 bg-brand-gold/10 p-6 sm:flex-row sm:items-center">
                   <div>
                     <h3 className="font-black text-brand-navy">
-                      Besoin de préparer votre échéance&nbsp;?
+                      Former vos équipes à la LCB-FT&nbsp;?
                     </h3>
                     <p className="mt-2 text-sm leading-6 text-slate-700">
-                      Le guide dédié détaille le calendrier et les points à
-                      vérifier pour la formalité.
+                      Notre module TRACFIN immobilier couvre la vigilance, la
+                      déclaration de soupçon et l’organisation du dispositif,
+                      avec des cas concrets de transaction.
                     </p>
                   </div>
                   <Link
-                    href="/guides/renouvellement-carte-professionnelle-immobilier"
+                    href="/formation-tracfin-immobilier"
                     className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand-navy px-4 py-3 text-sm font-black text-white transition hover:bg-brand-navy-mid"
                   >
-                    Guide du renouvellement
+                    Découvrir le module TRACFIN
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                 </div>
               </section>
 
-              <section id="justificatifs" className="scroll-mt-8">
+              <section id="conservation-sanctions" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Traçabilité
+                  Traçabilité et risques
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels justificatifs conserver&nbsp;?
+                  Registre, conservation des documents et sanctions
                 </h2>
                 <div className="mt-6 grid gap-6 md:grid-cols-[1.3fr_1fr]">
                   <div className="space-y-5 text-base leading-8 text-slate-700">
                     <p>
-                      L’organisme de formation délivre une attestation à la
-                      personne qui a accompli l’activité. Le décret prévoit que
-                      ce document mentionne les <strong>objectifs</strong>, le{" "}
-                      <strong>contenu</strong>, la <strong>durée</strong> et la{" "}
-                      <strong>date de réalisation</strong>.
+                      Les documents et informations recueillis au titre de la
+                      vigilance — pièces d’identité, justificatifs, éléments sur
+                      le bénéficiaire effectif, analyses internes — doivent être
+                      conservés <strong>pendant cinq ans</strong> à compter de
+                      la fin de la relation d’affaires ou de la réalisation de
+                      l’opération.
                     </p>
                     <p>
-                      Vérifiez ces mentions dès réception et archivez
-                      l’attestation avec les autres pièces de votre cycle. Les
-                      titulaires transmettent leurs justificatifs à la CCI,
-                      après chaque formation ou au plus tard au moment de la
-                      demande de renouvellement.
+                      En cas de manquement, le professionnel s’expose à des{" "}
+                      <strong>sanctions disciplinaires</strong> prononcées par
+                      l’autorité de contrôle compétente, ainsi qu’à des{" "}
+                      <strong>sanctions pénales</strong>. À titre de repère, le
+                      délit de blanchiment est puni de cinq ans d’emprisonnement
+                      et de 375&nbsp;000&nbsp;euros d’amende (article 324-1 du
+                      code pénal).
                     </p>
                   </div>
                   <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                     <FileCheck2 className="h-8 w-8 text-brand-gold-dark" aria-hidden />
                     <h3 className="mt-5 font-black text-brand-navy">
-                      Contrôle rapide d’une attestation
+                      Les réflexes en cas de soupçon
                     </h3>
                     <ul className="mt-4 space-y-3 text-sm text-slate-700">
-                      {["Objectifs", "Contenu", "Durée", "Date de réalisation"].map(
-                        (item) => (
-                          <li key={item} className="flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-brand-navy" aria-hidden />
-                            {item}
-                          </li>
-                        ),
-                      )}
+                      {[
+                        "Ne pas révéler la déclaration au client",
+                        "Saisir le déclarant TRACFIN interne",
+                        "Déclarer sans délai via la téléprocédure",
+                        "Archiver les éléments du dossier cinq ans",
+                      ].map((item) => (
+                        <li key={item} className="flex items-center gap-2">
+                          <CheckCircle2 className="h-4 w-4 text-brand-navy" aria-hidden />
+                          {item}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
+                <p className="mt-5 flex gap-3 rounded-xl bg-brand-navy/5 p-4 text-sm leading-6 text-slate-700">
+                  <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-brand-navy" aria-hidden />
+                  Le doute ne doit jamais être tranché seul&nbsp;: remontez
+                  systématiquement l’information au déclarant désigné. C’est lui
+                  qui apprécie l’opportunité d’une déclaration de soupçon, dans
+                  le strict respect de la confidentialité.
+                </p>
               </section>
 
               <section id="faq" className="scroll-mt-8">
@@ -669,7 +723,7 @@ export default function FormationLoiAlur42HeuresPage() {
                   Questions fréquentes
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Formation loi ALUR 42 heures&nbsp;: FAQ
+                  TRACFIN et agent immobilier&nbsp;: FAQ
                 </h2>
                 <div className="mt-7 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white">
                   {faqs.map((faq) => (
@@ -693,36 +747,67 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
                   <ul className="space-y-5 text-sm leading-7 text-slate-700">
                     <li>
-                      <SourceLink href={LEGIFRANCE_DECREE_URL}>
-                        Décret n°&nbsp;2016-173 du 18 février 2016 — Légifrance
+                      <SourceLink href={CMF_CODE_URL}>
+                        Code monétaire et financier, articles L. 561-1 et suivants — Légifrance
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Personnes concernées, durée, activités recevables et justificatifs.
+                        Personnes assujetties, mesures de vigilance, déclaration
+                        de soupçon, conservation et dispositif interne.
                       </p>
                     </li>
                     <li>
-                      <SourceLink href={LEGIFRANCE_ETHICS_URL}>
-                        Décret n°&nbsp;2020-1259 du 14 octobre 2020 — Légifrance
+                      <SourceLink href={TRACFIN_MISSIONS_URL}>
+                        Les missions, l’organisation et les pouvoirs de TRACFIN — economie.gouv.fr
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Intégration de la non-discrimination à l’accès au logement.
+                        Rôle de la cellule de renseignement financier et suites
+                        données aux déclarations.
                       </p>
                     </li>
                     <li>
-                      <SourceLink href={CCI_RENEWAL_URL}>
-                        Renouvellement de carte professionnelle — CCI France
+                      <SourceLink href={TRACFIN_HOME_URL}>
+                        Site institutionnel de TRACFIN — economie.gouv.fr
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Durée de validité, période de dépôt et accès à la formalité.
+                        Accès à la téléprocédure de déclaration et aux
+                        ressources destinées aux professionnels assujettis.
                       </p>
                     </li>
                   </ul>
                   <p className="mt-6 border-t border-slate-200 pt-5 text-xs leading-5 text-slate-500">
-                    Informations vérifiées le 28 juillet 2026. Ce guide présente
-                    le cadre général et ne remplace ni les textes officiels ni
-                    l’examen de votre dossier par la CCI compétente.
+                    Informations vérifiées le 31 juillet 2026. Ce guide présente
+                    le cadre général du dispositif LCB-FT et ne remplace ni les
+                    textes officiels ni un accompagnement juridique adapté à
+                    votre structure.
                   </p>
                 </div>
+              </section>
+
+              <section aria-label="Guides liés">
+                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
+                  Pour aller plus loin
+                </p>
+                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
+                  Guides liés
+                </h2>
+                <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+                  {relatedLinks.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand-gold/50 hover:shadow-md"
+                      >
+                        <span className="inline-flex items-center gap-2 font-black text-brand-navy group-hover:text-brand-navy-mid">
+                          {link.label}
+                          <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden />
+                        </span>
+                        <span className="mt-2 text-sm leading-6 text-slate-600">
+                          {link.detail}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </section>
 
               <section className="overflow-hidden rounded-3xl bg-brand-navy p-7 text-white sm:p-10">
@@ -730,19 +815,19 @@ export default function FormationLoiAlur42HeuresPage() {
                   <div className="max-w-2xl">
                     <BookOpen className="h-8 w-8 text-brand-gold" aria-hidden />
                     <h2 className="mt-5 text-2xl font-black sm:text-3xl">
-                      Consulter le parcours de formation immobilière
+                      Sécurisez votre conformité avec la formation TRACFIN
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Découvrez le programme, ses modules et ses modalités afin
-                      de vérifier s’ils correspondent à votre activité et à
-                      votre calendrier.
+                      Le module TRACFIN immobilier de MonPassFormation vous
+                      donne les procédures, les modèles et les réflexes
+                      opérationnels pour répondre à vos obligations LCB-FT.
                     </p>
                   </div>
                   <Link
-                    href="/formation-immobiliere-loi-alur"
+                    href="/formation-tracfin-immobilier"
                     className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand-gold px-5 py-3.5 text-sm font-black text-brand-navy transition hover:bg-brand-gold-hover"
                   >
-                    Voir la formation loi ALUR
+                    Voir la formation TRACFIN
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                 </div>
@@ -762,19 +847,24 @@ export default function FormationLoiAlur42HeuresPage() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/guides" className="transition hover:text-brand-navy">
+                    Guides
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/formation-tracfin-immobilier"
+                    className="transition hover:text-brand-navy"
+                  >
+                    Formation TRACFIN
+                  </Link>
+                </li>
+                <li>
                   <Link
                     href="/formation-immobiliere-loi-alur"
                     className="transition hover:text-brand-navy"
                   >
                     Formation loi ALUR
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/guides/renouvellement-carte-professionnelle-immobilier"
-                    className="transition hover:text-brand-navy"
-                  >
-                    Renouveler sa carte
                   </Link>
                 </li>
               </ul>

@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
+  AlertTriangle,
   ArrowLeft,
   ArrowRight,
   BookOpen,
   CalendarDays,
-  CheckCircle2,
+  ClipboardCheck,
   Clock3,
   ExternalLink,
   FileCheck2,
-  Scale,
-  ShieldCheck,
-  Users,
+  XCircle,
   type LucideIcon,
 } from "lucide-react";
 
 const SITE_URL = "https://monpassformation.com";
-const PAGE_PATH = "/guides/formation-loi-alur-42-heures";
+const PAGE_PATH = "/guides/erreurs-renouvellement-carte-professionnelle";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const COVER_URL = `${SITE_URL}/generated/fal/transaction/cover-immobilier.jpg`;
 const LEGIFRANCE_DECREE_URL =
@@ -25,10 +24,13 @@ const LEGIFRANCE_ETHICS_URL =
   "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000042427805";
 const CCI_RENEWAL_URL =
   "https://www.cci.fr/ressources/formalites-en-ligne/fichier-des-professionnels-de-limmobilier/renouvellement-de-carte-professionnelle";
+const SERVICE_PUBLIC_URL =
+  "https://www.service-public.fr/professionnels-entreprises/vosdroits/F31119";
 
-const title = "Formation loi ALUR 42 heures : guide 2026";
+const title =
+  "Renouvellement carte professionnelle immobilier : les 7 erreurs qui font rejeter le dossier";
 const description =
-  "Durée, personnes concernées, contenus obligatoires et justificatifs : comprendre les 42 heures de formation loi ALUR pour les professionnels de l’immobilier.";
+  "Renouvellement de la carte professionnelle immobilier : les 7 erreurs qui font rejeter le dossier CCI, les délais à respecter et la checklist avant dépôt.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -37,12 +39,12 @@ export const metadata: Metadata = {
   },
   description,
   keywords: [
-    "formation loi ALUR 42 heures",
-    "formation ALUR immobilier",
-    "formation continue agent immobilier",
-    "obligation formation loi ALUR",
-    "renouvellement carte professionnelle immobilier",
-    "formation déontologie immobilier",
+    "renouvellement carte professionnelle immobilier erreurs",
+    "dossier CCI carte professionnelle rejeté",
+    "renouvellement carte agent immobilier délai",
+    "justificatif formation continue CCI",
+    "carte professionnelle immobilier validité 3 ans",
+    "checklist renouvellement carte immobilier",
   ],
   alternates: {
     canonical: PAGE_URL,
@@ -66,14 +68,14 @@ export const metadata: Metadata = {
     siteName: "MonPassFormation",
     locale: "fr_FR",
     type: "article",
-    publishedTime: "2026-07-28",
-    modifiedTime: "2026-07-28",
+    publishedTime: "2026-07-31",
+    modifiedTime: "2026-07-31",
     images: [
       {
         url: COVER_URL,
         width: 1024,
         height: 576,
-        alt: "Guide de la formation loi ALUR de 42 heures",
+        alt: "Erreurs à éviter au renouvellement de la carte professionnelle immobilier",
       },
     ],
   },
@@ -85,107 +87,39 @@ export const metadata: Metadata = {
   },
 };
 
-
-type Fact = {
-  icon: LucideIcon;
-  value: string;
-  label: string;
-  detail: string;
-};
-
-const keyFacts: Fact[] = [
-  {
-    icon: Clock3,
-    value: "42 h",
-    label: "sur trois ans",
-    detail: "Au cours de trois années consécutives d’exercice.",
-  },
-  {
-    icon: CalendarDays,
-    value: "14 h",
-    label: "par an",
-    detail: "L’autre rythme prévu par le décret.",
-  },
-  {
-    icon: ShieldCheck,
-    value: "4 h",
-    label: "de déontologie",
-    detail: "Dont 2 h sur la non-discrimination à l’accès au logement.",
-  },
-];
-
-const audiences = [
-  {
-    title: "Titulaires de la carte professionnelle",
-    text: "Sont concernés les titulaires de la carte et, pour une personne morale, son représentant légal et statutaire.",
-  },
-  {
-    title: "Directions d’établissement",
-    text: "L’obligation vise aussi les personnes qui dirigent un établissement, une succursale, une agence ou un bureau.",
-  },
-  {
-    title: "Collaborateurs habilités",
-    text: "Les salariés et indépendants habilités par le titulaire à négocier, s’entremettre ou s’engager pour son compte sont également concernés.",
-  },
-];
-
-const eligibleThemes = [
-  "Droit applicable à l’activité immobilière",
-  "Économie et environnement du marché",
-  "Pratiques commerciales directement liées au métier",
-  "Déontologie des professionnels de l’immobilier",
-  "Construction, habitation et urbanisme",
-  "Transition énergétique",
-];
-
-const planningSteps = [
-  {
-    title: "Recenser les heures déjà effectuées",
-    text: "Rassemblez les attestations et vérifiez leurs dates, leur durée, leur contenu et la période de trois années concernée.",
-  },
-  {
-    title: "Contrôler les quatre heures obligatoires",
-    text: "Le cycle doit comprendre 2 h sur la non-discrimination à l’accès au logement et 2 h sur les autres règles déontologiques.",
-  },
-  {
-    title: "Choisir des thèmes liés à l’activité",
-    text: "Le contenu retenu doit avoir un lien direct avec l’activité professionnelle réellement exercée.",
-  },
-  {
-    title: "Conserver chaque justificatif",
-    text: "L’attestation doit notamment mentionner les objectifs, le contenu, la durée et la date de réalisation de l’activité.",
-  },
-  {
-    title: "Anticiper la formalité CCI",
-    text: "Pour une carte arrivant à échéance, préparez les justificatifs avant l’ouverture de la période de dépôt de la demande.",
-  },
-];
-
 const faqs = [
   {
-    question: "Faut-il suivre exactement 14 heures chaque année ?",
+    question:
+      "Que se passe-t-il si la demande de renouvellement est déposée trop tard ?",
     answer:
-      "Le décret fixe la durée à 14 heures par an ou 42 heures au cours de trois années consécutives d’exercice. Le rythme annuel aide à répartir la charge, mais le texte prévoit bien ces deux modalités.",
+      "La demande doit être présentée dans les deux mois précédant l’expiration de la carte. Une fois la carte expirée, le professionnel ne peut plus exercer légalement : toute négociation, entremise ou gestion sans carte valide constitue un exercice illégal de la profession. D’où l’importance de préparer le dossier plusieurs mois en amont.",
   },
   {
-    question: "Les 42 heures peuvent-elles porter sur n’importe quel sujet ?",
+    question:
+      "Peut-on régulariser des heures de formation manquantes avant de déposer ?",
     answer:
-      "Non. Les activités doivent concerner les domaines admis par le décret et présenter un lien direct avec l’activité professionnelle exercée. Les obligations spécifiques de déontologie et de non-discrimination doivent aussi être respectées.",
+      "Oui, tant que les formations sont réalisées pendant le cycle de trois années consécutives concerné et avant le dépôt du dossier. Identifiez le volume manquant — y compris les heures de déontologie et de non-discrimination — et suivez les modules correspondants avant d’engager la formalité.",
   },
   {
-    question: "Combien d’heures de déontologie sont obligatoires ?",
+    question: "Que faire en cas de rejet du dossier par la CCI ?",
     answer:
-      "Sur trois années consécutives, il faut au moins 2 heures consacrées à la non-discrimination à l’accès au logement et au moins 2 heures portant sur les autres règles déontologiques, soit 4 heures au total.",
+      "La CCI motive son refus : corrigez le point bloquant (heures, attestations, pièce manquante) et redéposez un dossier complet. Pendant ce temps, la carte arrivée à expiration ne permet plus d’exercer. En cas de désaccord, rapprochez-vous de la CCI pour connaître les voies de recours applicables.",
   },
   {
-    question: "Une attestation de formation suffit-elle à renouveler la carte ?",
+    question: "Quelle est la durée de validité de la carte professionnelle ?",
     answer:
-      "Elle sert à justifier la formation continue, mais le renouvellement reste une formalité distincte soumise à d’autres conditions et pièces. Il faut consulter la liste actualisée de la CCI compétente.",
+      "La carte professionnelle est valable trois ans. C’est une évolution notable : avant la réforme issue de la loi ALUR, la validité était de dix ans. Le passage à trois ans rend le calendrier de formation continue et de renouvellement nettement plus fréquent qu’autrefois.",
   },
   {
-    question: "Quand demander le renouvellement de la carte professionnelle ?",
+    question:
+      "Le justificatif de formation est-il la seule pièce du dossier de renouvellement ?",
     answer:
-      "CCI France indique que la demande doit être réalisée dans les deux mois précédant la date d’expiration de la carte. La préparation des formations et des pièces doit donc commencer en amont.",
+      "Non. La formation continue est une condition centrale, mais le dossier CCI comporte d’autres pièces et conditions, notamment liées à la garantie financière et à l’assurance responsabilité civile professionnelle selon l’activité. Consultez la liste actualisée publiée par CCI France avant de déposer.",
+  },
+  {
+    question: "Quel délai de traitement prévoir pour le renouvellement ?",
+    answer:
+      "Les délais d’instruction varient selon les CCI et la complétude du dossier. Un dossier complet, déposé dès l’ouverture de la période — deux mois avant l’expiration — maximise les chances de recevoir la nouvelle carte sans interruption d’activité.",
   },
 ];
 
@@ -198,8 +132,8 @@ const structuredData = {
       headline: title,
       description,
       image: COVER_URL,
-      datePublished: "2026-07-28",
-      dateModified: "2026-07-28",
+      datePublished: "2026-07-31",
+      dateModified: "2026-07-31",
       inLanguage: "fr-FR",
       isAccessibleForFree: true,
       mainEntityOfPage: {
@@ -223,11 +157,11 @@ const structuredData = {
       about: [
         {
           "@type": "Thing",
-          name: "Formation continue des professionnels de l’immobilier",
+          name: "Renouvellement de la carte professionnelle immobilier",
         },
         {
           "@type": "Thing",
-          name: "Loi ALUR",
+          name: "Formation continue des professionnels de l’immobilier",
         },
       ],
     },
@@ -245,12 +179,12 @@ const structuredData = {
           "@type": "ListItem",
           position: 2,
           name: "Guides",
-          item: `${SITE_URL}/guides`,
+          item: "https://monpassformation.com/guides",
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Formation loi ALUR 42 heures",
+          name: "Erreurs au renouvellement de la carte professionnelle",
           item: PAGE_URL,
         },
       ],
@@ -269,6 +203,92 @@ const structuredData = {
     },
   ],
 };
+
+type Fact = {
+  icon: LucideIcon;
+  value: string;
+  label: string;
+  detail: string;
+};
+
+const keyFacts: Fact[] = [
+  {
+    icon: Clock3,
+    value: "3 ans",
+    label: "de validité",
+    detail: "La carte professionnelle est valable trois ans — contre dix ans avant la réforme ALUR.",
+  },
+  {
+    icon: CalendarDays,
+    value: "2 mois",
+    label: "avant l’expiration",
+    detail: "La demande de renouvellement se présente dans les deux mois précédant l’expiration.",
+  },
+  {
+    icon: XCircle,
+    value: "7",
+    label: "erreurs fréquentes",
+    detail: "Les causes de rejet de dossier que ce guide vous aide à éviter.",
+  },
+];
+
+const errors = [
+  {
+    title: "Erreur n° 1 — Attendre la dernière minute pour déposer",
+    text: "La demande se présente dans les deux mois précédant l’expiration. Découvrir un blocage la veille de l’échéance, c’est risquer une interruption d’activité : sans carte valide, impossible d’exercer. Anticipez dès l’ouverture de la période.",
+  },
+  {
+    title: "Erreur n° 2 — Ne pas atteindre les 42 heures",
+    text: "42 heures sur trois années consécutives d’exercice, ou 14 heures par an : un volume insuffisant sur le cycle de référence est un motif de rejet direct. Faites le compte de vos heures attestées avant tout dépôt.",
+  },
+  {
+    title: "Erreur n° 3 — Oublier les 4 heures de déontologie",
+    text: "Par cycle de trois ans, au moins 2 heures de non-discrimination à l’accès au logement et 2 heures d’autres règles déontologiques sont exigées. Un dossier à 42 heures mais sans ces contenus reste incomplet.",
+  },
+  {
+    title: "Erreur n° 4 — Présenter des formations hors domaines admis",
+    text: "Seuls comptent les six domaines prévus par le décret : droit immobilier, économie du marché, pratiques commerciales du métier, déontologie, construction-habitation-urbanisme, transition énergétique. Les formations hors champ sont écartées du décompte.",
+  },
+  {
+    title: "Erreur n° 5 — Négliger le lien direct avec l’activité",
+    text: "Chaque formation doit correspondre à l’activité réellement exercée : transaction, gestion locative, syndic ou marchand de listes. Un programme déconnecté de la mention portée sur la carte fragilise le dossier.",
+  },
+  {
+    title: "Erreur n° 6 — Transmettre des attestations incomplètes",
+    text: "Chaque attestation doit mentionner objectifs, contenu, durée et date de réalisation — et être nominative. Un document sans durée, sans date ou au seul nom de l’agence peut être refusé.",
+  },
+  {
+    title: "Erreur n° 7 — Oublier les autres pièces du dossier",
+    text: "La formation continue est centrale, mais le renouvellement exige un dossier administratif complet, soumis à d’autres conditions et pièces. Vérifiez la liste actualisée de la CCI compétente avant le dépôt.",
+  },
+];
+
+const planningSteps = [
+  {
+    title: "Vérifier la date d’expiration de la carte",
+    text: "Repérez l’échéance exacte et fixez-vous une alerte au moins quatre mois avant : la période de dépôt s’ouvre deux mois avant l’expiration.",
+  },
+  {
+    title: "Compter les heures attestées sur le cycle",
+    text: "Additionnez les durées de vos attestations : vous devez atteindre 42 heures sur trois années consécutives, ou justifier de 14 heures par an.",
+  },
+  {
+    title: "Isoler les 4 heures de déontologie",
+    text: "Vérifiez que 2 h de non-discrimination à l’accès au logement et 2 h d’autres règles déontologiques sont clairement identifiables sur vos justificatifs.",
+  },
+  {
+    title: "Contrôler la conformité de chaque attestation",
+    text: "Objectifs, contenu, durée, date de réalisation, identité du bénéficiaire : exigez une correction de l’organisme si une mention manque.",
+  },
+  {
+    title: "Vérifier domaines et lien direct avec l’activité",
+    text: "Chaque formation doit relever d’un domaine admis et correspondre à l’activité couverte par votre carte. Écartez les heures non recevables du décompte.",
+  },
+  {
+    title: "Compléter le dossier administratif et déposer tôt",
+    text: "Rassemblez l’ensemble des pièces exigées par la CCI et déposez dès l’ouverture de la période de deux mois : un dossier complet et précoce évite toute interruption d’activité.",
+  },
+];
 
 function SourceLink({
   href,
@@ -290,7 +310,7 @@ function SourceLink({
   );
 }
 
-export default function FormationLoiAlur42HeuresPage() {
+export default function ErreursRenouvellementCarteProfessionnellePage() {
   return (
     <>
       <script
@@ -345,7 +365,7 @@ export default function FormationLoiAlur42HeuresPage() {
                   </li>
                   <li aria-hidden>/</li>
                   <li aria-current="page" className="font-semibold text-white">
-                    Formation loi ALUR 42 heures
+                    Erreurs au renouvellement de la carte professionnelle
                   </li>
                 </ol>
               </nav>
@@ -355,28 +375,31 @@ export default function FormationLoiAlur42HeuresPage() {
                   Guide réglementaire 2026
                 </p>
                 <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                  Formation loi ALUR 42 heures&nbsp;: les obligations à connaître
+                  Renouvellement de la carte professionnelle&nbsp;: les 7
+                  erreurs qui font rejeter le dossier
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">
-                  À qui s’adresse l’obligation, comment répartir les heures et
-                  quels justificatifs conserver&nbsp;? Voici le cadre pratique,
-                  fondé sur les textes officiels.
+                  Tous les trois ans, le même scénario se répète&nbsp;: des
+                  dossiers rejetés pour des erreurs évitables — heures
+                  insuffisantes, attestations incomplètes, dépôt tardif.
+                  Passez en revue les sept pièges et la checklist avant de
+                  déposer à la CCI.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Link
-                    href="#comprendre"
+                    href="#erreurs"
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-gold px-5 py-3.5 text-sm font-black text-brand-navy transition hover:bg-brand-gold-hover"
                   >
-                    Comprendre les 42 heures
+                    Voir les 7 erreurs
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                   <a
-                    href={LEGIFRANCE_DECREE_URL}
+                    href={CCI_RENEWAL_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3.5 text-sm font-bold text-white transition hover:bg-white/10"
                   >
-                    Lire le décret sur Légifrance
+                    La formalité sur CCI France
                     <ExternalLink className="h-4 w-4" aria-hidden />
                   </a>
                 </div>
@@ -418,11 +441,9 @@ export default function FormationLoiAlur42HeuresPage() {
               <nav aria-label="Sommaire" className="mt-4">
                 <ul className="space-y-1 text-sm">
                   {[
-                    ["#comprendre", "Comprendre les 42 h"],
-                    ["#personnes-concernees", "Personnes concernées"],
-                    ["#contenu", "Contenu obligatoire"],
-                    ["#organiser", "Organiser son cycle"],
-                    ["#justificatifs", "Justificatifs"],
+                    ["#delais", "Les délais à respecter"],
+                    ["#erreurs", "Les 7 erreurs de rejet"],
+                    ["#checklist", "Checklist avant dépôt"],
                     ["#faq", "Questions fréquentes"],
                     ["#sources", "Sources officielles"],
                   ].map(([href, label]) => (
@@ -440,150 +461,107 @@ export default function FormationLoiAlur42HeuresPage() {
             </aside>
 
             <article className="min-w-0 space-y-14">
-              <section id="comprendre" className="scroll-mt-8">
+              <section id="delais" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Le principe
+                  Le calendrier
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy sm:text-4xl">
-                  14 heures par an ou 42 heures sur trois ans
+                  Les délais à respecter pour ne pas se retrouver sans carte
                 </h2>
                 <div className="mt-6 space-y-5 text-base leading-8 text-slate-700">
                   <p>
-                    La formation continue des professionnels de l’immobilier est
-                    une obligation professionnelle. Elle vise la mise à jour et
-                    le perfectionnement des connaissances et compétences utiles
-                    à l’exercice du métier.
+                    La carte professionnelle, délivrée par la CCI en
+                    application de la loi Hoguet, est{" "}
+                    <strong>valable trois ans</strong>. C’est un point
+                    souvent mal connu des professionnels de longue date&nbsp;:
+                    avant la réforme issue de la loi ALUR, la validité était
+                    de dix ans. Le rythme actuel impose donc un renouvellement
+                    — et un cycle de formation — bien plus fréquent.
                   </p>
                   <p>
-                    L’article 2 du{" "}
-                    <SourceLink href={LEGIFRANCE_DECREE_URL}>
-                      décret n°&nbsp;2016-173 du 18 février 2016
-                    </SourceLink>{" "}
-                    fixe une durée de <strong>14 heures par an</strong> ou de{" "}
-                    <strong>42 heures au cours de trois années consécutives d’exercice</strong>.
-                    Il ne s’agit donc pas de deux obligations à additionner,
-                    mais de deux rythmes prévus par le texte.
+                    Selon{" "}
+                    <SourceLink href={CCI_RENEWAL_URL}>
+                      CCI France
+                    </SourceLink>
+                    , la demande de renouvellement doit être réalisée{" "}
+                    <strong>dans les deux mois précédant la date
+                    d’expiration</strong> de la carte. Cette fenêtre est
+                    courte&nbsp;: tout doit être prêt — formations effectuées,
+                    attestations contrôlées, pièces rassemblées — avant son
+                    ouverture.
                   </p>
                 </div>
-
                 <div className="mt-7 rounded-2xl border-l-4 border-brand-gold bg-white p-6 shadow-sm">
                   <div className="flex gap-4">
-                    <Scale className="mt-1 h-6 w-6 shrink-0 text-brand-gold-dark" aria-hidden />
+                    <CalendarDays className="mt-1 h-6 w-6 shrink-0 text-brand-gold-dark" aria-hidden />
                     <div>
                       <h3 className="font-black text-brand-navy">
-                        Pour le renouvellement de la carte
+                        Le bon réflexe&nbsp;: J-4 mois
                       </h3>
                       <p className="mt-2 leading-7 text-slate-700">
-                        CCI France présente le renouvellement comme soumis,
-                        entre autres conditions, à 42 heures de formation
-                        continue en lien direct avec l’activité exercée. La
-                        formation prépare un justificatif réglementaire&nbsp;;
-                        elle ne remplace pas la demande administrative.
+                        Programmez une alerte quatre mois avant l’expiration&nbsp;:
+                        comptez vos heures, identifiez les manques éventuels et
+                        suivez les modules nécessaires. À J-2 mois, vous
+                        déposez un dossier complet dès l’ouverture de la
+                        période.
                       </p>
                     </div>
                   </div>
                 </div>
               </section>
 
-              <section id="personnes-concernees" className="scroll-mt-8">
+              <section id="erreurs" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Public concerné
+                  Causes de rejet
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Qui doit suivre la formation continue&nbsp;?
+                  Les 7 erreurs qui font rejeter le dossier CCI
                 </h2>
                 <p className="mt-5 max-w-3xl text-base leading-8 text-slate-700">
-                  L’obligation ne concerne pas uniquement la personne dont le
-                  nom figure sur la carte. Le décret distingue trois catégories
-                  de professionnels.
+                  La majorité des rejets tient à la formation continue&nbsp;:
+                  volume, contenu ou justificatifs. Voici les sept erreurs les
+                  plus fréquentes, et comment chacune s’évite.
                 </p>
-                <div className="mt-7 grid gap-4 md:grid-cols-3">
-                  {audiences.map((audience, index) => (
+                <div className="mt-7 space-y-4">
+                  {errors.map((error) => (
                     <div
-                      key={audience.title}
-                      className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+                      key={error.title}
+                      className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
                     >
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy text-sm font-black text-white">
-                        {index + 1}
-                      </span>
-                      <h3 className="mt-5 text-lg font-black text-brand-navy">
-                        {audience.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-7 text-slate-600">
-                        {audience.text}
-                      </p>
+                      <AlertTriangle
+                        className="mt-1 h-6 w-6 shrink-0 text-brand-gold-dark"
+                        aria-hidden
+                      />
+                      <div>
+                        <h3 className="font-black text-brand-navy">
+                          {error.title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-7 text-slate-600">
+                          {error.text}
+                        </p>
+                      </div>
                     </div>
                   ))}
                 </div>
                 <p className="mt-5 flex gap-3 rounded-xl bg-brand-navy/5 p-4 text-sm leading-6 text-slate-700">
-                  <Users className="mt-0.5 h-5 w-5 shrink-0 text-brand-navy" aria-hidden />
-                  En cas de doute sur votre situation ou sur la période à
-                  justifier, rapprochez-vous de la CCI compétente avant de
-                  constituer votre programme.
+                  <FileCheck2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-navy" aria-hidden />
+                  Sur le volet justificatifs, notre guide détaille les{" "}
+                  <Link
+                    href="/guides/attestation-formation-alur-validite"
+                    className="font-bold text-brand-navy underline decoration-brand-gold/60 decoration-2 underline-offset-4 transition hover:text-brand-navy-mid"
+                  >
+                    mentions obligatoires de l’attestation de formation ALUR
+                  </Link>
+                  .
                 </p>
               </section>
 
-              <section id="contenu" className="scroll-mt-8">
+              <section id="checklist" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Programme recevable
+                  Avant le dépôt
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels contenus peuvent compter dans les 42 heures&nbsp;?
-                </h2>
-                <p className="mt-5 text-base leading-8 text-slate-700">
-                  Les activités doivent porter sur des domaines prévus par le
-                  décret et avoir un <strong>lien direct avec l’activité exercée</strong>.
-                  Les thèmes admis couvrent notamment&nbsp;:
-                </p>
-                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {eligibleThemes.map((theme) => (
-                    <li
-                      key={theme}
-                      className="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-semibold leading-6 text-slate-700"
-                    >
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold-dark" aria-hidden />
-                      {theme}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-8 overflow-hidden rounded-2xl bg-brand-navy text-white">
-                  <div className="grid gap-0 md:grid-cols-[1fr_1.35fr]">
-                    <div className="border-b border-white/10 p-6 md:border-b-0 md:border-r md:p-8">
-                      <p className="text-4xl font-black text-brand-gold">4 heures</p>
-                      <p className="mt-2 font-bold">de déontologie sur le cycle</p>
-                    </div>
-                    <div className="p-6 md:p-8">
-                      <p className="leading-7 text-white/80">
-                        Depuis la modification entrée en vigueur en 2021, le
-                        cycle comprend au moins <strong className="text-white">2 heures sur
-                        la non-discrimination à l’accès au logement</strong> et au
-                        moins <strong className="text-white">2 heures sur les autres
-                        règles déontologiques</strong>.
-                      </p>
-                      <p className="mt-4 text-sm text-white/70">
-                        Source&nbsp;:{" "}
-                        <a
-                          href={LEGIFRANCE_ETHICS_URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-bold text-brand-gold-pale underline underline-offset-4"
-                        >
-                          décret n°&nbsp;2020-1259 sur Légifrance
-                        </a>
-                        .
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <section id="organiser" className="scroll-mt-8">
-                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Méthode pratique
-                </p>
-                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Comment organiser son cycle de formation&nbsp;?
+                  Checklist&nbsp;: un dossier irréprochable en 6 vérifications
                 </h2>
                 <ol className="mt-7 space-y-4">
                   {planningSteps.map((step, index) => (
@@ -604,11 +582,14 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-7 flex flex-col items-start justify-between gap-5 rounded-2xl border border-brand-gold/30 bg-brand-gold/10 p-6 sm:flex-row sm:items-center">
                   <div>
                     <h3 className="font-black text-brand-navy">
-                      Besoin de préparer votre échéance&nbsp;?
+                      <span className="inline-flex items-center gap-2">
+                        <ClipboardCheck className="h-5 w-5" aria-hidden />
+                        Envie de la procédure complète&nbsp;?
+                      </span>
                     </h3>
                     <p className="mt-2 text-sm leading-6 text-slate-700">
-                      Le guide dédié détaille le calendrier et les points à
-                      vérifier pour la formalité.
+                      Notre guide du renouvellement détaille la démarche pas à
+                      pas, de la préparation des pièces au dépôt en ligne.
                     </p>
                   </div>
                   <Link
@@ -621,55 +602,12 @@ export default function FormationLoiAlur42HeuresPage() {
                 </div>
               </section>
 
-              <section id="justificatifs" className="scroll-mt-8">
-                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Traçabilité
-                </p>
-                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels justificatifs conserver&nbsp;?
-                </h2>
-                <div className="mt-6 grid gap-6 md:grid-cols-[1.3fr_1fr]">
-                  <div className="space-y-5 text-base leading-8 text-slate-700">
-                    <p>
-                      L’organisme de formation délivre une attestation à la
-                      personne qui a accompli l’activité. Le décret prévoit que
-                      ce document mentionne les <strong>objectifs</strong>, le{" "}
-                      <strong>contenu</strong>, la <strong>durée</strong> et la{" "}
-                      <strong>date de réalisation</strong>.
-                    </p>
-                    <p>
-                      Vérifiez ces mentions dès réception et archivez
-                      l’attestation avec les autres pièces de votre cycle. Les
-                      titulaires transmettent leurs justificatifs à la CCI,
-                      après chaque formation ou au plus tard au moment de la
-                      demande de renouvellement.
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <FileCheck2 className="h-8 w-8 text-brand-gold-dark" aria-hidden />
-                    <h3 className="mt-5 font-black text-brand-navy">
-                      Contrôle rapide d’une attestation
-                    </h3>
-                    <ul className="mt-4 space-y-3 text-sm text-slate-700">
-                      {["Objectifs", "Contenu", "Durée", "Date de réalisation"].map(
-                        (item) => (
-                          <li key={item} className="flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-brand-navy" aria-hidden />
-                            {item}
-                          </li>
-                        ),
-                      )}
-                    </ul>
-                  </div>
-                </div>
-              </section>
-
               <section id="faq" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
                   Questions fréquentes
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Formation loi ALUR 42 heures&nbsp;: FAQ
+                  Renouvellement de la carte professionnelle&nbsp;: FAQ
                 </h2>
                 <div className="mt-7 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white">
                   {faqs.map((faq) => (
@@ -693,35 +631,97 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
                   <ul className="space-y-5 text-sm leading-7 text-slate-700">
                     <li>
-                      <SourceLink href={LEGIFRANCE_DECREE_URL}>
-                        Décret n°&nbsp;2016-173 du 18 février 2016 — Légifrance
-                      </SourceLink>
-                      <p className="mt-1 text-slate-500">
-                        Personnes concernées, durée, activités recevables et justificatifs.
-                      </p>
-                    </li>
-                    <li>
-                      <SourceLink href={LEGIFRANCE_ETHICS_URL}>
-                        Décret n°&nbsp;2020-1259 du 14 octobre 2020 — Légifrance
-                      </SourceLink>
-                      <p className="mt-1 text-slate-500">
-                        Intégration de la non-discrimination à l’accès au logement.
-                      </p>
-                    </li>
-                    <li>
                       <SourceLink href={CCI_RENEWAL_URL}>
                         Renouvellement de carte professionnelle — CCI France
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Durée de validité, période de dépôt et accès à la formalité.
+                        Période de dépôt, justificatifs exigés et accès à la
+                        formalité en ligne.
+                      </p>
+                    </li>
+                    <li>
+                      <SourceLink href={LEGIFRANCE_DECREE_URL}>
+                        Décret n°&nbsp;2016-173 du 18 février 2016 — Légifrance
+                      </SourceLink>
+                      <p className="mt-1 text-slate-500">
+                        Volume de formation, domaines admis et mentions des
+                        attestations.
+                      </p>
+                    </li>
+                    <li>
+                      <SourceLink href={LEGIFRANCE_ETHICS_URL}>
+                        Décret relatif à la déontologie — Légifrance
+                      </SourceLink>
+                      <p className="mt-1 text-slate-500">
+                        Heures obligatoires de non-discrimination et de règles
+                        déontologiques.
+                      </p>
+                    </li>
+                    <li>
+                      <SourceLink href={SERVICE_PUBLIC_URL}>
+                        Carte professionnelle d’agent immobilier — Service-Public.fr
+                      </SourceLink>
+                      <p className="mt-1 text-slate-500">
+                        Validité de la carte et conditions d’exercice de la
+                        profession.
                       </p>
                     </li>
                   </ul>
                   <p className="mt-6 border-t border-slate-200 pt-5 text-xs leading-5 text-slate-500">
-                    Informations vérifiées le 28 juillet 2026. Ce guide présente
+                    Informations vérifiées le 31 juillet 2026. Ce guide présente
                     le cadre général et ne remplace ni les textes officiels ni
                     l’examen de votre dossier par la CCI compétente.
                   </p>
+                </div>
+              </section>
+
+              <section aria-labelledby="guides-lies" className="scroll-mt-8">
+                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
+                  Pour aller plus loin
+                </p>
+                <h2 id="guides-lies" className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
+                  Guides liés
+                </h2>
+                <div className="mt-7 grid gap-4 sm:grid-cols-2">
+                  {[
+                    {
+                      href: "/guides/renouvellement-carte-professionnelle-immobilier",
+                      title: "Renouvellement de la carte professionnelle",
+                      text: "La procédure CCI complète, pas à pas.",
+                    },
+                    {
+                      href: "/guides/attestation-formation-alur-validite",
+                      title: "Attestation de formation ALUR et validité",
+                      text: "Mentions obligatoires, conservation, contrôle.",
+                    },
+                    {
+                      href: "/guides/formation-loi-alur-42-heures",
+                      title: "Formation loi ALUR 42 heures : le guide complet",
+                      text: "Durée, rythme, contenus et justificatifs.",
+                    },
+                    {
+                      href: "/guides/carte-professionnelle-immobilier-prix-delais",
+                      title: "Carte professionnelle immobilier : prix et délais",
+                      text: "Coûts de la formalité et délais d’instruction.",
+                    },
+                  ].map((guide) => (
+                    <Link
+                      key={guide.href}
+                      href={guide.href}
+                      className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-gold"
+                    >
+                      <h3 className="font-black text-brand-navy transition group-hover:text-brand-navy-mid">
+                        {guide.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">
+                        {guide.text}
+                      </p>
+                      <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-brand-gold-dark">
+                        Lire le guide
+                        <ArrowRight className="h-4 w-4" aria-hidden />
+                      </span>
+                    </Link>
+                  ))}
                 </div>
               </section>
 
@@ -730,12 +730,13 @@ export default function FormationLoiAlur42HeuresPage() {
                   <div className="max-w-2xl">
                     <BookOpen className="h-8 w-8 text-brand-gold" aria-hidden />
                     <h2 className="mt-5 text-2xl font-black sm:text-3xl">
-                      Consulter le parcours de formation immobilière
+                      Arrivez au renouvellement avec un dossier complet
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Découvrez le programme, ses modules et ses modalités afin
-                      de vérifier s’ils correspondent à votre activité et à
-                      votre calendrier.
+                      Formation Loi ALUR 42 h + TRACFIN 3 h à 299&nbsp;€,
+                      certifiée Qualiopi, en visioconférences&nbsp;: volume,
+                      déontologie et attestations conformes, pour un dossier
+                      CCI sans mauvaise surprise.
                     </p>
                   </div>
                   <Link
@@ -759,6 +760,11 @@ export default function FormationLoiAlur42HeuresPage() {
                 <li>
                   <Link href="/" className="transition hover:text-brand-navy">
                     Accueil
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/guides" className="transition hover:text-brand-navy">
+                    Guides
                   </Link>
                 </li>
                 <li>

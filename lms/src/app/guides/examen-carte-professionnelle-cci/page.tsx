@@ -6,29 +6,30 @@ import {
   BookOpen,
   CalendarDays,
   CheckCircle2,
-  Clock3,
+  GraduationCap,
   ExternalLink,
   FileCheck2,
   Scale,
-  ShieldCheck,
   Users,
   type LucideIcon,
 } from "lucide-react";
 
 const SITE_URL = "https://monpassformation.com";
-const PAGE_PATH = "/guides/formation-loi-alur-42-heures";
+const PAGE_PATH = "/guides/examen-carte-professionnelle-cci";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const COVER_URL = `${SITE_URL}/generated/fal/transaction/cover-immobilier.jpg`;
 const LEGIFRANCE_DECREE_URL =
-  "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000032080616/";
-const LEGIFRANCE_ETHICS_URL =
-  "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000042427805";
-const CCI_RENEWAL_URL =
-  "https://www.cci.fr/ressources/formalites-en-ligne/fichier-des-professionnels-de-limmobilier/renouvellement-de-carte-professionnelle";
+  "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006061974/";
+const CCI_CONDITIONS_URL =
+  "https://www.entreprises.cci-paris-idf.fr/fiches-pratiques/les-conditions-dobtention-dune-carte-professionnelle-loi-hoguet";
+const SERVICE_PUBLIC_URL =
+  "https://entreprendre.service-public.fr/vosdroits/F32994";
+const CCI_FORMALITIES_URL =
+  "https://www.cci.fr/ressources/formalites-en-ligne/fichier-des-professionnels-de-limmobilier";
 
-const title = "Formation loi ALUR 42 heures : guide 2026";
+const title = "Examen de la carte professionnelle immobilier : la réalité en 2026";
 const description =
-  "Durée, personnes concernées, contenus obligatoires et justificatifs : comprendre les 42 heures de formation loi ALUR pour les professionnels de l’immobilier.";
+  "L'examen de capacité a disparu en 2006. Aptitude professionnelle, BTS professions immobilières, VAE et préparation : les vraies voies vers la carte délivrée par la CCI.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -37,12 +38,12 @@ export const metadata: Metadata = {
   },
   description,
   keywords: [
-    "formation loi ALUR 42 heures",
-    "formation ALUR immobilier",
-    "formation continue agent immobilier",
-    "obligation formation loi ALUR",
-    "renouvellement carte professionnelle immobilier",
-    "formation déontologie immobilier",
+    "examen carte professionnelle immobilier",
+    "examen carte T CCI",
+    "aptitude professionnelle agent immobilier",
+    "BTS professions immobilières examen",
+    "préparer carte professionnelle immobilier",
+    "examen capacité immobilier abrogé",
   ],
   alternates: {
     canonical: PAGE_URL,
@@ -66,14 +67,14 @@ export const metadata: Metadata = {
     siteName: "MonPassFormation",
     locale: "fr_FR",
     type: "article",
-    publishedTime: "2026-07-28",
-    modifiedTime: "2026-07-28",
+    publishedTime: "2026-07-31",
+    modifiedTime: "2026-07-31",
     images: [
       {
         url: COVER_URL,
         width: 1024,
         height: 576,
-        alt: "Guide de la formation loi ALUR de 42 heures",
+        alt: "Examen et aptitude professionnelle pour la carte immobilier",
       },
     ],
   },
@@ -85,107 +86,46 @@ export const metadata: Metadata = {
   },
 };
 
-
-type Fact = {
-  icon: LucideIcon;
-  value: string;
-  label: string;
-  detail: string;
-};
-
-const keyFacts: Fact[] = [
-  {
-    icon: Clock3,
-    value: "42 h",
-    label: "sur trois ans",
-    detail: "Au cours de trois années consécutives d’exercice.",
-  },
-  {
-    icon: CalendarDays,
-    value: "14 h",
-    label: "par an",
-    detail: "L’autre rythme prévu par le décret.",
-  },
-  {
-    icon: ShieldCheck,
-    value: "4 h",
-    label: "de déontologie",
-    detail: "Dont 2 h sur la non-discrimination à l’accès au logement.",
-  },
-];
-
-const audiences = [
-  {
-    title: "Titulaires de la carte professionnelle",
-    text: "Sont concernés les titulaires de la carte et, pour une personne morale, son représentant légal et statutaire.",
-  },
-  {
-    title: "Directions d’établissement",
-    text: "L’obligation vise aussi les personnes qui dirigent un établissement, une succursale, une agence ou un bureau.",
-  },
-  {
-    title: "Collaborateurs habilités",
-    text: "Les salariés et indépendants habilités par le titulaire à négocier, s’entremettre ou s’engager pour son compte sont également concernés.",
-  },
-];
-
-const eligibleThemes = [
-  "Droit applicable à l’activité immobilière",
-  "Économie et environnement du marché",
-  "Pratiques commerciales directement liées au métier",
-  "Déontologie des professionnels de l’immobilier",
-  "Construction, habitation et urbanisme",
-  "Transition énergétique",
-];
-
-const planningSteps = [
-  {
-    title: "Recenser les heures déjà effectuées",
-    text: "Rassemblez les attestations et vérifiez leurs dates, leur durée, leur contenu et la période de trois années concernée.",
-  },
-  {
-    title: "Contrôler les quatre heures obligatoires",
-    text: "Le cycle doit comprendre 2 h sur la non-discrimination à l’accès au logement et 2 h sur les autres règles déontologiques.",
-  },
-  {
-    title: "Choisir des thèmes liés à l’activité",
-    text: "Le contenu retenu doit avoir un lien direct avec l’activité professionnelle réellement exercée.",
-  },
-  {
-    title: "Conserver chaque justificatif",
-    text: "L’attestation doit notamment mentionner les objectifs, le contenu, la durée et la date de réalisation de l’activité.",
-  },
-  {
-    title: "Anticiper la formalité CCI",
-    text: "Pour une carte arrivant à échéance, préparez les justificatifs avant l’ouverture de la période de dépôt de la demande.",
-  },
-];
-
 const faqs = [
   {
-    question: "Faut-il suivre exactement 14 heures chaque année ?",
+    question: "Existe-t-il un examen pour obtenir la carte professionnelle immobilier ?",
     answer:
-      "Le décret fixe la durée à 14 heures par an ou 42 heures au cours de trois années consécutives d’exercice. Le rythme annuel aide à répartir la charge, mais le texte prévoit bien ces deux modalités.",
+      "Non, plus depuis 2006. L'article 17 du décret n° 72-678, qui prévoyait un examen d'aptitude professionnelle, est abrogé depuis le 1er janvier 2006. L'aptitude se justifie désormais par un diplôme ou par l'expérience professionnelle : la CCI instruit votre dossier, elle n'organise aucune épreuve de capacité.",
   },
   {
-    question: "Les 42 heures peuvent-elles porter sur n’importe quel sujet ?",
+    question: "Pourquoi entend-on encore parler d'un « examen » de la carte ?",
     answer:
-      "Non. Les activités doivent concerner les domaines admis par le décret et présenter un lien direct avec l’activité professionnelle exercée. Les obligations spécifiques de déontologie et de non-discrimination doivent aussi être respectées.",
+      "La confusion vient de trois sources : l'ancien examen de capacité supprimé en 2006, le BTS professions immobilières — un véritable examen, mais qui délivre un diplôme d'État et non la carte — et les diagnostics d'aptitude en ligne proposés par certaines CCI, qui ont une simple valeur indicative.",
   },
   {
-    question: "Combien d’heures de déontologie sont obligatoires ?",
+    question: "Quel diplôme passer pour obtenir la carte « Transactions » ?",
     answer:
-      "Sur trois années consécutives, il faut au moins 2 heures consacrées à la non-discrimination à l’accès au logement et au moins 2 heures portant sur les autres règles déontologiques, soit 4 heures au total.",
+      "Le BTS professions immobilières (bac+2) est la voie la plus directe. Sont également recevables un diplôme d'au moins trois années d'études supérieures juridiques, économiques ou commerciales, un titre RNCP de niveau équivalent dans ces filières, ou le diplôme de l'ICH (institut du CNAM).",
   },
   {
-    question: "Une attestation de formation suffit-elle à renouveler la carte ?",
+    question: "Quel est le taux de réussite à l'examen de la carte ?",
     answer:
-      "Elle sert à justifier la formation continue, mais le renouvellement reste une formalité distincte soumise à d’autres conditions et pièces. Il faut consulter la liste actualisée de la CCI compétente.",
+      "Il n'y a pas de taux de réussite à proprement parler, puisqu'il n'existe plus d'épreuve pour la carte : la demande est instruite sur pièces. Pour le BTS professions immobilières, les taux de réussite sont publiés session par session par le ministère de l'enseignement supérieur.",
   },
   {
-    question: "Quand demander le renouvellement de la carte professionnelle ?",
+    question: "Le BTS professions immobilières peut-il se préparer en alternance ?",
     answer:
-      "CCI France indique que la demande doit être réalisée dans les deux mois précédant la date d’expiration de la carte. La préparation des formations et des pièces doit donc commencer en amont.",
+      "Oui. Le BTS PI se prépare en formation initiale, en alternance (contrat d'apprentissage ou de professionnalisation, le coût pédagogique étant alors pris en charge via l'OPCO de l'entreprise) ou en candidat libre. Son référentiel a été rénové par l'arrêté du 22 novembre 2023, avec une première session du nouveau diplôme en 2026.",
+  },
+  {
+    question: "La VAE est-elle un examen ?",
+    answer:
+      "Non. La validation des acquis de l'expérience est une procédure devant jury, ouverte dès un an d'expérience en lien avec la certification visée. Elle permet d'obtenir tout ou partie d'un diplôme ou titre ouvrant droit à la carte, sans repasser par une scolarité complète.",
+  },
+  {
+    question: "Combien coûte l'obtention de la carte par la voie diplôme ?",
+    answer:
+      "Le coût dépend de la voie : formation BTS (gratuite pour l'alternant), dossier VAE (tarif variable selon le certificateur), puis frais de dossier CCI pour la carte elle-même, fixés par arrêté — consultez le tarif en vigueur auprès de votre CCI.",
+  },
+  {
+    question: "Un ressortissant européen doit-il passer une épreuve ?",
+    answer:
+      "La reconnaissance des qualifications acquises dans l'Union européenne ou l'Espace économique européen suit la directive 2005/36/CE. Selon les cas, une épreuve d'aptitude ou un stage d'adaptation peut être proposé. Rapprochez-vous du centre de formalités des professions immobilières de la CCI compétente.",
   },
 ];
 
@@ -198,8 +138,8 @@ const structuredData = {
       headline: title,
       description,
       image: COVER_URL,
-      datePublished: "2026-07-28",
-      dateModified: "2026-07-28",
+      datePublished: "2026-07-31",
+      dateModified: "2026-07-31",
       inLanguage: "fr-FR",
       isAccessibleForFree: true,
       mainEntityOfPage: {
@@ -223,11 +163,11 @@ const structuredData = {
       about: [
         {
           "@type": "Thing",
-          name: "Formation continue des professionnels de l’immobilier",
+          name: "Aptitude professionnelle immobilier",
         },
         {
           "@type": "Thing",
-          name: "Loi ALUR",
+          name: "Carte professionnelle immobilier",
         },
       ],
     },
@@ -250,7 +190,7 @@ const structuredData = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Formation loi ALUR 42 heures",
+          name: "Examen de la carte professionnelle",
           item: PAGE_URL,
         },
       ],
@@ -269,6 +209,104 @@ const structuredData = {
     },
   ],
 };
+
+type Fact = {
+  icon: LucideIcon;
+  value: string;
+  label: string;
+  detail: string;
+};
+
+const keyFacts: Fact[] = [
+  {
+    icon: FileCheck2,
+    value: "2006",
+    label: "fin de l'examen de capacité",
+    detail: "L'article 17 du décret de 1972 est abrogé depuis le 1er janvier 2006.",
+  },
+  {
+    icon: GraduationCap,
+    value: "BTS PI",
+    label: "diplôme de référence",
+    detail: "Rénové par l'arrêté du 22 novembre 2023, première session en 2026.",
+  },
+  {
+    icon: Users,
+    value: "3 voies",
+    label: "pour justifier l'aptitude",
+    detail: "Diplôme, expérience professionnelle salariée ou VAE.",
+  },
+];
+
+const voies = [
+  {
+    title: "La voie du diplôme",
+    text: "Article 11 du décret : diplôme d'au moins trois années d'études supérieures juridiques, économiques ou commerciales, titre RNCP équivalent, BTS professions immobilières ou diplôme de l'ICH.",
+  },
+  {
+    title: "La voie mixte",
+    text: "Article 12 : le baccalauréat (ou un titre équivalent dans les filières juridique, économique ou commerciale) complété par trois ans d'emploi salarié rattaché à l'activité visée.",
+  },
+  {
+    title: "La voie de l'expérience",
+    text: "Article 14 : dix ans d'emploi salarié dans l'activité, durée réduite à quatre ans pour un emploi de cadre ou un emploi public de catégorie A (ou équivalent).",
+  },
+];
+
+const btsPoints = [
+  "Diplôme d'État de niveau bac+2, voie directe vers la carte « Transactions »",
+  "Référentiel rénové par l'arrêté du 22 novembre 2023, première session 2026",
+  "Accessible en formation initiale, en alternance ou en candidat libre",
+  "Programme : droit immobilier, transaction, gestion locative, négociation",
+  "Obtenu, il dispense de justifier une expérience professionnelle",
+  "Préparé à distance, il reste compatible avec une activité professionnelle",
+];
+
+const preparationSteps = [
+  {
+    title: "Faire le point sur votre profil",
+    text: "Listez vos diplômes et vos périodes d'emploi salarié, puis confrontez-les aux conditions des articles 11 à 14 du décret. Certaines CCI proposent un diagnostic d'aptitude en ligne, à valeur indicative.",
+  },
+  {
+    title: "Choisir la voie la plus courte",
+    text: "Diplôme déjà en poche ? Vous êtes peut-être déjà apte. Expérience solide sans diplôme ? Comparez la voie « expérience » et la VAE avant de vous engager dans une formation longue.",
+  },
+  {
+    title: "Travailler le socle juridique du métier",
+    text: "Loi Hoguet, mandats, honoraires, déontologie, diagnostics : ces fondamentaux servent à la fois pour le diplôme et pour l'exercice quotidien ensuite.",
+  },
+  {
+    title: "Valider le diplôme ou l'attestation visé",
+    text: "Épreuves du BTS, jury de VAE ou validation de votre expérience : sécurisez le justificatif qui prouvera votre aptitude devant la CCI.",
+  },
+  {
+    title: "Constituer le dossier de carte",
+    text: "Garantie financière si détention de fonds, assurance RC professionnelle, pièces d'aptitude : la demande se dépose ensuite auprès de la CCI territorialement compétente.",
+  },
+];
+
+const relatedGuides = [
+  {
+    href: "/guides/devenir-agent-immobilier-sans-diplome",
+    title: "Devenir agent immobilier sans diplôme",
+    text: "Expérience professionnelle et VAE : les voies réelles sans diplôme.",
+  },
+  {
+    href: "/guides/carte-professionnelle-immobilier-prix-delais",
+    title: "Carte professionnelle : prix et délais",
+    text: "Frais de dossier CCI, pièces et calendrier d'obtention.",
+  },
+  {
+    href: "/guides/negociateur-immobilier-statut-salaire",
+    title: "Négociateur immobilier : statut et salaire",
+    text: "Entrer dans le métier comme salarié habilité ou agent commercial.",
+  },
+  {
+    href: "/formation-juridique-immobilier",
+    title: "Formation juridique immobilier",
+    text: "Consolider les fondamentaux du droit applicable à la transaction.",
+  },
+];
 
 function SourceLink({
   href,
@@ -290,7 +328,7 @@ function SourceLink({
   );
 }
 
-export default function FormationLoiAlur42HeuresPage() {
+export default function ExamenCarteProfessionnelleCciPage() {
   return (
     <>
       <script
@@ -345,38 +383,39 @@ export default function FormationLoiAlur42HeuresPage() {
                   </li>
                   <li aria-hidden>/</li>
                   <li aria-current="page" className="font-semibold text-white">
-                    Formation loi ALUR 42 heures
+                    Examen de la carte professionnelle
                   </li>
                 </ol>
               </nav>
 
               <div className="mt-9 max-w-4xl">
                 <p className="inline-flex rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-brand-gold-pale">
-                  Guide réglementaire 2026
+                  Guide carrière 2026
                 </p>
                 <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                  Formation loi ALUR 42 heures&nbsp;: les obligations à connaître
+                  Examen de la carte professionnelle immobilier&nbsp;: ce qu’il faut vraiment savoir
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">
-                  À qui s’adresse l’obligation, comment répartir les heures et
-                  quels justificatifs conserver&nbsp;? Voici le cadre pratique,
-                  fondé sur les textes officiels.
+                  Contrairement à une idée répandue, il n’existe plus d’examen de
+                  capacité pour obtenir la carte. Voici ce qui l’a remplacé, les
+                  vrais diplômes qui ouvrent droit à la carte, et comment vous
+                  préparer efficacement.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Link
-                    href="#comprendre"
+                    href="#examen"
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-gold px-5 py-3.5 text-sm font-black text-brand-navy transition hover:bg-brand-gold-hover"
                   >
-                    Comprendre les 42 heures
+                    Comprendre le dispositif actuel
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                   <a
-                    href={LEGIFRANCE_DECREE_URL}
+                    href={CCI_CONDITIONS_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3.5 text-sm font-bold text-white transition hover:bg-white/10"
                   >
-                    Lire le décret sur Légifrance
+                    Conditions d’obtention (CCI)
                     <ExternalLink className="h-4 w-4" aria-hidden />
                   </a>
                 </div>
@@ -418,11 +457,11 @@ export default function FormationLoiAlur42HeuresPage() {
               <nav aria-label="Sommaire" className="mt-4">
                 <ul className="space-y-1 text-sm">
                   {[
-                    ["#comprendre", "Comprendre les 42 h"],
-                    ["#personnes-concernees", "Personnes concernées"],
-                    ["#contenu", "Contenu obligatoire"],
-                    ["#organiser", "Organiser son cycle"],
-                    ["#justificatifs", "Justificatifs"],
+                    ["#examen", "L'examen existe-t-il ?"],
+                    ["#voies", "Les voies d'aptitude"],
+                    ["#bts", "Le BTS professions immobilières"],
+                    ["#preparer", "Se préparer concrètement"],
+                    ["#taux", "Taux de réussite"],
                     ["#faq", "Questions fréquentes"],
                     ["#sources", "Sources officielles"],
                   ].map(([href, label]) => (
@@ -440,29 +479,31 @@ export default function FormationLoiAlur42HeuresPage() {
             </aside>
 
             <article className="min-w-0 space-y-14">
-              <section id="comprendre" className="scroll-mt-8">
+              <section id="examen" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Le principe
+                  Le point de départ
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy sm:text-4xl">
-                  14 heures par an ou 42 heures sur trois ans
+                  L’examen de la carte professionnelle existe-t-il encore&nbsp;?
                 </h2>
                 <div className="mt-6 space-y-5 text-base leading-8 text-slate-700">
                   <p>
-                    La formation continue des professionnels de l’immobilier est
-                    une obligation professionnelle. Elle vise la mise à jour et
-                    le perfectionnement des connaissances et compétences utiles
-                    à l’exercice du métier.
+                    <strong>Non.</strong> Jusqu’en 2005, les personnes dépourvues
+                    des diplômes requis pouvaient passer un examen d’aptitude
+                    professionnelle organisé sous l’autorité administrative. Le{" "}
+                    <SourceLink href={LEGIFRANCE_DECREE_URL}>
+                      décret n°&nbsp;72-678 du 20 juillet 1972
+                    </SourceLink>{" "}
+                    le prévoyait à son article 17&nbsp;: cet article est{" "}
+                    <strong>abrogé depuis le 1<sup>er</sup> janvier 2006</strong>{" "}
+                    (décret n°&nbsp;2005-1315).
                   </p>
                   <p>
-                    L’article 2 du{" "}
-                    <SourceLink href={LEGIFRANCE_DECREE_URL}>
-                      décret n°&nbsp;2016-173 du 18 février 2016
-                    </SourceLink>{" "}
-                    fixe une durée de <strong>14 heures par an</strong> ou de{" "}
-                    <strong>42 heures au cours de trois années consécutives d’exercice</strong>.
-                    Il ne s’agit donc pas de deux obligations à additionner,
-                    mais de deux rythmes prévus par le texte.
+                    Aujourd’hui, la CCI qui délivre la carte{" "}
+                    <strong>instruit un dossier sur pièces</strong>&nbsp;: elle
+                    vérifie votre aptitude professionnelle, votre honorabilité,
+                    votre garantie financière et votre assurance. Aucune épreuve
+                    écrite ou orale n’est organisée pour la carte elle-même.
                   </p>
                 </div>
 
@@ -471,78 +512,82 @@ export default function FormationLoiAlur42HeuresPage() {
                     <Scale className="mt-1 h-6 w-6 shrink-0 text-brand-gold-dark" aria-hidden />
                     <div>
                       <h3 className="font-black text-brand-navy">
-                        Pour le renouvellement de la carte
+                        Ce qui remplace l’examen
                       </h3>
                       <p className="mt-2 leading-7 text-slate-700">
-                        CCI France présente le renouvellement comme soumis,
-                        entre autres conditions, à 42 heures de formation
-                        continue en lien direct avec l’activité exercée. La
-                        formation prépare un justificatif réglementaire&nbsp;;
-                        elle ne remplace pas la demande administrative.
+                        L’aptitude professionnelle se prouve désormais par des{" "}
+                        <strong>titres ou par le temps</strong>&nbsp;: un diplôme
+                        visé par le décret, ou une expérience salariée suffisante
+                        dans l’activité. La VAE permet, elle, de transformer
+                        l’expérience en diplôme.
                       </p>
                     </div>
                   </div>
                 </div>
               </section>
 
-              <section id="personnes-concernees" className="scroll-mt-8">
+              <section id="voies" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Public concerné
+                  Aptitude professionnelle
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Qui doit suivre la formation continue&nbsp;?
+                  Les trois voies reconnues par le décret
                 </h2>
                 <p className="mt-5 max-w-3xl text-base leading-8 text-slate-700">
-                  L’obligation ne concerne pas uniquement la personne dont le
-                  nom figure sur la carte. Le décret distingue trois catégories
-                  de professionnels.
+                  Les conditions détaillées figurent sur la fiche officielle des{" "}
+                  <SourceLink href={CCI_CONDITIONS_URL}>
+                    conditions d’obtention publiée par la CCI
+                  </SourceLink>
+                  . Elles s’organisent en trois voies principales.
                 </p>
                 <div className="mt-7 grid gap-4 md:grid-cols-3">
-                  {audiences.map((audience, index) => (
+                  {voies.map((voie, index) => (
                     <div
-                      key={audience.title}
+                      key={voie.title}
                       className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
                     >
                       <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy text-sm font-black text-white">
                         {index + 1}
                       </span>
                       <h3 className="mt-5 text-lg font-black text-brand-navy">
-                        {audience.title}
+                        {voie.title}
                       </h3>
                       <p className="mt-3 text-sm leading-7 text-slate-600">
-                        {audience.text}
+                        {voie.text}
                       </p>
                     </div>
                   ))}
                 </div>
                 <p className="mt-5 flex gap-3 rounded-xl bg-brand-navy/5 p-4 text-sm leading-6 text-slate-700">
                   <Users className="mt-0.5 h-5 w-5 shrink-0 text-brand-navy" aria-hidden />
-                  En cas de doute sur votre situation ou sur la période à
-                  justifier, rapprochez-vous de la CCI compétente avant de
-                  constituer votre programme.
+                  Les durées d’expérience s’apprécient en temps complet ou
+                  équivalent temps partiel, et l’emploi doit se rattacher à la
+                  mention demandée sur la carte.
                 </p>
               </section>
 
-              <section id="contenu" className="scroll-mt-8">
+              <section id="bts" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Programme recevable
+                  Le vrai « examen » du métier
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels contenus peuvent compter dans les 42 heures&nbsp;?
+                  Le BTS professions immobilières, voie royale vers la carte
                 </h2>
                 <p className="mt-5 text-base leading-8 text-slate-700">
-                  Les activités doivent porter sur des domaines prévus par le
-                  décret et avoir un <strong>lien direct avec l’activité exercée</strong>.
-                  Les thèmes admis couvrent notamment&nbsp;:
+                  Si vous cherchez un « examen de la carte professionnelle », le
+                  diplôme qui s’en rapproche le plus est le{" "}
+                  <strong>BTS professions immobilières (BTS PI)</strong>&nbsp;: un
+                  diplôme d’État de niveau bac+2 qui ouvre directement droit à la
+                  carte, sans condition d’expérience.
                 </p>
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {eligibleThemes.map((theme) => (
+                  {btsPoints.map((point) => (
                     <li
-                      key={theme}
+                      key={point}
                       className="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-semibold leading-6 text-slate-700"
                     >
                       <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold-dark" aria-hidden />
-                      {theme}
+                      {point}
                     </li>
                   ))}
                 </ul>
@@ -550,43 +595,38 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-8 overflow-hidden rounded-2xl bg-brand-navy text-white">
                   <div className="grid gap-0 md:grid-cols-[1fr_1.35fr]">
                     <div className="border-b border-white/10 p-6 md:border-b-0 md:border-r md:p-8">
-                      <p className="text-4xl font-black text-brand-gold">4 heures</p>
-                      <p className="mt-2 font-bold">de déontologie sur le cycle</p>
+                      <p className="text-4xl font-black text-brand-gold">Bac+2</p>
+                      <p className="mt-2 font-bold">et la carte devient accessible</p>
                     </div>
                     <div className="p-6 md:p-8">
                       <p className="leading-7 text-white/80">
-                        Depuis la modification entrée en vigueur en 2021, le
-                        cycle comprend au moins <strong className="text-white">2 heures sur
-                        la non-discrimination à l’accès au logement</strong> et au
-                        moins <strong className="text-white">2 heures sur les autres
-                        règles déontologiques</strong>.
+                        Le BTS PI peut se préparer{" "}
+                        <strong className="text-white">en alternance</strong> —
+                        le coût pédagogique est alors pris en charge via l’OPCO
+                        de l’entreprise — ou <strong className="text-white">en
+                        candidat libre</strong>, à son rythme. Son référentiel a
+                        été rénové par l’arrêté du 22 novembre 2023&nbsp;: la
+                        première session du nouveau diplôme se tient en 2026.
                       </p>
                       <p className="mt-4 text-sm text-white/70">
-                        Source&nbsp;:{" "}
-                        <a
-                          href={LEGIFRANCE_ETHICS_URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-bold text-brand-gold-pale underline underline-offset-4"
-                        >
-                          décret n°&nbsp;2020-1259 sur Légifrance
-                        </a>
-                        .
+                        La VAE offre une alternative&nbsp;: un an d’expérience en
+                        lien avec le diplôme visé suffit pour engager la
+                        procédure devant jury.
                       </p>
                     </div>
                   </div>
                 </div>
               </section>
 
-              <section id="organiser" className="scroll-mt-8">
+              <section id="preparer" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
                   Méthode pratique
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Comment organiser son cycle de formation&nbsp;?
+                  Comment préparer votre accès à la carte, étape par étape
                 </h2>
                 <ol className="mt-7 space-y-4">
-                  {planningSteps.map((step, index) => (
+                  {preparationSteps.map((step, index) => (
                     <li
                       key={step.title}
                       className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 sm:grid-cols-[44px_1fr] sm:p-6"
@@ -604,61 +644,66 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-7 flex flex-col items-start justify-between gap-5 rounded-2xl border border-brand-gold/30 bg-brand-gold/10 p-6 sm:flex-row sm:items-center">
                   <div>
                     <h3 className="font-black text-brand-navy">
-                      Besoin de préparer votre échéance&nbsp;?
+                      Pas de diplôme, mais de l’expérience&nbsp;?
                     </h3>
                     <p className="mt-2 text-sm leading-6 text-slate-700">
-                      Le guide dédié détaille le calendrier et les points à
-                      vérifier pour la formalité.
+                      Notre guide dédié détaille les voies « expérience
+                      professionnelle » et VAE, et le parcours réaliste par le
+                      métier de négociateur.
                     </p>
                   </div>
                   <Link
-                    href="/guides/renouvellement-carte-professionnelle-immobilier"
+                    href="/guides/devenir-agent-immobilier-sans-diplome"
                     className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand-navy px-4 py-3 text-sm font-black text-white transition hover:bg-brand-navy-mid"
                   >
-                    Guide du renouvellement
+                    Agent immobilier sans diplôme
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                 </div>
               </section>
 
-              <section id="justificatifs" className="scroll-mt-8">
+              <section id="taux" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Traçabilité
+                  Transparence
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels justificatifs conserver&nbsp;?
+                  Taux de réussite&nbsp;: ce qui est publié — et ce qui ne l’est pas
                 </h2>
                 <div className="mt-6 grid gap-6 md:grid-cols-[1.3fr_1fr]">
                   <div className="space-y-5 text-base leading-8 text-slate-700">
                     <p>
-                      L’organisme de formation délivre une attestation à la
-                      personne qui a accompli l’activité. Le décret prévoit que
-                      ce document mentionne les <strong>objectifs</strong>, le{" "}
-                      <strong>contenu</strong>, la <strong>durée</strong> et la{" "}
-                      <strong>date de réalisation</strong>.
+                      Puisqu’il n’existe plus d’épreuve pour la carte, il n’existe{" "}
+                      <strong>aucune statistique officielle de réussite</strong>{" "}
+                      à un « examen de la carte professionnelle ». La demande est
+                      administrative&nbsp;: elle aboutit si les conditions légales
+                      sont remplies et le dossier complet.
                     </p>
                     <p>
-                      Vérifiez ces mentions dès réception et archivez
-                      l’attestation avec les autres pièces de votre cycle. Les
-                      titulaires transmettent leurs justificatifs à la CCI,
-                      après chaque formation ou au plus tard au moment de la
-                      demande de renouvellement.
+                      En revanche, les résultats du{" "}
+                      <strong>BTS professions immobilières</strong> relèvent des
+                      statistiques ministérielles publiées à chaque session, et
+                      les certificateurs de VAE communiquent leurs propres taux
+                      de validation. Méfiez-vous des chiffres non sourcés qui
+                      circulent sur ces sujets.
                     </p>
                   </div>
                   <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <FileCheck2 className="h-8 w-8 text-brand-gold-dark" aria-hidden />
+                    <CalendarDays className="h-8 w-8 text-brand-gold-dark" aria-hidden />
                     <h3 className="mt-5 font-black text-brand-navy">
-                      Contrôle rapide d’une attestation
+                      Les vrais jalons à anticiper
                     </h3>
                     <ul className="mt-4 space-y-3 text-sm text-slate-700">
-                      {["Objectifs", "Contenu", "Durée", "Date de réalisation"].map(
-                        (item) => (
-                          <li key={item} className="flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-brand-navy" aria-hidden />
-                            {item}
-                          </li>
-                        ),
-                      )}
+                      {[
+                        "Sessions du BTS PI (calendrier ministériel)",
+                        "Délais d’instruction du dossier VAE",
+                        "Instruction de la demande par la CCI",
+                        "Validité de 3 ans de la carte obtenue",
+                      ].map((item) => (
+                        <li key={item} className="flex items-center gap-2">
+                          <CheckCircle2 className="h-4 w-4 text-brand-navy" aria-hidden />
+                          {item}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -669,7 +714,7 @@ export default function FormationLoiAlur42HeuresPage() {
                   Questions fréquentes
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Formation loi ALUR 42 heures&nbsp;: FAQ
+                  Examen de la carte professionnelle&nbsp;: FAQ
                 </h2>
                 <div className="mt-7 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white">
                   {faqs.map((faq) => (
@@ -679,6 +724,30 @@ export default function FormationLoiAlur42HeuresPage() {
                       </summary>
                       <p className="mt-4 text-sm leading-7 text-slate-600">{faq.answer}</p>
                     </details>
+                  ))}
+                </div>
+              </section>
+
+              <section id="guides-lies" className="scroll-mt-8">
+                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
+                  Pour aller plus loin
+                </p>
+                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
+                  Guides liés
+                </h2>
+                <div className="mt-7 grid gap-4 sm:grid-cols-2">
+                  {relatedGuides.map((guide) => (
+                    <Link
+                      key={guide.href}
+                      href={guide.href}
+                      className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-gold/50 hover:shadow-md"
+                    >
+                      <h3 className="flex items-center justify-between gap-3 font-black text-brand-navy">
+                        {guide.title}
+                        <ArrowRight className="h-4 w-4 shrink-0 text-brand-gold-dark transition group-hover:translate-x-1" aria-hidden />
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">{guide.text}</p>
+                    </Link>
                   ))}
                 </div>
               </section>
@@ -694,31 +763,39 @@ export default function FormationLoiAlur42HeuresPage() {
                   <ul className="space-y-5 text-sm leading-7 text-slate-700">
                     <li>
                       <SourceLink href={LEGIFRANCE_DECREE_URL}>
-                        Décret n°&nbsp;2016-173 du 18 février 2016 — Légifrance
+                        Décret n°&nbsp;72-678 du 20 juillet 1972 — Légifrance
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Personnes concernées, durée, activités recevables et justificatifs.
+                        Conditions d’aptitude professionnelle (art. 11 à 16) et abrogation de l’examen (art. 17).
                       </p>
                     </li>
                     <li>
-                      <SourceLink href={LEGIFRANCE_ETHICS_URL}>
-                        Décret n°&nbsp;2020-1259 du 14 octobre 2020 — Légifrance
+                      <SourceLink href={CCI_CONDITIONS_URL}>
+                        Conditions d’obtention de la carte professionnelle — CCI Paris Île-de-France
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Intégration de la non-discrimination à l’accès au logement.
+                        Détail des diplômes et des durées d’expérience exigés par mention.
                       </p>
                     </li>
                     <li>
-                      <SourceLink href={CCI_RENEWAL_URL}>
-                        Renouvellement de carte professionnelle — CCI France
+                      <SourceLink href={SERVICE_PUBLIC_URL}>
+                        Devenir agent immobilier — service-public.fr
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Durée de validité, période de dépôt et accès à la formalité.
+                        Démarche officielle, mentions de la carte et justificatifs.
+                      </p>
+                    </li>
+                    <li>
+                      <SourceLink href={CCI_FORMALITIES_URL}>
+                        Fichier des professionnels de l’immobilier — CCI France
+                      </SourceLink>
+                      <p className="mt-1 text-slate-500">
+                        Accès aux formalités : première demande, mise à jour, renouvellement.
                       </p>
                     </li>
                   </ul>
                   <p className="mt-6 border-t border-slate-200 pt-5 text-xs leading-5 text-slate-500">
-                    Informations vérifiées le 28 juillet 2026. Ce guide présente
+                    Informations vérifiées le 31 juillet 2026. Ce guide présente
                     le cadre général et ne remplace ni les textes officiels ni
                     l’examen de votre dossier par la CCI compétente.
                   </p>
@@ -730,12 +807,13 @@ export default function FormationLoiAlur42HeuresPage() {
                   <div className="max-w-2xl">
                     <BookOpen className="h-8 w-8 text-brand-gold" aria-hidden />
                     <h2 className="mt-5 text-2xl font-black sm:text-3xl">
-                      Consulter le parcours de formation immobilière
+                      Carte obtenue&nbsp;? Pensez à la formation continue
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Découvrez le programme, ses modules et ses modalités afin
-                      de vérifier s’ils correspondent à votre activité et à
-                      votre calendrier.
+                      Dès l’exercice, la loi impose 42 heures de formation sur
+                      trois ans, exigées au renouvellement. Découvrez le parcours
+                      MonPassFormation, certifié Qualiopi et animé en
+                      visioconférences.
                     </p>
                   </div>
                   <Link

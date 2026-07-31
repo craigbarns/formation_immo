@@ -1,34 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
+  AlertTriangle,
   ArrowLeft,
   ArrowRight,
   BookOpen,
-  CalendarDays,
   CheckCircle2,
-  Clock3,
   ExternalLink,
-  FileCheck2,
-  Scale,
   ShieldCheck,
+  Sparkles,
   Users,
   type LucideIcon,
 } from "lucide-react";
 
 const SITE_URL = "https://monpassformation.com";
-const PAGE_PATH = "/guides/formation-loi-alur-42-heures";
+const PAGE_PATH = "/guides/immobilier-intelligence-artificielle";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const COVER_URL = `${SITE_URL}/generated/fal/transaction/cover-immobilier.jpg`;
-const LEGIFRANCE_DECREE_URL =
-  "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000032080616/";
-const LEGIFRANCE_ETHICS_URL =
-  "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000042427805";
-const CCI_RENEWAL_URL =
-  "https://www.cci.fr/ressources/formalites-en-ligne/fichier-des-professionnels-de-limmobilier/renouvellement-de-carte-professionnelle";
+const CNIL_IA_URL = "https://www.cnil.fr/fr/intelligence-artificielle";
+const STRATEGIE_IA_URL =
+  "https://www.economie.gouv.fr/actualites/strategie-nationale-intelligence-artificielle";
+const AI_ACT_URL = "https://eur-lex.europa.eu/eli/reg/2024/1689/oj";
 
-const title = "Formation loi ALUR 42 heures : guide 2026";
+const title = "Intelligence artificielle et immobilier : usages, limites, formation";
 const description =
-  "Durée, personnes concernées, contenus obligatoires et justificatifs : comprendre les 42 heures de formation loi ALUR pour les professionnels de l’immobilier.";
+  "Estimation, rédaction d’annonces, prospection, visites virtuelles : ce que l’intelligence artificielle change pour les agents immobiliers, ses limites et comment se former.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -37,17 +33,17 @@ export const metadata: Metadata = {
   },
   description,
   keywords: [
-    "formation loi ALUR 42 heures",
-    "formation ALUR immobilier",
-    "formation continue agent immobilier",
-    "obligation formation loi ALUR",
-    "renouvellement carte professionnelle immobilier",
-    "formation déontologie immobilier",
+    "intelligence artificielle immobilier",
+    "IA agent immobilier",
+    "estimation immobilière IA",
+    "rédaction annonce immobilière IA",
+    "visite virtuelle intelligence artificielle",
+    "formation IA immobilier",
   ],
   alternates: {
     canonical: PAGE_URL,
   },
-  category: "Formation professionnelle immobilière",
+  category: "Innovation et pratiques professionnelles immobilières",
   robots: {
     index: true,
     follow: true,
@@ -66,14 +62,14 @@ export const metadata: Metadata = {
     siteName: "MonPassFormation",
     locale: "fr_FR",
     type: "article",
-    publishedTime: "2026-07-28",
-    modifiedTime: "2026-07-28",
+    publishedTime: "2026-07-31",
+    modifiedTime: "2026-07-31",
     images: [
       {
         url: COVER_URL,
         width: 1024,
         height: 576,
-        alt: "Guide de la formation loi ALUR de 42 heures",
+        alt: "Usages de l’intelligence artificielle pour les agents immobiliers",
       },
     ],
   },
@@ -85,107 +81,36 @@ export const metadata: Metadata = {
   },
 };
 
-
-type Fact = {
-  icon: LucideIcon;
-  value: string;
-  label: string;
-  detail: string;
-};
-
-const keyFacts: Fact[] = [
-  {
-    icon: Clock3,
-    value: "42 h",
-    label: "sur trois ans",
-    detail: "Au cours de trois années consécutives d’exercice.",
-  },
-  {
-    icon: CalendarDays,
-    value: "14 h",
-    label: "par an",
-    detail: "L’autre rythme prévu par le décret.",
-  },
-  {
-    icon: ShieldCheck,
-    value: "4 h",
-    label: "de déontologie",
-    detail: "Dont 2 h sur la non-discrimination à l’accès au logement.",
-  },
-];
-
-const audiences = [
-  {
-    title: "Titulaires de la carte professionnelle",
-    text: "Sont concernés les titulaires de la carte et, pour une personne morale, son représentant légal et statutaire.",
-  },
-  {
-    title: "Directions d’établissement",
-    text: "L’obligation vise aussi les personnes qui dirigent un établissement, une succursale, une agence ou un bureau.",
-  },
-  {
-    title: "Collaborateurs habilités",
-    text: "Les salariés et indépendants habilités par le titulaire à négocier, s’entremettre ou s’engager pour son compte sont également concernés.",
-  },
-];
-
-const eligibleThemes = [
-  "Droit applicable à l’activité immobilière",
-  "Économie et environnement du marché",
-  "Pratiques commerciales directement liées au métier",
-  "Déontologie des professionnels de l’immobilier",
-  "Construction, habitation et urbanisme",
-  "Transition énergétique",
-];
-
-const planningSteps = [
-  {
-    title: "Recenser les heures déjà effectuées",
-    text: "Rassemblez les attestations et vérifiez leurs dates, leur durée, leur contenu et la période de trois années concernée.",
-  },
-  {
-    title: "Contrôler les quatre heures obligatoires",
-    text: "Le cycle doit comprendre 2 h sur la non-discrimination à l’accès au logement et 2 h sur les autres règles déontologiques.",
-  },
-  {
-    title: "Choisir des thèmes liés à l’activité",
-    text: "Le contenu retenu doit avoir un lien direct avec l’activité professionnelle réellement exercée.",
-  },
-  {
-    title: "Conserver chaque justificatif",
-    text: "L’attestation doit notamment mentionner les objectifs, le contenu, la durée et la date de réalisation de l’activité.",
-  },
-  {
-    title: "Anticiper la formalité CCI",
-    text: "Pour une carte arrivant à échéance, préparez les justificatifs avant l’ouverture de la période de dépôt de la demande.",
-  },
-];
-
 const faqs = [
   {
-    question: "Faut-il suivre exactement 14 heures chaque année ?",
+    question: "L’IA peut-elle estimer un bien à la place de l’agent immobilier ?",
     answer:
-      "Le décret fixe la durée à 14 heures par an ou 42 heures au cours de trois années consécutives d’exercice. Le rythme annuel aide à répartir la charge, mais le texte prévoit bien ces deux modalités.",
+      "Non. Les outils d’estimation automatisée croisent des données de transactions comparables et des tendances de marché, mais ils ne remplacent ni la visite du bien ni la connaissance locale. L’avis de valeur reste une prestation professionnelle que l’agent assume et signe ; l’IA sert d’aide, pas de décideur.",
   },
   {
-    question: "Les 42 heures peuvent-elles porter sur n’importe quel sujet ?",
+    question: "Peut-on rédiger ses annonces immobilières avec une IA générative ?",
     answer:
-      "Non. Les activités doivent concerner les domaines admis par le décret et présenter un lien direct avec l’activité professionnelle exercée. Les obligations spécifiques de déontologie et de non-discrimination doivent aussi être respectées.",
+      "Oui, à condition de garder le contrôle : vérifiez chaque fait (surface, prestations, diagnostics), conservez les mentions obligatoires comme la classe énergétique du DPE et écartez toute formulation discriminatoire ou trompeuse. La responsabilité du contenu publié reste celle de l’agence.",
   },
   {
-    question: "Combien d’heures de déontologie sont obligatoires ?",
+    question: "Peut-on saisir des données clients dans un outil d’IA ?",
     answer:
-      "Sur trois années consécutives, il faut au moins 2 heures consacrées à la non-discrimination à l’accès au logement et au moins 2 heures portant sur les autres règles déontologiques, soit 4 heures au total.",
+      "Avec la plus grande prudence. Les coordonnées, situations familiales ou financières de vos clients sont des données personnelles protégées par le RGPD. Évitez de les saisir dans des outils grand public non maîtrisés et suivez les recommandations de la CNIL sur l’usage des systèmes d’IA.",
   },
   {
-    question: "Une attestation de formation suffit-elle à renouveler la carte ?",
+    question: "L’intelligence artificielle est-elle encadrée par la loi ?",
     answer:
-      "Elle sert à justifier la formation continue, mais le renouvellement reste une formalité distincte soumise à d’autres conditions et pièces. Il faut consulter la liste actualisée de la CCI compétente.",
+      "Oui. Le règlement européen sur l’intelligence artificielle (règlement (UE) 2024/1689, dit « AI Act ») instaure un cadre progressif fondé sur le niveau de risque des systèmes, avec notamment des exigences de transparence. En France, la CNIL publie des recommandations pour concilier IA et protection des données.",
   },
   {
-    question: "Quand demander le renouvellement de la carte professionnelle ?",
+    question: "Visites virtuelles et home staging par IA : quelles précautions ?",
     answer:
-      "CCI France indique que la demande doit être réalisée dans les deux mois précédant la date d’expiration de la carte. La préparation des formations et des pièces doit donc commencer en amont.",
+      "Ces outils améliorent la mise en valeur d’un bien, mais les visuels retouchés ou générés doivent être présentés comme tels. Une photo modifiée sans information claire peut être qualifiée de pratique commerciale trompeuse : indiquez toujours qu’il s’agit d’une visualisation virtuelle.",
+  },
+  {
+    question: "Faut-il une formation pour utiliser l’IA dans une agence ?",
+    answer:
+      "C’est fortement recommandé. Une formation structurée couvre le choix des outils, la qualité des consignes (prompts), la protection des données et les limites juridiques. Elle peut s’intégrer à votre cycle de formation continue des professionnels de l’immobilier, en lien direct avec votre activité.",
   },
 ];
 
@@ -198,8 +123,8 @@ const structuredData = {
       headline: title,
       description,
       image: COVER_URL,
-      datePublished: "2026-07-28",
-      dateModified: "2026-07-28",
+      datePublished: "2026-07-31",
+      dateModified: "2026-07-31",
       inLanguage: "fr-FR",
       isAccessibleForFree: true,
       mainEntityOfPage: {
@@ -223,11 +148,15 @@ const structuredData = {
       about: [
         {
           "@type": "Thing",
-          name: "Formation continue des professionnels de l’immobilier",
+          name: "Intelligence artificielle",
         },
         {
           "@type": "Thing",
-          name: "Loi ALUR",
+          name: "Agent immobilier",
+        },
+        {
+          "@type": "Thing",
+          name: "Transformation numérique",
         },
       ],
     },
@@ -250,7 +179,7 @@ const structuredData = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Formation loi ALUR 42 heures",
+          name: "Intelligence artificielle et immobilier",
           item: PAGE_URL,
         },
       ],
@@ -269,6 +198,108 @@ const structuredData = {
     },
   ],
 };
+
+type Fact = {
+  icon: LucideIcon;
+  value: string;
+  label: string;
+  detail: string;
+};
+
+const keyFacts: Fact[] = [
+  {
+    icon: Sparkles,
+    value: "4 usages",
+    label: "concrets en agence",
+    detail: "Estimation assistée, annonces, prospection et visites virtuelles : les cas d’usage les plus matures.",
+  },
+  {
+    icon: ShieldCheck,
+    value: "RGPD",
+    label: "et recommandations CNIL",
+    detail: "Les données personnelles de vos clients restent protégées, y compris dans les outils d’IA.",
+  },
+  {
+    icon: Users,
+    value: "L’humain",
+    label: "garde la décision",
+    detail: "L’agent valide chaque production de l’outil et engage sa responsabilité professionnelle.",
+  },
+];
+
+const useCases = [
+  {
+    title: "Estimation assistée",
+    text: "Analyse de transactions comparables et de tendances locales pour préparer un pré-avis de valeur, à confronter ensuite à la visite du bien et à votre connaissance du secteur.",
+  },
+  {
+    title: "Rédaction d’annonces",
+    text: "Génération de trames adaptées à chaque portail et à chaque audience. La relecture reste obligatoire : faits exacts, mentions légales, aucune formulation discriminatoire.",
+  },
+  {
+    title: "Prospection et qualification",
+    text: "Segmentation des contacts, priorisation des appels et scénarios de relance pour concentrer votre temps sur les prospects les plus engagés.",
+  },
+  {
+    title: "Visites virtuelles et home staging",
+    text: "Mise en valeur 3D, dépersonnalisation des photos et projections d’aménagement, en informant clairement que les visuels sont retouchés ou générés.",
+  },
+];
+
+const limites = [
+  "Des erreurs factuelles possibles : surfaces, diagnostics ou prix inventés si la consigne est mal cadrée",
+  "Des biais hérités des données d’entraînement, à surveiller dans les estimations comme dans les textes",
+  "La protection des données personnelles : le RGPD s’applique pleinement aux usages d’IA",
+  "Une exigence de transparence envers les clients sur les contenus générés ou retouchés",
+  "Des mentions légales qui ne se délèguent pas : DPE, surface Carrez, honoraires",
+  "Une responsabilité professionnelle inchangée : l’agent répond de ce qu’il publie et conseille",
+];
+
+const planningSteps = [
+  {
+    title: "Définir vos cas d’usage prioritaires",
+    text: "Commencez par un ou deux usages à forte valeur et faible risque — annonces, relances — avant d’étendre l’IA à l’estimation ou à la relation client.",
+  },
+  {
+    title: "Choisir des outils maîtrisés",
+    text: "Privilégiez des solutions professionnelles documentées : localisation des données, conditions d’utilisation, conformité RGPD. Évitez les outils grand public pour les données clients.",
+  },
+  {
+    title: "Encadrer la saisie des informations",
+    text: "Fixez une règle simple en agence : aucune donnée personnelle identifiable dans une consigne sans nécessité, et anonymisation systématique lorsque c’est possible.",
+  },
+  {
+    title: "Instaurer une relecture systématique",
+    text: "Aucune annonce, estimation ou réponse client générée par l’IA ne part sans validation humaine. Cette discipline protège vos clients et votre responsabilité.",
+  },
+  {
+    title: "Former l’équipe et tracer les usages",
+    text: "Organisez une montée en compétence collective et consignez les usages autorisés : c’est la meilleure façon d’industrialiser sans perdre le contrôle.",
+  },
+];
+
+const relatedLinks = [
+  {
+    href: "/formation-immobiliere-loi-alur",
+    label: "Formation immobilière loi ALUR (42 h)",
+    detail: "Intégrez les nouvelles pratiques à votre cycle de formation continue.",
+  },
+  {
+    href: "/guides/estimation-immobiliere-methodes",
+    label: "Estimation immobilière : les méthodes",
+    detail: "Les méthodes de référence que l’IA ne remplace pas.",
+  },
+  {
+    href: "/guides/contenus-obligatoires-formation-alur",
+    label: "Contenus obligatoires de la formation ALUR",
+    detail: "Les thèmes recevables pour votre formation continue.",
+  },
+  {
+    href: "/formation-deontologie-immobilier",
+    label: "Formation déontologie immobilier",
+    detail: "Transparence et non-discrimination, y compris avec l’IA.",
+  },
+];
 
 function SourceLink({
   href,
@@ -290,7 +321,7 @@ function SourceLink({
   );
 }
 
-export default function FormationLoiAlur42HeuresPage() {
+export default function ImmobilierIntelligenceArtificiellePage() {
   return (
     <>
       <script
@@ -345,38 +376,36 @@ export default function FormationLoiAlur42HeuresPage() {
                   </li>
                   <li aria-hidden>/</li>
                   <li aria-current="page" className="font-semibold text-white">
-                    Formation loi ALUR 42 heures
+                    IA et immobilier
                   </li>
                 </ol>
               </nav>
 
               <div className="mt-9 max-w-4xl">
                 <p className="inline-flex rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-brand-gold-pale">
-                  Guide réglementaire 2026
+                  Guide pratique 2026
                 </p>
                 <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                  Formation loi ALUR 42 heures&nbsp;: les obligations à connaître
+                  Intelligence artificielle et immobilier&nbsp;: usages concrets, limites et formation
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">
-                  À qui s’adresse l’obligation, comment répartir les heures et
-                  quels justificatifs conserver&nbsp;? Voici le cadre pratique,
-                  fondé sur les textes officiels.
+                  Estimation assistée, rédaction d’annonces, prospection, visites virtuelles&nbsp;: ce que l’IA change réellement dans le quotidien d’un agent immobilier, ce qu’elle ne doit pas faire, et comment monter en compétence.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Link
-                    href="#comprendre"
+                    href="#usages"
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-gold px-5 py-3.5 text-sm font-black text-brand-navy transition hover:bg-brand-gold-hover"
                   >
-                    Comprendre les 42 heures
+                    Découvrir les usages concrets
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                   <a
-                    href={LEGIFRANCE_DECREE_URL}
+                    href={CNIL_IA_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3.5 text-sm font-bold text-white transition hover:bg-white/10"
                   >
-                    Lire le décret sur Légifrance
+                    Les recommandations de la CNIL
                     <ExternalLink className="h-4 w-4" aria-hidden />
                   </a>
                 </div>
@@ -418,11 +447,10 @@ export default function FormationLoiAlur42HeuresPage() {
               <nav aria-label="Sommaire" className="mt-4">
                 <ul className="space-y-1 text-sm">
                   {[
-                    ["#comprendre", "Comprendre les 42 h"],
-                    ["#personnes-concernees", "Personnes concernées"],
-                    ["#contenu", "Contenu obligatoire"],
-                    ["#organiser", "Organiser son cycle"],
-                    ["#justificatifs", "Justificatifs"],
+                    ["#usages", "Usages concrets"],
+                    ["#limites", "Limites et risques"],
+                    ["#bonnes-pratiques", "Bonnes pratiques"],
+                    ["#se-former", "Se former à l’IA"],
                     ["#faq", "Questions fréquentes"],
                     ["#sources", "Sources officielles"],
                   ].map(([href, label]) => (
@@ -440,109 +468,59 @@ export default function FormationLoiAlur42HeuresPage() {
             </aside>
 
             <article className="min-w-0 space-y-14">
-              <section id="comprendre" className="scroll-mt-8">
+              <section id="usages" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Le principe
+                  Le terrain
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy sm:text-4xl">
-                  14 heures par an ou 42 heures sur trois ans
-                </h2>
-                <div className="mt-6 space-y-5 text-base leading-8 text-slate-700">
-                  <p>
-                    La formation continue des professionnels de l’immobilier est
-                    une obligation professionnelle. Elle vise la mise à jour et
-                    le perfectionnement des connaissances et compétences utiles
-                    à l’exercice du métier.
-                  </p>
-                  <p>
-                    L’article 2 du{" "}
-                    <SourceLink href={LEGIFRANCE_DECREE_URL}>
-                      décret n°&nbsp;2016-173 du 18 février 2016
-                    </SourceLink>{" "}
-                    fixe une durée de <strong>14 heures par an</strong> ou de{" "}
-                    <strong>42 heures au cours de trois années consécutives d’exercice</strong>.
-                    Il ne s’agit donc pas de deux obligations à additionner,
-                    mais de deux rythmes prévus par le texte.
-                  </p>
-                </div>
-
-                <div className="mt-7 rounded-2xl border-l-4 border-brand-gold bg-white p-6 shadow-sm">
-                  <div className="flex gap-4">
-                    <Scale className="mt-1 h-6 w-6 shrink-0 text-brand-gold-dark" aria-hidden />
-                    <div>
-                      <h3 className="font-black text-brand-navy">
-                        Pour le renouvellement de la carte
-                      </h3>
-                      <p className="mt-2 leading-7 text-slate-700">
-                        CCI France présente le renouvellement comme soumis,
-                        entre autres conditions, à 42 heures de formation
-                        continue en lien direct avec l’activité exercée. La
-                        formation prépare un justificatif réglementaire&nbsp;;
-                        elle ne remplace pas la demande administrative.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <section id="personnes-concernees" className="scroll-mt-8">
-                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Public concerné
-                </p>
-                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Qui doit suivre la formation continue&nbsp;?
+                  Quatre usages concrets pour les agents immobiliers
                 </h2>
                 <p className="mt-5 max-w-3xl text-base leading-8 text-slate-700">
-                  L’obligation ne concerne pas uniquement la personne dont le
-                  nom figure sur la carte. Le décret distingue trois catégories
-                  de professionnels.
+                  Loin des effets d’annonce, l’IA trouve déjà sa place dans les
+                  agences. Voici les quatre cas d’usage les plus aboutis — tous
+                  partagent la même règle&nbsp;: l’outil produit, le professionnel
+                  valide.
                 </p>
-                <div className="mt-7 grid gap-4 md:grid-cols-3">
-                  {audiences.map((audience, index) => (
+                <div className="mt-7 grid gap-4 sm:grid-cols-2">
+                  {useCases.map((useCase, index) => (
                     <div
-                      key={audience.title}
+                      key={useCase.title}
                       className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
                     >
                       <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy text-sm font-black text-white">
                         {index + 1}
                       </span>
                       <h3 className="mt-5 text-lg font-black text-brand-navy">
-                        {audience.title}
+                        {useCase.title}
                       </h3>
                       <p className="mt-3 text-sm leading-7 text-slate-600">
-                        {audience.text}
+                        {useCase.text}
                       </p>
                     </div>
                   ))}
                 </div>
-                <p className="mt-5 flex gap-3 rounded-xl bg-brand-navy/5 p-4 text-sm leading-6 text-slate-700">
-                  <Users className="mt-0.5 h-5 w-5 shrink-0 text-brand-navy" aria-hidden />
-                  En cas de doute sur votre situation ou sur la période à
-                  justifier, rapprochez-vous de la CCI compétente avant de
-                  constituer votre programme.
-                </p>
               </section>
 
-              <section id="contenu" className="scroll-mt-8">
+              <section id="limites" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Programme recevable
+                  Vigilance
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels contenus peuvent compter dans les 42 heures&nbsp;?
+                  Les limites à connaître avant de déployer l’IA
                 </h2>
                 <p className="mt-5 text-base leading-8 text-slate-700">
-                  Les activités doivent porter sur des domaines prévus par le
-                  décret et avoir un <strong>lien direct avec l’activité exercée</strong>.
-                  Les thèmes admis couvrent notamment&nbsp;:
+                  Un outil d’IA mal encadré expose l’agence à des erreurs, à des
+                  manquements au RGPD et à des pratiques trompeuses. Les points
+                  de vigilance essentiels&nbsp;:
                 </p>
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {eligibleThemes.map((theme) => (
+                  {limites.map((limite) => (
                     <li
-                      key={theme}
+                      key={limite}
                       className="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-semibold leading-6 text-slate-700"
                     >
                       <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold-dark" aria-hidden />
-                      {theme}
+                      {limite}
                     </li>
                   ))}
                 </ul>
@@ -550,26 +528,28 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-8 overflow-hidden rounded-2xl bg-brand-navy text-white">
                   <div className="grid gap-0 md:grid-cols-[1fr_1.35fr]">
                     <div className="border-b border-white/10 p-6 md:border-b-0 md:border-r md:p-8">
-                      <p className="text-4xl font-black text-brand-gold">4 heures</p>
-                      <p className="mt-2 font-bold">de déontologie sur le cycle</p>
+                      <p className="text-4xl font-black text-brand-gold">AI Act</p>
+                      <p className="mt-2 font-bold">le cadre européen de l’IA</p>
                     </div>
                     <div className="p-6 md:p-8">
                       <p className="leading-7 text-white/80">
-                        Depuis la modification entrée en vigueur en 2021, le
-                        cycle comprend au moins <strong className="text-white">2 heures sur
-                        la non-discrimination à l’accès au logement</strong> et au
-                        moins <strong className="text-white">2 heures sur les autres
-                        règles déontologiques</strong>.
+                        Le <strong className="text-white">règlement (UE) 2024/1689</strong>{" "}
+                        établit des règles harmonisées sur l’intelligence
+                        artificielle, proportionnées au niveau de risque des
+                        systèmes. En France, la{" "}
+                        <strong className="text-white">CNIL</strong> accompagne les
+                        professionnels pour concilier IA et protection des
+                        données personnelles.
                       </p>
                       <p className="mt-4 text-sm text-white/70">
                         Source&nbsp;:{" "}
                         <a
-                          href={LEGIFRANCE_ETHICS_URL}
+                          href={AI_ACT_URL}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="font-bold text-brand-gold-pale underline underline-offset-4"
                         >
-                          décret n°&nbsp;2020-1259 sur Légifrance
+                          règlement (UE) 2024/1689 sur EUR-Lex
                         </a>
                         .
                       </p>
@@ -578,12 +558,12 @@ export default function FormationLoiAlur42HeuresPage() {
                 </div>
               </section>
 
-              <section id="organiser" className="scroll-mt-8">
+              <section id="bonnes-pratiques" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
                   Méthode pratique
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Comment organiser son cycle de formation&nbsp;?
+                  Déployer l’IA dans votre agence en cinq étapes
                 </h2>
                 <ol className="mt-7 space-y-4">
                   {planningSteps.map((step, index) => (
@@ -601,66 +581,60 @@ export default function FormationLoiAlur42HeuresPage() {
                     </li>
                   ))}
                 </ol>
+                <p className="mt-5 flex gap-3 rounded-xl bg-brand-navy/5 p-4 text-sm leading-6 text-slate-700">
+                  <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-brand-navy" aria-hidden />
+                  La tentation du « tout automatique » est le principal écueil&nbsp;:
+                  une agence qui publie sans relire transfère son risque
+                  juridique à un outil qui n’assume aucune responsabilité.
+                </p>
+              </section>
+
+              <section id="se-former" className="scroll-mt-8">
+                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
+                  Compétences
+                </p>
+                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
+                  Pourquoi se former à l’IA quand on est agent immobilier&nbsp;?
+                </h2>
+                <div className="mt-6 space-y-5 text-base leading-8 text-slate-700">
+                  <p>
+                    La puissance publique fait de la diffusion de l’IA dans les
+                    entreprises une priorité — la{" "}
+                    <SourceLink href={STRATEGIE_IA_URL}>
+                      stratégie nationale pour l’intelligence artificielle
+                    </SourceLink>{" "}
+                    met l’accent sur l’adoption par les PME et sur la formation
+                    des professionnels. Le secteur immobilier n’échappe pas à ce
+                    mouvement&nbsp;: les agences qui structurent leurs usages
+                    gagnent en productivité sans dégrader la conformité.
+                  </p>
+                  <p>
+                    Une formation dédiée vous apprend à choisir les outils, à
+                    formuler des consignes efficaces, à sécuriser les données
+                    clients et à intégrer l’IA dans vos processus existants.
+                    Elle peut s’inscrire dans votre cycle de{" "}
+                    <strong>formation continue</strong>, en lien direct avec
+                    votre activité professionnelle.
+                  </p>
+                </div>
                 <div className="mt-7 flex flex-col items-start justify-between gap-5 rounded-2xl border border-brand-gold/30 bg-brand-gold/10 p-6 sm:flex-row sm:items-center">
                   <div>
                     <h3 className="font-black text-brand-navy">
-                      Besoin de préparer votre échéance&nbsp;?
+                      Structurer vos usages de l’IA&nbsp;?
                     </h3>
                     <p className="mt-2 text-sm leading-6 text-slate-700">
-                      Le guide dédié détaille le calendrier et les points à
-                      vérifier pour la formalité.
+                      Notre parcours de formation immobilière intègre les
+                      pratiques numériques et la conformité, pour une adoption
+                      utile et sécurisée.
                     </p>
                   </div>
                   <Link
-                    href="/guides/renouvellement-carte-professionnelle-immobilier"
+                    href="/formation-immobiliere-loi-alur"
                     className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand-navy px-4 py-3 text-sm font-black text-white transition hover:bg-brand-navy-mid"
                   >
-                    Guide du renouvellement
+                    Découvrir la formation
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
-                </div>
-              </section>
-
-              <section id="justificatifs" className="scroll-mt-8">
-                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
-                  Traçabilité
-                </p>
-                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Quels justificatifs conserver&nbsp;?
-                </h2>
-                <div className="mt-6 grid gap-6 md:grid-cols-[1.3fr_1fr]">
-                  <div className="space-y-5 text-base leading-8 text-slate-700">
-                    <p>
-                      L’organisme de formation délivre une attestation à la
-                      personne qui a accompli l’activité. Le décret prévoit que
-                      ce document mentionne les <strong>objectifs</strong>, le{" "}
-                      <strong>contenu</strong>, la <strong>durée</strong> et la{" "}
-                      <strong>date de réalisation</strong>.
-                    </p>
-                    <p>
-                      Vérifiez ces mentions dès réception et archivez
-                      l’attestation avec les autres pièces de votre cycle. Les
-                      titulaires transmettent leurs justificatifs à la CCI,
-                      après chaque formation ou au plus tard au moment de la
-                      demande de renouvellement.
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <FileCheck2 className="h-8 w-8 text-brand-gold-dark" aria-hidden />
-                    <h3 className="mt-5 font-black text-brand-navy">
-                      Contrôle rapide d’une attestation
-                    </h3>
-                    <ul className="mt-4 space-y-3 text-sm text-slate-700">
-                      {["Objectifs", "Contenu", "Durée", "Date de réalisation"].map(
-                        (item) => (
-                          <li key={item} className="flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-brand-navy" aria-hidden />
-                            {item}
-                          </li>
-                        ),
-                      )}
-                    </ul>
-                  </div>
                 </div>
               </section>
 
@@ -669,7 +643,7 @@ export default function FormationLoiAlur42HeuresPage() {
                   Questions fréquentes
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
-                  Formation loi ALUR 42 heures&nbsp;: FAQ
+                  IA et immobilier&nbsp;: FAQ
                 </h2>
                 <div className="mt-7 divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white">
                   {faqs.map((faq) => (
@@ -693,36 +667,67 @@ export default function FormationLoiAlur42HeuresPage() {
                 <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
                   <ul className="space-y-5 text-sm leading-7 text-slate-700">
                     <li>
-                      <SourceLink href={LEGIFRANCE_DECREE_URL}>
-                        Décret n°&nbsp;2016-173 du 18 février 2016 — Légifrance
+                      <SourceLink href={CNIL_IA_URL}>
+                        Intelligence artificielle — CNIL
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Personnes concernées, durée, activités recevables et justificatifs.
+                        Recommandations pour développer et utiliser des systèmes
+                        d’IA respectueux des données personnelles.
                       </p>
                     </li>
                     <li>
-                      <SourceLink href={LEGIFRANCE_ETHICS_URL}>
-                        Décret n°&nbsp;2020-1259 du 14 octobre 2020 — Légifrance
+                      <SourceLink href={AI_ACT_URL}>
+                        Règlement (UE) 2024/1689 sur l’intelligence artificielle — EUR-Lex
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Intégration de la non-discrimination à l’accès au logement.
+                        Le cadre européen harmonisé applicable aux systèmes
+                        d’IA, selon leur niveau de risque.
                       </p>
                     </li>
                     <li>
-                      <SourceLink href={CCI_RENEWAL_URL}>
-                        Renouvellement de carte professionnelle — CCI France
+                      <SourceLink href={STRATEGIE_IA_URL}>
+                        La stratégie nationale pour l’intelligence artificielle — economie.gouv.fr
                       </SourceLink>
                       <p className="mt-1 text-slate-500">
-                        Durée de validité, période de dépôt et accès à la formalité.
+                        Les orientations publiques pour la diffusion de l’IA
+                        dans l’économie et la formation des professionnels.
                       </p>
                     </li>
                   </ul>
                   <p className="mt-6 border-t border-slate-200 pt-5 text-xs leading-5 text-slate-500">
-                    Informations vérifiées le 28 juillet 2026. Ce guide présente
-                    le cadre général et ne remplace ni les textes officiels ni
-                    l’examen de votre dossier par la CCI compétente.
+                    Informations vérifiées le 31 juillet 2026. Ce guide décrit
+                    des usages et des principes de prudence généraux&nbsp;; il ne
+                    remplace ni les textes officiels ni les conseils d’un
+                    professionnel sur vos outils et vos traitements de données.
                   </p>
                 </div>
+              </section>
+
+              <section aria-label="Guides liés">
+                <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
+                  Pour aller plus loin
+                </p>
+                <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy">
+                  Guides liés
+                </h2>
+                <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+                  {relatedLinks.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand-gold/50 hover:shadow-md"
+                      >
+                        <span className="inline-flex items-center gap-2 font-black text-brand-navy group-hover:text-brand-navy-mid">
+                          {link.label}
+                          <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden />
+                        </span>
+                        <span className="mt-2 text-sm leading-6 text-slate-600">
+                          {link.detail}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </section>
 
               <section className="overflow-hidden rounded-3xl bg-brand-navy p-7 text-white sm:p-10">
@@ -730,12 +735,12 @@ export default function FormationLoiAlur42HeuresPage() {
                   <div className="max-w-2xl">
                     <BookOpen className="h-8 w-8 text-brand-gold" aria-hidden />
                     <h2 className="mt-5 text-2xl font-black sm:text-3xl">
-                      Consulter le parcours de formation immobilière
+                      Formez-vous aux nouvelles pratiques du métier
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Découvrez le programme, ses modules et ses modalités afin
-                      de vérifier s’ils correspondent à votre activité et à
-                      votre calendrier.
+                      Numérique, conformité, relation client&nbsp;: le parcours de
+                      formation immobilière de MonPassFormation prépare votre
+                      agence aux usages de demain, sans négliger le cadre légal.
                     </p>
                   </div>
                   <Link
@@ -762,6 +767,11 @@ export default function FormationLoiAlur42HeuresPage() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/guides" className="transition hover:text-brand-navy">
+                    Guides
+                  </Link>
+                </li>
+                <li>
                   <Link
                     href="/formation-immobiliere-loi-alur"
                     className="transition hover:text-brand-navy"
@@ -771,10 +781,10 @@ export default function FormationLoiAlur42HeuresPage() {
                 </li>
                 <li>
                   <Link
-                    href="/guides/renouvellement-carte-professionnelle-immobilier"
+                    href="/formation-deontologie-immobilier"
                     className="transition hover:text-brand-navy"
                   >
-                    Renouveler sa carte
+                    Formation déontologie
                   </Link>
                 </li>
               </ul>
