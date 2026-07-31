@@ -280,39 +280,6 @@ export default function ImmobilierCheckoutPage() {
       </section>
 
       <section className="mx-auto mt-16 max-w-7xl px-5 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-brand-gold/30 bg-gradient-to-r from-brand-navy via-brand-navy to-slate-900 p-8 text-white shadow-xl sm:p-12">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-            <div className="max-w-3xl space-y-4">
-              <span className="inline-flex rounded-full bg-brand-gold/20 px-3.5 py-1 text-xs font-black uppercase tracking-widest text-brand-gold">
-                Offre Réseaux &amp; Agences
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-                Vous formatez une équipe ou un réseau de négociateurs ?
-              </h2>
-              <p className="text-sm sm:text-base leading-relaxed text-zinc-300">
-                Bénéficiez de <strong>tarifs dégressifs groupe (dès 3 collaborateurs)</strong>, de la centralisation des factures et du suivi d&apos;avancement des attestations pour votre renouvellement de carte T globale.
-              </p>
-              <div className="flex flex-wrap gap-6 pt-2 text-xs font-bold text-brand-gold/90">
-                <span>✓ Facturation centralisée</span>
-                <span>✓ Suivi d&apos;assiduité équipe</span>
-                <span>✓ Conforme CCI 100%</span>
-              </div>
-            </div>
-            <div className="shrink-0 flex flex-col gap-3">
-              <a
-                href="mailto:contact@passformation.com?subject=Demande%20de%20devis%20groupe%20formation%20immobilier"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-gold px-6 py-4 text-sm font-black text-brand-navy shadow-lg transition hover:bg-brand-gold-hover"
-              >
-                Demander un devis Groupe (1 clic)
-                <ArrowRight className="h-4 w-4" />
-              </a>
-              <p className="text-[11px] text-center text-zinc-400">Réponse sous 2h ouvrées</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto mt-16 max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="rounded-3xl border border-zinc-200 bg-white p-7 shadow-sm sm:p-10">
           <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-gold">
             Ressources Loi ALUR
