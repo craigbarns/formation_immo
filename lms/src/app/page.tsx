@@ -1064,6 +1064,31 @@ export default function HomePage() {
           </div>
         </section>
 
+        <section className="bg-slate-900 py-12 text-white">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+            <div className="flex flex-col items-center justify-between gap-6 text-center lg:flex-row lg:text-left">
+              <div className="max-w-3xl">
+                <span className="inline-flex rounded-full bg-brand-gold/20 px-3.5 py-1 text-xs font-black uppercase tracking-widest text-brand-gold">
+                  Agences &amp; Réseaux
+                </span>
+                <h2 className="mt-2 text-2xl font-black text-white sm:text-3xl">
+                  Besoin de former 3 négociateurs ou plus ?
+                </h2>
+                <p className="mt-2 text-sm text-zinc-300">
+                  Profitez de nos tarifs dégressifs groupe et de la centralisation des attestations CCI pour votre équipe.
+                </p>
+              </div>
+              <a
+                href="mailto:contact@passformation.com?subject=Demande%20de%20devis%20groupe%20formation%20immobilier"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand-gold px-6 py-4 text-sm font-black text-brand-navy shadow-lg transition hover:bg-brand-gold-hover"
+              >
+                Demander un devis de groupe (contact@passformation.com)
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </a>
+            </div>
+          </div>
+        </section>
+
         <section className="bg-brand-navy py-16 text-white sm:py-20">
           <div className="mx-auto max-w-5xl px-5 text-center sm:px-6 lg:px-8">
             <p className="text-sm font-black uppercase text-brand-gold">
