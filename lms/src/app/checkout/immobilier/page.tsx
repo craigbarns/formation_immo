@@ -189,7 +189,7 @@ export default function ImmobilierCheckoutPage() {
               </div>
               <p className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 rounded-xl px-3 py-1.5 border border-emerald-200">
                 <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
-                Éligible prise en charge OPCO &amp; AGEFICE
+                Attestation officielle conforme Loi ALUR &amp; CCI
               </p>
             </div>
 
@@ -212,7 +212,7 @@ export default function ImmobilierCheckoutPage() {
                 <div className="flex gap-3">
                   <ShieldCheck className="h-5 w-5 shrink-0 text-brand-navy" />
                   <p className="text-xs font-medium leading-relaxed text-zinc-600">
-                    <strong>Facture &amp; Attestation OPCO</strong> (AGEFICE, FIFPL, OPCO EP).
+                    <strong>Facture disponible</strong> immédiatement après votre commande.
                   </p>
                 </div>
               </div>
