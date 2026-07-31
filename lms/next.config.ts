@@ -70,11 +70,11 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: blob: https://images.unsplash.com https://*.tile.openstreetmap.org https://tile.openstreetmap.org https://unpkg.com",
               "font-src 'self'",
-              "connect-src 'self' https://api.openai.com https://*.supabase.co",
+              "connect-src 'self' https://api.openai.com https://*.supabase.co https://vitals.vercel-insights.com",
               "media-src 'self' blob:",
               "frame-src 'self' https://view.monday.com",
               "frame-ancestors 'none'",
