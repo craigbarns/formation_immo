@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { ToastProvider } from "@/components/toast";
 import { FocusModeProvider } from "@/components/focus-mode";
 import { PwaRegister } from "@/components/PwaRegister";
+import { Analytics } from "@vercel/analytics/next";
 import {
   DEFAULT_OG_IMAGE,
   SITE_NAME,
@@ -105,6 +106,7 @@ export default function RootLayout({
             <ToastProvider>
               {children}
               <PwaRegister />
+              <Analytics />
             </ToastProvider>
           </FocusModeProvider>
         </ThemeProvider>
