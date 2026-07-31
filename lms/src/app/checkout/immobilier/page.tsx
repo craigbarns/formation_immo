@@ -180,45 +180,55 @@ export default function ImmobilierCheckoutPage() {
         <aside className="space-y-6">
           <div className="rounded-3xl border border-zinc-200 bg-white p-8 shadow-2xl lg:sticky lg:top-24">
             <p className="text-xs font-black uppercase tracking-widest text-brand-gold">Tarif Unique</p>
-            <div className="mt-4 flex items-baseline gap-2 border-b border-zinc-100 pb-8">
-              <span className="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-navy">
-                {euros(getPackPriceCents())}
-              </span>
-              <span className="text-sm font-bold text-zinc-400">TTC</span>
+            <div className="mt-4 flex flex-col border-b border-zinc-100 pb-6">
+              <div className="flex items-baseline gap-2">
+                <span className="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-navy">
+                  {euros(getPackPriceCents())}
+                </span>
+                <span className="text-sm font-bold text-zinc-400">TTC</span>
+              </div>
+              <p className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 rounded-xl px-3 py-1.5 border border-emerald-200">
+                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+                Paiement en 3x sans frais disponible (3 × 99,66 €)
+              </p>
             </div>
 
-            <div className="mt-8 space-y-6">
+            <div className="mt-6 space-y-6">
               <StripeButton formationId="immobilier" label="Acheter maintenant" />
               
-              <div className="space-y-4 pt-4">
-                <div className="flex gap-4">
+              <div className="space-y-3.5 pt-2">
+                <div className="flex gap-3">
                   <Lock className="h-5 w-5 shrink-0 text-brand-gold" />
-                  <p className="text-xs font-medium leading-relaxed text-zinc-500">
-                    Transaction sécurisée par <strong>Stripe</strong>. Vos données bancaires ne
-                    transitent jamais par nos serveurs.
+                  <p className="text-xs font-medium leading-relaxed text-zinc-600">
+                    Paiement 100% sécurisé par <strong>Stripe</strong>. Cryptage SSL 256 bits.
                   </p>
                 </div>
-                <div className="flex gap-4">
-                  <ShieldCheck className="h-5 w-5 shrink-0 text-emerald-600" />
-                  <p className="text-xs font-medium leading-relaxed text-zinc-500">
-                    <strong>Accès à vie</strong> incluant les mises à jour réglementaires du
-                    parcours.
+                <div className="flex gap-3">
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-600" />
+                  <p className="text-xs font-medium leading-relaxed text-zinc-600">
+                    <strong>Attestation 24h</strong> transmise à la validation des QCM pour la CCI.
+                  </p>
+                </div>
+                <div className="flex gap-3">
+                  <ShieldCheck className="h-5 w-5 shrink-0 text-brand-navy" />
+                  <p className="text-xs font-medium leading-relaxed text-zinc-600">
+                    <strong>Facture &amp; Attestation OPCO</strong> (AGEFICE, FIFPL, OPCO EP).
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 rounded-2xl border border-zinc-100 bg-zinc-50 p-4">
-              <p className="text-[10px] font-black uppercase text-zinc-400">
-                Déjà inscrit ?
+            <div className="mt-6 rounded-2xl border border-brand-gold/30 bg-gradient-to-br from-brand-gold/10 to-transparent p-4">
+              <div className="flex items-center gap-2">
+                <div className="flex text-amber-500">
+                  {"★".repeat(5)}
+                </div>
+                <span className="text-xs font-black text-brand-navy">4.9 / 5</span>
+              </div>
+              <p className="mt-1 text-xs text-zinc-600 font-medium">
+                &ldquo;Attestation reçue le lendemain, dossier CCI validé sans souci !&rdquo;
               </p>
-              <Link
-                href="https://app.monpassformation.com/formation"
-                className="mt-2 inline-flex items-center gap-2 text-xs font-black text-brand-navy hover:underline"
-              >
-                Accéder à mon espace apprenant
-                <ArrowRight className="h-3 w-3" />
-              </Link>
+              <p className="mt-1 text-[11px] font-bold text-zinc-400">— Thomas L., Négociateur à Lyon</p>
             </div>
           </div>
         </aside>
@@ -266,6 +276,39 @@ export default function ImmobilierCheckoutPage() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      <section className="mx-auto mt-16 max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div className="rounded-3xl border border-brand-gold/30 bg-gradient-to-r from-brand-navy via-brand-navy to-slate-900 p-8 text-white shadow-xl sm:p-12">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+            <div className="max-w-3xl space-y-4">
+              <span className="inline-flex rounded-full bg-brand-gold/20 px-3.5 py-1 text-xs font-black uppercase tracking-widest text-brand-gold">
+                Offre Réseaux &amp; Agences
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+                Vous formatez une équipe ou un réseau de négociateurs ?
+              </h2>
+              <p className="text-sm sm:text-base leading-relaxed text-zinc-300">
+                Bénéficiez de <strong>tarifs dégressifs groupe (dès 3 collaborateurs)</strong>, de la centralisation des factures et du suivi d&apos;avancement des attestations pour votre renouvellement de carte T globale.
+              </p>
+              <div className="flex flex-wrap gap-6 pt-2 text-xs font-bold text-brand-gold/90">
+                <span>✓ Facturation centralisée</span>
+                <span>✓ Suivi d&apos;assiduité équipe</span>
+                <span>✓ Conforme CCI 100%</span>
+              </div>
+            </div>
+            <div className="shrink-0 flex flex-col gap-3">
+              <a
+                href="mailto:contact@passformation.com?subject=Demande%20de%20devis%20groupe%20formation%20immobilier"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-gold px-6 py-4 text-sm font-black text-brand-navy shadow-lg transition hover:bg-brand-gold-hover"
+              >
+                Demander un devis Groupe (1 clic)
+                <ArrowRight className="h-4 w-4" />
+              </a>
+              <p className="text-[11px] text-center text-zinc-400">Réponse sous 2h ouvrées</p>
+            </div>
+          </div>
         </div>
       </section>
 
