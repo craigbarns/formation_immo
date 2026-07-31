@@ -1,0 +1,53 @@
+# Vercel Web Analytics Configuration
+
+## Summary
+Successfully configured Vercel Web Analytics for this Next.js project by updating the Content Security Policy (CSP) to allow analytics tracking.
+
+## What Was Done
+
+### 1. Analyzed Current Setup
+- Verified that `@vercel/analytics` package (v2.0.1) was already installed - the latest version
+- Confirmed the Analytics component was already properly imported and placed in the root layout (`src/app/layout.tsx`)
+- The Analytics component was correctly positioned within the body tag as per Vercel's documentation
+
+### 2. Fetched Latest Documentation
+- Retrieved the latest installation instructions from https://vercel.com/docs/analytics/quickstart
+- Confirmed the project follows Next.js App Router best practices for Analytics integration
+
+### 3. Updated CSP Configuration
+Modified `next.config.ts` to include the required CSP directives for Vercel Analytics:
+
+**script-src directive:**
+- Added `https://va.vercel-scripts.com` to allow loading of analytics scripts
+
+**connect-src directive:**
+- Added `https://vitals.vercel-insights.com` for analytics data collection
+- Added `https://*.vercel-insights.com` for additional Vercel Insights endpoints
+
+## Modified Files
+- `lms/next.config.ts` - Updated Content-Security-Policy header to whitelist Vercel Analytics domains
+
+## Why These Changes Were Made
+The Vercel Analytics component was already properly integrated in the code, but the strict Content Security Policy was blocking the analytics from functioning. The CSP needed to be updated to allow:
+1. Script loading from Vercel's analytics script CDN (`va.vercel-scripts.com`)
+2. Data transmission to Vercel's analytics endpoints (`vitals.vercel-insights.com` and wildcard domain)
+
+These CSP updates are required for both development and production environments to ensure analytics data is properly collected without browser console errors.
+
+## Verification
+- ✅ Build completed successfully with no errors
+- ✅ All 108 tests passed
+- ✅ Linter found only pre-existing issues unrelated to this change
+- ✅ Dependencies installed and lock file updated
+
+## Next Steps
+After deployment to Vercel:
+1. Enable Web Analytics in the Vercel dashboard for this project
+2. Verify analytics tracking in the browser's Network tab (look for requests to `/<unique-path>/view`)
+3. Monitor the Analytics dashboard in Vercel to see visitor data
+
+## Implementation Notes
+- This project uses the Next.js App Router pattern
+- Analytics component is correctly placed in the root layout after all other content
+- The implementation follows the official Vercel documentation for Next.js App Router
+- No additional configuration or environment variables are required
