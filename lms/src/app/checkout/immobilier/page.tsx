@@ -189,7 +189,7 @@ export default function ImmobilierCheckoutPage() {
               </div>
               <p className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 rounded-xl px-3 py-1.5 border border-emerald-200">
                 <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
-                Paiement en 3x sans frais disponible (3 × 99,66 €)
+                Éligible prise en charge OPCO &amp; AGEFICE
               </p>
             </div>
 
