@@ -41,9 +41,15 @@ interface AttendanceTotalRow {
   evidence_events: number | null;
 }
 
+interface AttendanceIdentityRow {
+  user_id: string;
+  email: string | null;
+}
+
 export interface LearnerStatsPayload {
   id: string;
   full_name: string;
+  email: string;
   xp: number;
   lessons_completed: number;
   last_activity: string;
@@ -128,6 +134,7 @@ export async function listLearners(): Promise<{ learners?: LearnerStatsPayload[]
       { data: gamification, error: gamificationError },
       { data: progress, error: progressError },
       { data: attendanceTotals, error: attendanceError },
+      { data: attendanceIdentities, error: identitiesError },
     ] =
       await Promise.all([
         admin
@@ -139,11 +146,16 @@ export async function listLearners(): Promise<{ learners?: LearnerStatsPayload[]
           .select("user_id, lesson_key, completed")
           .in("user_id", userIds),
         admin.rpc("get_attendance_totals"),
+        admin
+          .from("attendance_identities")
+          .select("user_id, email")
+          .in("user_id", userIds),
       ]);
 
     if (gamificationError) return { error: gamificationError.message };
     if (progressError) return { error: progressError.message };
     if (attendanceError) return { error: attendanceError.message };
+    if (identitiesError) return { error: identitiesError.message };
 
     const gamificationByUser = new Map<string, GamificationRow>();
     ((gamification || []) as GamificationRow[]).forEach((row) => {
@@ -162,6 +174,10 @@ export async function listLearners(): Promise<{ learners?: LearnerStatsPayload[]
     ((attendanceTotals || []) as AttendanceTotalRow[]).forEach((row) => {
       attendanceByUser.set(row.user_id, row);
     });
+    const emailByUser = new Map<string, string>();
+    ((attendanceIdentities || []) as AttendanceIdentityRow[]).forEach((row) => {
+      if (row.email) emailByUser.set(row.user_id, row.email);
+    });
 
     return {
       learners: profileRows.map((profile) => {
@@ -172,6 +188,7 @@ export async function listLearners(): Promise<{ learners?: LearnerStatsPayload[]
         return {
           id: profile.id,
           full_name: profile.full_name || "Apprenant anonyme",
+          email: emailByUser.get(profile.id) || "",
           xp: state?.xp || 0,
           streak: state?.streak || 0,
           last_activity:

@@ -16,6 +16,8 @@ export interface AttendanceSessionExport {
 
 export interface AttendanceExportOptions {
   learnerName: string;
+  learnerEmail: string;
+  learnerId: string;
   sessions: AttendanceSessionExport[];
   pedagogicalProgressPct: number;
   completedLessons: number;
@@ -70,6 +72,8 @@ function readableLessons(moduleSlugs: string[], lessonSlugs: string[]) {
 
 export function buildAttendanceCSV({
   learnerName,
+  learnerEmail,
+  learnerId,
   sessions,
   pedagogicalProgressPct,
   completedLessons,
@@ -96,6 +100,8 @@ export function buildAttendanceCSV({
     ["Modalité", FORMATION.modality],
     ["Durée contractuelle", `${FORMATION.durationHours} heures`],
     ["Apprenant", learnerName],
+    ["Email du compte authentifié", learnerEmail || "Non disponible"],
+    ["Identifiant LMS", learnerId],
     ["Période constatée", periodStart ? `${formatDateTime(periodStart)} — ${formatDateTime(periodEnd!)}` : "Aucune connexion"],
     ["Document généré le", `${generatedAt} (Europe/Paris)`],
     [],

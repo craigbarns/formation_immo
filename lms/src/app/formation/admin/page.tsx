@@ -37,6 +37,7 @@ import type { ConnectionLogPayload, LearnerStatsPayload } from "@/app/actions/ad
 interface LearnerStats {
   id: string;
   full_name: string;
+  email: string;
   xp: number;
   lessons_completed: number;
   last_activity: string;
@@ -122,8 +123,10 @@ export default function AdminPage() {
     fetchLogs();
   }, [selectedLearner]);
 
-  const filteredLearners = learners.filter(l => 
-    l.full_name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredLearners = learners.filter(
+    (learner) =>
+      learner.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      learner.email.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   if (isAccessDenied) {
@@ -256,6 +259,7 @@ export default function AdminPage() {
                         </div>
                         <div>
                           <p className="font-black text-white uppercase tracking-tight">{learner.full_name}</p>
+                          {learner.email && <p className="mt-0.5 text-[10px] font-medium text-white/50">{learner.email}</p>}
                           <div className="mt-1 flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-white/75">
                             <span className="flex items-center gap-1"><Zap size={10} className="text-brand-gold" /> {learner.xp} XP</span>
                             <span className="flex items-center gap-1"><Clock size={10} /> {formatAdminDate(learner.last_activity)}</span>
@@ -413,6 +417,8 @@ export default function AdminPage() {
                     <button 
                       onClick={() => exportAttendanceToCSV({
                         learnerName: selectedLearner.full_name,
+                        learnerEmail: selectedLearner.email,
+                        learnerId: selectedLearner.id,
                         sessions: attendanceLogs,
                         pedagogicalProgressPct: parcoursProgressPct(selectedLearner.completed_keys),
                         completedLessons: completedParcoursCount(selectedLearner.completed_keys),
