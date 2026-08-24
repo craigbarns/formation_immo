@@ -14,6 +14,8 @@ interface ProactiveMessage {
   priority: number;
 }
 
+const PROACTIVE_CHECK_INTERVAL_MS = 30_000;
+
 export function ProactiveCoachBanner() {
   const [message, setMessage] = useState<ProactiveMessage | null>(null);
   const [dismissed, setDismissed] = useState(false);
@@ -38,10 +40,6 @@ export function ProactiveCoachBanner() {
     const interval = setInterval(async () => {
       lessonTime = Date.now() - startTime;
 
-      // Only call API every 30 seconds, or immediately after 10 min
-      const shouldCall = lessonTime > 10 * 60 * 1000 || lessonTime % (30 * 1000) < 2000;
-      if (!shouldCall) return;
-
       try {
         const res = await fetch("/api/coach/proactive", {
           method: "POST",
@@ -58,7 +56,7 @@ export function ProactiveCoachBanner() {
       } catch {
         // silent
       }
-    }, 5000);
+    }, PROACTIVE_CHECK_INTERVAL_MS);
 
     return () => clearInterval(interval);
   }, [isActivePage]);

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text -- @react-pdf/renderer Image is not a DOM image and has no alt prop. */
 import * as fs from "fs";
 import * as path from "path";
 import {
@@ -101,7 +102,7 @@ function PageFooter({ page, total }: { page: number; total: number }) {
     <View style={s.footer}>
       <View style={s.footerLine} />
       <Text style={s.footerTxt}>
-        {ORGANIZATION.name}  |  {ORGANIZATION.address}  |  Numéro SIRET: {ORGANIZATION.siret}  |  Numéro de déclaration d'activité: {ORGANIZATION.activityDeclarationNumber} (auprès du préfet de région de: {ORGANIZATION.prefectureRegion}){"\n"}e-mail: {ORGANIZATION.email}   tel: {ORGANIZATION.phone}
+        {ORGANIZATION.name}  |  {ORGANIZATION.address}  |  Numéro SIRET: {ORGANIZATION.siret}  |  Numéro de déclaration d&apos;activité: {ORGANIZATION.activityDeclarationNumber} (auprès du préfet de région de: {ORGANIZATION.prefectureRegion}){"\n"}e-mail: {ORGANIZATION.email}   tel: {ORGANIZATION.phone}
       </Text>
       <Text style={s.pageNum}>Page {page} / {total}</Text>
     </View>
@@ -164,7 +165,7 @@ export function AttestationPDF({ data }: { data: AttestationData }) {
             <Text style={[s.tHCell, s.cDur]}>Durée</Text>
             <Text style={[s.tHCell, s.cDates]}>Dates</Text>
           </View>
-          {FORMATION.modules.map((mod, idx) => {
+          {FORMATION.modules.map((mod) => {
             const md = training.moduleDates.find(d => d.slug === mod.slug);
             const dateStr = md
               ? `${fmt(md.startDate)} – ${fmt(md.endDate)}`
@@ -197,7 +198,7 @@ export function AttestationPDF({ data }: { data: AttestationData }) {
             <Text style={[s.infoVal, s.bold]}>{FORMATION.durationHours} h</Text>
           </View>
           <View style={s.infoRow}>
-            <Text style={s.infoLbl}>Nature de l'action de formation :</Text>
+            <Text style={s.infoLbl}>Nature de l&apos;action de formation :</Text>
             <Text style={[s.infoVal, s.bold]}>Action de formation</Text>
           </View>
         </View>
@@ -205,7 +206,7 @@ export function AttestationPDF({ data }: { data: AttestationData }) {
         <Text style={s.objTitle}>Objectifs de la formation : cf.programme détaillé en annexe</Text>
 
         <Text style={s.validTxt}>
-          Les objectifs pédagogiques ont été atteints et l'apprenant a acquis les connaissances
+          Les objectifs pédagogiques ont été atteints et l&apos;apprenant a acquis les connaissances
           conformément au programme de la formation en atteignant un taux de réussite au Quizz final
           {" superieur à 80%."}{"\n"}
           {"(Score obtenu : "}<Text style={s.bold}>{quiz.score}%</Text>{")"}

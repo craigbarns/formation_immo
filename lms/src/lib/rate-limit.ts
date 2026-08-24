@@ -1,32 +1,28 @@
-import { Ratelimit } from "@upstash/ratelimit";
-import { Redis } from "@upstash/redis";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 const WINDOW_MS = 60_000;
 const MAX_REQUESTS = 20;
+const DATABASE_RETRY_DELAY_MS = 60_000;
 
-// ── Upstash Redis (persistent across cold starts) ──────────────────────────
-// Falls back to in-memory if env vars are absent (local dev / missing config).
-let upstashLimiter: Ratelimit | null = null;
-
-if (
-  process.env.UPSTASH_REDIS_REST_URL &&
-  process.env.UPSTASH_REDIS_REST_TOKEN
-) {
-  upstashLimiter = new Ratelimit({
-    redis: Redis.fromEnv(),
-    limiter: Ratelimit.slidingWindow(MAX_REQUESTS, "60 s"),
-    analytics: false,
-  });
+export interface RateLimitResult {
+  allowed: boolean;
+  remaining: number;
 }
 
-// ── In-memory fallback ─────────────────────────────────────────────────────
 interface RateLimitEntry {
   count: number;
   resetAt: number;
 }
-const store = new Map<string, RateLimitEntry>();
 
-function checkInMemory(key: string): { allowed: boolean; remaining: number } {
+interface DatabaseRateLimitRow {
+  allowed: boolean;
+  remaining: number;
+}
+
+const store = new Map<string, RateLimitEntry>();
+let databaseRetryAfter = 0;
+
+function checkInMemory(key: string): RateLimitResult {
   const now = Date.now();
   const entry = store.get(key);
 
@@ -43,13 +39,42 @@ function checkInMemory(key: string): { allowed: boolean; remaining: number } {
   return { allowed: true, remaining: MAX_REQUESTS - entry.count };
 }
 
-// ── Public API ─────────────────────────────────────────────────────────────
-export async function checkRateLimit(
-  key: string
-): Promise<{ allowed: boolean; remaining: number }> {
-  if (upstashLimiter) {
-    const result = await upstashLimiter.limit(key);
-    return { allowed: result.success, remaining: result.remaining };
+async function checkInSupabase(key: string): Promise<RateLimitResult> {
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .rpc("check_api_rate_limit", {
+      p_key: key,
+      p_max_requests: MAX_REQUESTS,
+      p_window_seconds: WINDOW_MS / 1000,
+    })
+    .single();
+
+  if (error) throw error;
+
+  const row = data as DatabaseRateLimitRow | null;
+  if (!row || typeof row.allowed !== "boolean" || typeof row.remaining !== "number") {
+    throw new Error("Invalid Supabase rate-limit response");
   }
-  return checkInMemory(key);
+
+  return row;
+}
+
+/**
+ * Distributed rate limit backed by Supabase. If the database or RPC is
+ * temporarily unavailable, a per-instance limiter keeps the endpoint usable
+ * and a short circuit breaker prevents a request storm against the backend.
+ */
+export async function checkRateLimit(key: string): Promise<RateLimitResult> {
+  const now = Date.now();
+  if (now < databaseRetryAfter) return checkInMemory(key);
+
+  try {
+    const result = await checkInSupabase(key);
+    databaseRetryAfter = 0;
+    return result;
+  } catch (error) {
+    databaseRetryAfter = now + DATABASE_RETRY_DELAY_MS;
+    console.error("[rate-limit] Supabase unavailable; using in-memory fallback", error);
+    return checkInMemory(key);
+  }
 }

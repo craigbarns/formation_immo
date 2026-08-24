@@ -198,7 +198,7 @@ export function buildVisualsFromScript(scriptFile: string): LessonVisuals | null
 
   let md: string;
   try {
-    md = fs.readFileSync(filePath, "utf8");
+    md = fs.readFileSync(/*turbopackIgnore: true*/ filePath, "utf8");
   } catch {
     return null;
   }
@@ -237,7 +237,7 @@ export function buildRecapFromScript(scriptFile: string): RecapData | null {
 
   let md: string;
   try {
-    md = fs.readFileSync(filePath, "utf8");
+    md = fs.readFileSync(/*turbopackIgnore: true*/ filePath, "utf8");
   } catch {
     return null;
   }

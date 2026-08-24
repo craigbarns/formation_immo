@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text -- @react-pdf/renderer Image is not a DOM image and has no alt prop. */
 import * as fs from "fs";
 import * as path from "path";
 import {

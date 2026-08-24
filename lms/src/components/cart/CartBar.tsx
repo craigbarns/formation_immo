@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { ArrowRight, Loader2, ShoppingCart, Sparkles, Trash2 } from "lucide-react";
 import { useCart } from "./CartProvider";
 import { euros } from "@/lib/price";
@@ -12,6 +13,7 @@ import { euros } from "@/lib/price";
 export function CartBar() {
   const cart = useCart();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   if (cart.count === 0) return null;
 
@@ -31,7 +33,7 @@ export function CartBar() {
       if (response.status === 401) {
         // Connexion obligatoire avant paiement — le panier survit (localStorage).
         // achat=1 : la page login/register affiche le parcours "finalisez votre achat".
-        window.location.href = `/login?next=${encodeURIComponent(window.location.pathname)}&achat=1`;
+        router.push(`/login?next=${encodeURIComponent(window.location.pathname)}&achat=1`);
         return;
       }
 

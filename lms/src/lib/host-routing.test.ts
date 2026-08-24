@@ -14,6 +14,9 @@ describe("host routing", () => {
     expect(isPublicMarketingPath("/")).toBe(true);
     expect(isPublicMarketingPath("/guides/formation-loi-alur-42-heures")).toBe(true);
     expect(isPublicMarketingPath("/formation-immobiliere-loi-alur")).toBe(true);
+    expect(isPublicMarketingPath("/formation-juridique-immobilier")).toBe(true);
+    expect(isPublicMarketingPath("/formation-deontologie-immobilier")).toBe(true);
+    expect(isPublicMarketingPath("/formation-tracfin-immobilier")).toBe(true);
     expect(isPublicMarketingPath("/formation/juridique/loi-alur")).toBe(false);
     expect(isPublicMarketingPath("/api/checkout")).toBe(false);
   });

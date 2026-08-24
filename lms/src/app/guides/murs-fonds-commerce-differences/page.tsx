@@ -234,21 +234,6 @@ const keyFacts: Fact[] = [
   },
 ];
 
-const audiences = [
-  {
-    title: "L’investisseur patrimonial",
-    text: "Vous cherchez un rendement locatif et une valorisation à long terme : l’achat des murs vous donne la propriété du local et les loyers du bail commercial.",
-  },
-  {
-    title: "Le repreneur exploitant",
-    text: "Vous souhaitez exploiter une activité : l’achat du fonds vous donne la clientèle, l’enseigne et le droit d’occuper les lieux grâce au bail commercial.",
-  },
-  {
-    title: "L’acquéreur global",
-    text: "Vous voulez exploiter et posséder : l’achat conjoint des murs et du fonds sécurise durablement votre outil d’exploitation, moyennant deux évaluations distinctes.",
-  },
-];
-
 const mursCriteria = [
   "Emplacement et visibilité du local commercial",
   "Qualité et solidité du bail commercial en cours",

@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import path from "node:path";
 
 const privateNoStoreRoutes = [
   "/login/:path*",
@@ -10,6 +11,10 @@ const privateNoStoreRoutes = [
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["@react-pdf/renderer"],
+  outputFileTracingRoot: path.join(process.cwd(), ".."),
+  outputFileTracingIncludes: {
+    "/formation/**": ["../module*/scripts/**/*.md"],
+  },
   // Les médias de public/ sont servis par le CDN : ils n'ont rien à faire dans
   // la fonction serverless. Sans ces exclusions, le tracing embarque ~180 Mo
   // d'audio dans la fonction et le déploiement Netlify dépasse sa limite de 250 Mo.

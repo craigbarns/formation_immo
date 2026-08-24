@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Lock, ShieldCheck, Scale, FileText } from "lucide-react";
+import { ArrowRight, CheckCircle2, Lock, ShieldCheck, FileText } from "lucide-react";
 import { getCatalog, getModulePriceCentsFor, getPackPriceCents } from "@/data/catalog";
 import { euros } from "@/lib/price";
 import {
@@ -243,7 +243,7 @@ export default function FormationTracfinPage() {
 
             <aside className="space-y-6">
               <div className="rounded-3xl border border-zinc-200 bg-white p-8 shadow-xl lg:sticky lg:top-24">
-                <p className="text-xs font-black uppercase tracking-widest text-brand-gold">Module à l'unité</p>
+                <p className="text-xs font-black uppercase tracking-widest text-brand-gold">Module à l&apos;unité</p>
                 <div className="mt-3 flex items-baseline gap-2 border-b border-zinc-100 pb-6">
                   <span className="text-4xl font-black text-brand-navy">{euros(modulePrice)}</span>
                   <span className="text-sm font-bold text-zinc-400">TTC</span>

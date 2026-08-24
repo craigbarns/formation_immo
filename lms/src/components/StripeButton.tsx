@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { ArrowRight, Loader2, CreditCard } from "lucide-react";
 
 export function StripeButton({
@@ -15,6 +16,7 @@ export function StripeButton({
   label?: string;
 }) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -28,7 +30,7 @@ export function StripeButton({
       if (response.status === 401) {
         // Connexion obligatoire avant paiement : on revient ici après login.
         // achat=1 : la page login/register affiche le parcours "finalisez votre achat".
-        window.location.href = `/login?next=${encodeURIComponent(window.location.pathname)}&achat=1`;
+        router.push(`/login?next=${encodeURIComponent(window.location.pathname)}&achat=1`);
         return;
       }
 

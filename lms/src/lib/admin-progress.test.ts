@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { FORMATION_MODULES, STANDALONE_MODULE_SLUGS, lessonId } from "@/data/course";
+import { STANDALONE_MODULE_SLUGS, lessonId } from "@/data/course";
 import { getTotalLessonCount } from "./formation-journey";
 import {
   parcoursLessonKeySet,
