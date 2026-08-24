@@ -30,6 +30,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { CircularProgress } from "@/components/charts/CircularProgress";
 import { exportAttendanceToCSV } from "@/lib/utils/export";
+import { formatAttendanceDuration } from "@/lib/attendance";
 import { createFullAccessUser, deleteUser, listLearnerConnectionLogs, listLearners } from "@/app/actions/admin";
 import type { ConnectionLogPayload, LearnerStatsPayload } from "@/app/actions/admin";
 
@@ -44,6 +45,12 @@ interface LearnerStats {
   exams_taken: number;
   exam_scores: Record<string, { score: number, total: number, date: string }>;
   completed_keys: Set<string>;
+  attendance_seconds: number;
+  attendance_verified_seconds: number;
+  attendance_historical_seconds: number;
+  attendance_first_at: string | null;
+  attendance_last_at: string | null;
+  attendance_evidence_events: number;
 }
 
 export default function AdminPage() {
@@ -59,10 +66,13 @@ export default function AdminPage() {
   const accessFormRef = useRef<HTMLFormElement>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  // Progression = PARCOURS certifiant (42h), hors formations autonomes (add-ons 59€).
-  // Sans ce cadrage, une cliente pack ayant fini ses 42h plafonnait sous 100 %.
+  // Progression = parcours principal, hors formations autonomes (add-ons 59€).
   const totalLessons = FORMATION_MODULES.reduce((a, m) => a + m.lessons.length, 0);
   const totalModules = FORMATION_MODULES.length;
+  const totalAttendanceSeconds = learners.reduce(
+    (total, learner) => total + learner.attendance_seconds,
+    0,
+  );
 
   const loadLearners = useCallback(async ({ showLoading = true } = {}) => {
     if (showLoading) setLoading(true);
@@ -218,7 +228,7 @@ export default function AdminPage() {
         <StatCard icon={<Users className="h-6 w-6" />} label="Apprenants" value={String(learners.length)} sub="Inscrits sur la plateforme" />
         <StatCard icon={<BookOpen className="h-6 w-6" />} label="Contenu" value={String(totalLessons)} sub="Leçons à maîtriser" />
         <StatCard icon={<Award className="h-6 w-6" />} label="Expertise" value={String(totalModules)} sub="Modules certifiants" />
-        <StatCard icon={<TrendingUp className="h-6 w-6" />} label="Total QCM" value="180" sub="Banque de questions" />
+        <StatCard icon={<TrendingUp className="h-6 w-6" />} label="Temps actif" value={formatAttendanceDuration(totalAttendanceSeconds)} sub="Tous apprenants, chevauchements exclus" />
       </div>
 
       <div className="grid gap-8 lg:grid-cols-3">
@@ -248,7 +258,8 @@ export default function AdminPage() {
                           <p className="font-black text-white uppercase tracking-tight">{learner.full_name}</p>
                           <div className="mt-1 flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-white/75">
                             <span className="flex items-center gap-1"><Zap size={10} className="text-brand-gold" /> {learner.xp} XP</span>
-                            <span className="flex items-center gap-1"><Clock size={10} /> {learner.last_activity}</span>
+                            <span className="flex items-center gap-1"><Clock size={10} /> {formatAdminDate(learner.last_activity)}</span>
+                            <span className="flex items-center gap-1 text-emerald-300"><Activity size={10} /> {formatAttendanceDuration(learner.attendance_seconds)}</span>
                           </div>
                         </div>
                       </div>
@@ -393,13 +404,21 @@ export default function AdminPage() {
                     <h2 className="text-4xl font-black text-white uppercase tracking-tight">{selectedLearner.full_name}</h2>
                     <div className="mt-6 flex flex-wrap justify-center md:justify-start gap-4">
                        <Badge icon={<Zap size={10} />} label={`${selectedLearner.xp} XP`} color="purple" />
-                       <Badge icon={<Calendar size={10} />} label={`Actif le ${selectedLearner.last_activity}`} color="blue" />
+                       <Badge icon={<Calendar size={10} />} label={`Actif le ${formatAdminDate(selectedLearner.last_activity)}`} color="blue" />
                        <Badge icon={<Target size={10} />} label={`${completedParcoursCount(selectedLearner.completed_keys)}/${totalLessons} Leçons`} color="gold" />
+                       <Badge icon={<Clock size={10} />} label={`${formatAttendanceDuration(selectedLearner.attendance_seconds)} actives`} color="blue" />
                     </div>
                   </div>
                   <div className="flex flex-col gap-3">
                     <button 
-                      onClick={() => exportAttendanceToCSV(selectedLearner.full_name, attendanceLogs)}
+                      onClick={() => exportAttendanceToCSV({
+                        learnerName: selectedLearner.full_name,
+                        sessions: attendanceLogs,
+                        pedagogicalProgressPct: parcoursProgressPct(selectedLearner.completed_keys),
+                        completedLessons: completedParcoursCount(selectedLearner.completed_keys),
+                        totalLessons,
+                        examsTaken: selectedLearner.exams_taken,
+                      })}
                       className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-6 py-4 text-xs font-black uppercase tracking-widest text-brand-navy transition hover:bg-white shadow-xl shadow-brand-gold/10"
                     >
                       <Download size={14} /> Relevé Assiduité
@@ -443,40 +462,63 @@ export default function AdminPage() {
                     {/* Attendance Logs Table */}
                     <div className="space-y-6">
                         <h3 className="text-xs font-black uppercase tracking-widest text-white/75 flex items-center gap-3">
-                            <History size={14} /> Journal d&apos;assiduité récent
+                            <History size={14} /> Relevé d&apos;assiduité auditable
                         </h3>
+                        <div className="grid gap-3 sm:grid-cols-3">
+                          <AttendanceMetric
+                            label="Temps actif constaté"
+                            value={formatAttendanceDuration(selectedLearner.attendance_seconds)}
+                          />
+                          <AttendanceMetric
+                            label="Périodes consolidées"
+                            value={String(attendanceLogs.length)}
+                          />
+                          <AttendanceMetric
+                            label="Preuves techniques"
+                            value={String(selectedLearner.attendance_evidence_events)}
+                          />
+                        </div>
+                        {selectedLearner.attendance_historical_seconds > 0 && (
+                          <p className="rounded-2xl border border-amber-400/20 bg-amber-400/5 px-5 py-4 text-[11px] font-medium leading-relaxed text-amber-100/80">
+                            L&apos;historique antérieur au suivi actif v2 est conservé, plafonné à 60 secondes par trace et dédupliqué. Les nouvelles périodes excluent l&apos;arrière-plan, l&apos;inactivité et les chevauchements multi-onglets.
+                          </p>
+                        )}
                         <div className="rounded-3xl border border-white/10 bg-[#030712] shadow-inner overflow-x-auto">
-                            <table className="w-full min-w-[400px] text-left border-collapse">
+                            <table className="w-full min-w-[720px] text-left border-collapse">
                                 <thead className="bg-white/5 border-b border-white/10">
                                     <tr className="text-[10px] font-black uppercase tracking-widest text-brand-gold">
-                                        <th className="p-5">Date & Heure</th>
+                                        <th className="p-5">Début / Fin</th>
                                         <th className="p-5">Leçon / Module</th>
-                                        <th className="p-5 text-right">Durée</th>
+                                        <th className="p-5">Niveau de preuve</th>
+                                        <th className="p-5 text-right">Temps actif</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-white/5">
                                     {loadingLogs ? (
-                                      <tr><td colSpan={3} className="p-10 text-center text-white/75 text-xs font-bold uppercase animate-pulse">Chargement des relevés...</td></tr>
+                                      <tr><td colSpan={4} className="p-10 text-center text-white/75 text-xs font-bold uppercase animate-pulse">Chargement des relevés...</td></tr>
                                     ) : attendanceLogs.length > 0 ? (
-                                      attendanceLogs.slice(0, 10).map((log) => (
-                                        <tr key={log.id} className="group hover:bg-white/[0.01] transition-colors">
+                                      attendanceLogs.slice(0, 50).map((log) => (
+                                        <tr key={log.session_key} className="group hover:bg-white/[0.01] transition-colors">
                                             <td className="p-5">
-                                                <p className="text-sm font-bold text-white/80">{new Date(log.started_at).toLocaleDateString('fr-FR')}</p>
-                                                <p className="text-[10px] font-medium text-white/75">{new Date(log.started_at).toLocaleTimeString('fr-FR')}</p>
+                                                <p className="text-xs font-bold text-white/80">{formatAdminDateTime(log.started_at)}</p>
+                                                <p className="mt-1 text-[10px] font-medium text-white/50">au {formatAdminDateTime(log.ended_at)}</p>
                                             </td>
                                             <td className="p-5">
-                                                <p className="text-xs font-black text-white/60 uppercase tracking-tight">{log.lesson_slug || "Navigation"}</p>
-                                                <p className="text-[10px] font-bold text-white/75 uppercase tracking-widest mt-0.5">{log.module_slug || "Dashboard"}</p>
+                                                <p className="text-xs font-black text-white/60 uppercase tracking-tight">{log.lesson_slugs.join(", ") || "Navigation"}</p>
+                                                <p className="text-[10px] font-bold text-white/75 uppercase tracking-widest mt-0.5">{log.module_slugs.join(", ") || "Dashboard"}</p>
+                                            </td>
+                                            <td className="p-5">
+                                                <EvidenceBadge quality={log.evidence_quality} count={log.evidence_events} />
                                             </td>
                                             <td className="p-5 text-right">
                                                 <span className="text-sm font-black text-brand-gold tabular-nums">
-                                                    {Math.round((log.duration_seconds ?? 0) / 60)} min
+                                                    {formatAttendanceDuration(log.active_seconds)}
                                                 </span>
                                             </td>
                                         </tr>
                                       ))
                                     ) : (
-                                      <tr><td colSpan={3} className="p-10 text-center text-white/75 text-[10px] font-black uppercase tracking-widest">Aucune donnée de session enregistrée</td></tr>
+                                      <tr><td colSpan={4} className="p-10 text-center text-white/75 text-[10px] font-black uppercase tracking-widest">Aucune donnée de session enregistrée</td></tr>
                                     )}
                                 </tbody>
                             </table>
@@ -574,4 +616,54 @@ function Badge({ icon, label, color }: { icon: React.ReactNode, label: string, c
             {label}
         </span>
     );
+}
+
+function formatAdminDate(value: string) {
+  const timestamp = Date.parse(value);
+  if (!Number.isFinite(timestamp)) return value || "Jamais";
+  return new Intl.DateTimeFormat("fr-FR", {
+    timeZone: "Europe/Paris",
+    dateStyle: "short",
+    timeStyle: "short",
+  }).format(timestamp);
+}
+
+function formatAdminDateTime(value: string) {
+  return new Intl.DateTimeFormat("fr-FR", {
+    timeZone: "Europe/Paris",
+    dateStyle: "short",
+    timeStyle: "medium",
+  }).format(new Date(value));
+}
+
+function AttendanceMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4">
+      <p className="text-[9px] font-black uppercase tracking-widest text-white/50">{label}</p>
+      <p className="mt-2 text-lg font-black tabular-nums text-white">{value}</p>
+    </div>
+  );
+}
+
+function EvidenceBadge({
+  quality,
+  count,
+}: {
+  quality: ConnectionLogPayload["evidence_quality"];
+  count: number;
+}) {
+  const verified = quality === "verified-active";
+  const mixed = quality === "mixed";
+  const label = verified ? "Actif vérifié v2" : mixed ? "Mixte" : "Historique normalisé";
+  const colors = verified
+    ? "border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
+    : mixed
+      ? "border-sky-400/20 bg-sky-400/10 text-sky-200"
+      : "border-amber-400/20 bg-amber-400/10 text-amber-100";
+
+  return (
+    <span className={`inline-flex rounded-full border px-3 py-1 text-[9px] font-black uppercase tracking-wider ${colors}`}>
+      {label} · {count}
+    </span>
+  );
 }

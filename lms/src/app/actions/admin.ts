@@ -31,6 +31,16 @@ interface LessonProgressRow {
   completed: boolean | null;
 }
 
+interface AttendanceTotalRow {
+  user_id: string;
+  total_active_seconds: number | null;
+  verified_active_seconds: number | null;
+  historical_active_seconds: number | null;
+  first_activity_at: string | null;
+  last_activity_at: string | null;
+  evidence_events: number | null;
+}
+
 export interface LearnerStatsPayload {
   id: string;
   full_name: string;
@@ -42,16 +52,24 @@ export interface LearnerStatsPayload {
   exams_taken: number;
   exam_scores: ExamScores;
   completed_keys: string[];
+  attendance_seconds: number;
+  attendance_verified_seconds: number;
+  attendance_historical_seconds: number;
+  attendance_first_at: string | null;
+  attendance_last_at: string | null;
+  attendance_evidence_events: number;
 }
 
 export interface ConnectionLogPayload {
-  id: string;
-  user_id: string;
+  session_key: string;
   started_at: string;
-  ended_at: string | null;
-  duration_seconds: number | null;
-  module_slug: string | null;
-  lesson_slug: string | null;
+  ended_at: string;
+  active_seconds: number;
+  module_slugs: string[];
+  lesson_slugs: string[];
+  page_paths: string[];
+  evidence_events: number;
+  evidence_quality: "verified-active" | "historical-normalized" | "mixed";
 }
 
 export interface AdminAccessResult {
@@ -106,7 +124,11 @@ export async function listLearners(): Promise<{ learners?: LearnerStatsPayload[]
 
     if (userIds.length === 0) return { learners: [] };
 
-    const [{ data: gamification, error: gamificationError }, { data: progress, error: progressError }] =
+    const [
+      { data: gamification, error: gamificationError },
+      { data: progress, error: progressError },
+      { data: attendanceTotals, error: attendanceError },
+    ] =
       await Promise.all([
         admin
           .from("gamification_state")
@@ -116,10 +138,12 @@ export async function listLearners(): Promise<{ learners?: LearnerStatsPayload[]
           .from("lesson_progress")
           .select("user_id, lesson_key, completed")
           .in("user_id", userIds),
+        admin.rpc("get_attendance_totals"),
       ]);
 
     if (gamificationError) return { error: gamificationError.message };
     if (progressError) return { error: progressError.message };
+    if (attendanceError) return { error: attendanceError.message };
 
     const gamificationByUser = new Map<string, GamificationRow>();
     ((gamification || []) as GamificationRow[]).forEach((row) => {
@@ -134,22 +158,35 @@ export async function listLearners(): Promise<{ learners?: LearnerStatsPayload[]
       completedKeysByUser.set(row.user_id, keys);
     });
 
+    const attendanceByUser = new Map<string, AttendanceTotalRow>();
+    ((attendanceTotals || []) as AttendanceTotalRow[]).forEach((row) => {
+      attendanceByUser.set(row.user_id, row);
+    });
+
     return {
       learners: profileRows.map((profile) => {
         const state = gamificationByUser.get(profile.id);
         const completedKeys = completedKeysByUser.get(profile.id) || [];
+        const attendance = attendanceByUser.get(profile.id);
 
         return {
           id: profile.id,
           full_name: profile.full_name || "Apprenant anonyme",
           xp: state?.xp || 0,
           streak: state?.streak || 0,
-          last_activity: state?.last_login_date || "Jamais",
+          last_activity:
+            attendance?.last_activity_at || state?.last_login_date || "Jamais",
           quiz_correct: state?.total_quiz_correct || 0,
           exams_taken: state?.total_exams_taken || 0,
           exam_scores: state?.exam_scores || {},
           lessons_completed: completedKeys.length,
           completed_keys: completedKeys,
+          attendance_seconds: Number(attendance?.total_active_seconds || 0),
+          attendance_verified_seconds: Number(attendance?.verified_active_seconds || 0),
+          attendance_historical_seconds: Number(attendance?.historical_active_seconds || 0),
+          attendance_first_at: attendance?.first_activity_at || null,
+          attendance_last_at: attendance?.last_activity_at || null,
+          attendance_evidence_events: Number(attendance?.evidence_events || 0),
         };
       }),
     };
@@ -168,11 +205,9 @@ export async function listLearnerConnectionLogs(
 
   try {
     const admin = createAdminClient();
-    const { data, error } = await admin
-      .from("connection_logs")
-      .select("id, user_id, started_at, ended_at, duration_seconds, module_slug, lesson_slug")
-      .eq("user_id", learnerId)
-      .order("started_at", { ascending: false });
+    const { data, error } = await admin.rpc("get_learner_attendance_sessions", {
+      p_learner_id: learnerId,
+    });
 
     if (error) return { error: error.message };
 

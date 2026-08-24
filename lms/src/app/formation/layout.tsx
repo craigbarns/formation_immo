@@ -59,7 +59,7 @@ export default async function FormationLayout({
 
   return (
     <FormationShell>
-      <AttendanceTracker />
+      <AttendanceTracker learnerId={user.id} disabled={isAdmin} />
       {children}
       <StreakReminder />
       <ProactiveCoachBanner />
