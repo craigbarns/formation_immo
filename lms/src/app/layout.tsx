@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { ToastProvider } from "@/components/toast";
 import { FocusModeProvider } from "@/components/focus-mode";
 import { PwaRegister } from "@/components/PwaRegister";
+import Script from "next/script";
 import {
   DEFAULT_OG_IMAGE,
   SITE_NAME,
@@ -100,6 +101,18 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-C8TMLHW7CV"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-C8TMLHW7CV');
+          `}
+        </Script>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} storageKey="formation-theme">
           <FocusModeProvider>
             <ToastProvider>
