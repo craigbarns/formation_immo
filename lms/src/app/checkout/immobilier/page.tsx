@@ -24,6 +24,7 @@ const PROGRAMME_MODULES = [
     number: "01",
     icon: Scale,
     title: "Juridique & conformité",
+    slug: "juridique",
     summary: "Loi ALUR 2026, compromis, diagnostics, mandats, copropriété, TRACFIN, baux d'habitation.",
     lessons: 8,
   },
@@ -31,6 +32,7 @@ const PROGRAMME_MODULES = [
     number: "02",
     icon: Handshake,
     title: "Transaction & négociation",
+    slug: "transaction",
     summary: "Estimation, prospection, négociation avancée, CRM, offre d'achat, acte authentique.",
     lessons: 7,
   },
@@ -38,6 +40,7 @@ const PROGRAMME_MODULES = [
     number: "03",
     icon: PiggyBank,
     title: "Financement & fiscalité",
+    slug: "financement",
     summary: "Crédit, fiscalité, rentabilité, assurances, dispositifs avancés.",
     lessons: 5,
   },
@@ -45,6 +48,7 @@ const PROGRAMME_MODULES = [
     number: "04",
     icon: Megaphone,
     title: "Marketing digital",
+    slug: "marketing",
     summary: "Photos pro, annonces, portails, réseaux sociaux, SEO, vidéo, personal branding.",
     lessons: 7,
   },
@@ -52,6 +56,7 @@ const PROGRAMME_MODULES = [
     number: "05",
     icon: DoorOpen,
     title: "Visite, closing & fidélisation",
+    slug: "terrain",
     summary: "Visites, argumentaire, closing, promesse, fidélisation, découverte client.",
     lessons: 6,
   },
@@ -59,6 +64,7 @@ const PROGRAMME_MODULES = [
     number: "06",
     icon: BookOpen,
     title: "Déontologie & éthique professionnelle",
+    slug: "deontologie",
     summary: "Code de déontologie, non-discrimination, conflits d'intérêts, éthique pratique.",
     lessons: 4,
   },
@@ -66,6 +72,7 @@ const PROGRAMME_MODULES = [
     number: "07",
     icon: Scale,
     title: "TRACFIN & LCB-FT — Lutte anti-blanchiment",
+    slug: "tracfin",
     summary: "Cadre légal LCB-FT, vigilance client, bénéficiaire effectif, déclaration de soupçon à TRACFIN.",
     lessons: 3,
   },
@@ -263,9 +270,11 @@ export default function ImmobilierCheckoutPage() {
                     {mod.number}
                   </span>
                 </div>
-                <h3 className="mt-5 text-lg font-black uppercase tracking-tight text-brand-navy">
-                  {mod.title}
-                </h3>
+                <Link href={`/formation-${mod.slug}-immobilier`} className="block mt-5 hover:opacity-80">
+                  <h3 className="text-lg font-black uppercase tracking-tight text-brand-navy">
+                    {mod.title}
+                  </h3>
+                </Link>
                 <p className="mt-3 text-sm leading-relaxed text-zinc-600">
                   {mod.summary}
                 </p>

@@ -19,9 +19,9 @@ const PAGE_PATH = "/formation-deontologie-immobilier";
 const MODULE_ID = "deontologie";
 
 export const metadata: Metadata = {
-  title: "Formation Déontologie & Non-discrimination Immobilier | Obligatoire 4h",
+  title: "Formation Déontologie Immobilier 4h (100% En Ligne) - Loi ALUR",
   description:
-    "Module de formation déontologie et non-discrimination à l'accès au logement de 4h pour agents immobiliers et mandataires. Conforme Loi ALUR et arrêté 2020.",
+    "Validez rapidement votre formation déontologie immobilier de 4h (dont 2h de non-discrimination au logement) exigée par la Loi ALUR. Attestation immédiate.",
   keywords: [
     "formation déontologie immobilier",
     "non discrimination logement formation",

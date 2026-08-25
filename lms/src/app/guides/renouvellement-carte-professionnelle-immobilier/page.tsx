@@ -148,12 +148,12 @@ const trainingRequirements = [
     text: "Les thèmes retenus doivent correspondre à l’activité immobilière effectivement exercée.",
   },
   {
-    title: "2 heures de non-discrimination",
-    text: "Elles portent spécifiquement sur la non-discrimination à l’accès au logement.",
-  },
-  {
-    title: "2 heures d’autres règles déontologiques",
-    text: "Elles complètent les deux heures précédentes, soit quatre heures de déontologie sur le cycle.",
+    title: "4 heures de déontologie",
+    text: (
+      <>
+        Vous devez valider 2h sur la non-discrimination au logement et 2h sur les autres règles déontologiques. Vous pouvez suivre notre <Link href="/formation-deontologie-immobilier" className="text-brand-gold-dark font-bold hover:underline">formation déontologie immobilier de 4h</Link> dédiée pour valider cette obligation.
+      </>
+    ),
   },
 ];
 
@@ -588,6 +588,33 @@ export default function RenouvellementCarteProfessionnelleImmobilierPage() {
                     Guide formation 42 h
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
+                </div>
+                
+                {/* COMMERCIAL CTA */}
+                <div className="mt-8 overflow-hidden rounded-3xl border border-brand-navy bg-brand-navy text-white shadow-xl">
+                  <div className="p-8 sm:p-10">
+                    <p className="inline-flex rounded-full bg-brand-gold px-3 py-1 text-xs font-black uppercase text-brand-navy">
+                      Recommandé
+                    </p>
+                    <h3 className="mt-4 text-2xl font-black sm:text-3xl">
+                      Besoin de valider vos 42h dès aujourd'hui ?
+                    </h3>
+                    <p className="mt-4 max-w-2xl text-lg text-white/80">
+                      Découvrez notre pack complet <strong>Formation Loi ALUR de 42h (incluant le module TRACFIN de 3h)</strong>. 100% en ligne, attestations immédiates et conformité totale pour votre dossier CCI.
+                    </p>
+                    <div className="mt-8 flex flex-wrap items-center gap-4">
+                      <Link
+                        href="/formation-immobiliere-loi-alur"
+                        className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-6 py-4 text-base font-black text-brand-navy transition hover:bg-white hover:text-brand-navy"
+                      >
+                        Découvrir le Pack 45h
+                        <ArrowRight className="h-5 w-5" aria-hidden />
+                      </Link>
+                      <span className="text-sm font-semibold text-white/60">
+                        Paiement sécurisé • Accès immédiat
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </section>
 
