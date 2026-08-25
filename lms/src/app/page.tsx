@@ -72,10 +72,10 @@ function moduleCover(slug: string): string {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    absolute: "Formation Loi ALUR 42h en ligne | MonPassFormation",
+    absolute: "Formation Agent Immobilier & Loi ALUR 42h (100% En Ligne)",
   },
   description:
-    "Formation Loi ALUR en ligne : socle de 42h et module TRACFIN de 3h, soit 45h, avec QCM, supports pratiques, suivi et attestation.",
+    "Validez rapidement votre renouvellement de carte professionnelle (Carte T) avec notre Formation Loi ALUR 42h + TRACFIN. E-learning 24/7, attestation immédiate.",
   keywords: [
     "formation Loi ALUR 42h",
     "formation immobilière en ligne",
@@ -88,9 +88,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Formation Loi ALUR 42h en ligne (+3h TRACFIN)",
+    title: "Formation Agent Immobilier & Loi ALUR 42h (100% En Ligne)",
     description:
-      "Un parcours immobilier de 45 heures : socle Loi ALUR de 42h, module TRACFIN, QCM et supports.",
+      "Validez rapidement votre renouvellement de carte professionnelle (Carte T) avec notre Formation Loi ALUR 42h + TRACFIN. E-learning 24/7, attestation immédiate.",
     url: "/",
     siteName: SITE_NAME,
     locale: "fr_FR",
