@@ -12,9 +12,9 @@ import {
 const PAGE_PATH = "/formation-immobiliere-loi-alur";
 
 export const metadata: Metadata = {
-  title: "Formation Loi ALUR 42h en ligne (+3h TRACFIN)",
+  title: "Formation Loi ALUR 42h (100% En Ligne) - Attestation Immédiate",
   description:
-    "Formation immobilière en ligne de 45h : socle Loi ALUR de 42h, TRACFIN, 7 modules, 40 leçons, QCM, supports et attestation.",
+    "Validez vos 42h obligatoires Loi ALUR pour le renouvellement de votre carte professionnelle. Formation 100% en ligne, module TRACFIN 3h inclus. Attestation immédiate.",
   keywords: [
     "formation Loi ALUR 42h",
     "formation agent immobilier en ligne",
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     canonical: PAGE_PATH,
   },
   openGraph: {
-    title: "Formation Loi ALUR 42h en ligne (+3h TRACFIN)",
+    title: "Formation Loi ALUR 42h (100% En Ligne) - Attestation Immédiate",
     description:
-      "Un parcours immobilier de 45h avec 7 modules, 40 leçons, QCM et supports pratiques.",
+      "Validez vos 42h obligatoires Loi ALUR pour le renouvellement de votre carte professionnelle. Formation 100% en ligne, module TRACFIN 3h inclus. Attestation immédiate.",
     url: PAGE_PATH,
     type: "website",
     siteName: SITE_NAME,
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Formation Loi ALUR 42h en ligne (+3h TRACFIN)",
+    title: "Formation Loi ALUR 42h (100% En Ligne) - Attestation Immédiate",
     description:
-      "Un parcours immobilier de 45h avec 7 modules, 40 leçons, QCM et supports pratiques.",
+      "Validez vos 42h obligatoires Loi ALUR pour le renouvellement de votre carte professionnelle. Formation 100% en ligne, module TRACFIN 3h inclus. Attestation immédiate.",
     images: [DEFAULT_OG_IMAGE],
   },
 };
@@ -103,6 +103,35 @@ export default function FormationImmobiliereLoiAlurPage() {
           priceCurrency: "EUR",
           availability: "https://schema.org/InStock",
         },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "La formation est-elle valable pour la CCI ?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Oui, cette formation de 42h (incluant le module TRACFIN de 3h) est strictement conforme à la Loi ALUR et vous permet de renouveler votre carte professionnelle (Carte T) auprès de votre CCI."
+            }
+          },
+          {
+            "@type": "Question",
+            name: "Comment obtenir mon attestation de formation ?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Dès la validation de l'ensemble de vos modules et QCM en ligne, votre attestation de fin de formation est générée automatiquement. Vous pouvez la télécharger immédiatement au format PDF."
+            }
+          },
+          {
+            "@type": "Question",
+            name: "Puis-je suivre la formation à mon rythme ?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Absolument. La formation est 100% en ligne (e-learning). Vous avez accès à la plateforme 24h/24 et 7j/7, ce qui vous permet d'avancer selon vos disponibilités professionnelles."
+            }
+          }
+        ]
       },
     ],
   };

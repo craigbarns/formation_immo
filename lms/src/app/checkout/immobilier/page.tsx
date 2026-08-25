@@ -327,6 +327,31 @@ export default function ImmobilierCheckoutPage() {
         </div>
       </section>
 
+      <section className="mx-auto mt-16 max-w-4xl px-5 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-gold">
+            Questions fréquentes
+          </p>
+          <h2 className="mt-3 text-2xl font-black text-brand-navy sm:text-3xl">
+            Tout savoir sur la formation ALUR
+          </h2>
+        </div>
+        <div className="space-y-6">
+          <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+            <h3 className="text-lg font-black text-brand-navy">La formation est-elle valable pour la CCI ?</h3>
+            <p className="mt-2 text-sm text-zinc-600">Oui, cette formation de 42h (incluant le module TRACFIN de 3h) est strictement conforme à la Loi ALUR et vous permet de renouveler votre carte professionnelle (Carte T) auprès de votre CCI.</p>
+          </div>
+          <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+            <h3 className="text-lg font-black text-brand-navy">Comment obtenir mon attestation de formation ?</h3>
+            <p className="mt-2 text-sm text-zinc-600">Dès la validation de l'ensemble de vos modules et QCM en ligne, votre attestation de fin de formation est générée automatiquement. Vous pouvez la télécharger immédiatement au format PDF.</p>
+          </div>
+          <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+            <h3 className="text-lg font-black text-brand-navy">Puis-je suivre la formation à mon rythme ?</h3>
+            <p className="mt-2 text-sm text-zinc-600">Absolument. La formation est 100% en ligne (e-learning). Vous avez accès à la plateforme 24h/24 et 7j/7, ce qui vous permet d'avancer selon vos disponibilités professionnelles.</p>
+          </div>
+        </div>
+      </section>
+
       <section className="mt-16 rounded-3xl bg-brand-navy px-6 py-16 text-center sm:px-12 md:py-20">
         <p className="text-xs font-black uppercase tracking-[0.2em] text-brand-gold">
           Besoin d&apos;un renseignement ?
