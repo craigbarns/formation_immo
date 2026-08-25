@@ -26,9 +26,9 @@ const LEGIFRANCE_ETHICS_URL =
 const CCI_RENEWAL_URL =
   "https://www.cci.fr/ressources/formalites-en-ligne/fichier-des-professionnels-de-limmobilier/renouvellement-de-carte-professionnelle";
 
-const title = "Formation loi ALUR 42 heures : guide 2026";
+const title = "Formation Loi ALUR 42h (Obligatoire) : Le Guide 2026";
 const description =
-  "Durée, personnes concernées, contenus obligatoires et justificatifs : comprendre les 42 heures de formation loi ALUR pour les professionnels de l’immobilier.";
+  "Découvrez comment valider votre formation loi ALUR 42h obligatoire. Durée, thèmes, déontologie, TRACFIN, renouvellement carte T et justificatifs CCI.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

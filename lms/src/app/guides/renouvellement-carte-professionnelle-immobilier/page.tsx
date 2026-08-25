@@ -27,9 +27,9 @@ const LEGIFRANCE_DECREE_URL =
 const LEGIFRANCE_ETHICS_URL =
   "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000042427805";
 
-const title = "Renouvellement carte professionnelle immobilier : guide 2026";
+const title = "Renouvellement Carte Professionnelle Immobilier (Carte T) - 2026";
 const description =
-  "Quand et comment renouveler sa carte professionnelle immobilière : délai de deux mois, formation continue de 42 heures et préparation du dossier CCI.";
+  "Dossier CCI, délai de 2 mois et formation ALUR obligatoire de 42h. Découvrez les démarches exactes pour renouveler votre carte d'agent immobilier.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -382,7 +382,7 @@ export default function RenouvellementCarteProfessionnelleImmobilierPage() {
                   Guide pratique 2026
                 </p>
                 <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                  Renouvellement de la carte professionnelle immobilière
+                  Renouvellement Carte Professionnelle Immobilier (Carte T)
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">
                   Délai, formation continue et préparation du dossier&nbsp;:

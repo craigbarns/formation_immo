@@ -139,12 +139,12 @@ export default function ImmobilierCheckoutPage() {
                   <Sparkles className="h-3.5 w-3.5" />
                   Conforme Loi ALUR 2026
                 </p>
-                <h1 className="mt-3 text-3xl font-black md:text-4xl">Formation Agent Immobilier — Loi ALUR 42h &amp; TRACFIN</h1>
+                <h1 className="mt-3 text-3xl font-black md:text-4xl">Formation Agent Immobilier — Renouvellement Carte T &amp; Loi ALUR 42h</h1>
               </div>
             </div>
             <div className="p-8">
               <p className="text-lg leading-relaxed text-zinc-600">
-                Maîtrisez les 5 piliers du métier : juridique, transaction, financement, marketing et terrain, complétés par la déontologie et TRACFIN. Un parcours certifiant de 45h conçu pour les professionnels exigeants.
+                L'essentiel pour <strong>renouveler sa carte T</strong> et maîtriser les 5 piliers du métier : juridique, transaction, financement, marketing et terrain, complétés par la déontologie et TRACFIN. Un parcours certifiant de 45h conçu pour les professionnels exigeants.
               </p>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
