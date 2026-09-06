@@ -1119,7 +1119,17 @@ export default function HomePage() {
             <ul className="mt-3 space-y-2 text-sm text-zinc-600">
               <li>
                 <Link href={IMMOBILIER_CHECKOUT} className="transition hover:text-brand-navy">
-                  Formation immobilière
+                  Formation loi ALUR (42h)
+                </Link>
+              </li>
+              <li>
+                <Link href="/formation-deontologie-immobilier" className="transition hover:text-brand-navy">
+                  Déontologie Immobilier (4h)
+                </Link>
+              </li>
+              <li>
+                <Link href="/formation-tracfin-immobilier" className="transition hover:text-brand-navy">
+                  TRACFIN Immobilier (3h)
                 </Link>
               </li>
               <li>
@@ -1132,8 +1142,6 @@ export default function HomePage() {
                   Guides immobilier
                 </Link>
               </li>
-              <li>Management commercial</li>
-              <li>Marketing digital</li>
             </ul>
           </div>
 

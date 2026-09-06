@@ -159,7 +159,7 @@ export default function FormationDeontologiePage() {
                 Module réglementaire obligatoire — Déontologie
               </p>
               <h1 className="mt-4 text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
-                Formation Déontologie &amp; Non-discrimination (4h)
+                Formation Déontologie Immobilier &amp; Non-discrimination (4h)
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-white/85 sm:text-xl">
                 Remplissez l&apos;obligation légale des 4 heures incluant au moins 2h de prévention de la non-discrimination au logement et 2h sur le code de déontologie des professionnels de l&apos;immobilier.

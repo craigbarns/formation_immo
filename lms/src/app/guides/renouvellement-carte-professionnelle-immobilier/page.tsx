@@ -27,9 +27,9 @@ const LEGIFRANCE_DECREE_URL =
 const LEGIFRANCE_ETHICS_URL =
   "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000042427805";
 
-const title = "Renouvellement Carte Professionnelle Immobilier (Carte T) - 2026";
+const title = "Renouvellement Carte Professionnelle Immobilier & Formation Loi ALUR";
 const description =
-  "Dossier CCI, délai de 2 mois et formation ALUR obligatoire de 42h. Découvrez les démarches exactes pour renouveler votre carte d'agent immobilier.";
+  "Toutes les démarches pour le renouvellement de votre carte professionnelle immobilier (carte T) auprès de la CCI, et la formation loi ALUR obligatoire.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -474,6 +474,29 @@ export default function RenouvellementCarteProfessionnelleImmobilierPage() {
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-brand-navy sm:text-4xl">
                   Une carte valable trois ans, à renouveler auprès de la CCI
                 </h2>
+                
+                {/* BLOC DE CONVERSION SEO */}
+                <div className="my-8 overflow-hidden rounded-2xl bg-brand-navy p-6 text-white shadow-xl sm:p-8">
+                  <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
+                    <div>
+                      <h3 className="text-xl font-black text-brand-gold">
+                        Besoin de valider vos 42h pour renouveler votre carte ?
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-white/80">
+                        Passez votre formation Loi ALUR 100% en ligne. Module déontologie et Tracfin inclus. Attestation délivrée immédiatement.
+                      </p>
+                    </div>
+                    <Link
+                      href="/formation-immobiliere-loi-alur"
+                      className="group inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand-gold px-6 py-3.5 text-sm font-black text-brand-navy transition hover:bg-brand-gold-hover hover:scale-105"
+                    >
+                      Voir le pack 42h
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+                    </Link>
+                  </div>
+                </div>
+                {/* FIN BLOC DE CONVERSION */}
+
                 <div className="mt-6 space-y-5 text-base leading-8 text-slate-700">
                   <p>
                     Selon{" "}
