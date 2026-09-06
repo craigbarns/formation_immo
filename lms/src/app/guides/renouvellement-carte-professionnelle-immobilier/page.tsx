@@ -15,6 +15,7 @@ import {
   ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
+import { LeadMagnet } from "@/components/marketing/LeadMagnet";
 
 const SITE_URL = "https://monpassformation.com";
 const PAGE_PATH = "/guides/renouvellement-carte-professionnelle-immobilier";
@@ -752,6 +753,8 @@ export default function RenouvellementCarteProfessionnelleImmobilierPage() {
                   </div>
                 </div>
               </section>
+              
+              <LeadMagnet />
 
               <section id="faq" className="scroll-mt-8">
                 <p className="text-sm font-black uppercase tracking-[0.14em] text-brand-gold-dark">
