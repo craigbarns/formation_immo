@@ -621,7 +621,7 @@ export default function RenouvellementCarteProfessionnelleImmobilierPage() {
                       Recommandé
                     </p>
                     <h3 className="mt-4 text-2xl font-black sm:text-3xl">
-                      Besoin de valider vos 42h dès aujourd'hui ?
+                      Besoin de valider vos 42h dès aujourd&apos;hui ?
                     </h3>
                     <p className="mt-4 max-w-2xl text-lg text-white/80">
                       Découvrez notre pack complet <strong>Formation Loi ALUR de 42h (incluant le module TRACFIN de 3h)</strong>. 100% en ligne, attestations immédiates et conformité totale pour votre dossier CCI.

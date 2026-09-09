@@ -144,7 +144,7 @@ export default function ImmobilierCheckoutPage() {
             </div>
             <div className="p-8">
               <p className="text-lg leading-relaxed text-zinc-600">
-                L'essentiel pour <strong>renouveler sa carte T</strong> et maîtriser les 5 piliers du métier : juridique, transaction, financement, marketing et terrain, complétés par la déontologie et TRACFIN. Un parcours certifiant de 45h conçu pour les professionnels exigeants.
+                L&apos;essentiel pour <strong>renouveler sa carte T</strong> et maîtriser les 5 piliers du métier : juridique, transaction, financement, marketing et terrain, complétés par la déontologie et TRACFIN. Un parcours certifiant de 45h conçu pour les professionnels exigeants.
               </p>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -352,11 +352,11 @@ export default function ImmobilierCheckoutPage() {
           </div>
           <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
             <h3 className="text-lg font-black text-brand-navy">Comment obtenir mon attestation de formation ?</h3>
-            <p className="mt-2 text-sm text-zinc-600">Dès la validation de l'ensemble de vos modules et QCM en ligne, votre attestation de fin de formation est générée automatiquement. Vous pouvez la télécharger immédiatement au format PDF.</p>
+            <p className="mt-2 text-sm text-zinc-600">Dès la validation de l&apos;ensemble de vos modules et QCM en ligne, votre attestation de fin de formation est générée automatiquement. Vous pouvez la télécharger immédiatement au format PDF.</p>
           </div>
           <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
             <h3 className="text-lg font-black text-brand-navy">Puis-je suivre la formation à mon rythme ?</h3>
-            <p className="mt-2 text-sm text-zinc-600">Absolument. La formation est 100% en ligne (e-learning). Vous avez accès à la plateforme 24h/24 et 7j/7, ce qui vous permet d'avancer selon vos disponibilités professionnelles.</p>
+            <p className="mt-2 text-sm text-zinc-600">Absolument. La formation est 100% en ligne (e-learning). Vous avez accès à la plateforme 24h/24 et 7j/7, ce qui vous permet d&apos;avancer selon vos disponibilités professionnelles.</p>
           </div>
         </div>
       </section>
