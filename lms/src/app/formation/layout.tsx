@@ -8,6 +8,7 @@ import { StudyReminder } from "@/components/retention/StudyReminder";
 import { AttendanceTracker } from "@/components/AttendanceTracker";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { getAccessibleModuleSlugs, getEntitlements, type EntitlementRow } from "@/lib/entitlements";
 
 export const metadata: Metadata = {
   robots: {
@@ -37,28 +38,31 @@ export default async function FormationLayout({
     .single();
 
   const isAdmin = profile?.role === "admin";
+  let entitlementRows: EntitlementRow[] = [];
 
   // 2. 🔒 VÉRIFICATION DE L'ACCÈS (sauf pour les admins)
   // Utilise le client admin (service role) côté serveur pour éviter les
   // blocages RLS/PostgREST sur auth.users.
   if (!isAdmin) {
     const admin = createAdminClient();
-    const { data: subscription } = await admin
+    const { data: subscriptions, error } = await admin
       .from("user_subscriptions")
-      .select("status")
+      .select("module_slug, status")
       .eq("formation_id", "immobilier")
-      .or(`email.eq.${user.email},user_id.eq.${user.id}`)
-      .eq("status", "active")
-      .limit(1)
-      .maybeSingle();
+      .or(`email.eq.${user.email?.toLowerCase()},user_id.eq.${user.id}`)
+      .eq("status", "active");
 
-    if (!subscription) {
+    if (error) throw new Error(error.message);
+    if (!subscriptions?.length) {
       redirect("/checkout/immobilier?error=accès_non_autorisé");
     }
+    entitlementRows = subscriptions;
   }
 
+  const firstModuleSlug = getAccessibleModuleSlugs(getEntitlements(entitlementRows), isAdmin)[0];
+
   return (
-    <FormationShell>
+    <FormationShell examHref={firstModuleSlug ? `/formation/examen/${firstModuleSlug}` : "/formation"}>
       <AttendanceTracker learnerId={user.id} disabled={isAdmin} />
       {children}
       <StreakReminder />

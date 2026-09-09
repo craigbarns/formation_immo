@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getEntitlements, hasModuleAccess } from "@/lib/entitlements";
+import { getAccessibleModuleSlugs, getEntitlements, hasModuleAccess } from "@/lib/entitlements";
 import { fetchActiveEntitlementRows } from "@/lib/auth-access";
 
 /**
@@ -66,7 +66,10 @@ export async function verifyModuleAccess(moduleSlug: string) {
     .single();
 
   if (profile?.role === "admin") {
-    return { user, isAdmin: true, hasAccess: true };
+    return {
+      user, isAdmin: true, hasAccess: true,
+      accessibleModuleSlugs: getAccessibleModuleSlugs(getEntitlements([]), true),
+    };
   }
 
   // 2. Sinon, lire les droits actifs (pack + modules) via service role
@@ -75,9 +78,13 @@ export async function verifyModuleAccess(moduleSlug: string) {
     userId: user.id,
   });
 
-  const hasAccess = hasModuleAccess(getEntitlements(rows), moduleSlug);
+  const entitlements = getEntitlements(rows);
+  const hasAccess = hasModuleAccess(entitlements, moduleSlug);
 
-  return { user, isAdmin: false, hasAccess };
+  return {
+    user, isAdmin: false, hasAccess,
+    accessibleModuleSlugs: getAccessibleModuleSlugs(entitlements),
+  };
 }
 
 /**
@@ -99,7 +106,10 @@ export async function getAccessSummary() {
     .single();
 
   if (profile?.role === "admin") {
-    return { user, isAdmin: true as const, hasPack: true, modules: [] as string[] };
+    return {
+      user, isAdmin: true as const, hasPack: true, modules: [] as string[],
+      accessibleModuleSlugs: getAccessibleModuleSlugs(getEntitlements([]), true),
+    };
   }
 
   const rows = await fetchActiveEntitlementRows({
@@ -107,5 +117,8 @@ export async function getAccessSummary() {
     userId: user.id,
   });
   const { hasPack, modules } = getEntitlements(rows);
-  return { user, isAdmin: false as const, hasPack, modules: [...modules] };
+  return {
+    user, isAdmin: false as const, hasPack, modules: [...modules],
+    accessibleModuleSlugs: getAccessibleModuleSlugs({ hasPack, modules }),
+  };
 }

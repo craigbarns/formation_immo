@@ -36,10 +36,16 @@ export function getCertifiedLessonCount(): number {
 }
 
 /** Première leçon non marquée « vue », dans l’ordre du parcours. */
-export function findNextLesson(progress: Record<string, boolean>): NextLessonInfo | null {
-  const totalSteps = getTotalLessonCount();
+export function findNextLesson(
+  progress: Record<string, boolean>,
+  accessibleModuleSlugs?: readonly string[],
+): NextLessonInfo | null {
+  const modules = accessibleModuleSlugs === undefined
+    ? FORMATION_MODULES
+    : COURSE.filter((mod) => accessibleModuleSlugs.includes(mod.slug));
+  const totalSteps = modules.reduce((total, mod) => total + mod.lessons.length, 0);
   let step = 0;
-  for (const mod of FORMATION_MODULES) {
+  for (const mod of modules) {
     for (const lesson of mod.lessons) {
       step += 1;
       const id = lessonId(mod.slug, lesson.slug);

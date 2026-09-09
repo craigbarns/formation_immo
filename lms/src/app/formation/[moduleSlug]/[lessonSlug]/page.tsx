@@ -127,7 +127,7 @@ export default async function LessonPage({ params }: Props) {
 
   const { module: mod, lesson } = result;
   const key = lessonId(moduleSlug, lessonSlug);
-  const nav = getPrevNext(moduleSlug, lessonSlug);
+  const nav = getPrevNext(moduleSlug, lessonSlug, access.accessibleModuleSlugs);
   const moduleIndex = COURSE.findIndex((m) => m.slug === moduleSlug);
   const moduleInfo = {
     slug: moduleSlug,

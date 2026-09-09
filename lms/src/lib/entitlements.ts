@@ -2,7 +2,7 @@
  * Logique d'accès PURE (aucune I/O). Testable unitairement.
  * Convention : module_slug === null  ⇒  accès "pack" (tous les modules).
  */
-import { STANDALONE_MODULE_SLUGS } from "@/data/course";
+import { COURSE, STANDALONE_MODULE_SLUGS } from "@/data/course";
 
 export type EntitlementRow = {
   module_slug: string | null;
@@ -46,6 +46,13 @@ export function getEntitlements(rows: EntitlementRow[]): Entitlements {
 export function hasModuleAccess(ent: Entitlements, moduleSlug: string): boolean {
   if (ent.modules.has(moduleSlug)) return true;
   return ent.hasPack && !PACK_EXCLUDED_MODULES.has(moduleSlug);
+}
+
+/** Modules ouverts à l'apprenant, dans l'ordre du catalogue, pour la navigation. */
+export function getAccessibleModuleSlugs(ent: Entitlements, isAdmin = false): string[] {
+  return COURSE.filter((mod) => isAdmin || hasModuleAccess(ent, mod.slug)).map(
+    (mod) => mod.slug,
+  );
 }
 
 /** Décide si un utilisateur peut accéder à un module donné. */

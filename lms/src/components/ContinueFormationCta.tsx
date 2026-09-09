@@ -12,14 +12,18 @@ import {
 } from "@/constants/formation-storage";
 import { motion } from "framer-motion";
 
-export function ContinueFormationCta() {
+export function ContinueFormationCta({
+  accessibleModuleSlugs,
+}: {
+  accessibleModuleSlugs: string[];
+}) {
   const supabase = createClient();
   /** undefined = chargement, null = tout vu, sinon prochaine leçon */
   const [next, setNext] = useState<NextLessonInfo | null | undefined>(undefined);
 
   const refresh = useCallback(() => {
-    setNext(findNextLesson(getStoredProgress()));
-  }, []);
+    setNext(findNextLesson(getStoredProgress(), accessibleModuleSlugs));
+  }, [accessibleModuleSlugs]);
 
   useEffect(() => {
     async function load() {
@@ -37,10 +41,10 @@ export function ContinueFormationCta() {
           if (row.completed) progress[row.lesson_key] = true;
         });
       }
-      setNext(findNextLesson(progress));
+      setNext(findNextLesson(progress, accessibleModuleSlugs));
     }
     load();
-  }, [supabase]);
+  }, [supabase, accessibleModuleSlugs]);
 
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {
@@ -53,6 +57,8 @@ export function ContinueFormationCta() {
       window.removeEventListener(FORMATION_PROGRESS_CHANGED_EVENT, refresh);
     };
   }, [refresh]);
+
+  if (accessibleModuleSlugs.length === 0) return null;
 
   if (next === undefined) {
     return (
@@ -75,16 +81,16 @@ export function ContinueFormationCta() {
             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-400 mb-1">PARCOURS THÉORIQUE BOUCLÉ</p>
             <h3 className="text-xl font-black text-white uppercase tracking-tight">Félicitations, Expert !</h3>
             <p className="mt-2 text-base text-white/50 font-medium italic leading-relaxed">
-              Vous avez visionné l&apos;intégralité du cursus. Il est temps de valider vos acquis avec les examens certifiants.
+              Vous avez parcouru toutes les leçons de vos modules. Il est temps de valider vos acquis avec les examens.
             </p>
           </div>
         </div>
         <div className="mt-6 flex flex-wrap gap-3 md:mt-0 md:shrink-0">
           <Link
-            href="/formation/examen/juridique"
+            href={`/formation/examen/${accessibleModuleSlugs[0]}`}
             className="group inline-flex items-center gap-3 rounded-xl bg-emerald-500 px-8 py-4 text-xs font-black uppercase tracking-widest text-brand-navy shadow-xl shadow-emerald-500/20 transition hover:bg-white hover:scale-105"
           >
-            EXAMEN FINAL
+            PASSER UN EXAMEN
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
