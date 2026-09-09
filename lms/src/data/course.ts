@@ -1023,10 +1023,17 @@ export function lessonId(moduleSlug: string, lessonSlug: string) {
   return `${moduleSlug}/${lessonSlug}`;
 }
 
-export function getPrevNext(moduleSlug: string, lessonSlug: string) {
-  const modIndex = COURSE.findIndex((m) => m.slug === moduleSlug);
+export function getPrevNext(
+  moduleSlug: string,
+  lessonSlug: string,
+  accessibleModuleSlugs?: readonly string[],
+) {
+  const modules = accessibleModuleSlugs === undefined
+    ? COURSE
+    : COURSE.filter((mod) => accessibleModuleSlugs.includes(mod.slug));
+  const modIndex = modules.findIndex((m) => m.slug === moduleSlug);
   if (modIndex < 0) return null;
-  const mod = COURSE[modIndex];
+  const mod = modules[modIndex];
   const lIndex = mod.lessons.findIndex((l) => l.slug === lessonSlug);
   if (lIndex < 0) return null;
 
@@ -1035,7 +1042,7 @@ export function getPrevNext(moduleSlug: string, lessonSlug: string) {
     const l = mod.lessons[lIndex - 1];
     prev = { href: `/formation/${mod.slug}/${l.slug}`, label: `← ${l.title}` };
   } else if (modIndex > 0) {
-    const pm = COURSE[modIndex - 1];
+    const pm = modules[modIndex - 1];
     const l = pm.lessons[pm.lessons.length - 1];
     prev = { href: `/formation/${pm.slug}/${l.slug}`, label: `← ${l.title}` };
   }
@@ -1044,8 +1051,8 @@ export function getPrevNext(moduleSlug: string, lessonSlug: string) {
   if (lIndex < mod.lessons.length - 1) {
     const l = mod.lessons[lIndex + 1];
     next = { href: `/formation/${mod.slug}/${l.slug}`, label: `${l.title} →` };
-  } else if (modIndex < COURSE.length - 1) {
-    const nm = COURSE[modIndex + 1];
+  } else if (modIndex < modules.length - 1) {
+    const nm = modules[modIndex + 1];
     const l = nm.lessons[0];
     next = { href: `/formation/${nm.slug}/${l.slug}`, label: `${l.title} →` };
   }

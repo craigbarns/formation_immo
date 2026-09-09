@@ -59,7 +59,9 @@ export default async function ModulePage({ params }: Props) {
   // Navigation linéaire dans le PARCOURS principal uniquement. Un module
   // autonome (ex. TRACFIN) est hors parcours : pas de précédent/suivant, et il
   // n'apparaît jamais comme "module suivant" à la fin de la déontologie.
-  const navList = STANDALONE_MODULE_SLUGS.has(mod.slug) ? [] : FORMATION_MODULES;
+  const navList = STANDALONE_MODULE_SLUGS.has(mod.slug)
+    ? []
+    : FORMATION_MODULES.filter((item) => access.accessibleModuleSlugs.includes(item.slug));
   const modIndex = navList.findIndex((m) => m.slug === mod.slug);
   const prevMod = modIndex > 0 ? navList[modIndex - 1] : null;
   const nextMod =

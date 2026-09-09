@@ -7,7 +7,7 @@ import { Brain, ArrowRight, TrendingUp, AlertCircle, Sparkles } from "lucide-rea
 import { createClient } from "@/lib/supabase/client";
 import { getGamificationState, type GamificationState } from "@/lib/gamification";
 import { getStoredProgress } from "@/components/LessonProgress";
-import { FORMATION_MODULES } from "@/data/course";
+import { COURSE } from "@/data/course";
 
 interface Recommendation {
   type: "continue" | "review" | "explore" | "practice";
@@ -18,18 +18,19 @@ interface Recommendation {
   priority: number;
 }
 
-function generateRecommendations(
+export function generateRecommendations(
   gamification: GamificationState,
   progress: Record<string, boolean>,
+  accessibleModuleSlugs: readonly string[],
 ): Recommendation[] {
   const recommendations: Recommendation[] = [];
-  const modules = FORMATION_MODULES;
+  const modules = COURSE.filter((mod) => accessibleModuleSlugs.includes(mod.slug));
 
   // Find weak areas from exam scores
   const weakModules: string[] = [];
   for (const [moduleSlug, score] of Object.entries(gamification.examScores)) {
     const percentage = (score.score / score.total) * 100;
-    if (percentage < 80) {
+    if (percentage < 80 && accessibleModuleSlugs.includes(moduleSlug)) {
       weakModules.push(moduleSlug);
     }
   }
@@ -77,7 +78,10 @@ function generateRecommendations(
   }
 
   // Recommend practice if many lessons completed
-  const completedCount = Object.values(progress).filter(Boolean).length;
+  const completedCount = modules.reduce(
+    (total, mod) => total + mod.lessons.filter((lesson) => progress[`${mod.slug}/${lesson.slug}`]).length,
+    0,
+  );
   if (completedCount >= 5) {
     const unattemptedModule = modules.find(m => !gamification.examScores[m.slug]);
     if (unattemptedModule) {
@@ -116,7 +120,11 @@ function generateRecommendations(
   return recommendations.sort((a, b) => b.priority - a.priority).slice(0, 3);
 }
 
-export function AdaptiveLearningPath() {
+export function AdaptiveLearningPath({
+  accessibleModuleSlugs,
+}: {
+  accessibleModuleSlugs: string[];
+}) {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
 
   useEffect(() => {
@@ -168,11 +176,13 @@ export function AdaptiveLearningPath() {
         });
       }
 
-      setRecommendations(generateRecommendations(gamification, progress));
+      setRecommendations(generateRecommendations(gamification, progress, accessibleModuleSlugs));
     }
 
     load();
-  }, []);
+  }, [accessibleModuleSlugs]);
+
+  if (accessibleModuleSlugs.length === 0) return null;
 
   if (recommendations.length === 0) {
     return (
@@ -180,7 +190,7 @@ export function AdaptiveLearningPath() {
         <Sparkles className="mx-auto h-8 w-8 text-emerald-600" />
         <h3 className="mt-3 font-bold text-zinc-900">Félicitations !</h3>
         <p className="mt-1 text-sm text-zinc-600">
-          Vous avez terminé tous les modules. Passez aux examens pour valider vos compétences !
+          Vous avez terminé les leçons de vos modules. Passez aux examens pour valider vos compétences !
         </p>
       </div>
     );

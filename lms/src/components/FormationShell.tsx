@@ -10,7 +10,7 @@ import { LogoutButton } from "@/components/auth/LogoutButton";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useSyncSupabase } from "@/hooks/useSyncSupabase";
 
-export function FormationShell({ children }: { children: React.ReactNode }) {
+export function FormationShell({ children, examHref }: { children: React.ReactNode; examHref: string }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   useSyncSupabase();
 
@@ -72,7 +72,7 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
             <NavItem href="/formation">Parcours</NavItem>
             <NavItem href="/formation/supports-visuels">Fiches</NavItem>
             <NavItem href="/formation/outils">Simulateurs</NavItem>
-            <NavItem href="/formation/examen/juridique">Examens</NavItem>
+            <NavItem href={examHref}>Examens</NavItem>
             <NavItem href="/formation/profil">Profil</NavItem>
             <div className="flex items-center gap-1.5 ml-1 border-l border-slate-200 dark:border-white/15 pl-1.5">
               <ThemeToggle />
@@ -135,7 +135,7 @@ export function FormationShell({ children }: { children: React.ReactNode }) {
       {/* Mobile bottom nav */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t border-slate-200 dark:border-white/10 bg-white/95 dark:bg-[#030712]/90 px-2 py-3 backdrop-blur-xl md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.08)] dark:shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
         <MobileNavItem href="/formation" icon={<Home className="h-5 w-5" />} label="Parcours" />
-        <MobileNavItem href="/formation/examen/juridique" icon={<GraduationCap className="h-5 w-5" />} label="Examens" />
+        <MobileNavItem href={examHref} icon={<GraduationCap className="h-5 w-5" />} label="Examens" />
         <MobileNavItem href="/formation/outils" icon={<BarChart2 className="h-5 w-5" />} label="Outils" />
         <MobileNavItem href="/formation/supports-visuels" icon={<BookOpen className="h-5 w-5" />} label="Fiches" />
         <MobileNavItem href="/formation/profil" icon={<Award className="h-5 w-5" />} label="Profil" />

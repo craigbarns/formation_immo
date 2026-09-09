@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 };
 import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award, Trophy, type LucideIcon } from "lucide-react";
 import { FORMATION_MODULES, formatDuration } from "@/data/course";
-import { PACK_EXCLUDED_MODULES } from "@/lib/entitlements";
 import { getAccessSummary } from "@/lib/access";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getModuleShowcase } from "@/data/module-showcase";
@@ -50,11 +49,11 @@ export default async function FormationHomePage() {
     redirect("/formation/test");
   }
 
-  // Droits par module : pack = tout (add-ons éventuels exclus via PACK_EXCLUDED,
-  // vide aujourd'hui) ; sinon modules achetés à l'unité. Même règle que verifyModuleAccess.
+  // La reprise et les recommandations suivent les mêmes droits que les leçons.
   const access = await getAccessSummary();
-  const canAccess = (slug: string) =>
-    (access.hasPack && !PACK_EXCLUDED_MODULES.has(slug)) || access.modules.includes(slug);
+  const { accessibleModuleSlugs } = access;
+  const canAccess = (slug: string) => accessibleModuleSlugs.includes(slug);
+  const firstModuleSlug = accessibleModuleSlugs[0];
 
   // Stats du parcours (FORMATION_MODULES = tous les modules, TRACFIN inclus).
   const totalLessons = FORMATION_MODULES.reduce((acc, m) => acc + m.lessons.length, 0);
@@ -119,7 +118,7 @@ export default async function FormationHomePage() {
             <ProgressOverview />
           </div>
           <div className="mt-6">
-            <ContinueFormationCta />
+            <ContinueFormationCta accessibleModuleSlugs={accessibleModuleSlugs} />
           </div>
         </div>
       </section>
@@ -142,7 +141,7 @@ export default async function FormationHomePage() {
             Parcours recommandé
           </h2>
           <div className="rounded-[2rem] border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 p-1 shadow-md dark:shadow-xl">
-            <AdaptiveLearningPath />
+            <AdaptiveLearningPath accessibleModuleSlugs={accessibleModuleSlugs} />
           </div>
         </div>
       </section>
@@ -212,8 +211,8 @@ export default async function FormationHomePage() {
             desc="Infographies HD"
             highlight
           />
-          <QuickLink href="/formation/examen/juridique" icon="✅" label="Examens QCM" desc="Par module" />
-          <QuickLink href="/formation/flashcards/juridique" icon="🃏" label="Flashcards" desc="Révision rapide" />
+          {firstModuleSlug && <QuickLink href={`/formation/examen/${firstModuleSlug}`} icon="✅" label="Examens QCM" desc="Par module" />}
+          {firstModuleSlug && <QuickLink href={`/formation/flashcards/${firstModuleSlug}`} icon="🃏" label="Flashcards" desc="Révision rapide" />}
           <QuickLink href="/formation/profil" icon="🏅" label="Badges" desc="Progression" />
           <QuickLink href="/formation/certification" icon="🎓" label="Certification" desc="Examen final" highlight />
         </div>
