@@ -31,5 +31,23 @@ export function getAuthErrorMessage(message: string): string {
     return "Le mot de passe doit contenir au moins 6 caractères.";
   }
 
+  // Lien de réinitialisation / connexion expiré, déjà utilisé ou invalide
+  if (
+    normalized.includes("token has expired or is invalid") ||
+    normalized.includes("link is invalid or has expired") ||
+    normalized.includes("otp_expired") ||
+    normalized.includes("auth_callback_failed")
+  ) {
+    return "Ce lien a expiré ou a déjà été utilisé. Refaites une demande de réinitialisation.";
+  }
+
+  if (normalized.includes("auth session missing")) {
+    return "Lien de réinitialisation invalide. Refaites une demande depuis la page de connexion.";
+  }
+
+  if (normalized.includes("should be different from the old password")) {
+    return "Le nouveau mot de passe doit être différent de l'ancien.";
+  }
+
   return message;
 }

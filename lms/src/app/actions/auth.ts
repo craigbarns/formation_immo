@@ -13,6 +13,8 @@ import {
 } from "@/lib/auth-access";
 import { grantsFromProducts, parsePurchaseMetadata } from "@/lib/purchase";
 import { getAuthErrorMessage } from "@/lib/auth-errors";
+import { buildResetUrl, shouldSendResetLink } from "@/lib/password-reset";
+import { sendPasswordResetEmail } from "@/lib/email/resend";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
@@ -380,21 +382,59 @@ export async function logout() {
   redirect("/login");
 }
 
+/**
+ * Envoie le lien de réinitialisation via Resend (l'e-mail Supabase n'était pas
+ * délivré). Renvoie true si la demande est traitée — e-mail envoyé, ou bien
+ * compte inconnu / demande trop rapprochée (cas volontairement silencieux) —,
+ * false s'il faut se rabattre sur l'envoi Supabase (config absente, échec).
+ */
+async function sendResetLinkViaResend(email: string): Promise<boolean> {
+  try {
+    const user = await findAuthUserByEmail(email);
+    if (!user) return true;
+    if (!shouldSendResetLink(user.recovery_sent_at, Date.now())) return true;
+
+    const admin = createAdminClient();
+    const { data, error } = await admin.auth.admin.generateLink({ type: "recovery", email });
+    const hashedToken = data?.properties?.hashed_token;
+    if (error || !hashedToken) {
+      console.error("[reset] generateLink impossible:", error?.message);
+      return false;
+    }
+
+    return await sendPasswordResetEmail(email, buildResetUrl(getAppUrl(), hashedToken));
+  } catch (err) {
+    console.error("[reset] envoi via Resend impossible, repli Supabase:", err);
+    return false;
+  }
+}
+
 export async function resetPassword(formData: FormData) {
-  const supabase = await createClient();
   const email = getString(formData.get("email")).toLowerCase();
 
   if (!email) {
     redirect("/login?reset=1&error=Email requis.");
   }
 
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${getAppUrl()}/auth/callback?next=/settings/reset-password`,
-  });
+  const handled = await sendResetLinkViaResend(email);
 
-  if (error) {
-    redirect("/login?reset=1&error=" + encodeURIComponent(getAuthErrorMessage(error.message)));
+  if (!handled) {
+    // Repli : ancien envoi Supabase (ex. hébergement sans clé Resend).
+    const supabase = await createClient();
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${getAppUrl()}/auth/callback?next=/settings/reset-password`,
+    });
+
+    if (error) {
+      redirect("/login?reset=1&error=" + encodeURIComponent(getAuthErrorMessage(error.message)));
+    }
   }
 
-  redirect("/login?message=Un email de réinitialisation a été envoyé.");
+  // Même message que le compte existe ou non : on ne révèle pas qui est client.
+  redirect(
+    "/login?message=" +
+      encodeURIComponent(
+        "Si un compte existe pour cette adresse, un e-mail de réinitialisation vient d'être envoyé. Pensez à vérifier vos spams."
+      )
+  );
 }

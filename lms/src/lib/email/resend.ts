@@ -179,6 +179,60 @@ export async function sendAdminCreatedAccountEmail(
   }
 }
 
+/**
+ * E-mail de réinitialisation du mot de passe (remplace l'e-mail Supabase, qui
+ * n'était pas délivré). Renvoie false si Resend n'est pas configuré ou échoue,
+ * pour que l'appelant puisse se rabattre sur l'envoi Supabase.
+ */
+export async function sendPasswordResetEmail(email: string, resetUrl: string): Promise<boolean> {
+  if (!resend) {
+    console.error("[email] RESEND_API_KEY manquant — email de réinitialisation non envoyé");
+    return false;
+  }
+  const { data, error } = await resend.emails.send({
+    from: FROM,
+    to: email,
+    subject: "Réinitialise ton mot de passe MonPassFormation",
+    html: `
+      <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#070d18;color:#fff;border-radius:16px;overflow:hidden">
+        <div style="background:linear-gradient(135deg,#0a1628,#0f2040);padding:40px 32px;text-align:center">
+          <h1 style="color:#d4af37;font-size:28px;margin:0 0 8px">MonPassFormation</h1>
+          <p style="color:#ffffff60;margin:0;font-size:13px;text-transform:uppercase;letter-spacing:2px">Réinitialisation du mot de passe</p>
+        </div>
+        <div style="padding:40px 32px">
+          <h2 style="color:#fff;font-size:22px;margin:0 0 16px">Bonjour 👋</h2>
+          <p style="color:#ffffff80;line-height:1.7">Tu as demandé à réinitialiser le mot de passe de ton compte <strong style="color:#fff">${email}</strong>. Clique sur le bouton ci-dessous pour en choisir un nouveau :</p>
+          <div style="margin:32px 0;text-align:center">
+            <a href="${resetUrl}" style="display:inline-block;background:#d4af37;color:#0a1628;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:2px;padding:16px 32px;border-radius:12px;text-decoration:none">
+              Choisir un nouveau mot de passe →
+            </a>
+          </div>
+          <p style="color:#ffffff60;font-size:13px;line-height:1.7;margin:0 0 12px">
+            Ce lien fonctionne sur n'importe quel appareil. Il n'est valable que pour une durée limitée et ne peut servir qu'une fois.
+          </p>
+          <div style="border-top:1px solid #ffffff15;padding-top:20px;margin-top:24px">
+            <p style="color:#ffffff60;font-size:13px;line-height:1.7;margin:0 0 12px">
+              🔒 Tu n'es pas à l'origine de cette demande ? Ignore simplement cet e-mail : ton mot de passe actuel reste inchangé.
+            </p>
+            <p style="color:#ffffff60;font-size:13px;line-height:1.7;margin:0">
+              📞 En cas de difficulté, contacte notre service technique au <a href="tel:0618130727" style="color:#d4af37;text-decoration:none;font-weight:700">06 18 13 07 27</a>.
+            </p>
+          </div>
+        </div>
+        <div style="background:#ffffff08;padding:24px 32px;text-align:center">
+          <p style="color:#ffffff30;font-size:12px;margin:0">MonPassFormation · <a href="${APP_URL}" style="color:#d4af37;text-decoration:none">app.monpassformation.com</a></p>
+        </div>
+      </div>
+    `,
+  });
+  if (error) {
+    console.error("[email] Erreur Resend sendPasswordResetEmail:", JSON.stringify(error));
+    return false;
+  }
+  console.log("[email] Email de réinitialisation envoyé, id:", data?.id);
+  return true;
+}
+
 export async function sendReminderEmail(email: string, name: string | undefined, daysSince: number) {
   if (!resend) return;
   const prenom = name?.split(" ")[0] ?? "là";

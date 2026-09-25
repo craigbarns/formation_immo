@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Lock, Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { getAuthErrorMessage } from "@/lib/auth-errors";
 
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState("");
@@ -11,6 +13,9 @@ export default function ResetPasswordPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
+  // Le jeton du lien e-mail est à usage unique : une fois vérifié, un nouvel
+  // essai (ex. mot de passe refusé) ne doit pas le re-vérifier.
+  const tokenVerified = useRef(false);
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
@@ -28,11 +33,29 @@ export default function ResetPasswordPage() {
 
     setLoading(true);
     const supabase = createClient();
+
+    // Lien reçu par e-mail (?token_hash=…) : on vérifie le jeton MAINTENANT et
+    // pas à l'ouverture de la page, pour qu'un robot de messagerie qui pré-ouvre
+    // le lien ne le consomme pas. Fonctionne sur n'importe quel appareil.
+    const tokenHash = new URLSearchParams(window.location.search).get("token_hash");
+    if (tokenHash && !tokenVerified.current) {
+      const { error: verifyError } = await supabase.auth.verifyOtp({
+        type: "recovery",
+        token_hash: tokenHash,
+      });
+      if (verifyError) {
+        setLoading(false);
+        setError(getAuthErrorMessage(verifyError.message));
+        return;
+      }
+      tokenVerified.current = true;
+    }
+
     const { error: updateError } = await supabase.auth.updateUser({ password });
     setLoading(false);
 
     if (updateError) {
-      setError(updateError.message);
+      setError(getAuthErrorMessage(updateError.message));
       return;
     }
 
@@ -85,7 +108,12 @@ export default function ResetPasswordPage() {
                 </div>
 
                 {error && (
-                  <p className="rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm font-bold text-red-400">{error}</p>
+                  <div className="rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm font-bold text-red-400" role="alert">
+                    <p>{error}</p>
+                    <Link href="/login?reset=1" className="mt-2 inline-block text-brand-gold underline underline-offset-4 hover:text-white">
+                      Recevoir un nouveau lien
+                    </Link>
+                  </div>
                 )}
 
                 <button
