@@ -836,7 +836,7 @@ export default function NegociateurImmobilierStatutSalairePage() {
                       Habilité&nbsp;? Vous êtes soumis à la formation continue
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Le parcours MonPassFormation (42 h loi ALUR + 3 h TRACFIN,
+                      Le parcours MonPassFormation (42 h loi ALUR, TRACFIN inclus,
                       certifié Qualiopi, avec visioconférences) couvre
                       l’obligation d’un cycle complet pour les collaborateurs
                       habilités comme pour les titulaires.

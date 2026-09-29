@@ -733,7 +733,7 @@ export default function ErreursRenouvellementCarteProfessionnellePage() {
                       Arrivez au renouvellement avec un dossier complet
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Formation Loi ALUR 42 h + TRACFIN 3 h à 299&nbsp;€,
+                      Formation Loi ALUR 42 h, TRACFIN inclus, à 299&nbsp;€,
                       certifiée Qualiopi, en visioconférences&nbsp;: volume,
                       déontologie et attestations conformes, pour un dossier
                       CCI sans mauvaise surprise.

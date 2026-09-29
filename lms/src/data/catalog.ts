@@ -1,8 +1,19 @@
-import { COURSE, formatDuration } from "@/data/course";
+import { COURSE } from "@/data/course";
 import { PACK_EXCLUDED_MODULES } from "@/lib/entitlements";
 
 export const FORMATION_ID = "immobilier";
 export const PACK_PRODUCT_ID = "pack";
+
+/**
+ * Durée AFFICHÉE du pack : 42h, la durée officielle de la formation continue
+ * Loi ALUR (et le seuil de la certification, REQUIRED_HOURS). Le module TRACFIN
+ * est inclus dans ces 42h côté communication, même si le contenu réel des
+ * leçons totalise davantage — décision commerciale. Ne jamais afficher une
+ * durée recalculée depuis les leçons pour le pack.
+ */
+export const PACK_DISPLAY_HOURS = 42;
+export const PACK_DISPLAY_DURATION = `${PACK_DISPLAY_HOURS}h`;
+export const PACK_DISPLAY_DURATION_ISO = `PT${PACK_DISPLAY_HOURS}H`;
 
 /** Modules retirés de la vente à l'unité (slugs) — escape hatch sans toucher COURSE. */
 export const UNAVAILABLE_MODULES: string[] = [];
@@ -49,18 +60,14 @@ export function getModulePriceCentsFor(slug: string): number {
 
 /** Catalogue vendable, dérivé de COURSE (source unique de vérité du contenu). */
 export function getCatalog(): Product[] {
-  // Le pack "accès complet" ne couvre PAS les add-ons autonomes (ex. TRACFIN) :
-  // sa description et sa durée ne comptent que les modules réellement inclus.
+  // Le pack "accès complet" ne couvre PAS les add-ons autonomes : son nombre de
+  // modules ne compte que ceux réellement inclus ; sa durée est la durée affichée.
   const packModules = COURSE.filter((m) => !PACK_EXCLUDED_MODULES.has(m.slug));
-  const packDurationMin = packModules.reduce(
-    (t, m) => t + m.lessons.reduce((a, l) => a + l.duration, 0),
-    0
-  );
   const pack: Product = {
     id: PACK_PRODUCT_ID,
     kind: "pack",
     label: "Formation Agent Immobilier — Loi ALUR 2026",
-    description: `Accès complet aux ${packModules.length} modules (${formatDuration(packDurationMin)}), attestation et certification MasterClass.`,
+    description: `Accès complet aux ${packModules.length} modules (${PACK_DISPLAY_DURATION}, TRACFIN inclus), attestation et certification MasterClass.`,
     priceCents: getPackPriceCents(),
     grants: "all",
     available: true,

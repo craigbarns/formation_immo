@@ -78,12 +78,12 @@ export default function FormationImmobiliereLoiAlurPage() {
         "@type": "Course",
         "@id": `${pageUrl}#course`,
         url: pageUrl,
-        name: "Formation Agent Immobilier — Loi ALUR 42h + TRACFIN 3h",
+        name: "Formation Agent Immobilier — Loi ALUR 42h (TRACFIN inclus)",
         description:
-          "Parcours de formation continue en ligne de 45 heures pour les professionnels de l'immobilier : socle Loi ALUR de 42h, module TRACFIN de 3h, QCM, supports pratiques et attestation.",
+          "Parcours de formation continue en ligne de 42 heures conforme Loi ALUR pour les professionnels de l'immobilier : module TRACFIN inclus, QCM, supports pratiques et attestation.",
         image: absoluteUrl(DEFAULT_OG_IMAGE),
         inLanguage: "fr-FR",
-        timeRequired: "PT45H",
+        timeRequired: "PT42H",
         educationalLevel: "Formation professionnelle continue",
         provider: {
           "@type": "Organization",

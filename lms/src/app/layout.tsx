@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Formation immobilière en ligne de 45h : socle Loi ALUR de 42h, module TRACFIN de 3h, QCM, supports et suivi de progression.",
+    "Formation immobilière en ligne Loi ALUR de 42h, module TRACFIN inclus : QCM, supports et suivi de progression.",
   metadataBase: new URL(SITE_URL),
   applicationName: SITE_NAME,
   authors: [{ name: "PASS Formation" }],
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Formation immobilière Loi ALUR en ligne",
     description:
-      "Un parcours en ligne de 45h : socle Loi ALUR de 42h et module TRACFIN de 3h.",
+      "Un parcours en ligne Loi ALUR de 42h, module TRACFIN inclus.",
     locale: "fr_FR",
     type: "website",
     siteName: SITE_NAME,
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Formation immobilière Loi ALUR en ligne",
     description:
-      "Un parcours en ligne de 45h : socle Loi ALUR de 42h et module TRACFIN de 3h.",
+      "Un parcours en ligne Loi ALUR de 42h, module TRACFIN inclus.",
     images: [DEFAULT_OG_IMAGE],
   },
   robots: {

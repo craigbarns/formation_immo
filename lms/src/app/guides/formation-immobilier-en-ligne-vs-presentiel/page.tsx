@@ -834,7 +834,7 @@ export default function FormationImmobilierEnLigneVsPresentielPage() {
                     <p className="mt-3 leading-7 text-white/75">
                       Le parcours MonPassFormation combine modules auto-rythmés,
                       visioconférences en direct, QCM et supports pratiques — 42 h
-                      loi ALUR + 3 h TRACFIN, avec attestation à la clé.
+                      loi ALUR, module TRACFIN inclus, avec attestation à la clé.
                     </p>
                   </div>
                   <Link

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 };
 import { BookOpen, Clock, Layers, Sparkles, Target, Brain, Award, Trophy, type LucideIcon } from "lucide-react";
 import { FORMATION_MODULES, formatDuration } from "@/data/course";
+import { PACK_DISPLAY_DURATION } from "@/data/catalog";
 import { getAccessSummary } from "@/lib/access";
 import { getAvatarForModule } from "@/data/module-avatars";
 import { getModuleShowcase } from "@/data/module-showcase";
@@ -58,9 +59,8 @@ export default async function FormationHomePage() {
   // Stats du parcours (FORMATION_MODULES = tous les modules, TRACFIN inclus).
   const totalLessons = FORMATION_MODULES.reduce((acc, m) => acc + m.lessons.length, 0);
   const totalModules = FORMATION_MODULES.length;
-  const totalDuration = formatDuration(
-    FORMATION_MODULES.reduce((acc, m) => acc + m.lessons.reduce((a, l) => a + l.duration, 0), 0)
-  );
+  // Durée affichée du parcours = 42h (Loi ALUR, TRACFIN inclus), pas la somme des leçons.
+  const totalDuration = PACK_DISPLAY_DURATION;
 
   return (
     <div className="space-y-12">

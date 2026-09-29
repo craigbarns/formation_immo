@@ -310,7 +310,7 @@ const relatedGuides = [
   },
   {
     href: "/formation-immobiliere-loi-alur",
-    title: "Formation loi ALUR 42 h + TRACFIN",
+    title: "Formation loi ALUR 42 h, TRACFIN inclus",
     text: "La formation continue obligatoire, certifiée Qualiopi, dès l'exercice.",
   },
 ];
@@ -815,7 +815,7 @@ export default function DevenirAgentImmobilierSansDiplomePage() {
                     <p className="mt-3 leading-7 text-white/75">
                       La formation continue est obligatoire pour les titulaires
                       et les collaborateurs habilités. Le parcours
-                      MonPassFormation (42 h loi ALUR + 3 h TRACFIN, certifié
+                      MonPassFormation (42 h loi ALUR, TRACFIN inclus, certifié
                       Qualiopi, en visioconférences) couvre l’obligation sur un
                       cycle complet.
                     </p>

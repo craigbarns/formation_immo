@@ -809,7 +809,7 @@ export default function QuiDoitSuivreFormation42HeuresPage() {
                       MonPassFormation
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Formation Loi ALUR 42 h + TRACFIN 3 h à 299&nbsp;€,
+                      Formation Loi ALUR 42 h, TRACFIN inclus, à 299&nbsp;€,
                       certifiée Qualiopi, en visioconférences avec des experts
                       de l’immobilier. Des attestations nominatives conformes
                       pour chaque personne formée.

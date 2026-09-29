@@ -80,7 +80,7 @@ const PROGRAMME_MODULES = [
 export const metadata: Metadata = {
   title: "Acheter la formation immobilière",
   description:
-    "Découvrez puis achetez la formation Agent Immobilier Loi ALUR : 45h, 40 leçons et 7 modules en ligne.",
+    "Découvrez puis achetez la formation Agent Immobilier Loi ALUR : 42h, TRACFIN inclus, 7 modules en ligne.",
   alternates: {
     canonical: "/formation-immobiliere-loi-alur",
   },
@@ -144,7 +144,7 @@ export default function ImmobilierCheckoutPage() {
             </div>
             <div className="p-8">
               <p className="text-lg leading-relaxed text-zinc-600">
-                L&apos;essentiel pour <strong>renouveler sa carte T</strong> et maîtriser les 5 piliers du métier : juridique, transaction, financement, marketing et terrain, complétés par la déontologie et TRACFIN. Un parcours certifiant de 45h conçu pour les professionnels exigeants.
+                L&apos;essentiel pour <strong>renouveler sa carte T</strong> et maîtriser les 5 piliers du métier : juridique, transaction, financement, marketing et terrain, complétés par la déontologie et TRACFIN. Un parcours certifiant de 42h conçu pour les professionnels exigeants.
               </p>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -247,7 +247,7 @@ export default function ImmobilierCheckoutPage() {
             Programme complet
           </p>
           <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-brand-navy sm:text-4xl">
-            7 modules · 40 leçons · 45h de formation
+            7 modules · 40 leçons · 42h de formation
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-zinc-600">
             Un parcours structuré couvrant l&apos;ensemble du métier d&apos;agent immobilier, de la conformité juridique à l&apos;éthique professionnelle.

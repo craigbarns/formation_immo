@@ -631,7 +631,7 @@ export default function RenouvellementCarteProfessionnelleImmobilierPage() {
                         href="/formation-immobiliere-loi-alur"
                         className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-6 py-4 text-base font-black text-brand-navy transition hover:bg-white hover:text-brand-navy"
                       >
-                        Découvrir le Pack 45h
+                        Découvrir le Pack 42h
                         <ArrowRight className="h-5 w-5" aria-hidden />
                       </Link>
                       <span className="text-sm font-semibold text-white/60">

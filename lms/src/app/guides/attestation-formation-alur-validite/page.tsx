@@ -818,7 +818,7 @@ export default function AttestationFormationAlurValiditePage() {
                       Des attestations conformes, sans mauvaise surprise
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Formation Loi ALUR 42 h + TRACFIN 3 h à 299&nbsp;€,
+                      Formation Loi ALUR 42 h, TRACFIN inclus, à 299&nbsp;€,
                       certifiée Qualiopi, en visioconférences. Chaque
                       participant reçoit une attestation nominative complète&nbsp;:
                       objectifs, contenu, durée et date de réalisation.

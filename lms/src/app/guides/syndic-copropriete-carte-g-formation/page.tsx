@@ -818,7 +818,7 @@ export default function SyndicCoproprieteCarteGFormationPage() {
                       Un cycle de formation conforme pour votre cabinet
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Le parcours MonPassFormation (42 h loi ALUR + 3 h TRACFIN,
+                      Le parcours MonPassFormation (42 h loi ALUR, TRACFIN inclus,
                       certifié Qualiopi, avec visioconférences) permet aux
                       professionnels de la gestion et du syndic de valider leur
                       cycle complet dans les règles.

@@ -19,7 +19,14 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { COURSE, formatDuration, getModuleDurationMin } from "@/data/course";
-import { getCatalog, getModulePriceCents, getPackPriceCents, PACK_PRODUCT_ID } from "@/data/catalog";
+import {
+  getCatalog,
+  getModulePriceCents,
+  getPackPriceCents,
+  PACK_DISPLAY_DURATION,
+  PACK_DISPLAY_DURATION_ISO,
+  PACK_PRODUCT_ID,
+} from "@/data/catalog";
 import { PACK_EXCLUDED_MODULES } from "@/lib/entitlements";
 import { euros } from "@/lib/price";
 import { CartProvider } from "@/components/cart/CartProvider";
@@ -43,14 +50,9 @@ const PASS_FORMATION_LOGO = "/images/pass-formation-logo.svg";
 const PACK_MODULES = COURSE.filter((m) => !PACK_EXCLUDED_MODULES.has(m.slug));
 const TOTAL_MODULES = PACK_MODULES.length;
 const TOTAL_LESSONS = PACK_MODULES.reduce((acc, m) => acc + m.lessons.length, 0);
-const TOTAL_DURATION_MIN = PACK_MODULES.reduce(
-  (acc, m) => acc + m.lessons.reduce((a, l) => a + l.duration, 0),
-  0,
-);
-const TOTAL_DURATION = formatDuration(TOTAL_DURATION_MIN);
-const TOTAL_DURATION_ISO = `PT${Math.floor(TOTAL_DURATION_MIN / 60)}H${
-  TOTAL_DURATION_MIN % 60 ? `${TOTAL_DURATION_MIN % 60}M` : ""
-}`;
+// Durée affichée = 42h (Loi ALUR, TRACFIN inclus) — voir PACK_DISPLAY_DURATION.
+const TOTAL_DURATION = PACK_DISPLAY_DURATION;
+const TOTAL_DURATION_ISO = PACK_DISPLAY_DURATION_ISO;
 
 /** Cover par module ; fallback visuel générique pour tout nouveau module sans visuel. */
 function moduleCover(slug: string): string {
@@ -75,7 +77,7 @@ export const metadata: Metadata = {
     absolute: "Formation Agent Immobilier & Loi ALUR 42h (100% En Ligne)",
   },
   description:
-    "Validez rapidement votre renouvellement de carte professionnelle (Carte T) avec notre Formation Loi ALUR 42h + TRACFIN. E-learning 24/7, attestation immédiate.",
+    "Validez rapidement votre renouvellement de carte professionnelle (Carte T) avec notre Formation Loi ALUR 42h, module TRACFIN inclus. E-learning 24/7, attestation immédiate.",
   keywords: [
     "formation Loi ALUR 42h",
     "formation immobilière en ligne",
@@ -90,7 +92,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Formation Agent Immobilier & Loi ALUR 42h (100% En Ligne)",
     description:
-      "Validez rapidement votre renouvellement de carte professionnelle (Carte T) avec notre Formation Loi ALUR 42h + TRACFIN. E-learning 24/7, attestation immédiate.",
+      "Validez rapidement votre renouvellement de carte professionnelle (Carte T) avec notre Formation Loi ALUR 42h, module TRACFIN inclus. E-learning 24/7, attestation immédiate.",
     url: "/",
     siteName: SITE_NAME,
     locale: "fr_FR",
@@ -106,9 +108,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Formation Loi ALUR 42h en ligne (+3h TRACFIN)",
+    title: "Formation Loi ALUR 42h en ligne (TRACFIN inclus)",
     description:
-      "Un parcours immobilier de 45 heures : socle Loi ALUR de 42h, module TRACFIN, QCM et supports.",
+      "Un parcours immobilier Loi ALUR de 42h, module TRACFIN inclus, avec QCM et supports.",
     images: [IMMOBILIER_COVER],
   },
 };
@@ -338,9 +340,9 @@ export default function HomePage() {
         "@type": "Course",
         "@id": `${absoluteUrl(IMMOBILIER_CHECKOUT)}#course`,
         url: absoluteUrl(IMMOBILIER_CHECKOUT),
-        name: "Formation Agent Immobilier — Loi ALUR 42h + TRACFIN 3h",
+        name: "Formation Agent Immobilier — Loi ALUR 42h (TRACFIN inclus)",
         description:
-          `Parcours de formation continue en ligne de ${TOTAL_DURATION} pour les professionnels de l'immobilier, avec un socle Loi ALUR de 42h, un module TRACFIN de 3h, des QCM, des supports pratiques et une attestation.`,
+          `Parcours de formation continue en ligne de ${TOTAL_DURATION} conforme Loi ALUR pour les professionnels de l'immobilier, module TRACFIN inclus, avec des QCM, des supports pratiques et une attestation.`,
         image: absoluteUrl(IMMOBILIER_COVER),
         inLanguage: "fr-FR",
         timeRequired: TOTAL_DURATION_ISO,
@@ -465,8 +467,8 @@ export default function HomePage() {
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85 sm:text-xl">
                 MonPassFormation centralise vos formations professionnelles. Premier parcours actif :
-                45h de formation immobilière, avec un socle Loi ALUR de 42h et un module TRACFIN
-                de 3h, à suivre à votre rythme.
+                la formation immobilière Loi ALUR de 42h, module TRACFIN inclus, à suivre à votre
+                rythme.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">

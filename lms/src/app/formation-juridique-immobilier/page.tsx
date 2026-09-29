@@ -145,7 +145,7 @@ export default function FormationJuridiquePage() {
                 href="/formation-immobiliere-loi-alur"
                 className="rounded-lg bg-brand-navy px-4 py-2.5 text-sm font-black text-white transition hover:bg-brand-navy-mid"
               >
-                Pack complet 45h — {euros(packPrice)}
+                Pack complet 42h — {euros(packPrice)}
               </Link>
             </div>
           </div>
@@ -169,7 +169,7 @@ export default function FormationJuridiquePage() {
                   href="/formation-immobiliere-loi-alur"
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-6 py-4 text-base font-bold text-white transition hover:bg-white/20"
                 >
-                  Voir le Pack 45h complet
+                  Voir le Pack 42h complet
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </div>

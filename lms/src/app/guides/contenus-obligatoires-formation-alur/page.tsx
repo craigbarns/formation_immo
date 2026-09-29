@@ -796,7 +796,7 @@ export default function ContenusObligatoiresFormationAlurPage() {
                       Un programme 100&nbsp;% conforme avec MonPassFormation
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Formation Loi ALUR 42 h + TRACFIN 3 h à 299&nbsp;€,
+                      Formation Loi ALUR 42 h, TRACFIN inclus, à 299&nbsp;€,
                       certifiée Qualiopi, en visioconférences&nbsp;: les six
                       domaines, les 4 h de déontologie et la non-discrimination
                       sont couverts, avec attestations conformes à la clé.

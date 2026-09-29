@@ -19,7 +19,7 @@ export function getTotalLessonCount(): number {
 /**
  * Modules "bonus" hors de la certification finale.
  * La déontologie reste bonus (hors 42h). TRACFIN, désormais inclus au pack,
- * COMPTE dans la certification (le diplôme passe à 45h).
+ * COMPTE dans la certification. Durée affichée et exigée : 42h (TRACFIN inclus).
  */
 export const BONUS_MODULE_SLUGS = ["deontologie"];
 

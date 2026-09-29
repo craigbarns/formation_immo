@@ -101,7 +101,7 @@ const faqs = [
   {
     question: "TRACFIN est-elle une formation séparée à payer en plus ?",
     answer:
-      "Cela dépend des organismes : certains vendent le module anti-blanchiment séparément, d’autres l’intègrent. Chez MonPassFormation, les 3 heures TRACFIN sont incluses dans le parcours à 299 €, ce qui porte le total à 45 heures de formation sans surcoût.",
+      "Cela dépend des organismes : certains vendent le module anti-blanchiment séparément, d’autres l’intègrent. Chez MonPassFormation, le module TRACFIN est inclus dans le parcours de 42 heures à 299 €, sans surcoût.",
   },
   {
     question: "Le présentiel est-il toujours plus cher que l’e-learning ?",
@@ -225,7 +225,7 @@ const keyFacts: Fact[] = [
     icon: Video,
     value: "299 €",
     label: "chez MonPassFormation",
-    detail: "Socle 42 h + TRACFIN 3 h, soit 45 h avec visioconférences incluses.",
+    detail: "42 h Loi ALUR, TRACFIN et visioconférences inclus.",
   },
 ];
 
@@ -616,9 +616,9 @@ export default function FormationLoiAlurPrixComparatifPage() {
                 <div className="mt-8 overflow-hidden rounded-2xl bg-brand-navy text-white">
                   <div className="grid gap-0 md:grid-cols-[1fr_1.35fr]">
                     <div className="border-b border-white/10 p-6 md:border-b-0 md:border-r md:p-8">
-                      <p className="text-4xl font-black text-brand-gold">45 h</p>
+                      <p className="text-4xl font-black text-brand-gold">42 h</p>
                       <p className="mt-2 font-bold">
-                        soit 42 h loi ALUR + 3 h TRACFIN incluses
+                        loi ALUR, module TRACFIN inclus
                       </p>
                     </div>
                     <div className="p-6 md:p-8">
@@ -772,10 +772,10 @@ export default function FormationLoiAlurPrixComparatifPage() {
                   <div className="max-w-2xl">
                     <BookOpen className="h-8 w-8 text-brand-gold" aria-hidden />
                     <h2 className="mt-5 text-2xl font-black sm:text-3xl">
-                      45 heures de formation pour 299&nbsp;€, tout inclus
+                      42 heures de formation pour 299&nbsp;€, tout inclus
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      Socle 42 h loi ALUR, TRACFIN 3 h, visioconférences, QCM,
+                      42 h loi ALUR avec TRACFIN, visioconférences, QCM,
                       supports pratiques et attestation&nbsp;: un seul prix, pas
                       d’option cachée.
                     </p>

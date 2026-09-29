@@ -779,7 +779,7 @@ export default function FinancementFormationImmobilierPage() {
                       Une formation certifiée Qualiopi, prête pour votre dossier
                     </h2>
                     <p className="mt-3 leading-7 text-white/75">
-                      42 h loi ALUR + 3 h TRACFIN, 100&nbsp;% en ligne, programme
+                      42 h loi ALUR, TRACFIN inclus, 100&nbsp;% en ligne, programme
                       détaillé et justificatifs complets&nbsp;: de quoi instruire
                       sereinement votre demande de prise en charge.
                     </p>
