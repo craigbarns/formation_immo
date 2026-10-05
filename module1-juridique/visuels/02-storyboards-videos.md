@@ -390,7 +390,7 @@
 - Graphique de consommation visible
 
 **Texte à dire (avatar)** :
-> "Commençons par le DPE, le Diagnostic de Performance Énergétique. Document obligatoire depuis 2006, réformé en 2021. Il classe le bien de A (très performant) à G (très énergivore). Attention : depuis le 1er janvier 2023, les logements classés G sont interdits à la location. En 2025, ce sera au tour des F. Vos clients vendeurs doivent le savoir : un mauvais DPE peut impacter leur prix de vente de 10 à 15%."
+> "Commençons par le DPE, le Diagnostic de Performance Énergétique. Document obligatoire depuis 2006, réformé en 2021. Il classe le bien de A (très performant) à G (très énergivore). Attention : depuis le 1er janvier 2025, les logements classés G sont non décents et ne peuvent plus être reloués. Les F suivront au 1er janvier 2028, les E en 2034. Vos clients vendeurs doivent le savoir : un mauvais DPE peut impacter leur prix de vente de 10 à 15%."
 
 **Éléments B-roll** :
 - Exemple de DPE réel

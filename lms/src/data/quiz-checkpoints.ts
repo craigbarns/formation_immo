@@ -3,6 +3,8 @@
  * 2-3 questions par leçon pour renforcer la compréhension en temps réel.
  */
 
+import { reorder } from "@/lib/qcm-shuffle";
+
 export type QuizCheckpoint = {
   id: string;
   moduleSlug: string;
@@ -13,7 +15,7 @@ export type QuizCheckpoint = {
   difficulty: "easy" | "medium" | "hard";
 };
 
-const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
+const RAW_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   // ──────────────────────────────────────────────
   // MODULE 1 — JURIDIQUE
   // ──────────────────────────────────────────────
@@ -1277,14 +1279,14 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
     id: "qc-jur-baux-02",
     moduleSlug: "juridique",
     lessonSlug: "baux-habitation",
-    question: "Depuis la loi Climat, les logements classés F ou G en zone tendue :",
+    question: "En 2026, un bailleur veut relouer un appartement classé F au DPE. Que doit lui dire l'agent ?",
     options: [
-      { label: "Peuvent être loués sans restriction", isCorrect: false },
-      { label: "Ne peuvent plus être loués", isCorrect: true },
-      { label: "Peuvent être loués avec une majoration de 10 % du loyer", isCorrect: false },
-      { label: "Sont soumis à un préavis de 6 mois uniquement", isCorrect: false },
+      { label: "Il peut le relouer, mais sans hausse de loyer ; il deviendra non décent au 1er janvier 2028", isCorrect: true },
+      { label: "Il ne peut plus le louer : les logements F sont non décents depuis le 1er janvier 2025", isCorrect: false },
+      { label: "Il ne peut plus le louer en zone tendue, mais reste libre de le faire ailleurs en France", isCorrect: false },
+      { label: "Il peut le relouer et réviser le loyer selon l'IRL jusqu'à l'échéance de 2034", isCorrect: false },
     ],
-    explanation: "Les logements classés F ou G (passoires énergétiques) ne peuvent plus être mis en location dans les zones tendues, conformément à la loi Climat et Resilience.",
+    explanation: "Calendrier de la décence énergétique (métropole, loi Climat & Résilience) : classe G non décente depuis le 1er janvier 2025, F au 1er janvier 2028, E au 1er janvier 2034 — partout en France, pas seulement en zone tendue. Depuis le 24 août 2022, les loyers des logements F et G sont gelés : ni hausse à la relocation, ni révision annuelle IRL.",
     difficulty: "medium",
   },
   {
@@ -1973,6 +1975,12 @@ const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
     difficulty: "easy",
   },
 ];
+
+/** Ordre des réponses mélangé (graine = id) : la bonne réponse n'est plus toujours en B. */
+const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = RAW_QUIZ_CHECKPOINTS.map((qc) => ({
+  ...qc,
+  options: reorder(qc.id, qc.options, 0).items,
+}));
 
 export function getQuizCheckpoints(
   moduleSlug: string,

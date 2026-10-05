@@ -2,6 +2,10 @@
  * Questions d'examen par module — mode chronométré avec scoring persistant.
  */
 
+import { FORMATION_MODULES } from "@/data/course";
+import { BONUS_MODULE_SLUGS } from "@/lib/formation-journey";
+import { reorder } from "@/lib/qcm-shuffle";
+
 export type ExamQuestion = {
   id: string;
   question: string;
@@ -19,7 +23,7 @@ export type ModuleExam = {
   questions: ExamQuestion[];
 };
 
-export const MODULE_EXAMS: ModuleExam[] = [
+const RAW_MODULE_EXAMS: ModuleExam[] = [
   {
     moduleSlug: "juridique",
     title: "Examen — Juridique & conformité",
@@ -150,7 +154,7 @@ export const MODULE_EXAMS: ModuleExam[] = [
           "Les logements situés en zone tendue uniquement",
         ],
         correctIndex: 0,
-        explanation: "La loi Climat & Résilience interdit la location des logements G depuis 2025, F depuis 2028, E depuis 2034. Les biens DPE G sortent progressivement du marché locatif.",
+        explanation: "Décence énergétique (loi Climat & Résilience) : logements G non décents depuis le 1er janvier 2025, F à compter du 1er janvier 2028, E en 2034. Un logement F reste donc louable jusqu'au 31 décembre 2027, loyer gelé.",
       },
       {
         id: "j12",
@@ -1780,7 +1784,33 @@ export const MODULE_EXAMS: ModuleExam[] = [
   },
 ];
 
+/** Mélange l'ordre des réponses (graine = id) : la bonne réponse n'est plus toujours en B. */
+function shuffleExamQuestion(q: ExamQuestion): ExamQuestion {
+  if (!q.options || q.correctIndex == null) return q;
+  const { items, index } = reorder(q.id, q.options, q.correctIndex);
+  return { ...q, options: items, correctIndex: index };
+}
+
+/** Examens publiés : contenu rédigé ci-dessus, ordre des réponses mélangé. */
+export const MODULE_EXAMS: ModuleExam[] = RAW_MODULE_EXAMS.map((exam) => ({
+  ...exam,
+  questions: exam.questions.map(shuffleExamQuestion),
+}));
+
 export const FINAL_EXAM_ID = "certification-finale";
+export const FINAL_EXAM_QUESTION_COUNT = 30;
+
+/**
+ * Modules couverts par l'examen final de certification : le parcours principal
+ * (formations autonomes à 59 € exclues) hors modules bonus (déontologie).
+ * Avant correctif, l'examen piochait dans TOUS les examens, y compris les
+ * formations que les clients du pack n'ont pas achetées.
+ */
+export function getCertificationExamModuleSlugs(): string[] {
+  return FORMATION_MODULES.map((m) => m.slug).filter(
+    (slug) => !BONUS_MODULE_SLUGS.includes(slug) && MODULE_EXAMS.some((e) => e.moduleSlug === slug)
+  );
+}
 
 export function getModuleExam(moduleSlug: string): ModuleExam | undefined {
   if (moduleSlug === FINAL_EXAM_ID) {
@@ -1790,18 +1820,25 @@ export function getModuleExam(moduleSlug: string): ModuleExam | undefined {
 }
 
 export function getFinalExam(): ModuleExam {
-  // Take 6 random questions from each module to make a 30-question final exam
+  // Répartition équilibrée : FINAL_EXAM_QUESTION_COUNT questions tirées au hasard
+  // dans les modules certifiants (le reste de la division va aux premiers modules).
+  const slugs = getCertificationExamModuleSlugs();
+  const perModule = Math.floor(FINAL_EXAM_QUESTION_COUNT / slugs.length);
+  let remainder = FINAL_EXAM_QUESTION_COUNT - perModule * slugs.length;
   const allFinalQuestions: ExamQuestion[] = [];
-  
-  MODULE_EXAMS.forEach(module => {
-    const shuffled = [...module.questions].sort(() => 0.5 - Math.random());
-    allFinalQuestions.push(...shuffled.slice(0, 6));
-  });
+
+  for (const slug of slugs) {
+    const exam = MODULE_EXAMS.find((e) => e.moduleSlug === slug)!;
+    const take = perModule + (remainder > 0 ? 1 : 0);
+    if (remainder > 0) remainder--;
+    const shuffled = [...exam.questions].sort(() => 0.5 - Math.random());
+    allFinalQuestions.push(...shuffled.slice(0, take));
+  }
 
   return {
     moduleSlug: FINAL_EXAM_ID,
     title: "Certification Professionnelle — Agent Immobilier (42h)",
-    duration: 45, // 45 minutes for 30 questions
-    questions: allFinalQuestions.sort(() => 0.5 - Math.random()), // Shuffle final set
+    duration: 45,
+    questions: allFinalQuestions.sort(() => 0.5 - Math.random()),
   };
 }

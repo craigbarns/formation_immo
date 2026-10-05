@@ -75,7 +75,7 @@ Module 1 - Formation Agent Immobilier 2026
 - Majoration possible : +20% (meublé), critères de localisation/caractéristiques
 
 **2. DPE et performance énergétique**
-- Interdiction de location des passoires énergétiques (classés F/G)
+- Décence énergétique : G non décent depuis 2025, F au 1er janvier 2028, E en 2034 (gel des loyers F/G depuis 2022)
 - 2026 : DPE obligatoire pour toute annonce de vente/location
 - Affichage obligatoire de l'étiquette énergie
 
@@ -89,7 +89,7 @@ Module 1 - Formation Agent Immobilier 2026
 | Mesure | Avant | Depuis 2026 |
 |--------|-------|-------------|
 | DPE location | Recommandé | Obligatoire |
-| Passoires F/G | Tolérées | Interdiction de location |
+| Passoires F/G | Tolérées | Loyers gelés ; G non décent depuis 2025, F en 2028 |
 | Honoraires loc. | Plafonnés | Gel des montants |
 
 ## Exemple Chiffré
@@ -189,7 +189,7 @@ Module 1 - Formation Agent Immobilier 2026
 
 **DPE rénové**
 - Nouvelle méthode de calcul (3CL 2021)
-- Interdiction de location des classes F et G
+- Calendrier de décence : G depuis 2025, F en 2028, E en 2034
 - 2028 : interdiction classe E
 - Mention obligatoire dans toute annonce
 

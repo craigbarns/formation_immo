@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getFinalExam } from "@/data/exam-questions";
+import {
+  getFinalExam,
+  getCertificationExamModuleSlugs,
+  FINAL_EXAM_QUESTION_COUNT,
+} from "@/data/exam-questions";
 import { ExamMode } from "@/components/exam/ExamMode";
 import { Trophy, ShieldCheck, GraduationCap, Clock, Award } from "lucide-react";
 
@@ -11,6 +15,8 @@ export const metadata: Metadata = {
 
 export default function CertificationPage() {
   const finalExam = getFinalExam();
+  const moduleCount = getCertificationExamModuleSlugs().length;
+  const passMark = Math.ceil(FINAL_EXAM_QUESTION_COUNT * 0.7);
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-6">
@@ -33,12 +39,12 @@ export default function CertificationPage() {
             </h1>
             <p className="mt-4 text-lg text-zinc-600 max-w-2xl leading-relaxed">
               Validation officielle des compétences acquises durant les 42 heures de formation.
-              Cet examen final synthétise les 5 modules indispensables à l&apos;exercice de la profession.
+              Cet examen final synthétise les {moduleCount} modules du parcours certifiant, indispensables à l&apos;exercice de la profession.
             </p>
           </div>
           
           <div className="flex -space-x-3">
-             {[1,2,3,4,5].map(i => (
+             {Array.from({ length: moduleCount }, (_, k) => k + 1).map(i => (
                <div key={i} className="w-12 h-12 rounded-full border-4 border-white bg-brand-navy-soft flex items-center justify-center text-white font-bold text-xs shadow-lg">
                  M{i}
                </div>
@@ -65,7 +71,7 @@ export default function CertificationPage() {
           </div>
           <div>
             <h3 className="font-bold text-brand-navy">Questions</h3>
-            <p className="text-sm text-zinc-500">30 questions (QCM)</p>
+            <p className="text-sm text-zinc-500">{FINAL_EXAM_QUESTION_COUNT} questions (QCM)</p>
           </div>
         </div>
 
@@ -75,7 +81,7 @@ export default function CertificationPage() {
           </div>
           <div>
             <h3 className="font-bold text-brand-navy">Seuil de réussite</h3>
-            <p className="text-sm text-zinc-500">21/30 (70%)</p>
+            <p className="text-sm text-zinc-500">{passMark}/{FINAL_EXAM_QUESTION_COUNT} (70%)</p>
           </div>
         </div>
       </div>

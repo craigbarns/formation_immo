@@ -305,7 +305,7 @@ export const LESSON_VISUALS: Record<string, LessonVisuals> = {
     keyConcepts: [
       { icon: "file-text", title: "Loi du 6 juillet 1989", description: "Texte fondateur des baux d'habitation, modifié par ALUR et ELAN", type: "rule" },
       { icon: "calendar", title: "Durées", description: "Vide : 3 ans (PP) / 6 ans (PM) — Meublé : 1 an (9 mois étudiant)", type: "definition" },
-      { icon: "thermometer", title: "Passoires énergétiques", description: "Logements classés F ou G ne peuvent plus être loués dans les zones tendues", type: "warning" },
+      { icon: "thermometer", title: "Passoires énergétiques", description: "Non décents (donc non relouables) : G depuis 2025, F au 1er janvier 2028, E en 2034 — partout en France. Loyers F/G gelés depuis août 2022", type: "warning" },
     ],
     stats: [
       { label: "Bail vide PP", value: "3", unit: "ans", color: "navy" },

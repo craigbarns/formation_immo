@@ -3,6 +3,8 @@
  * Évalue le niveau initial : débutant / intermédiaire / avancé.
  */
 
+import { reorder } from "@/lib/qcm-shuffle";
+
 export type PlacementQuestion = {
   id: string;
   module: "juridique" | "transaction" | "financement" | "marketing" | "terrain";
@@ -24,7 +26,7 @@ export type PlacementResult = {
   recommendation: string;
 };
 
-export const PLACEMENT_QUESTIONS: PlacementQuestion[] = [
+const RAW_PLACEMENT_QUESTIONS: PlacementQuestion[] = [
   // ── JURIDIQUE (3 questions) ──
   {
     id: "pj1",
@@ -245,6 +247,12 @@ export const PLACEMENT_QUESTIONS: PlacementQuestion[] = [
     difficulty: "avance",
   },
 ];
+
+/** Ordre des réponses mélangé (graine = id) : la bonne réponse n'est plus toujours en B. */
+export const PLACEMENT_QUESTIONS: PlacementQuestion[] = RAW_PLACEMENT_QUESTIONS.map((q) => {
+  const { items, index } = reorder(q.id, q.options, q.correctIndex);
+  return { ...q, options: items, correctIndex: index };
+});
 
 export const PLACEMENT_MODULE_LABELS: Record<string, string> = {
   juridique: "Juridique & ALUR",
