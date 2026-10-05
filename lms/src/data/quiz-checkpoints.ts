@@ -3,7 +3,7 @@
  * 2-3 questions par leçon pour renforcer la compréhension en temps réel.
  */
 
-import { reorder } from "@/lib/qcm-shuffle";
+import { balancedPositions, placeAt } from "@/lib/qcm-shuffle";
 
 export type QuizCheckpoint = {
   id: string;
@@ -1976,11 +1976,30 @@ const RAW_QUIZ_CHECKPOINTS: QuizCheckpoint[] = [
   },
 ];
 
-/** Ordre des réponses mélangé (graine = id) : la bonne réponse n'est plus toujours en B. */
-const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = RAW_QUIZ_CHECKPOINTS.map((qc) => ({
-  ...qc,
-  options: reorder(qc.id, qc.options, 0).items,
-}));
+/**
+ * Ordre des réponses mélangé (graine = id), avec la bonne réponse répartie à
+ * parts égales sur A/B/C/D au sein de chaque module.
+ */
+const ALL_QUIZ_CHECKPOINTS: QuizCheckpoint[] = (() => {
+  const byModule = new Map<string, QuizCheckpoint[]>();
+  for (const qc of RAW_QUIZ_CHECKPOINTS) {
+    byModule.set(qc.moduleSlug, [...(byModule.get(qc.moduleSlug) ?? []), qc]);
+  }
+  const targets = new Map<string, number>();
+  for (const [moduleSlug, list] of byModule) {
+    const positions = balancedPositions(`qc:${moduleSlug}`, list.length);
+    list.forEach((qc, i) => targets.set(qc.id, positions[i]));
+  }
+  return RAW_QUIZ_CHECKPOINTS.map((qc) => ({
+    ...qc,
+    options: placeAt(
+      qc.id,
+      qc.options,
+      qc.options.findIndex((o) => o.isCorrect),
+      targets.get(qc.id) ?? 0,
+    ).items,
+  }));
+})();
 
 export function getQuizCheckpoints(
   moduleSlug: string,

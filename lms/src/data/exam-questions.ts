@@ -4,7 +4,7 @@
 
 import { FORMATION_MODULES } from "@/data/course";
 import { BONUS_MODULE_SLUGS } from "@/lib/formation-journey";
-import { reorder } from "@/lib/qcm-shuffle";
+import { balancedPositions, placeAt } from "@/lib/qcm-shuffle";
 
 export type ExamQuestion = {
   id: string;
@@ -27,891 +27,1089 @@ const RAW_MODULE_EXAMS: ModuleExam[] = [
   {
     moduleSlug: "juridique",
     title: "Examen — Juridique & conformité",
-    duration: 15,
+    duration: 20,
     questions: [
       {
         id: "j1",
-        question: "La loi ALUR impose principalement aux professionnels de l'immobilier :",
+        question:
+          "Une agence affiche son barème d'honoraires dans sa vitrine, mais pas sur son site internet. Au regard de l'arrêté du 10 janvier 2017, quelle est sa situation ?",
         options: [
-          "De fixer librement les honoraires sans les afficher",
-          "Une transparence totale sur les honoraires et les conditions de vente",
-          "De réduire leurs commissions de 50%",
-          "De ne travailler qu'avec des notaires agréés",
+          "En infraction : le barème doit aussi figurer sur le site internet de l'agence",
+          "En règle : la réglementation n'impose l'affichage du barème qu'à l'entrée de l'agence",
+          "En règle, tant que chaque mandat signé reprend le barème complet de l'agence",
+          "En infraction seulement si ses honoraires dépassent 5 % TTC du prix de vente",
         ],
-        correctIndex: 1,
-        explanation: "La loi ALUR renforce la transparence : affichage obligatoire des honoraires, information claire du consommateur.",
+        correctIndex: 0,
+        explanation:
+          "L'arrêté du 10 janvier 2017 impose l'affichage du barème TTC de façon visible et lisible à l'entrée de l'agence ET sur son site internet. Il n'existe aucun plafond légal d'honoraires en transaction : le seuil de 5 % est une erreur fréquente.",
       },
       {
         id: "j2",
-        question: "Le compromis de vente engage :",
+        question:
+          "Trois semaines après la signature d'un compromis sans clause de dédit, le vendeur reçoit une offre supérieure de 20 000 €. Que peut-il faire ?",
         options: [
-          "Uniquement le vendeur",
-          "Uniquement l'acheteur",
-          "Les deux parties (vendeur et acheteur)",
-          "Uniquement l'agent immobilier",
+          "Rien : le compromis vaut vente et l'acquéreur peut en exiger l'exécution forcée",
+          "Se rétracter librement, puisque le délai de 10 jours s'applique aussi au vendeur",
+          "Se désengager en restituant à l'acquéreur le double du dépôt de garantie versé",
+          "Accepter la nouvelle offre, s'il prévient l'acquéreur par lettre recommandée",
         ],
-        correctIndex: 2,
-        explanation: "Le compromis (promesse synallagmatique) engage les deux parties, sous réserve des conditions suspensives.",
+        correctIndex: 0,
+        explanation:
+          "Le compromis est une promesse synallagmatique qui vaut vente (art. 1589 C. civ.) dès l'accord sur la chose et le prix, sous réserve des conditions suspensives. Le délai de rétractation de 10 jours ne profite qu'à l'acquéreur non professionnel ; la restitution du double ne joue que si les parties ont convenu d'arrhes ou d'une faculté de dédit.",
       },
       {
         id: "j3",
-        question: "Quel diagnostic est obligatoire pour toute vente immobilière ?",
+        question:
+          "Vente d'un appartement en copropriété construit en 1960, dont l'installation électrique a 20 ans. Quels documents le vendeur doit-il fournir, au minimum ?",
         options: [
-          "Le diagnostic termites uniquement en zone déclarée",
-          "Le DPE (Diagnostic de Performance Énergétique)",
-          "L'audit acoustique",
-          "Le diagnostic radon partout en France",
+          "DPE, amiante, électricité, état des risques et mesurage Loi Carrez",
+          "DPE, plomb, amiante, électricité et mesurage Loi Carrez du lot vendu",
+          "DPE et état des risques ; les autres diagnostics restent facultatifs",
+          "DPE, plomb, termites et électricité, quelle que soit la commune du bien",
         ],
-        correctIndex: 1,
-        explanation: "Le DPE est obligatoire pour toute vente ou location depuis 2006, renforcé en 2021.",
+        correctIndex: 0,
+        explanation:
+          "Amiante : permis de construire antérieur au 1er juillet 1997. Électricité : installation de plus de 15 ans. DPE et état des risques : toujours. Mesurage Carrez : lot de copropriété. Le constat plomb (CREP) ne concerne que les logements construits avant le 1er janvier 1949, et le termites uniquement les zones délimitées par arrêté.",
       },
       {
         id: "j4",
-        question: "Le mandat exclusif se distingue du mandat simple par :",
+        question:
+          "Pendant la durée d'un mandat exclusif, le vendeur cède lui-même son bien à un voisin, sans l'agence. À quoi s'expose-t-il ?",
         options: [
-          "Un prix de vente plus élevé",
-          "L'exclusivité donnée à une seule agence pour la commercialisation",
-          "L'absence de commission",
-          "Une durée illimitée",
+          "À la clause pénale du mandat, si elle y figure en caractères très apparents",
+          "À rien : un vendeur reste toujours libre de vendre seul, même sous mandat exclusif",
+          "À l'annulation de la vente, l'agence pouvant se substituer à l'acquéreur choisi",
+          "Au versement automatique du double de la commission prévue au mandat exclusif",
         ],
-        correctIndex: 1,
-        explanation: "Le mandat exclusif confie la vente à un seul professionnel, ce qui favorise un engagement réciproque.",
+        correctIndex: 0,
+        explanation:
+          "Le mandat exclusif interdit au vendeur de vendre par lui-même ou par un tiers pendant sa durée. La sanction est la clause pénale, opposable seulement si elle est stipulée en caractères très apparents dans un mandat dont le vendeur a reçu un exemplaire (décret n° 72-678, art. 78) ; le juge peut la modérer. La vente au voisin reste valable.",
       },
       {
         id: "j5",
-        question: "La carte professionnelle (carte T) est délivrée par :",
+        question:
+          "Un agent demande le renouvellement de sa carte professionnelle à la CCI. Que doit-il justifier au titre de la formation continue ?",
         options: [
-          "La mairie du lieu d'exercice",
-          "La CCI (Chambre de Commerce et d'Industrie)",
-          "Le tribunal de commerce",
-          "La préfecture",
+          "42 heures sur trois ans, dont des heures de déontologie et de non-discrimination",
+          "14 heures suivies durant la dernière année, le reste n'étant pas contrôlé par la CCI",
+          "Aucune heure : seuls les négociateurs salariés sont tenus à la formation continue",
+          "Un diplôme de niveau bac + 3 en immobilier obtenu depuis moins de cinq ans",
         ],
-        correctIndex: 1,
-        explanation: "Depuis la loi ALUR, la carte T est délivrée par la CCI territoriale.",
+        correctIndex: 0,
+        explanation:
+          "Décret n° 2016-173 : 14 heures par an ou 42 heures sur trois années consécutives, contrôlées au renouvellement triennal de la carte, avec des heures obligatoires de déontologie et de non-discrimination (décret n° 2020-1259). L'obligation vise les titulaires de carte, les directeurs d'établissement et les collaborateurs.",
       },
       {
         id: "j6",
-        question: "Le délai de rétractation pour l'acheteur après signature du compromis est de :",
-        options: ["7 jours", "10 jours", "14 jours", "30 jours"],
-        correctIndex: 1,
-        explanation: "Depuis la loi Macron (2015), le délai de rétractation est passé de 7 à 10 jours.",
+        question:
+          "Un compromis est remis en main propre contre récépissé à l'acquéreur, particulier, le 3 mars. Jusqu'à quand peut-il se rétracter ?",
+        options: [
+          "Jusqu'au 13 mars à minuit, le délai courant à partir du lendemain de la remise",
+          "Jusqu'au 12 mars à minuit, le délai courant dès le jour même de la remise",
+          "Jusqu'au 17 mars à minuit, le délai légal étant de quatorze jours calendaires",
+          "Il ne peut plus se rétracter : la remise en main propre vaut acceptation définitive",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Article L.271-1 du CCH : 10 jours à compter du lendemain de la première présentation de la lettre recommandée ou de la remise en main propre. Remise le 3 mars : le délai court du 4 au 13 mars inclus. Le délai de 14 jours relève du droit de la consommation (contrats hors établissement), pas de l'achat immobilier.",
       },
       {
         id: "j7",
-        question: "En copropriété, le syndic a l'obligation de fournir au vendeur :",
+        question:
+          "Pour la vente d'un lot de copropriété, que faut-il annexer à la promesse de vente (art. L.721-2 CCH) ?",
         options: [
-          "Uniquement le règlement de copropriété",
-          "Le pré-état daté et les documents prévus par la loi ALUR",
-          "Seulement les 3 derniers PV d'AG",
-          "Aucun document, c'est au notaire de les demander",
+          "Les PV des trois dernières AG, le règlement de copropriété et les données financières du lot",
+          "Le seul état daté, que le syndic établit après la signature de l'acte authentique de vente",
+          "Le dernier appel de charges et le carnet d'entretien ; le reste est remis chez le notaire",
+          "Aucun document : le notaire les obtient directement auprès du syndic avant l'acte définitif",
         ],
-        correctIndex: 1,
-        explanation: "La loi ALUR impose la fourniture du pré-état daté avec de nombreux documents (PV AG, carnet d'entretien, etc.).",
+        correctIndex: 0,
+        explanation:
+          "L'article L.721-2 du CCH impose d'annexer à la promesse les documents d'organisation de l'immeuble (règlement, fiche synthétique, PV des AG des trois dernières années), les informations financières (charges, impayés, fonds de travaux) et le carnet d'entretien. L'état daté intervient plus tard, pour l'acte authentique.",
       },
       {
         id: "j8",
-        question: "La garantie des vices cachés s'applique :",
+        question:
+          "Un vendeur particulier insère dans l'acte une clause excluant la garantie des vices cachés. Que vaut cette clause ?",
         options: [
-          "Uniquement aux biens neufs",
-          "À tout bien vendu, même entre particuliers",
-          "Uniquement si l'acheteur a fait appel à un agent",
-          "Uniquement pendant le premier mois",
+          "Elle le protège, sauf s'il connaissait le vice : sa mauvaise foi l'écarte",
+          "Elle est toujours réputée non écrite, même entre deux particuliers de bonne foi",
+          "Elle le protège totalement, même s'il connaissait le vice et l'a dissimulé",
+          "Elle ne vaut que si l'acquéreur est lui-même un professionnel de l'immobilier",
         ],
-        correctIndex: 1,
-        explanation: "La garantie des vices cachés (art. 1641 Code civil) s'applique à toute vente.",
+        correctIndex: 0,
+        explanation:
+          "Article 1643 du Code civil : le vendeur peut stipuler qu'il ne sera tenu d'aucune garantie. La clause est valable pour un vendeur non professionnel de bonne foi, mais inopérante s'il connaissait le vice. Le vendeur professionnel, lui, est présumé connaître les vices : la clause lui est inopposable.",
       },
       {
         id: "j9",
-        question: "Le RGPD impose aux agents immobiliers de :",
+        question:
+          "Un prospect acquéreur n'a plus donné signe de vie depuis sa dernière visite. Combien de temps l'agence peut-elle conserver ses données pour le prospecter ?",
         options: [
-          "Conserver les données clients indéfiniment",
-          "Collecter et traiter les données personnelles de manière transparente et sécurisée",
-          "Partager les fichiers clients entre agences",
-          "Ne jamais collecter d'adresse email",
+          "Trois ans après son dernier contact, puis suppression ou anonymisation des données",
+          "Indéfiniment, tant que l'agence reste en activité et que le fichier reste confidentiel",
+          "Cinq ans, durée de prescription de droit commun imposée par le RGPD à tout professionnel",
+          "Un mois après la dernière visite, faute de consentement écrit renouvelé du prospect",
         ],
-        correctIndex: 1,
-        explanation: "Le RGPD impose transparence, finalité, minimisation et sécurité dans le traitement des données personnelles.",
+        correctIndex: 0,
+        explanation:
+          "Pour la prospection, la CNIL retient trois ans à compter de la collecte ou du dernier contact émanant du prospect ; chaque nouveau contact relance le délai. Ensuite, les données sont supprimées ou anonymisées. Le RGPD n'impose aucune durée fixe de cinq ans : il exige une durée proportionnée à la finalité.",
       },
       {
         id: "j10",
-        question: "Un mandat de vente doit obligatoirement mentionner :",
+        question:
+          "L'exemplaire du mandat de vente remis au vendeur ne porte pas son numéro d'inscription au registre des mandats. Quelle est la conséquence ?",
         options: [
-          "Le nom du futur acheteur",
-          "Le montant et les modalités de la rémunération de l'agent",
-          "Le prix de vente minimum accepté par l'acheteur",
-          "La date exacte de la vente",
+          "Le vendeur peut en obtenir l'annulation et priver ainsi l'agent de sa commission",
+          "Aucune : le numéro peut être reporté sur le mandat après la signature de la vente",
+          "L'acquéreur peut invoquer la nullité du mandat pour faire baisser le prix de vente",
+          "Le mandat reste valable, mais la commission est réduite de moitié par la loi Hoguet",
         ],
-        correctIndex: 1,
-        explanation: "La loi Hoguet et ses décrets imposent la mention des honoraires et de leur charge supportée (vendeur ou acquéreur) dans le mandat."
+        correctIndex: 0,
+        explanation:
+          "Le numéro d'inscription au registre est une mention obligatoire (loi Hoguet, décret n° 72-678). Depuis l'arrêt de chambre mixte du 24 février 2017 (n° 15-20.411), la violation des règles de forme du mandat, qui protègent le mandant, est sanctionnée par une nullité relative : seul le mandant peut l'invoquer — et l'agent perd alors son droit à commission (loi Hoguet, art. 6).",
       },
       {
         id: "j11",
-        question: "Depuis le 1er janvier 2025, quels logements ne peuvent plus être loués (interdiction de location loi Climat) ?",
+        question:
+          "Depuis le 1er janvier 2025, quel logement ne peut plus faire l'objet d'un nouveau bail en métropole ?",
         options: [
-          "Les logements classés G au DPE (passoires thermiques)",
-          "Les logements classés F au DPE",
-          "Tous les logements de plus de 30 ans",
-          "Les logements situés en zone tendue uniquement",
+          "Un logement classé G au DPE, désormais jugé non décent",
+          "Un logement classé F au DPE, désormais jugé non décent",
+          "Tout logement classé F, mais uniquement en zone tendue",
+          "Tout logement dont le DPE a été établi il y a plus de 5 ans",
         ],
         correctIndex: 0,
-        explanation: "Décence énergétique (loi Climat & Résilience) : logements G non décents depuis le 1er janvier 2025, F à compter du 1er janvier 2028, E en 2034. Un logement F reste donc louable jusqu'au 31 décembre 2027, loyer gelé.",
+        explanation:
+          "Décence énergétique (loi Climat & Résilience) : logements G non décents depuis le 1er janvier 2025, F à compter du 1er janvier 2028, E en 2034, dans toute la France. Un logement F reste donc louable jusqu'au 31 décembre 2027, loyer gelé. Un DPE est valable 10 ans ; ceux établis avant juillet 2021 ont tous expiré.",
       },
       {
         id: "j12",
-        question: "Le seuil de déclaration de soupçon Tracfin (LCB-FT) en transaction immobilière est :",
+        question:
+          "Un acquéreur veut payer comptant via une société étrangère, mais refuse d'en identifier les associés. Que doit faire l'agent ?",
         options: [
-          "Aucun seuil — toute opération suspecte doit être déclarée",
-          "À partir de 10 000 € en espèces",
-          "À partir de 100 000 € quel que soit le mode de paiement",
-          "Uniquement pour les transactions internationales",
+          "Ne rien signer sans identifier le bénéficiaire effectif ; envisager une déclaration",
+          "Poursuivre : sans paiement en espèces, la vigilance anti-blanchiment ne s'applique pas",
+          "Prévenir l'acquéreur qu'une déclaration de soupçon va être transmise à TRACFIN",
+          "Poursuivre, puis déclarer à TRACFIN uniquement si le prix dépasse un million d'euros",
         ],
         correctIndex: 0,
-        explanation: "Tracfin n'impose pas de seuil financier : c'est l'analyse du risque (incohérence du financement, profil client, origine des fonds) qui déclenche la déclaration. Le seuil 10 000 € concerne le paiement espèces interdit (Code monétaire L112-6).",
+        explanation:
+          "Faute de pouvoir identifier le client et son bénéficiaire effectif, le professionnel ne doit pas exécuter l'opération (art. L.561-8 CMF) et apprécie une déclaration de soupçon. Il n'existe aucun seuil de montant, et révéler l'existence d'une déclaration au client est interdit (interdiction de divulgation).",
       },
       {
         id: "j13",
-        question: "Le délai légal de rétractation SRU pour un acquéreur particulier est de :",
+        question:
+          "Dans lequel de ces cas l'acquéreur bénéficie-t-il du délai de rétractation de 10 jours de l'article L.271-1 du CCH ?",
         options: [
-          "7 jours calendaires",
-          "10 jours calendaires à compter de la réception du compromis",
-          "14 jours ouvrables",
-          "30 jours à compter de la signature",
+          "Un particulier qui achète un appartement pour le mettre en location",
+          "Un particulier qui achète un local commercial pour y installer un bureau",
+          "Un marchand de biens qui achète un logement pour le revendre ensuite",
+          "Toute acquisition immobilière, quels que soient l'acquéreur et le bien",
         ],
-        correctIndex: 1,
-        explanation: "Article L271-1 CCH : 10 jours calendaires de rétractation pour l'acquéreur non-pro après remise du compromis (LRAR ou main propre). Délai d'ordre public, non négociable.",
-      },
-      {
-        id: "j14",
-        question: "Expliquez avec vos mots : qu'est-ce qu'un mandat exclusif et quels sont ses avantages pour le vendeur et pour l'agent ?",
-        type: "open",
-        modelAnswer: "Le mandat exclusif confie la vente d'un bien immobilier à un seul agent. Pour le vendeur, il garantit une meilleure visibilité (l'agent investit davantage en marketing), un suivi personnalisé et souvent un délai de vente plus court. Pour l'agent, il sécurise sa rémunération, lui permet de maîtriser la commercialisation et de négocier sereinement avec les acquéreurs sans crainte d'être court-circuité.",
-        explanation: "Un bon agent doit savoir argumenter les 2 types de mandats (simple vs exclusif) en mettant en valeur les bénéfices concrets pour chaque partie.",
+        correctIndex: 0,
+        explanation:
+          "Le délai protège l'acquéreur non professionnel d'un immeuble à usage d'habitation, y compris pour un investissement locatif. Il ne s'applique ni à un local commercial ni à un acquéreur professionnel de l'immobilier comme le marchand de biens.",
       },
     ],
   },
   {
     moduleSlug: "transaction",
     title: "Examen — Transaction & négociation",
-    duration: 15,
+    duration: 20,
     questions: [
       {
         id: "t1",
-        question: "La méthode par comparaison pour estimer un bien repose sur :",
+        question:
+          "Pour estimer un T3, vous disposez de quatre sources. Laquelle doit primer dans votre avis de valeur ?",
         options: [
-          "Le coût de reconstruction du bien",
-          "Les prix de vente récents de biens similaires dans le même secteur",
-          "La valeur sentimentale du propriétaire",
-          "Le montant du crédit restant dû",
+          "Les ventes récentes de biens comparables du secteur (DVF, notaires)",
+          "Les prix affichés par les annonces concurrentes actuellement en ligne",
+          "Le prix payé par le vendeur à l'achat, revalorisé de l'inflation depuis",
+          "Le coût de reconstruction à neuf, diminué d'un abattement pour vétusté",
         ],
-        correctIndex: 1,
-        explanation: "La méthode par comparaison utilise des références de transactions récentes et comparables.",
+        correctIndex: 0,
+        explanation:
+          "La méthode par comparaison repose sur des prix de vente réellement signés (base DVF, bases notariales), ajustés selon les écarts (étage, état, extérieur…). Les prix affichés sont des prix demandés, souvent surévalués ; le prix d'achat historique et le coût de reconstruction ne disent rien du marché actuel.",
       },
       {
         id: "t2",
-        question: "En prospection téléphonique, la première étape est de :",
+        question:
+          "Octobre 2026. Un particulier vend sa maison sur Leboncoin. Pouvez-vous l'appeler pour lui proposer un mandat ?",
         options: [
-          "Proposer immédiatement un prix",
-          "Se présenter et identifier le besoin du prospect",
-          "Demander un rendez-vous de signature",
-          "Envoyer un email automatique",
+          "Non, sauf s'il a accepté au préalable d'être démarché par téléphone",
+          "Oui, à condition que son numéro ne soit pas inscrit sur la liste Bloctel",
+          "Oui : en publiant son numéro dans l'annonce, il accepte d'être sollicité",
+          "Oui, si vous l'appelez en semaine entre 10 h et 13 h ou entre 14 h et 20 h",
         ],
-        correctIndex: 1,
-        explanation: "La prise de contact professionnelle commence par la présentation et l'écoute active du besoin.",
+        correctIndex: 0,
+        explanation:
+          "Depuis le 11 août 2026 (loi du 30 juin 2025, art. L.223-1 C. conso.), le démarchage téléphonique d'un particulier exige son consentement préalable, spécifique au téléphone, valable un an au plus et dont le professionnel doit garder la preuve. Bloctel a disparu ; une annonce publique ne vaut pas consentement. Les plages horaires restent applicables, mais en plus du consentement.",
       },
       {
         id: "t3",
-        question: "Face à un vendeur qui surestime son bien de 20%, vous devez :",
+        question:
+          "Un vendeur exige un prix 20 % au-dessus de vos comparables. Quelle approche limite le risque d'un mandat invendable ?",
         options: [
-          "Accepter son prix pour prendre le mandat",
-          "Présenter des comparables et proposer un plan de test de prix",
-          "Refuser catégoriquement le dossier",
-          "Proposer un prix encore plus bas pour négocier",
+          "Montrer les comparables et convenir d'un réajustement daté si les visites manquent",
+          "Accepter son prix sans discuter : le marché le convaincra seul de baisser plus tard",
+          "Publier un prix inférieur au sien sans le prévenir, pour générer des premières visites",
+          "Lui garantir par écrit la vente à son prix pour obtenir à coup sûr l'exclusivité",
         ],
-        correctIndex: 1,
-        explanation: "L'approche professionnelle : documenter avec des comparables, puis proposer un ajustement progressif.",
+        correctIndex: 0,
+        explanation:
+          "Le prix doit rester celui du mandat : le modifier sans accord est une faute. Accepter un prix irréaliste produit un bien « brûlé » sur les portails. La bonne pratique : objectiver avec des ventes comparables, fixer avec le vendeur un point d'étape daté (nombre de visites, retours) et un réajustement convenu à l'avance.",
       },
       {
         id: "t4",
-        question: "La technique SPIN en négociation immobilière signifie :",
+        question:
+          "Dans la méthode SPIN, à quoi sert une question d'« implication » ?",
         options: [
-          "Situation, Problème, Implication, Besoin-solution",
-          "Speed, Performance, Innovation, Négociation",
-          "Stratégie, Prix, Information, Normes",
-          "Signature, Paiement, Investissement, Notaire",
+          "À faire mesurer au client les conséquences de son problème s'il n'agit pas",
+          "À recueillir les faits de base : budget, délai, composition du foyer",
+          "À faire formuler par le client les bénéfices de la solution proposée",
+          "À identifier les difficultés ou les insatisfactions actuelles du client",
         ],
         correctIndex: 0,
-        explanation: "SPIN Selling : Situation > Problème > Implication > Need-payoff (besoin-solution).",
+        explanation:
+          "SPIN : Situation (les faits), Problème (les difficultés), Implication (les conséquences si rien ne change — c'est elle qui crée l'urgence), Need-payoff ou bénéfice (le client formule lui-même la valeur de la solution).",
       },
       {
         id: "t5",
-        question: "Un CRM immobilier sert principalement à :",
+        question:
+          "Dans votre CRM, quel indicateur mesure le mieux la qualité de votre travail de prise de mandat ?",
         options: [
-          "Calculer les impôts fonciers",
-          "Gérer et suivre les contacts, mandats et relances",
-          "Rédiger les actes notariés",
-          "Publier automatiquement les annonces",
+          "Le taux de transformation des estimations en mandats signés",
+          "Le nombre total de contacts enregistrés dans la base de l'agence",
+          "Le nombre d'appels sortants passés chaque jour par le négociateur",
+          "Le nombre de biens publiés ce mois-ci sur les portails immobiliers",
         ],
-        correctIndex: 1,
-        explanation: "Le CRM centralise la relation client : contacts, historique, relances, pipeline de mandats.",
+        correctIndex: 0,
+        explanation:
+          "Le volume (contacts, appels, annonces) mesure l'activité, pas son efficacité. Le ratio estimations → mandats montre la capacité à convaincre un vendeur ; complété par le ratio mandats → ventes, il révèle aussi la justesse des prix rentrés.",
       },
       {
         id: "t6",
-        question: "L'objection 'votre commission est trop élevée' se traite par :",
+        question:
+          "« 5 % de commission, c'est trop : l'agence d'en face prend 4 %. » Quelle réponse est la plus professionnelle ?",
         options: [
-          "Baisser immédiatement le prix",
-          "Expliquer la valeur ajoutée et les services inclus",
-          "Ignorer l'objection",
-          "Proposer de travailler gratuitement",
+          "Détailler votre plan de commercialisation et ce qu'il rapporte au vendeur en net",
+          "Aligner tout de suite votre taux sur le concurrent pour ne pas perdre ce mandat",
+          "Critiquer les méthodes de l'agence concurrente pour justifier l'écart de prix",
+          "Accepter 4 % à l'oral et laisser 5 % au mandat, pour garder de la souplesse",
         ],
-        correctIndex: 1,
-        explanation: "La réponse professionnelle valorise les services (estimation, marketing, négociation, suivi juridique).",
+        correctIndex: 0,
+        explanation:
+          "On répond à une objection de prix par la valeur : diffusion, qualification des acquéreurs, sécurisation du dossier, prix net obtenu. Dénigrer un confrère est contraire au code de déontologie, et les honoraires doivent figurer exactement au mandat : un accord oral différent est inopposable et source de litige.",
       },
       {
         id: "t7",
-        question: "Un bon indicateur de performance pour un négociateur est :",
+        question:
+          "Un négociateur rentre 10 mandats par mois mais n'en vend qu'un seul. Que révèle d'abord ce ratio ?",
         options: [
-          "Le nombre de cafés bus par semaine",
-          "Le ratio mandats pris / mandats vendus",
-          "Le nombre d'heures au bureau",
-          "Le nombre de cartes de visite distribuées",
+          "Des prix sans doute surévalués : la qualité des mandats pose problème",
+          "Une très bonne performance, puisque seul le volume de mandats rentrés compte",
+          "Un manque de prospection : il faut doubler le nombre d'appels chaque semaine",
+          "Un défaut de diffusion : il faut multiplier les options payantes des portails",
         ],
-        correctIndex: 1,
-        explanation: "Le taux de transformation (prise de mandat -> vente) est l'indicateur clé de performance.",
+        correctIndex: 0,
+        explanation:
+          "Un taux de vente de 10 % signale presque toujours des mandats rentrés au-dessus du marché (souvent en mandat simple, pour « faire du stock »). Davantage de prospection ou de diffusion ne corrige pas un prix irréaliste.",
       },
       {
         id: "t8",
-        question: "La négociation gagnant-gagnant vise à :",
+        question:
+          "Un acquéreur propose 6 % sous le prix ; le vendeur refuse de baisser. Quelle piste explorer en priorité ?",
         options: [
-          "Faire gagner uniquement l'acheteur",
-          "Trouver un accord satisfaisant pour les deux parties",
-          "Maximiser la commission de l'agent",
-          "Accélérer la vente à tout prix",
+          "Des contreparties hors prix : date de libération, mobilier, délais",
+          "Ne plus transmettre au vendeur que les offres qui atteignent le prix du mandat",
+          "Baisser votre commission sans en informer le vendeur pour combler l'écart",
+          "Conseiller à l'acquéreur de signer au prix et de renégocier après le compromis",
         ],
-        correctIndex: 1,
-        explanation: "La négociation collaborative crée de la valeur pour les deux parties et préserve la relation.",
+        correctIndex: 0,
+        explanation:
+          "Une négociation gagnant-gagnant élargit le champ des variables au-delà du prix. L'agent doit informer loyalement son mandant de toutes les offres ; toute modification de ses honoraires passe par un avenant ; et pousser à signer avec l'intention de renégocier est déloyal.",
       },
       {
         id: "t9",
-        question: "Le prix de présentation idéal d'un bien est :",
+        question:
+          "Un acquéreur signe une offre d'achat et veut y joindre un chèque de 5 000 € « pour montrer son sérieux ». Que faites-vous ?",
         options: [
-          "Toujours au-dessus du marché pour laisser une marge",
-          "Aligné sur les comparables récents avec une marge de négociation raisonnable",
-          "Le plus bas possible pour vendre vite",
-          "Le prix souhaité par le vendeur sans analyse",
+          "Vous refusez le chèque : tout versement rendrait l'offre d'achat nulle",
+          "Vous le déposez sur le compte séquestre de l'agence jusqu'au compromis",
+          "Vous l'acceptez, à condition qu'il soit libellé à l'ordre du vendeur",
+          "Vous l'acceptez si son montant reste inférieur à 10 % du prix proposé",
         ],
-        correctIndex: 1,
-        explanation: "Un prix aligné sur le marché + marge raisonnable optimise le délai de vente et le prix final.",
+        correctIndex: 0,
+        explanation:
+          "Article 1589-1 du Code civil : est nul tout engagement unilatéral d'acquérir un bien immobilier pour lequel un versement est exigé ou reçu, quelle qu'en soit la forme. L'offre d'achat ne s'accompagne d'aucun versement ; le dépôt de garantie n'intervient qu'à l'avant-contrat.",
       },
       {
         id: "t10",
-        question: "La fidélisation client en immobilier passe d'abord par :",
+        question:
+          "Lequel de ces envois commerciaux par e-mail ou SMS est autorisé sans consentement préalable ?",
         options: [
-          "Des cadeaux coûteux",
-          "Un suivi régulier et personnalisé après la transaction",
-          "Des appels quotidiens",
-          "Des publicités dans le journal",
+          "Une newsletter immobilière à un ancien client vendeur, avec lien de désinscription",
+          "Une newsletter adressée à un fichier de particuliers acheté à un courtier en données",
+          "Un SMS proposant une estimation à tous les numéros relevés sur des annonces de particuliers",
+          "Un e-mail personnalisé à un prospect qui s'est déjà désinscrit de votre liste de diffusion",
         ],
-        correctIndex: 1,
-        explanation: "Le suivi post-transaction (anniversaire, conseils, parrainage) génère des recommandations durables.",
+        correctIndex: 0,
+        explanation:
+          "La prospection électronique d'un particulier exige son consentement préalable (art. L.34-5 CPCE), sauf s'il est déjà client et que l'offre porte sur des services analogues, avec une possibilité simple de s'opposer à chaque envoi. Une désinscription est définitive ; un fichier acheté ou des numéros relevés sur des annonces ne valent pas consentement.",
       },
       {
         id: "t11",
-        question: "La loi Lemoine (2022) sur l'assurance emprunteur permet :",
+        question:
+          "Un emprunteur a pris en 2024 l'assurance de sa banque. Peut-il en changer aujourd'hui ?",
         options: [
-          "De ne pas souscrire d'assurance pour les prêts < 50 000 €",
-          "De résilier et changer d'assurance emprunteur à tout moment, sans frais",
-          "De réduire automatiquement le taux d'intérêt du prêt",
-          "De supprimer le questionnaire médical pour tous les prêts",
+          "Oui, à tout moment et sans frais, à garanties équivalentes",
+          "Seulement à la date anniversaire, avec un préavis de deux mois",
+          "Seulement dans les douze mois suivant la signature de l'offre",
+          "Non : l'assurance est figée pour toute la durée du prêt signé",
         ],
-        correctIndex: 1,
-        explanation: "Loi Lemoine 2022 : résiliation infra-annuelle (à tout moment) de l'assurance emprunteur + suppression du questionnaire médical pour prêts < 200 000 € remboursés avant 60 ans. Économie moyenne : 5 000 à 15 000 € sur la durée du prêt.",
+        correctIndex: 0,
+        explanation:
+          "Depuis la loi Lemoine (2022), l'assurance emprunteur peut être résiliée à tout moment, sans frais, pour tous les contrats, sous réserve d'une équivalence de garanties. Les deux autres délais correspondent aux anciens régimes (loi Hamon : 12 mois ; amendement Bourquin : date anniversaire).",
       },
       {
         id: "t12",
-        question: "La différence principale entre compromis de vente et promesse unilatérale de vente :",
+        question:
+          "Dans une promesse unilatérale de vente, le bénéficiaire laisse expirer le délai d'option sans la lever. Conséquence ?",
         options: [
-          "Aucune, ce sont des synonymes",
-          "Le compromis engage les deux parties, la promesse n'engage que le vendeur (option pour l'acheteur)",
-          "La promesse est obligatoire chez le notaire, pas le compromis",
-          "Le compromis est uniquement pour le neuf",
+          "Le vendeur garde l'indemnité d'immobilisation, sauf condition suspensive défaillie",
+          "Le vendeur peut exiger en justice qu'il achète le bien au prix fixé dans la promesse",
+          "La vente se forme automatiquement à l'expiration du délai, faute de refus exprès",
+          "Le bénéficiaire doit verser au vendeur le double de l'indemnité d'immobilisation",
         ],
-        correctIndex: 1,
-        explanation: "Compromis (synallagmatique) = vente parfaite, les deux engagés. Promesse unilatérale = vendeur engagé, acheteur dispose d'une option (indemnité d'immobilisation 5-10% si renonce hors conditions suspensives).",
+        correctIndex: 0,
+        explanation:
+          "Dans la promesse unilatérale, seul le vendeur s'engage ; le bénéficiaire achète une option, rémunérée par l'indemnité d'immobilisation (souvent 10 %). S'il ne lève pas l'option, la vente ne se forme pas et l'indemnité reste acquise au vendeur, sauf si une condition suspensive (prêt…) a défailli. À l'inverse, le compromis engage les deux parties.",
       },
       {
         id: "t13",
-        question: "Le séquestre versé par l'acquéreur lors du compromis représente généralement :",
+        question:
+          "À la signature d'un compromis négocié par une agence, l'acquéreur particulier verse un dépôt de garantie. Qui peut le recevoir ?",
         options: [
-          "1% à 2% du prix",
-          "5% à 10% du prix de vente",
-          "20% à 30% du prix",
-          "Le prix complet",
+          "Le notaire, ou l'agence si elle a une garantie financière pour détenir des fonds",
+          "Le vendeur directement, qui l'encaisse dès la signature pour sécuriser la vente",
+          "L'agence dans tous les cas, sur son compte courant, jusqu'à l'acte authentique",
+          "La banque de l'acquéreur, qui le bloque jusqu'à l'obtention définitive du prêt",
         ],
-        correctIndex: 1,
-        explanation: "Le dépôt de garantie (séquestre) est usuellement de 5 à 10% du prix de vente, conservé par le notaire ou l'agence. Restituable si conditions suspensives non levées, conservé par le vendeur en cas de défaillance acquéreur après les 10 jours de rétractation SRU.",
+        correctIndex: 0,
+        explanation:
+          "Article L.271-2 du CCH : le versement ne peut être reçu que par un professionnel disposant d'une garantie financière affectée au remboursement des fonds (agent habilité à détenir des fonds, notaire). En cas de rétractation, il est restitué dans les 21 jours suivant le lendemain de la rétractation.",
       },
     ],
   },
   {
     moduleSlug: "financement",
     title: "Examen — Financement & fiscalité",
-    duration: 15,
+    duration: 20,
     questions: [
       {
         id: "f1",
-        question: "Le taux d'endettement maximum recommandé par le HCSF est de :",
-        options: ["25%", "33%", "35%", "40%"],
-        correctIndex: 2,
-        explanation: "Depuis janvier 2022, le HCSF fixe le seuil d'endettement à 35% (assurance incluse).",
+        question:
+          "Un couple gagne 5 000 € nets par mois et n'a aucun autre crédit. Selon la norme HCSF, quelle mensualité maximale peut-il supporter ?",
+        options: [
+          "1 750 €, assurance emprunteur comprise",
+          "1 750 €, assurance emprunteur en plus",
+          "1 650 €, soit le seuil historique de 33 %",
+          "2 000 €, la banque pouvant aller à 40 %",
+        ],
+        correctIndex: 0,
+        explanation:
+          "La norme HCSF, juridiquement contraignante depuis 2022, plafonne le taux d'effort à 35 % des revenus nets, assurance emprunteur comprise, et la durée à 25 ans (27 ans avec différé). Les banques peuvent y déroger pour 20 % de leur production, en priorité pour la résidence principale : ce n'est pas un droit pour l'emprunteur.",
       },
       {
         id: "f2",
-        question: "La rentabilité nette se calcule en déduisant du loyer :",
-        options: [
-          "Uniquement la taxe foncière",
-          "Charges, taxe foncière, assurance, gestion et vacance locative",
-          "Uniquement les intérêts d'emprunt",
-          "Rien, c'est la même que la brute",
-        ],
-        correctIndex: 1,
-        explanation: "La rentabilité nette intègre toutes les charges réelles pour refléter le rendement réel.",
+        question:
+          "Studio acheté 150 000 € frais inclus, loué 650 €/mois. Charges non récupérables 600 €/an, taxe foncière 900 €/an, assurance PNO 150 €/an. Rentabilité nette avant impôt ?",
+        options: ["4,1 %", "5,2 %", "4,7 %", "3,5 %"],
+        correctIndex: 0,
+        explanation:
+          "Loyers annuels : 650 × 12 = 7 800 €. Charges : 600 + 900 + 150 = 1 650 €. Rentabilité nette : (7 800 − 1 650) / 150 000 = 4,1 %. 5,2 % est la rentabilité brute (7 800 / 150 000) ; 4,7 % oublie la taxe foncière.",
       },
       {
         id: "f3",
-        question: "Le dispositif Pinel permet :",
+        question:
+          "En 2026, un client veut acheter un appartement neuf « en Pinel » pour réduire ses impôts. Que lui répondez-vous ?",
         options: [
-          "Une exonération totale d'impôts",
-          "Une réduction d'impôt proportionnelle à la durée d'engagement locatif",
-          "Un crédit d'impôt sur les travaux uniquement",
-          "Une déduction des intérêts d'emprunt sans plafond",
+          "C'est impossible : le Pinel est fermé aux achats réalisés après 2024",
+          "Il obtiendra 21 % de réduction d'impôt pour un engagement de 12 ans",
+          "Il doit choisir un bien situé en zone C pour être éligible au Pinel",
+          "Le Pinel ne vise plus que les logements anciens rénovés depuis 2025",
         ],
-        correctIndex: 1,
-        explanation: "Le Pinel offre une réduction d'impôt de 9% à 14% selon la durée d'engagement (6, 9 ou 12 ans).",
+        correctIndex: 0,
+        explanation:
+          "Le dispositif Pinel a pris fin le 31 décembre 2024 : seuls les investisseurs entrés avant cette date conservent leur réduction d'impôt. Les taux de 21 % sur 12 ans correspondaient au Pinel « + » ou aux années antérieures, et la zone C n'a jamais été éligible.",
       },
       {
         id: "f4",
-        question: "L'assurance emprunteur (ADI) couvre principalement :",
+        question:
+          "Un emprunteur en arrêt maladie de longue durée ne peut plus travailler. Quelle garantie de son assurance de prêt prend le relais des échéances ?",
         options: [
-          "Les dégâts des eaux du bien",
-          "Le décès, l'invalidité et l'incapacité de travail de l'emprunteur",
-          "La perte de valeur du bien",
-          "Les vices cachés",
+          "La garantie ITT (incapacité temporaire totale de travail)",
+          "La garantie PTIA (perte totale et irréversible d'autonomie)",
+          "La garantie perte d'emploi, incluse d'office dans le contrat",
+          "La garantie décès, qui couvre aussi les arrêts de travail",
         ],
-        correctIndex: 1,
-        explanation: "L'ADI protège la banque et l'emprunteur en cas de décès, invalidité ou incapacité de remboursement.",
+        correctIndex: 0,
+        explanation:
+          "L'ITT prend en charge les échéances pendant un arrêt de travail, après un délai de franchise (souvent 90 jours). La PTIA vise une dépendance totale et définitive ; la perte d'emploi est une option facultative, rarement souscrite.",
       },
       {
         id: "f5",
-        question: "Le régime LMNP (Loueur Meublé Non Professionnel) permet :",
+        question:
+          "Un loueur en meublé (LMNP au réel) a déduit 40 000 € d'amortissements. Il revend son appartement en 2026. Quelle conséquence fiscale ?",
         options: [
-          "D'être exonéré de toute fiscalité",
-          "D'amortir le bien et de déduire les charges en régime réel",
-          "De louer sans bail",
-          "De vendre sans plus-value",
+          "Ces amortissements sont réintégrés dans le calcul de sa plus-value",
+          "Aucune : les amortissements déduits restent définitivement acquis",
+          "Il doit rembourser ces amortissements au Trésor dans l'année",
+          "Il bascule automatiquement au statut LMP pour l'année de revente",
         ],
-        correctIndex: 1,
-        explanation: "Le LMNP en régime réel permet l'amortissement du bien et la déduction des charges réelles.",
+        correctIndex: 0,
+        explanation:
+          "Depuis la loi de finances 2025 (cessions à compter du 15 février 2025), les amortissements déduits par un LMNP au réel viennent minorer le prix d'acquisition, ce qui augmente la plus-value imposable. Les résidences services (étudiantes, seniors, EHPAD) sont exclues de cette réintégration.",
       },
       {
         id: "f6",
-        question: "Le PTZ (Prêt à Taux Zéro) est réservé :",
+        question:
+          "Lequel de ces acquéreurs peut prétendre au prêt à taux zéro (PTZ) ?",
         options: [
-          "À tous les acheteurs sans condition",
-          "Aux primo-accédants sous conditions de ressources",
-          "Aux investisseurs locatifs uniquement",
-          "Aux SCI exclusivement",
+          "Un couple locataire depuis 10 ans, sous plafonds, pour sa résidence principale",
+          "Un investisseur qui achète un studio neuf pour le louer en résidence étudiante",
+          "Un propriétaire de sa résidence principale qui en achète une plus grande",
+          "Un acquéreur aux revenus élevés, au-dessus des plafonds, en zone tendue",
         ],
-        correctIndex: 1,
-        explanation: "Le PTZ est réservé aux primo-accédants, sous plafonds de ressources et selon la zone géographique.",
+        correctIndex: 0,
+        explanation:
+          "Le PTZ finance la résidence principale d'un primo-accédant — personne n'ayant pas été propriétaire de sa résidence principale au cours des deux dernières années — sous plafonds de ressources. L'investissement locatif en est exclu.",
       },
       {
         id: "f7",
-        question: "La plus-value immobilière est exonérée d'impôt après :",
-        options: ["15 ans", "22 ans pour l'IR et 30 ans pour les prélèvements sociaux", "10 ans", "5 ans"],
-        correctIndex: 1,
-        explanation: "Exonération IR après 22 ans, exonération totale (y compris prélèvements sociaux) après 30 ans.",
+        question:
+          "Un particulier revend un appartement locatif détenu depuis 25 ans. Comment sa plus-value est-elle taxée ?",
+        options: [
+          "Exonérée d'impôt sur le revenu, encore taxée en partie aux prélèvements sociaux",
+          "Totalement exonérée, puisque l'exonération complète intervient après 22 ans",
+          "Imposée au barème progressif de l'impôt sur le revenu, sans aucun abattement",
+          "Exonérée de prélèvements sociaux, mais encore taxée à l'impôt sur le revenu",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Les abattements pour durée de détention exonèrent la plus-value d'impôt sur le revenu (19 %) après 22 ans, mais de prélèvements sociaux (17,2 %) seulement après 30 ans. À 25 ans, il reste donc des prélèvements sociaux sur une fraction de la plus-value. La résidence principale, elle, est exonérée sans condition de durée.",
       },
       {
         id: "f8",
-        question: "Le taux d'usure est :",
+        question:
+          "Une banque refuse un prêt alors que le taux nominal proposé est inférieur au taux d'usure. Comment l'expliquer ?",
         options: [
-          "Le taux minimum pratiqué par les banques",
-          "Le taux maximum légal au-delà duquel un prêt ne peut être accordé",
-          "Le taux moyen du marché immobilier",
-          "Le taux de la Banque Centrale Européenne",
+          "Le TAEG, assurance et frais compris, dépassait le taux d'usure",
+          "L'usure se compare au taux nominal majoré d'un point de sécurité",
+          "Le taux d'usure ne vise que les prêts d'une durée supérieure à 25 ans",
+          "La banque doit rester à un point sous l'usure par règle de prudence",
         ],
-        correctIndex: 1,
-        explanation: "Le taux d'usure est le TAEG maximum légal, publié trimestriellement par la Banque de France.",
+        correctIndex: 0,
+        explanation:
+          "Le taux d'usure est le taux maximal légal, fixé par la Banque de France. Il se compare au TAEG, qui inclut intérêts, assurance emprunteur, frais de dossier et de garantie : une assurance chère peut à elle seule faire franchir le seuil.",
       },
       {
         id: "f9",
-        question: "Le déficit foncier est imputable sur le revenu global :",
+        question:
+          "Un bailleur en location nue perçoit 5 000 € de loyers, paie 3 000 € d'intérêts et 18 000 € de travaux d'entretien. Que peut-il imputer sur son revenu global ?",
         options: [
-          "Sans limite",
-          "Dans la limite de 10 700 EUR par an (hors intérêts d'emprunt)",
-          "Uniquement sur les revenus fonciers",
-          "Il n'est jamais imputable",
+          "10 700 €, le solde de 5 300 € étant reportable sur ses revenus fonciers",
+          "16 000 €, l'intégralité du déficit foncier, sans aucun plafonnement",
+          "0 € : un déficit foncier ne s'impute que sur les revenus fonciers futurs",
+          "10 700 €, le reste du déficit étant définitivement perdu pour le bailleur",
         ],
-        correctIndex: 1,
-        explanation: "Le déficit foncier (hors intérêts) est déductible du revenu global dans la limite de 10 700 EUR/an.",
+        correctIndex: 0,
+        explanation:
+          "Les intérêts s'imputent d'abord sur les loyers : 5 000 − 3 000 = 2 000 €. Les travaux créent ensuite un déficit de 16 000 €, imputable sur le revenu global dans la limite de 10 700 € par an. Les 5 300 € restants se reportent sur les revenus fonciers des dix années suivantes, à condition de louer le bien jusqu'au 31 décembre de la troisième année suivant l'imputation.",
       },
       {
         id: "f10",
-        question: "La délégation d'assurance emprunteur permet :",
+        question:
+          "Un emprunteur présente à sa banque une assurance externe pour remplacer la sienne. La banque peut-elle refuser ?",
         options: [
-          "De supprimer l'assurance",
-          "De choisir un assureur différent de celui proposé par la banque",
-          "De réduire le montant du prêt",
-          "De prolonger la durée du crédit",
+          "Seulement si les garanties ne sont pas équivalentes, par un refus motivé",
+          "Oui, librement, sans avoir à motiver sa décision auprès de l'emprunteur",
+          "Non, jamais, même si les garanties proposées sont nettement inférieures",
+          "Oui, si l'assurance externe coûte moins cher que le contrat de la banque",
         ],
-        correctIndex: 1,
-        explanation: "Depuis la loi Lagarde (2010) et la loi Lemoine (2022), l'emprunteur peut choisir librement son assurance.",
+        correctIndex: 0,
+        explanation:
+          "La banque ne peut refuser la délégation d'assurance que pour défaut d'équivalence de garanties, par une décision écrite et motivée, dans les 10 jours ouvrés suivant la demande (Code de la consommation). Elle ne peut ni modifier le taux du prêt ni facturer de frais pour ce changement.",
       },
       {
         id: "f11",
-        question: "Une SCI à l'IS (Impôt sur les Sociétés) est généralement préférable à une SCI à l'IR pour :",
+        question:
+          "Un investisseur loue nu via une SCI à l'impôt sur les sociétés. Quel est le principal point de vigilance à la revente ?",
         options: [
-          "Une location nue de courte durée pour des particuliers",
-          "Un investissement locatif avec amortissement du bien et capitalisation",
-          "Une résidence principale familiale",
-          "Aucun cas, l'IR est toujours mieux",
+          "La plus-value se calcule sur la valeur nette comptable, après amortissements",
+          "La plus-value est exonérée après 22 ans de détention, comme pour une SCI à l'IR",
+          "Les loyers ont déjà supporté 17,2 % de prélèvements sociaux chaque année",
+          "Une SCI à l'IS ne peut pas amortir le bâtiment qu'elle a acquis et loue",
         ],
-        correctIndex: 1,
-        explanation: "SCI à l'IS : amortissement comptable du bien (diminue la base imposable), taux IS 15% jusqu'à 42 500 € puis 25%, parfaite pour capitaliser. Inconvénient : double imposition à la sortie (IS sur plus-value + IR sur dividendes).",
+        correctIndex: 0,
+        explanation:
+          "À l'IS, la SCI amortit le bâtiment, ce qui réduit l'impôt pendant la détention ; mais la plus-value professionnelle se calcule sur la valeur nette comptable, sans abattement pour durée de détention. Elle est souvent lourde après de longues années d'amortissement, et la distribution du prix aux associés est ensuite taxée comme un dividende.",
       },
       {
         id: "f12",
-        question: "Le démembrement temporaire (vente nue-propriété) sur 15-20 ans permet à l'investisseur :",
+        question:
+          "Un investisseur achète la nue-propriété d'un logement pour 15 ans, un bailleur institutionnel en ayant l'usufruit. Que se passe-t-il ?",
         options: [
-          "De percevoir immédiatement les loyers",
-          "D'acquérir un bien avec une décote de 30-40% et récupérer la pleine propriété sans fiscalité au terme",
-          "De déduire les loyers de ses impôts",
-          "De revendre rapidement avec plus-value",
+          "Il ne perçoit aucun loyer, puis récupère la pleine propriété sans impôt au terme",
+          "Il perçoit les loyers, l'usufruitier se limitant à gérer le bien à sa place",
+          "Il paie l'IFI sur la pleine valeur du bien pendant toute la durée du démembrement",
+          "Il déduit de ses revenus imposables les loyers encaissés par l'usufruitier",
         ],
-        correctIndex: 1,
-        explanation: "Achat nue-propriété : prix décoté 30-40%, pas de loyers ni fiscalité IFI/IR pendant 15-20 ans. À l'échéance, l'usufruit s'éteint automatiquement, l'investisseur récupère la pleine propriété sans frais ni fiscalité. Stratégie patrimoniale long terme.",
+        correctIndex: 0,
+        explanation:
+          "Le nu-propriétaire achète avec une décote (souvent 30 à 40 %) correspondant aux loyers abandonnés. Il n'a ni revenus fonciers à déclarer ni IFI (dû par l'usufruitier), et la réunion de l'usufruit à la nue-propriété au terme n'est pas taxée.",
       },
       {
         id: "f13",
-        question: "Le déficit foncier généré par des travaux sur un bien locatif loué nu est imputable :",
+        question:
+          "Un bailleur perçoit 12 000 € de loyers nus par an. Peut-il relever du régime micro-foncier ?",
         options: [
-          "Sans plafond sur le revenu global",
-          "Sur le revenu global jusqu'à 10 700 €/an (21 400 € pour travaux énergétiques 2023-2025)",
-          "Uniquement sur les revenus fonciers futurs",
-          "Sur la plus-value de revente uniquement",
+          "Oui, avec un abattement forfaitaire de 30 % sur ses loyers",
+          "Oui, avec un abattement forfaitaire de 50 % sur ses loyers",
+          "Non : le micro-foncier s'arrête à 10 000 € de loyers par an",
+          "Non : la location nue relève toujours du régime réel d'office",
         ],
-        correctIndex: 1,
-        explanation: "Plafond standard 10 700 € imputables sur revenu global, doublé à 21 400 € pour travaux de rénovation énergétique permettant de sortir d'une étiquette F ou G (loi de finances 2023, prolongé jusqu'en 2025). Économie d'impôt = TMI × montant déficit.",
+        correctIndex: 0,
+        explanation:
+          "Le micro-foncier s'applique de droit sous 15 000 € de loyers nus annuels, avec un abattement forfaitaire de 30 % censé couvrir toutes les charges. Le bailleur peut opter pour le réel s'il a davantage de charges (travaux, intérêts). L'abattement de 50 % est celui du micro-BIC en location meublée de longue durée.",
       },
     ],
   },
   {
     moduleSlug: "marketing",
     title: "Examen — Marketing digital immobilier",
-    duration: 15,
+    duration: 20,
     questions: [
       {
         id: "m1",
-        question: "Les photos immobilières professionnelles doivent privilégier :",
+        question:
+          "Pour la photo principale d'un séjour, quelle pratique donne le rendu le plus fidèle et le plus vendeur ?",
         options: [
-          "Le flash direct et le mode portrait",
-          "La lumière naturelle, le grand angle et le staging",
-          "Les filtres Instagram lourds",
-          "Le noir et blanc pour le style",
+          "Lumière du jour, lampes allumées, appareil à hauteur de poitrine, verticales droites",
+          "Flash direct en pleine face, pour éclaircir les coins sombres de la pièce photographiée",
+          "Objectif fisheye, pour faire paraître la pièce nettement plus grande qu'en réalité",
+          "Cadrage serré sur un détail de décoration, pour intriguer et pousser au clic",
         ],
-        correctIndex: 1,
-        explanation: "Lumière naturelle + grand angle + home staging = photos qui convertissent les clics en visites.",
+        correctIndex: 0,
+        explanation:
+          "La photo de référence : lumière naturelle complétée par l'éclairage intérieur, grand angle raisonnable (16–24 mm équivalent), appareil vers 1,20–1,50 m et verticales redressées. Le flash direct écrase les volumes ; un fisheye déforme et déçoit à la visite.",
       },
       {
         id: "m2",
-        question: "Sur SeLoger et Leboncoin, l'élément qui génère le plus de clics est :",
+        question:
+          "Dans une liste de résultats sur un portail, qu'est-ce qui décide d'abord du clic sur une annonce ?",
         options: [
-          "La description technique",
-          "La photo principale et le prix",
-          "Le nom de l'agence",
-          "Le numéro de téléphone",
+          "La photo principale, avec le prix et la surface",
+          "La longueur du texte de description du bien",
+          "Le nom et le logo de l'agence qui diffuse le bien",
+          "Le nombre total de photos publiées dans l'annonce",
         ],
-        correctIndex: 1,
-        explanation: "La photo principale et le prix sont les premiers éléments vus : ils déterminent le taux de clic.",
+        correctIndex: 0,
+        explanation:
+          "Dans la liste de résultats, l'internaute ne voit que la vignette : photo principale, prix, surface, localisation. Le texte et le nombre de photos jouent ensuite, une fois l'annonce ouverte.",
       },
       {
         id: "m3",
-        question: "Une annonce immobilière efficace doit contenir :",
+        question:
+          "Annonce d'un bien vendu 300 000 € honoraires inclus, avec des honoraires à la charge de l'acquéreur. Quelles mentions de prix sont obligatoires ?",
         options: [
-          "Le maximum de majuscules pour attirer l'attention",
-          "Un titre accrocheur, des points forts du bien et un appel à l'action",
-          "Uniquement la surface et le prix",
-          "Des emojis dans chaque phrase",
+          "Le prix honoraires inclus, le prix hors honoraires et le taux d'honoraires",
+          "Le seul prix honoraires inclus : le détail figure au barème de l'agence",
+          "Le prix net vendeur seulement, les honoraires étant facturés à part",
+          "Le prix hors honoraires et la mention « frais d'agence en sus »",
         ],
-        correctIndex: 1,
-        explanation: "Structure gagnante : titre accrocheur + avantages clés + CTA (appel à l'action) clair.",
+        correctIndex: 0,
+        explanation:
+          "L'arrêté du 10 janvier 2017 impose, lorsque les honoraires sont à la charge de l'acquéreur, d'afficher le prix honoraires inclus, le prix hors honoraires et le montant des honoraires TTC exprimé en pourcentage du prix hors honoraires.",
       },
       {
         id: "m4",
-        question: "Le meilleur moment pour publier sur les réseaux sociaux immobiliers est :",
+        question:
+          "Vous publiez l'annonce de vente d'un appartement classé F. Que doit-elle mentionner au titre de l'énergie ?",
         options: [
-          "Lundi à 6h du matin",
-          "En semaine entre 11h-13h et 18h-20h",
-          "Le dimanche à 23h",
-          "N'importe quand, l'algorithme s'en charge",
+          "Classes énergie et climat, dépenses estimées, mention « consommation excessive »",
+          "La seule classe énergie, la classe climat restant facultative pour une vente",
+          "La classe énergie, et le fait qu'un logement F ne peut plus être loué en 2026",
+          "Rien avant le compromis : le DPE est uniquement remis à l'acquéreur chez le notaire",
         ],
-        correctIndex: 1,
-        explanation: "Les pics d'engagement se situent à la pause déjeuner et en fin de journée en semaine.",
+        correctIndex: 0,
+        explanation:
+          "Toute annonce de vente ou de location doit afficher les classes énergie et climat du DPE et l'estimation des dépenses annuelles d'énergie. Pour les logements F et G, elle doit en plus porter la mention « logement à consommation énergétique excessive ». Un logement F reste louable jusqu'au 31 décembre 2027.",
       },
       {
         id: "m5",
-        question: "Le SEO local pour une agence immobilière commence par :",
+        question:
+          "Quel levier améliore le plus vite la visibilité d'une agence sur les recherches « agence immobilière + ville » ?",
         options: [
-          "Acheter des liens par milliers",
-          "Optimiser sa fiche Google Business Profile",
-          "Créer un blog sur la cuisine",
-          "Ignorer Google et se concentrer sur les flyers",
+          "Une fiche Google Business Profile complète, active et riche en avis",
+          "L'achat de centaines de liens sur des annuaires de sites étrangers",
+          "La répétition du nom de la ville en texte caché dans le pied de page",
+          "La copie des descriptions d'annonces des agences concurrentes du secteur",
         ],
-        correctIndex: 1,
-        explanation: "Google Business Profile est la base du référencement local : fiche complète, avis, photos, posts.",
+        correctIndex: 0,
+        explanation:
+          "Les recherches locales affichent d'abord le « pack local » de Google Maps, alimenté par la fiche Google Business Profile : catégories, horaires, photos, publications et surtout avis récents. Liens achetés, texte caché et contenu dupliqué sont pénalisés par Google.",
       },
       {
         id: "m6",
-        question: "Le format vidéo le plus efficace sur Instagram pour l'immobilier est :",
+        question:
+          "Un agent offre 200 € de remise aux clients qui publient un avis 5 étoiles sur sa fiche Google. Est-ce permis ?",
         options: [
-          "Un diaporama de 30 photos",
-          "Un Reel de 30-60 secondes avec visite virtuelle",
-          "Une vidéo de 10 minutes en plan fixe",
-          "Une photo avec musique",
+          "Non : récompenser un avis positif fausse les avis et constitue une pratique trompeuse",
+          "Oui, si la remise est clairement mentionnée dans les conditions générales de l'agence",
+          "Oui, tant que les clients ont réellement acheté ou vendu un bien avec l'agence",
+          "Non, sauf si la remise accordée ne dépasse pas 10 % des honoraires de la transaction",
         ],
-        correctIndex: 1,
-        explanation: "Les Reels courts avec visite dynamique génèrent le plus d'engagement et de portée organique.",
+        correctIndex: 0,
+        explanation:
+          "Conditionner un avantage à un avis positif fausse l'information du consommateur : c'est une pratique commerciale trompeuse (Code de la consommation), également interdite par les règles de Google, qui peut supprimer les avis ou suspendre la fiche. On peut solliciter des avis, mais sans contrepartie ni exigence de note.",
       },
       {
         id: "m7",
-        question: "Le home staging virtuel permet de :",
+        question:
+          "Vous publiez les photos d'un séjour vide meublé virtuellement par IA. Que devez-vous faire ?",
         options: [
-          "Cacher les défauts du bien",
-          "Aider l'acheteur à se projeter dans le bien grâce à des visuels aménagés",
-          "Modifier les plans du bien",
-          "Remplacer les visites physiques",
+          "Le signaler clairement sur les visuels concernés et garder des photos réelles",
+          "Rien : le home staging virtuel est une pratique courante, sans aucune obligation",
+          "Le signaler uniquement si l'acquéreur pose la question au moment de la visite",
+          "En profiter pour effacer aussi les fissures visibles, pour un rendu homogène",
         ],
-        correctIndex: 1,
-        explanation: "Le home staging virtuel aide à la projection sans tromper : il illustre le potentiel du bien.",
+        correctIndex: 0,
+        explanation:
+          "Le home staging virtuel aide l'acquéreur à se projeter, à condition de ne pas tromper : mention « aménagement virtuel » sur chaque visuel et photos réelles du même espace. Masquer un défaut (fissure, humidité) constitue une pratique commerciale trompeuse.",
       },
       {
         id: "m8",
-        question: "Le taux de conversion d'une annonce immobilière se mesure par :",
+        question:
+          "Annonce A : 2 000 vues et 10 contacts. Annonce B : 800 vues et 12 contacts. Que concluez-vous ?",
         options: [
-          "Le nombre de likes sur Facebook",
-          "Le ratio contacts qualifiés / nombre de vues de l'annonce",
-          "Le nombre de partages WhatsApp",
-          "La durée de mise en ligne",
+          "B convertit trois fois mieux : c'est A qu'il faut retravailler (photos, prix)",
+          "A est la meilleure annonce, puisqu'elle génère plus de deux fois plus de vues",
+          "Les deux se valent : l'écart n'est que de deux contacts sur toute la période",
+          "B manque de visibilité : son prix est forcément trop élevé pour le marché",
         ],
-        correctIndex: 1,
-        explanation: "Le taux de conversion = leads qualifiés / vues. C'est l'indicateur clé de performance d'une annonce.",
+        correctIndex: 0,
+        explanation:
+          "Taux de conversion = contacts / vues. A : 10 / 2 000 = 0,5 %. B : 12 / 800 = 1,5 %, soit trois fois plus. A attire des vues mais ne convainc pas une fois ouverte : il faut revoir ses photos, son texte ou son prix.",
       },
       {
         id: "m9",
-        question: "Pour améliorer le référencement d'un site immobilier, il faut :",
+        question:
+          "Quel contenu a le plus de chances de bien positionner le site d'une agence sur Google, dans la durée ?",
         options: [
-          "Copier les annonces des concurrents",
-          "Créer du contenu unique, local et régulier (blog, guides, estimations)",
-          "Acheter le nom de domaine le plus long possible",
-          "Mettre le maximum de mots-clés dans le footer",
+          "Des guides locaux originaux : prix par quartier, écoles, transports",
+          "Les descriptions d'annonces reprises à l'identique depuis les portails",
+          "Des pages générées en masse pour cent villes où l'agence n'intervient pas",
+          "Un texte rempli de mots-clés répétés, écrit en blanc sur fond blanc",
         ],
-        correctIndex: 1,
-        explanation: "Le contenu unique, pertinent et local (guides quartier, estimations) est la clé du SEO immobilier.",
+        correctIndex: 0,
+        explanation:
+          "Google valorise le contenu original et utile à l'internaute local (critères E-E-A-T). Le contenu dupliqué n'apporte rien, les pages de masse sans valeur et le texte caché relèvent du spam et sont sanctionnés.",
       },
       {
         id: "m10",
-        question: "L'email marketing immobilier est le plus efficace quand il est :",
+        question:
+          "Quelle campagne e-mail a le plus de chances de déclencher des demandes de visite ?",
         options: [
-          "Envoyé à toute la base sans segmentation",
-          "Personnalisé, segmenté par critères (acheteur/vendeur, budget, zone)",
-          "Envoyé 5 fois par jour",
-          "Uniquement composé d'images sans texte",
+          "Les nouveaux biens, envoyés aux seuls acquéreurs dont ils correspondent aux critères",
+          "Une newsletter générale envoyée chaque jour à l'ensemble des contacts de la base",
+          "Un e-mail composé d'une seule grande image, sans texte ni lien vers l'annonce",
+          "Un envoi massif à des adresses collectées automatiquement sur des sites d'annonces",
         ],
-        correctIndex: 1,
-        explanation: "La segmentation et la personnalisation multiplient par 3 à 5 le taux d'ouverture et de conversion.",
+        correctIndex: 0,
+        explanation:
+          "La pertinence fait le taux d'ouverture et de clic : segmenter par projet (achat, vente), budget, secteur et typologie. Les envois quotidiens non ciblés font fuir et dégradent la délivrabilité ; les adresses collectées sans consentement sont illicites.",
       },
       {
         id: "m11",
-        question: "Une visite virtuelle 3D type Matterport augmente en moyenne le taux de prise de RDV de :",
+        question:
+          "Quel est le principal bénéfice d'une visite virtuelle 360° pour un mandat de vente ?",
         options: [
-          "5%",
-          "30 à 50% selon les baromètres sectoriels",
-          "Aucun impact démontré",
-          "200% systématiquement",
+          "Filtrer les visites : les acquéreurs qui se déplacent sont mieux informés",
+          "Remplacer la visite physique, qui devient inutile avant de signer le compromis",
+          "Dispenser l'agence de publier les diagnostics et les informations du DPE",
+          "Augmenter mécaniquement le prix de vente final d'environ 10 % en moyenne",
         ],
-        correctIndex: 1,
-        explanation: "Études MoxiWorks/Matterport : annonces avec visite 3D génèrent +30 à +50% de prises de contact qualifiées et réduisent les visites physiques 'curieuses' (-40%). ROI shooting Matterport (300-600€) atteint en 1 mandat.",
+        correctIndex: 0,
+        explanation:
+          "La visite virtuelle sert de pré-visite : moins de déplacements inutiles, des visiteurs plus qualifiés, un argument fort en prise de mandat. Elle ne remplace ni la visite physique ni les informations obligatoires de l'annonce.",
       },
       {
         id: "m12",
-        question: "Sur LinkedIn, la stratégie personal branding immobilier la plus efficace est :",
+        question:
+          "Quelle ligne éditoriale construit le mieux la notoriété d'un agent sur LinkedIn ou Instagram ?",
         options: [
-          "Publier uniquement des annonces de biens à vendre",
-          "Mixer expertise locale (analyses marché), success stories clients, conseils pédagogiques",
-          "Reposter le contenu de l'agence",
-          "Acheter des followers",
+          "Analyses du marché local, cas clients et conseils pratiques, en alternance",
+          "Uniquement les biens à vendre, publiés dès leur entrée dans le portefeuille",
+          "Des partages quotidiens des publications nationales de son réseau d'agences",
+          "L'achat d'abonnés, pour paraître plus influent aux yeux des futurs vendeurs",
         ],
-        correctIndex: 1,
-        explanation: "LinkedIn = vitrine d'expertise. Algorithme valorise contenu original + interaction. Mix gagnant : 50% expertise/conseils, 30% témoignages clients, 20% coulisses du métier. Évitez le 'achetez/vendez' direct (-80% de portée).",
+        correctIndex: 0,
+        explanation:
+          "Le personal branding repose sur l'expertise visible et la preuve sociale : marché local, réussites clients (avec leur accord), pédagogie. Un fil 100 % annonces lasse ; les faux abonnés n'apportent aucun contact et décrédibilisent.",
       },
       {
         id: "m13",
-        question: "Depuis 2022, l'affichage du DPE dans une annonce immobilière est :",
+        question:
+          "Vous voulez publier sur Instagram une photo de la remise des clés avec vos clients. Que vous faut-il ?",
         options: [
-          "Recommandé mais pas obligatoire",
-          "Obligatoire avec lettres + montant estimé des dépenses énergétiques annuelles",
-          "Obligatoire uniquement pour la location",
-          "Obligatoire uniquement pour les biens > 100 m²",
+          "Leur accord, de préférence écrit, précisant les supports et la durée",
+          "Rien, s'ils sourient sur la photo : leur accord est alors présumé",
+          "Rien, si leurs noms n'apparaissent pas dans le texte de la publication",
+          "Un accord oral unique, valable pour toutes vos publications futures",
         ],
-        correctIndex: 1,
-        explanation: "Décret 2021-1104 : annonce doit afficher la classe DPE (A à G) + GES + montant estimé charges énergétiques annuelles min/max. Sanction DGCCRF : 3 000 € (PP) / 15 000 € (PM). Mention obligatoire 'logement à consommation énergétique excessive' pour F/G.",
+        correctIndex: 0,
+        explanation:
+          "Toute personne a droit au respect de son image (art. 9 C. civ.) et une photo identifiable est une donnée personnelle (RGPD). L'accord doit être spécifique (supports, durée) ; un écrit permet d'en apporter la preuve.",
       },
     ],
   },
   {
     moduleSlug: "terrain",
     title: "Examen — Visite, closing & fidélisation",
-    duration: 15,
+    duration: 30,
     questions: [
       {
         id: "te1",
-        question: "Avant une visite, l'agent immobilier doit :",
+        question: "Une heure avant une visite, quelle préparation a le plus d'impact sur l'acquéreur ?",
         options: [
-          "Arriver en retard pour créer l'attente",
-          "Préparer un parcours de visite, vérifier l'état du bien et anticiper les questions",
-          "Laisser le client découvrir seul",
-          "Ne rien préparer pour être spontané",
+          "Repasser sur place : aérer, allumer, ranger, fixer l'ordre des pièces",
+          "Envoyer à l'acquéreur toutes les photos, pour qu'il ait déjà tout vu",
+          "Demander au vendeur d'être présent pour répondre à chaque question",
+          "Préparer un discours complet, pour parler pendant toute la visite",
         ],
-        correctIndex: 1,
-        explanation: "La préparation (parcours, points forts, réponses aux objections) est la clé d'une visite réussie.",
+        correctIndex: 0,
+        explanation:
+          "La première impression se joue sur la lumière, l'odeur et le rangement ; un parcours défini met en valeur les points forts. La présence du vendeur bride souvent l'acquéreur, et un monologue empêche d'écouter ses réactions.",
       },
       {
         id: "te2",
-        question: "L'argumentaire de vente doit mettre en avant :",
+        question: "Pourquoi faire signer un bon de visite à chaque acquéreur ?",
         options: [
-          "Uniquement le prix bas",
-          "Les bénéfices pour l'acheteur (cadre de vie, potentiel, emplacement)",
-          "Les défauts pour être honnête",
-          "Le nombre de pièces uniquement",
+          "Pour prouver que l'agence a présenté le bien à cet acquéreur",
+          "Parce qu'il est obligatoire pour que la visite soit légale et assurée",
+          "Parce qu'il engage l'acquéreur à faire une offre si le bien lui plaît",
+          "Pour autoriser l'agence à transmettre ses données à tous ses partenaires",
         ],
-        correctIndex: 1,
-        explanation: "Vendre des bénéfices (pas des caractéristiques) : projection, mode de vie, valorisation.",
+        correctIndex: 0,
+        explanation:
+          "Le bon de visite n'est pas imposé par la loi et n'engage pas à acheter : c'est une preuve. Si vendeur et acquéreur concluent ensuite sans l'agence, il établit qu'elle est à l'origine de la rencontre et fonde sa demande d'indemnisation.",
       },
       {
         id: "te3",
-        question: "Face à l'objection 'je vais réfléchir', la bonne réponse est :",
+        question:
+          "Un acquéreur dit chercher « un 3 pièces à 300 000 € ». Quelle question de découverte poser en premier ?",
         options: [
-          "D'accord, rappelez-moi quand vous voulez",
-          "Identifier le frein réel et proposer des éléments pour aider à la décision",
-          "Baisser le prix immédiatement",
-          "Ignorer et passer au client suivant",
+          "« Qu'est-ce qui motive votre projet, et pour quand ? »",
+          "« Préférez-vous un parquet ou plutôt du carrelage ? »",
+          "« Voulez-vous voir nos 4 pièces, un peu plus chers ? »",
+          "« Pourriez-vous monter à 330 000 € pour un coup de cœur ? »",
         ],
-        correctIndex: 1,
-        explanation: "Derrière 'je vais réfléchir' se cache souvent un frein spécifique à identifier et traiter.",
+        correctIndex: 0,
+        explanation:
+          "La motivation (naissance, mutation, investissement) et le délai hiérarchisent les critères et révèlent l'urgence réelle. Les détails de finition viennent après ; proposer d'emblée plus cher ou plus grand, c'est vendre avant d'avoir compris.",
       },
       {
         id: "te4",
-        question: "Le closing immobilier efficace repose sur :",
+        question: "Avant de faire visiter un bien à 400 000 €, que devez-vous vérifier chez l'acquéreur ?",
         options: [
-          "La pression agressive",
-          "La création d'un sentiment d'urgence légitime et la sécurisation du client",
-          "L'attente passive d'une décision",
-          "La multiplication des visites sans suivi",
+          "Sa capacité de financement : apport, simulation ou accord de principe",
+          "Son lieu de naissance, pour adapter votre argumentaire à son profil",
+          "Son avis sur les autres agences qu'il a déjà consultées dans le secteur",
+          "Sa religion et ses habitudes de vie, pour cibler les biens adaptés",
         ],
-        correctIndex: 1,
-        explanation: "Un bon closing combine urgence (marché, concurrence) et réassurance (accompagnement, garanties).",
+        correctIndex: 0,
+        explanation:
+          "Qualifier le financement évite les visites inutiles et protège le vendeur. L'origine, la religion ou les mœurs sont des critères de discrimination interdits (art. 225-1 du Code pénal) : ils ne doivent jamais orienter la sélection des biens.",
       },
       {
         id: "te5",
-        question: "La promesse de vente se distingue du compromis par :",
+        question: "En fin de visite, l'acquéreur vous dit : « Je vais réfléchir. » Quelle réaction est la plus efficace ?",
         options: [
-          "Elle n'engage que le vendeur (promesse unilatérale)",
-          "Elle est moins chère",
-          "Elle n'a pas besoin de notaire",
-          "Elle est plus rapide à signer",
+          "Chercher le frein restant, puis fixer un point à date précise",
+          "Respecter son choix et attendre qu'il vous rappelle de lui-même",
+          "Annoncer qu'une offre arrive ce soir, même si ce n'est pas le cas",
+          "Proposer aussitôt une baisse de prix pour lever son hésitation",
         ],
         correctIndex: 0,
-        explanation: "La promesse unilatérale engage uniquement le vendeur ; l'acheteur a une option d'achat.",
+        explanation:
+          "« Je vais réfléchir » cache souvent un frein précis (prix, travaux, financement, accord du conjoint). On l'identifie, on y répond, et on convient d'un rendez-vous. Inventer une offre est une pratique trompeuse ; baisser le prix sans mandat du vendeur est une faute.",
       },
       {
         id: "te6",
-        question: "L'acte authentique est signé chez :",
+        question: "Quelle phrase crée une urgence légitime auprès d'un acquéreur intéressé ?",
         options: [
-          "L'agent immobilier",
-          "Le notaire",
-          "La mairie",
-          "La banque",
+          "« D'autres visites sont prévues cette semaine ; je vous tiens informé. »",
+          "« Un acheteur fait une offre ce soir », alors qu'aucune offre n'existe",
+          "« Le prix augmente de 5 % lundi si vous ne signez pas aujourd'hui. »",
+          "« Signez l'offre, vous pourrez de toute façon vous rétracter après. »",
         ],
-        correctIndex: 1,
-        explanation: "Seul le notaire peut recevoir l'acte authentique de vente qui transfère la propriété.",
+        correctIndex: 0,
+        explanation:
+          "L'urgence doit reposer sur des faits vrais et vérifiables (visites programmées, intérêt d'autres acquéreurs). Une fausse offre ou une fausse hausse de prix sont des pratiques commerciales trompeuses ; minimiser la portée d'une offre d'achat est déloyal.",
       },
       {
         id: "te7",
-        question: "Le suivi post-vente idéal comprend :",
+        question:
+          "Vous recevez deux offres : l'une au prix, avec prêt ; l'autre 3 % en dessous, au comptant. Que faites-vous ?",
         options: [
-          "Ne plus jamais contacter le client",
-          "Un contact à 1 mois, 6 mois, 1 an avec des attentions personnalisées",
-          "Un appel quotidien pendant 1 an",
-          "Un email automatique unique",
+          "Vous transmettez les deux au vendeur, avec votre analyse",
+          "Vous ne transmettez que l'offre au prix, la seule conforme au mandat",
+          "Vous ne transmettez que l'offre au comptant, plus sûre pour le vendeur",
+          "Vous mettez les acquéreurs en concurrence sans en parler au vendeur",
         ],
-        correctIndex: 1,
-        explanation: "Un suivi espacé et personnalisé (anniversaire, conseils) transforme un client en ambassadeur.",
+        correctIndex: 0,
+        explanation:
+          "Le mandataire doit loyauté et information à son mandant : toutes les offres lui sont transmises. Son rôle de conseil est d'éclairer le choix — une offre au comptant, même plus basse, peut être plus sûre qu'une offre au prix soumise à un prêt.",
       },
       {
         id: "te8",
-        question: "Le parrainage client est efficace parce que :",
+        question:
+          "Un compromis prévoit une condition suspensive de prêt, mais l'acquéreur ne dépose aucune demande de crédit. Conséquence ?",
         options: [
-          "Il ne coûte rien",
-          "La recommandation personnelle a un taux de conversion 4 à 5 fois supérieur",
-          "Il remplace la prospection",
-          "Il est obligatoire légalement",
+          "La condition est réputée accomplie : il risque de perdre son dépôt de garantie",
+          "Il récupère son dépôt de garantie, puisque le prêt n'a pas été obtenu",
+          "Le vendeur doit lui accorder d'office un délai supplémentaire de 30 jours",
+          "La vente est caduque et l'agence conserve le dépôt de garantie à titre d'honoraires",
         ],
-        correctIndex: 1,
-        explanation: "Le bouche-à-oreille qualifié convertit beaucoup mieux que la prospection froide.",
+        correctIndex: 0,
+        explanation:
+          "Article 1304-3 du Code civil : la condition est réputée accomplie si la partie qui y avait intérêt en a empêché la réalisation. L'acquéreur qui ne sollicite aucun prêt, ou un prêt non conforme au compromis, ne peut s'en prévaloir : il doit acheter ou subir la clause pénale.",
       },
       {
         id: "te9",
-        question: "Lors de la visite, l'agent doit adopter une posture de :",
+        question: "Quelle est la durée minimale légale de la condition suspensive d'obtention de prêt ?",
         options: [
-          "Vendeur agressif",
-          "Conseiller à l'écoute qui guide la découverte",
-          "Simple ouvreur de portes",
-          "Critique du bien pour négocier",
+          "Un mois à compter de la signature de l'avant-contrat",
+          "Dix jours, comme le délai de rétractation de l'acquéreur",
+          "Quarante-cinq jours, quel que soit le montant emprunté",
+          "Trois mois, durée de validité d'une offre de prêt",
         ],
-        correctIndex: 1,
-        explanation: "Le rôle de conseil (écoute, réponses, projection) crée la confiance et facilite la décision.",
+        correctIndex: 0,
+        explanation:
+          "Article L.313-41 du Code de la consommation : la durée de validité de la condition suspensive de prêt ne peut être inférieure à un mois. En pratique, on prévoit souvent 45 à 60 jours pour laisser à la banque le temps d'émettre l'offre.",
       },
       {
         id: "te10",
-        question: "La condition suspensive d'obtention de prêt protège :",
+        question: "Un acquéreur particulier achète sans recourir au crédit. Que doit contenir le compromis ?",
         options: [
-          "Uniquement la banque",
-          "L'acheteur, qui peut se désengager si le prêt est refusé",
-          "Uniquement le vendeur",
-          "L'agent immobilier",
+          "Sa mention manuscrite indiquant qu'il n'a pas recours à un prêt",
+          "Rien de particulier : la condition de prêt est simplement retirée",
+          "Une attestation de sa banque prouvant qu'il dispose bien des fonds",
+          "Une condition suspensive de prêt maintenue pour un montant de 0 €",
         ],
-        correctIndex: 1,
-        explanation: "La condition suspensive de prêt protège l'acheteur : si le crédit est refusé, la vente est annulée sans pénalité.",
+        correctIndex: 0,
+        explanation:
+          "Article L.313-42 du Code de la consommation : l'acte doit porter une mention écrite de la main de l'acquéreur, par laquelle il reconnaît qu'il ne pourra pas se prévaloir de la protection de la condition de prêt s'il en sollicite un ensuite. À défaut, la condition de prêt est présumée.",
       },
       {
         id: "te11",
-        question: "La méthode BANT (Budget, Authority, Need, Timing) sert à :",
+        question: "Le jour de l'acte authentique, qui reçoit le prix de vente et le reverse au vendeur ?",
         options: [
-          "Calculer la commission de l'agent",
-          "Qualifier rapidement un prospect : a-t-il les moyens, le pouvoir de décision, le besoin et l'urgence ?",
-          "Décrire un bien immobilier",
-          "Évaluer un agent en formation",
+          "Le notaire, via son compte à la Caisse des dépôts",
+          "L'agence, qui reverse le prix net de sa commission",
+          "La banque de l'acquéreur, directement au vendeur",
+          "L'acquéreur lui-même, par virement le jour de l'acte",
         ],
-        correctIndex: 1,
-        explanation: "BANT = grille de qualification leads. Un prospect 'BANT-positif' (4/4) doit être prioritaire, un BANT 1-2/4 nécessite nurturing avant relance. Outil canonique pour ne pas perdre de temps sur des contacts froids.",
+        correctIndex: 0,
+        explanation:
+          "Le notaire reçoit les fonds (apport et prêt) sur son compte à la Caisse des dépôts et consignations, règle les éventuels créanciers (banque du vendeur, syndic…), prélève les droits, puis verse le solde au vendeur. Il verse aussi la commission due à l'agence.",
       },
       {
         id: "te12",
-        question: "Pour traiter l'objection 'C'est trop cher', la meilleure technique est :",
+        question: "À partir de quand l'agent peut-il percevoir sa commission sur une vente ?",
         options: [
-          "Baisser immédiatement le prix",
-          "Reformuler ('trop cher par rapport à quoi ?'), creuser la vraie objection (peur, comparaison, capacité), puis valoriser les bénéfices",
-          "Ignorer l'objection et passer à la suite",
-          "Conseiller un autre bien moins cher",
+          "Quand la vente est définitivement conclue, en pratique à l'acte",
+          "À la signature du compromis, puisque celui-ci vaut déjà vente parfaite",
+          "Dès la signature du mandat, sous forme d'acompte sur ses frais engagés",
+          "À l'acceptation de l'offre d'achat par le vendeur, par lettre recommandée",
         ],
-        correctIndex: 1,
-        explanation: "Méthode CRAC (Creuser, Reformuler, Argumenter, Confirmer). 'Trop cher' cache souvent : peur de se tromper, comparaison fausse, capacité financière mal évaluée. Reformuler permet de désarmer et personnaliser la réponse.",
+        correctIndex: 0,
+        explanation:
+          "Loi Hoguet, art. 6 : aucune somme n'est due à l'agent ni ne peut être perçue avant que l'opération ait été effectivement conclue. Tant que les conditions suspensives du compromis ne sont pas réalisées, la vente n'est pas définitive : la commission est versée par le notaire à l'acte.",
       },
       {
         id: "te13",
-        question: "La technique de closing 'Ben Franklin' (balance bénéfices/freins) est efficace car :",
+        question: "À quel moment une demande de recommandation à un client vendeur a-t-elle le plus de chances d'aboutir ?",
         options: [
-          "Elle force la décision immédiate",
-          "Elle aide le client à structurer sa réflexion en listant pros/cons, ce qui réduit la peur du choix",
-          "Elle utilise la pression psychologique",
-          "Elle promet des cadeaux",
+          "Juste après l'acte, quand sa satisfaction est à son plus haut niveau",
+          "Au premier rendez-vous d'estimation, avant toute prestation réalisée",
+          "Un an après la vente, quand il aura oublié les moments de tension",
+          "Jamais : solliciter un client est contraire à la déontologie",
         ],
-        correctIndex: 1,
-        explanation: "Ben Franklin Close : on co-construit avec le client une balance écrite '+/-'. Effet : le client visualise objectivement la décision, l'agent guide subtilement vers les bénéfices. Excellent pour acheteurs hésitants/analytiques.",
+        correctIndex: 0,
+        explanation:
+          "La recommandation se demande au pic de satisfaction, juste après la réussite, idéalement avec une demande précise (un avis, un nom). Elle s'entretient ensuite par un suivi régulier (anniversaire d'achat, point marché).",
       },
       {
         id: "te14",
-        question: "Le renouvellement de la carte professionnelle (carte T) est obligatoire tous les :",
-        options: ["1 an", "2 ans", "3 ans", "5 ans"],
-        correctIndex: 2,
-        explanation: "La carte professionnelle est délivrée par la CCI et doit être renouvelée tous les 3 ans, sous réserve de 42h de formation continue.",
+        question:
+          "Un acquéreur visite avec vous, puis achète directement au vendeur pour éviter les honoraires. Quel recours pour l'agence ?",
+        options: [
+          "Des dommages-intérêts, avec le bon de visite et le mandat",
+          "Obtenir l'annulation de la vente conclue sans son intervention",
+          "Aucun : sans compromis signé à l'agence, elle n'a aucun droit",
+          "Saisir la CCI, qui fixe elle-même la commission due à l'agence",
+        ],
+        correctIndex: 0,
+        explanation:
+          "La vente reste valable. L'agence peut réclamer une indemnité au vendeur sur le fondement de la clause du mandat, rédigée en caractères très apparents, qui lui interdit de traiter directement avec un acquéreur présenté par l'agence ; et à l'acquéreur s'il a agi de manière fautive. Le bon de visite prouve la présentation.",
       },
       {
         id: "te15",
-        question: "Le délai de rétractation de l'acheteur après signature du compromis est de :",
-        options: ["7 jours", "10 jours", "14 jours", "1 mois"],
-        correctIndex: 1,
-        explanation: "Le délai de rétractation est de 10 jours calendaires à compter de la notification du compromis (loi SRU).",
+        question: "Un époux veut confier seul la vente de la maison où vit la famille, qui lui appartient en propre. Que faire ?",
+        options: [
+          "Obtenir aussi l'accord de son conjoint : c'est le logement de la famille",
+          "Faire signer le seul propriétaire, puisque le bien lui appartient en propre",
+          "Demander l'accord écrit des enfants majeurs qui habitent encore le logement",
+          "Attendre la signature chez le notaire, seul à vérifier qui doit consentir",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Article 215 du Code civil : les époux ne peuvent l'un sans l'autre disposer des droits par lesquels est assuré le logement de la famille, même s'il appartient en propre à l'un d'eux. Sans l'accord du conjoint, la vente pourrait être annulée : on le fait intervenir dès le mandat.",
       },
       {
         id: "te16",
-        question: "La méthode d'estimation la plus utilisée par les agents immobiliers est :",
-        options: ["La méthode du coût de reconstruction", "La méthode comparative (prix au m²)", "La méthode du rendement", "La méthode comptable"],
-        correctIndex: 1,
-        explanation: "La méthode comparative consiste à comparer le bien avec des biens similaires vendus récemment dans le même secteur. C'est la plus utilisée en pratique.",
+        question: "Trois frères et sœurs ont hérité d'une maison. L'un d'eux veut signer seul le mandat de vente. Est-ce suffisant ?",
+        options: [
+          "Non : il faut l'accord de tous, ou des 2/3 avec l'aval du juge",
+          "Oui, dès lors qu'il détient au moins un tiers des droits sur la maison",
+          "Oui, s'il a été désigné par ses cohéritiers comme interlocuteur principal",
+          "Oui, à condition de prévenir les deux autres par lettre recommandée",
+        ],
+        correctIndex: 0,
+        explanation:
+          "La vente d'un bien indivis requiert l'unanimité (art. 815-3 C. civ.). Les indivisaires titulaires d'au moins deux tiers des droits peuvent toutefois demander au tribunal judiciaire l'autorisation de vendre (art. 815-5-1). Un mandat signé par un seul ne permet pas de vendre.",
       },
       {
         id: "te17",
-        question: "Le taux d'usure en crédit immobilier est fixé par :",
-        options: ["La Banque de France", "Le ministère de l'Économie", "L'ACPR", "La BCE"],
+        question: "En rendez-vous de prise de mandat, quelle information pèse le plus sur votre stratégie ?",
+        options: [
+          "Le motif et le délai de vente du propriétaire",
+          "Le nom du notaire habituel de toute la famille",
+          "La couleur qu'il envisage pour ses futurs volets",
+          "Le prix qu'il espère, sans autre question",
+        ],
         correctIndex: 0,
-        explanation: "Le taux d'usure est fixé trimestriellement par la Banque de France. Il représente le taux effectif global (TEG) maximum autorisé.",
+        explanation:
+          "Un vendeur pressé (mutation, succession, achat en cours) n'a pas la même stratégie de prix ni de communication qu'un vendeur qui « teste le marché ». Le motif et le délai conditionnent le prix de présentation, le type de mandat et le plan d'action.",
       },
       {
         id: "te18",
-        question: "Pour optimiser le référencement local d'une annonce immobilière, l'élément le plus important est :",
-        options: ["Le nombre d'images", "La présence du nom du quartier dans le titre et la description", "Le prix affiché", "La couleur de l'annonce"],
-        correctIndex: 1,
-        explanation: "Le SEO local immobilier repose fortement sur la présence des noms de quartiers, villes et landmarks dans le contenu textuel.",
+        question: "Quel argument justifie honnêtement un mandat exclusif auprès d'un vendeur ?",
+        options: [
+          "Un plan d'action précis (diffusion, visites, comptes rendus) en retour",
+          "L'exclusivité est obligatoire au-delà de 300 000 € de prix de vente",
+          "L'exclusivité permet à l'agence de fixer seule le prix de vente du bien",
+          "L'exclusivité dispense l'agence de rendre compte de ses actions au vendeur",
+        ],
+        correctIndex: 0,
+        explanation:
+          "L'exclusivité se justifie par un engagement de moyens supérieur : diffusion renforcée, visites qualifiées, reporting régulier. Elle n'est jamais obligatoire, le prix reste fixé avec le vendeur, et l'agent doit au contraire lui rendre compte de ses actions.",
       },
       {
         id: "te19",
-        question: "Sur Instagram, le format le plus performant pour les agents immobiliers est :",
-        options: ["Le texte statique", "Le carousel (plusieurs images)", "La story éphémère", "Le live"],
-        correctIndex: 1,
-        explanation: "Les carousels génèrent le plus d'engagement car ils incitent au swipe et augmentent le temps passé sur le contenu.",
+        question: "Un mandat exclusif d'un an a été signé il y a quatre mois. Le vendeur veut y mettre fin. Le peut-il ?",
+        options: [
+          "Oui, par lettre recommandée, avec un préavis de quinze jours",
+          "Non, il reste engagé jusqu'au terme d'un an prévu au mandat",
+          "Oui, mais en versant la moitié de la commission prévue",
+          "Seulement si l'agence n'a organisé aucune visite du bien",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Article 78 du décret n° 72-678 : passé un délai de trois mois à compter de sa signature, le mandat exclusif peut être dénoncé à tout moment par chacune des parties, par lettre recommandée avec accusé de réception, moyennant un préavis de quinze jours.",
       },
       {
         id: "te20",
-        question: "Lors d'une visite virtuelle 3D (Matterport), l'erreur la plus fréquente est :",
-        options: ["Utiliser trop de points de scan", "Scanner sans préparer le logement (objets personnels, lumière)", "Mettre la musique trop forte", "Filmer en 720p"],
-        correctIndex: 1,
-        explanation: "Un logement mal préparé (encombré, mal éclairé, objets personnels visibles) dégrade fortement la qualité perçue de la visite virtuelle.",
+        question: "Depuis la loi ALUR, que doit obligatoirement préciser un mandat exclusif ?",
+        options: [
+          "Les actions promises par l'agent et comment il en rendra compte",
+          "Le nom des acquéreurs déjà intéressés par le bien au jour du mandat",
+          "Un prix plancher en dessous duquel l'agent peut vendre sans accord",
+          "La garantie d'une vente dans les trois mois suivant la signature",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Loi Hoguet, art. 6, modifiée par la loi ALUR : lorsqu'il comporte une clause d'exclusivité, le mandat précise les actions que le mandataire s'engage à réaliser et les modalités selon lesquelles il rend compte au mandant des actions effectuées.",
       },
       {
         id: "te21",
-        question: "La technique de négociation 'boule de neige' consiste à :",
-        options: ["Baisser le prix progressivement", "Accumuler les concessions mineures pour obtenir un gain majeur", "Augmenter le prix à chaque visite", "Refuser toute concession"],
-        correctIndex: 1,
-        explanation: "La technique de la boule de neige consiste à demander plusieurs concessions mineures qui, cumulées, créent un avantage significatif en négociation.",
+        question: "Un acquéreur hésite entre deux biens. Quelle technique l'aide à décider sans pression ?",
+        options: [
+          "Lister avec lui avantages et freins de chaque bien (méthode Ben Franklin)",
+          "Lui annoncer qu'il perdra les deux biens s'il ne choisit pas dès ce soir",
+          "Lui conseiller d'office le plus cher, qui rapporte davantage d'honoraires",
+          "Le laisser décider seul, sans plus jamais le relancer sur le sujet",
+        ],
+        correctIndex: 0,
+        explanation:
+          "La balance avantages / freins structure la réflexion et rend la décision rationnelle, tout en faisant apparaître le vrai critère décisif. La fausse urgence et le conseil intéressé sont contraires à la déontologie ; l'abandon du suivi fait perdre la vente.",
       },
       {
         id: "te22",
-        question: "La plus-value immobilière est exonérée d'impôt après une détention de :",
-        options: ["15 ans", "22 ans", "30 ans", "5 ans"],
-        correctIndex: 1,
-        explanation: "La plus-value sur les biens immobiliers est exonérée après 22 ans pour l'impôt sur le revenu et 30 ans pour les prélèvements sociaux.",
+        question: "« Préférez-vous signer l'offre mardi ou jeudi ? » Quelle technique est utilisée ?",
+        options: [
+          "Le closing par alternative : on choisit le quand, pas le si",
+          "Une question ouverte de découverte, pour cerner les motivations",
+          "Une reformulation d'objection, pour vérifier la compréhension",
+          "Une question d'implication, au sens de la méthode SPIN",
+        ],
+        correctIndex: 0,
+        explanation:
+          "L'alternative propose deux options qui supposent toutes deux la décision prise. Elle n'est légitime qu'une fois les objections levées : utilisée trop tôt, elle est perçue comme une manipulation.",
       },
       {
         id: "te23",
-        question: "Les honoraires d'agence sont encadrés par :",
-        options: ["Aucune réglementation", "La loi Hoguet (affichage obligatoire et répartition)", "Un décret du ministère du Logement", "La Chambre de Commerce"],
-        correctIndex: 1,
-        explanation: "La loi Hoguet impose l'affichage des honoraires en vitrine et sur chaque annonce, ainsi que la mention de leur charge supportée (vendeur ou acquéreur selon le mandat)."
+        question:
+          "Un vendeur vous demande de ne pas faire visiter son bien à des acquéreurs d'origine étrangère. Que faites-vous ?",
+        options: [
+          "Vous refusez : c'est une discrimination pénalement sanctionnée",
+          "Vous acceptez : le vendeur reste libre de choisir son acquéreur",
+          "Vous acceptez, à condition que rien ne soit écrit sur le sujet",
+          "Vous acceptez si l'instruction figure noir sur blanc au mandat",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Refuser une visite ou une vente en raison de l'origine est une discrimination (art. 225-1 et 225-2 du Code pénal : jusqu'à 3 ans d'emprisonnement et 45 000 € d'amende). L'agent qui exécute l'instruction engage sa propre responsabilité pénale : il doit refuser et le rappeler au vendeur.",
       },
       {
         id: "te24",
-        question: "Un compromis de vente doit obligatoirement contenir :",
-        options: ["Uniquement le prix et l'adresse", "L'identification des parties, le prix, la description du bien, les conditions suspensives et la date de signature", "Uniquement la date de signature", "Le nom du notaire uniquement"],
-        correctIndex: 1,
-        explanation: "Le compromis doit contenir : identification des parties, description du bien, prix, conditions suspensives, date de signature, et délai de rétractation.",
+        question: "Vous devez faire visiter un logement en vente, occupé par un locataire. Quelle règle s'applique ?",
+        options: [
+          "Pas de visite les jours fériés, ni plus de deux heures par jour ouvrable",
+          "Vous pouvez entrer avec le double des clés si le locataire est absent",
+          "Le locataire doit accepter tous les créneaux que vous lui proposez",
+          "Aucune visite n'est possible avant la fin du bail du locataire en place",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Loi du 6 juillet 1989, art. 4 : est réputée non écrite la clause obligeant le locataire, en vue de la vente ou de la location, à laisser visiter les jours fériés ou plus de deux heures les jours ouvrables. Les visites s'organisent avec lui ; entrer sans son accord est une violation de domicile.",
       },
       {
         id: "te25",
-        question: "Le mandat de vente simple permet au propriétaire de :",
-        options: ["Vendre lui-même ou via plusieurs agences simultanément", "Vendre uniquement via une agence", "Ne pas vendre", "Vendre uniquement à un acheteur proposé par l'agence"],
+        question:
+          "Pendant la visite, l'acquéreur demande si le bien a déjà subi un dégât des eaux. Vous savez que oui. Que répondez-vous ?",
+        options: [
+          "La vérité : l'agent doit informer l'acquéreur",
+          "Rien : seul le vendeur est tenu d'informer l'acquéreur",
+          "Que vous l'ignorez, pour ne pas compromettre la vente",
+          "Qu'il le verra dans les diagnostics remis chez le notaire",
+        ],
         correctIndex: 0,
-        explanation: "Le mandat simple autorise le propriétaire à vendre par lui-même ou de confier la vente à plusieurs agences en parallèle.",
+        explanation:
+          "L'agent est tenu d'un devoir d'information et de conseil, y compris envers l'acquéreur, et ne peut dissimuler une information déterminante (art. 1112-1 C. civ.). Mentir l'expose, avec le vendeur, à une action pour dol et à des dommages-intérêts.",
       },
     ],
   },
@@ -922,133 +1120,134 @@ const RAW_MODULE_EXAMS: ModuleExam[] = [
     questions: [
       {
         id: "tr1",
-        question: "Les professionnels de l'immobilier sont-ils assujettis à la lutte contre le blanchiment (LCB-FT) ?",
+        question: "Une agence ne fait que de la location. Est-elle soumise aux obligations anti-blanchiment (LCB-FT) ?",
         options: [
-          "Non, seules les banques le sont",
-          "Oui : agents immobiliers et intermédiaires figurent parmi les professions assujetties du Code monétaire et financier",
-          "Uniquement pour les transactions de plus d'un million d'euros",
-          "Uniquement les notaires dans la chaîne immobilière",
+          "Oui, pour les locations à 10 000 € de loyer mensuel ou plus",
+          "Non : la LCB-FT ne vise que les ventes de biens immobiliers",
+          "Oui, pour toute location, quel que soit le montant du loyer",
+          "Non : seuls les notaires et les banques y sont assujettis",
         ],
-        correctIndex: 1,
+        correctIndex: 0,
         explanation:
-          "Les professionnels de l'immobilier (transaction, et selon les cas location) sont expressément assujettis aux obligations LCB-FT par le Code monétaire et financier (art. L.561-2). L'immobilier est un secteur prioritaire de vigilance : c'est un canal classique de blanchiment.",
+          "Article L.561-2, 8° du Code monétaire et financier : sont assujettis les intermédiaires en transaction immobilière et, en location, ceux qui interviennent pour des biens dont le loyer mensuel est égal ou supérieur à 10 000 €.",
       },
       {
         id: "tr2",
-        question: "Que recouvre l'obligation de « vigilance client » (KYC) avant d'entrer en relation d'affaires ?",
+        question: "À quel moment l'agent doit-il identifier son client et vérifier son identité ?",
         options: [
-          "Demander uniquement le nom du client",
-          "Identifier le client ET vérifier son identité sur document probant, identifier le bénéficiaire effectif, et comprendre l'objet de la relation",
-          "Vérifier seulement la solvabilité bancaire",
-          "Rien tant que le compromis n'est pas signé",
+          "Avant toute relation d'affaires, dès le mandat ou l'offre",
+          "Au compromis seulement, une fois l'accord sur le prix trouvé",
+          "Jamais : c'est le rôle exclusif du notaire, le jour de l'acte",
+          "Uniquement si le client prévoit de payer une partie en espèces",
         ],
-        correctIndex: 1,
+        correctIndex: 0,
         explanation:
-          "La vigilance impose d'identifier et vérifier l'identité du client (pièce officielle), d'identifier le bénéficiaire effectif des personnes morales, et de recueillir les informations sur l'objet et la nature de la relation — AVANT la transaction, avec conservation des justificatifs.",
+          "Article L.561-5 du CMF : l'identification du client et du bénéficiaire effectif, et la vérification sur document probant, interviennent avant d'entrer en relation d'affaires. L'agent identifie son mandant et la contrepartie (acquéreur ou vendeur), indépendamment des diligences du notaire.",
       },
       {
         id: "tr3",
-        question: "Qu'est-ce que le « bénéficiaire effectif » d'une société acheteuse ?",
+        question:
+          "Une SCI acheteuse a quatre associés, détenant 40 %, 30 %, 20 % et 10 % du capital. Qui sont ses bénéficiaires effectifs ?",
         options: [
-          "Le gérant inscrit au Kbis, toujours",
-          "La ou les personnes physiques qui contrôlent en dernier ressort la société (détention significative du capital ou contrôle de fait)",
-          "L'agent immobilier mandaté",
-          "Le notaire chargé de l'acte",
+          "Les associés à 40 % et à 30 %, qui détiennent plus de 25 %",
+          "Le gérant inscrit au registre, quelle que soit sa part au capital",
+          "Les quatre associés, puisque chacun détient une part du capital",
+          "Le seul associé à 40 %, en tant qu'actionnaire le plus important",
         ],
-        correctIndex: 1,
+        correctIndex: 0,
         explanation:
-          "Le bénéficiaire effectif est la personne physique qui, in fine, possède ou contrôle la société (seuil indicatif de détention de 25 % du capital ou contrôle par d'autres moyens). Les montages en cascade visant à le dissimuler sont un signal d'alerte classique.",
+          "Article R.561-1 du CMF : est bénéficiaire effectif toute personne physique détenant, directement ou indirectement, plus de 25 % du capital ou des droits de vote, ou exerçant un contrôle sur la société. Ce n'est qu'à défaut que le représentant légal est retenu.",
       },
       {
         id: "tr4",
-        question: "Parmi ces situations, laquelle constitue un signal d'alerte typique de blanchiment dans une transaction ?",
+        question: "Lequel de ces comportements est le signal d'alerte le plus sérieux ?",
         options: [
-          "Un acquéreur qui négocie le prix à la baisse",
-          "Un acquéreur pressé, indifférent au prix et aux caractéristiques du bien, avec un financement au montage opaque",
-          "Un acquéreur qui demande un second rendez-vous de visite",
-          "Un vendeur qui refuse une offre trop basse",
+          "Un acheteur pressé, indifférent au prix, financé par une société offshore",
+          "Un acheteur qui négocie fermement le prix et obtient finalement 5 % de rabais",
+          "Un vendeur qui refuse une offre que l'agent jugeait pourtant correcte",
+          "Un acheteur qui demande une deuxième visite avec son artisan",
         ],
-        correctIndex: 1,
+        correctIndex: 0,
         explanation:
-          "Le faisceau d'indices inclut : indifférence au prix ou aux caractéristiques, précipitation inhabituelle, fonds d'origine floue ou en provenance de tiers/étranger sans justification, montages sociétaires opaques, distance inexpliquée entre le client et le bien.",
+          "Le faisceau d'indices typique : désintérêt pour le prix ou les caractéristiques du bien, urgence inexpliquée, montage financier opaque (société étrangère, tiers payeur). Négocier, refuser une offre ou revisiter sont des comportements normaux.",
       },
       {
         id: "tr5",
-        question: "Un client souhaite régler une partie du prix « en espèces, de la main à la main ». Que devez-vous savoir ?",
+        question: "Un acquéreur propose de régler 40 000 € du prix « en liquide, hors acte ». Que faites-vous ?",
         options: [
-          "C'est légal si les deux parties sont d'accord",
-          "Les paiements en espèces sont strictement plafonnés ; une demande de ce type est un signal d'alerte majeur à documenter",
-          "C'est autorisé jusqu'à 50 000 €",
-          "Cela ne concerne que le notaire",
+          "Vous refusez et analysez une déclaration de soupçon",
+          "Vous acceptez si le vendeur est d'accord et la somme < 50 000 €",
+          "Vous acceptez, à condition que les espèces passent par le notaire",
+          "Rien : un paiement hors acte ne concerne pas l'agent immobilier",
         ],
-        correctIndex: 1,
+        correctIndex: 0,
         explanation:
-          "Le règlement d'une transaction immobilière passe par le notaire et les paiements en espèces sont très strictement plafonnés par la loi. Une telle proposition est un indice caractérisé : refus, documentation de la demande, et évaluation d'une déclaration de soupçon.",
+          "Un paiement occulte en espèces cumule dissimulation de prix (fraude fiscale) et risque de blanchiment : c'est un signal d'alerte majeur, à documenter et à déclarer s'il est confirmé. Le prix d'une vente immobilière se règle par virement via le notaire, qui ne peut accepter d'espèces au-delà de quelques milliers d'euros.",
       },
       {
         id: "tr6",
-        question: "Qu'est-ce que la « déclaration de soupçon » ?",
+        question: "Vous soupçonnez qu'une vente sert à blanchir des fonds. Quand devez-vous déclarer à TRACFIN ?",
         options: [
-          "Une plainte pénale déposée au commissariat contre le client",
-          "Un signalement confidentiel transmis à TRACFIN lorsque le professionnel soupçonne que des fonds proviennent d'une infraction",
-          "Un e-mail d'alerte envoyé à la FNAIM",
-          "Une mention obligatoire ajoutée au compromis de vente",
+          "Avant de réaliser l'opération, dès que le soupçon existe",
+          "Après l'acte authentique, une fois votre commission encaissée",
+          "Seulement si vous détenez la preuve formelle d'une infraction",
+          "En fin d'année, dans un rapport annuel regroupant vos soupçons",
         ],
-        correctIndex: 1,
+        correctIndex: 0,
         explanation:
-          "La déclaration de soupçon est le signalement, via la plateforme dédiée de TRACFIN (ERMES), des sommes ou opérations dont on soupçonne qu'elles proviennent d'une infraction ou participent au financement du terrorisme. Ce n'est ni une plainte ni une accusation — c'est une transmission d'informations protégée.",
+          "Articles L.561-15 et L.561-16 du CMF : la déclaration porte sur un soupçon, pas sur une preuve, et doit en principe précéder l'opération, pour permettre à TRACFIN d'exercer son droit d'opposition. Si le soupçon naît après, on déclare sans délai.",
       },
       {
         id: "tr7",
-        question: "Après avoir déclaré un soupçon à TRACFIN, pouvez-vous en informer votre client « par transparence » ?",
+        question: "Après votre déclaration, le client vous demande si « tout est en ordre ». Que répondez-vous ?",
         options: [
-          "Oui, la transparence prime dans la relation commerciale",
-          "Non : révéler l'existence d'une déclaration est interdit et pénalement sanctionné (interdiction de divulgation)",
-          "Oui, mais seulement après la signature de l'acte",
-          "Oui, si le client le demande par écrit",
+          "Rien sur la déclaration : la révéler, même à demi-mot, est un délit",
+          "La vérité, par transparence, puisqu'il pose lui-même la question",
+          "Que TRACFIN examine son dossier, sans lui donner plus de détails",
+          "Qu'il peut consulter la déclaration à la CCI qui a délivré la carte",
         ],
-        correctIndex: 1,
+        correctIndex: 0,
         explanation:
-          "L'interdiction de divulgation (« tipping off ») est absolue : informer le client ou un tiers de l'existence d'une déclaration de soupçon est une infraction pénale. La déclaration est confidentielle et le déclarant de bonne foi bénéficie d'une immunité civile et pénale.",
+          "Article L.561-18 du CMF : il est interdit de divulguer l'existence et le contenu d'une déclaration de soupçon, ou les suites qui lui sont données (amende de 22 500 €, art. L.574-1). Laisser entendre que TRACFIN examine le dossier est une divulgation.",
       },
       {
         id: "tr8",
-        question: "Le client visé par un soupçon insiste pour conclure. Faut-il refuser la transaction pour « se couvrir » ?",
+        question: "Dans une agence, qui transmet les déclarations de soupçon à TRACFIN ?",
         options: [
-          "Oui, tout soupçon impose de rompre immédiatement la relation",
-          "Pas nécessairement : on déclare à TRACFIN, on renforce la vigilance, et on n'alerte surtout pas le client — rompre brutalement peut constituer une divulgation indirecte",
-          "Oui, et il faut prévenir les autres agences du secteur",
-          "Non, la déclaration dispense de toute autre précaution",
+          "Le déclarant désigné par l'agence auprès de TRACFIN",
+          "Le négociateur qui a repéré l'anomalie, à titre personnel",
+          "La CCI qui a délivré la carte professionnelle de l'agence",
+          "Le notaire, auquel l'agent signale simplement le dossier",
         ],
-        correctIndex: 1,
+        correctIndex: 0,
         explanation:
-          "La déclaration n'interdit pas mécaniquement la poursuite de la relation : elle appelle une vigilance renforcée. Une rupture brutale et inexpliquée peut mettre la puce à l'oreille du client (divulgation indirecte). Chaque situation s'apprécie — au besoin avec conseil juridique — sans jamais révéler la déclaration.",
+          "Chaque professionnel assujetti désigne auprès de TRACFIN un déclarant (et un correspondant), généralement le dirigeant. Les collaborateurs lui remontent leurs doutes via la procédure interne ; c'est lui qui déclare, via la plateforme ERMES.",
       },
       {
         id: "tr9",
-        question: "Quelles obligations d'organisation interne la LCB-FT impose-t-elle à une agence ?",
+        question: "Combien de temps l'agence doit-elle conserver les documents d'identification d'un client ?",
         options: [
-          "Aucune : la vigilance est une affaire individuelle",
-          "Des procédures internes écrites, la formation régulière du personnel et la conservation des justificatifs de vigilance",
-          "Uniquement l'affichage d'une plaque en vitrine",
-          "L'embauche obligatoire d'un juriste à temps plein",
+          "Cinq ans après la fin de la relation d'affaires",
+          "Un an après la signature de l'acte authentique",
+          "Dix ans à compter du premier rendez-vous client",
+          "Jusqu'à l'encaissement de la commission d'agence",
         ],
-        correctIndex: 1,
+        correctIndex: 0,
         explanation:
-          "L'assujetti doit disposer de procédures internes adaptées (classification des risques, modalités de vigilance), former régulièrement son personnel et conserver les documents de vigilance pendant cinq ans après la fin de la relation. La DGCCRF contrôle et sanctionne les manquements.",
+          "Article L.561-12 du CMF : les documents relatifs à l'identité des clients et aux opérations sont conservés cinq ans à compter de la cessation de la relation d'affaires ou de l'exécution de l'opération.",
       },
       {
         id: "tr10",
-        question: "Que risque un professionnel de l'immobilier qui ignore ses obligations LCB-FT ?",
+        question: "Qui sanctionne une agence immobilière qui ne respecte pas ses obligations de vigilance ?",
         options: [
-          "Rien, tant qu'il n'a pas lui-même blanchi d'argent",
-          "Des sanctions administratives et disciplinaires (amendes, interdiction d'exercer) et, en cas de participation, des poursuites pénales pour blanchiment",
-          "Un simple rappel à l'ordre sans conséquence",
-          "Uniquement la perte de sa carte de visite",
+          "La Commission nationale des sanctions, jusqu'au retrait de la carte",
+          "TRACFIN, qui peut retirer lui-même la carte professionnelle de l'agent",
+          "La CCI, qui ne peut prononcer qu'un simple avertissement écrit",
+          "Personne, tant que l'agence n'a pas elle-même blanchi des fonds",
         ],
-        correctIndex: 1,
+        correctIndex: 0,
         explanation:
-          "Le manquement aux obligations LCB-FT expose à des sanctions administratives et disciplinaires lourdes (Commission nationale des sanctions : amendes, interdictions temporaires d'exercer, publication). Participer sciemment à une opération de blanchiment relève du pénal — jusqu'à 5 ans d'emprisonnement et 375 000 € d'amende, davantage en cas de circonstances aggravantes.",
+          "Les manquements des agents immobiliers, contrôlés par la DGCCRF, sont sanctionnés par la Commission nationale des sanctions (art. L.561-38 et s. CMF) : avertissement, blâme, interdiction temporaire d'exercer, retrait de la carte, amende jusqu'à 5 M€. La participation au blanchiment relève en plus du juge pénal.",
       },
     ],
   },
@@ -1785,16 +1984,20 @@ const RAW_MODULE_EXAMS: ModuleExam[] = [
 ];
 
 /** Mélange l'ordre des réponses (graine = id) : la bonne réponse n'est plus toujours en B. */
-function shuffleExamQuestion(q: ExamQuestion): ExamQuestion {
+function shuffleExamQuestion(q: ExamQuestion, target: number): ExamQuestion {
   if (!q.options || q.correctIndex == null) return q;
-  const { items, index } = reorder(q.id, q.options, q.correctIndex);
+  const { items, index } = placeAt(q.id, q.options, q.correctIndex, target);
   return { ...q, options: items, correctIndex: index };
 }
 
 /** Examens publiés : contenu rédigé ci-dessus, ordre des réponses mélangé. */
 export const MODULE_EXAMS: ModuleExam[] = RAW_MODULE_EXAMS.map((exam) => ({
   ...exam,
-  questions: exam.questions.map(shuffleExamQuestion),
+  // Bonne réponse répartie à parts égales sur A/B/C/D dans chaque examen.
+  questions: (() => {
+    const positions = balancedPositions(`exam:${exam.moduleSlug}`, exam.questions.length);
+    return exam.questions.map((q, i) => shuffleExamQuestion(q, positions[i]));
+  })(),
 }));
 
 export const FINAL_EXAM_ID = "certification-finale";

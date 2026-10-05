@@ -51,3 +51,26 @@ export function reorder<T>(
   const perm = seededPermutation(seed, items.length);
   return { items: perm.map((old) => items[old]), index: perm.indexOf(index) };
 }
+
+/**
+ * Positions cibles de la bonne réponse pour une série de `count` questions à
+ * `optionCount` choix : chaque lettre revient autant de fois (à une près),
+ * dans un ordre mélangé — ni « tout en B », ni motif A-B-C-D prévisible.
+ */
+export function balancedPositions(seed: string, count: number, optionCount = 4): number[] {
+  const slots = Array.from({ length: count }, (_, i) => i % optionCount);
+  return seededPermutation(seed, count).map((i) => slots[i]);
+}
+
+/** Mélange les mauvaises réponses et place la bonne (`index`) en position `target`. */
+export function placeAt<T>(
+  seed: string,
+  items: readonly T[],
+  index: number,
+  target: number
+): { items: T[]; index: number } {
+  const others = items.filter((_, i) => i !== index);
+  const shuffled = seededPermutation(seed, others.length).map((i) => others[i]);
+  const at = Math.min(Math.max(target, 0), others.length);
+  return { items: [...shuffled.slice(0, at), items[index], ...shuffled.slice(at)], index: at };
+}
