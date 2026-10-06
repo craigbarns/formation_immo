@@ -63,7 +63,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-alur-03",
         question: "Où les honoraires d'agence doivent-ils être affichés ?",
         answer:
-          "En vitrine de l'agence ET sur chaque annonce (web, papier, portail). Format : % TTC du prix, qui paye (vendeur ou acquéreur).",
+          "Barème TTC en vitrine et sur le site de l'agence ; sur chaque annonce, la partie qui paie. Si c'est l'acquéreur : prix honoraires inclus, prix hors honoraires et taux TTC calculé sur le prix hors honoraires (arrêté du 10 janvier 2017).",
         category: "Loi ALUR",
         difficulty: 1,
       },
@@ -95,7 +95,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-alur-07",
         question: "Sanction en cas d'exercice sans carte T ?",
         answer:
-          "Délit pénal : jusqu'à 6 mois de prison et 7 500€ d'amende (art. L541-1 Code de la consommation).",
+          "Délit : 6 mois d'emprisonnement et 7 500 € d'amende (loi Hoguet, art. 14).",
         category: "Loi ALUR",
         difficulty: 3,
       },
@@ -119,7 +119,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-alur-10",
         question: "Le registre des mandats est-il un simple cahier libre ?",
         answer:
-          "Non : il doit être relié, coté et paraphé par un notaire ou tenu sous forme électronique sécurisée, avec numérotation continue.",
+          "Non : registre à numérotation continue, coté sans discontinuité et relié, ou tenu sous forme électronique sécurisée. Chaque mandat y est inscrit et son numéro reporté sur l'exemplaire remis au client.",
         category: "Loi ALUR",
         difficulty: 3,
       },
@@ -174,7 +174,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-comp-06",
         question: "Que se passe-t-il si la condition suspensive de prêt n'est pas levée ?",
         answer:
-          "Le compromis est caduc. L'acheteur récupère son dépôt, à condition d'avoir fait les démarches de bonne foi (au moins 2 refus bancaires).",
+          "Le compromis est caduc et l'acquéreur récupère son dépôt, à condition d'avoir demandé un prêt conforme aux caractéristiques prévues au compromis (montant, durée, taux). S'il n'a rien demandé, la condition est réputée accomplie (art. 1304-3 C. civ.).",
         category: "Compromis",
         difficulty: 3,
       },
@@ -190,7 +190,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-comp-08",
         question: "Quels documents annexer au compromis ?",
         answer:
-          "Diagnostics (DDT), règlement de copropriété, PV des 3 dernières AG, carnet d'entretien, état daté, titre de propriété.",
+          "Le dossier de diagnostic technique et, pour un lot de copropriété, les documents de l'article L.721-2 du CCH : règlement de copropriété, fiche synthétique, PV des 3 dernières AG, informations financières (charges, impayés, fonds de travaux), carnet d'entretien, plan pluriannuel de travaux s'il existe.",
         category: "Compromis",
         difficulty: 2,
       },
@@ -228,7 +228,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-diag-02",
         question: "Sur quels biens l'ERP est-il obligatoire ?",
         answer:
-          "Tous les biens situés en zone à risque couverte par un PPR — environ 80 % du territoire. Gratuit via Géorisques.gouv.fr.",
+          "Pour presque tous les biens : zones couvertes par un plan de prévention des risques, zones de sismicité 2 à 5, potentiel radon de niveau 3, recul du trait de côte, secteurs d'information sur les sols… Il s'établit gratuitement sur Géorisques et doit dater de moins de 6 mois.",
         category: "Diagnostics",
         difficulty: 2,
       },
@@ -275,7 +275,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-diag-08",
         question: "Qu'est-ce que l'audit énergétique réglementaire ?",
         answer:
-          "Obligatoire à la vente pour les passoires (F/G) depuis 2023, étendu aux E en 2025 et aux D en 2034. Chiffre le coût des travaux.",
+          "Obligatoire à la vente d'une maison ou d'un immeuble en monopropriété classé F ou G depuis 2023, E depuis le 1er janvier 2025, D à partir de 2034. Il propose des scénarios de travaux chiffrés.",
         category: "Diagnostics",
         difficulty: 2,
       },
@@ -321,7 +321,8 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       {
         id: "ju-mand-03",
         question: "Taux de transformation moyen : mandat exclusif vs simple ?",
-        answer: "Exclusif : 80-90% de vente en 3 mois. Simple : 30-40%.",
+        answer:
+          "Il n'existe pas de statistique officielle fiable. L'exclusivité permet un prix unique, une diffusion maîtrisée et un suivi des visites, ce qui accélère souvent la vente ; mesurez-le sur vos propres mandats.",
         category: "Mandats",
         difficulty: 2,
       },
@@ -329,7 +330,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-mand-04",
         question: "Qu'est-ce qu'une clause pénale dans un mandat exclusif ?",
         answer:
-          "Indemnité (souvent ~8% honoraires) due si le vendeur traite en direct avec un acheteur présenté par l'agence, pendant ou 12 mois après.",
+          "Une indemnité, souvent égale au montant des honoraires, due si le vendeur vend sans l'agent pendant l'exclusivité, ou traite directement avec un acquéreur présenté par l'agence (pendant le mandat ou une période fixée après). Elle doit figurer en caractères très apparents (art. 78 du décret 72-678).",
         category: "Mandats",
         difficulty: 3,
       },
@@ -369,7 +370,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-mand-09",
         question: "Qui peut signer un mandat pour un bien indivis ?",
         answer:
-          "Tous les indivisaires ou un mandataire désigné à l'unanimité. En l'absence, la vente est impossible (sauf partage judiciaire).",
+          "Tous les indivisaires, ou un mandataire désigné par eux. À défaut, les titulaires d'au moins deux tiers des droits peuvent demander au tribunal l'autorisation de vendre (art. 815-5-1 C. civ.), ou un partage judiciaire est engagé.",
         category: "Mandats",
         difficulty: 2,
       },
@@ -424,7 +425,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-copr-05",
         question: "Depuis la loi ALUR, quelle est l'obligation du fonds travaux ?",
         answer:
-          "Minimum 5% du budget annuel pour toute copro >10 lots de +5 ans. Non récupérable lors de la vente (suit le lot).",
+          "Une cotisation annuelle au moins égale à 5 % du budget prévisionnel (et à 2,5 % des travaux du plan pluriannuel s'il existe). Elle est attachée au lot : le vendeur ne la récupère pas à la vente.",
         category: "Copropriété",
         difficulty: 3,
       },
@@ -448,7 +449,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-copr-08",
         question: "Piège : l'acquéreur hérite-t-il des dettes de charges du vendeur ?",
         answer:
-          "Non, sauf celles du trimestre en cours. Vérifier l'état daté : arriérés payés par vendeur, appels en cours au prorata.",
+          "Non : les sommes exigibles avant la vente restent dues par le vendeur, et le syndic peut se payer sur le prix grâce à son opposition. Un prorata des provisions du trimestre en cours peut être convenu entre les parties dans l'acte.",
         category: "Copropriété",
         difficulty: 3,
       },
@@ -456,7 +457,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-copr-09",
         question: "Qu'est-ce que le DTG ?",
         answer:
-          "Diagnostic Technique Global : obligatoire pour les copros >10 ans de +10 lots. État du bâti, plan pluriannuel de travaux.",
+          "Diagnostic Technique Global : état du bâti et des équipements communs, avec une évaluation des travaux. Il est obligatoire dans certains cas (mise en copropriété d'un immeuble de plus de 10 ans, procédure d'insalubrité) ; sinon l'AG décide de le faire. À ne pas confondre avec le plan pluriannuel de travaux, obligatoire pour les copropriétés de plus de 15 ans.",
         category: "Copropriété",
         difficulty: 2,
       },
@@ -487,7 +488,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-parc-02",
         question: "Le vendeur vous dit « Pas besoin de DPE, je vends à un pro ». Vrai ou faux ?",
         answer:
-          "Faux. Le DPE est obligatoire même pour une vente à un marchand de biens. Seule la vente de terrain nu en est dispensée.",
+          "Faux. Le DPE est obligatoire pour la vente d'un logement, y compris à un professionnel. Les exceptions sont rares : terrain nu, constructions provisoires, certains bâtiments non chauffés ou indépendants de petite surface.",
         category: "Cas pratique",
         difficulty: 2,
       },
@@ -558,7 +559,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-trac-02",
         question: "Les agents immobiliers sont-ils soumis à Tracfin ?",
         answer:
-          "Oui depuis 2009. Art. L561-2 CMF. Obligations d'identification du client, de vigilance et de déclaration de soupçon.",
+          "Oui. Les intermédiaires en transaction immobilière figurent parmi les professions assujetties (art. L.561-2, 8° CMF) : identification du client et du bénéficiaire effectif, vigilance, déclaration de soupçon.",
         category: "Tracfin",
         difficulty: 1,
       },
@@ -597,7 +598,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-trac-07",
         question: "Sanction en cas de défaut de vigilance Tracfin ?",
         answer:
-          "Amende administrative jusqu'à 1 M€ ou 2,5% du CA, retrait de la carte T, et sanction disciplinaire de la DGCCRF.",
+          "Sanctions de la Commission nationale des sanctions : avertissement, blâme, interdiction temporaire d'exercer, retrait de la carte, et sanction pécuniaire jusqu'à 5 M€.",
         category: "Tracfin",
         difficulty: 3,
       },
@@ -636,7 +637,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-disc-01",
         question: "Combien de critères de discrimination sont aujourd'hui sanctionnés par la loi ?",
         answer:
-          "25 critères (art. 225-1 du Code pénal), incluant origine, sexe, orientation sexuelle, handicap, religion, précarité sociale, perte d'autonomie.",
+          "Plus de vingt critères (art. 225-1 du Code pénal), dont l'origine, le sexe, la situation de famille, l'orientation sexuelle, le handicap, la religion, la particulière vulnérabilité résultant de la situation économique et la perte d'autonomie.",
         category: "Non-discrimination",
         difficulty: 2,
       },
@@ -652,7 +653,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-disc-03",
         question: "Qu'est-ce qu'un testing ?",
         answer:
-          "Contrôle par candidatures fictives. Preuve recevable en justice selon la Cour de cassation (2006). Largement utilisé par la DILCRAH et SOS Racisme.",
+          "Contrôle par candidatures fictives comparables, qui ne diffèrent que sur un critère. Admis comme preuve par la Cour de cassation (2002), puis consacré par la loi du 31 mars 2006 (art. 225-3-1 du Code pénal). Associations et pouvoirs publics en organisent régulièrement.",
         category: "Non-discrimination",
         difficulty: 3,
       },
@@ -668,7 +669,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-disc-05",
         question: "Peut-on demander une copie de carte Vitale ou un RIB ?",
         answer:
-          "Non. Interdiction expresse par le décret 2015-1437. Violation = amende administrative de 3 000€.",
+          "La carte Vitale et les relevés de compte bancaire, non : ils figurent dans la liste des pièces interdites (art. 22-2 de la loi de 1989, décret 2015-1437). Sanction : amende administrative jusqu'à 3 000 € (personne physique) ou 15 000 € (personne morale).",
         category: "Non-discrimination",
         difficulty: 3,
       },
@@ -676,7 +677,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-disc-06",
         question: "Piège : refuser un locataire sans garant est-il discriminatoire ?",
         answer:
-          "Oui si le candidat présente la caution Visale ou une garantie équivalente. Refus = discrimination indirecte (QPV, jeunes, précaires).",
+          "Exiger un garant n'est pas discriminatoire en soi. Mais un bailleur qui a souscrit une assurance loyers impayés ne peut pas cumuler avec un cautionnement (sauf locataire étudiant ou apprenti, art. 22-1 de la loi de 1989). Et la garantie Visale vaut un garant : la refuser par principe prive de bons dossiers.",
         category: "Non-discrimination",
         difficulty: 3,
       },
@@ -692,7 +693,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-disc-08",
         question: "Quelles autorités peuvent-elles saisir en cas de discrimination ?",
         answer:
-          "Le Défenseur des Droits, la DGCCRF, la DDPP, ou directement le Procureur de la République.",
+          "Le Défenseur des droits (saisine gratuite), le procureur de la République (plainte pénale), ou le juge civil pour obtenir réparation. Des associations peuvent accompagner la victime.",
         category: "Non-discrimination",
         difficulty: 2,
       },
@@ -700,7 +701,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-disc-09",
         question: "Le bailleur peut-il refuser un animal de compagnie ?",
         answer:
-          "Uniquement pour les chiens de catégorie 1. Sinon, interdiction absolue depuis la loi du 9 juillet 1970.",
+          "Dans un bail d'habitation, la clause interdisant tout animal familier est réputée non écrite (loi du 9 juillet 1970, art. 10), sauf pour les chiens d'attaque de 1re catégorie. Le locataire reste responsable des dégâts et des nuisances.",
         category: "Non-discrimination",
         difficulty: 2,
       },
@@ -771,7 +772,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-baux-08",
         question: "Qu'est-ce que l'encadrement des loyers ?",
         answer:
-          "Plafonnement préfectoral dans certaines zones (Paris, Lille, Lyon, Bordeaux…) basé sur un loyer de référence +/- 20%.",
+          "Dans certains territoires (Paris, Lille, Lyon, Bordeaux, Montpellier…), le loyer ne peut pas dépasser le loyer de référence majoré (+20 %), sauf complément de loyer justifié ; si le loyer est inférieur au loyer de référence minoré (-30 %), le bailleur peut demander une réévaluation au renouvellement du bail.",
         category: "Baux",
         difficulty: 2,
       },
@@ -779,7 +780,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ju-baux-09",
         question: "Révision annuelle du loyer : sur quel indice ?",
         answer:
-          "IRL (Indice de Référence des Loyers) publié par l'INSEE chaque trimestre. Clause d'indexation obligatoire dans le bail.",
+          "L'IRL (Indice de référence des loyers) publié chaque trimestre par l'INSEE. La clause de révision est facultative : sans elle, le loyer ne peut pas être révisé. Depuis août 2022, le loyer des logements F et G ne peut plus augmenter.",
         category: "Baux",
         difficulty: 2,
       },
@@ -814,7 +815,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-esti-02",
         question: "Combien de comparables minimum pour une estimation solide ?",
         answer:
-          "5 à 10 biens vendus de moins de 6 mois, dans un rayon de 500 m, avec caractéristiques similaires (surface ±20%, étage, DPE).",
+          "Plusieurs ventes récentes et vraiment comparables (même secteur, surface proche, étage, état, DPE), complétées par les biens en vente concurrents. La base DVF a quelques mois de décalage : vos propres ventes récentes la complètent utilement.",
         category: "Estimation",
         difficulty: 2,
       },
@@ -837,7 +838,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-esti-05",
         question: "Piège : un vendeur surestime de 15%. Que lui dire ?",
         answer:
-          "« À ce prix vous allez perdre 3-6 mois. Les biens mal priced tournent 3x plus longtemps et finissent -12% sous marché. »",
+          "« À ce prix, le bien risque de rester longtemps en vitrine : les acquéreurs comparent, et un bien qui stagne finit souvent par se vendre moins cher qu'au juste prix. » Appuyez-vous sur des ventes comparables, chiffres DVF à l'appui.",
         category: "Estimation",
         difficulty: 3,
       },
@@ -845,7 +846,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-esti-06",
         question: "Impact d'un DPE F/G sur la valeur d'un bien en 2026 ?",
         answer:
-          "Décote moyenne de 12 à 20% selon les baromètres sectoriels, plus 20-40k€ de travaux anticipés.",
+          "Les études notariales sur la « valeur verte » montrent une décote des logements F et G par rapport aux D, variable selon les régions (souvent de quelques pourcents à plus de 15 %). S'y ajoute le coût des travaux à prévoir, surtout pour louer.",
         category: "Estimation",
         difficulty: 2,
       },
@@ -861,7 +862,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-esti-08",
         question: "Valeur vénale vs valeur d'usage ?",
         answer:
-          "Vénale = prix de marché en libre négociation. Usage = utilité pour un occupant précis. Écart possible : 10-15% (professionnel, saisonnier).",
+          "Vénale = prix de marché en libre négociation, entre un vendeur et un acquéreur informés. Usage = utilité du bien pour un occupant précis. L'écart peut être important pour les biens atypiques ou professionnels.",
         category: "Estimation",
         difficulty: 3,
       },
@@ -869,7 +870,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-esti-09",
         question: "Délai moyen de vente en France en 2026 ?",
         answer:
-          "Environ 90 jours selon les baromètres sectoriels. Varie selon tension du marché : 45 j Paris, 110 j secteurs ruraux.",
+          "Il varie fortement selon le marché local, le prix et l'état du bien : de quelques semaines en zone tendue à plusieurs mois ailleurs. Suivez votre propre délai moyen, c'est un argument précieux face aux vendeurs.",
         category: "Estimation",
         difficulty: 1,
       },
@@ -892,7 +893,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-pros-01",
         question: "Quels sont les 5 canaux de prospection principaux ?",
         answer:
-          "Pige PAP, farming quartier, réseau personnel, partenaires (notaires/banques), digital (SEO, réseaux sociaux).",
+          "Pige PAP (par courrier ou en personne), farming quartier, réseau personnel, partenaires (notaires/banques), digital (SEO, réseaux sociaux, estimation en ligne).",
         category: "Prospection",
         difficulty: 1,
       },
@@ -906,9 +907,9 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       },
       {
         id: "tr-pros-03",
-        question: "Ratio appels pige → mandats signés moyenne marché ?",
+        question: "Peut-on appeler un vendeur PAP repéré sur Leboncoin ?",
         answer:
-          "100 appels → 20 RDV → 5 estimations → 1 mandat signé. Soit 1% de taux de transformation.",
+          "Non, sauf consentement préalable : depuis le 11 août 2026, démarcher un particulier par téléphone sans son accord est interdit (art. L.223-1 C. conso.). Courrier, visite ou estimation en ligne avec case de consentement.",
         category: "Prospection",
         difficulty: 2,
       },
@@ -922,9 +923,9 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       },
       {
         id: "tr-pros-05",
-        question: "Meilleurs horaires pour pige téléphonique ?",
+        question: "Quand peut-on appeler un particulier qui a consenti ?",
         answer:
-          "Mardi-jeudi, 11h-12h et 18h-19h30. Éviter lundi matin et vendredi après-midi.",
+          "En semaine hors jours fériés, de 10h à 13h et de 14h à 20h, 4 tentatives maximum par 30 jours. Consentement valable 1 an au plus, preuve gardée 3 ans.",
         category: "Prospection",
         difficulty: 1,
       },
@@ -932,7 +933,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-pros-06",
         question: "Combien de contacts moyens pour qu'un prospect signe un mandat ?",
         answer:
-          "7 touchpoints en moyenne (règle de 7 marketing). Mix canaux : appels, mails, visites, événements.",
+          "7 contacts environ, selon une règle empirique du marketing. Mix de canaux : courriers, boîtage, rencontres, événements, réseaux sociaux — et appels seulement avec l'accord de la personne.",
         category: "Prospection",
         difficulty: 3,
       },
@@ -971,7 +972,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-nemd-01",
         question: "Quelle est l'objection n°1 à l'exclusivité ?",
         answer:
-          "« Plusieurs agences = plus de chances. » Répondre avec la statistique : exclusif = 90% de vente, simple = 30-40%.",
+          "« Plusieurs agences = plus de chances. » Réponse : un prix unique, une diffusion coordonnée et un suivi des visites valent mieux qu'un bien affiché partout à des prix différents. Appuyez-vous sur vos propres résultats, pas sur des statistiques invérifiables.",
         category: "Négociation mandat",
         difficulty: 1,
       },
@@ -986,15 +987,16 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       {
         id: "tr-nemd-03",
         question: "Taux d'honoraires moyen en France (2026) ?",
-        answer: "4 à 6% TTC pour un bien <500k€, 3 à 4% TTC au-delà, dégressif.",
+        answer:
+          "Les honoraires sont libres. En pratique, ils sont souvent de l'ordre de 4 à 6 % TTC pour les biens les moins chers, avec un barème dégressif au-delà. Le barème affiché ne peut pas être dépassé.",
         category: "Négociation mandat",
         difficulty: 1,
       },
       {
         id: "tr-nemd-04",
-        question: "Argument fort : nombre de vendeurs qui regrettent le mandat simple ?",
+        question: "Argument fort face au mandat simple ?",
         answer:
-          "68% (étude OpinionWay 2024) — principal regret : multi-visites épuisantes et décote liée à sur-exposition.",
+          "Les visites désordonnées, les écarts de prix entre agences et l'image d'un bien « vu partout » qui affaiblit la négociation. Racontez des cas que vous avez vécus, sans chiffres invérifiables.",
         category: "Négociation mandat",
         difficulty: 2,
       },
@@ -1018,7 +1020,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-nemd-07",
         question: "Quel document remettre systématiquement en entretien d'estimation ?",
         answer:
-          "Dossier d'avis de valeur écrit + plan de commercialisation + exemples d'annonces pro. Augmente de 40% le taux de signature.",
+          "Un avis de valeur écrit et argumenté (ventes comparables), un plan de commercialisation et des exemples d'annonces professionnelles. Ils rendent votre engagement concret au moment de la décision.",
         category: "Négociation mandat",
         difficulty: 2,
       },
@@ -1057,7 +1059,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-neav-03",
         question: "Stratégie gagnant-gagnant vs gagnant-perdant ?",
         answer:
-          "G-G : intérêts conjoints, relation pérenne. G-P : exploitation unilatérale. 70% des transactions se font en mode G-G.",
+          "G-G : on cherche un accord qui sert les intérêts des deux parties, pour une relation durable. G-P : une partie gagne au détriment de l'autre. En immobilier, l'agent cherche un accord que vendeur et acquéreur pourront signer sereinement.",
         category: "Négociation avancée",
         difficulty: 2,
       },
@@ -1144,7 +1146,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-crm-03",
         question: "Règle des 72h après visite ?",
         answer:
-          "Contacter le visiteur sous 72h. Au-delà, l'intérêt chute de 60%. Idéal : relance J+1 par téléphone, puis J+3 par mail.",
+          "Recontacter le visiteur rapidement, idéalement le lendemain, avec une information utile. Plus on attend, plus l'émotion de la visite retombe et d'autres biens prennent sa place.",
         category: "CRM",
         difficulty: 1,
       },
@@ -1160,7 +1162,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-crm-05",
         question: "CRM immobiliers leaders en France (2026) ?",
         answer:
-          "Netty, Hektor, Apimo, Adapt Immo, Immofacile, Carte Blanche. Intégration portails + signature électronique.",
+          "De nombreux logiciels métier existent (Netty, Hektor, Apimo…). Critères de choix : diffusion vers les portails, signature électronique, gestion des consentements RGPD, registre des mandats.",
         category: "CRM",
         difficulty: 2,
       },
@@ -1168,7 +1170,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-crm-06",
         question: "Taux moyen de fiches clients non retouchées après 6 mois ?",
         answer:
-          "45-60% en moyenne. Risque : pipeline gonflé artificiellement. Politique de nettoyage trimestriel indispensable.",
+          "Une fiche non mise à jour fausse le pipeline. Instaurez un nettoyage régulier : mise à jour des statuts, suppression des prospects inactifs depuis plus de 3 ans (recommandation CNIL).",
         category: "CRM",
         difficulty: 3,
       },
@@ -1176,7 +1178,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-crm-07",
         question: "Piège : ne pas rappeler un prospect « pas prêt » ?",
         answer:
-          "80% des leads achètent dans les 24 mois mais pas avec vous si vous disparaissez. Nurturing mensuel = ROI x5.",
+          "Un prospect « pas prêt » aujourd'hui peut l'être dans quelques mois — mais avec un autre agent si vous disparaissez. Gardez un contact espacé et utile (dans le respect de ses consentements).",
         category: "CRM",
         difficulty: 3,
       },
@@ -1207,7 +1209,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-oa-01",
         question: "Une offre d'achat écrite engage-t-elle l'acheteur ?",
         answer:
-          "Oui, si elle est au prix affiché ou au-dessus : le vendeur peut exiger la signature du compromis (art. 1583 Code civil).",
+          "Oui : pendant son délai de validité, l'acquéreur ne peut pas la retirer (art. 1116 C. civ.). Si le vendeur l'accepte, l'accord sur la chose et le prix est formé (art. 1583) ; le compromis en précise ensuite les conditions. Le prix proposé n'oblige pas le vendeur à accepter.",
         category: "Offre & avant-contrats",
         difficulty: 2,
       },
@@ -1215,7 +1217,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-oa-02",
         question: "Durée de validité courante d'une offre d'achat ?",
         answer:
-          "7 à 15 jours. Au-delà, elle est caduque. Préciser la date butoir dans la lettre.",
+          "Le plus souvent 5 à 10 jours. Sans acceptation à l'échéance, elle devient caduque. Indiquez une date butoir précise.",
         category: "Offre & avant-contrats",
         difficulty: 1,
       },
@@ -1255,7 +1257,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-oa-07",
         question: "Le vendeur peut-il refuser une offre au prix affiché ?",
         answer:
-          "Juridiquement : risqué. L'agent peut exiger ses honoraires (il a rempli sa mission). Moralement : éviter via marge d'estimation.",
+          "Oui : une offre au prix demandé n'oblige pas le vendeur à vendre, sauf si le mandat donnait expressément à l'agent le pouvoir de l'engager. La commission n'est due que si la vente est conclue ; le mandat peut toutefois prévoir une indemnité en cas de refus abusif d'une offre conforme.",
         category: "Offre & avant-contrats",
         difficulty: 3,
       },
@@ -1286,7 +1288,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-aa-01",
         question: "Qui peut rédiger un acte authentique de vente immobilière ?",
         answer:
-          "Uniquement un notaire. Monopole défini par l'ordonnance de 1945. Acte opposable aux tiers dès publication.",
+          "Seul un notaire peut établir l'acte authentique de vente, indispensable à la publicité foncière qui rend la vente opposable aux tiers.",
         category: "Acte authentique",
         difficulty: 1,
       },
@@ -1302,7 +1304,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-aa-03",
         question: "Composition des frais de notaire dans l'ancien ?",
         answer:
-          "7-8% du prix : ~80% de taxes (droits d'enregistrement), ~10% émoluments du notaire, 10% débours. Uniquement 2-3% dans le neuf.",
+          "7 à 8 % du prix : environ 80 % de droits de mutation reversés aux collectivités (relevés dans la plupart des départements depuis 2025, sauf primo-accédants), environ 10 % d'émoluments du notaire, le reste en débours et frais. Seulement 2 à 3 % dans le neuf.",
         category: "Acte authentique",
         difficulty: 2,
       },
@@ -1334,7 +1336,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "tr-aa-07",
         question: "Qu'est-ce que la publication au SPF ?",
         answer:
-          "Enregistrement de l'acte au Service de la Publicité Foncière. Obligatoire dans les 2 mois. Rend la vente opposable aux tiers.",
+          "Le notaire fait publier l'acte au Service de la publicité foncière : c'est ce qui rend la vente opposable aux tiers.",
         category: "Acte authentique",
         difficulty: 3,
       },
@@ -1393,7 +1395,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-cr-03",
         question: "Quelle part de dossiers les banques peuvent-elles déroger aux règles HCSF ?",
         answer:
-          "20% maximum (dont 80% pour résidences principales), pour clients à profil exceptionnel.",
+          "20 % de leur production trimestrielle, dont au moins 70 % pour l'achat de la résidence principale, avec une priorité aux primo-accédants.",
         category: "Crédit",
         difficulty: 2,
       },
@@ -1409,7 +1411,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-cr-05",
         question: "Qu'est-ce que le PTZ (Prêt à Taux Zéro) ?",
         answer:
-          "Prêt sans intérêts pour primo-accédants sous conditions de ressources. Jusqu'à 40% du bien en zone tendue, différé de remboursement.",
+          "Prêt sans intérêts pour les primo-accédants sous conditions de ressources, pour une résidence principale. Le montant et le différé de remboursement dépendent des revenus, de la zone et du type d'opération.",
         category: "Crédit",
         difficulty: 1,
       },
@@ -1417,7 +1419,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-cr-06",
         question: "Taux d'intérêt moyen prêt 20 ans avril 2026 ?",
         answer:
-          "3,25 à 3,60% (Observatoire Crédit Logement). Remontée continue depuis 2022 après un plancher historique à 1%.",
+          "Consultez chaque mois l'Observatoire Crédit Logement/CSA ou les baromètres des courtiers : les taux évoluent vite, et un chiffre mémorisé devient faux en quelques mois.",
         category: "Crédit",
         difficulty: 1,
       },
@@ -1480,7 +1482,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-fi-03",
         question: "Abattement forfaitaire en micro-BIC (LMNP) ?",
         answer:
-          "50% en régime général. 71% pour meublés de tourisme classés ou chambres d'hôtes.",
+          "50 % (plafond 77 700 €) pour la location meublée classique, les meublés de tourisme classés et les chambres d'hôtes. 30 % (plafond 15 000 €) pour les meublés de tourisme non classés (loi Le Meur, 2024).",
         category: "Fiscalité",
         difficulty: 2,
       },
@@ -1488,7 +1490,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-fi-04",
         question: "Qu'est-ce que le déficit foncier ?",
         answer:
-          "Lorsque les charges excèdent les loyers : imputable sur le revenu global dans la limite de 10 700€/an (21 400€ pour rénovations énergétiques).",
+          "Lorsque les charges (hors intérêts d'emprunt) excèdent les loyers : imputable sur le revenu global dans la limite de 10 700 €/an. Le plafond relevé à 21 400 € pour les travaux de sortie de passoire concernait les dépenses payées jusqu'au 31 décembre 2025.",
         category: "Fiscalité",
         difficulty: 3,
       },
@@ -1528,7 +1530,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-fi-09",
         question: "Avantage fiscal majeur du LMNP ?",
         answer:
-          "Amortissement du bien et du mobilier (30 à 40 ans). Permet souvent de neutraliser les recettes locatives sur 10-15 ans.",
+          "L'amortissement du bâti (sur 25 à 40 ans) et du mobilier (5 à 10 ans), qui neutralise souvent les loyers imposables pendant de longues années. Depuis 2025, ces amortissements sont réintégrés dans le calcul de la plus-value à la revente.",
         category: "Fiscalité",
         difficulty: 3,
       },
@@ -1574,7 +1576,8 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       {
         id: "fi-re-04",
         question: "Rendement moyen locatif à Paris en 2026 ?",
-        answer: "2,5 à 3,5% brut. Les grandes villes moyennes montent à 5-7%.",
+        answer:
+          "En ordre de grandeur, autour de 3 % brut à Paris, davantage dans de nombreuses villes moyennes. Vérifiez toujours avec des loyers et des prix réels du secteur.",
         category: "Rentabilité",
         difficulty: 2,
       },
@@ -1614,7 +1617,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-re-09",
         question: "Location nue vs meublée : écart de rendement net ?",
         answer:
-          "Meublé : +1 à +2 points net grâce au régime LMNP et aux loyers plus élevés (+15-25%).",
+          "Le meublé se loue plus cher et bénéficie de l'amortissement en LMNP, mais avec plus de rotation, d'équipement et de gestion. Depuis 2025, les amortissements sont réintégrés dans la plus-value à la revente : comparez sur toute la durée de détention.",
         category: "Rentabilité",
         difficulty: 2,
       },
@@ -1629,7 +1632,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-di-01",
         question: "Qu'est-ce que le prêt Action Logement ?",
         answer:
-          "Prêt employeur (entreprises >10 salariés) jusqu'à 30 000€ à 1% sur 25 ans. Réservé aux salariés primo-accédants.",
+          "Prêt complémentaire d'Action Logement, à taux réduit, pour certains salariés d'entreprises du secteur privé qui achètent leur résidence principale. Montant plafonné et conditions à vérifier auprès d'Action Logement.",
         category: "Dispositifs",
         difficulty: 2,
       },
@@ -1637,7 +1640,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-di-02",
         question: "Qu'est-ce que le prêt conventionné ?",
         answer:
-          "Prêt délivré par des banques ayant signé une convention avec l'État. Sans conditions de ressources. Ouvre droit à l'APL accession.",
+          "Prêt délivré par une banque ayant signé une convention avec l'État, sans condition de ressources, pour financer la résidence principale. Ses taux sont plafonnés.",
         category: "Dispositifs",
         difficulty: 2,
       },
@@ -1645,7 +1648,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-di-03",
         question: "Qu'est-ce que le PAS (Prêt Accession Sociale) ?",
         answer:
-          "Prêt conventionné sous conditions de ressources. Frais de dossier plafonnés à 500€, taux encadrés par l'État.",
+          "Prêt conventionné réservé aux ménages sous conditions de ressources, pour la résidence principale. Taux et frais de dossier sont encadrés par l'État.",
         category: "Dispositifs",
         difficulty: 2,
       },
@@ -1669,7 +1672,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-di-06",
         question: "MaPrimeRénov' : critère principal en 2026 ?",
         answer:
-          "Aide à la rénovation énergétique selon revenus et gain de classe énergétique. Jusqu'à 70 000€ pour passoires en rénovation globale.",
+          "Selon les revenus et le gain de classes. Rénovation d'ampleur (logements E, F ou G) : 10 à 80 % d'un plafond de 30 000 € HT (2 classes gagnées) ou 40 000 € HT (3 classes et plus). Par geste : chauffage décarboné, revenus très modestes à intermédiaires.",
         category: "Dispositifs",
         difficulty: 2,
       },
@@ -1677,7 +1680,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-di-07",
         question: "Piège : cumuler PTZ et PAS est-il possible ?",
         answer:
-          "Oui, les dispositifs se cumulent sous conditions de ressources. Plus l'éco-PTZ et MaPrimeRénov' sur travaux neuf/ancien.",
+          "Oui, sous conditions de ressources. Dans l'ancien, l'éco-PTZ et MaPrimeRénov' (logement de plus de 15 ans) peuvent financer en plus les travaux de rénovation énergétique.",
         category: "Dispositifs",
         difficulty: 3,
       },
@@ -1748,7 +1751,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-as-06",
         question: "Piège : l'assurance emprunteur est-elle obligatoire ?",
         answer:
-          "Non légalement, mais toutes les banques l'imposent comme condition d'octroi. Quotité minimale : 100% sur une tête, 200% en couple.",
+          "Elle n'est pas imposée par la loi, mais les banques l'exigent presque toujours. La quotité totale doit couvrir au moins 100 % du prêt : en couple, 50/50 au minimum, 100/100 pour une protection maximale.",
         category: "Assurances",
         difficulty: 3,
       },
@@ -1779,7 +1782,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-de-01",
         question: "Dispositif Pinel : est-il encore en vigueur en 2026 ?",
         answer:
-          "Non. Le Pinel a pris fin au 31 décembre 2024. Remplacement partiel par le statut LLI (Logement Locatif Intermédiaire).",
+          "Non. Le Pinel a pris fin au 31 décembre 2024. Les alternatives pour un particulier : Denormandie (ancien avec travaux), Loc'Avantages, Malraux, location meublée en LMNP…",
         category: "Défiscalisation",
         difficulty: 1,
       },
@@ -1787,7 +1790,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-de-02",
         question: "Qu'est-ce que le dispositif Denormandie ?",
         answer:
-          "Variante du Pinel pour l'ancien avec travaux ≥25% du coût total, dans 222 villes moyennes (plan Action Cœur de Ville).",
+          "Réduction d'impôt pour l'achat d'un logement ancien avec travaux représentant au moins 25 % du coût total, dans les communes éligibles (programme Action Cœur de Ville, opérations de revitalisation du territoire). Prolongé jusqu'au 31 décembre 2027.",
         category: "Défiscalisation",
         difficulty: 2,
       },
@@ -1811,7 +1814,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-de-05",
         question: "LMNP : régime fiscal optimal pour investisseur ?",
         answer:
-          "Micro-BIC (<77 700€ recettes, abattement 50%) ou réel (amortissement = revenus neutralisés sur 10-15 ans).",
+          "Micro-BIC (recettes jusqu'à 77 700 €, abattement de 50 %) ou réel (amortissements qui neutralisent souvent les loyers imposables). Depuis 2025, les amortissements sont réintégrés dans la plus-value à la revente.",
         category: "Défiscalisation",
         difficulty: 2,
       },
@@ -1827,7 +1830,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-de-07",
         question: "Qu'est-ce que le déficit foncier maximum sur revenu global ?",
         answer:
-          "10 700€/an (21 400€ si travaux de rénovation énergétique permettant de sortir classe F/G), reportable 10 ans.",
+          "10 700 €/an, l'excédent étant reportable sur les revenus fonciers des 10 années suivantes. Le plafond de 21 400 € pour les travaux de sortie de passoire concernait les dépenses payées jusqu'au 31 décembre 2025.",
         category: "Défiscalisation",
         difficulty: 2,
       },
@@ -1835,7 +1838,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-de-08",
         question: "Piège : défiscaliser sans rendement ?",
         answer:
-          "Stratégie perdante. Un dispositif doit produire rendement ET avantage fiscal. Beaucoup de Pinel en zone B2 perdent 15-20% à la revente.",
+          "Stratégie perdante. Un dispositif doit produire du rendement ET un avantage fiscal. Un logement acheté trop cher pour défiscaliser peut se revendre en dessous de son prix d'achat.",
         category: "Défiscalisation",
         difficulty: 3,
       },
@@ -1843,7 +1846,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "fi-de-09",
         question: "Plafond global des niches fiscales en France ?",
         answer:
-          "10 000€/an (art. 200-0 A CGI). Outre-mer et Malraux peuvent porter à 18 000€.",
+          "10 000 €/an (art. 200-0 A CGI), porté à 18 000 € pour les investissements outre-mer et les SOFICA. Le Malraux et les monuments historiques sont hors plafond.",
         category: "Défiscalisation",
         difficulty: 2,
       },
@@ -1878,7 +1881,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-ph-03",
         question: "Combien de photos minimum dans une annonce performante ?",
         answer:
-          "Minimum 10, idéal 15-20. La première photo génère 90% des clics.",
+          "Une série complète de 10 à 15 photos de qualité. La photo principale décide de l'essentiel du clic dans la liste de résultats : choisissez la plus forte.",
         category: "Photos",
         difficulty: 1,
       },
@@ -1918,7 +1921,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-ph-08",
         question: "Home staging : impact moyen sur délai de vente ?",
         answer:
-          "Réduit le délai de 40-60%. Investissement moyen : 1-2% du prix, ROI x5 sur négociation.",
+          "Le home staging aide l'acquéreur à se projeter et réduit souvent le délai de vente. Ses effets varient selon le bien : mesurez-les sur vos propres mandats plutôt que de promettre un chiffre.",
         category: "Photos",
         difficulty: 2,
       },
@@ -1934,7 +1937,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-ph-10",
         question: "Coût moyen d'un shooting pro en France ?",
         answer:
-          "150 à 400€ pour 20-30 photos HD + plan 2D + retouche. ROI mesuré : +15% leads qualifiés vs photos amateur.",
+          "Quelques centaines d'euros pour une série de photos professionnelles retouchées, parfois avec plan. Un investissement vite rentabilisé si la photo principale améliore le taux de clic de l'annonce.",
         category: "Photos",
         difficulty: 1,
       },
@@ -1965,7 +1968,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-an-03",
         question: "Mentions obligatoires sur une annonce (loi ALUR + DPE) ?",
         answer:
-          "DPE lettre + consommation + émissions, honoraires %, qui paye, charges de copro si applicable, surface Carrez.",
+          "Classes énergie et climat du DPE et estimation des dépenses d'énergie ; partie qui paie les honoraires (et, si c'est l'acquéreur, prix honoraires inclus, prix hors honoraires et taux) ; pour un lot de copropriété : nombre de lots, quote-part annuelle moyenne de charges et procédures en cours.",
         category: "Annonces",
         difficulty: 2,
       },
@@ -1973,7 +1976,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-an-04",
         question: "Quels mots booster le taux de clic d'un titre ?",
         answer:
-          "« Lumineux », « rénové », « exceptionnel », « rare », « avec terrasse/jardin ». Éviter : « charme », « potentiel » (code pour travaux).",
+          "Des termes concrets et vérifiables : « lumineux », « rénové », « avec terrasse », « exposé sud », « dernier étage ». Évitez les superlatifs vagues (« exceptionnel », « rare ») et les codes (« charme », « potentiel » pour « travaux »).",
         category: "Annonces",
         difficulty: 2,
       },
@@ -1997,7 +2000,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-an-07",
         question: "Quelle erreur légale fréquente dans les annonces ?",
         answer:
-          "Oubli du DPE ou mention « DPE vierge » alors que le diagnostic est obligatoire : amende jusqu'à 15 000€ (DGCCRF).",
+          "Omettre le DPE ou écrire « DPE vierge » alors que le diagnostic est obligatoire. C'est une annonce non conforme, sanctionnable par une amende administrative de la DGCCRF.",
         category: "Annonces",
         difficulty: 3,
       },
@@ -2028,7 +2031,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-po-01",
         question: "Principaux portails immobiliers en France (2026) ?",
         answer:
-          "SeLoger, Leboncoin, Bien'ici, Logic-Immo (groupe SeLoger), Meilleurs Agents, Figaro Immo.",
+          "SeLoger, Leboncoin, Bien'ici, Figaro Immobilier, Logic-Immo, ainsi que les sites des réseaux et des agences. Choisissez selon le type de bien et la cible.",
         category: "Portails",
         difficulty: 1,
       },
@@ -2044,7 +2047,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-po-03",
         question: "Nombre moyen de leads générés par annonce SeLoger ?",
         answer:
-          "8 à 25 leads sur 30 jours. Multiplié par 2 avec boost (annonce en tête de liste).",
+          "Il varie fortement selon le prix, le secteur et la qualité de l'annonce. Suivez dans vos statistiques le nombre de contacts par annonce et par portail, avec et sans option payante.",
         category: "Portails",
         difficulty: 2,
       },
@@ -2052,7 +2055,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-po-04",
         question: "Qu'est-ce que le Bien'ici ?",
         answer:
-          "Portail lancé par le syndicat FNAIM en 2017, réservé aux professionnels. Cartographie 3D immersive, croissance forte.",
+          "Portail lancé en 2017 à l'initiative de professionnels de l'immobilier, qui n'accepte que les annonces de professionnels. Il se distingue par sa recherche cartographique.",
         category: "Portails",
         difficulty: 2,
       },
@@ -2068,7 +2071,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-po-06",
         question: "Coût moyen d'abonnement SeLoger par agence ?",
         answer:
-          "150 à 600€/mois selon la zone et le nombre d'annonces (crédits). Packs premium 1000-2500€/mois.",
+          "Il dépend de la zone, du volume d'annonces et des options. Demandez des devis et comparez le coût par contact obtenu, portail par portail.",
         category: "Portails",
         difficulty: 2,
       },
@@ -2107,7 +2110,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-re-02",
         question: "Ratio contenu recommandé sur Instagram immobilier ?",
         answer:
-          "70% valeur (conseils, coulisses, marché), 30% promo (annonces, offres). Éviter tout prix en première lecture.",
+          "Environ 80 % de contenu utile (conseils, coulisses, marché) et 20 % d'annonces. Quand vous publiez un bien, les mentions obligatoires d'une annonce s'appliquent, prix compris.",
         category: "Réseaux",
         difficulty: 2,
       },
@@ -2115,7 +2118,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-re-03",
         question: "Formats Instagram les plus performants en 2026 ?",
         answer:
-          "Reels (1m30 max), Carrousels avant/après, Stories interactives avec sondages, Collab posts avec influenceurs locaux.",
+          "Les vidéos courtes (Reels), les carrousels avant/après et les stories interactives. Le format vertical, sous-titré, retient le mieux l'attention.",
         category: "Réseaux",
         difficulty: 2,
       },
@@ -2131,7 +2134,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-re-05",
         question: "Quel hashtag type utiliser sur une annonce Lyon ?",
         answer:
-          "Mix national (#immobilier #appartementavendre) + local (#lyon #lyon6 #immobilierlyon). 8 à 15 hashtags optimaux sur Instagram.",
+          "Quelques hashtags ciblés, surtout locaux (#lyon6, #immobilierlyon), plutôt qu'une longue liste générique. Les hashtags trop généraux noient la publication.",
         category: "Réseaux",
         difficulty: 2,
       },
@@ -2139,7 +2142,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-re-06",
         question: "Piège : diffuser des prix dans chaque post ?",
         answer:
-          "Algorithme pénalise (comportement commercial). Privilégier questions, storytelling, coulisses. Prix uniquement en story/DM.",
+          "Les publications 100 % commerciales lassent l'audience. Mais quand vous présentez un bien à vendre, c'est une annonce : le prix et les mentions obligatoires (honoraires, DPE) doivent y figurer, pas seulement en message privé.",
         category: "Réseaux",
         difficulty: 3,
       },
@@ -2155,7 +2158,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-re-08",
         question: "Durée de vie moyenne d'un post Instagram vs LinkedIn ?",
         answer:
-          "Instagram : 48h (72h avec les Reels). LinkedIn : 5-7 jours. Planifier en conséquence.",
+          "Une publication Instagram vit surtout dans les premières heures ou jours ; un post LinkedIn circule souvent plus longtemps. Observez vos propres statistiques pour planifier.",
         category: "Réseaux",
         difficulty: 3,
       },
@@ -2186,7 +2189,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-se-03",
         question: "Quel est le minimum d'avis Google recommandé ?",
         answer:
-          "30-50 avis minimum avec note ≥4,5/5. Au-delà de 100, forte crédibilité dans résultats de recherche.",
+          "Il n'y a pas de seuil officiel : visez un flux régulier d'avis récents et authentiques, avec une réponse à chacun. La fraîcheur des avis compte autant que leur nombre.",
         category: "SEO",
         difficulty: 2,
       },
@@ -2210,7 +2213,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-se-06",
         question: "Qu'est-ce que les citations NAP ?",
         answer:
-          "Name, Address, Phone. Cohérence des infos sur annuaires (Pages Jaunes, Yelp, Qualibat, TrustPilot) = signal fort pour Google.",
+          "Name, Address, Phone. Des coordonnées identiques sur votre fiche Google, votre site et les annuaires (Pages Jaunes, annuaires professionnels…) renforcent votre crédibilité auprès de Google.",
         category: "SEO",
         difficulty: 3,
       },
@@ -2218,7 +2221,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-se-07",
         question: "Piège : acheter des avis Google ?",
         answer:
-          "Risque de suppression de la fiche (pénalité Google) et amende DGCCRF (pratique commerciale trompeuse, 300 000€).",
+          "Risque de suppression des avis ou de suspension de la fiche par Google. Et c'est une pratique commerciale trompeuse : délit puni de 2 ans d'emprisonnement et 300 000 € d'amende (art. L.132-2 C. conso.).",
         category: "SEO",
         difficulty: 3,
       },
@@ -2234,7 +2237,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-se-09",
         question: "Quelle balise essentielle optimiser sur une page annonce ?",
         answer:
-          "Balise title <60 caractères + meta description <155 caractères + H1 unique + schema.org « Residence » pour rich snippets.",
+          "Balise title de moins de 60 caractères, meta description de 155 caractères environ, un H1 unique, et des données structurées schema.org (par exemple RealEstateListing) pour enrichir l'affichage.",
         category: "SEO",
         difficulty: 3,
       },
@@ -2249,7 +2252,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-vi-01",
         question: "Qu'est-ce qu'une visite virtuelle 360° ?",
         answer:
-          "Captation immersive (Matterport, Ricoh Theta) permettant une visite à distance. Augmente les leads qualifiés de 30-50%.",
+          "Captation immersive (Matterport, caméras 360°) permettant une pré-visite à distance. Les visiteurs qui se déplacent ensuite sont mieux informés.",
         category: "Vidéo",
         difficulty: 1,
       },
@@ -2273,7 +2276,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-vi-04",
         question: "Structure type d'une vidéo immobilière qui convertit ?",
         answer:
-          "Hook 3s → extérieur → pièce principale → cuisine → chambres → extras → quartier → call-to-action avec prix caché.",
+          "Accroche de 3 secondes → extérieur → pièce principale → cuisine → chambres → atouts → quartier → appel à l'action. Le prix et les mentions obligatoires figurent dans la publication.",
         category: "Vidéo",
         difficulty: 2,
       },
@@ -2281,7 +2284,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-vi-05",
         question: "Impact d'une vidéo vs photos seules ?",
         answer:
-          "+400% d'engagement sur les réseaux. +300% taux de clic sur portails. Les biens avec vidéo se vendent 31% plus vite (étude NAR).",
+          "La vidéo montre les volumes et l'enchaînement des pièces, et retient l'attention sur les réseaux. Son effet varie selon le bien : mesurez-le sur vos annonces, sans vous fier aux statistiques qui circulent sans source.",
         category: "Vidéo",
         difficulty: 2,
       },
@@ -2305,7 +2308,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-vi-08",
         question: "Drone : quelle réglementation en France ?",
         answer:
-          "Déclaration de vol si >250g, brevet télépilote pour usage commercial, interdiction zones urbaines denses sans autorisation préfectorale.",
+          "Enregistrement des drones de plus de 250 g équipés d'une caméra, formation du télépilote, et en ville, des règles strictes (déclaration ou autorisation selon le scénario de vol). Le plus sûr : un prestataire déclaré.",
         category: "Vidéo",
         difficulty: 3,
       },
@@ -2313,7 +2316,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-vi-09",
         question: "Format optimal pour une vidéo Reels Instagram ?",
         answer:
-          "9/16 vertical, 1080x1920 px, 30 fps, sous-titres incrustés (60% vue sans son), musique tendance.",
+          "Vertical 9/16, 1080 × 1920 px, sous-titres incrustés (beaucoup de vidéos sont regardées sans le son), musique libre de droits.",
         category: "Vidéo",
         difficulty: 2,
       },
@@ -2328,7 +2331,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-pb-01",
         question: "Qu'est-ce que le personal branding ?",
         answer:
-          "Construction d'une marque personnelle cohérente et mémorable pour se différencier. 75% des mandats viennent d'une relation, pas de publicité.",
+          "La construction d'une marque personnelle cohérente et reconnaissable qui vous différencie. Dans un métier de confiance, la recommandation et la réputation pèsent lourd dans l'obtention des mandats.",
         category: "Personal Branding",
         difficulty: 1,
       },
@@ -2392,7 +2395,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "ma-pb-09",
         question: "Impact mesurable d'un personal brand fort ?",
         answer:
-          "+30 à +50% de mandats entrants après 18 mois, marges plus élevées (prix non négocié), clients fidélisés sur 10-15 ans.",
+          "Plus de contacts entrants, des honoraires mieux défendus et des clients plus fidèles. Mesurez-le dans votre CRM : part des mandats issus de vos contenus et recommandations.",
         category: "Personal Branding",
         difficulty: 2,
       },
@@ -2435,7 +2438,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-vi-04",
         question: "Combien de visites rentables pour une vente ?",
         answer:
-          "Moyenne FNAIM : 8 à 12 visites qualifiées par vente signée. Moins = prix trop haut, plus = sélection à améliorer.",
+          "Il n'y a pas de norme : de nombreuses visites sans offre signalent souvent un prix trop élevé ou une présentation à revoir ; peu de visites, un problème de diffusion ou d'attractivité.",
         category: "Visite",
         difficulty: 2,
       },
@@ -2514,7 +2517,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-ar-03",
         question: "Qu'est-ce que la vente émotionnelle ?",
         answer:
-          "90% des décisions d'achat immo reposent sur l'émotion, 10% sur la raison. Décrire ambiances, vie quotidienne, pas seulement mètres carrés.",
+          "La décision d'achat est largement émotionnelle, puis justifiée par des critères rationnels. Décrivez les ambiances et la vie quotidienne, pas seulement les mètres carrés.",
         category: "Argumentaire",
         difficulty: 2,
       },
@@ -2522,7 +2525,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-ar-04",
         question: "Storytelling : comment l'utiliser dans une visite ?",
         answer:
-          "Raconter l'histoire du bien (qui y a vécu, pourquoi vendre, anecdotes). Active l'empathie, différencie le bien des concurrents.",
+          "Raconter l'histoire du bien (époque, rénovations, vie du quartier) active l'émotion et le différencie. Mais sans dévoiler la situation personnelle du vendeur : elle relève de la confidentialité.",
         category: "Argumentaire",
         difficulty: 2,
       },
@@ -2593,7 +2596,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-cl-03",
         question: "Comment gérer « Je dois réfléchir » ?",
         answer:
-          "1) Normaliser, 2) Identifier frein réel (« qu'est-ce qui vous fait hésiter ? »), 3) Traiter objection spécifique, 4) Créer urgence.",
+          "1) Normaliser, 2) identifier le frein réel (« qu'est-ce qui vous fait hésiter ? »), 3) traiter l'objection précise, 4) convenir d'un prochain contact daté. L'urgence ne s'invoque que si elle est réelle.",
         category: "Closing",
         difficulty: 2,
       },
@@ -2633,7 +2636,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-cl-08",
         question: "Que faire après un refus explicite ?",
         answer:
-          "Remercier, laisser 72h, envoyer un mail de synthèse + alternatives. 30% des refus se transforment en offre sous 30 jours.",
+          "Remercier, laisser passer quelques jours, envoyer une synthèse et des alternatives. Un refus aujourd'hui n'est pas un refus définitif : la relation compte pour la suite.",
         category: "Closing",
         difficulty: 2,
       },
@@ -2672,7 +2675,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-pr-03",
         question: "Durée classique d'une promesse unilatérale ?",
         answer:
-          "2 à 4 mois, calés sur les conditions suspensives (prêt, urbanisme). Fait l'objet d'un acte notarié dans +90% des cas.",
+          "Le plus souvent 2 à 4 mois, calés sur les conditions suspensives (prêt, urbanisme). Elle est fréquemment établie par acte notarié.",
         category: "Promesse",
         difficulty: 2,
       },
@@ -2680,7 +2683,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-pr-04",
         question: "Piège : la promesse unilatérale doit-elle être enregistrée ?",
         answer:
-          "Oui, obligatoirement dans les 10 jours auprès du SIE, sous peine de nullité. Acte sous seing privé comme acte notarié.",
+          "Oui si elle est signée sous seing privé : enregistrement dans les 10 jours suivant son acceptation par le bénéficiaire, à peine de nullité (art. 1589-2 C. civ.). Établie par un notaire, elle est enregistrée par lui.",
         category: "Promesse",
         difficulty: 3,
       },
@@ -2688,7 +2691,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-pr-05",
         question: "Quand préférer la promesse au compromis ?",
         answer:
-          "Acheteur hésitant qui veut « bloquer » le bien. Vendeur sous pression qui veut certitude. Rare : 10-15% des ventes en France.",
+          "Quand l'acquéreur veut « réserver » le bien le temps de vérifier un point (financement, projet) contre une indemnité d'immobilisation, ou quand le notaire du vendeur la préconise. Le compromis reste le plus courant.",
         category: "Promesse",
         difficulty: 3,
       },
@@ -2726,14 +2729,16 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       {
         id: "te-fi-01",
         question: "Temps moyen entre deux achats immobiliers d'un même client ?",
-        answer: "7 à 10 ans (cycle familial).",
+        answer:
+          "Souvent plusieurs années (au gré des évolutions familiales et professionnelles). C'est un horizon de suivi réaliste pour une relation client.",
         category: "Fidélisation",
         difficulty: 1,
       },
       {
         id: "te-fi-02",
         question: "Combien de recommandations moyennes génère un client fidélisé sur 5 ans ?",
-        answer: "2,3 contacts directs dont ~1,5 qui concrétise.",
+        answer:
+          "Il n'existe pas de chiffre fiable : mesurez-le vous-même dans votre CRM (part des mandats issus d'une recommandation).",
         category: "Fidélisation",
         difficulty: 2,
       },
@@ -2749,7 +2754,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-fi-04",
         question: "Coût d'acquisition nouveau client vs fidélisation ?",
         answer:
-          "5 à 7 fois plus cher d'acquérir un nouveau client que de fidéliser. ROI x10 sur un programme de fidélisation structuré.",
+          "Conquérir un client coûte en général bien plus cher que d'en garder un (adage marketing souvent cité). Un programme de suivi structuré est donc l'un des investissements les plus rentables.",
         category: "Fidélisation",
         difficulty: 2,
       },
@@ -2765,7 +2770,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-fi-06",
         question: "Piège : disparaître après la signature ?",
         answer:
-          "70% des clients ne sont jamais recontactés. Énorme manque à gagner : referrals, revente future, réseau du client.",
+          "Beaucoup d'agents ne recontactent jamais leurs clients après la vente. C'est un manque à gagner : recommandations, revente future, réseau du client.",
         category: "Fidélisation",
         difficulty: 3,
       },
@@ -2789,7 +2794,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-fi-09",
         question: "Avis Google : quand le demander ?",
         answer:
-          "Dans les 7 jours post-remise des clés, via un lien direct en SMS. Taux de retour 25-40% si timing respecté.",
+          "Dans la semaine qui suit la remise des clés, avec un lien direct, sans contrepartie ni exigence de note. Le taux de réponse est bien meilleur quand la demande arrive au pic de satisfaction.",
         category: "Fidélisation",
         difficulty: 2,
       },
@@ -2804,7 +2809,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-rn-01",
         question: "Que signifie R1/R2 en prospection ?",
         answer:
-          "R1 = premier contact (prise de RDV). R2 = second rendez-vous sur place (estimation). Passage R1→R2 = KPI central.",
+          "Dans le parcours de prise de mandat : R0 = premier échange (souvent téléphonique) de qualification ; R1 = visite du bien et découverte du vendeur ; R2 = présentation de l'estimation et du plan d'action, avec signature du mandat.",
         category: "R0/R1/R2",
         difficulty: 1,
       },
@@ -2812,7 +2817,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-rn-02",
         question: "Qu'est-ce que le R0 ?",
         answer:
-          "Avant-premier contact : détection d'un signal (annonce PAP, vitrine, réseau). Approche indirecte pour ouvrir un R1 téléphonique.",
+          "Le premier échange, souvent téléphonique, avec un vendeur qui vous a contacté ou a accepté d'être rappelé. Objectif : qualifier (motivation, délai, agences consultées, idée du prix) et décider d'un R1.",
         category: "R0/R1/R2",
         difficulty: 2,
       },
@@ -2820,7 +2825,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-rn-03",
         question: "Ratio R1→R2 attendu pour un bon négociateur ?",
         answer:
-          "20-30% des appels R1 débouchent sur un R2 physique. En dessous de 15% = approche à retravailler.",
+          "Il dépend de la qualité des contacts. Suivez votre propre ratio R0 → R1 dans le CRM : s'il baisse, revoyez votre accroche ou la source de vos contacts.",
         category: "R0/R1/R2",
         difficulty: 2,
       },
@@ -2828,7 +2833,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-rn-04",
         question: "Ratio R2→mandat signé typique ?",
         answer:
-          "40-60% avec une bonne préparation (comparables, plan de commercialisation, arguments exclusivité).",
+          "Il dépend de la préparation : comparables solides, plan de commercialisation, écoute du projet du vendeur. Mesurez votre propre ratio R2 → mandat et améliorez-le étape par étape.",
         category: "R0/R1/R2",
         difficulty: 2,
       },
@@ -2836,7 +2841,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-rn-05",
         question: "Durée idéale d'un appel R1 ?",
         answer:
-          "5 à 8 minutes. Objectif unique : obtenir le RDV R2. Pas d'estimation téléphonique, pas de négociation d'honoraires.",
+          "5 à 8 minutes pour le R0. Objectif unique : qualifier et obtenir le rendez-vous sur place. Pas d'estimation au téléphone, pas de négociation d'honoraires.",
         category: "R0/R1/R2",
         difficulty: 1,
       },
@@ -2866,9 +2871,9 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       },
       {
         id: "te-rn-09",
-        question: "Combien d'appels par jour pour un prospecteur efficace ?",
+        question: "Combien d'appels de prospection par jour ?",
         answer:
-          "80-120 appels sortants/jour pour un profil full-time. Transformation R1 cible : 4-6 RDV R2/semaine.",
+          "Depuis le 11 août 2026, uniquement vers des contacts qui ont donné leur accord (ou des clients sous mandat). La prospection repose d'abord sur le terrain, les courriers, le digital et les recommandations.",
         category: "R0/R1/R2",
         difficulty: 2,
       },
@@ -2915,7 +2920,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
         id: "te-dc-05",
         question: "Piège : croire le client sur parole à 100% ?",
         answer:
-          "Les clients sous-estiment leur budget de 15-20%. Demander systématiquement l'accord bancaire ou la simulation.",
+          "Beaucoup d'acquéreurs n'ont pas de budget validé : demandez systématiquement une simulation ou un accord de principe bancaire avant de multiplier les visites.",
         category: "Découverte",
         difficulty: 3,
       },
@@ -2973,7 +2978,8 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       {
         id: "de-nd-01",
         question: "Combien de critères de discrimination sont définis par l'art. 225-1 du Code pénal ?",
-        answer: "25 critères, dont l'origine, le sexe, la situation de famille, l'état de santé, le handicap, l'orientation sexuelle et les revenus.",
+        answer:
+          "Plus de vingt critères, dont l'origine, le sexe, la situation de famille, l'état de santé, le handicap, l'orientation sexuelle et la particulière vulnérabilité résultant de la situation économique.",
         category: "Cadre légal",
         difficulty: 1,
       },
@@ -3000,8 +3006,9 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       },
       {
         id: "de-nd-05",
-        question: "La loi Égalité et Citoyenneté 2017 interdit quoi en matière de baux ?",
-        answer: "Elle interdit au bailleur de refuser un locataire bénéficiaire des APL. C'est un critère discriminatoire depuis 2017.",
+        question: "Refuser un candidat parce qu'il perçoit l'APL est-il discriminatoire ?",
+        answer:
+          "Oui. La loi du 24 juin 2016 a ajouté à l'article 225-1 du Code pénal le critère de « particulière vulnérabilité résultant de la situation économique ». L'APL fait partie des ressources du candidat.",
         category: "Cadre légal",
         difficulty: 1,
       },
@@ -3029,7 +3036,8 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       {
         id: "de-ndp-03",
         question: "Que faire si un propriétaire vous demande de refuser les bénéficiaires d'APL ?",
-        answer: "Refus catégorique. Informer le propriétaire que c'est illégal depuis la loi 2017. Refuser le mandat si le propriétaire maintient sa demande.",
+        answer:
+          "Refus catégorique : c'est une discrimination liée à la situation économique (loi du 24 juin 2016). Informer le propriétaire, et refuser le mandat s'il maintient sa demande.",
         category: "Pratique",
         difficulty: 2,
       },
@@ -3057,28 +3065,32 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       {
         id: "de-cd-02",
         question: "Quel est le rôle du CNTGI ?",
-        answer: "Conseil National de la Transaction et de la Gestion Immobilières : instance disciplinaire qui peut prononcer avertissement, blâme, interdiction temporaire ou définitive d'exercer.",
+        answer:
+          "Conseil national de la transaction et de la gestion immobilières : instance consultative créée par la loi ALUR, qui veille à la moralité et à la compétence de la profession et participe à l'élaboration de ses règles (code de déontologie, formation continue).",
         category: "Déontologie",
         difficulty: 2,
       },
       {
         id: "de-cd-03",
-        question: "Citez 3 des 10 principes du code de déontologie immobilier.",
-        answer: "Compétence, loyauté, désintéressement, confraternité, discrétion, indépendance, transparence, prévention des conflits d'intérêts, formation continue, refus de toute discrimination.",
+        question: "Citez les grandes règles du code de déontologie immobilier.",
+        answer:
+          "Éthique professionnelle, respect des lois (dont non-discrimination et LCB-FT), compétence, organisation de l'entreprise, transparence, confidentialité, défense des intérêts en présence, prévention des conflits d'intérêts, confraternité, règlement amiable des litiges.",
         category: "Déontologie",
         difficulty: 2,
       },
       {
         id: "de-cd-04",
         question: "Quelle obligation de formation le code de déontologie impose-t-il ?",
-        answer: "42 heures de formation continue sur 3 ans (ou 14h/an) pour maintenir la carte professionnelle — c'est l'objet de cette formation ALUR.",
+        answer:
+          "Le code impose de respecter les obligations de formation (art. 4), fixées par la loi Hoguet et le décret 2016-173 : 42 heures sur 3 ans (ou 14 h par an), dont 2 h de déontologie et 2 h de non-discrimination, pour renouveler la carte.",
         category: "Déontologie",
         difficulty: 1,
       },
       {
         id: "de-cd-05",
-        question: "Que signifie le devoir de désintéressement pour un agent immobilier ?",
-        answer: "Ne pas favoriser ses intérêts personnels au détriment du client. Interdiction de recevoir des commissions cachées ou des avantages de prestataires tiers sans en informer le mandant.",
+        question: "Que recouvre la prévention des conflits d'intérêts (art. 9) ?",
+        answer:
+          "Ne pas favoriser ses intérêts au détriment du client : informer le mandant avant d'acheter, ou de faire acheter par un proche, un bien sous mandat ; déclarer ses liens avec les prestataires recommandés et toute rémunération qu'on en tire.",
         category: "Déontologie",
         difficulty: 2,
       },
@@ -3099,7 +3111,7 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       {
         id: "de-ep-02",
         question: "Quelles sont les durées de conservation RGPD en immobilier ?",
-        answer: "Dossiers locataires refusés : 1 an. Mandats et actes : 5 ans (prescription civile). Données comptables : 10 ans.",
+        answer: "Candidats locataires non retenus : 3 mois (référentiel CNIL). Prospects : 3 ans après le dernier contact. Pièces LCB-FT : 5 ans après la fin de la relation. Données comptables : 10 ans.",
         category: "RGPD",
         difficulty: 2,
       },
@@ -3120,7 +3132,8 @@ export const LESSON_FLASHCARDS: LessonFlashcardDeck[] = [
       {
         id: "de-ep-05",
         question: "Un acheteur vous propose 2 000 € pour faire accepter son offre sous le prix. Que faire ?",
-        answer: "Refus catégorique. C'est un abus de confiance (art. 314-1 Code pénal) et une violation du devoir de loyauté envers le mandant vendeur.",
+        answer:
+          "Refus catégorique. C'est une corruption passive privée (art. 445-2 du Code pénal) et une violation du devoir de loyauté envers le mandant vendeur.",
         category: "Éthique",
         difficulty: 1,
       },

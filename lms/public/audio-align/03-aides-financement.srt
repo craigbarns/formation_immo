@@ -1,0 +1,607 @@
+1
+00:00:00,271 --> 00:00:08,073
+MaPrimeRénov', certificat d'économie
+d'énergie, éco-prêt à taux zéro, TVA
+réduite, aide locale.
+
+2
+00:00:08,112 --> 00:00:14,273
+La France est l'un des pays qui aident le
+plus la rénovation énergétique et l'un de
+ceux où le parcours est le plus déroutant.
+
+3
+00:00:14,314 --> 00:00:20,615
+Résultat, des clients qui renoncent, des
+passoires qui restent des passoires et des
+ventes qui capotent.
+
+4
+00:00:20,635 --> 00:00:29,538
+Dans cette leçon, vous allez comprendre la
+logique de chaque aide, leurs règles de
+cumul, les intervenants obligatoires et
+les arnaques dont vous devez protéger vos
+clients.
+
+5
+00:00:30,478 --> 00:00:34,180
+Reprenons Karine et Mathieu, notre couple
+de la leçon précédente.
+
+6
+00:00:34,201 --> 00:00:36,703
+Leur plan de rénovation d'ampleur est
+chiffré.
+
+7
+00:00:36,722 --> 00:00:40,985
+Environ 50 000 euros pour passer leur
+maison de E à C.
+
+8
+00:00:41,006 --> 00:00:42,366
+50 000 euros.
+
+9
+00:00:42,387 --> 00:00:44,988
+À ce stade, la moitié des ménages
+abandonnent.
+
+10
+00:00:45,009 --> 00:00:53,316
+Ce qu'ils ignorent, avec leurs revenus
+intermédiaires, une part majeure de ce
+montant peut être couverte par les aides
+publiques, et le reste financé sans
+intérêt.
+
+11
+00:00:54,276 --> 00:00:59,161
+La différence entre un projet abandonné et
+un projet signé, c'est rarement la
+technique.
+
+12
+00:00:59,182 --> 00:01:04,626
+C'est le plan de financement, et le
+professionnel qui sait l'esquisser devient
+indispensable.
+
+13
+00:01:04,647 --> 00:01:09,953
+L'aide centrale, c'est MaPrimeRénov',
+distribuée par l'Agence Nationale de
+l'Habitat, l'ANAH,
+
+14
+00:01:10,933 --> 00:01:12,435
+Deux grands principes à graver.
+
+15
+00:01:12,454 --> 00:01:16,477
+Premier principe, l'aide dépend des
+revenus du ménage.
+
+16
+00:01:16,516 --> 00:01:20,099
+Quatre profils, du plus modeste au plus
+aisé.
+
+17
+00:01:20,118 --> 00:01:24,882
+Historiquement, code couleur bleu, jaune,
+violet, rose.
+
+18
+00:01:24,921 --> 00:01:28,323
+Plus les revenus sont modestes, plus le
+taux d'aide est élevé.
+
+19
+00:01:28,343 --> 00:01:31,546
+Deuxième principe, il existe deux parcours
+distincts.
+
+20
+00:01:32,206 --> 00:01:33,808
+Le parcours par geste.
+
+21
+00:01:33,847 --> 00:01:36,250
+On subventionne un équipement à la fois.
+
+22
+00:01:36,310 --> 00:01:48,740
+En 2026, il est recentré sur le chauffage
+décarboné, pompe à chaleur, chauffe-eau
+thermodynamique, poêle à granuler, et
+réservé au ménage au revenu très modeste,
+modeste et intermédiaire.
+
+23
+00:01:48,781 --> 00:01:51,403
+Simple, rapide, mais forfaitaire.
+
+24
+00:01:51,424 --> 00:01:55,167
+Le parcours rénovation d'ampleur, c'est là
+que l'État met les gros moyens.
+
+25
+00:01:55,186 --> 00:01:55,968
+Conditions en 2026.
+
+26
+00:01:57,588 --> 00:02:08,852
+un logement classé E, F ou G, au moins 2
+gestes d'isolation, un saut d'au moins 2
+classes de DPE et un accompagnement
+obligatoire par mon accompagnateur Rénov'.
+
+27
+00:02:08,891 --> 00:02:14,733
+En contrepartie, une prise en charge en
+pourcentage d'un plafond de travaux qui
+monte avec l'ambition.
+
+28
+00:02:14,772 --> 00:02:22,995
+30 000 euros hors taxes pour un gain de 2
+classes, 40 000 pour 3 classes ou plus,
+avec des taux de 10% pour les revenus
+supérieurs,
+
+29
+00:02:23,814 --> 00:02:29,419
+45 pour les intermédiaires, 60 pour les
+modestes et 80 pour les très modestes.
+
+30
+00:02:29,479 --> 00:02:31,439
+3 conditions transversales.
+
+31
+00:02:31,500 --> 00:02:35,302
+Un logement de plus de 15 ans, occupé en
+résidence principale.
+
+32
+00:02:35,323 --> 00:02:41,247
+Les bailleurs y ont droit avec un
+engagement de location et des travaux
+réalisés par des entreprises RGE.
+
+33
+00:02:41,287 --> 00:02:44,588
+Les barèmes évoluent chaque année, parfois
+en cours d'année.
+
+34
+00:02:44,628 --> 00:02:52,414
+Le réflexe professionnel, c'est la
+simulation officielle sur
+francerenof.gouv.fr, jamais un chiffre de
+mémoire.
+
+35
+00:02:53,254 --> 00:02:56,556
+Autour de MaPrimeRénov', gravitent quatre
+leviers complémentaires.
+
+36
+00:02:57,075 --> 00:03:00,796
+Les certificats d'économie d'énergie, les
+CEE.
+
+37
+00:03:00,836 --> 00:03:02,477
+Le principe est original.
+
+38
+00:03:02,497 --> 00:03:09,079
+Ce ne sont pas des fonds publics, mais une
+obligation imposée aux vendeurs d'énergie
+de financer des économies chez les
+particuliers.
+
+39
+00:03:09,098 --> 00:03:15,920
+Concrètement, des primes versées par les
+énergéticiens et leurs partenaires,
+cumulables avec MaPrimeRénov'.
+
+40
+00:03:15,941 --> 00:03:19,441
+Dans le parcours d'ampleur, elles sont
+souvent intégrées directement.
+
+41
+00:03:19,461 --> 00:03:20,502
+Conseils.
+
+42
+00:03:20,521 --> 00:03:21,382
+Comparer les offres.
+
+43
+00:03:22,002 --> 00:03:24,783
+Les montants varient d'un opérateur à
+l'autre.
+
+44
+00:03:24,804 --> 00:03:25,585
+2.
+
+45
+00:03:25,604 --> 00:03:27,086
+L'éco-prêt à taux zéro.
+
+46
+00:03:27,126 --> 00:03:30,427
+Un crédit sans intérêt, sans condition de
+ressources.
+
+47
+00:03:30,467 --> 00:03:35,752
+Jusqu'à 50 000 euros pour une rénovation
+d'ampleur, remboursable sur une durée
+longue.
+
+48
+00:03:35,771 --> 00:03:38,052
+C'est le financement du reste à charge.
+
+49
+00:03:38,092 --> 00:03:39,895
+Et il se cumule avec tout le reste.
+
+50
+00:03:39,955 --> 00:03:48,039
+Il existe même une version
+pré-avance-rénovation, remboursable à la
+vente du bien, pensée pour les ménages
+âgés ou modestes.
+
+51
+00:03:49,480 --> 00:03:57,145
+La TVA a taux réduit de 5,5% sur les
+travaux de rénovation énergétique,
+appliqués directement sur la facture de
+l'artisan.
+
+52
+00:03:57,165 --> 00:03:57,846
+4.
+
+53
+00:03:57,866 --> 00:04:07,312
+Les aides locales, régions, départements,
+intercommunalités et, dans certaines
+communes, une exonération temporaire de
+taxes foncières après travaux.
+
+54
+00:04:08,252 --> 00:04:12,877
+Réflexes, interroger la collectivité, ces
+aides passent souvent sous les radars.
+
+55
+00:04:12,918 --> 00:04:25,732
+La règle d'or du cumul, MaPrimeRénov' plus
+CEE plus ÉcoPTZ plus TVA réduite plus
+Aides locales peuvent s'empiler dans la
+limite de plafond d'écrêtement.
+
+56
+00:04:26,673 --> 00:04:32,677
+L'aide publique totale ne peut pas
+dépasser un pourcentage maximal du coût,
+variable selon les revenus.
+
+57
+00:04:32,718 --> 00:04:35,420
+Un dossier bien monté s'approche de ce
+plafond.
+
+58
+00:04:35,461 --> 00:04:39,504
+Un dossier mal monté laisse des milliers
+d'euros sur la table.
+
+59
+00:04:39,524 --> 00:04:42,067
+Deux sigles conditionnent tout le système.
+
+60
+00:04:42,187 --> 00:04:44,488
+RGE, reconnu garant de l'environnement.
+
+61
+00:04:44,889 --> 00:04:49,831
+C'est la qualification obligatoire de
+l'entreprise pour que le client touche les
+aides.
+
+62
+00:04:49,870 --> 00:04:55,052
+Pas de RGE, pas de MaPrimeRénov', pas de
+CEE, pas d'EcoPTZ.
+
+63
+00:04:55,091 --> 00:04:56,273
+Le réflexe ?
+
+64
+00:04:56,293 --> 00:05:02,475
+Vérifier la qualification sur l'annuaire
+officiel de FranceRénov' pour le bon
+domaine de travaux et à la date du devis.
+
+65
+00:05:05,696 --> 00:05:10,699
+Pour toute rénovation d'ampleur aidée, un
+accompagnateur agréé est obligatoire.
+
+66
+00:05:10,759 --> 00:05:15,463
+Il audite, structure le projet, monte le
+dossier et suit le chantier.
+
+67
+00:05:15,483 --> 00:05:17,824
+Son coût est lui-même partiellement pris
+en charge.
+
+68
+00:05:17,845 --> 00:05:19,927
+Pour vos clients, c'est un allié.
+
+69
+00:05:19,966 --> 00:05:22,428
+Pour vous, un partenaire à connaître
+localement.
+
+70
+00:05:23,209 --> 00:05:31,310
+et le point de départ de tout parcours, le
+réseau France Rénov', le service public
+gratuit et neutre du Conseil en
+Rénovation.
+
+71
+00:05:31,391 --> 00:05:40,372
+Un professionnel de l'immobilier qui
+oriente systématiquement ses clients vers
+France Rénov' gagne en crédibilité sans
+engager sa responsabilité sur les
+montants.
+
+72
+00:05:40,392 --> 00:05:44,314
+Le secteur des aides attire les fraudeurs
+et vos clients vous en parleront.
+
+73
+00:05:44,334 --> 00:05:46,314
+Quatre signaux d'alerte à leur
+transmettre.
+
+74
+00:05:47,235 --> 00:05:48,134
+1.
+
+75
+00:05:48,154 --> 00:05:52,836
+Le démarchage téléphonique en rénovation
+énergétique est interdit par la loi depuis
+2020.
+
+76
+00:05:52,877 --> 00:06:02,759
+Quiconque appelle pour « vos aides à 1
+euro » ou « un audit gratuit obligatoire »
+est, par définition, hors la loi.
+
+77
+00:06:02,800 --> 00:06:04,000
+On raccroche 2.
+
+78
+00:06:04,720 --> 00:06:10,026
+Personne ne se présente « mandaté par
+l'État » ou « envoyé par l'Anoage à
+domicile ».
+
+79
+00:06:10,045 --> 00:06:13,329
+Les conseillers France-Rénov' ne
+démarchent jamais.
+
+80
+00:06:13,468 --> 00:06:14,250
+3.
+
+81
+00:06:14,269 --> 00:06:16,172
+Jamais de signature le jour même.
+
+82
+00:06:16,192 --> 00:06:23,519
+Le délai de rétractation de 14 jours
+s'applique hors établissement et un crédit
+affecté signé dans la foulée est un piège
+classique.
+
+83
+00:06:24,360 --> 00:06:28,045
+Le client se retrouve à rembourser des
+travaux bâclés ou fantômes.
+
+84
+00:06:28,064 --> 00:06:28,904
+4.
+
+85
+00:06:28,925 --> 00:06:35,992
+Les gestes gratuits ou à 1 euro,
+massivement démarchés, ont été le terrain
+des plus grosses fraudes au CE.
+
+86
+00:06:36,012 --> 00:06:37,214
+Prudence absolue.
+
+87
+00:06:37,254 --> 00:06:40,317
+En cas de litige, signalement sur signal
+conso.
+
+88
+00:06:40,358 --> 00:06:42,639
+Et pour les fraudes aux aides, l'ANAH
+elle-même.
+
+89
+00:06:43,360 --> 00:06:47,942
+Un professionnel qui sait dire cela
+protège ses clients et se distingue.
+
+90
+00:06:47,983 --> 00:06:51,084
+Cas pratique, le plan de financement de
+Karine et Mathieu.
+
+91
+00:06:51,105 --> 00:07:02,490
+Revenu intermédiaire, maison de 100 m²
+classée E, bouquet de travaux à 50 000
+euros visant la classe C, un saut de deux
+classes, parcours rénovation d'ampleur.
+
+92
+00:07:02,529 --> 00:07:08,093
+Étape 1, rendez-vous France Rénov',
+gratuit, qui confirme l'éligibilité,
+
+93
+00:07:08,733 --> 00:07:11,115
+et oriente vers un accompagnateur Rénov'.
+
+94
+00:07:11,154 --> 00:07:12,596
+Étape 2.
+
+95
+00:07:12,636 --> 00:07:14,937
+Audit et validation du bouquet.
+
+96
+00:07:14,956 --> 00:07:18,858
+Le saut de deux classes est certifié par
+le scénario de l'audit.
+
+97
+00:07:18,918 --> 00:07:20,120
+Étape 3.
+
+98
+00:07:20,160 --> 00:07:21,641
+Simulation officielle.
+
+99
+00:07:21,680 --> 00:07:37,730
+Pour un profil intermédiaire et un gain de
+deux classes, barème 2026, 45% d'un
+plafond de 30 000 euros hors taxe, soit 13
+500 euros de subvention, ma prime Rénov'
+d'ampleur CEE intégrée.
+
+100
+00:07:38,211 --> 00:07:43,973
+Étape 4, TVA à 5,5%, déjà appliqué sur les
+devis.
+
+101
+00:07:44,012 --> 00:07:46,713
+Aide de la Métropole, 2000 euros.
+
+102
+00:07:46,752 --> 00:07:52,254
+Étape 5, le reste à charge, environ 34 000
+euros.
+
+103
+00:07:52,295 --> 00:08:02,437
+Financé par un éco-prêt à taux zéro sur 20
+ans, soit autour de 145 euros par mois,
+quand la facture de chauffage baisse,
+elle, de 150 euros par mois.
+
+104
+00:08:03,257 --> 00:08:10,500
+Conclusion du conseiller, l'opération
+s'autofinance pratiquement dès le premier
+mois, et la maison prend de la valeur.
+
+105
+00:08:10,521 --> 00:08:18,865
+Voilà un discours qui déclenche des
+décisions, à condition de toujours
+l'ancrer dans la simulation officielle du
+moment, jamais dans des chiffres
+mémorisés.
+
+106
+00:08:18,884 --> 00:08:19,865
+Récapitulons.
+
+107
+00:08:19,884 --> 00:08:21,305
+Ma prime rénov' de parcours.
+
+108
+00:08:22,526 --> 00:08:27,447
+par geste pour l'équipement, d'ampleur
+pour les sauts de classe, modulés par les
+revenus.
+
+109
+00:08:27,487 --> 00:08:38,732
+Autour, les CEE des énergéticiens, l'éco
+prête au zéro jusqu'à 50 000 euros, la TVA
+à 5,5 %, les aides locales, le tout
+cumulable dans la limite des plafonds.
+
+110
+00:08:38,753 --> 00:08:47,716
+Deux passages obligés, l'entreprise RGE et
+pour l'ampleur, mon accompagnateur Rénov'
+et quatre réflexes anti-arnaques à
+transmettre.
+
+111
+00:08:47,736 --> 00:08:48,918
+Les barèmes bougent chaque année,
+
+112
+00:08:49,498 --> 00:08:53,065
+Les montants cités sont des ordres de
+grandeur début 2026.
+
+113
+00:08:53,105 --> 00:08:59,417
+La seule source qui fait foi, c'est la
+simulation du jour sur
+francerenov.gouv.fr.
+
+114
+00:08:59,437 --> 00:09:02,643
+Dernière leçon de cette formation, le
+photovoltaïque.
+
+115
+00:09:02,682 --> 00:09:09,174
+Technique, rentabilité, démarche, et ce
+qu'il faut vérifier quand des panneaux
+entrent dans une transaction immobilière.

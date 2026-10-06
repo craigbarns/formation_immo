@@ -59,7 +59,7 @@ En tant qu'agent immobilier, vous collectez des données personnelles sensibles 
 
 **1. Base légale :** Vous devez avoir un motif légitime pour collecter chaque donnée (exécution du contrat, obligation légale, intérêt légitime).
 
-**2. Durée de conservation :** Dossiers locataires refusés : 1 an maximum. Mandats et actes : 5 ans (prescription civile). Données comptables : 10 ans.
+**2. Durée de conservation :** Dossiers des candidats locataires non retenus : trois mois au plus, selon le référentiel de la CNIL. Prospects : trois ans après le dernier contact. Pièces d'identification anti-blanchiment : cinq ans après la fin de la relation. Données comptables : dix ans.
 
 **3. Droits des personnes :** Vos clients ont le droit d'accéder à leurs données, de les rectifier, et dans certains cas de les supprimer.
 

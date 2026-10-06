@@ -397,14 +397,14 @@ export const LESSON_VISUALS: Record<string, LessonVisuals> = {
       colAHeader: "Anciens (obsolètes)",
       colBHeader: "Actifs",
       rows: [
-        { label: "Exemples", colA: "Besson, Robien, Scellier, Pinel", colB: "Denormandie, Cosse, Malraux", highlight: "b" },
+        { label: "Exemples", colA: "Besson, Robien, Scellier, Pinel", colB: "Denormandie, Loc'Avantages, Malraux", highlight: "b" },
         { label: "Logement visé", colA: "Neuf / ancien selon époque", colB: "Rénovation ancien / social / patrimoine", highlight: "b" },
         { label: "Conseil", colA: "Connaître pour répondre aux clients", colB: "Orienter les nouveaux investisseurs", highlight: "b" },
       ],
     },
     takeaways: [
       "Connaître l'histoire des dispositifs Besson, Robien, Scellier, Pinel",
-      "Maîtriser les dispositifs actifs en 2025-2026 : Denormandie, Cosse, Malraux",
+      "Maîtriser les dispositifs actifs en 2026 : Denormandie, Loc'Avantages, Malraux",
       "Expliquer la fin du Pinel (31/12/2024) aux clients investisseurs",
       "Orienter vers un conseiller en gestion de patrimoine pour l'optimisation fiscale",
     ],
@@ -660,7 +660,7 @@ export const LESSON_VISUALS: Record<string, LessonVisuals> = {
     keyConcepts: [
       { icon: "trending-up", title: "Boost d'annonce", description: "Publication aux heures de pointe (12h-14h, 19h-22h) pour maximiser la visibilité", type: "tip" },
       { icon: "bar-chart", title: "Taux de contact", description: "Objectif : +2.5% de taux de contact par rapport à la moyenne du portail", type: "stat" },
-      { icon: "camera", title: "Photo de couverture", description: "La 1ère photo génère 90% des clics — investir dans la meilleure prise de vue", type: "warning" },
+      { icon: "camera", title: "Photo de couverture", description: "La photo principale décide de l'essentiel du clic — investir dans la meilleure prise de vue", type: "warning" },
       { icon: "star", title: "Profil agence optimisé", description: "Logo HD, description SEO, avis clients, coordonnées complètes", type: "rule" },
     ],
     stats: [

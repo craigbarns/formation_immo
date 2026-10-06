@@ -1,133 +1,168 @@
 {
   "version": 1,
-  "duration": 470.686,
+  "duration": 690.654,
   "slides": [
     {
       "index": 0,
-      "start": 0.031,
+      "start": 0.131,
       "source": "auto"
     },
     {
       "index": 1,
-      "start": 31.698,
+      "start": 30.438,
       "source": "auto"
     },
     {
       "index": 2,
-      "start": 62.491,
+      "start": 63.984,
       "source": "auto"
     },
     {
       "index": 3,
-      "start": 94.059,
+      "start": 100.223,
       "source": "auto"
     },
     {
       "index": 4,
-      "start": 124.896,
+      "start": 135.581,
       "source": "auto"
     },
     {
       "index": 5,
-      "start": 160.88,
+      "start": 166.182,
       "source": "auto"
     },
     {
       "index": 6,
-      "start": 193.74,
+      "start": 197.737,
       "source": "auto"
     },
     {
       "index": 7,
-      "start": 225.618,
+      "start": 233.468,
       "source": "auto"
     },
     {
       "index": 8,
-      "start": 257.849,
+      "start": 264.968,
       "source": "auto"
     },
     {
       "index": 9,
-      "start": 289.705,
+      "start": 296.798,
       "source": "auto"
     },
     {
       "index": 10,
-      "start": 324.261,
+      "start": 330.755,
       "source": "auto"
     },
     {
       "index": 11,
-      "start": 355.364,
+      "start": 361.763,
       "source": "auto"
     },
     {
       "index": 12,
-      "start": 390.582,
+      "start": 392.032,
       "source": "auto"
     },
     {
       "index": 13,
-      "start": 426.102,
+      "start": 426.642,
       "source": "auto"
     },
     {
       "index": 14,
-      "start": 456.285,
+      "start": 457.58,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 488.11,
+      "source": "auto"
+    },
+    {
+      "index": 16,
+      "start": 520.232,
+      "source": "auto"
+    },
+    {
+      "index": 17,
+      "start": 552.033,
+      "source": "auto"
+    },
+    {
+      "index": 18,
+      "start": 583.106,
+      "source": "auto"
+    },
+    {
+      "index": 19,
+      "start": 615.064,
+      "source": "auto"
+    },
+    {
+      "index": 20,
+      "start": 648.792,
+      "source": "auto"
+    },
+    {
+      "index": 21,
+      "start": 681.326,
       "source": "auto"
     }
   ],
   "keyTerms": [
     {
       "term": "avez",
-      "start": 0.371,
-      "end": 0.532
+      "start": 0.271,
+      "end": 0.451
     },
     {
       "term": "cette",
-      "start": 0.872,
-      "end": 1.012
+      "start": 0.831,
+      "end": 0.972
     },
     {
       "term": "changements",
-      "start": 2.694,
-      "end": 3.015
+      "start": 2.733,
+      "end": 3.093
     },
     {
       "term": "chaque",
-      "start": 5.197,
-      "end": 5.457
+      "start": 5.294,
+      "end": 5.514
     },
     {
       "term": "nouvelle",
-      "start": 5.497,
-      "end": 5.798
+      "start": 5.534,
+      "end": 5.814
     },
     {
       "term": "plus",
-      "start": 6.939,
-      "end": 7.179
+      "start": 6.915,
+      "end": 7.135
     },
     {
       "term": "immobilier",
-      "start": 8.02,
-      "end": 9.102
+      "start": 8.096,
+      "end": 9.476
+    },
+    {
+      "term": "cadre",
+      "start": 11.017,
+      "end": 11.337
     },
     {
       "term": "Allure",
-      "start": 10.744,
-      "end": 11.104
+      "start": 12.198,
+      "end": 12.598
     },
     {
-      "term": "encore.",
-      "start": 11.505,
-      "end": 12.245
-    },
-    {
-      "term": "sont",
-      "start": 14.989,
-      "end": 15.169
+      "term": "continue",
+      "start": 12.638,
+      "end": 12.978
     }
   ]
 }

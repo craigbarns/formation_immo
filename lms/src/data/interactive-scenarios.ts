@@ -149,7 +149,7 @@ const HONORAIRES_ALUR_DEMO: InteractiveScenario = {
         },
       ],
       explanation:
-        "L’acquéreur potentiel doit pouvoir comprendre le coût global et la répartition des honoraires **dès la lecture de l’annonce** — c’est le principe d’information loyale appliqué à l’immobilier.",
+        "L’acquéreur potentiel doit pouvoir comprendre le coût global et qui paie les honoraires **dès la lecture de l’annonce** — c’est le principe d’information loyale appliqué à l’immobilier.",
       next: "quiz-2",
     }),
     "quiz-2": s({
@@ -300,7 +300,7 @@ export const INTERACTIVE_SCENARIOS: Record<string, InteractiveScenario> = {
         options: [
           { label: "Uniquement le montant des travaux du bien", isCorrect: false },
           {
-            label: "Les conditions de remuneration et la repartition claire des honoraires",
+            label: "Le montant des honoraires et la partie qui en a la charge",
             isCorrect: true,
           },
           { label: "Le budget publicitaire ideal de l'agence", isCorrect: false },

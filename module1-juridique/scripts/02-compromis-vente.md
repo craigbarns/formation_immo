@@ -198,7 +198,7 @@ Maintenant, voyons les erreurs qui peuvent coûter cher. [PAUSE 1s] Celles que j
 
 [B-ROLL : Comparaison entre description floue et description précise]
 
-**Erreur numéro 2 : oublier la mention du DPE.** [PAUSE 1s] Depuis le 1er juillet 2021, le DPE est obligatoire pour tous les biens. [PAUSE 1s] L'absence de mention expose à une amende de 1 500 euros.
+**Erreur numéro 2 : oublier le DPE.** [PAUSE 1s] Le DPE doit être annexé au compromis, dans le dossier de diagnostic technique, et sa classe doit correspondre à celle de l'annonce. [PAUSE 1s] Depuis le 1er juillet 2021, il est opposable : un DPE manquant ou erroné ouvre à l'acquéreur un recours contre le vendeur, et engage votre responsabilité de conseil.
 
 [B-ROLL : DPE avec mention "OBLIGATOIRE" en rouge]
 

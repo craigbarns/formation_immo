@@ -339,7 +339,7 @@ const regimesFiscaux: DataTable = {
     ],
   ],
   notes:
-    "Depuis 2023, le seuil micro-BIC pour les meublés de tourisme classés est distinct (188 700 €). Le statut LMP est automatiquement acquis si les deux conditions de recettes sont simultanément remplies.",
+    "Depuis la loi Le Meur (2024), les meublés de tourisme classés relèvent du même plafond que le meublé classique (77 700 €, abattement 50 %), et les meublés de tourisme non classés d'un plafond de 15 000 € (abattement 30 %). Le statut LMP est automatiquement acquis si les deux conditions de recettes sont simultanément remplies. Depuis 2025, les amortissements LMNP sont réintégrés dans la plus-value à la revente.",
 };
 
 const dispositifsDefiscalisation: DataTable = {
@@ -361,20 +361,20 @@ const dispositifsDefiscalisation: DataTable = {
   sortable: true,
   rows: [
     [
-      cell("Pinel+"),
-      badgeCell("17,5 % / 21 %", "Jusqu'à", "gold"),
-      cell("9 ou 12 ans"),
+      cell("Pinel / Pinel+"),
+      badgeCell("Jusqu'à 21 %", "Logement neuf", "gold"),
+      cell("6, 9 ou 12 ans"),
       cell("300 000 € / 5 500 €/m²"),
       cell("Zones A bis, A, B1"),
-      badgeCell("Actif", "2024", "green"),
+      badgeCell("Terminé", "31/12/2024", "red"),
     ],
     [
       highlighted("Denormandie"),
       badgeCell("12 – 21 %", "Selon durée", "gold"),
       cell("6, 9 ou 12 ans"),
       cell("300 000 €"),
-      cell("222 villes du programme Action Cœur de Ville"),
-      badgeCell("Actif", "2026", "green"),
+      cell("Communes Action Cœur de Ville et ORT"),
+      badgeCell("Actif", "Jusqu'au 31/12/2027", "green"),
     ],
     [
       cell("Malraux"),
@@ -410,7 +410,7 @@ const dispositifsDefiscalisation: DataTable = {
     ],
   ],
   notes:
-    "Le dispositif Pinel classique s'est terminé le 31/12/2024. Seul le Pinel+ (critères de qualité renforcés) reste actif. Le déficit foncier est porté à 21 400 €/an pour les travaux de rénovation énergétique réalisés entre 2023 et 2025.",
+    "Le Pinel et le Pinel+ ont pris fin le 31/12/2024 : seuls les investissements engagés avant cette date conservent leur réduction. Le plafond de déficit foncier porté à 21 400 €/an pour les travaux de sortie de passoire concernait les dépenses payées jusqu'au 31/12/2025 ; le plafond est revenu à 10 700 €/an.",
 };
 
 const comparatifPortails: DataTable = {
@@ -742,7 +742,7 @@ const outilsSeo: DataTable = {
     [cell("PageSpeed Insights"), cell("Vitesse de chargement, Core Web Vitals"), badgeCell("Gratuit", "✓", "green"), badgeCell("Débutant", "●", "green"), cell("Priorité 2 — audit mensuel")],
     [cell("Yoast SEO (WordPress)"), cell("Optimisation on-page (balises, meta)"), badgeCell("Gratuit / 99 €/an", "€", "gold"), badgeCell("Débutant", "●", "green"), cell("Priorité 2 — si site sous WordPress")],
   ],
-  notes: "Commencez par Google Search Console + Google Business Profile (tous deux gratuits). Ils couvrent 70 % des besoins SEO d'une agence de proximité.",
+  notes: "Commencez par Google Search Console + Google Business Profile (tous deux gratuits) : ils couvrent l'essentiel des besoins SEO d'une agence de proximité.",
 };
 
 // ---------------------------------------------------------------------------

@@ -79,9 +79,9 @@ D. Le phoning est interdit par la loi, pas le porte-à-porte
 
 ❌ **B est incorrect** : C'est l'inverse ! Le porte-à-porte permet le contact visuel, pas le phoning qui est limité à la voix.
 
-❌ **D est incorrect** : Ni l'un ni l'autre n'est interdit, mais tous deux sont encadrés par la loi. Le phoning est soumis au démarchage téléphonique (Bloctel), et le porte-à-porte doit respecter les horaires et les panneaux "Pas de démarchage".
+❌ **D est incorrect** : Ni l'un ni l'autre n'est interdit en soi, mais tous deux sont encadrés par la loi. Depuis le 11 août 2026, le phoning vers un particulier exige son consentement préalable (Bloctel a disparu) : sans accord, l'appel de démarchage est interdit. Le porte-à-porte reste possible, dans le respect des panneaux "Pas de démarchage", et un mandat signé hors agence ouvre au vendeur 14 jours de rétractation.
 
-**RÉFÉRENCE** : Loi n°2014-344 du 17 mars 2014 relative à la consommation (Bloctel) - Article L. 121-20-5 du Code de la Consommation
+**RÉFÉRENCE** : Article L.223-1 du Code de la consommation (loi n° 2025-594 du 30 juin 2025, en vigueur le 11 août 2026) ; décret n° 2026-662 du 23 juillet 2026 ; article L.221-18 du Code de la consommation (rétractation hors établissement)
 
 ---
 

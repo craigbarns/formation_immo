@@ -1,0 +1,412 @@
+1
+00:00:00,271 --> 00:00:02,333
+voix off, connaître les règles.
+
+2
+00:00:02,353 --> 00:00:03,294
+C'est bien.
+
+3
+00:00:03,314 --> 00:00:11,622
+Savoir comment se comporter quand elles
+sont mises à l'épreuve dans la vraie vie,
+c'est ce qui fait la différence entre un
+professionnel ordinaire et un
+professionnel de confiance.
+
+4
+00:00:11,643 --> 00:00:16,707
+Dans cette leçon, nous allons traverser
+ensemble les situations à risque les plus
+fréquentes.
+
+5
+00:00:16,728 --> 00:00:20,172
+Conflits d'intérêts, secrets
+professionnels, RGPD,
+
+6
+00:00:20,891 --> 00:00:24,495
+pratiques trompeuses et cinq dilemmes
+éthiques réels.
+
+7
+00:00:24,515 --> 00:00:25,635
+Voix off.
+
+8
+00:00:25,675 --> 00:00:30,939
+Le double mandant, c'est quand vous
+représentez à la fois le vendeur et
+l'acheteur dans la même transaction.
+
+9
+00:00:30,958 --> 00:00:32,840
+C'est légal, mais encadré.
+
+10
+00:00:32,859 --> 00:00:39,143
+Vos obligations, informer les deux parties
+de votre double rôle, par écrit, avant
+toute négociation.
+
+11
+00:00:39,164 --> 00:00:43,326
+Ne pas divulguer à l'acheteur le prix
+plancher du vendeur et vice-versa.
+
+12
+00:00:43,366 --> 00:00:46,408
+Facturer votre commission de façon
+transparente aux deux parties.
+
+13
+00:00:46,429 --> 00:00:47,750
+Le conflit d'intérêts élargi.
+
+14
+00:00:48,814 --> 00:00:53,561
+Vous ne pouvez pas acheter un bien pour
+vous-même via le mandat d'un client
+vendeur sans l'informer.
+
+15
+00:00:53,582 --> 00:00:59,651
+Vous ne pouvez pas orienter un client vers
+un prestataire, notaire, banque, assureur
+contre rémunération cachée.
+
+16
+00:01:00,805 --> 00:01:02,006
+Signal d'alerte.
+
+17
+00:01:02,026 --> 00:01:04,126
+Dès que vous pensez « Est-ce que je peux
+faire ça ?
+
+18
+00:01:04,527 --> 00:01:09,388
+», la réponse est probablement non, ou du
+moins ça nécessite une transparence
+totale.
+
+19
+00:01:09,427 --> 00:01:10,548
+Voix off.
+
+20
+00:01:10,567 --> 00:01:14,308
+En tant qu'agent immobilier, vous
+collectez des données personnelles
+sensibles.
+
+21
+00:01:14,328 --> 00:01:18,269
+Revenus, situation familiale, avis
+d'imposition, coordonnées bancaires.
+
+22
+00:01:18,290 --> 00:01:22,730
+Le RGPD, Règlement général sur la
+protection des données, vous impose
+
+23
+00:01:23,490 --> 00:01:24,272
+1.
+
+24
+00:01:24,292 --> 00:01:33,400
+Base légale, vous devez avoir un motif
+légitime pour collecter chaque donnée,
+exécution du contrat, obligations légales,
+intérêts légitimes.
+
+25
+00:01:33,421 --> 00:01:34,040
+2.
+
+26
+00:01:34,061 --> 00:01:40,266
+Durée de conservation, dossier des
+candidats locataires non retenus, 3 mois
+ou plus, selon le référentiel de la CNIL.
+
+27
+00:01:41,227 --> 00:01:46,810
+Prospect, 3 ans après le dernier contact,
+pièce d'identification anti-blanchiment.
+
+28
+00:01:46,829 --> 00:01:48,811
+5 ans après la fin de la relation.
+
+29
+00:01:48,831 --> 00:01:50,751
+Données comptables, 10 ans.
+
+30
+00:01:50,811 --> 00:01:51,350
+3.
+
+31
+00:01:51,391 --> 00:01:52,751
+Droits des personnes.
+
+32
+00:01:52,772 --> 00:01:58,073
+Vos clients ont le droit d'accéder à leurs
+données, de les rectifier, et dans
+certains cas de les supprimer.
+
+33
+00:01:59,301 --> 00:02:00,061
+4.
+
+34
+00:02:00,100 --> 00:02:01,262
+Sécurité.
+
+35
+00:02:01,281 --> 00:02:02,902
+Protégez vos fichiers clients.
+
+36
+00:02:02,941 --> 00:02:05,362
+Ne les partagez pas par e-mail non
+sécurisé.
+
+37
+00:02:05,403 --> 00:02:09,223
+En cas de violation, vous devez notifier
+la CNIL dans les 72 heures.
+
+38
+00:02:09,264 --> 00:02:10,743
+Secrets professionnels.
+
+39
+00:02:10,764 --> 00:02:20,546
+Les informations confidentielles que vos
+clients vous confient, situation
+financière, motivation de vente, ne se
+partagent pas, ni avec des confrères, ni
+sur les réseaux sociaux.
+
+40
+00:02:20,567 --> 00:02:21,187
+Voix off.
+
+41
+00:02:22,453 --> 00:02:30,914
+Les articles L121-1 à L121-7 du Code de la
+consommation définissent les pratiques
+commerciales trompeuses.
+
+42
+00:02:30,955 --> 00:02:41,417
+En immobilier, les plus fréquentes sont
+annoncer un bien à un prix inférieur à la
+réalité pour attirer des appels, puis
+prétendre qu'il est déjà vendu à pas.
+
+43
+00:02:41,437 --> 00:02:46,217
+Surestimer délibérément un bien pour
+obtenir le mandat, sachant que le prix
+sera abaissé ensuite.
+
+44
+00:02:47,157 --> 00:02:49,379
+Omettre des informations essentielles.
+
+45
+00:02:49,400 --> 00:02:53,502
+Servitude, projet urbain à proximité,
+sinistre passé.
+
+46
+00:02:53,543 --> 00:02:58,508
+Utiliser des photos trompeuses ou
+retouchées qui ne représentent pas l'état
+réel du bien.
+
+47
+00:02:58,548 --> 00:03:02,711
+Sanctions, jusqu'à 2 ans d'emprisonnement
+et 300 000 euros d'amende.
+
+48
+00:03:02,730 --> 00:03:05,772
+Voie off, voici 5 situations réelles.
+
+49
+00:03:05,794 --> 00:03:10,858
+Pour chacune, demandez-vous ce que vous
+feriez, puis écoutez la réponse éthique et
+légale.
+
+50
+00:03:10,877 --> 00:03:15,562
+Dilemme 1, votre vendeur vous demande de
+ne pas mentionner l'humidité dans la cave
+lors des visites.
+
+51
+00:03:16,382 --> 00:03:18,143
+Réponse, refus.
+
+52
+00:03:18,182 --> 00:03:25,605
+L'article 1112-1 du Code civil impose de
+révéler les informations déterminantes
+pour le consentement de l'acheteur.
+
+53
+00:03:25,626 --> 00:03:28,387
+Vous risquez une annulation de vente et
+des dommages d'intérêt.
+
+54
+00:03:28,426 --> 00:03:35,349
+Dilemme 2, un acquéreur vous propose 2000
+euros pour vous si vous faites accepter
+son offre en dessous du prix.
+
+55
+00:03:35,370 --> 00:03:37,991
+Réponse, refus catégorique.
+
+56
+00:03:38,010 --> 00:03:44,913
+C'est un abus de confiance, 314 dérets, un
+code pénal et une violation du devoir de
+loyauté envers votre mandant vendeur.
+
+57
+00:03:46,069 --> 00:03:47,191
+Dilemme 3.
+
+58
+00:03:47,211 --> 00:03:51,794
+Un confrère vous appelle pour vous
+demander à quel prix votre client-vendeur
+accepterait de céder.
+
+59
+00:03:51,813 --> 00:03:52,935
+Réponse.
+
+60
+00:03:52,974 --> 00:03:54,596
+Refus de divulguer.
+
+61
+00:03:54,616 --> 00:03:56,076
+Secret professionnel.
+
+62
+00:03:56,097 --> 00:03:59,340
+Vous pouvez collaborer sur la transaction
+sans trahir votre mandant.
+
+63
+00:04:00,387 --> 00:04:01,687
+Dilemme 4.
+
+64
+00:04:01,706 --> 00:04:06,088
+Vous avez un client-acheteur parfait pour
+un bien, mais c'est votre cousin qui veut
+acheter.
+
+65
+00:04:06,128 --> 00:04:07,549
+Réponse.
+
+66
+00:04:07,588 --> 00:04:10,030
+Transparence totale auprès du vendeur.
+
+67
+00:04:10,069 --> 00:04:12,349
+Informez le par écrit du lien de parenté.
+
+68
+00:04:12,389 --> 00:04:14,711
+Il peut décider de continuer ou non avec
+vous.
+
+69
+00:04:14,730 --> 00:04:15,931
+Dilemme 5.
+
+70
+00:04:15,971 --> 00:04:20,793
+Un propriétaire vous demande de rejeter
+tous les dossiers de candidats bénéficiant
+des APL.
+
+71
+00:04:20,833 --> 00:04:21,833
+Réponse.
+
+72
+00:04:21,853 --> 00:04:22,392
+Refus.
+
+73
+00:04:22,432 --> 00:04:26,935
+La discrimination par les allocations est
+prohibée depuis la loi Égalité et
+Citoyenneté 2017.
+
+74
+00:04:28,714 --> 00:04:33,401
+Voix off, le code de déontologie encadre
+aussi vos relations avec vos confrères.
+
+75
+00:04:33,440 --> 00:04:36,785
+Vous ne pouvez pas dénigrer une autre
+agence pour obtenir un mandat.
+
+76
+00:04:36,805 --> 00:04:42,151
+Vous ne pouvez pas contacter directement
+le client d'un confrère si vous savez
+qu'il est sous mandat exclusif.
+
+77
+00:04:42,190 --> 00:04:47,937
+En cas de partage d'honoraires
+interagence, les termes doivent être
+convenus par écrit avant toute
+présentation de l'offre.
+
+78
+00:04:48,939 --> 00:04:50,182
+Voix off.
+
+79
+00:04:50,202 --> 00:04:53,151
+L'éthique professionnelle n'est pas un
+frein à votre performance.
+
+80
+00:04:53,170 --> 00:04:54,293
+C'est son fondement.
+
+81
+00:04:54,314 --> 00:05:03,478
+Les agents qui durent, ceux qui
+construisent une clientèle fidèle et une
+réputation solide, sont ceux qui ont fait
+de la transparence et de l'intégrité leur
+signature.
+
+82
+00:05:03,497 --> 00:05:07,249
+Vous avez maintenant les outils pour agir
+avec confiance dans les situations les
+plus complexes.

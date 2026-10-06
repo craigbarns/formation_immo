@@ -282,7 +282,7 @@ export const CHEAT_SHEETS: CheatSheet[] = [
         rows: [
           { label: "Taux d'endettement max.", value: "35 %", detail: "Assurance incluse — calcul mensualité / revenus nets", tone: "warning" },
           { label: "Durée maximale", value: "25 ans", detail: "+ 2 ans différé pour neuf / VEFA / travaux > 25%", tone: "warning" },
-          { label: "Marge dérogation", value: "20 % production", detail: "Banque peut déroger sur 20% des dossiers (primo-acc.)", tone: "neutral" },
+          { label: "Marge dérogation", value: "20 % production", detail: "Dérogation sur 20 % des dossiers, dont au moins 70 % pour une résidence principale", tone: "neutral" },
           { label: "Reste à vivre", value: "Min. 700-1000 €/pers.", detail: "Norme bancaire interne, pas légale stricte", tone: "neutral" },
         ],
       },
@@ -329,9 +329,9 @@ export const CHEAT_SHEETS: CheatSheet[] = [
         title: "Déficit foncier (location nue)",
         rows: [
           { label: "Plafond standard", value: "10 700 €/an", detail: "Imputable revenu global, reste reportable 10 ans", tone: "positive" },
-          { label: "Plafond rénovation énergétique", value: "21 400 €/an", detail: "Sortie passoire F/G — loi finances 2023, jusqu'à 2025", tone: "positive" },
-          { label: "Économie d'impôt TMI 30 %", value: "≈ 6 420 €", detail: "Sur 21 400 € de déficit", tone: "positive" },
-          { label: "Économie d'impôt TMI 41 %", value: "≈ 8 774 €", detail: "Sur 21 400 € de déficit", tone: "positive" },
+          { label: "Plafond rénovation énergétique", value: "Terminé", detail: "21 400 €/an pour les dépenses payées jusqu'au 31/12/2025", tone: "warning" },
+          { label: "Économie d'impôt TMI 30 %", value: "≈ 3 210 €", detail: "Sur 10 700 € de déficit", tone: "positive" },
+          { label: "Économie d'impôt TMI 41 %", value: "≈ 4 387 €", detail: "Sur 10 700 € de déficit", tone: "positive" },
         ],
       },
       {

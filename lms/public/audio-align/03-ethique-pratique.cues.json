@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "duration": 307.249,
+  "slides": [
+    {
+      "index": 0,
+      "start": 0.271,
+      "source": "auto"
+    },
+    {
+      "index": 1,
+      "start": 30.959,
+      "source": "auto"
+    },
+    {
+      "index": 2,
+      "start": 62.026,
+      "source": "auto"
+    },
+    {
+      "index": 3,
+      "start": 93.421,
+      "source": "auto"
+    },
+    {
+      "index": 4,
+      "start": 125.403,
+      "source": "auto"
+    },
+    {
+      "index": 5,
+      "start": 161.437,
+      "source": "auto"
+    },
+    {
+      "index": 6,
+      "start": 196.382,
+      "source": "auto"
+    },
+    {
+      "index": 7,
+      "start": 227.211,
+      "source": "auto"
+    },
+    {
+      "index": 8,
+      "start": 260.833,
+      "source": "auto"
+    },
+    {
+      "index": 9,
+      "start": 293.171,
+      "source": "auto"
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "voix",
+      "start": 0.271,
+      "end": 0.491
+    },
+    {
+      "term": "C'est",
+      "start": 2.353,
+      "end": 2.514
+    },
+    {
+      "term": "bien.",
+      "start": 2.534,
+      "end": 3.294
+    },
+    {
+      "term": "quand",
+      "start": 4.496,
+      "end": 4.616
+    },
+    {
+      "term": "sont",
+      "start": 4.836,
+      "end": 4.976
+    },
+    {
+      "term": "dans",
+      "start": 5.657,
+      "end": 5.757
+    },
+    {
+      "term": "fait",
+      "start": 7.138,
+      "end": 7.278
+    },
+    {
+      "term": "professionnel",
+      "start": 8.279,
+      "end": 8.9
+    },
+    {
+      "term": "confiance.",
+      "start": 10.722,
+      "end": 11.623
+    },
+    {
+      "term": "situations",
+      "start": 14.366,
+      "end": 14.826
+    }
+  ]
+}

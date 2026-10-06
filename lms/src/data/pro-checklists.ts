@@ -219,7 +219,7 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
         id: "te-03",
         text: "Exposition et luminosite de chaque piece",
         category: "Caracteristiques techniques",
-        tip: "Un appartement double exposition sud-ouest peut valoir 10 a 15 % de plus qu'un nord.",
+        tip: "Un appartement en double exposition sud-ouest se vend souvent nettement mieux qu'un appartement plein nord : integrez-le dans vos comparables.",
       },
       {
         id: "te-04",
@@ -299,15 +299,15 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
       },
       {
         id: "tp-03",
-        text: "Rediger un script d'appel telephonique adapte a chaque cible",
+        text: "Rediger un script d'appel pour les contacts qui ont accepte d'etre appeles",
         category: "Preparation",
-        tip: "Preparez 3 variantes : proprietaire occupant, investisseur, succession.",
+        tip: "Depuis le 11 aout 2026, pas d'appel de demarchage a un particulier sans son consentement prealable (1 an maximum, preuve gardee 3 ans).",
       },
       {
         id: "tp-04",
         text: "Identifier les biens en vente par particuliers (PAP, Le Bon Coin)",
         category: "Actions terrain",
-        tip: "Contactez dans les 24h de la parution. La reactivite est le facteur numero un.",
+        tip: "Contactez-les dans les 24h par courrier ou en personne, jamais par telephone sans leur accord : le numero de l'annonce ne vaut pas consentement.",
       },
       {
         id: "tp-05",
@@ -558,7 +558,7 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
         id: "ma-08",
         text: "Minimum 10 photos HD de qualite professionnelle",
         category: "Visuels et diffusion",
-        tip: "Les annonces avec plus de 10 photos recoivent 3 fois plus de contacts.",
+        tip: "Une serie complete d'une dizaine de photos ou plus rassure les acquereurs et genere davantage de contacts.",
       },
       {
         id: "ma-09",
@@ -734,10 +734,10 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
     lessonSlug: "defiscalisation",
     title: "Checklist défiscalisation immobilière 2025",
     description:
-      "Dispositifs actifs et expirés à connaître pour conseiller vos clients investisseurs en 2025.",
+      "Dispositifs actifs et expirés à connaître pour conseiller vos clients investisseurs en 2026.",
     icon: "💰",
     categories: [
-      "Dispositifs actifs en 2025",
+      "Dispositifs actifs en 2026",
       "Dispositifs expirés — à connaître",
       "Vérification éligibilité client",
     ],
@@ -745,31 +745,31 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
       {
         id: "df-01",
         text: "Loi Denormandie : réduction 12 %, 18 % ou 21 % selon durée (6, 9 ou 12 ans)",
-        category: "Dispositifs actifs en 2025",
+        category: "Dispositifs actifs en 2026",
         tip: "Travaux ≥ 25 % du coût total. Biens en centre-ville dégradé. Vérifier la liste des communes éligibles sur impots.gouv.fr.",
       },
       {
         id: "df-02",
         text: "Loc'Avantages (ex-Cosse) : réduction d'impôt 15 % à 65 % selon conventionnement ANAH",
-        category: "Dispositifs actifs en 2025",
+        category: "Dispositifs actifs en 2026",
         tip: "Convention ANAH requise. Loyer inférieur au marché selon la zone. Très avantageux pour les TMI élevés (30 %+). Prorogé jusqu'au 31/12/2027.",
       },
       {
         id: "df-03",
         text: "Loi Malraux : réduction 22 % (AVAP) ou 30 % (secteur sauvegardé) sur les travaux",
-        category: "Dispositifs actifs en 2025",
+        category: "Dispositifs actifs en 2026",
         tip: "Plafond 400 000 € de travaux sur 4 ans. Architecte des Bâtiments de France obligatoire. Dispositif permanent sans date d'expiration.",
       },
       {
         id: "df-04",
-        text: "Déficit foncier : imputation sur le revenu global jusqu'à 10 700 €/an (21 400 € si réno énergétique)",
-        category: "Dispositifs actifs en 2025",
-        tip: "Travaux déductibles : réparation, amélioration, entretien. Pas la construction. Régime réel obligatoire. Le plafond doublé (21 400 €) s'applique aux DPE passoires rénovées.",
+        text: "Déficit foncier : imputation sur le revenu global jusqu'à 10 700 €/an",
+        category: "Dispositifs actifs en 2026",
+        tip: "Travaux déductibles : réparation, amélioration, entretien. Pas la construction. Régime réel obligatoire. Le plafond doublé (21 400 €) pour les travaux de sortie de passoire a pris fin avec les dépenses payées en 2025.",
       },
       {
         id: "df-05",
         text: "LMNP régime réel : amortissement du bien + déduction de toutes les charges",
-        category: "Dispositifs actifs en 2025",
+        category: "Dispositifs actifs en 2026",
         tip: "Revenus locatifs < 23 000 €/an ou < 50 % des revenus du foyer. L'amortissement crée souvent un déficit BIC non imposable. Consulter un expert-comptable.",
       },
       {
@@ -794,7 +794,7 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
         id: "df-09",
         text: "Vérifier la zone géographique du bien (A, A bis, B1, B2, C) selon le dispositif envisagé",
         category: "Vérification éligibilité client",
-        tip: "Denormandie : communes de la liste officielle. Malraux : SPR ou AVAP. Cosse : zones A/B1/B2 selon le niveau de loyer.",
+        tip: "Denormandie : communes de la liste officielle. Malraux : site patrimonial remarquable. Loc'Avantages : loyer plafonné selon la zone et le niveau de conventionnement.",
       },
       {
         id: "df-10",
@@ -936,9 +936,9 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
       },
       {
         id: "fisc-04",
-        text: "LMNP régime micro-BIC : abattement 50 % (71 % pour meublé de tourisme classé)",
+        text: "LMNP régime micro-BIC : abattement 50 % (30 % pour un meublé de tourisme non classé)",
         category: "Régime fiscal location meublée",
-        tip: "Applicable si CA < 77 700 € (meublé classique) ou 188 700 € (meublé de tourisme classé).",
+        tip: "Applicable si recettes ≤ 77 700 € (meublé classique ou de tourisme classé) ou ≤ 15 000 € (meublé de tourisme non classé), depuis la loi Le Meur de 2024.",
       },
       {
         id: "fisc-05",
@@ -948,7 +948,7 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
       },
       {
         id: "fisc-06",
-        text: "Vérifier le seuil LMP (Loueur Meublé Professionnel) : > 23 000 €/an ET > 50 % des revenus du foyer",
+        text: "Vérifier le seuil LMP (Loueur Meublé Professionnel) : recettes > 23 000 €/an ET supérieures aux autres revenus d'activité du foyer",
         category: "Régime fiscal location meublée",
         tip: "Le statut LMP offre l'imputation du déficit sur le revenu global sans plafond, mais impose la cotisation sociale des indépendants (11 %).",
       },
@@ -1299,7 +1299,7 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
         id: "r2-03",
         text: "R2 — Apporter le mandat de vente pré-rempli, prêt à signer",
         category: "R2 — Présentation & signature",
-        tip: "Venir sans le mandat oblige à reprogrammer un RDV — vous perdez 30 % des signatures ainsi.",
+        tip: "Venir sans le mandat oblige à reprogrammer un rendez-vous : une partie des vendeurs ne signe jamais le second.",
       },
       {
         id: "r2-04",
@@ -1809,9 +1809,9 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
       },
       {
         id: "nd-05",
-        text: "Conserver les dossiers des candidats refusés pendant 1 an",
+        text: "Supprimer les dossiers des candidats non retenus au bout de 3 mois",
         category: "Dossier et preuves",
-        tip: "En cas de plainte, vous devez prouver que la sélection était objective. Les dossiers conservés sont votre défense.",
+        tip: "Référentiel CNIL sur la gestion locative. Pour prouver une sélection objective en cas de plainte, conservez plutôt votre grille de critères datée et le motif de chaque décision.",
       },
       {
         id: "nd-06",
@@ -2201,7 +2201,7 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
         id: "dp-05",
         text: "Vérifier les conditions de location (durée, loyer plafond, locataire éligible)",
         category: "Vérification éligibilité",
-        tip: "Cosse : loyer plafond selon la zone et la surface. Denormandie : engagement de location de 6, 9 ou 12 ans.",
+        tip: "Loc'Avantages : loyer plafonné selon la zone et le niveau de conventionnement Anah. Denormandie : engagement de location de 6, 9 ou 12 ans.",
       },
       {
         id: "dp-06",
@@ -2399,7 +2399,7 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
         id: "vv-05",
         text: "Ajouter une musique libre de droits et des sous-titres pour les visionnages sans son",
         category: "Tournage et montage",
-        tip: "85 % des vidéos Facebook se regardent sans le son. Les sous-titres doublent le temps de visionnage moyen.",
+        tip: "Une grande partie des vidéos sur les réseaux est regardée sans le son : les sous-titres sont indispensables.",
       },
       {
         id: "vv-06",
@@ -2459,7 +2459,7 @@ export const PRO_CHECKLISTS: ProChecklist[] = [
         id: "pb-05",
         text: "Répondre à tous les avis Google dans les 48h (positifs et négatifs)",
         category: "Réputation",
-        tip: "Un avis négatif bien géré convertit 70 % des lecteurs en clients potentiels. Montrez que vous prenez les retours au sérieux.",
+        tip: "Un avis négatif bien géré rassure les futurs clients qui lisent votre réponse. Montrez que vous prenez les retours au sérieux.",
       },
       {
         id: "pb-06",

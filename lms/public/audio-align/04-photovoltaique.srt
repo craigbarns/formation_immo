@@ -1,0 +1,689 @@
+1
+00:00:00,192 --> 00:00:02,791
+produire sa propre électricité sur son
+toit.
+
+2
+00:00:03,692 --> 00:00:06,392
+Il y a 15 ans, c'était un pari militant.
+
+3
+00:00:06,432 --> 00:00:11,855
+Aujourd'hui, c'est l'un des
+investissements immobiliers les plus
+rationnels qui soient, quand il est bien
+fait.
+
+4
+00:00:11,875 --> 00:00:20,780
+Mais entre les promesses des commerciaux,
+autonomie totale, rentabilité garantie, et
+la réalité technique, il y a un monde.
+
+5
+00:00:20,800 --> 00:00:32,225
+Dans cette dernière leçon, vous allez
+apprendre à dimensionner, chiffrer et
+sécuriser un projet photovoltaïque, et à
+gérer le cas qui vous concerne
+directement, des panneaux dans une
+transaction immobilière.
+
+6
+00:00:32,965 --> 00:00:35,948
+Sophie vend une maison à Aix-en-Provence.
+
+7
+00:00:35,987 --> 00:00:40,451
+Ses clients acquéreurs, Julie et Thomas,
+posent la question du moment.
+
+8
+00:00:40,490 --> 00:00:42,192
+Et si on mettait des panneaux solaires ?
+
+9
+00:00:42,213 --> 00:00:45,975
+Le commercial qui nous a appelés parle de
+2000 euros d'économie par an.
+
+10
+00:00:45,996 --> 00:00:47,837
+Sophie pourrait botter en touche.
+
+11
+00:00:47,856 --> 00:00:53,140
+Mais elle sait que ce commercial, qui les
+a démarchés par téléphone, promet le
+double de la réalité.
+
+12
+00:00:53,161 --> 00:00:59,485
+Elle sait aussi qu'une installation bien
+dimensionnée serait, elle, réellement
+pertinente sous le soleil provençal.
+
+13
+00:01:00,667 --> 00:01:07,951
+Savoir distinguer les deux, le projet
+solide du mirage commercial, c'est
+exactement la compétence de cette leçon.
+
+14
+00:01:07,971 --> 00:01:10,313
+La technique, d'abord, en clair.
+
+15
+00:01:10,394 --> 00:01:14,076
+Un panneau photovoltaïque transforme la
+lumière en courant continu.
+
+16
+00:01:15,118 --> 00:01:20,462
+Un onduleur convertit ce courant en
+alternatif, utilisable dans la maison.
+
+17
+00:01:20,501 --> 00:01:25,625
+Le tout se mesure en kW crête, la
+puissance maximale de l'installation.
+
+18
+00:01:25,665 --> 00:01:30,908
+Une maison s'équipe typiquement de 3, 6 ou
+9 kW crête.
+
+19
+00:01:30,927 --> 00:01:31,867
+Combien ça produit ?
+
+20
+00:01:31,888 --> 00:01:33,248
+Tout dépend de la région.
+
+21
+00:01:33,269 --> 00:01:34,109
+En ordre de grandeur,
+
+22
+00:01:34,930 --> 00:01:42,552
+1 kW crête produit de 900 kWh par an dans
+le nord de la France, à plus de 1 400 dans
+le sud.
+
+23
+00:01:42,572 --> 00:01:53,396
+Une installation de 6 kW crête à
+Aix-en-Provence produit ainsi autour de 8
+500 kWh par an, davantage que la
+consommation électrique moyenne d'un
+foyer.
+
+24
+00:01:53,415 --> 00:01:56,457
+Trois facteurs font ou défont la
+production.
+
+25
+00:01:56,477 --> 00:02:02,879
+L'orientation, le plein sud est idéal,
+l'est et l'ouest restent exploitables, le
+nord jamais.
+
+26
+00:02:03,799 --> 00:02:13,962
+L'inclinaison, autour de 30 degrés, et
+surtout l'ombrage, une cheminée, un arbre,
+le pignon du voisin, peuvent amputer
+sérieusement la production.
+
+27
+00:02:13,983 --> 00:02:16,304
+C'est le point que doit lever l'étude
+technique.
+
+28
+00:02:16,343 --> 00:02:25,086
+Côté matériel, les panneaux
+monocrystallins dominent le marché avec
+des rendements supérieurs à 20% et des
+garanties de production de 25 à 30 ans.
+
+29
+00:02:25,106 --> 00:02:30,848
+Le choix onduleur central contre
+micro-onduleur se joue sur l'ombrage et la
+configuration de toiture.
+
+30
+00:02:31,609 --> 00:02:33,109
+Et la batterie de stockage ?
+
+31
+00:02:33,128 --> 00:02:42,611
+Séduisante, mais son coût plombe encore la
+rentabilité dans la plupart des cas
+résidentiels début 2026, à réserver aux
+usages spécifiques.
+
+32
+00:02:42,651 --> 00:02:44,792
+Que fait-on de cette électricité ?
+
+33
+00:02:44,831 --> 00:02:45,793
+Trois modèles.
+
+34
+00:02:45,832 --> 00:02:49,753
+Le modèle dominant, l'autoconsommation
+avec vente du surplus.
+
+35
+00:02:49,774 --> 00:02:54,694
+Vous consommez votre production en direct,
+et ce que vous ne consommez pas part sur
+le réseau.
+
+36
+00:02:55,495 --> 00:03:01,680
+racheté dans le cadre de l'obligation
+d'achat via un contrat de 20 ans porté par
+EDF-OA.
+
+37
+00:03:01,699 --> 00:03:05,423
+Mais attention, tout a changé en juin
+2026.
+
+38
+00:03:05,462 --> 00:03:19,372
+Pour une installation de 9 kW crête O+,
+dont la demande de raccordement est
+déposée depuis le 5 juin 2026, le surplus
+est racheté 1,1 centime le kWh, et la
+prime à l'autoconsommation a disparu.
+
+39
+00:03:19,393 --> 00:03:20,993
+C'est l'arrêté du 1er juin 2026.
+
+40
+00:03:22,534 --> 00:03:27,218
+Les contrats signés avant conservent leurs
+conditions d'origine, primes comprises.
+
+41
+00:03:27,239 --> 00:03:29,941
+Deuxième modèle, la vente en totalité.
+
+42
+00:03:29,980 --> 00:03:33,864
+Elle n'est plus ouverte aux installations
+de 9 kW crête ou moins.
+
+43
+00:03:33,883 --> 00:03:40,248
+Troisième, l'autoconsommation totale sans
+injection, pour les petites installations
+dites « plug and play ».
+
+44
+00:03:40,269 --> 00:03:42,491
+Le chiffre qui remet les idées en place ?
+
+45
+00:03:42,510 --> 00:03:43,431
+100 batteries.
+
+46
+00:03:43,472 --> 00:03:47,615
+Un foyer autoconsomme typiquement 30 à 50
+% de sa production.
+
+47
+00:03:47,634 --> 00:03:49,657
+Le reste part sur le réseau pour presque
+rien.
+
+48
+00:03:50,477 --> 00:03:54,203
+Moralité, la rentabilité repose désormais
+sur l'autoconsommation.
+
+49
+00:03:54,263 --> 00:04:04,497
+On dimensionne l'installation sur la
+consommation de journée et on consomme
+quand le soleil brille, chauffe-eau
+programmée en journée, recharge du
+véhicule électrique, électroménager
+décalé.
+
+50
+00:04:05,397 --> 00:04:08,199
+Ce sont ces usages qui font la rentabilité
+réelle.
+
+51
+00:04:08,219 --> 00:04:09,400
+Les démarches ?
+
+52
+00:04:09,419 --> 00:04:10,260
+Dans l'ordre.
+
+53
+00:04:10,320 --> 00:04:10,841
+1.
+
+54
+00:04:10,860 --> 00:04:12,122
+L'urbanisme.
+
+55
+00:04:12,162 --> 00:04:23,807
+Une déclaration préalable de travaux en
+mairie pour une pose en toiture avec un
+point de vigilance majeur en secteur
+protégé ou près d'un monument historique
+où l'avis de l'architecte des bâtiments de
+France peut s'imposer.
+
+56
+00:04:23,848 --> 00:04:25,788
+Réflexe de professionnel.
+
+57
+00:04:25,809 --> 00:04:28,430
+Vérifier le PLU avant de promettre quoi
+que ce soit.
+
+58
+00:04:29,350 --> 00:04:30,012
+2.
+
+59
+00:04:30,052 --> 00:04:32,795
+La demande de raccordement auprès des
+NEDIS.
+
+60
+00:04:32,935 --> 00:04:33,615
+3.
+
+61
+00:04:33,636 --> 00:04:37,259
+L'attestation de conformité électrique, le
+consuel.
+
+62
+00:04:37,279 --> 00:04:38,182
+4.
+
+63
+00:04:38,201 --> 00:04:41,524
+La mise en service et le contrat
+d'obligation d'achat.
+
+64
+00:04:41,564 --> 00:04:44,067
+Un installateur sérieux pilote l'ensemble.
+
+65
+00:04:44,108 --> 00:04:47,692
+Comptez 2 à 4 mois entre signature et mise
+en service.
+
+66
+00:04:48,512 --> 00:04:52,973
+La qualification a exigé RGE, mention
+QualiTV.
+
+67
+00:04:53,014 --> 00:04:55,634
+Sans elle, pas d'obligation d'achat.
+
+68
+00:04:55,654 --> 00:05:03,516
+Côté fiscal, la TVA est réduite à 5,5% sur
+les installations de 9 kW crête au plus,
+sous condition.
+
+69
+00:05:03,536 --> 00:05:05,536
+La rentabilité maintenant, la vraie.
+
+70
+00:05:05,576 --> 00:05:14,139
+En ordre de grandeur en 2026, une
+installation résidentielle de 6 kW crête
+posée coûte autour de 10 à 15 000 euros.
+
+71
+00:05:14,158 --> 00:05:17,579
+Les recettes annuelles viennent presque
+entièrement des économies
+d'autoconsommation.
+
+72
+00:05:18,660 --> 00:05:24,062
+700 à 1100 euros par an dans le sud, selon
+le pilotage, moins dans le nord.
+
+73
+00:05:24,141 --> 00:05:34,266
+En de retour, de l'ordre de 11 à 15 ans,
+pour un matériel garanti 25 ans et plus,
+c'est encore un placement patrimonial
+correct quand le projet est bien
+dimensionné.
+
+74
+00:05:34,307 --> 00:05:35,286
+Pas un miracle.
+
+75
+00:05:35,307 --> 00:05:39,809
+Promesse de retour en 3 ou 4 ans, tout
+discours d'autonomie totale sans batterie,
+
+76
+00:05:40,528 --> 00:05:43,569
+Tout crédit signé le jour du démarchage,
+fuyez.
+
+77
+00:05:43,589 --> 00:05:50,173
+Les armes axolaires ont ruiné des ménages,
+le démarchage téléphonique y est
+d'ailleurs tout aussi interdit qu'en
+rénovation.
+
+78
+00:05:50,192 --> 00:05:56,954
+Le cas qui vous concerne au premier chef,
+vendre ou estimer une maison équipée, 4
+vérifications systématiques.
+
+79
+00:05:57,014 --> 00:05:57,355
+1.
+
+80
+00:05:57,375 --> 00:05:59,276
+Le statut de l'installation.
+
+81
+00:05:59,295 --> 00:06:00,656
+Propriété pleine du vendeur.
+
+82
+00:06:01,317 --> 00:06:08,541
+ou installation en location, en crédit non
+soldé, voire en tiers investissement avec
+location de toiture.
+
+83
+00:06:08,562 --> 00:06:10,882
+Chaque situation change la transaction.
+
+84
+00:06:10,923 --> 00:06:16,146
+Un crédit affecté doit être soldé ou
+repris, un bail de toiture suit le bien et
+s'impose à l'acquéreur.
+
+85
+00:06:17,588 --> 00:06:19,310
+Le contrat d'obligation d'achat.
+
+86
+00:06:19,329 --> 00:06:20,632
+Bonne nouvelle à connaître.
+
+87
+00:06:20,692 --> 00:06:23,975
+Il se transfère au nouveau propriétaire
+par simple avenant.
+
+88
+00:06:24,016 --> 00:06:29,581
+Un contrat signé avant juin 2026 garde son
+tarif, bien plus élevé que celui
+d'aujourd'hui.
+
+89
+00:06:29,601 --> 00:06:33,266
+C'est un vrai actif, avec ses années de
+tarif garantie restantes.
+
+90
+00:06:33,305 --> 00:06:37,389
+Demandez le contrat, la date de mise en
+service et les factures de production.
+
+91
+00:06:38,250 --> 00:06:39,011
+3.
+
+92
+00:06:39,050 --> 00:06:40,351
+La conformité.
+
+93
+00:06:40,372 --> 00:06:46,934
+Consuel, déclaration préalable, assurance
+décénale de l'installateur, garantie du
+matériel.
+
+94
+00:06:46,973 --> 00:06:51,656
+Une installation non déclarée, c'est un
+risque transmis à l'acquéreur.
+
+95
+00:06:51,675 --> 00:06:52,716
+4.
+
+96
+00:06:52,735 --> 00:06:55,197
+L'impact sur la valeur et le DPE.
+
+97
+00:06:55,237 --> 00:06:58,899
+La production photovoltaïque améliore le
+DPE, parfois d'une classe.
+
+98
+00:06:59,619 --> 00:07:07,367
+et les études du marché montrent qu'une
+installation en propriété, récente et
+documentée, est un argument de vente
+réelle.
+
+99
+00:07:07,387 --> 00:07:16,096
+Valorisez-la dans l'annonce, puissance,
+production annuelle, économie réalisée et,
+pour un contrat ancien, revenu du surplus.
+
+100
+00:07:17,218 --> 00:07:19,759
+Une maison solaire bien documentée se vend
+mieux.
+
+101
+00:07:19,778 --> 00:07:23,639
+Une maison solaire mal documentée devient
+un problème juridique.
+
+102
+00:07:23,678 --> 00:07:26,860
+La différence vaut 4 vérifications.
+
+103
+00:07:26,879 --> 00:07:30,500
+Cas pratique, le projet de Julie et Thomas
+Aix en Provence.
+
+104
+00:07:30,540 --> 00:07:34,942
+Toiture sud, 30 degrés, aucun ombrage, le
+cas d'école.
+
+105
+00:07:34,961 --> 00:07:41,362
+Consommation électrique annuelle, 7000
+kWh, télétravail et véhicules électriques
+en projet.
+
+106
+00:07:42,463 --> 00:07:54,252
+Dimensionnement retenu, 6 kW crête, 16
+panneaux, micro-onduleurs, devis d'un
+installateur local RGE Qualité V, 12 500
+euros posés.
+
+107
+00:07:54,271 --> 00:07:58,194
+Production attendue, 8 500 kWh par an.
+
+108
+00:07:58,235 --> 00:08:01,658
+Le calcul honnête, aux règles de juin
+2026.
+
+109
+00:08:01,697 --> 00:08:07,062
+Avec pilotage des usages, chauffe-eau en
+journée, taux d'autoconsommation estimé à
+45%,
+
+110
+00:08:08,463 --> 00:08:15,572
+3 800 kWh autoconsommés, soit environ 800
+euros d'économie par an, au prix de
+l'électricité de 2026.
+
+111
+00:08:15,593 --> 00:08:21,019
+Surplus vendu, 4 700 kWh à 1,1 centime,
+soit à peine 50 euros.
+
+112
+00:08:24,303 --> 00:08:31,690
+plus aucune prime, recette totale autour
+de 850 euros par an, temps de retour près
+de 15 ans.
+
+113
+00:08:31,711 --> 00:08:34,813
+Alors Sophie, leur agente, change la
+donne.
+
+114
+00:08:34,833 --> 00:08:38,837
+Le véhicule électrique sera rechargé en
+journée, pendant le télétravail.
+
+115
+00:08:38,857 --> 00:08:43,100
+L'autoconsommation monte à 60%, environ
+1100 euros d'économie par an,
+
+116
+00:08:43,802 --> 00:08:51,431
+et un retour ramené à 11 ans, puis plus de
+15 ans de production quasi gratuite et le
+commercial du démarchage téléphonique.
+
+117
+00:08:51,471 --> 00:08:59,421
+Avec ses 2000 euros d'économie dès la
+première année et son crédit assigné sur
+place, Julie et Thomas savent maintenant
+répondre.
+
+118
+00:08:59,461 --> 00:09:03,525
+Et Sophie, qui leur a expliqué tout cela,
+vient de gagner deux clients à vie.
+
+119
+00:09:04,206 --> 00:09:06,886
+Récapitulons cette leçon et cette
+formation.
+
+120
+00:09:06,927 --> 00:09:08,067
+Le photovoltaïque.
+
+121
+00:09:08,107 --> 00:09:12,009
+Une production qui dépend de la région, de
+l'orientation et de l'ombrage.
+
+122
+00:09:12,029 --> 00:09:15,390
+L'autoconsommation avec vente du surplus
+comme modèle de référence.
+
+123
+00:09:15,410 --> 00:09:16,751
+Des démarches balisées.
+
+124
+00:09:16,792 --> 00:09:18,131
+Déclaration préalable.
+
+125
+00:09:18,172 --> 00:09:18,993
+Consuel.
+
+126
+00:09:19,052 --> 00:09:19,913
+Enedis.
+
+127
+00:09:19,952 --> 00:09:21,153
+Obligation d'achat.
+
+128
+00:09:21,192 --> 00:09:31,418
+Une rentabilité qui repose désormais sur
+l'autoconsommation avec un retour de 11 à
+15 ans à mille lieux des promesses du
+démarchage et quatre vérifications avant
+toute transaction d'un bien équipé.
+
+129
+00:09:31,878 --> 00:09:45,822
+Vous avez désormais le panorama complet,
+le DPE et son calendrier, les travaux et
+leur ordre, les aides et leur cumul, le
+solaire et sa rentabilité, les chiffres
+évolueront, les mécanismes eux sont là
+pour durer.
+
+130
+00:09:45,841 --> 00:09:48,182
+Vos réflexes de vérification aussi.
+
+131
+00:09:48,202 --> 00:09:56,666
+francerenoff arrobase l'IMIS aux
+méta-adresses, donc imis, d'Epicard &
+Covengren.com.
+
+132
+00:09:56,686 --> 00:10:00,106
+Vous reste une étape, l'examen final de 15
+questions.
+
+133
+00:10:01,048 --> 00:10:09,172
+Prenez le temps de revoir vos notes et
+faites de la transition énergétique ce
+qu'elle est devenue sur le marché, votre
+meilleur argument professionnel.

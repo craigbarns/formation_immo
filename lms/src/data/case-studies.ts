@@ -181,7 +181,7 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
     lessonSlug: "negociation-mandat",
     title: "Calcul d'honoraires — mandat exclusif vs simple",
     description:
-      "Un propriétaire hésite entre un mandat simple à 5 % et un mandat exclusif à 4 % pour un bien estimé à 350 000 €. Historiquement, un mandat exclusif se vend en moyenne 15 % plus cher qu'un mandat simple dans le secteur. Calculez les honoraires dans chaque scénario et le gain net pour le vendeur.",
+      "Un propriétaire hésite entre un mandat simple à 5 % et un mandat exclusif à 4 % pour un bien estimé à 350 000 €. Hypothèse de l'exercice : d'après les ventes de votre agence dans ce secteur, vos mandats exclusifs se sont vendus en moyenne 15 % plus cher que vos mandats simples. Calculez les honoraires dans chaque scénario et le gain net pour le vendeur.",
     propertyDetails: [
       { label: "Estimation", value: "350 000 €" },
       { label: "Taux mandat simple", value: "5 %" },
@@ -903,7 +903,7 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
     lessonSlug: "argumentaire",
     title: "Argumentaire chiffré — convaincre un vendeur sceptique",
     description:
-      "Un vendeur veut vendre seul son T3 à Toulouse estimé à 230 000 €. Il pense économiser 5 % d'honoraires. Vous disposez de données prouvant qu'un mandat exclusif se vend 12 % plus cher et 40 % plus vite qu'un PAP. Construisez l'argumentaire chiffré pour le convaincre de signer.",
+      "Un vendeur veut vendre seul son T3 à Toulouse estimé à 230 000 €. Il pense économiser 5 % d'honoraires. Hypothèse de l'exercice : sur vos deux dernières années, vos mandats exclusifs se sont vendus 12 % plus cher et 40 % plus vite que les ventes entre particuliers du secteur. Construisez l'argumentaire chiffré pour le convaincre de signer.",
     propertyDetails: [
       { label: "Bien", value: "T3 Toulouse — 68 m²" },
       { label: "Estimation", value: "230 000 €" },

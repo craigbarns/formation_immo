@@ -3,9 +3,11 @@
 > **Narration audio (TTS)** : texte nettoyé dans `*.narration.txt` (même nom que ce fichier). Régénérer avec `node lms/scripts/extract-narration-for-audio.mjs`, puis MP3 via `node lms/scripts/mistral-voxtral-tts.mjs`.
 ## "Prospection : scripts qui convertissent"
 
-**Durée** : 8 minutes 30 (environ 1450 mots)
+**Durée** : 9 minutes 30 (environ 1600 mots)
 **Voix ElevenLabs recommandée** : Antoni (dynamique, énergique, persuasif)
 **Avatar** : Homme 30-40 ans, look décontracté-chic, chemise ouverte, environnement startup/coworking
+
+> **Mise à jour octobre 2026** : depuis le 11 août 2026, le démarchage téléphonique d'un particulier exige son consentement préalable (art. L.223-1 du Code de la consommation, loi n° 2025-594 du 30 juin 2025, décret n° 2026-662 du 23 juillet 2026). Bloctel a disparu. Les accroches et le cas pratique ne visent plus que des contacts qui ont accepté d'être appelés.
 
 ---
 
@@ -27,11 +29,11 @@ Modern real estate agent in co-working space, making phone calls with headset, m
 
 [B-ROLL : Agent frustré qui raccroche, regarde son téléphone avec découragement]
 
-"La prospection téléphonique, c'est le cauchemar de la moitié des agents immobiliers. Pourtant... c'est aussi ce qui sépare les bons des excellents. Ce qui fait la différence entre un agent qui survit... et un agent qui prospère."
+"Et depuis le 11 août 2026, il y a pire : cinquante appels à froid chez des particuliers, ce sont cinquante infractions. [PAUSE 2s] Le téléphone reste pourtant l'outil qui sépare les bons agents des excellents. À une condition : appeler les bonnes personnes, de la bonne manière."
 
 [B-ROLL : Transition vers un agent confiant au téléphone, souriant, qui prend des notes]
 
-"Bonjour et bienvenue. Aujourd'hui, je vous donne les scripts qui convertissent. Ceux qui transforment un froid 'non merci' en un chaud 'quand pouvez-vous passer ?'"
+"Bonjour et bienvenue. Aujourd'hui, je vous donne les scripts qui convertissent, et les règles qui vous permettent de les utiliser sans risque. Ceux qui transforment un 'je vais réfléchir' en un 'quand pouvez-vous passer ?'"
 
 ---
 
@@ -43,47 +45,63 @@ Modern real estate agent in co-working space, making phone calls with headset, m
 
 [B-ROLL : Gros plan sur un script mal écrit, puis croix rouge qui l'efface]
 
-"Ce type d'approche ne fonctionne plus. Les gens reçoivent dix appels par jour. Ils ont développé un radar. Ils sentent le vendeur à trois kilomètres. Et ils raccrochent avant même que vous ayez fini votre phrase."
+"Ce type d'approche ne fonctionnait déjà plus. Les gens recevaient dix appels par jour. Ils ont développé un radar. Et le législateur a fini par trancher : un particulier ne peut plus être démarché par téléphone s'il ne l'a pas accepté au préalable."
 
 [B-ROLL : Graphique montrant le taux de conversion qui chute avec les approches traditionnelles]
 
-"Mais il y a pire. Certains agents ne prospectent plus du tout. Ils ont abandonné. Ils attendent que les leads tombent du ciel. Les portails. Les recommandations. [PAUSE 2s] Et ils attendent longtemps."
+"Certains agents en concluent qu'il faut arrêter de prospecter. Ils attendent que les leads tombent du ciel. Les portails. Les recommandations. [PAUSE 2s] Et ils attendent longtemps."
 
 [B-ROLL : Agent qui regarde sa boîte mail vide, puis l'horloge qui tourne]
 
-"La prospection, c'est comme un muscle. Plus vous l'exercez, plus il devient fort. Aujourd'hui, on va vous donner l'entraînement qui fait la différence."
+"La prospection, c'est comme un muscle. Ce qui change, c'est l'ordre des exercices : d'abord donner envie au propriétaire de vous laisser l'appeler, ensuite réussir l'appel."
 
 ---
 
-#### [SEGMENT 3 - CONTENU STRUCTURÉ] (1:45 - 6:15)
+#### [SEGMENT 3 - CONTENU STRUCTURÉ] (1:45 - 7:00)
 
 [B-ROLL : Titre "LES 4 PILIERS DE LA PROSPECTION QUI CONVERTIT"]
 
-"Voici les quatre piliers d'une prospection qui convertit. Ignorez l'un d'eux, et vos résultats s'effondrent. Maîtrisez-les tous, et vous deviendrez une machine à rendez-vous."
+"Voici les quatre piliers d'une prospection qui convertit. Ignorez l'un d'eux, et vos résultats s'effondrent. Maîtrisez-les tous, et votre agenda se remplit."
 
 ---
 
-**PILIER 1 : LA PRÉPARATION** (1:45 - 2:45)
+**PILIER 1 : LA PRÉPARATION ET LE DROIT D'APPELER**
 
 [B-ROLL : Agent qui prépare ses appels avec une liste, un CRM, des fiches prospect]
 
-"Premier pilier : la préparation. Avant de décrocher le téléphone, vous devez savoir POURQUOI vous appelez cette personne. Pas de hasard. Pas de 'je vais voir'."
+"Premier pilier : la préparation. Avant de décrocher le téléphone, deux questions. [PAUSE 1s] Première question : ai-je le droit d'appeler cette personne ?"
+
+[B-ROLL : Article L.223-1 du Code de la consommation qui s'affiche, puis le logo Bloctel barré]
+
+"Depuis le 11 août 2026, Bloctel n'existe plus, et la logique s'est inversée. Vous ne vérifiez plus si la personne a refusé les appels : vous devez prouver qu'elle les a acceptés. Un accord libre, donné spécifiquement pour le téléphone, par un geste clair : une case non pré-cochée sur votre formulaire d'estimation, par exemple. Il vaut un an au plus, ne se renouvelle jamais tacitement, et vous en gardez la preuve trois ans."
+
+[B-ROLL : Annonce Leboncoin avec un numéro de téléphone, puis un panneau 'À vendre' sur un balcon]
+
+"Attention au piège classique. Le vendeur qui publie son numéro sur Leboncoin, ou sur un panneau 'À vendre', ne vous a rien accordé. Il l'a publié pour des acheteurs, pas pour des agences. L'appeler pour lui proposer un mandat, c'est du démarchage interdit : jusqu'à 375 000 euros d'amende pour une société."
+
+[B-ROLL : Liste des contacts autorisés qui apparaît, coches vertes]
+
+"Alors, qui pouvez-vous appeler ? Vos clients sous mandat, pour leur mandat. Les personnes qui vous ont demandé d'être rappelées. Les contacts qui ont accepté vos appels, il y a moins d'un an. Et les professionnels : un commerçant, un notaire ou un gestionnaire de patrimoine ne sont pas concernés par cette règle. Même avec un accord, on appelle en semaine, entre 10 heures et 13 heures, puis entre 14 heures et 20 heures, et pas plus de quatre tentatives par mois."
+
+[B-ROLL : Agent qui dépose un courrier soigné dans une boîte aux lettres]
+
+"Et les vendeurs en direct ? Allez les voir, ou écrivez-leur un vrai courrier avec une étude des ventes de leur rue. Votre objectif : qu'ils vous appellent, ou qu'ils cochent la case."
 
 [B-ROLL : Exemple de fiche prospect avec informations détaillées]
 
-"Si vous appelez un prospect qui a consulté votre site : vous savez quel bien il a regardé. Combien de temps. Combien de fois. Si vous appelez un propriétaire d'un secteur ciblé : vous connaissez son adresse. L'estimation de son bien. Les ventes récentes dans sa rue."
+"Deuxième question : pourquoi j'appelle cette personne ? Pas de hasard. Si un vendeur a demandé une estimation sur votre site, vous savez quel bien, quelle adresse, quelles ventes récentes dans sa rue. Si un acquéreur vous a écrit, vous savez quel bien l'a intéressé."
 
-[B-ROLL : Écran CRM montrant l'historique des interactions]
+[B-ROLL : Écran CRM montrant l'historique des interactions et la date du consentement]
 
-"Votre objectif : personnaliser chaque appel. Dès les premières secondes, le prospect doit sentir que cet appel est pour LUI. Pas un appel en série."
+"Votre objectif : personnaliser chaque appel. Dès les premières secondes, la personne doit sentir que cet appel est pour ELLE. Pas un appel en série."
 
 ---
 
-**PILIER 2 : L'ACCROCHE** (2:45 - 4:00)
+**PILIER 2 : L'ACCROCHE**
 
 [B-ROLL : Graphique montrant les 7 premières secondes qui déterminent la suite]
 
-"Deuxième pilier : l'accroche. Vous avez sept secondes. Sept secondes pour que le prospect décide de vous écouter... ou de raccrocher."
+"Deuxième pilier : l'accroche. Vous avez sept secondes. Sept secondes pour que votre interlocuteur décide de vous écouter... ou de raccrocher."
 
 [B-ROLL : Compteur de 7 secondes qui défile]
 
@@ -91,35 +109,35 @@ Modern real estate agent in co-working space, making phone calls with headset, m
 
 [B-ROLL : Script qui apparaît à l'écran, premier exemple]
 
-"Accroche numéro un : pour un propriétaire potentiel. 'Bonjour Monsieur Dupont, c'est Marc de l'agence Centrale. Je ne vous dérange pas deux minutes ? Je viens de vendre un appartement rue de la République, à deux pas de chez vous, et je me demandais si vous connaissiez quelqu'un qui chercherait à acheter dans le secteur ?'"
+"Accroche numéro un : pour un vendeur qui a demandé une estimation. 'Bonjour Monsieur Dupont, c'est Marc de l'agence Centrale. Vous avez demandé hier une estimation de votre appartement rue de la République, et accepté qu'on vous rappelle. Vous avez deux minutes ? Je viens justement de vendre un trois-pièces dans votre rue.'"
 
 [B-ROLL : Explication visuelle de l'accroche]
 
-"Pourquoi ça marche ? Vous ne vendez rien. Vous demandez de l'aide. Vous créez une référence locale. Vous êtes un voisin, pas un vendeur."
+"Pourquoi ça marche ? Vous répondez à sa demande. Vous rappelez le cadre de l'appel. Et vous créez tout de suite une référence locale. Vous êtes un voisin expert, pas un vendeur."
 
 [B-ROLL : Deuxième exemple qui apparaît]
 
-"Accroche numéro deux : pour un acheteur potentiel. 'Bonjour Madame Martin, c'est Julie de l'agence Partenaire. Vous avez consulté notre annonce rue de Sèze la semaine dernière. Je voulais juste vous prévenir : nous avons plusieurs visites programmées cette semaine, et je me demandais si vous seriez intéressée par un créneau avant que le bien ne parte ?'"
+"Accroche numéro deux : pour un acquéreur qui vous a écrit. 'Bonjour Madame Martin, c'est Julie de l'agence Partenaire. Vous nous avez écrit au sujet de l'appartement rue de Sèze. Je voulais vous prévenir : nous avons trois visites programmées cette semaine. Souhaitez-vous un créneau ?'"
 
 [B-ROLL : Explication]
 
-"Vous créez de l'urgence. Vous montrez que le bien est demandé. Vous êtes là pour LUI, pas pour vous."
+"Vous créez de l'urgence, à une condition : qu'elle soit vraie. Inventer des visites ou une offre, c'est une pratique commerciale trompeuse."
 
 [B-ROLL : Troisième exemple]
 
-"Accroche numéro trois : pour un ancien prospect. 'Bonjour Monsieur Bernard, c'est Thomas de l'agence Proprio. On s'était parlé il y a six mois pour votre projet de vente. Je voulais juste vous donner un coup de fil pour vous dire que le marché a bien évolué depuis, et que si vous envisagez toujours de vendre, ça pourrait valoir le coup qu'on en discute.'"
+"Accroche numéro trois : pour un ancien prospect. 'Bonjour Monsieur Bernard, c'est Thomas de l'agence Proprio. On s'était parlé il y a six mois pour votre projet de vente, et vous m'aviez autorisé à vous rappeler. Le marché a bien évolué depuis : si vous envisagez toujours de vendre, ça pourrait valoir le coup qu'on en discute.'"
 
 [B-ROLL : Explication]
 
-"Vous montrez que vous vous souvenez. Que vous suivez le marché. Que vous pensez à LUI."
+"Vous montrez que vous vous souvenez. Que vous suivez le marché. Mais avant d'appeler, vérifiez la date de son accord dans votre CRM : au-delà d'un an, il faut le lui redemander, par courrier ou au prochain rendez-vous."
 
 ---
 
-**PILIER 3 : L'ÉCOUTE ACTIVE** (4:00 - 5:15)
+**PILIER 3 : L'ÉCOUTE ACTIVE**
 
 [B-ROLL : Deux personnes au téléphone, visualisation des ondes sonores, ton chaleureux]
 
-"Troisième pilier : l'écoute active. Ce n'est PAS un monologue. C'est un dialogue. Vous parlez trente pour cent du temps. Le prospect parle soixante-dix pour cent."
+"Troisième pilier : l'écoute active. Ce n'est PAS un monologue. C'est un dialogue. Vous parlez trente pour cent du temps. Votre interlocuteur parle soixante-dix pour cent."
 
 [B-ROLL : Graphique 30/70 qui apparaît]
 
@@ -127,15 +145,15 @@ Modern real estate agent in co-working space, making phone calls with headset, m
 
 [B-ROLL : Agent qui prend des notes en écoutant, hochements de tête]
 
-"Prenez des notes. Beaucoup de notes. Le nom de son chien. Son prochain voyage. Sa crainte principale. Ces détails, vous les réutiliserez. 'Vous me disiez que vous partiez en vacances en juillet, c'est pour ça que je vous appelle maintenant...'"
+"Prenez des notes. Sa date de déménagement. Son prochain voyage. Sa crainte principale. Ces détails, vous les réutiliserez. 'Vous me disiez que vous partiez en juillet, c'est pour ça que je vous appelle maintenant...'"
 
 [B-ROLL : Exemple de prise de notes détaillée]
 
-"Le prospect doit se sentir compris. Écouté. Important. Pas comme un numéro dans une liste."
+"La personne doit se sentir comprise. Écoutée. Importante. Pas comme un numéro dans une liste."
 
 ---
 
-**PILIER 4 : LA CONCLUSION** (5:15 - 6:15)
+**PILIER 4 : LA CONCLUSION**
 
 [B-ROLL : Agent qui conclut un appel avec le sourire, rendez-vous qui s'inscrit dans l'agenda]
 
@@ -143,43 +161,31 @@ Modern real estate agent in co-working space, making phone calls with headset, m
 
 [B-ROLL : Les trois types de conclusion qui apparaissent]
 
-"Trois options. Option A : un rendez-vous. 'Parfait, je vous propose qu'on se voie mardi à 14h pour faire le point. Ça vous va ?' Option B : un rappel programmé. 'Très bien, je vous rappelle début septembre, après vos vacances. C'est noté ?' Option C : un envoi de documents. 'Je vous envoie ça par mail dès maintenant. Vous me direz ce que vous en pensez, et je vous rappelle jeudi ?'"
+"Trois options. Option A : un rendez-vous. 'Parfait, je vous propose qu'on se voie mardi à 14h pour faire le point. Ça vous va ?' Option B : un rappel convenu. 'Très bien, je vous rappelle début septembre, après vos vacances. Vous êtes d'accord ?' Option C : un envoi de documents. 'Je vous envoie ça par mail dès maintenant, et je vous rappelle jeudi ?'"
 
 [B-ROLL : Agent qui vérifie son agenda, envoie un mail, confirme le prochain contact]
 
-"Chaque appel doit avoir une suite. Une date. Une heure. Un engagement. Si le prospect dit 'appelez-moi dans un mois', vous dites : 'Parfait, c'est noté pour le 15 juin à 10h. Je vous envoie un SMS de confirmation la veille ?'"
+"Chaque appel doit avoir une suite. Une date. Une heure. Un engagement, que vous notez dans votre CRM. Et si la personne vous dit qu'elle ne veut plus être appelée, notez-le aussitôt : elle peut retirer son accord à tout moment, même oralement, sans se justifier."
 
 ---
 
-#### [SEGMENT 4 - CAS PRATIQUE] (6:15 - 7:45)
+#### [SEGMENT 4 - CAS PRATIQUE] (7:00 - 8:45)
 
 [B-ROLL : Titre "CAS PRATIQUE - APPEL EN DIRECT"]
 
-"Passons au cas pratique. Un appel réel que j'ai enregistré - avec l'accord du prospect. Écoutez bien la structure."
+"Passons au cas pratique. Un appel réel que j'ai enregistré, avec l'accord de mon interlocutrice. Écoutez bien la structure."
 
 [B-ROLL : Visualisation d'un téléphone qui sonne, puis transition vers le reconstitution de l'appel]
-
-"*Sonnerie*"
-
-[B-ROLL : Prospect qui décroche]
 
 "Prospect : 'Allô ?'"
 
 [B-ROLL : Agent au téléphone, souriant, ton naturel]
 
-"Agent : 'Bonjour Madame Lefranc, c'est Antoine de l'agence ImmoLyon. Je ne vous dérange pas deux minutes ?'"
-
-[B-ROLL : Prospect qui hésite]
-
-"Prospect : 'Euh... ça dépend. De quoi s'agit-il ?'"
-
-[B-ROLL : Agent qui consulte sa fiche]
-
-"Agent : 'Vous aviez consulté notre annonce pour l'appartement rue de la Charité il y a deux semaines. Je voulais juste savoir si vous aviez trouvé ce que vous cherchiez ?'"
+"Agent : 'Bonjour Madame Lefranc, c'est Antoine de l'agence ImmoLyon. Vous nous aviez écrit il y a deux semaines au sujet de l'appartement rue de la Charité, et vous aviez accepté qu'on vous rappelle. Vous avez deux minutes ?'"
 
 [B-ROLL : Prospect qui se détend]
 
-"Prospect : 'Ah oui, je me souviens. Non, en fait, on a pas encore trouvé. On hésite encore sur le secteur.'"
+"Prospect : 'Ah oui, je me souviens. Il était déjà vendu, d'ailleurs. On n'a toujours pas trouvé, on hésite encore sur le secteur.'"
 
 [B-ROLL : Agent qui prend des notes]
 
@@ -215,11 +221,7 @@ Modern real estate agent in co-working space, making phone calls with headset, m
 
 [B-ROLL : Agent qui confirme]
 
-"Agent : 'Parfait, c'est noté. Je vous envoie un SMS avec l'adresse exacte et mes coordonnées. Et au cas où, vous avez mon numéro si vous avez des questions d'ici là.'"
-
-[B-ROLL : Prospect satisfait]
-
-"Prospect : 'Super, merci beaucoup !'"
+"Agent : 'Parfait, c'est noté. Je vous envoie un SMS avec l'adresse exacte et mes coordonnées. Et vous avez mon numéro si vous avez des questions d'ici là.'"
 
 [B-ROLL : Agent qui raccroche avec le sourire]
 
@@ -227,11 +229,11 @@ Modern real estate agent in co-working space, making phone calls with headset, m
 
 [B-ROLL : Récapitulatif de l'appel avec les étapes clés]
 
-"Analysons cet appel. Accroche personnalisée : référence à l'annonce consultée. Écoute active : questions ouvertes sur le projet. Identification du besoin : budget, secteur, type de bien. Proposition de valeur : bien exclusif, pas encore en ligne. Closing : proposition de deux créneaux, pas plus. Résultat ? Rendez-vous pris en quatre minutes."
+"Analysons cet appel. Un cadre légal clair : elle avait accepté d'être rappelée, et l'agent le rappelle dès la première phrase. Accroche personnalisée : référence à sa demande. Écoute active : questions ouvertes sur le projet. Identification du besoin : budget, secteur, type de bien. Proposition de valeur : un bien pas encore en ligne. Closing : deux créneaux, pas plus. Résultat ? Rendez-vous pris en quatre minutes."
 
 ---
 
-#### [SEGMENT 5 - CONCLUSION] (7:45 - 8:30)
+#### [SEGMENT 5 - CONCLUSION] (8:45 - 9:30)
 
 [B-ROLL : Retour sur l'agent formateur, ton motivant]
 
@@ -239,15 +241,15 @@ Modern real estate agent in co-working space, making phone calls with headset, m
 
 [B-ROLL : Liste d'actions qui apparaît à l'écran]
 
-"Un : préparez vos appels. Fiches prospects. Informations. Objectifs. Deux : choisissez UNE accroche et travaillez-la jusqu'à la maîtriser parfaitement. Trois : écoutez plus que vous ne parlez. Quatre : concluez chaque appel avec un engagement."
+"Un : faites le tri dans votre fichier. Pour chaque particulier, qui a accepté vos appels, quand, et comment le prouver ? Deux : ajoutez une case de consentement, non pré-cochée, à votre formulaire d'estimation et à vos demandes de contact. Trois : choisissez UNE accroche et travaillez-la jusqu'à la maîtriser parfaitement. Quatre : concluez chaque appel avec un engagement."
 
-[B-ROLL : Agent qui fait ses 50 appels avec détermination]
+[B-ROLL : Agent qui enchaîne ses appels avec détermination]
 
-"Faites cinquante appels cette semaine avec cette méthode. Cinquante. Pas quarante-neuf. Cinquante. Et notez vos résultats. Combien de rendez-vous ? Combien de mandats ?"
+"Puis appelez tous les contacts qui vous y ont autorisé. Tous. Et notez vos résultats. Combien de rendez-vous ? Combien de mandats ?"
 
 [B-ROLL : Graphique de progression qui monte]
 
-"Je vous garantis que vos chiffres vont exploser. Parce que la prospection, ce n'est pas de la chance. C'est de la technique. Et maintenant, vous avez la technique."
+"Vous verrez vos chiffres progresser. Parce que la prospection, ce n'est pas de la chance. C'est de la technique, dans un cadre que vous maîtrisez. Et maintenant, vous avez les deux."
 
 [B-ROLL : Logo formation, écran de fin]
 
@@ -259,21 +261,28 @@ Modern real estate agent in co-working space, making phone calls with headset, m
 
 | Élément | Détail |
 |---------|--------|
-| **Durée** | 8 min 30 |
-| **Mots** | ~1450 |
+| **Durée** | 9 min 30 |
+| **Mots** | ~1600 |
 | **Voix** | Antoni (ElevenLabs) |
 | **Ton** | Dynamique, énergique, motivant |
 | **Cible** | Agents immobiliers voulant améliorer leur prospection |
-| **Objectif** | Maîtriser les scripts de prospection téléphonique |
-| **Call-to-action** | 50 appels cette semaine avec la méthode |
+| **Objectif** | Maîtriser les scripts d'appel dans le cadre du consentement préalable |
+| **Call-to-action** | Trier son fichier, collecter les consentements, appeler tous les contacts autorisés |
 
 ### 🎯 POINTS CLÉS À RETENIR
 
-1. **4 piliers** : Préparation → Accroche → Écoute active → Conclusion
-2. **7 secondes** pour convaincre le prospect de rester
-3. **30/70** : Vous parlez 30%, le prospect parle 70%
-4. **3 types d'accroches** : Propriétaire, Acheteur, Ancien prospect
-5. **Jamais d'appel sans objectif** clair à la fin
+1. **Le droit d'appeler d'abord** : depuis le 11 août 2026, pas d'appel de démarchage à un particulier sans son consentement préalable (1 an maximum, preuve conservée 3 ans). Bloctel a disparu ; une annonce Leboncoin ne vaut pas accord.
+2. **4 piliers** : Préparation → Accroche → Écoute active → Conclusion
+3. **7 secondes** pour convaincre votre interlocuteur de rester
+4. **30/70** : Vous parlez 30%, votre interlocuteur parle 70%
+5. **3 types d'accroches** : demande d'estimation, acquéreur entrant, ancien prospect consentant
+6. **Jamais d'appel sans objectif** clair à la fin
+
+### 📚 RÉFÉRENCES
+
+- Code de la consommation, art. L.223-1 (consentement préalable) et L.242-16 (amende jusqu'à 75 000 € / 375 000 €)
+- Loi n° 2025-594 du 30 juin 2025 ; décret n° 2026-662 du 23 juillet 2026 (recueil, durée et preuve du consentement)
+- Code de la consommation, art. D.223-8 et D.223-9 (jours, horaires, fréquence des appels)
 
 ---
 

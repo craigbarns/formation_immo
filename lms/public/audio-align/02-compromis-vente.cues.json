@@ -1,133 +1,138 @@
 {
   "version": 1,
-  "duration": 471.56,
+  "duration": 506.54,
   "slides": [
     {
       "index": 0,
-      "start": 0.391,
+      "start": 0.231,
       "source": "auto"
     },
     {
       "index": 1,
-      "start": 33.186,
+      "start": 34.977,
       "source": "auto"
     },
     {
       "index": 2,
-      "start": 65.175,
+      "start": 65.301,
       "source": "auto"
     },
     {
       "index": 3,
-      "start": 96.229,
+      "start": 95.903,
       "source": "auto"
     },
     {
       "index": 4,
-      "start": 129.506,
+      "start": 130.328,
       "source": "auto"
     },
     {
       "index": 5,
-      "start": 160.777,
+      "start": 161.802,
       "source": "auto"
     },
     {
       "index": 6,
-      "start": 194.488,
+      "start": 194.324,
       "source": "auto"
     },
     {
       "index": 7,
-      "start": 235.05,
+      "start": 224.732,
       "source": "auto"
     },
     {
       "index": 8,
-      "start": 265.397,
+      "start": 263.117,
       "source": "auto"
     },
     {
       "index": 9,
-      "start": 297.583,
+      "start": 295.622,
       "source": "auto"
     },
     {
       "index": 10,
-      "start": 329.801,
+      "start": 326.008,
       "source": "auto"
     },
     {
       "index": 11,
-      "start": 361.097,
+      "start": 361.099,
       "source": "auto"
     },
     {
       "index": 12,
-      "start": 394.842,
+      "start": 391.187,
       "source": "auto"
     },
     {
       "index": 13,
-      "start": 428.893,
+      "start": 421.236,
       "source": "auto"
     },
     {
       "index": 14,
-      "start": 461.787,
+      "start": 454.455,
+      "source": "auto"
+    },
+    {
+      "index": 15,
+      "start": 486.414,
       "source": "auto"
     }
   ],
   "keyTerms": [
     {
       "term": "Cette",
-      "start": 7.854,
-      "end": 8.034
+      "start": 7.42,
+      "end": 7.58
     },
     {
       "term": "tout",
-      "start": 9.354,
-      "end": 9.474
+      "start": 8.842,
+      "end": 8.942
     },
     {
       "term": "faire",
-      "start": 9.514,
-      "end": 9.674
+      "start": 8.982,
+      "end": 9.142
     },
     {
       "term": "description",
-      "start": 13.096,
-      "end": 13.556
+      "start": 12.446,
+      "end": 12.987
     },
     {
       "term": "bien",
-      "start": 13.736,
-      "end": 13.876
+      "start": 13.167,
+      "end": 13.348
     },
     {
       "term": "délai",
-      "start": 15.576,
-      "end": 15.797
+      "start": 15.13,
+      "end": 15.37
     },
     {
       "term": "Aujourd'hui,",
-      "start": 17.737,
-      "end": 18.558
+      "start": 17.973,
+      "end": 18.634
     },
     {
       "term": "nous",
-      "start": 18.578,
-      "end": 18.698
+      "start": 18.654,
+      "end": 18.774
     },
     {
       "term": "Vous",
-      "start": 21.158,
-      "end": 21.258
+      "start": 21.358,
+      "end": 21.478
     },
     {
       "term": "rédiger",
-      "start": 21.959,
-      "end": 22.319
+      "start": 22.199,
+      "end": 22.62
     }
   ]
 }

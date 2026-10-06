@@ -78,11 +78,11 @@ Le DPE évalue la consommation énergétique et l'impact en gaz à effet de serr
 
 [B-ROLL : Graphique animé montrant la répartition des classes énergétiques en France]
 
-**Obligation** : tous les biens en vente ou location depuis le 1er juillet 2021. [PAUSE 1s] Avant, il y avait des seuils de surface. [PAUSE 1s] Plus maintenant. [PAUSE 1s] Même un studio de 8 m² doit avoir son DPE.
+**Obligation** : pour toute vente depuis 2006, et pour toute location depuis 2007. [PAUSE 1s] Depuis le 1er juillet 2021, il est opposable : s'il est erroné, l'acquéreur ou le locataire peut se retourner contre le vendeur ou le bailleur. [PAUSE 1s] Et depuis le 1er janvier 2026, l'électricité y pèse moins lourd : environ 850 000 logements chauffés à l'électricité gagnent une classe.
 
 [B-ROLL : Comparaison avant/après 2021 des biens concernés]
 
-**Validité** : 10 ans maximum. [PAUSE 1s] Mais attention : si des travaux d'amélioration énergétique ont été réalisés, le DPE doit être refait.
+**Validité** : 10 ans. [PAUSE 1s] Mais attention : les DPE réalisés avant le 1er juillet 2021 ne sont plus valables depuis le 1er janvier 2025. [PAUSE 1s] Et après des travaux d'amélioration énergétique, faites-le refaire : un meilleur classement valorise le bien.
 
 [B-ROLL : Exemple de DPE avec travaux réalisés et nouveau classement]
 
@@ -94,7 +94,7 @@ Le DPE évalue la consommation énergétique et l'impact en gaz à effet de serr
 
 [B-ROLL : Calculatrice montrant le coût moyen]
 
-**Point crucial** : les passoires thermiques, classes F et G, doivent faire l'objet d'une mention obligatoire dans tous les documents de commercialisation. [PAUSE 1s] L'article L. 126-26 du Code de la construction et de l'habitation, issu de la Loi n° 2021-1104 du 22 août 2021 dite "Loi Climat et Résilience", l'impose. [PAUSE 2s]
+**Point crucial** : pour les passoires énergétiques, classes F et G, l'annonce doit porter la mention « logement à consommation énergétique excessive ». [PAUSE 1s] Et la Loi n° 2021-1104 du 22 août 2021, dite "Loi Climat et Résilience", les retire progressivement du marché locatif : les logements G ne sont plus décents depuis le 1er janvier 2025, les F ne le seront plus au 1er janvier 2028. [PAUSE 2s]
 
 ---
 

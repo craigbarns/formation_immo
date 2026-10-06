@@ -46,7 +46,7 @@ export const SCENARIO_ANNONCE_PARFAITE: InteractiveScenario = {
       id: "info-photo-mauvaise",
       variant: "warn",
       title: "La photo = 80% du clic",
-      body: "Statistiquement, la photo principale determine 80% des clics sur les portails. Une photo amateur au smartphone reduit dramatiquement la visibilite.\n\nInvestissez dans des photos professionnelles : le retour sur investissement est immediat.",
+      body: "La photo principale decide de l'essentiel des clics sur les portails. Une photo amateur au smartphone reduit dramatiquement la visibilite.\n\nInvestissez dans des photos professionnelles : le retour sur investissement est immediat.",
       next: "choice-photo",
     }),
     "info-photo-aucune": s({

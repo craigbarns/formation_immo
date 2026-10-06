@@ -1,143 +1,143 @@
 {
   "version": 1,
-  "duration": 533.06,
+  "duration": 549.175,
   "slides": [
     {
       "index": 0,
-      "start": 0.171,
+      "start": 0.271,
       "source": "auto"
     },
     {
       "index": 1,
-      "start": 31.399,
+      "start": 30.478,
       "source": "auto"
     },
     {
       "index": 2,
-      "start": 62.868,
+      "start": 64.647,
       "source": "auto"
     },
     {
       "index": 3,
-      "start": 96.059,
+      "start": 96.31,
       "source": "auto"
     },
     {
       "index": 4,
-      "start": 127.433,
+      "start": 128.892,
       "source": "auto"
     },
     {
       "index": 5,
-      "start": 162.455,
+      "start": 161.287,
       "source": "auto"
     },
     {
       "index": 6,
-      "start": 194.624,
+      "start": 195.941,
       "source": "auto"
     },
     {
       "index": 7,
-      "start": 225.917,
+      "start": 228.06,
       "source": "auto"
     },
     {
       "index": 8,
-      "start": 256.792,
+      "start": 266.673,
       "source": "auto"
     },
     {
       "index": 9,
-      "start": 288.496,
+      "start": 305.696,
       "source": "auto"
     },
     {
       "index": 10,
-      "start": 320.789,
+      "start": 340.393,
       "source": "auto"
     },
     {
       "index": 11,
-      "start": 352.334,
+      "start": 373.469,
       "source": "auto"
     },
     {
       "index": 12,
-      "start": 384.06,
+      "start": 407.983,
       "source": "auto"
     },
     {
       "index": 13,
-      "start": 414.469,
+      "start": 438.919,
       "source": "auto"
     },
     {
       "index": 14,
-      "start": 446.425,
+      "start": 472.295,
       "source": "auto"
     },
     {
       "index": 15,
-      "start": 476.891,
+      "start": 502.526,
       "source": "auto"
     },
     {
       "index": 16,
-      "start": 507.967,
+      "start": 533.105,
       "source": "auto"
     }
   ],
   "keyTerms": [
     {
-      "term": "immobiliers,",
-      "start": 0.872,
-      "end": 1.913
+      "term": "MaPrimeRénov',",
+      "start": 0.271,
+      "end": 1.591
     },
     {
-      "term": "techniques",
-      "start": 2.494,
-      "end": 3.015
+      "term": "d'économie",
+      "start": 2.171,
+      "end": 2.572
     },
     {
-      "term": "faire",
-      "start": 3.495,
-      "end": 3.776
+      "term": "d'énergie,",
+      "start": 2.592,
+      "end": 3.612
     },
     {
-      "term": "transaction.",
-      "start": 4.497,
-      "end": 5.818
+      "term": "éco-prêt",
+      "start": 3.652,
+      "end": 4.152
     },
     {
-      "term": "Vous",
-      "start": 5.858,
-      "end": 5.979
+      "term": "taux",
+      "start": 4.232,
+      "end": 4.412
     },
     {
-      "term": "votre",
-      "start": 6.84,
-      "end": 7.06
+      "term": "zéro,",
+      "start": 4.432,
+      "end": 5.172
     },
     {
-      "term": "chaque",
-      "start": 7.4,
-      "end": 7.621
+      "term": "réduite,",
+      "start": 5.592,
+      "end": 6.432
     },
     {
-      "term": "semaine,",
-      "start": 7.661,
-      "end": 8.362
+      "term": "aide",
+      "start": 6.452,
+      "end": 6.633
     },
     {
-      "term": "mais",
-      "start": 8.402,
-      "end": 8.562
+      "term": "France",
+      "start": 8.213,
+      "end": 8.493
     },
     {
-      "term": "savez-vous",
-      "start": 8.602,
-      "end": 8.982
+      "term": "énergétique",
+      "start": 10.513,
+      "end": 11.294
     }
   ]
 }

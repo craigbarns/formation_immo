@@ -208,7 +208,7 @@ const ALL_DRAG_DROP_EXERCISES: DragDropExercise[] = [
     instruction:
       "Associez chaque canal de prospection à son avantage principal.",
     items: [
-      "Pige téléphonique",
+      "Estimation en ligne",
       "Porte-à-porte",
       "Réseaux sociaux",
       "Partenariats notaires",
@@ -216,8 +216,8 @@ const ALL_DRAG_DROP_EXERCISES: DragDropExercise[] = [
     ],
     matchPairs: [
       {
-        left: "Pige téléphonique",
-        right: "Contact direct avec les vendeurs ayant un bien en ligne",
+        left: "Estimation en ligne",
+        right: "Vendeurs qui demandent eux-mêmes à être rappelés",
       },
       {
         left: "Porte-à-porte",
@@ -229,7 +229,7 @@ const ALL_DRAG_DROP_EXERCISES: DragDropExercise[] = [
       },
       {
         left: "Partenariats notaires",
-        right: "Accès aux dossiers de succession et de partage",
+        right: "Recommandations de clients qui doivent vendre",
       },
       {
         left: "Farming de quartier",
@@ -412,7 +412,7 @@ const ALL_DRAG_DROP_EXERCISES: DragDropExercise[] = [
     instruction:
       "Associez chaque dispositif à son avantage fiscal principal.",
     items: [
-      "Pinel+",
+      "Loc'Avantages",
       "Denormandie",
       "Malraux",
       "Monuments Historiques",
@@ -420,8 +420,8 @@ const ALL_DRAG_DROP_EXERCISES: DragDropExercise[] = [
     ],
     matchPairs: [
       {
-        left: "Pinel+",
-        right: "Réduction d'impôt jusqu'à 21 % pour un logement neuf en zone tendue",
+        left: "Loc'Avantages",
+        right: "Réduction d'impôt en louant sous les loyers du marché, avec convention Anah",
       },
       {
         left: "Denormandie",

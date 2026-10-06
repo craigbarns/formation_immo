@@ -1,148 +1,148 @@
 {
   "version": 1,
-  "duration": 556.287,
+  "duration": 609.172,
   "slides": [
     {
       "index": 0,
-      "start": 0.131,
+      "start": 0.192,
       "source": "auto"
     },
     {
       "index": 1,
-      "start": 30.948,
+      "start": 32.965,
       "source": "auto"
     },
     {
       "index": 2,
-      "start": 62.07,
+      "start": 67.972,
       "source": "auto"
     },
     {
       "index": 3,
-      "start": 94.467,
+      "start": 102.573,
       "source": "auto"
     },
     {
       "index": 4,
-      "start": 130.544,
+      "start": 133.983,
       "source": "auto"
     },
     {
       "index": 5,
-      "start": 166.176,
+      "start": 164.832,
       "source": "auto"
     },
     {
       "index": 6,
-      "start": 197.183,
+      "start": 199.393,
       "source": "auto"
     },
     {
       "index": 7,
-      "start": 230.428,
+      "start": 230.477,
       "source": "auto"
     },
     {
       "index": 8,
-      "start": 263.541,
+      "start": 263.848,
       "source": "auto"
     },
     {
       "index": 9,
-      "start": 294.632,
+      "start": 295.655,
       "source": "auto"
     },
     {
       "index": 10,
-      "start": 327.529,
+      "start": 334.307,
       "source": "auto"
     },
     {
       "index": 11,
-      "start": 359.092,
+      "start": 368.562,
       "source": "auto"
     },
     {
       "index": 12,
-      "start": 392.326,
+      "start": 399.051,
       "source": "auto"
     },
     {
       "index": 13,
-      "start": 422.517,
+      "start": 437.218,
       "source": "auto"
     },
     {
       "index": 14,
-      "start": 453.291,
+      "start": 474.272,
       "source": "auto"
     },
     {
       "index": 15,
-      "start": 485.489,
+      "start": 504.304,
       "source": "auto"
     },
     {
       "index": 16,
-      "start": 516.565,
+      "start": 539.461,
       "source": "auto"
     },
     {
       "index": 17,
-      "start": 546.96,
+      "start": 571.878,
       "source": "auto"
     }
   ],
   "keyTerms": [
     {
-      "term": "faites",
-      "start": 0.291,
-      "end": 0.572
+      "term": "électricité",
+      "start": 1.301,
+      "end": 2.228
     },
     {
-      "term": "appels,",
-      "start": 0.912,
-      "end": 1.573
+      "term": "c'est",
+      "start": 7.294,
+      "end": 7.454
     },
     {
-      "term": "rendez-vous,",
-      "start": 2.574,
-      "end": 3.354
+      "term": "plus",
+      "start": 9.154,
+      "end": 9.275
     },
     {
-      "term": "mandat.",
-      "start": 4.896,
-      "end": 5.476
+      "term": "quand",
+      "start": 10.615,
+      "end": 10.775
     },
     {
-      "term": "parle",
-      "start": 5.817,
-      "end": 6.037
+      "term": "bien",
+      "start": 11.095,
+      "end": 11.275
     },
     {
-      "term": "depuis",
-      "start": 6.437,
-      "end": 6.758
+      "term": "Mais",
+      "start": 11.876,
+      "end": 12.136
     },
     {
-      "term": "août",
-      "start": 7.118,
-      "end": 7.378
+      "term": "entre",
+      "start": 12.176,
+      "end": 12.436
     },
     {
-      "term": "sont",
-      "start": 12.303,
-      "end": 12.544
+      "term": "promesses",
+      "start": 12.576,
+      "end": 12.876
     },
     {
-      "term": "téléphone",
-      "start": 14.486,
-      "end": 14.986
+      "term": "totale,",
+      "start": 14.717,
+      "end": 15.577
     },
     {
-      "term": "agents",
-      "start": 16.908,
-      "end": 17.188
+      "term": "rentabilité",
+      "start": 15.597,
+      "end": 16.178
     }
   ]
 }
