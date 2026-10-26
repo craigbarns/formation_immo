@@ -42,6 +42,77 @@ export async function sendWelcomeEmail(email: string, name?: string) {
   });
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+/**
+ * Confirmation d'achat de module(s) à l'unité. `accessUrl` mène à la création
+ * de compte pour un achat invité, sinon directement à la formation.
+ */
+export async function sendModulePurchaseEmail(params: {
+  email: string;
+  name?: string;
+  moduleTitles: string[];
+  accessUrl: string;
+  needsAccount: boolean;
+}) {
+  if (!resend) {
+    console.error("[email] RESEND_API_KEY manquant — email d'achat de module non envoyé");
+    return;
+  }
+  const prenom = escapeHtml(params.name?.split(" ")[0] ?? "là");
+  const plural = params.moduleTitles.length > 1;
+  const modulesList = params.moduleTitles
+    .map((title) => `<li style="margin:0 0 8px;color:#fff">${escapeHtml(title)}</li>`)
+    .join("");
+  const steps = params.needsAccount
+    ? `<p style="color:#ffffff80;line-height:1.7">Pour y accéder, crée ton compte avec <strong style="color:#fff">${escapeHtml(params.email)}</strong> (l'adresse utilisée lors du paiement) : ${plural ? "tes modules apparaîtront" : "ton module apparaîtra"} automatiquement dans ton espace.</p>`
+    : `<p style="color:#ffffff80;line-height:1.7">${plural ? "Ils sont" : "Il est"} déjà ${plural ? "disponibles" : "disponible"} dans ton espace de formation.</p>`;
+
+  const { data, error } = await resend.emails.send({
+    from: FROM,
+    to: params.email,
+    subject: plural ? "Tes modules de formation sont disponibles 🏠" : "Ton module de formation est disponible 🏠",
+    html: `
+      <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#070d18;color:#fff;border-radius:16px;overflow:hidden">
+        <div style="background:linear-gradient(135deg,#0a1628,#0f2040);padding:40px 32px;text-align:center">
+          <h1 style="color:#d4af37;font-size:28px;margin:0 0 8px">MonPassFormation</h1>
+          <p style="color:#ffffff60;margin:0;font-size:13px;text-transform:uppercase;letter-spacing:2px">Confirmation de ton achat</p>
+        </div>
+        <div style="padding:40px 32px">
+          <h2 style="color:#fff;font-size:22px;margin:0 0 16px">Merci ${prenom} ! 🎉</h2>
+          <p style="color:#ffffff80;line-height:1.7">Ton paiement est confirmé. Tu as accès ${plural ? "aux modules suivants" : "au module suivant"} :</p>
+          <ul style="margin:16px 0 24px;padding-left:20px;line-height:1.6">${modulesList}</ul>
+          ${steps}
+          <div style="margin:32px 0;text-align:center">
+            <a href="${params.accessUrl}" style="display:inline-block;background:#d4af37;color:#0a1628;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:2px;padding:16px 32px;border-radius:12px;text-decoration:none">
+              ${params.needsAccount ? "Créer mon compte →" : "Accéder à ma formation →"}
+            </a>
+          </div>
+          <div style="border-top:1px solid #ffffff15;padding-top:20px;margin-top:8px">
+            <p style="color:#ffffff60;font-size:13px;line-height:1.7;margin:0">
+              📞 En cas de difficulté, réponds à cet email ou contacte notre service technique au <a href="tel:0618130727" style="color:#d4af37;text-decoration:none;font-weight:700">06 18 13 07 27</a>.
+            </p>
+          </div>
+        </div>
+        <div style="background:#ffffff08;padding:24px 32px;text-align:center">
+          <p style="color:#ffffff30;font-size:12px;margin:0">MonPassFormation · <a href="${APP_URL}" style="color:#d4af37;text-decoration:none">app.monpassformation.com</a></p>
+        </div>
+      </div>
+    `,
+  });
+  if (error) {
+    console.error("[email] Erreur Resend sendModulePurchaseEmail:", JSON.stringify(error));
+  } else {
+    console.log("[email] Email d'achat de module envoyé, id:", data?.id);
+  }
+}
+
 export async function sendModuleCompletionEmail(
   email: string,
   name: string | undefined,

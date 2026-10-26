@@ -1,8 +1,8 @@
 import { toErrorMessage } from "@/lib/utils/error";
-import { sendWelcomeEmail } from "@/lib/email/resend";
+import { sendModulePurchaseEmail, sendWelcomeEmail } from "@/lib/email/resend";
 import { grantEntitlement } from "@/lib/auth-access";
 import { grantsFromProducts, parsePurchaseMetadata } from "@/lib/purchase";
-import { FORMATION_ID } from "@/data/catalog";
+import { FORMATION_ID, getProduct } from "@/data/catalog";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
@@ -15,6 +15,8 @@ const stripe = process.env.STRIPE_SECRET_KEY
   : null;
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.monpassformation.com";
 
 const isSupabaseAdminConfigured =
   Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL) &&
@@ -88,14 +90,33 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Error saving entitlements" }, { status: 500 });
     }
 
-    // Email de bienvenue : achats PACK uniquement (comportement historique).
-    // Un client existant qui ajoute un module ne reçoit pas de "bienvenue".
+    // Pack ⇒ email de bienvenue. Module(s) seul(s) ⇒ confirmation d'achat avec
+    // le lien d'accès : sans elle, un acheteur invité qui fermait l'onglet après
+    // paiement ne recevait rien et ne savait pas comment créer son compte.
+    const customerName = session.customer_details?.name ?? undefined;
     if (purchase.purchaseType === "pack") {
-      const customerName = session.customer_details?.name ?? undefined;
       try {
         await sendWelcomeEmail(customerEmail, customerName);
       } catch (emailError) {
         console.error("Error sending welcome email:", emailError);
+      }
+    } else {
+      const needsAccount = !purchase.userId;
+      const moduleTitles = grants
+        .filter((slug): slug is string => slug !== null)
+        .map((slug) => getProduct(slug)?.label ?? slug);
+      try {
+        await sendModulePurchaseEmail({
+          email: customerEmail,
+          name: customerName,
+          moduleTitles,
+          needsAccount,
+          accessUrl: needsAccount
+            ? `${APP_URL}/register?session_id=${encodeURIComponent(session.id)}`
+            : `${APP_URL}/formation`,
+        });
+      } catch (emailError) {
+        console.error("Error sending module purchase email:", emailError);
       }
     }
   }
